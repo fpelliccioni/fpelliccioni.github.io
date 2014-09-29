@@ -45,7 +45,8 @@ timezone:    America/Argentina/Buenos_Aires
 future:      true
 #highlighter: rouge				#Ruby bases syntax highlighter
 highlighter: pygments			#Python bases syntax highlighter
-markdown:    kramdown
+# markdown:    kramdown			#Default
+markdown:    redcarpet			#Used by this blog ... http://gastonsanchez.com/blog/opinion/2014/02/16/Mathjax-with-jekyll.html ... to suport Latex
 
 kramdown:
   auto_ids: true
