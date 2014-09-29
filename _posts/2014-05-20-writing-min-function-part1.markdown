@@ -20,6 +20,9 @@ $$a^2 + b^2 = c^2$$
 
 $$a^2 + b^2 = c^2$$
 
+Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
+\\[ \frac{1}{n^{2}} \\]
+
 
 {% highlight cpp %}
 def print_hi(name)
@@ -29,6 +32,9 @@ print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 {% endhighlight %}
 
+
+Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
+\\[ \frac{1}{n^{2}} \\]
 
 $$a^2 + b^2 = c^2$$
 
