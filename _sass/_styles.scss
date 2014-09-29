@@ -11,7 +11,7 @@ body {
   height: 100%;
   overflow-x: hidden;
 
-  font-size: 16px;
+  font-size: 99px;
   font-size: 1.2em;
 }
 
@@ -44,8 +44,7 @@ strong {
 }
 
 small {
-    /*font-size: $fs5;*/
-    font-size:28px;
+    font-size: $fs5;
 }
 
 .hilite {
@@ -339,8 +338,7 @@ header.site-header nav {
             margin-top: 0;
             .date {
                 font-family: $sans;
-                /*font-size: $fs5;*/
-                font-size:28px;
+                font-size: $fs5;
                 font-weight: bold;
                 color: $grey-light;
                 text-transform: uppercase;
@@ -388,8 +386,7 @@ header.site-header nav {
         li {
             display: block;
             float: none;
-            /*font-size: $fs3;*/
-            font-size:28px;
+            font-size: $fs3;
             margin-bottom: $lh*2;
             position: relative;
             
@@ -428,8 +425,7 @@ header.site-header nav {
             }
             
             h1 {
-                /*font-size: $fs3;*/
-                font-size:28px;
+                font-size: $fs3;
                 font-style: italic;
             }
         }
@@ -446,8 +442,7 @@ header.site-header nav {
         .date time {
             position: relative;
             top: -3px;
-            /*font-size: $fs5;*/
-            font-size:28px;
+            font-size: $fs5;
             font-weight: bold;
             font-family: $sans;
             font-style: normal;
@@ -469,8 +464,7 @@ header.site-header nav {
         top: 45px;
         z-index: 5;
         .date {
-            /*font-size: $fs5;*/
-            font-size:28px;
+            font-size: $fs5;
             position: relative;
             top: 10px;
             left: 6px;
@@ -498,8 +492,7 @@ header.site-header nav {
         }
         
         figcaption {
-            /*font-size: $fs5;*/
-            font-size:28px;
+            font-size: $fs5;
             font-family: $sans;
             font-weight: bold;
             text-transform: uppercase;
@@ -546,8 +539,7 @@ header.site-header nav {
             padding-left: $lh/3;
             margin-bottom: $lh/3;
             line-height: $lh;
-            /*font-size: $fsp;*/
-            font-size:28px;
+            font-size: $fsp;
         &:last-child {
             margin-bottom: 0;
             }
@@ -559,8 +551,7 @@ header.site-header nav {
         display: block;
         margin: 0 auto;
         width: 76px;
-        /*font-size: $fs5;*/
-        font-size:28px;
+        font-size: $fs5;
         font-family: $sans;
         text-transform: uppercase;
         font-weight: bold;
@@ -586,8 +577,7 @@ footer {
     width: 100%;
     background: $black;
     height: $footerHeight;
-    /*font-size: $fsp;*/
-    font-size:28px;
+    font-size: $fsp;
     color: $white;
     position: relative;
         
@@ -600,8 +590,7 @@ footer {
     }
     
     small {
-        /*font-size: ($fs6);*/
-        font-size:28px;
+        font-size: ($fs6);
         text-align: center;
         display: block;
         width: 100%;
@@ -619,8 +608,7 @@ footer {
         margin-bottom: $lh/2;
         border-bottom: 2px solid $link;
         font-style: italic;
-        /*font-size: $fs4;*/
-        font-size:28px;
+        font-size: $fs4;
     }
     .prev-posts {
         @include column(6,10);
@@ -647,8 +635,7 @@ footer {
                 color: transparentize($grey-light, .4);
                 @include column(4,12);
                 position: relative;
-                /*font-size: $fs5;*/
-                font-size:28px;
+                font-size: $fs5;
                 font-family: $sans;
                 text-transform: uppercase;
                 text-align: right;
@@ -691,18 +678,15 @@ footer {
 // Type Fixes
 
 h1 {
-    /*font-size: $fs2;*/
-    font-size:28px;
+    font-size: $fs2;
 }
 
 blockquote, blockquote p {
-    /*font-size: $fs3;*/
-    font-size:28px;
+    font-size: $fs3;
 }
 
 footer {
-    /*font-size: $fs5;*/
-    font-size:28px;
+    font-size: $fs5;
     
     .prev-posts {
         li  {
@@ -712,8 +696,7 @@ footer {
           }
           
           span.date {
-              /*font-size: $fs6;*/
-              font-size:28px;
+              font-size: $fs6;
           }  
         }
     }
@@ -774,8 +757,7 @@ footer {
   
   header.site-header hgroup h1 {
     margin-bottom: 0;
-    /*font-size: $fsp;*/
-    font-size:28px;
+    font-size: $fsp;
   }
   
   header.site-header hgroup {
@@ -825,8 +807,7 @@ footer {
     display: block;
     margin-left: 0;
     top: 0px;
-    /*font-size: $fs5;*/
-    font-size:28px;
+    font-size: $fs5;
   }
   
   header.site-header nav ul li a {
@@ -879,13 +860,11 @@ footer {
 }
 
 footer {
-    /*font-size: $fs5;*/
-    font-size:28px;
+    font-size: $fs5;
 }
 
 small {
-    /*font-size: $fs6;*/
-    font-size:28px;
+    font-size: $fs6;
 }
 
 }
