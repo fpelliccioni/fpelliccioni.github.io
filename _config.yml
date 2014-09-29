@@ -1,0 +1,18 @@
+# Site settings
+title: Components Programming
+email: fpelliccioni@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  My name is Fernando Pelliccioni. I am a computer programmer for over 20 years.
+  I’ve been working in several industries for more than 16 years, from telecom to game industry.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://fpelliccioni.github.io" # the base hostname & protocol for your site
+twitter_username: ferpelliccioni
+github_username:  fpelliccioni
+
+# Build settings
+markdown: kramdown
+
+
+#Fer
+highlighter: rouge				#Ruby bases syntax highlighter
+#highlighter: pygments			#Python bases syntax highlighter
