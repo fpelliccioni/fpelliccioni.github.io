@@ -15,4 +15,4 @@ markdown: kramdown
 
 #Fer
 #highlighter: rouge				#Ruby bases syntax highlighter
-#highlighter: pygments			#Python bases syntax highlighter
+highlighter: pygments			#Python bases syntax highlighter
