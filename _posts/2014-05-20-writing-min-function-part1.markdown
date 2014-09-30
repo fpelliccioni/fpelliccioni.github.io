@@ -2,7 +2,9 @@
 layout: post
 title:  "Writing min function, part 1: The rise of Concepts"
 date:   2014-05-20 11:48:29
+<!---
 categories: jekyll update
+-->
 ---
 This is the first in a series of articles in which I want to transmit what I learned (or what I think I learned) from the books, papers and lectures of Alexander Stepanov.
 
@@ -18,9 +20,13 @@ These are the lessons that Alex gives us, and I want to show them in this series
 - Generic programming, of course!
 - And… the following lesson is mine:
 
-$$a^2 + b^2 = c^2$$
+`$$a^2 + b^2 = c^2$$`
 
 Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
+\\[ \frac{1}{n^{2}} \\]
+
+
+Here is an example MathJax inline rendering `\\( 1/x^{2} \\)`, and here is a block rendering: 
 \\[ \frac{1}{n^{2}} \\]
 
 
@@ -36,7 +42,7 @@ print_hi('Tom')
 Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
 \\[ \frac{1}{n^{2}} \\]
 
-$$a^2 + b^2 = c^2$$
+`$$a^2 + b^2 = c^2$$`
 
 
 
