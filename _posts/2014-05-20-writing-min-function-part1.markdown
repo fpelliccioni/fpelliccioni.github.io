@@ -199,18 +199,16 @@ Part 4: Const-Correctness
 
 ## References
 
-<a name="Ref1">[1]</a> Elements of Programming of Alexander Stepanov and Paul McJones, <http://www.elementsofprogramming.com>
-<a name="Ref2">[2]</a> Concept definition: Stepanov and McJones [2009, page 10]
-
-<a name="Ref3">[3]</a> SGI's STL using Concepts in Documentation: https://www.sgi.com/tech/stl/min.html
-
-<a name="Ref4">[4]</a> Object definition:
-	The definition used in this article has nothing to do with an OOP-like definition of object [[6]](#Ref6).
-	The definition used here is a practical definition of what an object is:
-	"Object is a sequence of bits in memory" or
-	"Object is a value residing in memory"
-	See Stepanov and McJones [2009, page 4] for a complete definition.
-<a name="Ref5">[5]</a> See Appendix A
+<a name="Ref1">[1]</a> Elements of Programming of Alexander Stepanov and Paul McJones, <http://www.elementsofprogramming.com>  
+<a name="Ref2">[2]</a> Concept definition: Stepanov and McJones [2009, page 10]  
+<a name="Ref3">[3]</a> SGI's STL using Concepts in Documentation: https://www.sgi.com/tech/stl/min.html  
+<a name="Ref4">[4]</a> Object definition:  
+	The definition used in this article has nothing to do with an OOP-like definition of object [[6]](#Ref6).  
+	The definition used here is a practical definition of what an object is:  
+	"Object is a sequence of bits in memory" or  
+	"Object is a value residing in memory"  
+	See Stepanov and McJones [2009, page 4] for a complete definition.  
+<a name="Ref5">[5]</a> See Appendix A  
 <a name="Ref6">[6]</a> Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]
  
 
