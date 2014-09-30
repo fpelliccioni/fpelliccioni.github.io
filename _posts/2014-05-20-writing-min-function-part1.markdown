@@ -214,6 +214,18 @@ Thanks in particular to the following for their feedback to improve this article
 \end{eqnarray*}$$`
 
 
+`$$\begin{eqnarray*}
+ Relation(\texttt{Op}) \triangleq \\
+   HomogeneousPredicate(\texttt{Op}) \\
+   \land \texttt{ Arity(Op) = 2}
+\end{eqnarray*}$$`
+
+`$$\begin{eqnarray*}
+ Relation(\texttt{Op}) \triangleq \\
+   {} HomogeneousPredicate(\texttt{Op}) \\
+   \land \texttt{ Arity(Op) = 2}
+\end{eqnarray*}$$`
+
 
 `$$\begin{align*}  
 Relation(\texttt{Op}) \triangleq  \\
