@@ -232,6 +232,21 @@ HomogeneousPredicate(\texttt{Op})  \\
 
 
 
+`$$\begin{eqnarray*}
+ e^x &\approx& 1+x+x^2/2! + \\
+   && {}+x^3/3! + x^4/4! + \\
+   && + x^5/5!
+\end{eqnarray*}$$`
+
+
+`$$\begin{eqnarray*}
+ e^x &\triangleq& 1+x+x^2/2! + \\
+   && {}+x^3/3! + x^4/4! + \\
+   && + x^5/5!
+\end{eqnarray*}$$`
+
+
+
 `$$\begin{eqnarray}  
 Relation(\texttt{Op}) \triangleq \\
 \hspace*{13mm} HomogeneousPredicate(\texttt{Op}) \\
