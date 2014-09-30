@@ -20,7 +20,6 @@ And... the following lesson is mine:
 
 - Please don't blindly accept what it is expressed on this blog. In case of doubt you should go to the source, the [Elements of Programming book [1]](#EoPBook)
 
-
 In this article I want to avoid using any programming language, I want to focus on the algorithms and the specifications. In subsequent articles, I will implement what we learned using several mainstream programming languages.
 
 ## Writing min
@@ -238,9 +237,11 @@ Part 4: Const-Correctness
 
 ## References
 
-<a name="EoPBook">[1] Elements of Programming of Alexander Stepanov and Paul McJones, http://www.elementsofprogramming.com</a>
+<a name="EoPBook">[1]</a> Elements of Programming of Alexander Stepanov and Paul McJones, [](http://www.elementsofprogramming.com)
 [2] Concept definition: Stepanov and McJones [2009, page 10]
+
 [3] SGI's STL using Concepts in Documentation: https://www.sgi.com/tech/stl/min.html
+
 [4] Object definition:
 	The definition used in this article has nothing to do with an OOP-like definition of object [6].
 	The definition used here is a practical definition of what an object is:
