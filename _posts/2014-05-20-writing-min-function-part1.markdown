@@ -24,7 +24,21 @@ Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block
 
 
 
+Here is an example MathJax inline rendering `\\( 1/x^{2} \\)`, and here is a block rendering: 
+\\[ \frac{1}{n^{2}} \\]
+
+
+
 {% highlight cpp %}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
+
+
+{% highlight python %}
 def print_hi(name)
   puts "Hi, #{name}"
 end
