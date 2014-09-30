@@ -44,8 +44,8 @@ Well, let’s start writing the specification and then, the code:
 Spec: Given two [objects[4]](#Ref4), a and b, return the smaller of both.
 
 
-{% highlight csharp %}
-//Note: Naive min function in pseudo-code. Warning: contains errors.
+{% highlight cpp linenos %}
+//Note: Naive min function in pseudo-code (contains errors).
 min(a, b) {
 	if (a < b) return a
 	return b
@@ -82,7 +82,7 @@ Is this enough for defining min function?
 
 No, and to ilustrate that, see what happened if the less-than-operator is defined this way:
 
-{% highlight csharp %}
+{% highlight cpp linenos %}
 //Pseudo-code for less-than-operator
 less_than_operator(a, b) {
 	if ( is_even(system_time().seconds) ) return true
@@ -140,23 +140,10 @@ Then, Partial Ordering is too weak, because the relation doesn't hold for every 
 
 We need to use Total Ordering for define the requirements of min, let's do it:
 
-
-
-``` cpp
+{% highlight cpp linenos %}
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
-//  and T is TotallyOrdered[[5]](#Ref5)
-min(a, b) {
-	if (a < b) return a
-	return b
-}
-// Note: the implementations still has errors.
-```
-
-{% highlight cpp %}
-// Requires:
-//  The type of a is equal to the type of b, and it is called T,
-//  and T is TotallyOrdered[[5]](#Ref5)
+//  and T is TotallyOrdered[5]
 min(a, b) {
 	if (a < b) return a
 	return b
@@ -170,11 +157,12 @@ Well, this is enough for a single post.
 
 In the next articles of the series, we will:
 
-complete and fix the errors of the implementation of min
-write the max function
-refine the requirements of min and max
-implement them in real programming languages
-analyze the functions provided by popular (and not so popular) programming languages.
+- complete and fix the errors of the implementation of min
+- write the max function
+- refine the requirements of min and max
+- implement them in real programming languages
+- analyze the functions provided by popular (and not so popular) programming languages.
+
 Stay tuned!
 
  
@@ -190,10 +178,11 @@ Thanks in particular to the following for their feedback to improve this article
 
 ## The Series
 
-Part 1: The rise of Concepts
-Part 2: Understanding Concepts
-Part 3: Weakening the ordering
-Part 4: Const-Correctness
+[Part 1: The rise of Concepts]({% post_url 2014-05-20-writing-min-function-part1 %})
+[Part 2: Understanding Concepts]({% post_url 2014-05-20-writing-min-function-part1 %})
+[Part 3: Weakening the ordering]({% post_url 2014-05-20-writing-min-function-part1 %})
+[Part 4: Const-Correctness]({% post_url 2014-05-20-writing-min-function-part1 %})
+
 
 ---
 
@@ -201,13 +190,13 @@ Part 4: Const-Correctness
 
 <a name="Ref1">[1]</a> Elements of Programming of Alexander Stepanov and Paul McJones, <http://www.elementsofprogramming.com>  
 <a name="Ref2">[2]</a> Concept definition: Stepanov and McJones [2009, page 10]  
-<a name="Ref3">[3]</a> SGI's STL using Concepts in Documentation: https://www.sgi.com/tech/stl/min.html  
+<a name="Ref3">[3]</a> SGI's STL using Concepts in Documentation: <https://www.sgi.com/tech/stl/min.html>  
 <a name="Ref4">[4]</a> Object definition:  
-	The definition used in this article has nothing to do with an OOP-like definition of object [[6]](#Ref6).  
-	The definition used here is a practical definition of what an object is:  
-	"Object is a sequence of bits in memory" or  
-	"Object is a value residing in memory"  
-	See Stepanov and McJones [2009, page 4] for a complete definition.  
+&nbsp;&nbsp;&nbsp;The definition used in this article has nothing to do with an OOP-like definition of object [[6]](#Ref6).  
+&nbsp;&nbsp;&nbsp;The definition used here is a practical definition of what an object is:  
+&nbsp;&nbsp;&nbsp;"Object is a sequence of bits in memory" or  
+&nbsp;&nbsp;&nbsp;"Object is a value residing in memory"  
+&nbsp;&nbsp;&nbsp;See Stepanov and McJones [2009, page 4] for a complete definition.  
 <a name="Ref5">[5]</a> See Appendix A  
 <a name="Ref6">[6]</a> Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]
  
@@ -318,22 +307,6 @@ Here is an example MathJax inline rendering `\\( 1/x^{2} \\)`, and here is a blo
 
 
 
-{% highlight cpp %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
-
-
-{% highlight csharp %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
 
 
 Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
