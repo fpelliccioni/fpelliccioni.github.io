@@ -227,7 +227,7 @@ HomogeneousPredicate(\texttt{Op}) \nonumber \\
 `$$\begin{align}  
 Relation(\texttt{Op}) \triangleq  \\
 HomogeneousPredicate(\texttt{Op})  \\
-\land \texttt{Arity(Op) = 2} 
+\land \texttt{ Arity(Op) = 2} 
 \end{align}$$`
 
 
