@@ -207,11 +207,17 @@ Thanks in particular to the following for their feedback to improve this article
 ## Appendix A: Definitions
 `$$a^2 + b^2 = c^2$$`
 
+
+$$\begin{eqnarray} 
+y &=& x^4 + 4      \nonumber \\
+&=& (x^2+2)^2 -4x^2 \nonumber \\
+&\le&(x^2+2)^2    \nonumber
+\end{eqnarray}$$
+
 Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
 
 
-`$$
-Relation(\texttt{Op}) \triangleq \\
+`$$ Relation(\texttt{Op}) \triangleq \\
 \hspace*{13mm} HomogeneousPredicate(\texttt{Op}) \\
 \hspace*{5mm} \land \texttt{Arity(Op) = 2}
 $$`
