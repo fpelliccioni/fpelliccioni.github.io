@@ -14,20 +14,20 @@ These are the lessons that Alex gives us, and I want to show them in this series
 - Designing our API's consistently
 - Not always the library implementations provided by the programming languages we use are correct, even though they are designed by "experts".
 - The concept of Stability
-- Generic programming, of course!
+- *Generic programming*, of course!
 
 And... the following lesson is mine:
 
 - Please don't blindly accept what it is expressed on this blog. In case of doubt you should go to the source, the [Elements of Programming book [1]](#Ref1)
 
-In this article I want to avoid using any programming language, I want to focus on the algorithms and the specifications. In subsequent articles, I will implement what we learned using several mainstream programming languages.
+In this article I want to avoid using any programming language, I want to focus on the algorithms and the specifications. In subsequent articles, I will try to implement what we learned using several mainstream programming languages.
 
 ## Writing *min*
 
 I will try to write the function *min*, that is, a function that returns the minimum of two things.
 
 At this time you may be wondering, this guy is writing an entire blog post about a two-line function, is this serious?
-The answer is yes. As Alex says, *“Simple things are beautiful”*, and believe it or not, we can learn a lot in the process of writing *min*.
+The answer is yes. As Alex says: *“Simple things are beautiful”*, and believe it or not, we can learn a lot in the process of writing *min*.
 
 The objective is to learn to correctly determine what are the *requirements* that a function must impose on types used in it.
 
@@ -53,7 +53,7 @@ min(a, b) {
 {% endhighlight %}
 
 
-The above function is written in pseudo-code (which looks like a mix between C and Python), it has some flaws, but we will see them later.
+The above function is written in pseudo-code (which looks like a mix between [*C*](http://www.open-std.org/jtc1/sc22/wg14/) and [*Python*](https://www.python.org/)), it has some flaws, but we will see them later.
 
 The most important question is… What are the requirements of *min* function must impose to the arguments a and b? That is... Which are the *Concepts*?
 
@@ -256,7 +256,7 @@ Some of the definitions presented here are based on: <http://www.elementsofprogr
 `$$\textbf{property}\text{(R : Relation)} \\
 \text{total_ordering : R}  \\
 \quad \text{r} \mapsto \text{transitive(r) } \land \\
-\text{ (} \forall \text{ a, b} \in \texttt{Domain(R)} \text{) exactly one of the following holds: r(a, b), r(b, a), or a = b}$$`
+\quad \text{ (} \forall \text{ a, b} \in \texttt{Domain(R)} \text{) exactly one of the following holds: r(a, b), r(b, a), or a = b}$$`
 
 `$$TotallyOrdered(\texttt{T}) \triangleq \\
 \qquad  \texttt{Regular(T)} \\
