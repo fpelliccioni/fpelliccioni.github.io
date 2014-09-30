@@ -219,6 +219,13 @@ y &=& x^4 + 4      \nonumber \\
 
 
 `$$\begin{eqnarray}  
+Relation(\texttt{Op}) \triangleq \nonumber \\
+\hspace*{13mm} HomogeneousPredicate(\texttt{Op}) \nonumber \\
+\hspace*{5mm} \land \texttt{Arity(Op) = 2} \nonumber
+\end{eqnarray}$$`
+
+
+`$$\begin{eqnarray}  
 Relation(\texttt{Op}) \triangleq \\
 \hspace*{13mm} HomogeneousPredicate(\texttt{Op}) \\
 \hspace*{5mm} \land \texttt{Arity(Op) = 2}
