@@ -224,11 +224,11 @@ HomogeneousPredicate(\texttt{Op}) \nonumber \\
 \land \texttt{Arity(Op) = 2} \nonumber
 \end{eqnarray}$$`
 
-`$$\begin{align}  
+`$$\begin{align*}  
 Relation(\texttt{Op}) \triangleq  \\
 HomogeneousPredicate(\texttt{Op})  \\
 \land \texttt{ Arity(Op) = 2} 
-\end{align}$$`
+\end{align*}$$`
 
 
 
