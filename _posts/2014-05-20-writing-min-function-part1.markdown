@@ -217,79 +217,80 @@ y &=& x^4 + 4      \nonumber \\
 Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
 
 
-`$$ Relation(\texttt{Op}) \triangleq \\
+`$$\begin{eqnarray}  
+Relation(\texttt{Op}) \triangleq \\
 \hspace*{13mm} HomogeneousPredicate(\texttt{Op}) \\
 \hspace*{5mm} \land \texttt{Arity(Op) = 2}
-$$`
+\end{eqnarray}$$`
  
 
 
-`$$
+`$$\begin{eqnarray} 
 HomogeneousPredicate(\texttt{P}) \triangleq \\
 \hspace*{13mm} Predicate(\texttt{P}) \\
 \hspace*{5mm} \land HomogeneousFunction(\texttt{P})
-$$`
+\end{eqnarray}$$`
  
 
-`$$
+`$$\begin{eqnarray} 
 Predicate(\texttt{P}) \triangleq \\
 \hspace*{13mm} FunctionalProcedure(\texttt{P}) \\
 \hspace*{5mm} \land \texttt{Codomain(P) = bool}
-$$`
+\end{eqnarray}$$`
  
 
 property(R : Relation)
 transitive : R
-`$$
+`$$\begin{eqnarray} 
 r \mapsto (\forall a, b, c \in \texttt{Domain(R)}) (r(a, b) \land r(b, c) \Rightarrow r(a, c))
-$$`
+\end{eqnarray}$$`
 
 property(R : Relation)
 refexive : R
-`$$
+`$$\begin{eqnarray} 
 r \mapsto (\forall a \in \texttt{Domain(R)}) (r(a, a))
-$$`
+\end{eqnarray}$$`
 
 property(R : Relation)
 antisymmetric : R
-`$$
+`$$\begin{eqnarray} 
 r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \land r(b, a) \Rightarrow a = b)
-$$`
+\end{eqnarray}$$`
 
 property(R : Relation)
 irreflexive : R
-`$$
+`$$\begin{eqnarray} 
 r \mapsto (\forall a \in \texttt{Domain(R)}) (\lnot r(a, a))
-$$`
+\end{eqnarray}$$`
 
 property(R : Relation)
 asymmetric : R
-`$$
+`$$\begin{eqnarray} 
 r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \Rightarrow \lnot r(b, a))
-$$`
+\end{eqnarray}$$`
 
 property(R : Relation)
 total : R
-`$$
+`$$\begin{eqnarray} 
 r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \lor r(b, a))
-$$`
+\end{eqnarray}$$`
 
 property(R : Relation)
 total_ordering : R
-`$$
+`$$\begin{eqnarray} 
 \textnormal{r} \mapsto \textnormal{transitive(r) } \land 
-$$`
+\end{eqnarray}$$`
 
-`$$
+`$$\begin{eqnarray} 
 \textnormal{ (} \forall \textnormal{ a, b} \in \texttt{Domain(R)} \textnormal{) exactly one of the following holds: r(a, b), r(b, a), or a = b}
-$$`
+\end{eqnarray}$$`
 
-`$$
+`$$\begin{eqnarray} 
 TotallyOrdered(\texttt{T}) \triangleq \\
 \hspace*{13mm} \texttt{Regular(T)} \\
 \hspace*{7mm} \land <\texttt{: T x T} \rightarrow \textnormal{bool} \\
 \hspace*{5mm} \land total\_ordering(<)
-$$`
+\end{eqnarray}$$`
  
 
 For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
