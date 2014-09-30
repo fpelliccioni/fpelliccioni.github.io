@@ -34,6 +34,7 @@ ul, ol, dl, figure,
             color: $grey-light;
             line-height: 2em;
         }
+        /*
         .nt {
             color: #c85b5c;
         }
@@ -43,6 +44,7 @@ ul, ol, dl, figure,
         .s {
             color: #87ceeb;
         }
+        */
     }
 
 
@@ -109,6 +111,9 @@ ul, ol, dl, figure,
     .vi    { color: #008080 } // Name.Variable.Instance
     .il    { color: #099 } // Literal.Number.Integer.Long
 */
+
+//Styles for Pygments
+//https://github.com/richleland/pygments-css
 
     .hll { background-color: #49483e }
     .c { color: #75715e } /* Comment */
