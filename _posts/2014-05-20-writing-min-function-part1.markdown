@@ -8,7 +8,7 @@ This is the first in a series of articles in which I want to transmit what I lea
 
 These are the lessons that Alex gives us, and I want to show them in this series:
 
-$$a^2 + b^2 = c^2$$
+`$$a^2 + b^2 = c^2$$`
 
 - Specify our algorithms correctly
 - Programming must be based on a solid mathematical foundation

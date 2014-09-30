@@ -74,14 +74,14 @@ code {
     color: $accent;
     font-family: "Monaco", "Courier New", "Courier";
     /*font-size: .75em;*/
-    /*font-size:12px;*/
-    font-size:99px;
+    font-size:12px;
+    /*font-size:99px;*/
     font-weight: bold;
 }
 
 code.has-jax {
     font: inherit; 
-    font-size: 500%; 
+    font-size: 100%; 
     background: inherit; 
     border: inherit;
 }
