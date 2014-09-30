@@ -227,36 +227,35 @@ Some of the definitions presented here are based on: <http://www.elementsofprogr
 \text{transitive : R}  \\
 \quad r \mapsto (\forall a, b, c \in \texttt{Domain(R)}) (r(a, b) \land r(b, c) \Rightarrow r(a, c))$$`
 
-**property**(R : Relation)  
-refexive : R  
-`$$\quad r \mapsto (\forall a \in \texttt{Domain(R)}) (r(a, a))$$`
 
-property(R : Relation)
-antisymmetric : R
-`$$
-r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \land r(b, a) \Rightarrow a = b)$$`
+`$$\textbf{property}\text{(R : Relation)} \\
+\text{refexive : R}  \\
+\quad r \mapsto (\forall a \in \texttt{Domain(R)}) (r(a, a))$$`
 
-property(R : Relation)
-irreflexive : R
-`$$
-r \mapsto (\forall a \in \texttt{Domain(R)}) (\lnot r(a, a))$$`
 
-property(R : Relation)
-asymmetric : R
-`$$
-r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \Rightarrow \lnot r(b, a))$$`
+`$$\textbf{property}\text{(R : Relation)} \\
+\text{antisymmetric : R}  \\
+\quad r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \land r(b, a) \Rightarrow a = b)$$`
 
-property(R : Relation)
-total : R
-`$$
-r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \lor r(b, a))$$`
 
-property(R : Relation)
-total_ordering : R
-`$$
-\textnormal{r} \mapsto \textnormal{transitive(r) } \land $$`
+`$$\textbf{property}\text{(R : Relation)} \\
+\text{irreflexive : R}  \\
+\quad r \mapsto (\forall a \in \texttt{Domain(R)}) (\lnot r(a, a))$$`
 
-`$$
+
+`$$\textbf{property}\text{(R : Relation)} \\
+\text{asymmetric : R}  \\
+\quad r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \Rightarrow \lnot r(b, a))$$`
+
+
+`$$\textbf{property}\text{(R : Relation)} \\
+\text{total : R}  \\
+\quad r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \lor r(b, a))$$`
+
+
+`$$\textbf{property}\text{(R : Relation)} \\
+\text{total_ordering : R}  \\
+\quad \textnormal{r} \mapsto \textnormal{transitive(r) } \land \\
 \textnormal{ (} \forall \textnormal{ a, b} \in \texttt{Domain(R)} \textnormal{) exactly one of the following holds: r(a, b), r(b, a), or a = b}$$`
 
 `$$TotallyOrdered(\texttt{T}) \triangleq \\
@@ -264,75 +263,4 @@ total_ordering : R
 \quad \land <\texttt{: T x T} \rightarrow \textnormal{bool} \\
 \quad \land total\_ordering(<)$$`
  
-
-
-
-
-
 For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-This is the first in a series of articles in which I want to transmit what I learned (or what I think I learned) from the books, papers and lectures of Alexander Stepanov.
-
-These are the lessons that Alex gives us, and I want to show them in this series:
-
-`$$a^2 + b^2 = c^2$$`
-
-- Specify our algorithms correctly
-- Programming must be based on a solid mathematical foundation
-- Designing our API’s consistently
-- Not always the library implementations provided by the programming languages we use are correct, even though they are designed by “experts”.
-- The concept of Stability
-- *Generic programming*, of course!
-- And… the following lesson is mine:
-
-`$$a^2 + b^2 = c^2$$`
-
-Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
-\\[ \frac{1}{n^{2}} \\]
-
-
-
-Here is an example MathJax inline rendering `\\( 1/x^{2} \\)`, and here is a block rendering: 
-\\[ \frac{1}{n^{2}} \\]
-
-
-
-
-
-Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
-\\[ \frac{1}{n^{2}} \\]
-
-`$$a^2 + b^2 = c^2$$`
-
-
-
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve --watch`, which launches a web server and auto-regenerates your site when a file is updated.
-
-
-`$$
-\begin{align}
-    f(n) :=& 2n \\
-    g(n) :=& 2^n \\
-    h(n) :=& 2^{2^n}
-\end{align}
-$$`
-
-
