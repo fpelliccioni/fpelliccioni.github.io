@@ -44,7 +44,7 @@ Well, let’s start writing the specification and then, the code:
 Spec: Given two [objects[4]](#Ref4), a and b, return the smaller of both.
 
 
-{% highlight cpp linenos %}
+{% highlight cpp %}
 //Note: Naive min function in pseudo-code (contains errors).
 min(a, b) {
 	if (a < b) return a
@@ -82,7 +82,7 @@ Is this enough for defining min function?
 
 No, and to ilustrate that, see what happened if the less-than-operator is defined this way:
 
-{% highlight cpp linenos %}
+{% highlight cpp %}
 //Pseudo-code for less-than-operator
 less_than_operator(a, b) {
 	if ( is_even(system_time().seconds) ) return true
@@ -92,19 +92,19 @@ less_than_operator(a, b) {
 
 This function returns true if the number of seconds of the system time is even, otherwise returns false. With this code I want to emphasize that the less_than_operator could be defined using a random behaviour, but we need to define an specific behaviour.
 
-Mathematically the less-than-operator is a Relation[[5]](#Ref5). A relation is a binary Predicate[[5]](#Ref5).
+Mathematically the less-than-operator is a **Relation**[[5]](#Ref5). A relation is a binary **Predicate**[[5]](#Ref5).
 
 That is, a predicate that takes two parameters of the same type.
 “If you look of two things, is either true or false. The relation holds, or not.”
-The difference between the code above and a relation is that the relation is considered a FunctionalProcedure[[5]](#Ref5), that is, a function in which by replacing its inputs with equal objects results in equal output objects.
+The difference between the code above and a relation is that the relation is considered a **FunctionalProcedure**[[5]](#Ref5), that is, a function in which by replacing its inputs with equal objects results in equal output objects.
 
 But the relation concept is too weak, we need a stronger concept: Ordering.
 
-*"What is an ordering? What do mathematicians call ordering?
+*"What is an ordering? What do mathematicians call ordering?*
 
-The only absolute rule for ordering is the requirement of transitivity[[5]](#Ref5).
-A relation is transitive if, whenever it holds between a and b, and between b and c, it holds between a and c.
-A transitive relation is the most basic notion of ordering, but it is still too weak for our needs."*
+*The only absolute rule for ordering is the requirement of **transitivity**[[5]](#Ref5).*
+*A relation is transitive if, whenever it holds between a and b, and between b and c, it holds between a and c.*
+*A transitive relation is the most basic notion of ordering, but it is still too weak for our needs."*
 
 Let's review what kinds of Ordering Relations exist:
 
@@ -117,14 +117,14 @@ Which one is greater? Which one includes the other?
 It is not defined!
  
 We have two kinds of Partial Ordering:
-Reflexive Partial Ordering (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is transitive, reflexive[[5]](#Ref5) and antisymmetric[[5]](#Ref5).
-Strict Partial Ordering (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is transitive and ireflexive[[5]](#Ref5) (it is also asymmetric[[5]](#Ref5), but this axiom is implied by irreflexivity and transitivity)
+Reflexive Partial Ordering (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is transitive, **reflexive**[[5]](#Ref5) and **antisymmetric**[[5]](#Ref5).
+Strict Partial Ordering (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is transitive and **ireflexive**[[5]](#Ref5) (it is also **asymmetric**[[5]](#Ref5), but this axiom is implied by irreflexivity and transitivity)
 Total Ordering: a Total Ordering is an Ordering Relation in which any pair of elements in the set of the relation are comparable under the relation. Total Ordering is a specialization of Partial Ordering.
 Examples:
 - Real numbers ordered by the less-than relation (<) (also Rational, Integers and Natural numbers)
 - The letters of the alphabet ordered by the natural dictionary order.
 We have two kinds of Total Ordering:
-Reflexive Total Ordering (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and total[[5]](#Ref5). (it is also reflexive, but is implied by totally)
+Reflexive Total Ordering (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and **total**[[5]](#Ref5). (it is also reflexive, but is implied by totally)
 Strict Total Ordering[[5]](#Ref5) (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is transitive and obeys the trichotomy law, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also irreflexive, but this axiom is implied by the trichotomy law)
 (Note: There are more ordering relations, but we will see them later)
 
@@ -140,7 +140,7 @@ Then, Partial Ordering is too weak, because the relation doesn't hold for every 
 
 We need to use Total Ordering for define the requirements of min, let's do it:
 
-{% highlight cpp linenos %}
+{% highlight cpp %}
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
 //  and T is TotallyOrdered[5]
@@ -178,10 +178,10 @@ Thanks in particular to the following for their feedback to improve this article
 
 ## The Series
 
-[Part 1: The rise of Concepts]({% post_url 2014-05-20-writing-min-function-part1 %})  
-[Part 2: Understanding Concepts]({% post_url 2014-05-20-writing-min-function-part1 %})  
-[Part 3: Weakening the ordering]({% post_url 2014-05-20-writing-min-function-part1 %})  
-[Part 4: Const-Correctness]({% post_url 2014-05-20-writing-min-function-part1 %})  
+&nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url 2014-05-20-writing-min-function-part1 %})  
+&nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url 2014-05-20-writing-min-function-part1 %})  
+&nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url 2014-05-20-writing-min-function-part1 %})  
+&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url 2014-05-20-writing-min-function-part1 %})  
 
 
 ---
@@ -192,11 +192,11 @@ Thanks in particular to the following for their feedback to improve this article
 <a name="Ref2">[2]</a> Concept definition: Stepanov and McJones [2009, page 10]  
 <a name="Ref3">[3]</a> SGI's STL using Concepts in Documentation: <https://www.sgi.com/tech/stl/min.html>  
 <a name="Ref4">[4]</a> Object definition:  
-&nbsp;&nbsp;&nbsp;The definition used in this article has nothing to do with an OOP-like definition of object [[6]](#Ref6).  
-&nbsp;&nbsp;&nbsp;The definition used here is a practical definition of what an object is:  
-&nbsp;&nbsp;&nbsp;"Object is a sequence of bits in memory" or  
-&nbsp;&nbsp;&nbsp;"Object is a value residing in memory"  
-&nbsp;&nbsp;&nbsp;See Stepanov and McJones [2009, page 4] for a complete definition.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The definition used in this article has nothing to do with an OOP-like definition of object [[6]](#Ref6).  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The definition used here is a practical definition of what an object is:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Object is a sequence of bits in memory" or  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Object is a value residing in memory"  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See Stepanov and McJones [2009, page 4] for a complete definition.  
 <a name="Ref5">[5]</a> See Appendix A  
 <a name="Ref6">[6]</a> Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]
  
