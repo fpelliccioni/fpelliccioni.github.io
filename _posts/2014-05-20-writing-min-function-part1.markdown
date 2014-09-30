@@ -151,6 +151,39 @@ min(a, b) {
 // Note: the implementations still has errors.
 {% endhighlight %}
 
+{% highlight cpp %}
+// Requires:
+//  The type of a is equal to the type of b, and it is called T,
+//  and T is TotallyOrdered[5]
+min(a, b) {
+	if (a < b) return a
+	return b
+}
+// Note: the implementations still has errors.
+{% endhighlight %}
+
+{% highlight python %}
+// Requires:
+//  The type of a is equal to the type of b, and it is called T,
+//  and T is TotallyOrdered[5]
+min(a, b) {
+	if (a < b) return a
+	return b
+}
+// Note: the implementations still has errors.
+{% endhighlight %}
+
+
+	// Requires:
+	//  The type of a is equal to the type of b, and it is called T,
+	//  and T is TotallyOrdered[5]
+	min(a, b) {
+		if (a < b) return a
+		return b
+	}
+	// Note: the implementations still has errors.
+
+
 Note that the requirements were expressed as code comments. Later we will see what the programming languages provide us to express them as code.
 
 Well, this is enough for a single post.
@@ -165,13 +198,14 @@ analyze the functions provided by popular (and not so popular) programming langu
 Stay tuned!
 
  
-
+---
 ## Acknowledgments
 
 Thanks in particular to the following for their feedback to improve this article: Mario Dal Lago, Andrzej Krzemienski, Dean Michael Berris, Javier Centurión, Alejandro Santos, Ezequiel Reyno.
 
  
 
+---
 ## The Series
 
 Part 1: The rise of Concepts
@@ -193,6 +227,7 @@ See Stepanov and McJones [2009, page 4] for a complete definition.
 [6] Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]
  
 
+---
 ## Appendix A: Definitions
 
 Some of the definitions presented here are based on: http://www.elementsofprogramming.com/eop-concepts.pdf
