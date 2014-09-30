@@ -118,10 +118,12 @@ Examples:
 We have two kinds of Partial Ordering:  
 	- ***Reflexive Partial Ordering*** (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is *transitive*, *reflexive*[[5]](#Ref5) and *antisymmetric*[[5]](#Ref5).  
 	- ***Strict Partial Ordering*** (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is *transitive* and *ireflexive*[[5]](#Ref5) (it is also *asymmetric*[[5]](#Ref5), but this axiom is implied by irreflexivity and transitivity)
-- ***Total Ordering***: a *Total Ordering* is an Ordering Relation in which any pair of elements in the set of the relation are comparable under the relation.  Total Ordering is a specialization of Partial Ordering.
+- ***Total Ordering***: a *Total Ordering* is an Ordering Relation in which any pair of elements in the set of the relation are comparable under the relation.  
+Total Ordering is a specialization of Partial Ordering.  
 Examples:
 	1. Real numbers ordered by the less-than relation (<) (also Rational, Integers and Natural numbers)
 	2. The letters of the alphabet ordered by the natural dictionary order.
+
 We have two kinds of Total Ordering:
 	- ***Reflexive Total Ordering*** (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and *total*[[5]](#Ref5). (it is also reflexive, but is implied by totally)
 	- ***Strict Total Ordering***[[5]](#Ref5) (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is *transitive* and obeys the *trichotomy law*, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also *irreflexive*, but this axiom is implied by the trichotomy law)
