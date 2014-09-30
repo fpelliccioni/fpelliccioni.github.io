@@ -22,18 +22,18 @@ And... the following lesson is mine:
 
 In this article I want to avoid using any programming language, I want to focus on the algorithms and the specifications. In subsequent articles, I will implement what we learned using several mainstream programming languages.
 
-## Writing min
+## Writing *min*
 
-I will try to write the function min, that is, a function that returns the minimum of two things.
+I will try to write the function *min*, that is, a function that returns the minimum of two things.
 
 At this time you may be wondering, this guy is writing an entire blog post about a two-line function, is this serious?
-The answer is yes. As Alex says, “Simple things are beautiful”, and believe it or not, we can learn a lot in the process of writing min.
+The answer is yes. As Alex says, *“Simple things are beautiful”*, and believe it or not, we can learn a lot in the process of writing *min*.
 
-The objective is to learn to correctly determine what are the requirements that a function must impose on types used in it.
+The objective is to learn to correctly determine what are the *requirements* that a function must impose on types used in it.
 
-*"It is better to design our Components (algorithms and data structures) not in terms of concrete types, but in terms of requirements on types expressed as syntactic and semantic properties"*
+*“It is better to design our **Components** (algorithms and data structures) not in terms of concrete types, but in terms of requirements on types expressed as syntactic and semantic properties”*
 
-Alex calls a collection of requirements a [Concept[2]](#Ref2).
+Alex calls a collection of requirements a [*Concept*[2]](#Ref2).
 
 Despite having no support for Concepts in programming languages, he has been using them for decades, not in code, but in his mind and in the documentation of the components developed by him [[3]](#Ref3).
 
@@ -55,13 +55,13 @@ min(a, b) {
 
 The above function is written in pseudo-code (which looks like a mix between C and Python), it has some flaws, but we will see them later.
 
-The most important question is… What are the requirements of min function must impose to the arguments a and b? That is... Which are the Concepts?
+The most important question is… What are the requirements of *min* function must impose to the arguments a and b? That is... Which are the Concepts?
 
 For some programmers, especially those advocates of duck-typing, imposing requirements to arguments may be something uninteresting. They simply use the arguments in the function body, and they hope to at least get a runtime error.
 
 I strongly disagree!
 
-*"Even if we do not have Concepts in the language, they should exists in our mind. You have to learn to think in terms of Concepts whichever language you use."*
+*“Even if we do not have Concepts in the language, they should exists in our mind. You have to learn to think in terms of Concepts whichever language you use.”*
 
 Forget for a while about programming languages, let’s see what the requirements are. The problem arises from this code snippet
 
@@ -78,7 +78,7 @@ But this is just a syntactic requirement, we have to go further in order to corr
 What is the less-than-operator?
 
 It is a way for comparing two objects, returning a boolean value.
-Is this enough for defining min function?
+Is this enough for defining *min* function?
 
 No, and to ilustrate that, see what happened if the less-than-operator is defined this way:
 
@@ -100,17 +100,17 @@ The difference between the code above and a relation is that the relation is con
 
 But the relation concept is too weak, we need a stronger concept: Ordering.
 
-*"What is an ordering? What do mathematicians call ordering?*
+*“What is an ordering? What do mathematicians call ordering?*
 
 *The only absolute rule for ordering is the requirement of **transitivity**[[5]](#Ref5).*
 *A relation is transitive if, whenever it holds between a and b, and between b and c, it holds between a and c.*
-*A transitive relation is the most basic notion of ordering, but it is still too weak for our needs."*
+*A transitive relation is the most basic notion of ordering, but it is still too weak for our needs.”*
 
 Let's review what kinds of Ordering Relations exist:
 
 Partial Ordering: A Partial Ordering is an ordering relation in which not every pair of elements need to be related.
 Examples:
-*"The canonical example of Partial Ordering is the Subset Relation"*
+*“The canonical example of Partial Ordering is the Subset Relation”*
 Subset are ordered, one subset could be a Subset of another subset, for example, the subset {2, 4} Is a Subset Of the subset {1, 2, 3, 4}.
 But it also happens that there are subsets which you could said nothing about, for example, given {2, 4} and {3, 5}.
 Which one is greater? Which one includes the other?
@@ -128,17 +128,17 @@ Reflexive Total Ordering (or Non-Strict Total Ordering): A relation is a Reflexi
 Strict Total Ordering[[5]](#Ref5) (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is transitive and obeys the trichotomy law, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also irreflexive, but this axiom is implied by the trichotomy law)
 (Note: There are more ordering relations, but we will see them later)
 
-## Writing min using Concepts
+## Writing *min* using Concepts
 
-Well, now we know about ordering relations, let's look at how we can use them to specify the min function.
+Well, now we know about ordering relations, let's look at how we can use them to specify the *min* function.
 
 But first, what should we use? Partial or Total Ordering?
 
-*"If our relation is the Subset relation on a set, then, min and max of two sets doesn't make sense."*
+*“If our relation is the Subset relation on a set, then, *min* and *max* of two sets doesn't make sense.”*
 
 Then, Partial Ordering is too weak, because the relation doesn't hold for every pair of elements of the set.
 
-We need to use Total Ordering for define the requirements of min, let's do it:
+We need to use Total Ordering for define the requirements of *min*, let's do it:
 
 {% highlight cpp %}
 // Requires:
@@ -157,9 +157,9 @@ Well, this is enough for a single post.
 
 In the next articles of the series, we will:
 
-- complete and fix the errors of the implementation of min
-- write the max function
-- refine the requirements of min and max
+- complete and fix the errors of the implementation of *min*
+- write the *max* function
+- refine the requirements of *min* and *max*
 - implement them in real programming languages
 - analyze the functions provided by popular (and not so popular) programming languages.
 
@@ -292,7 +292,7 @@ These are the lessons that Alex gives us, and I want to show them in this series
 - Designing our API’s consistently
 - Not always the library implementations provided by the programming languages we use are correct, even though they are designed by “experts”.
 - The concept of Stability
-- Generic programming, of course!
+- *Generic programming*, of course!
 - And… the following lesson is mine:
 
 `$$a^2 + b^2 = c^2$$`
