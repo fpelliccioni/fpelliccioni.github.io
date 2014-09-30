@@ -121,7 +121,7 @@ We have two kinds of Partial Ordering:
 - ***Total Ordering***: a *Total Ordering* is an Ordering Relation in which any pair of elements in the set of the relation are comparable under the relation.  
 Total Ordering is a specialization of Partial Ordering.  
 Examples:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Real numbers ordered by the less-than relation (<) (also Rational, Integers and Natural numbers)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Real numbers ordered by the less-than relation (<) (also Rational, Integers and Natural numbers)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The letters of the alphabet ordered by the natural dictionary order.  
 We have two kinds of Total Ordering:
 	- ***Reflexive Total Ordering*** (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and *total*[[5]](#Ref5). (it is also reflexive, but is implied by totally)
@@ -135,7 +135,7 @@ Well, now we know about ordering relations, let's look at how we can use them to
 
 But first, what should we use? Partial or Total Ordering?
 
-*“If our relation is the Subset relation on a set, then, *min* and *max* of two sets doesn't make sense.”*
+*“If our relation is the Subset relation on a set, then, _min_ and _max_ of two sets doesn't make sense.”*
 
 Then, Partial Ordering is too weak, because the relation doesn't hold for every pair of elements of the set.
 
@@ -205,61 +205,85 @@ Thanks in particular to the following for their feedback to improve this article
 ---
 
 ## Appendix A: Definitions
+`$$a^2 + b^2 = c^2$$`
 
-Some of the definitions presented here are based on: http://www.elementsofprogramming.com/eop-concepts.pdf
+Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
 
-$latex Relation(\texttt{Op}) \triangleq \\
+
+`$$
+Relation(\texttt{Op}) \triangleq \\
 \hspace*{13mm} HomogeneousPredicate(\texttt{Op}) \\
 \hspace*{5mm} \land \texttt{Arity(Op) = 2}
-&s=2$
+$$`
  
 
-$latex HomogeneousPredicate(\texttt{P}) \triangleq \\
+
+`$$
+HomogeneousPredicate(\texttt{P}) \triangleq \\
 \hspace*{13mm} Predicate(\texttt{P}) \\
 \hspace*{5mm} \land HomogeneousFunction(\texttt{P})
-&s=2$
+$$`
  
 
-$latex Predicate(\texttt{P}) \triangleq \\
+`$$
+Predicate(\texttt{P}) \triangleq \\
 \hspace*{13mm} FunctionalProcedure(\texttt{P}) \\
 \hspace*{5mm} \land \texttt{Codomain(P) = bool}
-&s=2$
+$$`
  
 
 property(R : Relation)
 transitive : R
-$latex r \mapsto (\forall a, b, c \in \texttt{Domain(R)}) (r(a, b) \land r(b, c) \Rightarrow r(a, c))&s=2$
+`$$
+r \mapsto (\forall a, b, c \in \texttt{Domain(R)}) (r(a, b) \land r(b, c) \Rightarrow r(a, c))
+$$`
 
 property(R : Relation)
 refexive : R
-$latex r \mapsto (\forall a \in \texttt{Domain(R)}) (r(a, a))&s=2$
+`$$
+r \mapsto (\forall a \in \texttt{Domain(R)}) (r(a, a))
+$$`
 
 property(R : Relation)
 antisymmetric : R
-$latex r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \land r(b, a) \Rightarrow a = b)&s=2$
+`$$
+r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \land r(b, a) \Rightarrow a = b)
+$$`
 
 property(R : Relation)
 irreflexive : R
-$latex r \mapsto (\forall a \in \texttt{Domain(R)}) (\lnot r(a, a))&s=2$
+`$$
+r \mapsto (\forall a \in \texttt{Domain(R)}) (\lnot r(a, a))
+$$`
 
 property(R : Relation)
 asymmetric : R
-$latex r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \Rightarrow \lnot r(b, a))&s=2$
+`$$
+r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \Rightarrow \lnot r(b, a))
+$$`
 
 property(R : Relation)
 total : R
-$latex r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \lor r(b, a))&s=2$
+`$$
+r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \lor r(b, a))
+$$`
 
 property(R : Relation)
 total_ordering : R
-$latex \textnormal{r} \mapsto \textnormal{transitive(r) } \land &s=2$
-$latex \textnormal{ (} \forall \textnormal{ a, b} \in \texttt{Domain(R)} \textnormal{) exactly one of the following holds: r(a, b), r(b, a), or a = b}&s=2$
+`$$
+\textnormal{r} \mapsto \textnormal{transitive(r) } \land 
+$$`
 
-$latex TotallyOrdered(\texttt{T}) \triangleq \\
+`$$
+\textnormal{ (} \forall \textnormal{ a, b} \in \texttt{Domain(R)} \textnormal{) exactly one of the following holds: r(a, b), r(b, a), or a = b}
+$$`
+
+`$$
+TotallyOrdered(\texttt{T}) \triangleq \\
 \hspace*{13mm} \texttt{Regular(T)} \\
 \hspace*{7mm} \land <\texttt{: T x T} \rightarrow \textnormal{bool} \\
 \hspace*{5mm} \land total\_ordering(<)
-&s=2$
+$$`
  
 
 For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
