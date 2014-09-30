@@ -214,8 +214,6 @@ y &=& x^4 + 4      \nonumber \\
 &\le&(x^2+2)^2    \nonumber
 \end{eqnarray}$$`
 
-Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
-
 
 `$$\begin{eqnarray}  
 Relation(\texttt{Op}) \triangleq \\
@@ -292,6 +290,11 @@ TotallyOrdered(\texttt{T}) \triangleq \\
 \hspace*{5mm} \land total\_ordering(<)
 \end{eqnarray}$$`
  
+
+
+ 
+Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
+
 
 For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
 
