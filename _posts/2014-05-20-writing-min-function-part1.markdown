@@ -263,4 +263,4 @@ Some of the definitions presented here are based on: <http://www.elementsofprogr
 \quad \land <\texttt{: T x T} \rightarrow \text{bool} \\
 \quad \land total\_ordering(<)$$`
  
-For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
+For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see <http://www.elementsofprogramming.com/eop-concepts.pdf> [page 1]
