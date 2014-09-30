@@ -148,6 +148,17 @@ private void index()
 } 
 ```
 
+``` csharp 
+// Requires:
+//  The type of a is equal to the type of b, and it is called T,
+//  and T is TotallyOrdered[5]
+min(a, b) {
+	if (a < b) return a
+	return b
+}
+// Note: the implementations still has errors.
+```
+
 {% highlight csharp %}
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
