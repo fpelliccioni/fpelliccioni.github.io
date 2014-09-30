@@ -92,13 +92,13 @@ less_than_operator(a, b) {
 
 This function returns *true* if the number of seconds of the system time is even, otherwise returns *false*. With this code I want to emphasize that the less_than_operator could be defined using a random behaviour, but we need to define an specific behaviour.
 
-Mathematically the less-than-operator is a ***Relation***[[5]](#Ref5). A relation is a binary ***Predicate***[[5]](#Ref5).
+Mathematically the less-than-operator is a *Relation*[[5]](#Ref5). A relation is a binary *Predicate*[[5]](#Ref5).
 
 That is, a predicate that takes two parameters of the same type.
 *“If you look of two things, is either true or false. The relation holds, or not.”*
-The difference between the code above and a relation is that the relation is considered a ***FunctionalProcedure***[[5]](#Ref5), that is, a function in which by replacing its inputs with equal objects results in equal output objects.
+The difference between the code above and a relation is that the relation is considered a *FunctionalProcedure*[[5]](#Ref5), that is, a function in which by replacing its inputs with equal objects results in equal output objects.
 
-But the *relation concept* is too weak, we need a stronger concept: ***Ordering***.
+But the *relation concept* is too weak, we need a stronger concept: *Ordering*.
 
 *“What is an ordering? What do mathematicians call ordering?*
 
@@ -108,7 +108,7 @@ But the *relation concept* is too weak, we need a stronger concept: ***Ordering*
 
 Let's review what kinds of Ordering Relations exist:
 
-- ***Partial Ordering***: A Partial Ordering is an ordering relation in which not every pair of elements need to be related.  
+- ***Partial Ordering***: A *Partial Ordering* is an *ordering relation* in which not every pair of elements need to be related.  
 Examples:  
     *“The canonical example of Partial Ordering is the Subset Relation”*  
     Subset are ordered, one subset could be a Subset of another subset, for example, the subset {2, 4} **Is a Subset Of** the subset   {1, 2, 3, 4}.  
@@ -116,16 +116,15 @@ Examples:
     Which one is greater? Which one includes the other?  
     It is not defined!  
 We have two kinds of Partial Ordering:  
-	- ***Reflexive Partial Ordering*** (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is transitive, ***reflexive***[[5]](#Ref5) and ***antisymmetric***[[5]](#Ref5).  
-	- ***Strict Partial Ordering*** (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is transitive and ***ireflexive***[[5]](#Ref5) (it is also ***asymmetric***[[5]](#Ref5), but this axiom is implied by irreflexivity and transitivity)
-- ***Total Ordering***: a Total Ordering is an Ordering Relation in which any pair of elements in the set of the relation are comparable under the relation.  Total Ordering is a specialization of Partial Ordering.
+	- ***Reflexive Partial Ordering*** (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is *transitive*, *reflexive*[[5]](#Ref5) and *antisymmetric*[[5]](#Ref5).  
+	- ***Strict Partial Ordering*** (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is *transitive* and *ireflexive*[[5]](#Ref5) (it is also *asymmetric*[[5]](#Ref5), but this axiom is implied by irreflexivity and transitivity)
+- ***Total Ordering***: a *Total Ordering* is an Ordering Relation in which any pair of elements in the set of the relation are comparable under the relation.  Total Ordering is a specialization of Partial Ordering.
 Examples:
-	- Real numbers ordered by the less-than relation (<) (also Rational, Integers and Natural numbers)
-	- The letters of the alphabet ordered by the natural dictionary order.
-
+	1. Real numbers ordered by the less-than relation (<) (also Rational, Integers and Natural numbers)
+	2. The letters of the alphabet ordered by the natural dictionary order.
 We have two kinds of Total Ordering:
-	- ***Reflexive Total Ordering*** (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and ***total***[[5]](#Ref5). (it is also reflexive, but is implied by totally)
-	- ***Strict Total Ordering***[[5]](#Ref5) (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is transitive and obeys the trichotomy law, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also irreflexive, but this axiom is implied by the trichotomy law)
+	- ***Reflexive Total Ordering*** (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and *total*[[5]](#Ref5). (it is also reflexive, but is implied by totally)
+	- ***Strict Total Ordering***[[5]](#Ref5) (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is *transitive* and obeys the *trichotomy law*, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also *irreflexive*, but this axiom is implied by the trichotomy law)
 
 (Note: There are more ordering relations, but we will see them later)
 
