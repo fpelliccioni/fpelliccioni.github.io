@@ -214,6 +214,9 @@ y &=& x^4 + 4      \nonumber \\
 &\le&(x^2+2)^2    \nonumber
 \end{eqnarray}$$`
 
+`$$Relation(\texttt{Op}) \triangleq$$`
+`$$\texttt{Op} \triangleq$$`
+
 
 `$$\begin{eqnarray}  
 Relation(\texttt{Op}) \triangleq \\
@@ -292,7 +295,7 @@ TotallyOrdered(\texttt{T}) \triangleq \\
  
 
 
- 
+
 Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
 
 
