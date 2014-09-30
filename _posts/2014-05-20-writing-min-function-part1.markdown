@@ -35,7 +35,7 @@ The objective is to learn to correctly determine what are the *requirements* tha
 
 Alex calls a collection of requirements a [*Concept*[2]](#Ref2).
 
-Despite having no support for Concepts in programming languages, he has been using them for decades, not in code, but in his mind and in the documentation of the components developed by him [[3]](#Ref3).
+Despite having no support for *Concepts* in programming languages, he has been using them for decades, not in code, but in his mind and in the documentation of the components developed by him [[3]](#Ref3).
 
 ## First Attempt
 
@@ -65,13 +65,13 @@ I strongly disagree!
 
 Forget for a while about programming languages, let’s see what the requirements are. The problem arises from this code snippet
 
-a < b
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a < b
 
 What does this mean?
 
 Someone could say that the requirement is that arguments a and b must be compared using the less-than-operator.
 
-But this is just a syntactic requirement, we have to go further in order to correctly specify our function. We need to include semantics in our type requirements! But... how to do it?
+But this is just a syntactic requirement, we have to go further in order to correctly specify our function. We need to include ***semantics*** in our type requirements! But... how to do it?
 
 ## Mathematics to the rescue!
 
@@ -90,19 +90,19 @@ less_than_operator(a, b) {
 }
 {% endhighlight %}
 
-This function returns true if the number of seconds of the system time is even, otherwise returns false. With this code I want to emphasize that the less_than_operator could be defined using a random behaviour, but we need to define an specific behaviour.
+This function returns *true* if the number of seconds of the system time is even, otherwise returns *false*. With this code I want to emphasize that the less_than_operator could be defined using a random behaviour, but we need to define an specific behaviour.
 
-Mathematically the less-than-operator is a **Relation**[[5]](#Ref5). A relation is a binary **Predicate**[[5]](#Ref5).
+Mathematically the less-than-operator is a ***Relation***[[5]](#Ref5). A relation is a binary ***Predicate***[[5]](#Ref5).
 
 That is, a predicate that takes two parameters of the same type.
-“If you look of two things, is either true or false. The relation holds, or not.”
-The difference between the code above and a relation is that the relation is considered a **FunctionalProcedure**[[5]](#Ref5), that is, a function in which by replacing its inputs with equal objects results in equal output objects.
+*“If you look of two things, is either true or false. The relation holds, or not.”*
+The difference between the code above and a relation is that the relation is considered a ***FunctionalProcedure***[[5]](#Ref5), that is, a function in which by replacing its inputs with equal objects results in equal output objects.
 
-But the relation concept is too weak, we need a stronger concept: Ordering.
+But the *relation concept* is too weak, we need a stronger concept: ***Ordering***.
 
 *“What is an ordering? What do mathematicians call ordering?*
 
-*The only absolute rule for ordering is the requirement of **transitivity**[[5]](#Ref5).*
+*The only absolute rule for ordering is the requirement of ***transitivity***[[5]](#Ref5).*
 *A relation is transitive if, whenever it holds between a and b, and between b and c, it holds between a and c.*
 *A transitive relation is the most basic notion of ordering, but it is still too weak for our needs.”*
 
@@ -117,14 +117,14 @@ Which one is greater? Which one includes the other?
 It is not defined!
  
 We have two kinds of Partial Ordering:
-Reflexive Partial Ordering (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is transitive, **reflexive**[[5]](#Ref5) and **antisymmetric**[[5]](#Ref5).
-Strict Partial Ordering (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is transitive and **ireflexive**[[5]](#Ref5) (it is also **asymmetric**[[5]](#Ref5), but this axiom is implied by irreflexivity and transitivity)
+Reflexive Partial Ordering (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is transitive, ***reflexive***[[5]](#Ref5) and ***antisymmetric***[[5]](#Ref5).
+Strict Partial Ordering (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is transitive and ***ireflexive***[[5]](#Ref5) (it is also ***asymmetric***[[5]](#Ref5), but this axiom is implied by irreflexivity and transitivity)
 Total Ordering: a Total Ordering is an Ordering Relation in which any pair of elements in the set of the relation are comparable under the relation. Total Ordering is a specialization of Partial Ordering.
 Examples:
 - Real numbers ordered by the less-than relation (<) (also Rational, Integers and Natural numbers)
 - The letters of the alphabet ordered by the natural dictionary order.
 We have two kinds of Total Ordering:
-Reflexive Total Ordering (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and **total**[[5]](#Ref5). (it is also reflexive, but is implied by totally)
+Reflexive Total Ordering (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and ***total***[[5]](#Ref5). (it is also reflexive, but is implied by totally)
 Strict Total Ordering[[5]](#Ref5) (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is transitive and obeys the trichotomy law, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also irreflexive, but this axiom is implied by the trichotomy law)
 (Note: There are more ordering relations, but we will see them later)
 
