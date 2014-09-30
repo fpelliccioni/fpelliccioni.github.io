@@ -255,12 +255,12 @@ Some of the definitions presented here are based on: <http://www.elementsofprogr
 
 `$$\textbf{property}\text{(R : Relation)} \\
 \text{total_ordering : R}  \\
-\quad \textnormal{r} \mapsto \textnormal{transitive(r) } \land \\
-\textnormal{ (} \forall \textnormal{ a, b} \in \texttt{Domain(R)} \textnormal{) exactly one of the following holds: r(a, b), r(b, a), or a = b}$$`
+\quad \text{r} \mapsto \text{transitive(r) } \land \\
+\text{ (} \forall \text{ a, b} \in \texttt{Domain(R)} \text{) exactly one of the following holds: r(a, b), r(b, a), or a = b}$$`
 
 `$$TotallyOrdered(\texttt{T}) \triangleq \\
 \qquad  \texttt{Regular(T)} \\
-\quad \land <\texttt{: T x T} \rightarrow \textnormal{bool} \\
+\quad \land <\texttt{: T x T} \rightarrow \text{bool} \\
 \quad \land total\_ordering(<)$$`
  
 For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
