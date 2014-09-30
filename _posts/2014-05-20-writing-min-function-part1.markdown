@@ -31,7 +31,7 @@ The answer is yes. As Alex says, “Simple things are beautiful”, and believe 
 
 The objective is to learn to correctly determine what are the requirements that a function must impose on types used in it.
 
-"It is better to design our Components (algorithms and data structures) not in terms of concrete types, but in terms of requirements on types expressed as syntactic and semantic properties"
+*"It is better to design our Components (algorithms and data structures) not in terms of concrete types, but in terms of requirements on types expressed as syntactic and semantic properties"*
 
 Alex calls a collection of requirements a [Concept[2]](#Ref2).
 
@@ -61,7 +61,7 @@ For some programmers, especially those advocates of duck-typing, imposing requir
 
 I strongly disagree!
 
-"Even if we do not have Concepts in the language, they should exists in our mind. You have to learn to think in terms of Concepts whichever language you use."
+*"Even if we do not have Concepts in the language, they should exists in our mind. You have to learn to think in terms of Concepts whichever language you use."*
 
 Forget for a while about programming languages, let’s see what the requirements are. The problem arises from this code snippet
 
@@ -100,17 +100,17 @@ The difference between the code above and a relation is that the relation is con
 
 But the relation concept is too weak, we need a stronger concept: Ordering.
 
-"What is an ordering? What do mathematicians call ordering?
+*"What is an ordering? What do mathematicians call ordering?
 
 The only absolute rule for ordering is the requirement of transitivity[[5]](#Ref5).
 A relation is transitive if, whenever it holds between a and b, and between b and c, it holds between a and c.
-A transitive relation is the most basic notion of ordering, but it is still too weak for our needs."
+A transitive relation is the most basic notion of ordering, but it is still too weak for our needs."*
 
 Let's review what kinds of Ordering Relations exist:
 
 Partial Ordering: A Partial Ordering is an ordering relation in which not every pair of elements need to be related.
 Examples:
-"The canonical example of Partial Ordering is the Subset Relation"
+*"The canonical example of Partial Ordering is the Subset Relation"*
 Subset are ordered, one subset could be a Subset of another subset, for example, the subset {2, 4} Is a Subset Of the subset {1, 2, 3, 4}.
 But it also happens that there are subsets which you could said nothing about, for example, given {2, 4} and {3, 5}.
 Which one is greater? Which one includes the other?
@@ -134,21 +134,15 @@ Well, now we know about ordering relations, let's look at how we can use them to
 
 But first, what should we use? Partial or Total Ordering?
 
-"If our relation is the Subset relation on a set, then, min and max of two sets doesn't make sense."
+*"If our relation is the Subset relation on a set, then, min and max of two sets doesn't make sense."*
 
 Then, Partial Ordering is too weak, because the relation doesn't hold for every pair of elements of the set.
 
 We need to use Total Ordering for define the requirements of min, let's do it:
 
 
-``` csharp 
-private void index()
-{ 
-	MessageBox.Show("hello world"); 
-} 
-```
 
-``` csharp 
+``` cpp
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
 //  and T is TotallyOrdered[[5]](#Ref5)
@@ -158,17 +152,6 @@ min(a, b) {
 }
 // Note: the implementations still has errors.
 ```
-
-{% highlight csharp %}
-// Requires:
-//  The type of a is equal to the type of b, and it is called T,
-//  and T is TotallyOrdered[[5]](#Ref5)
-min(a, b) {
-	if (a < b) return a
-	return b
-}
-// Note: the implementations still has errors.
-{% endhighlight %}
 
 {% highlight cpp %}
 // Requires:
@@ -180,28 +163,6 @@ min(a, b) {
 }
 // Note: the implementations still has errors.
 {% endhighlight %}
-
-{% highlight python %}
-// Requires:
-//  The type of a is equal to the type of b, and it is called T,
-//  and T is TotallyOrdered[[5]](#Ref5)
-min(a, b) {
-	if (a < b) return a
-	return b
-}
-// Note: the implementations still has errors.
-{% endhighlight %}
-
-
-	// Requires:
-	//  The type of a is equal to the type of b, and it is called T,
-	//  and T is TotallyOrdered[[5]](#Ref5)
-	min(a, b) {
-		if (a < b) return a
-		return b
-	}
-	// Note: the implementations still has errors.
-
 
 Note that the requirements were expressed as code comments. Later we will see what the programming languages provide us to express them as code.
 
