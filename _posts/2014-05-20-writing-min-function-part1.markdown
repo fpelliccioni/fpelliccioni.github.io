@@ -102,19 +102,19 @@ But the *relation concept* is too weak, we need a stronger concept: ***Ordering*
 
 *“What is an ordering? What do mathematicians call ordering?*
 
-*The only absolute rule for ordering is the requirement of ***transitivity***[[5]](#Ref5).*
+*The only absolute rule for ordering is the requirement of __transitivity__ [[5]](#Ref5).*
 *A relation is transitive if, whenever it holds between a and b, and between b and c, it holds between a and c.*
 *A transitive relation is the most basic notion of ordering, but it is still too weak for our needs.”*
 
 Let's review what kinds of Ordering Relations exist:
 
-Partial Ordering: A Partial Ordering is an ordering relation in which not every pair of elements need to be related.
+- Partial Ordering: A Partial Ordering is an ordering relation in which not every pair of elements need to be related.  
 Examples:
-*“The canonical example of Partial Ordering is the Subset Relation”*
-Subset are ordered, one subset could be a Subset of another subset, for example, the subset {2, 4} Is a Subset Of the subset {1, 2, 3, 4}.
-But it also happens that there are subsets which you could said nothing about, for example, given {2, 4} and {3, 5}.
-Which one is greater? Which one includes the other?
-It is not defined!
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*“The canonical example of Partial Ordering is the Subset Relation”*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subset are ordered, one subset could be a Subset of another subset, for example, the subset {2, 4} Is a Subset Of the subset {1, 2, 3, 4}.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;But it also happens that there are subsets which you could said nothing about, for example, given {2, 4} and {3, 5}.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which one is greater? Which one includes the other?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is not defined!
  
 We have two kinds of Partial Ordering:
 Reflexive Partial Ordering (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is transitive, ***reflexive***[[5]](#Ref5) and ***antisymmetric***[[5]](#Ref5).
