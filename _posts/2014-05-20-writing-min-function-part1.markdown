@@ -162,7 +162,7 @@ In the next articles of the series, we will:
 - write the *max* function
 - refine the requirements of *min* and *max*
 - implement them in real programming languages
-- analyze the functions provided by popular (and not so popular) programming languages.
+- analyze the API provided by some programming languages.
 
 Stay tuned!
 
