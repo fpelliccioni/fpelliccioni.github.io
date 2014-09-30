@@ -223,9 +223,9 @@ Some of the definitions presented here are based on: <http://www.elementsofprogr
 \quad \land \texttt{Codomain(P) = bool}$$`
  
 
-`$$property(R : Relation) \\
-transitive : R  \\
-r \mapsto (\forall a, b, c \in \texttt{Domain(R)}) (r(a, b) \land r(b, c) \Rightarrow r(a, c))$$`
+`$$\textbf{property}\text{(R : Relation)} \\
+\text{transitive : R}  \\
+\quad r \mapsto (\forall a, b, c \in \texttt{Domain(R)}) (r(a, b) \land r(b, c) \Rightarrow r(a, c))$$`
 
 **property**(R : Relation)  
 refexive : R  
