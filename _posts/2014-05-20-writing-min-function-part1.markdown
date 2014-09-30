@@ -205,6 +205,23 @@ Thanks in particular to the following for their feedback to improve this article
 ---
 
 ## Appendix A: Definitions
+
+
+`$$\begin{eqnarray*}
+ Relation(\texttt{Op}) &\triangleq& \\
+   && HomogeneousPredicate(\texttt{Op}) \\
+   && \land \texttt{ Arity(Op) = 2}
+\end{eqnarray*}$$`
+
+
+
+`$$\begin{align*}  
+Relation(\texttt{Op}) \triangleq  \\
+HomogeneousPredicate(\texttt{Op})  \\
+\land \texttt{ Arity(Op) = 2} 
+\end{align*}$$`
+
+
 `$$a^2 + b^2 = c^2$$`
 
 
@@ -244,6 +261,10 @@ HomogeneousPredicate(\texttt{Op})  \\
    && {}+x^3/3! + x^4/4! + \\
    && + x^5/5!
 \end{eqnarray*}$$`
+
+
+
+
 
 
 
