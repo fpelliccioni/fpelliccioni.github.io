@@ -208,11 +208,11 @@ Thanks in particular to the following for their feedback to improve this article
 `$$a^2 + b^2 = c^2$$`
 
 
-$$\begin{eqnarray} 
+`$$\begin{eqnarray} 
 y &=& x^4 + 4      \nonumber \\
 &=& (x^2+2)^2 -4x^2 \nonumber \\
 &\le&(x^2+2)^2    \nonumber
-\end{eqnarray}$$
+\end{eqnarray}$$`
 
 Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
 
