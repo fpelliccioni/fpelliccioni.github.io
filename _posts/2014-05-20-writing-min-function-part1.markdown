@@ -18,7 +18,7 @@ These are the lessons that Alex gives us, and I want to show them in this series
 
 And... the following lesson is mine:
 
-- Please don't blindly accept what it is expressed on this blog. In case of doubt you should go to the source, the [Elements of Programming book [1]](#EoPBook)
+- Please don't blindly accept what it is expressed on this blog. In case of doubt you should go to the source, the [Elements of Programming book [1]](#Ref1)
 
 In this article I want to avoid using any programming language, I want to focus on the algorithms and the specifications. In subsequent articles, I will implement what we learned using several mainstream programming languages.
 
@@ -33,15 +33,16 @@ The objective is to learn to correctly determine what are the requirements that 
 
 "It is better to design our Components (algorithms and data structures) not in terms of concrete types, but in terms of requirements on types expressed as syntactic and semantic properties"
 
-Alex calls a collection of requirements a Concept[2].
+Alex calls a collection of requirements a [Concept[2]](#Ref2).
 
-Despite having no support for Concepts in programming languages, he has been using them for decades, not in code, but in his mind and in the documentation of the components developed by him [3].
+Despite having no support for Concepts in programming languages, he has been using them for decades, not in code, but in his mind and in the documentation of the components developed by him [[3]](#Ref3).
 
 ## First Attempt
 
 Well, let’s start writing the specification and then, the code:
 
-Spec: Given two objects[4], a and b, return the smaller of both.
+Spec: Given two [objects[4]](#Ref4), a and b, return the smaller of both.
+
 
 {% highlight csharp %}
 //Note: Naive min function in pseudo-code. Warning: contains errors.
@@ -91,17 +92,17 @@ less_than_operator(a, b) {
 
 This function returns true if the number of seconds of the system time is even, otherwise returns false. With this code I want to emphasize that the less_than_operator could be defined using a random behaviour, but we need to define an specific behaviour.
 
-Mathematically the less-than-operator is a Relation [5]. A relation is a binary Predicate[5].
+Mathematically the less-than-operator is a Relation[[5]](#Ref5). A relation is a binary Predicate[[5]](#Ref5).
 
 That is, a predicate that takes two parameters of the same type.
 “If you look of two things, is either true or false. The relation holds, or not.”
-The difference between the code above and a relation is that the relation is considered a FunctionalProcedure[5], that is, a function in which by replacing its inputs with equal objects results in equal output objects.
+The difference between the code above and a relation is that the relation is considered a FunctionalProcedure[[5]](#Ref5), that is, a function in which by replacing its inputs with equal objects results in equal output objects.
 
 But the relation concept is too weak, we need a stronger concept: Ordering.
 
 "What is an ordering? What do mathematicians call ordering?
 
-The only absolute rule for ordering is the requirement of transitivity[5].
+The only absolute rule for ordering is the requirement of transitivity[[5]](#Ref5).
 A relation is transitive if, whenever it holds between a and b, and between b and c, it holds between a and c.
 A transitive relation is the most basic notion of ordering, but it is still too weak for our needs."
 
@@ -116,15 +117,15 @@ Which one is greater? Which one includes the other?
 It is not defined!
  
 We have two kinds of Partial Ordering:
-Reflexive Partial Ordering (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is transitive, reflexive[5] and antisymmetric[5].
-Strict Partial Ordering (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is transitive and ireflexive[5] (it is also asymmetric[5], but this axiom is implied by irreflexivity and transitivity)
+Reflexive Partial Ordering (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is transitive, reflexive[[5]](#Ref5) and antisymmetric[[5]](#Ref5).
+Strict Partial Ordering (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is transitive and ireflexive[[5]](#Ref5) (it is also asymmetric[[5]](#Ref5), but this axiom is implied by irreflexivity and transitivity)
 Total Ordering: a Total Ordering is an Ordering Relation in which any pair of elements in the set of the relation are comparable under the relation. Total Ordering is a specialization of Partial Ordering.
 Examples:
 - Real numbers ordered by the less-than relation (<) (also Rational, Integers and Natural numbers)
 - The letters of the alphabet ordered by the natural dictionary order.
 We have two kinds of Total Ordering:
-Reflexive Total Ordering (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and total[5]. (it is also reflexive, but is implied by totally)
-Strict Total Ordering[5] (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is transitive and obeys the trichotomy law, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also irreflexive, but this axiom is implied by the trichotomy law)
+Reflexive Total Ordering (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and total[[5]](#Ref5). (it is also reflexive, but is implied by totally)
+Strict Total Ordering[[5]](#Ref5) (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is transitive and obeys the trichotomy law, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also irreflexive, but this axiom is implied by the trichotomy law)
 (Note: There are more ordering relations, but we will see them later)
 
 ## Writing min using Concepts
@@ -150,7 +151,7 @@ private void index()
 ``` csharp 
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
-//  and T is TotallyOrdered[5]
+//  and T is TotallyOrdered[[5]](#Ref5)
 min(a, b) {
 	if (a < b) return a
 	return b
@@ -161,7 +162,7 @@ min(a, b) {
 {% highlight csharp %}
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
-//  and T is TotallyOrdered[5]
+//  and T is TotallyOrdered[[5]](#Ref5)
 min(a, b) {
 	if (a < b) return a
 	return b
@@ -172,7 +173,7 @@ min(a, b) {
 {% highlight cpp %}
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
-//  and T is TotallyOrdered[5]
+//  and T is TotallyOrdered[[5]](#Ref5)
 min(a, b) {
 	if (a < b) return a
 	return b
@@ -183,7 +184,7 @@ min(a, b) {
 {% highlight python %}
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
-//  and T is TotallyOrdered[5]
+//  and T is TotallyOrdered[[5]](#Ref5)
 min(a, b) {
 	if (a < b) return a
 	return b
@@ -194,7 +195,7 @@ min(a, b) {
 
 	// Requires:
 	//  The type of a is equal to the type of b, and it is called T,
-	//  and T is TotallyOrdered[5]
+	//  and T is TotallyOrdered[[5]](#Ref5)
 	min(a, b) {
 		if (a < b) return a
 		return b
@@ -237,19 +238,19 @@ Part 4: Const-Correctness
 
 ## References
 
-<a name="EoPBook">[1]</a> Elements of Programming of Alexander Stepanov and Paul McJones, [](http://www.elementsofprogramming.com)
-[2] Concept definition: Stepanov and McJones [2009, page 10]
+<a name="Ref1">[1]</a> Elements of Programming of Alexander Stepanov and Paul McJones, <http://www.elementsofprogramming.com>
+<a name="Ref2">[2]</a> Concept definition: Stepanov and McJones [2009, page 10]
 
-[3] SGI's STL using Concepts in Documentation: https://www.sgi.com/tech/stl/min.html
+<a name="Ref3">[3]</a> SGI's STL using Concepts in Documentation: https://www.sgi.com/tech/stl/min.html
 
-[4] Object definition:
-	The definition used in this article has nothing to do with an OOP-like definition of object [6].
+<a name="Ref4">[4]</a> Object definition:
+	The definition used in this article has nothing to do with an OOP-like definition of object [[6]](#Ref6).
 	The definition used here is a practical definition of what an object is:
 	"Object is a sequence of bits in memory" or
 	"Object is a value residing in memory"
 	See Stepanov and McJones [2009, page 4] for a complete definition.
-[5] See Appendix A
-[6] Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]
+<a name="Ref5">[5]</a> See Appendix A
+<a name="Ref6">[6]</a> Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]
  
 
 ---
