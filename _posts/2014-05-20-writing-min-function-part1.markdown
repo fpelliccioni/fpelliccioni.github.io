@@ -206,182 +206,67 @@ Thanks in particular to the following for their feedback to improve this article
 
 ## Appendix A: Definitions
 
+Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
 
 `$$Relation(\texttt{Op}) \triangleq \\
-\text{    } HomogeneousPredicateX(\texttt{Op}) \\
-\text{  } \land \texttt{ Arity(Op) = 2}$$`
-
-`$$Relation(\texttt{Op}) \triangleq \\
-\text{...} HomogeneousPredicateX(\texttt{Op}) \\
-\text{$…$} \land \texttt{ Arity(Op) = 2}$$`
-
-`$$Relation(\texttt{Op}) \triangleq \\
-\, HomogeneousPredicateX(\texttt{Op}) \\
-\; \land \texttt{ Arity(Op) = 2}$$`
-
-`$$Relation(\texttt{Op}) \triangleq \\
-\quad HomogeneousPredicateX(\texttt{Op}) \\
-\qquad \land \texttt{ Arity(Op) = 2}$$`
+\qquad HomogeneousPredicate(\texttt{Op}) \\
+\quad \land \texttt{ Arity(Op) = 2}$$`
 
 
+`$$HomogeneousPredicate(\texttt{P}) \triangleq \\
+\qquad  Predicate(\texttt{P}) \\
+\quad \land HomogeneousFunction(\texttt{P})$$`
 
 
-
-
-
-
-`$$\begin{eqnarray*}
- Relation(\texttt{Op}) &\triangleq& \\
-   && HomogeneousPredicate(\texttt{Op}) \\
-   && \land \texttt{ Arity(Op) = 2}
-\end{eqnarray*}$$`
-
-
-`$$\begin{eqnarray*}
- Relation(\texttt{Op}) \triangleq \\
-   HomogeneousPredicate(\texttt{Op}) \\
-   \land \texttt{ Arity(Op) = 2}
-\end{eqnarray*}$$`
-
-`$$\begin{eqnarray*}
- Relation(\texttt{Op}) \triangleq \\
-   {} HomogeneousPredicate(\texttt{Op}) \\
-   \land \texttt{ Arity(Op) = 2}
-\end{eqnarray*}$$`
-
-
-`$$\begin{align*}  
-Relation(\texttt{Op}) \triangleq  \\
-HomogeneousPredicate(\texttt{Op})  \\
-\land \texttt{ Arity(Op) = 2} 
-\end{align*}$$`
-
-
-`$$a^2 + b^2 = c^2$$`
-
-
-`$$\begin{eqnarray} 
-y &=& x^4 + 4      \nonumber \\
-&=& (x^2+2)^2 -4x^2 \nonumber \\
-&\le&(x^2+2)^2    \nonumber
-\end{eqnarray}$$`
-
-`$$Relation(\texttt{Op}) \triangleq$$`
-`$$\texttt{Op} \triangleq$$`
-
-
-`$$\begin{eqnarray}  
-Relation(\texttt{Op}) \triangleq \nonumber \\
-HomogeneousPredicate(\texttt{Op}) \nonumber \\
-\land \texttt{Arity(Op) = 2} \nonumber
-\end{eqnarray}$$`
-
-`$$\begin{align*}  
-Relation(\texttt{Op}) \triangleq  \\
-HomogeneousPredicate(\texttt{Op})  \\
-\land \texttt{ Arity(Op) = 2} 
-\end{align*}$$`
-
-
-
-`$$\begin{eqnarray*}
- e^x &\approx& 1+x+x^2/2! + \\
-   && {}+x^3/3! + x^4/4! + \\
-   && + x^5/5!
-\end{eqnarray*}$$`
-
-
-`$$\begin{eqnarray*}
- e^x &\triangleq& 1+x+x^2/2! + \\
-   && {}+x^3/3! + x^4/4! + \\
-   && + x^5/5!
-\end{eqnarray*}$$`
-
-
-
-
-
-
-
-`$$\begin{eqnarray}  
-Relation(\texttt{Op}) \triangleq \\
-\hspace*{13mm} HomogeneousPredicate(\texttt{Op}) \\
-\hspace*{5mm} \land \texttt{Arity(Op) = 2}
-\end{eqnarray}$$`
+`$$Predicate(\texttt{P}) \triangleq \\
+\qquad  FunctionalProcedure(\texttt{P}) \\
+\quad \land \texttt{Codomain(P) = bool}$$`
  
 
+`$$property(R : Relation) \\
+transitive : R  \\
+r \mapsto (\forall a, b, c \in \texttt{Domain(R)}) (r(a, b) \land r(b, c) \Rightarrow r(a, c))$$`
 
-`$$\begin{eqnarray} 
-HomogeneousPredicate(\texttt{P}) \triangleq \\
-\hspace*{13mm} Predicate(\texttt{P}) \\
-\hspace*{5mm} \land HomogeneousFunction(\texttt{P})
-\end{eqnarray}$$`
- 
-
-`$$\begin{eqnarray} 
-Predicate(\texttt{P}) \triangleq \\
-\hspace*{13mm} FunctionalProcedure(\texttt{P}) \\
-\hspace*{5mm} \land \texttt{Codomain(P) = bool}
-\end{eqnarray}$$`
- 
-
-property(R : Relation)
-transitive : R
-`$$\begin{eqnarray} 
-r \mapsto (\forall a, b, c \in \texttt{Domain(R)}) (r(a, b) \land r(b, c) \Rightarrow r(a, c))
-\end{eqnarray}$$`
-
-property(R : Relation)
-refexive : R
-`$$\begin{eqnarray} 
-r \mapsto (\forall a \in \texttt{Domain(R)}) (r(a, a))
-\end{eqnarray}$$`
+**property**(R : Relation)  
+refexive : R  
+`$$\quad r \mapsto (\forall a \in \texttt{Domain(R)}) (r(a, a))$$`
 
 property(R : Relation)
 antisymmetric : R
-`$$\begin{eqnarray} 
-r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \land r(b, a) \Rightarrow a = b)
-\end{eqnarray}$$`
+`$$
+r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \land r(b, a) \Rightarrow a = b)$$`
 
 property(R : Relation)
 irreflexive : R
-`$$\begin{eqnarray} 
-r \mapsto (\forall a \in \texttt{Domain(R)}) (\lnot r(a, a))
-\end{eqnarray}$$`
+`$$
+r \mapsto (\forall a \in \texttt{Domain(R)}) (\lnot r(a, a))$$`
 
 property(R : Relation)
 asymmetric : R
-`$$\begin{eqnarray} 
-r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \Rightarrow \lnot r(b, a))
-\end{eqnarray}$$`
+`$$
+r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \Rightarrow \lnot r(b, a))$$`
 
 property(R : Relation)
 total : R
-`$$\begin{eqnarray} 
-r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \lor r(b, a))
-\end{eqnarray}$$`
+`$$
+r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \lor r(b, a))$$`
 
 property(R : Relation)
 total_ordering : R
-`$$\begin{eqnarray} 
-\textnormal{r} \mapsto \textnormal{transitive(r) } \land 
-\end{eqnarray}$$`
+`$$
+\textnormal{r} \mapsto \textnormal{transitive(r) } \land $$`
 
-`$$\begin{eqnarray} 
-\textnormal{ (} \forall \textnormal{ a, b} \in \texttt{Domain(R)} \textnormal{) exactly one of the following holds: r(a, b), r(b, a), or a = b}
-\end{eqnarray}$$`
+`$$
+\textnormal{ (} \forall \textnormal{ a, b} \in \texttt{Domain(R)} \textnormal{) exactly one of the following holds: r(a, b), r(b, a), or a = b}$$`
 
-`$$\begin{eqnarray} 
-TotallyOrdered(\texttt{T}) \triangleq \\
-\hspace*{13mm} \texttt{Regular(T)} \\
-\hspace*{7mm} \land <\texttt{: T x T} \rightarrow \textnormal{bool} \\
-\hspace*{5mm} \land total\_ordering(<)
-\end{eqnarray}$$`
+`$$TotallyOrdered(\texttt{T}) \triangleq \\
+\qquad  \texttt{Regular(T)} \\
+\quad \land <\texttt{: T x T} \rightarrow \textnormal{bool} \\
+\quad \land total\_ordering(<)$$`
  
 
 
 
-Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
 
 
 For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
