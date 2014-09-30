@@ -79,6 +79,13 @@ code {
     font-weight: bold;
 }
 
+code.has-jax {
+    font: inherit; 
+    font-size: 500%; 
+    background: inherit; 
+    border: inherit;
+}
+
 /*
 code, pre {
   font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
