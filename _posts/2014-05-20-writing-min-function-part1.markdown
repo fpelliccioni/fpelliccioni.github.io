@@ -44,13 +44,15 @@ Well, let’s start writing the specification and then, the code:
 
 Spec: Given two objects[4], a and b, return the smaller of both.
 
-[code language="cpp"]
+{% highlight csharp %}
 //Note: Naive min function in pseudo-code. Warning: contains errors.
 min(a, b) {
 	if (a < b) return a
 	return b
 }
-[/code]
+{% endhighlight %}
+
+
 The above function is written in pseudo-code (which looks like a mix between C and Python), it has some flaws, but we will see them later.
 
 The most important question is… What are the requirements of min function must impose to the arguments a and b? That is... Which are the Concepts?
@@ -80,13 +82,14 @@ Is this enough for defining min function?
 
 No, and to ilustrate that, see what happened if the less-than-operator is defined this way:
 
-[code language="cpp"]
+{% highlight csharp %}
 //Pseudo-code for less-than-operator
 less_than_operator(a, b) {
 	if ( is_even(system_time().seconds) ) return true
 	return false
 }
-[/code]
+{% endhighlight %}
+
 This function returns true if the number of seconds of the system time is even, otherwise returns false. With this code I want to emphasize that the less_than_operator could be defined using a random behaviour, but we need to define an specific behaviour.
 
 Mathematically the less-than-operator is a Relation [5]. A relation is a binary Predicate[5].
@@ -137,7 +140,7 @@ Then, Partial Ordering is too weak, because the relation doesn't hold for every 
 
 We need to use Total Ordering for define the requirements of min, let's do it:
 
-[code language="cpp"]
+{% highlight csharp %}
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
 //  and T is TotallyOrdered[5]
@@ -146,7 +149,8 @@ min(a, b) {
 	return b
 }
 // Note: the implementations still has errors.
-[/code]
+{% endhighlight %}
+
 Note that the requirements were expressed as code comments. Later we will see what the programming languages provide us to express them as code.
 
 Well, this is enough for a single post.
@@ -284,7 +288,7 @@ print_hi('Tom')
 {% endhighlight %}
 
 
-{% highlight python %}
+{% highlight csharp %}
 def print_hi(name)
   puts "Hi, #{name}"
 end
