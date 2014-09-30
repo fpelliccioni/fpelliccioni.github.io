@@ -207,6 +207,16 @@ Thanks in particular to the following for their feedback to improve this article
 ## Appendix A: Definitions
 
 
+`$$Relation(\texttt{Op}) \triangleq \\
+	HomogeneousPredicate(\texttt{Op}) \\
+   	\land \texttt{ Arity(Op) = 2}$$`
+
+
+`$$Relation(\texttt{Op}) \triangleq
+	HomogeneousPredicate(\texttt{Op})
+   	\land \texttt{ Arity(Op) = 2}$$`
+
+
 `$$\begin{eqnarray*}
  Relation(\texttt{Op}) &\triangleq& \\
    && HomogeneousPredicate(\texttt{Op}) \\
