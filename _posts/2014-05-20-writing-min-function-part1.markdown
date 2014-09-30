@@ -208,8 +208,8 @@ Thanks in particular to the following for their feedback to improve this article
 
 
 `$$Relation(\texttt{Op}) \triangleq \\
-	HomogeneousPredicate(\texttt{Op}) \\
-   	\land \texttt{ Arity(Op) = 2}$$`
+	\texttt{    } HomogeneousPredicate(\texttt{Op}) \\
+   	\texttt{    } \land \texttt{ Arity(Op) = 2}$$`
 
 
 `$$Relation(\texttt{Op}) \triangleq
