@@ -140,6 +140,14 @@ Then, Partial Ordering is too weak, because the relation doesn't hold for every 
 
 We need to use Total Ordering for define the requirements of min, let's do it:
 
+
+``` csharp 
+private void index()
+{ 
+	MessageBox.Show("hello world"); 
+} 
+```
+
 {% highlight csharp %}
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
