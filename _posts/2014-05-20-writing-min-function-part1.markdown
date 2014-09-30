@@ -31,7 +31,7 @@ The answer is yes. As Alex says, *“Simple things are beautiful”*, and believ
 
 The objective is to learn to correctly determine what are the *requirements* that a function must impose on types used in it.
 
-*“It is better to design our **Components** (algorithms and data structures) not in terms of concrete types, but in terms of requirements on types expressed as syntactic and semantic properties”*
+*“It is better to design our __Components__ (algorithms and data structures) not in terms of concrete types, but in terms of requirements on types expressed as syntactic and semantic properties”*
 
 Alex calls a collection of requirements a [*Concept*[2]](#Ref2).
 
@@ -55,7 +55,7 @@ min(a, b) {
 
 The above function is written in pseudo-code (which looks like a mix between C and Python), it has some flaws, but we will see them later.
 
-The most important question is… What are the requirements of *min* function must impose to the arguments a and b? That is... Which are the Concepts?
+The most important question is… What are the requirements of *min* function must impose to the arguments a and b? That is... Which are the *Concepts*?
 
 For some programmers, especially those advocates of duck-typing, imposing requirements to arguments may be something uninteresting. They simply use the arguments in the function body, and they hope to at least get a runtime error.
 
@@ -128,7 +128,7 @@ Reflexive Total Ordering (or Non-Strict Total Ordering): A relation is a Reflexi
 Strict Total Ordering[[5]](#Ref5) (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is transitive and obeys the trichotomy law, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also irreflexive, but this axiom is implied by the trichotomy law)
 (Note: There are more ordering relations, but we will see them later)
 
-## Writing *min* using Concepts
+## Writing *min* using *Concepts*
 
 Well, now we know about ordering relations, let's look at how we can use them to specify the *min* function.
 
