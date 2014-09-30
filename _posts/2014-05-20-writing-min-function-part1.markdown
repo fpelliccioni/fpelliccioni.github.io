@@ -199,6 +199,7 @@ Stay tuned!
 
  
 ---
+
 ## Acknowledgments
 
 Thanks in particular to the following for their feedback to improve this article: Mario Dal Lago, Andrzej Krzemienski, Dean Michael Berris, Javier Centurión, Alejandro Santos, Ezequiel Reyno.
@@ -206,28 +207,33 @@ Thanks in particular to the following for their feedback to improve this article
  
 
 ---
+
 ## The Series
 
 Part 1: The rise of Concepts
 Part 2: Understanding Concepts
 Part 3: Weakening the ordering
 Part 4: Const-Correctness
-References
+
+---
+
+## References
 
 [1] Elements of Programming of Alexander Stepanov and Paul McJones, http://www.elementsofprogramming.com
 [2] Concept definition: Stepanov and McJones [2009, page 10]
 [3] SGI's STL using Concepts in Documentation: https://www.sgi.com/tech/stl/min.html
 [4] Object definition:
-The definition used in this article has nothing to do with an OOP-like definition of object [6].
-The definition used here is a practical definition of what an object is:
-"Object is a sequence of bits in memory" or
-"Object is a value residing in memory"
-See Stepanov and McJones [2009, page 4] for a complete definition.
+	The definition used in this article has nothing to do with an OOP-like definition of object [6].
+	The definition used here is a practical definition of what an object is:
+	"Object is a sequence of bits in memory" or
+	"Object is a value residing in memory"
+	See Stepanov and McJones [2009, page 4] for a complete definition.
 [5] See Appendix A
 [6] Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]
  
 
 ---
+
 ## Appendix A: Definitions
 
 Some of the definitions presented here are based on: http://www.elementsofprogramming.com/eop-concepts.pdf
@@ -287,6 +293,24 @@ $latex TotallyOrdered(\texttt{T}) \triangleq \\
  
 
 For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 This is the first in a series of articles in which I want to transmit what I learned (or what I think I learned) from the books, papers and lectures of Alexander Stepanov.
 
@@ -350,20 +374,4 @@ You’ll find this post in your `_posts` directory. Go ahead and edit it and re-
 \end{align}
 $$`
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
 
-Jekyll also offers powerful support for code snippets:
-
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
-
-Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll’s dedicated Help repository][jekyll-help].
-
-[jekyll]:      http://jekyllrb.com
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-help]: https://github.com/jekyll/jekyll-help
