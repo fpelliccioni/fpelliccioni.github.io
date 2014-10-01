@@ -177,7 +177,8 @@ Thanks in particular to the following for their feedback to improve this article
 
 ---
 
-{% include writing-min-function-series.md %}
+{% capture series-include %}{% include writing-min-function-series.md %}{% endcapture %}
+{{ series-include | markdownify }}
 
 ---
 
