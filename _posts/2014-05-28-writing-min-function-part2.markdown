@@ -177,7 +177,11 @@ Thanks in particular to the following for their feedback to improve this article
 
 ---
 
-{% include writing_min_function_series.md %}
+<!-- {% include writing_min_function_series.md %} -->
+{% include head.html %}
+
+
+
 <!-- {% capture series-include %}{% include writing_min_function_series.md %}{% endcapture %}
 {{ series-include | markdownify }}
  -->
