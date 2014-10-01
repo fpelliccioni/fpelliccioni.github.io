@@ -5,175 +5,119 @@ date:   2014-05-28 11:48:29
 comments: true
 ---
 
-This is the first in a series of articles in which I want to transmit what I learned (or what I think I learned) from the books, papers and lectures of Alexander Stepanov.
+This is the second article of the series called *"Writing min function"*.
 
-These are the lessons that Alex gives us, and I want to show them in this series:
+I want complete the *min* function and fix the mistakes mentioned in the [previous post]({% post_url 2014-05-20-writing-min-function-part1 %}). But first, we have to understand *Concepts*, so let's review the last version of the function with its requirements.
 
-- Specify our algorithms correctly
-- Programming must be based on a solid mathematical foundation
-- Designing our API's consistently
-- Not always the library implementations provided by the programming languages we use are correct, even though they are designed by "experts".
-- The concept of Stability
-- *Generic programming*, of course!
-
-And... the following lesson is mine:
-
-- Please don't blindly accept what it is expressed on this blog. In case of doubt you should go to the source, the [Elements of Programming book [1]](#Ref1)
-
-In this article I want to avoid using any programming language, I want to focus on the algorithms and the specifications. In subsequent articles, I will try to implement what we learned using several mainstream programming languages.
-
-## Writing *min*
-
-I will try to write the function *min*, that is, a function that returns the minimum of two things.
-
-At this time you may be wondering, this guy is writing an entire blog post about a two-line function, is this serious?
-The answer is yes. As Alex says: *“Simple things are beautiful”*, and believe it or not, we can learn a lot in the process of writing *min*.
-
-The objective is to learn to correctly determine what are the *requirements* that a function must impose on types used in it.
-
-*“It is better to design our __Components__ (algorithms and data structures) not in terms of concrete types, but in terms of requirements on types expressed as syntactic and semantic properties”*
-
-Alex calls a collection of requirements a [*Concept*[2]](#Ref2).
-
-Despite having no support for *Concepts* in programming languages, he has been using them for decades, not in code, but in his mind and in the documentation of the components developed by him [[3]](#Ref3).
-
-## First Attempt
-
-Well, let’s start writing the specification and then, the code:
-
-Spec: Given two [objects[4]](#Ref4), a and b, return the smaller of both.
-
-
-{% highlight cpp %}
-//Note: Naive min function in pseudo-code (contains errors).
-min(a, b) {
-	if (a < b) return a
-	return b
-}
-{% endhighlight %}
-
-
-The above function is written in pseudo-code (which looks like a mix between [*C*](http://www.open-std.org/jtc1/sc22/wg14/) and [*Python*](https://www.python.org/)), it has some flaws, but we will see them later.
-
-The most important question is… What are the requirements of *min* function must impose to the arguments a and b? That is... Which are the *Concepts*?
-
-For some programmers, especially those advocates of duck-typing, imposing requirements to arguments may be something uninteresting. They simply use the arguments in the function body, and they hope to at least get a runtime error.
-
-I strongly disagree!
-
-*“Even if we do not have Concepts in the language, they should exists in our mind. You have to learn to think in terms of Concepts whichever language you use.”*
-
-Forget for a while about programming languages, let’s see what the requirements are. The problem arises from this code snippet
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a < b
-
-What does this mean?
-
-Someone could say that the requirement is that arguments a and b must be compared using the less-than-operator.
-
-But this is just a syntactic requirement, we have to go further in order to correctly specify our function. We need to include ***semantics*** in our type requirements! But... how to do it?
-
-## Mathematics to the rescue!
-
-What is the less-than-operator?
-
-It is a way for comparing two objects, returning a boolean value.
-Is this enough for defining *min* function?
-
-No, and to ilustrate that, see what happened if the less-than-operator is defined this way:
-
-{% highlight cpp %}
-//Pseudo-code for less-than-operator
-less_than_operator(a, b) {
-	if ( is_even(system_time().seconds) ) return true
-	return false
-}
-{% endhighlight %}
-
-This function returns *true* if the number of seconds of the system time is even, otherwise returns *false*. With this code I want to emphasize that the less_than_operator could be defined using a random behaviour, but we need to define an specific behaviour.
-
-Mathematically the less-than-operator is a *Relation*[[5]](#Ref5). A relation is a binary *Predicate*[[5]](#Ref5).
-
-That is, a predicate that takes two parameters of the same type.
-*“If you look of two things, is either true or false. The relation holds, or not.”*
-The difference between the code above and a relation is that the relation is considered a *FunctionalProcedure*[[5]](#Ref5), that is, a function in which by replacing its inputs with equal objects results in equal output objects.
-
-But the *relation concept* is too weak, we need a stronger concept: *Ordering*.
-
-*“What is an ordering? What do mathematicians call ordering?*
-
-*The only absolute rule for ordering is the requirement of __transitivity__ [[5]](#Ref5).*
-*A relation is transitive if, whenever it holds between a and b, and between b and c, it holds between a and c.*
-*A transitive relation is the most basic notion of ordering, but it is still too weak for our needs.”*
-
-Let's review what kinds of Ordering Relations exist:
-
-- ***Partial Ordering***: A *Partial Ordering* is an *ordering relation* in which not every pair of elements need to be related.  
-Examples:  
-    *“The canonical example of Partial Ordering is the Subset Relation”*  
-    Subset are ordered, one subset could be a Subset of another subset, for example, the subset {2, 4} **Is a Subset Of** the subset   {1, 2, 3, 4}.  
-    But it also happens that there are subsets which you could said nothing about, for example, given {2, 4} and {3, 5}.  
-    Which one is greater? Which one includes the other?  
-    It is not defined!  
-We have two kinds of Partial Ordering:  
-	- ***Reflexive Partial Ordering*** (or Non-Strict Partial Ordering): A relation is a Reflexive Partial Ordering if it is *transitive*, *reflexive*[[5]](#Ref5) and *antisymmetric*[[5]](#Ref5).  
-	- ***Strict Partial Ordering*** (or Non-Reflexive Partial Ordering): A relation is a Strict Partial Ordering if it is *transitive* and *ireflexive*[[5]](#Ref5) (it is also *asymmetric*[[5]](#Ref5), but this axiom is implied by irreflexivity and transitivity)
-- ***Total Ordering***: a *Total Ordering* is an Ordering Relation in which any pair of elements in the set of the relation are comparable under the relation.  
-Total Ordering is a specialization of Partial Ordering.  
-Examples:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Real numbers ordered by the less-than relation (<) (also Rational, Integers and Natural numbers)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The letters of the alphabet ordered by the natural dictionary order.  
-We have two kinds of Total Ordering:
-	- ***Reflexive Total Ordering*** (or Non-Strict Total Ordering): A relation is a Reflexive Total Ordering if it is transitive, antisymmetric and *total*[[5]](#Ref5). (it is also reflexive, but is implied by totally)
-	- ***Strict Total Ordering***[[5]](#Ref5) (or Non-Reflexive Total Ordering): A relation is a Strict Total Ordering if it is *transitive* and obeys the *trichotomy law*, whereby for every pair of elements, exactly one of the following holds: the relation, its converse, or equality. (It is also *irreflexive*, but this axiom is implied by the trichotomy law)
-
-(Note: There are more ordering relations, but we will see them later)
-
-## Writing *min* using *Concepts*
-
-Well, now we know about ordering relations, let's look at how we can use them to specify the *min* function.
-
-But first, what should we use? Partial or Total Ordering?
-
-*“If our relation is the Subset relation on a set, then, _min_ and _max_ of two sets doesn't make sense.”*
-
-Then, Partial Ordering is too weak, because the relation doesn't hold for every pair of elements of the set.
-
-We need to use Total Ordering for define the requirements of *min*, let's do it:
 
 {% highlight cpp %}
 // Requires:
 //  The type of a is equal to the type of b, and it is called T,
-//  and T is TotallyOrdered[5]
+//  and T is TotallyOrdered
 min(a, b) {
 	if (a < b) return a
 	return b
 }
-// Note: the implementations still has errors.
 {% endhighlight %}
 
-Note that the requirements were expressed as code comments. Later we will see what the programming languages provide us to express them as code.
+Here we specify that:
 
-Well, this is enough for a single post.
+- the formal parameters a and b are of the same type, and we called this type: T.
+- T models the concept called TotallyOrdered.
 
-In the next articles of the series, we will:
+*"A type __models__ a concept, if the requirements expressed by the concept are __satisfied__ for this type"*
 
-- complete and fix the errors of the implementation of *min*
-- write the *max* function
-- refine the requirements of *min* and *max*
-- implement them in real programming languages
-- analyze the API provided by some programming languages.
+So, let's review the formal definition of the TotallyOrdered concept:
 
-Stay tuned!
+`$$TotallyOrdered(\texttt{T}) \triangleq \\
+\qquad  \texttt{Regular(T)} \\
+\quad \land <\texttt{: T x T} \rightarrow \text{bool} \\
+\quad \land total\_ordering(<)$$`
+ 
+This reads as:
 
+- line1: A type T models the TotallyOrdered concept if:
+- line2: The type T also has to model the Regular[1] concept. This means that TotallyOrdered is defined in terms of Regular.
+- line3: A procedure less-than-operator (<) with the signature: T x T -> bool, must exist. This is the syntactic rule that allows us to write things like: a < b
+- line4: This is a semantic requirement, meaning that the less-than-operator procedure has to be a Total Ordering relation.
+
+But... remember that there are two kinds of TotalOrdering.  
+Do we mean Reflexive or Strict TotalOrdering? Because it would be one or the other.
+
+Let's review the difference with examples:
+
+- An example of Reflexive Total Ordering is the $latex \leq &s=2$ relation on the Natural numbers set, or in other words, ($latex \mathbb{N} &s=2$, $latex \leq &s=2$) is a Reflexive Totally Ordered Set.
+That is, for all a, b and c in $latex \mathbb{N} &s=2$, the following must hold:
+Transitivity: if a $latex \leq &s=2$ b and b $latex \leq &s=2$ c then a $latex \leq &s=2$ c
+Antisymmetry: if a $latex \leq &s=2$ b and b $latex \leq &s=2$ a then a $latex = &s=2$ b
+Totality: a $latex \leq &s=2$ b or b $latex \leq &s=2$ a
+($latex \mathbb{N} &s=2$, $latex \geq &s=2$) is another example of a Reflexive Totally Ordered Set.
+
+- An example of Strict Total Ordering is the $latex \textless &s=2$ relation on the Natural numbers set, or in other words, ($latex \mathbb{N} &s=2$, $latex \textless &s=2$) is a Strict Totally Ordered Set.
+That is, for all a, b and c in $latex \mathbb{N} &s=2$, the following must hold:
+Transitivity: if a $latex \textless &s=2$ b and b $latex \textless &s=2$ c then a $latex \textless &s=2$ c
+Trichotomy: only one of the following holds, a $latex \textless &s=2$ b, b $latex \textless &s=2$ a or a $latex = &s=2$ b
+($latex \mathbb{N} &s=2$, $latex > &s=2$) is another example of a Strict Totally Ordered Set.
+
+Exercise 1: Prove that
+a. $latex \leq &s=2$ is a Transitive relation
+b. $latex \leq &s=2$ is an Antisymmetric relation
+c. $latex \leq &s=2$ is a Total relation
+on $latex \mathbb{N} &s=2$
+ 
+Exercise 2: Prove that
+a. $latex \textless &s=2$ is a Transitive relation
+b. $latex \textless &s=2$ obeys the Trichotomy law
+on $latex \mathbb{N} &s=2$
+ 
+So, we have four options with which the TotallyOrdered concept could be defined: $latex \textless &s=2$, $latex \leq &s=2$, $latex > &s=2$, or, $latex \geq &s=2$. Whatever we choose is a right decision, but we have to choose.
+
+Exercise 3: Do you know why any of the four options is a right choice?
+ 
+I'm lying, actually we will not choose anything, the TotallyOrdered concept is defined using $latex \textless &s=2$, but here I will show the thinking behind the choice.
+
+We have two choices to make:
+
+Less... vs. Greater...: $latex \textless &s=2$ or $latex \leq &s=2$ vs. $latex > &s=2$ or $latex \geq &s=2$
+Reflexive vs. Strict: $latex \leq &s=2$ or $latex \geq &s=2$ vs. $latex \textless &s=2$ or $latex > &s=2$
+As we know, for 1, Alex has chosen Less.... The rationale for his decision is simple: Counting!
+$latex \textless &s=2$ is the natural order of natural numbers. Why? Usually we count in ascending order, it is the natural way of counting.
+
+Having chosen Less... then, we have to chose between Reflexive ($latex \leq &s=2$) and Strict ($latex \textless &s=2$).
+Alex has chosen Strict ($latex \textless &s=2$) and his reasoning is: "It is one character less" (len('<') < len('<='))
+But maybe you could think: "This is not a good reason".
+The Alex’s answer is: "Well, we can choose either because they are equivalents!, then, you could use any decision procedure, such as, fewer typing"
+Finally, another fundament: "Mathematicians consistently use $latex \textless &s=2$ in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of $latex \textless &s=2$"
+
+Summarizing, the choice is to use LessThan that is Strict, so we use $latex \textless &s=2$.
+
+Well, now we understand what we mean when we use the TotallyOrdered concept, but  this post is ended and we haven't written any new code.
+You must be thinking: "Anyone knows how to write the min function without having any knowledge about abstract algebra".
+The Alex's answer is: "Yes, they may know how to write it, but they implemented it incorrectly time and time again. How I know that? Because I was one of them."
+
+And this is mine: "Remembering some mathematics doesn't do any harm"
+
+In the next post I will write some code. Be patient :)
+
+ 
+
+The Series
+
+Part 1: The rise of Concepts
+Part 2: Understanding Concepts
+Part 3: Weakening the ordering
+Part 4: Const-Correctness
+References
+
+[1] Regular is another concept, maybe the most important one, I will cover it later, but for the moment we will ignore it. If you want to see its definition, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
+
+ 
  
 ---
 
 ## Acknowledgments
 
-Thanks in particular to the following for their feedback to improve this article: Mario Dal Lago, Andrzej Krzemienski, Dean Michael Berris, Javier Centurión, Alejandro Santos, Ezequiel Reyno.
 
- 
 
 ---
 
