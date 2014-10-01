@@ -37,27 +37,29 @@ $$TotallyOrdered(\texttt{T}) \triangleq \\
 This reads as:
 
 - line1: A type T models the *TotallyOrdered* concept if:
-- line2: The type T also has to model the Regular[1] concept. This means that *TotallyOrdered* is defined in terms of Regular.
-- line3: A procedure less-than-operator (<) with the signature: T x T -> bool, must exist. This is the syntactic rule that allows us to write things like: a < b
-- line4: This is a semantic requirement, meaning that the less-than-operator procedure has to be a Total Ordering relation.
+- line2: The type T also has to model the [*Regular*[1]](#Ref1) concept. This means that *TotallyOrdered* is defined in terms of *Regular*.
+- line3: A procedure less-than-operator (<) with the signature:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T x T -> bool,  
+must exist. This is the syntactic rule that allows us to write things like: a < b
+- line4: This is a semantic requirement, meaning that the less-than-operator procedure has to be a *Total Ordering relation*.
 
-But... remember that there are two kinds of Total Ordering.  
-Do we mean Reflexive or Strict Total Ordering? Because it would be one or the other.
+But... remember that there are two kinds of *Total Ordering*.  
+Do we mean *Reflexive* or *Strict Total Ordering*? Because it would be one or the other.
 
 Let's review the difference with examples:
 
-- An example of Reflexive Total Ordering is the $$\leq$$ relation on the Natural numbers set, or in other words, ($$\mathbb{N}$$, $$\leq$$) is a Reflexive Totally Ordered Set.
-That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:
-Transitivity: if a $$\leq$$ b and b $$\leq$$ c then a $$\leq$$ c
-Antisymmetry: if a $$\leq$$ b and b $$\leq$$ a then a $$=$$ b
-Totality: a $$\leq$$ b or b $$\leq$$ a
-($$\mathbb{N}$$, $$\geq$$) is another example of a Reflexive Totally Ordered Set.
+- An example of *Reflexive Total Ordering* is the $$\leq$$ relation on the Natural numbers set, or in other words, ($$\mathbb{N}$$, $$\leq$$) is a Reflexive Totally Ordered Set.
+That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Transitivity*: if a $$\leq$$ b and b $$\leq$$ c then a $$\leq$$ c  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Antisymmetry*: if a $$\leq$$ b and b $$\leq$$ a then a $$=$$ b  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Totality*: a $$\leq$$ b or b $$\leq$$ a  
+($$\mathbb{N}$$, $$\geq$$) is another example of a *Reflexive Totally Ordered Set*.
 
-- An example of Strict Total Ordering is the $$<$$ relation on the Natural numbers set, or in other words, ($$\mathbb{N}$$, $$<$$) is a Strict Totally Ordered Set.
-That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:
-Transitivity: if a $$<$$ b and b $$<$$ c then a $$<$$ c
-Trichotomy: only one of the following holds, a $$<$$ b, b $$<$$ a or a $$=$$ b
-($$\mathbb{N}$$, $$>$$) is another example of a Strict Totally Ordered Set.
+- An example of *Strict Total Ordering* is the $$<$$ relation on the Natural numbers set, or in other words, ($$\mathbb{N}$$, $$<$$) is a Strict Totally Ordered Set.
+That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Transitivity*: if a $$<$$ b and b $$<$$ c then a $$<$$ c  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Trichotomy*: only one of the following holds, a $$<$$ b, b $$<$$ a or a $$=$$ b  
+($$\mathbb{N}$$, $$>$$) is another example of a *Strict Totally Ordered Set*.
 
 
 Exercise 1: Prove that  
@@ -98,19 +100,12 @@ The Alex's answer is: "Yes, they may know how to write it, but they implemented 
 
 And this is mine: "Remembering some mathematics doesn't do any harm"
 
-In the next post I will write some code. Be patient :)
+In the next post I will write some code. Be patient!
 
  
 
-The Series
 
-Part 1: The rise of Concepts
-Part 2: Understanding Concepts
-Part 3: Weakening the ordering
-Part 4: Const-Correctness
-References
 
-[1] Regular is another concept, maybe the most important one, I will cover it later, but for the moment we will ignore it. If you want to see its definition, see http://www.elementsofprogramming.com/eop-concepts.pdf [page 1]
 
  
  
@@ -134,78 +129,5 @@ References
 
 ## References
 
-<a name="Ref1">[1]</a> Elements of Programming of Alexander Stepanov and Paul McJones, <http://www.elementsofprogramming.com>  
-<a name="Ref2">[2]</a> Concept definition: Stepanov and McJones [2009, page 10]  
-<a name="Ref3">[3]</a> SGI's STL using Concepts in Documentation: <https://www.sgi.com/tech/stl/min.html>  
-<a name="Ref4">[4]</a> Object definition:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The definition used in this article has nothing to do with an OOP-like definition of object [[6]](#Ref6).  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The definition used here is a practical definition of what an object is:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Object is a sequence of bits in memory" or  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Object is a value residing in memory"  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See Stepanov and McJones [2009, page 4] for a complete definition.  
-<a name="Ref5">[5]</a> See Appendix A  
-<a name="Ref6">[6]</a> Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]
- 
+<a name="Ref1">[1]</a> *Regular* is another concept, maybe the most important one, I will cover it later, but for the moment we will ignore it. If you want to see its definition, see <http://www.elementsofprogramming.com/eop-concepts.pdf> [page 1]
 
----
-
-## Appendix A: Definitions
-
-Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
-
-`$$Relation(\texttt{Op}) \triangleq \\
-\qquad HomogeneousPredicate(\texttt{Op}) \\
-\quad \land \texttt{ Arity(Op) = 2}$$`
-
-
-`$$HomogeneousPredicate(\texttt{P}) \triangleq \\
-\qquad  Predicate(\texttt{P}) \\
-\quad \land HomogeneousFunction(\texttt{P})$$`
-
-
-`$$Predicate(\texttt{P}) \triangleq \\
-\qquad  FunctionalProcedure(\texttt{P}) \\
-\quad \land \texttt{Codomain(P) = bool}$$`
- 
-
-`$$\textbf{property}\text{(R : Relation)} \\
-\text{transitive : R}  \\
-\quad r \mapsto (\forall a, b, c \in \texttt{Domain(R)}) (r(a, b) \land r(b, c) \Rightarrow r(a, c))$$`
-
-
-`$$\textbf{property}\text{(R : Relation)} \\
-\text{refexive : R}  \\
-\quad r \mapsto (\forall a \in \texttt{Domain(R)}) (r(a, a))$$`
-
-
-`$$\textbf{property}\text{(R : Relation)} \\
-\text{antisymmetric : R}  \\
-\quad r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \land r(b, a) \Rightarrow a = b)$$`
-
-
-`$$\textbf{property}\text{(R : Relation)} \\
-\text{irreflexive : R}  \\
-\quad r \mapsto (\forall a \in \texttt{Domain(R)}) (\lnot r(a, a))$$`
-
-
-`$$\textbf{property}\text{(R : Relation)} \\
-\text{asymmetric : R}  \\
-\quad r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \Rightarrow \lnot r(b, a))$$`
-
-
-`$$\textbf{property}\text{(R : Relation)} \\
-\text{total : R}  \\
-\quad r \mapsto (\forall a, b \in \texttt{Domain(R)}) (r(a, b) \lor r(b, a))$$`
-
-
-`$$\textbf{property}\text{(R : Relation)} \\
-\text{total_ordering : R}  \\
-\quad \text{r} \mapsto \text{transitive(r) } \land \\
-\quad \text{ (} \forall \text{ a, b} \in \texttt{Domain(R)} \text{) exactly one of the following holds: r(a, b), r(b, a), or a = b}$$`
-
-`$$TotallyOrdered(\texttt{T}) \triangleq \\
-\qquad  \texttt{Regular(T)} \\
-\quad \land <\texttt{: T x T} \rightarrow \text{bool} \\
-\quad \land total\_ordering(<)$$`
- 
-For definitions of: HomogeneousFunction, FunctionalProcedure, and Regular, see <http://www.elementsofprogramming.com/eop-concepts.pdf> [page 1]
