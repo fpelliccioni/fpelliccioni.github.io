@@ -46,21 +46,24 @@ Do we mean Reflexive or Strict TotalOrdering? Because it would be one or the oth
 
 Let's review the difference with examples:
 
-- An example of Reflexive Total Ordering is the $latex \leq &s=2$ relation on the Natural numbers set, or in other words, ($latex \mathbb{N} &s=2$, $latex \leq &s=2$) is a Reflexive Totally Ordered Set.
-That is, for all a, b and c in $latex \mathbb{N} &s=2$, the following must hold:
-Transitivity: if a $latex \leq &s=2$ b and b $latex \leq &s=2$ c then a $latex \leq &s=2$ c
-Antisymmetry: if a $latex \leq &s=2$ b and b $latex \leq &s=2$ a then a $latex = &s=2$ b
-Totality: a $latex \leq &s=2$ b or b $latex \leq &s=2$ a
-($latex \mathbb{N} &s=2$, $latex \geq &s=2$) is another example of a Reflexive Totally Ordered Set.
+- An example of Reflexive Total Ordering is the `$$\leq$$` relation on the Natural numbers set, or in other words, (`$$\mathbb{N}$$`, `$$\leq$$`) is a Reflexive Totally Ordered Set.
+That is, for all a, b and c in `$$\mathbb{N}$$`, the following must hold:
+Transitivity: if a `$$\leq$$` b and b `$$\leq$$` c then a `$$\leq$$` c
+Antisymmetry: if a `$$\leq$$` b and b `$$\leq$$` a then a `$$=$$` b
+Totality: a `$$\leq$$` b or b `$$\leq$$` a
+(`$$\mathbb{N}$$`, `$$\geq$$`) is another example of a Reflexive Totally Ordered Set.
 
-- An example of Strict Total Ordering is the $latex \textless &s=2$ relation on the Natural numbers set, or in other words, ($latex \mathbb{N} &s=2$, $latex \textless &s=2$) is a Strict Totally Ordered Set.
-That is, for all a, b and c in $latex \mathbb{N} &s=2$, the following must hold:
-Transitivity: if a $latex \textless &s=2$ b and b $latex \textless &s=2$ c then a $latex \textless &s=2$ c
-Trichotomy: only one of the following holds, a $latex \textless &s=2$ b, b $latex \textless &s=2$ a or a $latex = &s=2$ b
-($latex \mathbb{N} &s=2$, $latex > &s=2$) is another example of a Strict Totally Ordered Set.
+- An example of Strict Total Ordering is the `$$\textless$$` relation on the Natural numbers set, or in other words, (`$$\mathbb{N}$$`, `$$\textless$$`) is a Strict Totally Ordered Set.
+That is, for all a, b and c in `$$\mathbb{N}$$`, the following must hold:
+Transitivity: if a `$$\textless$$` b and b `$$\textless$$` c then a `$$\textless$$` c
+Trichotomy: only one of the following holds, a `$$\textless$$` b, b `$$\textless$$` a or a `$$=$$` b
+(`$$\mathbb{N}$$`, `$$>$$`) is another example of a Strict Totally Ordered Set.
 
 
-$Test Fer$
+`$$HomogeneousPredicate(\texttt{P}) \triangleq \\
+\qquad  Predicate(\texttt{P}) \\
+\quad \land HomogeneousFunction(\texttt{P})$$`
+
 
 <div style="margin-left: 124px; text-indent: -124px;">
 	<strong>Exercise 1</strong>: Prove that
@@ -78,36 +81,36 @@ b. `$$\textless$$` obeys the Trichotomy law</div>
 </div>
 
 Exercise 1: Prove that
-a. $latex \leq &s=2$ is a Transitive relation
-b. $latex \leq &s=2$ is an Antisymmetric relation
-c. $latex \leq &s=2$ is a Total relation
-on $latex \mathbb{N} &s=2$
+a. `$$\leq$$` is a Transitive relation
+b. `$$\leq$$` is an Antisymmetric relation
+c. `$$\leq$$` is a Total relation
+on `$$\mathbb{N}$$`
  
 Exercise 2: Prove that
-a. $latex \textless &s=2$ is a Transitive relation
-b. $latex \textless &s=2$ obeys the Trichotomy law
-on $latex \mathbb{N} &s=2$
+a. `$$\textless$$` is a Transitive relation
+b. `$$\textless$$` obeys the Trichotomy law
+on `$$\mathbb{N}$$`
  
-So, we have four options with which the TotallyOrdered concept could be defined: $latex \textless &s=2$, $latex \leq &s=2$, $latex > &s=2$, or, $latex \geq &s=2$. Whatever we choose is a right decision, but we have to choose.
+So, we have four options with which the TotallyOrdered concept could be defined: `$$\textless$$`, `$$\leq$$`, `$$>$$`, or, `$$\geq$$`. Whatever we choose is a right decision, but we have to choose.
 
 Exercise 3: Do you know why any of the four options is a right choice?
  
-I'm lying, actually we will not choose anything, the TotallyOrdered concept is defined using $latex \textless &s=2$, but here I will show the thinking behind the choice.
+I'm lying, actually we will not choose anything, the TotallyOrdered concept is defined using `$$\textless$$`, but here I will show the thinking behind the choice.
 
 We have two choices to make:
 
-Less... vs. Greater...: $latex \textless &s=2$ or $latex \leq &s=2$ vs. $latex > &s=2$ or $latex \geq &s=2$
-Reflexive vs. Strict: $latex \leq &s=2$ or $latex \geq &s=2$ vs. $latex \textless &s=2$ or $latex > &s=2$
+Less... vs. Greater...: `$$\textless$$` or `$$\leq$$` vs. `$$>$$` or `$$\geq$$`
+Reflexive vs. Strict: `$$\leq$$` or `$$\geq$$` vs. `$$\textless$$` or `$$>$$`
 As we know, for 1, Alex has chosen Less.... The rationale for his decision is simple: Counting!
-$latex \textless &s=2$ is the natural order of natural numbers. Why? Usually we count in ascending order, it is the natural way of counting.
+`$$\textless$$` is the natural order of natural numbers. Why? Usually we count in ascending order, it is the natural way of counting.
 
-Having chosen Less... then, we have to chose between Reflexive ($latex \leq &s=2$) and Strict ($latex \textless &s=2$).
-Alex has chosen Strict ($latex \textless &s=2$) and his reasoning is: "It is one character less" (len('<') < len('<='))
+Having chosen Less... then, we have to chose between Reflexive (`$$\leq$$`) and Strict (`$$\textless$$`).
+Alex has chosen Strict (`$$\textless$$`) and his reasoning is: "It is one character less" (len('<') < len('<='))
 But maybe you could think: "This is not a good reason".
 The Alex’s answer is: "Well, we can choose either because they are equivalents!, then, you could use any decision procedure, such as, fewer typing"
-Finally, another fundament: "Mathematicians consistently use $latex \textless &s=2$ in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of $latex \textless &s=2$"
+Finally, another fundament: "Mathematicians consistently use `$$\textless$$` in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of `$$\textless$$`"
 
-Summarizing, the choice is to use LessThan that is Strict, so we use $latex \textless &s=2$.
+Summarizing, the choice is to use LessThan that is Strict, so we use `$$\textless$$`.
 
 Well, now we understand what we mean when we use the TotallyOrdered concept, but  this post is ended and we haven't written any new code.
 You must be thinking: "Anyone knows how to write the min function without having any knowledge about abstract algebra".
