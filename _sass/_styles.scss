@@ -21,11 +21,18 @@ h1,h2,h3,h4,h5 {
 
 p {
     margin-bottom: $lh;
+    font-size:99px;
 }
 
 p.has-jax {
+    font: inherit; 
+    //font-size: 400%; 
     font-size:20px;
+    background: inherit; 
+    border: inherit;
 }
+
+
 
 
 a, a:visited, a:active {
