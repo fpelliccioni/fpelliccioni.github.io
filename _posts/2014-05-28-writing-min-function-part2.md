@@ -53,10 +53,10 @@ Antisymmetry: if a $$\leq$$ b and b $$\leq$$ a then a $$=$$ b
 Totality: a $$\leq$$ b or b $$\leq$$ a
 ($$\mathbb{N}$$, $$\geq$$) is another example of a Reflexive Totally Ordered Set.
 
-- An example of Strict Total Ordering is the $$\textless$$ relation on the Natural numbers set, or in other words, ($$\mathbb{N}$$, $$\textless$$) is a Strict Totally Ordered Set.
+- An example of Strict Total Ordering is the $$<$$ relation on the Natural numbers set, or in other words, ($$\mathbb{N}$$, $$<$$) is a Strict Totally Ordered Set.
 That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:
-Transitivity: if a $$\textless$$ b and b $$\textless$$ c then a $$\textless$$ c
-Trichotomy: only one of the following holds, a $$\textless$$ b, b $$\textless$$ a or a $$=$$ b
+Transitivity: if a $$<$$ b and b $$<$$ c then a $$<$$ c
+Trichotomy: only one of the following holds, a $$<$$ b, b $$<$$ a or a $$=$$ b
 ($$\mathbb{N}$$, $$>$$) is another example of a Strict Totally Ordered Set.
 
 
@@ -67,30 +67,30 @@ Exercise 1: Prove that
 on $$\mathbb{N}$$
  
 Exercise 2: Prove that  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. $$\textless$$ is a Transitive relation  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$\textless$$ obeys the Trichotomy law  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. $$<$$ is a Transitive relation  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$<$$ obeys the Trichotomy law  
 on $$\mathbb{N}$$
  
-So, we have four options with which the *TotallyOrdered* concept could be defined: $$\textless$$, $$\leq$$, $$>$$, or, $$\geq$$. Whatever we choose is a right decision, but we have to choose.
+So, we have four options with which the *TotallyOrdered* concept could be defined: $$<$$, $$\leq$$, $$>$$, or, $$\geq$$. Whatever we choose is a right decision, but we have to choose.
 
 Exercise 3: Do you know why any of the four options is a right choice?
  
-I'm lying, actually we will not choose anything, the *TotallyOrdered* concept is defined using $$\textless$$, but here I will show the thinking behind the choice.
+I'm lying, actually we will not choose anything, the *TotallyOrdered* concept is defined using $$<$$, but here I will show the thinking behind the choice.
 
 We have two choices to make:
 
-Less... vs. Greater...: $$\textless$$ or $$\leq$$ vs. $$>$$ or $$\geq$$
-Reflexive vs. Strict: $$\leq$$ or $$\geq$$ vs. $$\textless$$ or $$>$$
+Less... vs. Greater...: $$<$$ or $$\leq$$ vs. $$>$$ or $$\geq$$
+Reflexive vs. Strict: $$\leq$$ or $$\geq$$ vs. $$<$$ or $$>$$
 As we know, for 1, Alex has chosen Less.... The rationale for his decision is simple: Counting!
-$$\textless$$ is the natural order of natural numbers. Why? Usually we count in ascending order, it is the natural way of counting.
+$$<$$ is the natural order of natural numbers. Why? Usually we count in ascending order, it is the natural way of counting.
 
-Having chosen Less... then, we have to chose between Reflexive ($$\leq$$) and Strict ($$\textless$$).
-Alex has chosen Strict ($$\textless$$) and his reasoning is: "It is one character less" (len('<') < len('<='))
+Having chosen Less... then, we have to chose between Reflexive ($$\leq$$) and Strict ($$<$$).
+Alex has chosen Strict ($$<$$) and his reasoning is: "It is one character less" (len('<') < len('<='))
 But maybe you could think: "This is not a good reason".
 The Alex’s answer is: "Well, we can choose either because they are equivalents!, then, you could use any decision procedure, such as, fewer typing"
-Finally, another fundament: "Mathematicians consistently use $$\textless$$ in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of $$\textless$$"
+Finally, another fundament: "Mathematicians consistently use $$<$$ in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of $$<$$"
 
-Summarizing, the choice is to use LessThan that is Strict, so we use $$\textless$$.
+Summarizing, the choice is to use LessThan that is Strict, so we use $$<$$.
 
 Well, now we understand what we mean when we use the *TotallyOrdered* concept, but  this post is ended and we haven't written any new code.
 You must be thinking: "Anyone knows how to write the min function without having any knowledge about abstract algebra".
