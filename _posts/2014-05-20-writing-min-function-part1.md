@@ -189,8 +189,8 @@ Thanks in particular to the following for their feedback to improve this article
 
 ## References
 
-<a name="Ref1">[1]</a> Original definition of "Generic Programming":   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;David R. Musser and Alexander A. Stepanov: Generic Programming. ISSAC 1988, pages 13-25. <http://www.stepanovpapers.com/genprog.pdf>
+<a name="Ref1">[1]</a> Original definition of "Generic Programming":  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;David R. Musser and Alexander A. Stepanov: Generic Programming. ISSAC 1988, pages 13-25. <http://www.stepanovpapers.com/genprog.pdf>  
 <a name="Ref2">[2]</a> Elements of Programming of Alexander Stepanov and Paul McJones, <http://www.elementsofprogramming.com>  
 <a name="Ref3">[3]</a> Concept definition: Stepanov and McJones [2009, page 10]  
 <a name="Ref4">[4]</a> SGI's STL using Concepts in Documentation: <https://www.sgi.com/tech/stl/min.html>  
