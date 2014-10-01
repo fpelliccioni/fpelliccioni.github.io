@@ -60,11 +60,13 @@ Trichotomy: only one of the following holds, a $latex \textless &s=2$ b, b $late
 ($latex \mathbb{N} &s=2$, $latex > &s=2$) is another example of a Strict Totally Ordered Set.
 
 
+$Test Fer$
+
 <div style="margin-left: 124px; text-indent: -124px;">
 	<strong>Exercise 1</strong>: Prove that
-a. `$$\leq$$` is a Transitive relation
-b. `$$\leq$$` is an Antisymmetric relation
-c. `$$\leq$$` is a Total relation</div>
+a. $$\leq$$ is a Transitive relation
+b. $$\leq$$ is an Antisymmetric relation
+c. $$\leq$$ is a Total relation</div>
 <div style="margin-left: 104px;">on `$$\mathbb{N}$$`</div>
 </div>
 <div style="margin-left: 34px; text-indent: -34px;"></div>
