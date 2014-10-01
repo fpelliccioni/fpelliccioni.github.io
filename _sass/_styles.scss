@@ -23,6 +23,11 @@ p {
     margin-bottom: $lh;
 }
 
+p.has-jax {
+    font-size:20px;
+}
+
+
 a, a:visited, a:active {
     color: $link;
     @include transit(all,0.25s,ease-in-out);

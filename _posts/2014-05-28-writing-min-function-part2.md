@@ -61,9 +61,9 @@ Trichotomy: only one of the following holds, a `$$\textless$$` b, b `$$\textless
 
 
 Exercise 1: Prove that
-1. $$\leq$$ is a Transitive relation
-2. $$\leq$$ is an Antisymmetric relation
-3. $$\leq$$ is a Total relation
+- $$\leq$$ is a Transitive relation
+- $$\leq$$ is an Antisymmetric relation
+- $$\leq$$ is a Total relation
 on `$$\mathbb{N}$$`
  
 Exercise 2: Prove that
