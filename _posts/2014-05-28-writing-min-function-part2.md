@@ -60,30 +60,10 @@ Trichotomy: only one of the following holds, a `$$\textless$$` b, b `$$\textless
 (`$$\mathbb{N}$$`, `$$>$$`) is another example of a Strict Totally Ordered Set.
 
 
-`$$HomogeneousPredicate(\texttt{P}) \triangleq \\
-\qquad  Predicate(\texttt{P}) \\
-\quad \land HomogeneousFunction(\texttt{P})$$`
-
-
-<div style="margin-left: 124px; text-indent: -124px;">
-	<strong>Exercise 1</strong>: Prove that
-a. $$\leq$$ is a Transitive relation
-b. $$\leq$$ is an Antisymmetric relation
-c. $$\leq$$ is a Total relation</div>
-<div style="margin-left: 104px;">on `$$\mathbb{N}$$`</div>
-</div>
-<div style="margin-left: 34px; text-indent: -34px;"></div>
-<div style="border: 1px solid #888;">
-<div style="margin-left: 124px; text-indent: -124px;"><strong>Exercise 2</strong>: Prove that
-a. `$$\textless$$` is a Transitive relation
-b. `$$\textless$$` obeys the Trichotomy law</div>
-<div style="margin-left: 104px;">on `$$\mathbb{N}$$`</div>
-</div>
-
 Exercise 1: Prove that
-a. `$$\leq$$` is a Transitive relation
-b. `$$\leq$$` is an Antisymmetric relation
-c. `$$\leq$$` is a Total relation
+1. $$\leq$$ is a Transitive relation
+2. $$\leq$$ is an Antisymmetric relation
+3. $$\leq$$ is a Total relation
 on `$$\mathbb{N}$$`
  
 Exercise 2: Prove that
