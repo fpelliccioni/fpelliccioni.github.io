@@ -23,11 +23,11 @@ min(a, b) {
 Here we specify that:
 
 - the formal parameters a and b are of the same type, and we called this type: T.
-- T models the concept called TotallyOrdered.
+- T models the concept called *TotallyOrdered*.
 
 *"A type __models__ a concept, if the requirements expressed by the concept are __satisfied__ for this type"*
 
-So, let's review the formal definition of the TotallyOrdered concept:
+So, let's review the formal definition of the *TotallyOrdered* concept:
 
 $$TotallyOrdered(\texttt{T}) \triangleq \\
 \qquad  \texttt{Regular(T)} \\
@@ -36,13 +36,13 @@ $$TotallyOrdered(\texttt{T}) \triangleq \\
  
 This reads as:
 
-- line1: A type T models the TotallyOrdered concept if:
-- line2: The type T also has to model the Regular[1] concept. This means that TotallyOrdered is defined in terms of Regular.
+- line1: A type T models the *TotallyOrdered* concept if:
+- line2: The type T also has to model the Regular[1] concept. This means that *TotallyOrdered* is defined in terms of Regular.
 - line3: A procedure less-than-operator (<) with the signature: T x T -> bool, must exist. This is the syntactic rule that allows us to write things like: a < b
 - line4: This is a semantic requirement, meaning that the less-than-operator procedure has to be a Total Ordering relation.
 
-But... remember that there are two kinds of TotalOrdering.  
-Do we mean Reflexive or Strict TotalOrdering? Because it would be one or the other.
+But... remember that there are two kinds of Total Ordering.  
+Do we mean Reflexive or Strict Total Ordering? Because it would be one or the other.
 
 Let's review the difference with examples:
 
@@ -71,11 +71,11 @@ Exercise 2: Prove that
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$\textless$$ obeys the Trichotomy law  
 on $$\mathbb{N}$$
  
-So, we have four options with which the TotallyOrdered concept could be defined: $$\textless$$, $$\leq$$, $$>$$, or, $$\geq$$. Whatever we choose is a right decision, but we have to choose.
+So, we have four options with which the *TotallyOrdered* concept could be defined: $$\textless$$, $$\leq$$, $$>$$, or, $$\geq$$. Whatever we choose is a right decision, but we have to choose.
 
 Exercise 3: Do you know why any of the four options is a right choice?
  
-I'm lying, actually we will not choose anything, the TotallyOrdered concept is defined using $$\textless$$, but here I will show the thinking behind the choice.
+I'm lying, actually we will not choose anything, the *TotallyOrdered* concept is defined using $$\textless$$, but here I will show the thinking behind the choice.
 
 We have two choices to make:
 
@@ -92,7 +92,7 @@ Finally, another fundament: "Mathematicians consistently use $$\textless$$ in th
 
 Summarizing, the choice is to use LessThan that is Strict, so we use $$\textless$$.
 
-Well, now we understand what we mean when we use the TotallyOrdered concept, but  this post is ended and we haven't written any new code.
+Well, now we understand what we mean when we use the *TotallyOrdered* concept, but  this post is ended and we haven't written any new code.
 You must be thinking: "Anyone knows how to write the min function without having any knowledge about abstract algebra".
 The Alex's answer is: "Yes, they may know how to write it, but they implemented it incorrectly time and time again. How I know that? Because I was one of them."
 
