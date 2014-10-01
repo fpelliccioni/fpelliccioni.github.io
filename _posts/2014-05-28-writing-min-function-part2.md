@@ -60,13 +60,13 @@ Trichotomy: only one of the following holds, a `$$\textless$$` b, b `$$\textless
 (`$$\mathbb{N}$$`, `$$>$$`) is another example of a Strict Totally Ordered Set.
 
 
-Exercise 1: Prove that
+Exercise 1: Prove that  
 - $$\leq$$ is a Transitive relation
 - $$\leq$$ is an Antisymmetric relation
 - $$\leq$$ is a Total relation
 on `$$\mathbb{N}$$`
  
-Exercise 2: Prove that
+Exercise 2: Prove that  
 a. `$$\textless$$` is a Transitive relation
 b. `$$\textless$$` obeys the Trichotomy law
 on `$$\mathbb{N}$$`
