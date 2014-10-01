@@ -59,6 +59,26 @@ MathJax.Hub.Config({
     }
 });
 
+
+// MathJax.Hub.Config({ 
+//     "HTML-CSS": { 
+//       scale: { 
+//         prefer: { 
+//           Firefox: 100, 
+//           Chrome: 500, 
+//           Opera: 100 
+//         } 
+//       } 
+//     } 
+// }); 
+
+
+ MathJax.Hub.Config({
+  "HTML-CSS": {
+    scale: (MathJax.Hub.Browser.isChrome ? 500 : 100)
+  }
+});
+
 MathJax.Hub.Config({
   displayAlign: "left",
   displayIndent: "100px"
