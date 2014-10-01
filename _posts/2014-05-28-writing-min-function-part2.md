@@ -178,7 +178,7 @@ Thanks in particular to the following for their feedback to improve this article
 ---
 
 <!-- {% include writing_min_function_series.md %} -->
-{% include head.html %}
+<!-- {% include head.html %} -->
 
 
 
