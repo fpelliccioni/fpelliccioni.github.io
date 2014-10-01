@@ -61,14 +61,14 @@ Trichotomy: only one of the following holds, a `$$\textless$$` b, b `$$\textless
 
 
 Exercise 1: Prove that  
-- $$\leq$$ is a Transitive relation
-- $$\leq$$ is an Antisymmetric relation
-- $$\leq$$ is a Total relation
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. $$\leq$$ is a Transitive relation  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$\leq$$ is an Antisymmetric relation  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. $$\leq$$ is a Total relation  
 on `$$\mathbb{N}$$`
  
 Exercise 2: Prove that  
-a. `$$\textless$$` is a Transitive relation
-b. `$$\textless$$` obeys the Trichotomy law
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. `$$\textless$$` is a Transitive relation  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. `$$\textless$$` obeys the Trichotomy law  
 on `$$\mathbb{N}$$`
  
 So, we have four options with which the TotallyOrdered concept could be defined: `$$\textless$$`, `$$\leq$$`, `$$>$$`, or, `$$\geq$$`. Whatever we choose is a right decision, but we have to choose.
