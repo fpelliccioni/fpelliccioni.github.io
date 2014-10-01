@@ -40,7 +40,8 @@ This reads as:
 - line2: The type T also has to model the [*Regular*[1]](#Ref1) concept. This means that *TotallyOrdered* is defined in terms of *Regular*.
 - line3: A procedure less-than-operator (<) with the signature:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T x T -> bool,  
-must exist. This is the syntactic rule that allows us to write things like: a < b
+must exist. This is the syntactic rule that allows us to write things like:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a < b
 - line4: This is a semantic requirement, meaning that the less-than-operator procedure has to be a *Total Ordering relation*.
 
 But... remember that there are two kinds of *Total Ordering*.  
@@ -61,18 +62,19 @@ That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Trichotomy*: only one of the following holds, a $$<$$ b, b $$<$$ a or a $$=$$ b  
 ($$\mathbb{N}$$, $$>$$) is another example of a *Strict Totally Ordered Set*.
 
-
-Exercise 1: Prove that  
+---
+**Exercise 1**: Prove that  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. $$\leq$$ is a Transitive relation  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$\leq$$ is an Antisymmetric relation  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. $$\leq$$ is a Total relation  
 on $$\mathbb{N}$$
  
-Exercise 2: Prove that  
+**Exercise 2**: Prove that  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. $$<$$ is a Transitive relation  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$<$$ obeys the Trichotomy law  
 on $$\mathbb{N}$$
- 
+---
+
 So, we have four options with which the *TotallyOrdered* concept could be defined: $$<$$, $$\leq$$, $$>$$, or, $$\geq$$. Whatever we choose is a right decision, but we have to choose.
 
 Exercise 3: Do you know why any of the four options is a right choice?
