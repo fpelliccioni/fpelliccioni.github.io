@@ -202,7 +202,7 @@ Thanks in particular to the following for their feedback to improve this article
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Object is a sequence of bits in memory" or  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Object is a value residing in memory"  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See Stepanov and McJones [2009, page 4] for a complete definition.  
-<a name="Ref6">[6]</a> [See Appendix A](#AppendixA)
+<a name="Ref6">[6]</a> [See Appendix A](#AppendixA)  
 <a name="Ref7">[7]</a> Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]
  
 

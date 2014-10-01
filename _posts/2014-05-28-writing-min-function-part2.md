@@ -59,6 +59,22 @@ Transitivity: if a $latex \textless &s=2$ b and b $latex \textless &s=2$ c then 
 Trichotomy: only one of the following holds, a $latex \textless &s=2$ b, b $latex \textless &s=2$ a or a $latex = &s=2$ b
 ($latex \mathbb{N} &s=2$, $latex > &s=2$) is another example of a Strict Totally Ordered Set.
 
+
+<div style="margin-left: 124px; text-indent: -124px;">
+	<strong>Exercise 1</strong>: Prove that
+a. `$$\leq$$` is a Transitive relation
+b. `$$\leq$$` is an Antisymmetric relation
+c. `$$\leq$$` is a Total relation</div>
+<div style="margin-left: 104px;">on `$$\mathbb{N}$$`</div>
+</div>
+<div style="margin-left: 34px; text-indent: -34px;"></div>
+<div style="border: 1px solid #888;">
+<div style="margin-left: 124px; text-indent: -124px;"><strong>Exercise 2</strong>: Prove that
+a. `$$\textless$$` is a Transitive relation
+b. `$$\textless$$` obeys the Trichotomy law</div>
+<div style="margin-left: 104px;">on `$$\mathbb{N}$$`</div>
+</div>
+
 Exercise 1: Prove that
 a. $latex \leq &s=2$ is a Transitive relation
 b. $latex \leq &s=2$ is an Antisymmetric relation
