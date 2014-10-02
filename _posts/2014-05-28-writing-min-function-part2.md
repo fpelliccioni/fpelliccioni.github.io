@@ -79,7 +79,7 @@ on $$\mathbb{N}$$
 So, we have four options with which the *TotallyOrdered* concept could be defined: $$<$$, $$\leq$$, $$>$$, or, $$\geq$$. Whatever we choose is a right decision, but we have to choose.
 
 ---
-*Exercise 3*: Do you know why any of the four options is a right choice?
+**Exercise 3**: Do you know why any of the four options is a right choice?
 
 ---
 
@@ -97,7 +97,7 @@ Having chosen *Less*... then, we have to chose between *Reflexive* ($$\leq$$) an
 Alex has chosen *Strict* ($$<$$) and his reasoning is: *"It is one character less"*, (len('<') < len('<='))  
 But maybe you could think: *"This is not a good reason"*.  
 The Alex’s answer is: *"Well, we can choose either because they are equivalents!, then, you could use any decision procedure, such as, fewer typing"*  
-Finally, another fundament: *"Mathematicians consistently use $$<$$ in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of $$<$$"*
+Finally, another fundament: *"Mathematicians consistently use < in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of <"*
 
 Summarizing, the choice is to use *LessThan* that is *Strict*, so we use $$<$$.
 
