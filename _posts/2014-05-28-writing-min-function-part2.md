@@ -27,7 +27,7 @@ Here we specify that:
 
 *"A type __models__ a concept, if the requirements expressed by the concept are __satisfied__ for this type"*
 
-So, let's review the formal definition of the *TotallyOrdered* concept:
+Now, let's review the formal definition of the *TotallyOrdered* concept:
 
 $$TotallyOrdered(\texttt{T}) \triangleq \\
 \qquad  \texttt{Regular(T)} \\
@@ -49,14 +49,14 @@ Do we mean *Reflexive* or *Strict Total Ordering*? Because it would be one or th
 
 Let's review the difference with examples:
 
-- An example of *Reflexive Total Ordering* is the $$\leq$$ relation on the Natural numbers set, or in other words, ($$\mathbb{N}$$, $$\leq$$) is a Reflexive Totally Ordered Set.
+- An example of *Reflexive Total Ordering* is the $$\leq$$ relation on the *Natural* numbers set, or in other words, ($$\mathbb{N}$$, $$\leq$$) is a *Reflexive Totally Ordered Set*.  
 That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Transitivity*: if a $$\leq$$ b and b $$\leq$$ c then a $$\leq$$ c  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Antisymmetry*: if a $$\leq$$ b and b $$\leq$$ a then a $$=$$ b  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Totality*: a $$\leq$$ b or b $$\leq$$ a  
 ($$\mathbb{N}$$, $$\geq$$) is another example of a *Reflexive Totally Ordered Set*.
 
-- An example of *Strict Total Ordering* is the $$<$$ relation on the Natural numbers set, or in other words, ($$\mathbb{N}$$, $$<$$) is a Strict Totally Ordered Set.
+- An example of *Strict Total Ordering* is the $$<$$ relation on the *Natural* numbers set, or in other words, ($$\mathbb{N}$$, $$<$$) is a *Strict Totally Ordered Set*.  
 That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Transitivity*: if a $$<$$ b and b $$<$$ c then a $$<$$ c  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Trichotomy*: only one of the following holds, a $$<$$ b, b $$<$$ a or a $$=$$ b  
@@ -73,47 +73,41 @@ on $$\mathbb{N}$$
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. $$<$$ is a Transitive relation  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$<$$ obeys the Trichotomy law  
 on $$\mathbb{N}$$
+
 ---
 
 So, we have four options with which the *TotallyOrdered* concept could be defined: $$<$$, $$\leq$$, $$>$$, or, $$\geq$$. Whatever we choose is a right decision, but we have to choose.
 
-Exercise 3: Do you know why any of the four options is a right choice?
- 
+---
+*Exercise 3*: Do you know why any of the four options is a right choice?
+
+---
+
 I'm lying, actually we will not choose anything, the *TotallyOrdered* concept is defined using $$<$$, but here I will show the thinking behind the choice.
 
 We have two choices to make:
 
-Less... vs. Greater...: $$<$$ or $$\leq$$ vs. $$>$$ or $$\geq$$
-Reflexive vs. Strict: $$\leq$$ or $$\geq$$ vs. $$<$$ or $$>$$
-As we know, for 1, Alex has chosen Less.... The rationale for his decision is simple: Counting!
-$$<$$ is the natural order of natural numbers. Why? Usually we count in ascending order, it is the natural way of counting.
+- *Less*... vs. *Greater*...: $$<$$ or $$\leq$$ vs. $$>$$ or $$\geq$$
+- *Reflexive* vs. *Strict*: $$\leq$$ or $$\geq$$ vs. $$<$$ or $$>$$
 
-Having chosen Less... then, we have to chose between Reflexive ($$\leq$$) and Strict ($$<$$).
-Alex has chosen Strict ($$<$$) and his reasoning is: "It is one character less" (len('<') < len('<='))
-But maybe you could think: "This is not a good reason".
-The Alex’s answer is: "Well, we can choose either because they are equivalents!, then, you could use any decision procedure, such as, fewer typing"
-Finally, another fundament: "Mathematicians consistently use $$<$$ in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of $$<$$"
+As we know, for 1, Alex has chosen *Less*.... The rationale for his decision is simple: Counting!  
+$$<$$ is the natural order of *Natural* numbers. Why? Usually we count in ascending order, it is the natural way of counting.
 
-Summarizing, the choice is to use LessThan that is Strict, so we use $$<$$.
+Having chosen *Less*... then, we have to chose between *Reflexive* ($$\leq$$) and *Strict* ($$<$$).  
+Alex has chosen *Strict* ($$<$$) and his reasoning is: *"It is one character less"*, (len('<') < len('<='))  
+But maybe you could think: *"This is not a good reason"*.  
+The Alex’s answer is: *"Well, we can choose either because they are equivalents!, then, you could use any decision procedure, such as, fewer typing"*  
+Finally, another fundament: *"Mathematicians consistently use $$<$$ in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of $$<$$"*
 
-Well, now we understand what we mean when we use the *TotallyOrdered* concept, but  this post is ended and we haven't written any new code.
-You must be thinking: "Anyone knows how to write the min function without having any knowledge about abstract algebra".
-The Alex's answer is: "Yes, they may know how to write it, but they implemented it incorrectly time and time again. How I know that? Because I was one of them."
+Summarizing, the choice is to use *LessThan* that is *Strict*, so we use $$<$$.
 
-And this is mine: "Remembering some mathematics doesn't do any harm"
+Well, now we understand what we mean when we use the *TotallyOrdered* concept, but this post is ended and we haven't written any new code.  
+You must be thinking: *"Anyone knows how to write the min function without having any knowledge about abstract algebra"*.
+The Alex's answer is: *"Yes, they may know how to write it, but they implemented it incorrectly time and time again. How I know that? Because I was one of them."*
+
+And this is mine: *"Remembering some mathematics doesn't do any harm"*
 
 In the next post I will write some code. Be patient!
-
- 
-
-
-
-
- 
- 
----
-
-## Acknowledgments
 
 
 
