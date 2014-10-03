@@ -23,8 +23,8 @@ This is the C++ equivalent of the min function code from [Part 2]({% post_url 20
 //Note 2: Still has errors!
 template <TotallyOrdered T>
 T const& min(T const& a, T const& b) {
-    if (a < b) return a;
-    return b;
+  if (a < b) return a;
+  return b;
 }
 {% endhighlight %}
 (We will see how to **define** the *TotallyOrdered* concept in C++ later. For now, think in the mathematical definition presented [before]({% post_url 2014-05-20-writing-min-function-part1 %})  )
@@ -33,21 +33,21 @@ And we use it in this way:
 
 {% highlight cpp %}
 void usage_with_builtin_types_simple() {
-    int a = 12;
-    int b = 34;
+  int a = 12;
+  int b = 34;
 
-    //using variables
-    cout << min(a, b); //print the result on standard output
+  //using variables
+  cout << min(a, b); //print the result on standard output
 
-    //using integer-literals (base10)
-    cout << min(1, 2);
+  //using integer-literals (base10)
+  cout << min(1, 2);
 
-    //using variables and literals
-    cout << min(a, 2);
+  //using variables and literals
+  cout << min(a, 2);
 
-    //assigning the result (copying the result)
-    int m1 = min(a, b);
-    int m2 = min(1, 2);
+  //assigning the result (copying the result)
+  int m1 = min(a, b);
+  int m2 = min(1, 2);
 }
 {% endhighlight %}
 These are very simple examples using the int builtin type, but our min function is supposed to be **Generic**, so it has to operate with all types that satisfy the *TotallyOrdered* concept. So let’s see a little more complicated example.
@@ -62,12 +62,12 @@ And now we use the min function with Employees:
 
 {% highlight cpp %}
 void usage_with_employees() {
-    employee e1 {"John", 5000.0f};
-    employee e2 {"Peter", 6000.0f};
-    employee e3 {"George", 4500.0f};
-    employee e4 {"Frank", 5000.0f};
+  employee e1 {"John", 5000.0f};
+  employee e2 {"Peter", 6000.0f};
+  employee e3 {"George", 4500.0f};
+  employee e4 {"Frank", 5000.0f};
 
-    employee m = min(e1, e2); // #1
+  employee m = min(e1, e2); // #1
 }
 {% endhighlight %}
 What happend at #1?
@@ -77,7 +77,8 @@ Well, we should get a compile-time error saying that the employee type doesn't s
 Why?
 
 First, syntactically there is no way of comparing two employees using the less-than-operator required by the *TotallyOrdered* concept.  
-If we use C++ templates without Concepts (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done. Instead, if we use a dynamic duck-typing language, like Python, we will get a similar error but at runtime.  
+If we use C++ without *Concepts* (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done.  
+Instead, if we use a dynamic duck-typing programming language (like Python or Javascript) we will get a similar error but at runtime.  
 The compiler (or interpreter) doesn't know how to do a < b for employees, so this is the reason why we get the error.
 
 So, how to make Employee to satisfy the *TotallyOrdered* concept?
@@ -92,7 +93,7 @@ For now I want to skip the points 1 and 3, we will see them later. So let's conc
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
-    return ???????;
+  return ???????;
 }
 {% endhighlight %}
 
@@ -101,7 +102,7 @@ This is the canonical way on C++ for implementing a less-than-operator, but ... 
 Actually, I don't know. That answer should be given by the designer of the Employee class. Well..., that's me (?).
 
 First, remember, *total ordering*, is, roughly speaking, some kind of *Natural Ordering*. So we need to know what is the natural ordering of Employees.
-Maybe the natural ordering of employees is by name, maybe by salary, ... I don't know. This depends on the domain of the application. In a company, I think, employees have a unique identification number, maybe that is a good candidate for implement total ordering. So, let's modify our Employee class:
+Maybe the natural ordering of employees is by name, maybe by salary, ... I don't know. This depends on the domain of the application. In a company, I think, employees may have a unique identification number, which seems to be a good candidate for implement total ordering. So, let's modify our Employee class:
 
 {% highlight cpp %}
 struct employee { int id; string name; float salary; };
@@ -110,7 +111,7 @@ Now, let's finalize our less-than-operator:
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
-    return a.id < b.id;
+  return a.id < b.id;
 }
 {% endhighlight %}
 Now, we have an Employee class with a natural ordering (by id) that satisfies the *TotallyOrdered* concept (remember, we are ignoring the points 1 and 3).
@@ -119,7 +120,7 @@ But, what if we want to know who is the lowest paid employee, and then raise his
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
-    return a.salary < b.salary;
+  return a.salary < b.salary;
 }
 {% endhighlight %}
 Is it OK?
@@ -133,34 +134,34 @@ Let’s do it using the old C++ way (without Concepts):
 //Note: It compiles, but is incorrect, still, be patient!
 template <typename T, typename C>
 T const& min(T const& a, T const& b, C cmp) {
-    if (cmp(a, b)) return a;
-    return b;
+  if (cmp(a, b)) return a;
+  return b;
 }
 {% endhighlight %}
 Now we can write code like the following:
 
 {% highlight cpp %}
 struct salary_comparator {
-    bool operator()(employee const& a, employee const& b) const {
-        return a.salary < b.salary;
-    }
+  bool operator()(employee const& a, employee const& b) const {
+    return a.salary < b.salary;
+  }
 };
 
 void usage_with_employees() {
-    employee e1 {1, "John", 5000.0f};
-    employee e2 {2, "Peter", 6000.0f};
-    employee e3 {3, "George", 4500.0f};
-    employee e4 {4, "Frank", 5000.0f};
+  employee e1 {1, "John", 5000.0f};
+  employee e2 {2, "Peter", 6000.0f};
+  employee e3 {3, "George", 4500.0f};
+  employee e4 {4, "Frank", 5000.0f};
 
-    // using natural employee ordering (by id)
-    employee m = min(e1, e2);
+  // using natural employee ordering (by id)
+  employee m = min(e1, e2);
 
-    // using another (unnatural) ordering
-    employee m2 = min(e1, e2, salary_comparator{});
+  // using another (unnatural) ordering
+  employee m2 = min(e1, e2, salary_comparator{});
 
-    // using another (unnatural) ordering, with lambdas   
-    employee m3 = min(e1, e2, [](employee const& a, employee const& b){
-              return a.name < b.name; } );
+  // using another (unnatural) ordering, with lambdas   
+  employee m3 = min(e1, e2, [](employee const& a, employee const& b){
+          return a.name < b.name; } );
 }
 {% endhighlight %}
 But so far, I have not mentioned anything that an experienced programmer does not know, the use of predicates (comparators) is a common thing in practically all programming languages.
@@ -210,8 +211,8 @@ So, let’s modify the min function to introduce weak ordering:
 template <typename T, StrictWeakOrdering Cmp>
    requires SameType<ArgumentType<Cmp>, T>
 T const& min(T const& a, T const& b, Cmp cmp) {
-    if (cmp(a, b)) return a;
-    return b;
+  if (cmp(a, b)) return a;
+  return b;
 }
 {% endhighlight %}
 The code above means that we have a function called min, that takes two formal parameters, a and b, both of the same type, called T.
