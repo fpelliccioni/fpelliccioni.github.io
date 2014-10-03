@@ -29,8 +29,8 @@ Here we specify that:
 
 Now, let's review the formal definition of the *TotallyOrdered* concept:
 
-$$TotallyOrdered(\texttt{T}) \triangleq \qquad \qquad\texttt{  line1}\\
-\qquad  \texttt{Regular(T)} \qquad \qquad\texttt{      line2}\\
+$$TotallyOrdered(\texttt{T}) \triangleq \qquad \qquad\texttt{    line1}\\
+\qquad  \texttt{Regular(T)} \qquad \qquad\texttt{             line2}\\
 \quad \land <\texttt{: T x T} \rightarrow \text{bool} \qquad \qquad\texttt{line3}\\
 \quad \land total\_ordering(<) \qquad \qquad\texttt{ line4}$$
  
