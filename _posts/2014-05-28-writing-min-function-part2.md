@@ -44,6 +44,9 @@ must exist. This is the syntactic rule that allows us to write things like:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a < b
 - (line4) This is a semantic requirement, meaning that the less-than-operator procedure has to be a *Total Ordering relation*.
 
+(**Note**: When we say *Total Ordering* we are referring to the ordering relation, the mathematical term mentioned in the previous article. 
+When we say *TotallyOrdered* we are referring to the name of the Concept, like Employee is the name of a class or Sort is the name of a function. Here we can use any name we want. We will invoke this name later, in our algorithms)
+
 But... remember that there are two kinds of *Total Ordering*.  
 Do we mean *Reflexive* or *Strict Total Ordering*? Because it would be one or the other.
 
