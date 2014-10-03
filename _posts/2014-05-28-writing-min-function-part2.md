@@ -29,20 +29,20 @@ Here we specify that:
 
 Now, let's review the formal definition of the *TotallyOrdered* concept:
 
-$$TotallyOrdered(\texttt{T}) \triangleq \qquad \qquad\texttt{    line1}\\
-\qquad  \texttt{Regular(T)} \qquad \qquad\texttt{             line2}\\
+$$TotallyOrdered(\texttt{T}) \triangleq \qquad \qquad\texttt{      line1}\\
+\qquad  \texttt{Regular(T)} \qquad \qquad\texttt{                      lineX}\\
 \quad \land <\texttt{: T x T} \rightarrow \text{bool} \qquad \qquad\texttt{line3}\\
 \quad \land total\_ordering(<) \qquad \qquad\texttt{ line4}$$
  
 This reads as:
 
-- line1: A type T models the *TotallyOrdered* concept if:
-- line2: The type T also has to model the [*Regular*[1]](#Ref1) concept. This means that *TotallyOrdered* is defined in terms of *Regular*.
-- line3: A procedure less-than-operator (<) with the signature:  
+(line1) A type T models the *TotallyOrdered* concept if:
+- (line2) T also has to model the [*Regular*[1]](#Ref1) concept. This means that *TotallyOrdered* is defined in terms of *Regular*.
+- (line3) A procedure less-than-operator (<) with the signature:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T x T -> bool,  
 must exist. This is the syntactic rule that allows us to write things like:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a < b
-- line4: This is a semantic requirement, meaning that the less-than-operator procedure has to be a *Total Ordering relation*.
+- (line4) This is a semantic requirement, meaning that the less-than-operator procedure has to be a *Total Ordering relation*.
 
 But... remember that there are two kinds of *Total Ordering*.  
 Do we mean *Reflexive* or *Strict Total Ordering*? Because it would be one or the other.
