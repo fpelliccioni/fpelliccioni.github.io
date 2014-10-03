@@ -44,12 +44,11 @@ must exist. This is the syntactic rule that allows us to write things like:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a < b
 - (line4) This is a semantic requirement, meaning that the less-than-operator procedure has to be a *Total Ordering relation*.
 
-(**Note**: When we say *Total Ordering* we are referring to the ordering relation, the mathematical term mentioned in the previous article. 
+(**Note**: when we say *Total Ordering* we are referring to the ordering relation, the mathematical term mentioned in the previous article. 
 When we say *TotallyOrdered* we are referring to the name of the Concept, like Employee is the name of a class or Sort is the name of a function. Here we can use any name we want. We will invoke this name later, in our algorithms)
 
-But... remember that there are two kinds of *Total Ordering*.  
-Do we mean *Reflexive* or *Strict Total Ordering*? Because it would be one or the other.
-
+So in line4 we are using *Total Ordering*, but remember, there are two kinds of *Total Ordering*.  
+Do we mean *Reflexive* or *Strict Total Ordering*? Because it would be one or the other.  
 Let's review the difference with examples:
 
 - An example of *Reflexive Total Ordering* is the $$\leq$$ relation on the *Natural* numbers set, or in other words, ($$\mathbb{N}$$, $$\leq$$) is a *Reflexive Totally Ordered Set*.  
@@ -93,23 +92,24 @@ We have two choices to make:
 - *Less*... vs. *Greater*...: $$<$$ or $$\leq$$ vs. $$>$$ or $$\geq$$
 - *Reflexive* vs. *Strict*: $$\leq$$ or $$\geq$$ vs. $$<$$ or $$>$$
 
-As we know, for 1, Alex has chosen *Less*.... The rationale for his decision is simple: Counting!  
+As we know, for the first one, Alex has chosen *Less*.... (see line4 of *TotallyOrdered* concept)
+The rationale for his decision is simple: **Counting**!  
 $$<$$ is the natural order of *Natural* numbers. Why? Usually we count in ascending order, it is the natural way of counting.
 
-Having chosen *Less*... then, we have to chose between *Reflexive* ($$\leq$$) and *Strict* ($$<$$).  
+Now we have to chose between *Reflexive* ($$\leq$$) and *Strict* ($$<$$).  
 Alex has chosen *Strict* ($$<$$) and his reasoning is:  
 &nbsp;&nbsp;&nbsp;*"It is one character less"*, (len('<') < len('<='))  
 But maybe you could think: *"This is not a good reason"*.  
-The Alex’s answer is: *"Well, we can choose either because they are equivalents!, then, you could use any decision procedure, such as, fewer typing"*  
+The Alex’s answer is: *"We can choose either because they are equivalents!, then, you could use any decision procedure you want, such as, fewer typing"*  
 Finally, another fundament: *"Mathematicians consistently use < in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of <"*
 
 Summarizing, the choice is to use *LessThan* that is *Strict*, so we use $$<$$.
 
-Well, now we understand what we mean when we use the *TotallyOrdered* concept, but this post is ended and we haven't written any new code.  
+Well, now we understand what the *TotallyOrdered* concept means (I hope), but this post is ended and we haven't written any new code.  
 You must be thinking: *"Anyone knows how to write the min function without having any knowledge about abstract algebra"*.
 The Alex's answer is: *"Yes, they may know how to write it, but they implemented it incorrectly time and time again. How I know that? Because I was one of them."*
 
-And this is mine: *"Remembering some mathematics doesn't do any harm"*
+And this is mine: Remembering some mathematics doesn't do any harm.
 
 In the next post I will write some code. Be patient!
 
