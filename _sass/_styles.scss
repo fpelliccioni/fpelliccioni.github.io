@@ -28,6 +28,8 @@ p.has-jax {
     font: inherit; 
     //font-size: 400%; 
     font-size:22px;
+    //line-height: 1.3em;
+    line-height: 30px;
     background: inherit; 
     border: inherit;
 }
@@ -80,7 +82,7 @@ small {
 
 blockquote, blockquote p {
     font-style: italic;
-    line-height: 5.3em;
+    line-height: 1.3em;
     text-align: center;
     color: lighten($black, .2);
     margin-bottom: $lh;
