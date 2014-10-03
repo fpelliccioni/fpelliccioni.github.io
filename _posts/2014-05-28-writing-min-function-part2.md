@@ -15,8 +15,8 @@ I want complete the *min* function and fix the mistakes mentioned in the [previo
 //  The type of a is equal to the type of b, and it is called T,
 //  and T is TotallyOrdered
 min(a, b) {
-	if (a < b) return a
-	return b
+  if (a < b) return a
+  return b
 }
 {% endhighlight %}
 
@@ -29,10 +29,10 @@ Here we specify that:
 
 Now, let's review the formal definition of the *TotallyOrdered* concept:
 
-$$TotallyOrdered(\texttt{T}) \triangleq \\
-\qquad  \texttt{Regular(T)} \\
-\quad \land <\texttt{: T x T} \rightarrow \text{bool} \\
-\quad \land total\_ordering(<)$$
+$$TotallyOrdered(\texttt{T}) \triangleq \qquad \qquad\texttt{line1}\\
+\qquad  \texttt{Regular(T)} \qquad \qquad\texttt{line2}\\
+\quad \land <\texttt{: T x T} \rightarrow \text{bool} \qquad \qquad\texttt{line3}\\
+\quad \land total\_ordering(<) \qquad \qquad\texttt{line4}$$
  
 This reads as:
 
@@ -94,7 +94,8 @@ As we know, for 1, Alex has chosen *Less*.... The rationale for his decision is 
 $$<$$ is the natural order of *Natural* numbers. Why? Usually we count in ascending order, it is the natural way of counting.
 
 Having chosen *Less*... then, we have to chose between *Reflexive* ($$\leq$$) and *Strict* ($$<$$).  
-Alex has chosen *Strict* ($$<$$) and his reasoning is: *"It is one character less"*, (len('<') < len('<='))  
+Alex has chosen *Strict* ($$<$$) and his reasoning is:  
+&nbsp;&nbsp;&nbsp;*"It is one character less"*, (len('<') < len('<='))  
 But maybe you could think: *"This is not a good reason"*.  
 The Alex’s answer is: *"Well, we can choose either because they are equivalents!, then, you could use any decision procedure, such as, fewer typing"*  
 Finally, another fundament: *"Mathematicians consistently use < in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of <"*
