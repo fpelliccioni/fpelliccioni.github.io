@@ -142,7 +142,8 @@ Now we can write code like the following:
 
 {% highlight cpp %}
 struct salary_comparator {
-  bool operator()(employee const& a, employee const& b) const {
+  bool operator()(employee const& a, 
+                  employee const& b) const {
     return a.salary < b.salary;
   }
 };
@@ -160,8 +161,10 @@ void usage_with_employees() {
   employee m2 = min(e1, e2, salary_comparator{});
 
   // using another (unnatural) ordering, with lambdas   
-  employee m3 = min(e1, e2, [](employee const& a, employee const& b){
-          return a.name < b.name; } );
+  employee m3 = min(e1, e2, [](employee const& a, 
+                               employee const& b){
+          return a.name < b.name; 
+  });
 }
 {% endhighlight %}
 But so far, I have not mentioned anything that an experienced programmer does not know, the use of predicates (comparators) is a common thing in practically all programming languages.
