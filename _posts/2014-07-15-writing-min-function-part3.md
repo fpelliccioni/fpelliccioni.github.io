@@ -45,16 +45,17 @@ void usage_with_builtin_types_simple() {
     //using variables and literals
     cout << min(a, 2);
 
-    //assigning the result (copy)
+    //assigning the result (copying the result)
     int m1 = min(a, b);
     int m2 = min(1, 2);
 }
 {% endhighlight %}
-These are very simple examples using the int builtin type, but our min function is supposed to be Generic, so it has to operate with all types that satisfy the TotallyOrdered concept. So let’s see a little more complicated example.
+These are very simple examples using the int builtin type, but our min function is supposed to be **Generic**, so it has to operate with all types that satisfy the *TotallyOrdered* concept. So let’s see a little more complicated example.
 
-Suppose we maintain the employee database of a company and we want to take two employees and know which is the minimum of the two. Let's see it on code. Here a simplified Employee class written in C++:
+Suppose we maintain the employee database of a company and we want to take two employees and know which is the minimum of the two:
 
 {% highlight cpp %}
+//A simplified Employee class written in C++
 struct employee { string name; float salary; };
 {% endhighlight %}
 And now we use the min function with Employees:
@@ -66,39 +67,41 @@ void usage_with_employees() {
     employee e3 {"George", 4500.0f};
     employee e4 {"Frank", 5000.0f};
 
-    employee m = min(e1, e2); // ???
+    employee m = min(e1, e2); // #1
 }
 {% endhighlight %}
-What happend at line 7?
+What happend at #1?
 
-Well, we should get a compile-time error saying that the employee type doesn't satisfy the TotallyOrdered concept.
+Well, we should get a compile-time error saying that the employee type doesn't satisfy the *TotallyOrdered* concept.
 
 Why?
 
-First, syntactically there is no way of comparing two employees using the less-than-operator required by the TotallyOrdered concept.
-If we use C++ templates without Concepts (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done. Instead, if we use a dynamic duck-typing language, like Python, we will get a similar error but at runtime.
+First, syntactically there is no way of comparing two employees using the less-than-operator required by the *TotallyOrdered* concept.  
+If we use C++ templates without Concepts (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done. Instead, if we use a dynamic duck-typing language, like Python, we will get a similar error but at runtime.  
 The compiler (or interpreter) doesn't know how to do a < b for employees, so this is the reason why we get the error.
 
-So, how to make my Employee type to satisfy the TotallyOrdered concept?
+So, how to make Employee to satisfy the *TotallyOrdered* concept?
 
 Let's start satisfying the requirements imposed by the concept:
 
-Employee must satisfy the Regular concept.
-We have to provide an operator< with the signature: Employee x Employee -> bool
-The operator< must be a total ordering relation.
-For now I want to skip the points 1 and 3, we will see them in another article. So let's concentrate on point 2, which is a syntactic requirement, that specify that we have to provide the operator<, so let's do it:
+- Employee must satisfy the *Regular* concept.
+- We have to provide an operator< with the signature: Employee x Employee -> bool
+- The operator< must be a total ordering relation.
+
+For now I want to skip the points 1 and 3, we will see them later. So let's concentrate on point 2 (remember, it is a syntactic requirement):
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
     return ???????;
 }
 {% endhighlight %}
+
 This is the canonical way on C++ for implementing a less-than-operator, but ... What should I put on line 2?
 
 Actually, I don't know. That answer should be given by the designer of the Employee class. Well..., that's me (?).
 
-First, remember, total ordering, is, roughly speaking, some kind of Natural Ordering. So we need to know what is the natural ordering of Employees.
-Maybe the natural ordering of employees is by name, maybe by salary, ... I don't know. This depends on the domain of the application. In a company, I think, employees have a unique identification number, maybe that is a good candidate to implement total ordering. So, let's modify our Employee class:
+First, remember, *total ordering*, is, roughly speaking, some kind of *Natural Ordering*. So we need to know what is the natural ordering of Employees.
+Maybe the natural ordering of employees is by name, maybe by salary, ... I don't know. This depends on the domain of the application. In a company, I think, employees have a unique identification number, maybe that is a good candidate for implement total ordering. So, let's modify our Employee class:
 
 {% highlight cpp %}
 struct employee { int id; string name; float salary; };
@@ -110,7 +113,7 @@ bool operator<(employee const& a, employee const& b) {
     return a.id < b.id;
 }
 {% endhighlight %}
-Now, we have an Employee class with a natural ordering, by id, that satisfies the TotallyOrdered concept (remember, we are ignoring the points 1 and 3).
+Now, we have an Employee class with a natural ordering (by id) that satisfies the *TotallyOrdered* concept (remember, we are ignoring the points 1 and 3).
 
 But, what if we want to know who is the lowest paid employee, and then raise his salary. Should we modify the less-than-operator to compare by salary?
 
@@ -120,15 +123,16 @@ bool operator<(employee const& a, employee const& b) {
 }
 {% endhighlight %}
 Is it OK?
-No, we are imposing a default un-natural ordering to employee’s, it is not the right way to do it.
+No, we are imposing an unnatural ordering to employees by default, it is not the right way to do it.
 
-Changing the Employee’s natural ordering is not an option, so, we need another min function, one that takes a relation as parameter.
-Let’s do it in the old-unconstrained-way (wrong way?), that is, without Concepts:
+Changing the Employee’s natural ordering is not an option, so, we need another way of selecting the minimum employee using an unnatural ordering relation.  
+What we need is another min function, one that takes a relation as parameter.  
+Let’s do it using the old C++ way (without Concepts):
 
 {% highlight cpp %}
 //Note: It compiles, but is incorrect, still, be patient!
-template <typename T, typename Comparator>
-T const& min(T const& a, T const& b, Comparator cmp) {
+template <typename T, typename C>
+T const& min(T const& a, T const& b, C cmp) {
     if (cmp(a, b)) return a;
     return b;
 }
@@ -160,10 +164,10 @@ void usage_with_employees() {
 }
 {% endhighlight %}
 But so far, I have not mentioned anything that an experienced programmer does not know, the use of predicates (comparators) is a common thing in practically all programming languages.
-What most programmers (and existing implementations) forget is to specify the semantics of the predicate.
+What most programmers (and most of the API provided by programming languages) forget is to specify the semantics requirements of the predicate.
 
 So, what are the semantic requirements?
-What is Comparator?
+We need to answer: What is Comparator?
 
 Comparator is a Relation, that is, a binary Predicate. What kind of relation?
 It is an ordering. What kind of ordering?
@@ -173,7 +177,8 @@ Remember, a Relation r is a Strict Total Ordering if: For all a, b and c in the 
 Transitivity: if r(a, b) and r(b, c) then r(a, c)
 Trichotomy: only one of the following holds, r(a, b), r(b, a) or a = b
  
-It's easy to prove that the transitivity axiom holds so I will skip it; but, what about trichotomy? Let’s prove it with an example. Given our previous defined employees:
+It's easy to prove that the transitivity axiom holds, let's leave it as an exercise for the reader.  
+What about trichotomy? Let’s prove it with an example. Given our previous defined employees:
 
 {% highlight cpp %}
 employee e1 { 1, "John", 5000.0f };
@@ -233,104 +238,6 @@ on $$\mathbb{N}$$
 
 
 
-
-
-
-
-This is the second article of the series called *"Writing min function"*.
-
-I want complete the *min* function and fix the mistakes mentioned in the [previous post]({% post_url 2014-05-20-writing-min-function-part1 %}). But first, we have to understand *Concepts*, so let's review the last version of the function with its requirements.
-
-
-{% highlight cpp %}
-{% endhighlight %}
-
-Here we specify that:
-
-- the formal parameters a and b are of the same type, and we called this type: T.
-- T models the concept called *TotallyOrdered*.
-
-*"A type __models__ a concept, if the requirements expressed by the concept are __satisfied__ for this type"*
-
-Now, let's review the formal definition of the *TotallyOrdered* concept:
-
-$$TotallyOrdered(\texttt{T}) \triangleq \qquad \qquad\quad\texttt{line1}\\
-\qquad  \texttt{Regular(T)} \qquad \qquad\qquad\texttt{ }\texttt{ line2}\\
-\quad \land <\texttt{: T x T} \rightarrow \text{bool} \qquad \qquad\texttt{line3}\\
-\quad \land total\_ordering(<) \qquad \qquad\texttt{ line4}$$
- 
-This reads as:  
-(line1) A type T models the *TotallyOrdered* concept if:
-
-- (line2) T also has to model the [*Regular*[1]](#Ref1) concept. This means that *TotallyOrdered* is defined in terms of *Regular*.
-- (line3) A procedure less-than-operator (<) with the signature:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T x T -> bool,  
-must exist. This is the syntactic rule that allows us to write things like:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a < b
-- (line4) This is a semantic requirement, meaning that the less-than-operator procedure has to be a *Total Ordering relation*.
-
-(**Note**: when we say *Total Ordering* we are referring to the ordering relation, the mathematical term mentioned in the previous article. 
-When we say *TotallyOrdered* we are referring to the name of the Concept, like Employee is the name of a class or Sort is the name of a function. Here we can use any name we want. We will invoke this name later, in our algorithms)
-
-So in line4 we are using *Total Ordering*, but remember, there are two kinds of *Total Ordering*.  
-Do we mean *Reflexive* or *Strict Total Ordering*? Because it would be one or the other.  
-Let's review the difference with examples:
-
-- An example of *Reflexive Total Ordering* is the $$\leq$$ relation on the *Natural* numbers set, or in other words, ($$\mathbb{N}$$, $$\leq$$) is a *Reflexive Totally Ordered Set*.  
-That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Transitivity*: if a $$\leq$$ b and b $$\leq$$ c then a $$\leq$$ c  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Antisymmetry*: if a $$\leq$$ b and b $$\leq$$ a then a $$=$$ b  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Totality*: a $$\leq$$ b or b $$\leq$$ a  
-($$\mathbb{N}$$, $$\geq$$) is another example of a *Reflexive Totally Ordered Set*.
-
-- An example of *Strict Total Ordering* is the $$<$$ relation on the *Natural* numbers set, or in other words, ($$\mathbb{N}$$, $$<$$) is a *Strict Totally Ordered Set*.  
-That is, for all a, b and c in $$\mathbb{N}$$, the following must hold:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Transitivity*: if a $$<$$ b and b $$<$$ c then a $$<$$ c  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Trichotomy*: only one of the following holds, a $$<$$ b, b $$<$$ a or a $$=$$ b  
-($$\mathbb{N}$$, $$>$$) is another example of a *Strict Totally Ordered Set*.
-
- 
-**Exercise 2**: Prove that  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. $$<$$ is a Transitive relation  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$<$$ obeys the Trichotomy law  
-on $$\mathbb{N}$$
-
----
-
-So, we have four options with which the *TotallyOrdered* concept could be defined: $$<$$, $$\leq$$, $$>$$, or, $$\geq$$. Whatever we choose is a right decision, but we have to choose.
-
----
-**Exercise 3**: Do you know why any of the four options is a right choice?
-
----
-
-I'm lying, actually we will not choose anything, the *TotallyOrdered* concept is defined using $$<$$, but here I will show the thinking behind the choice.
-
-We have two choices to make:
-
-- *Less*... vs. *Greater*...: $$<$$ or $$\leq$$ vs. $$>$$ or $$\geq$$
-- *Reflexive* vs. *Strict*: $$\leq$$ or $$\geq$$ vs. $$<$$ or $$>$$
-
-As we know, for the first one, Alex has chosen *Less*.... (see line4 of *TotallyOrdered* concept)
-The rationale for his decision is simple: **Counting**!  
-$$<$$ is the natural order of *Natural* numbers. Why? Usually we count in ascending order, it is the natural way of counting.
-
-Now we have to chose between *Reflexive* ($$\leq$$) and *Strict* ($$<$$).  
-Alex has chosen *Strict* ($$<$$) and his reasoning is:  
-&nbsp;&nbsp;&nbsp;*"It is one character less"*, (len('<') < len('<='))  
-But maybe you could think: *"This is not a good reason"*.  
-The Alex’s answer is: *"We can choose either because they are equivalents!, then, you could use any decision procedure you want, such as, fewer typing"*  
-Finally, another fundament: *"Mathematicians consistently use < in their books as the primary ordering, when they talk about, for example, Totally Ordered Fields they write all the axioms in terms of <"*
-
-Summarizing, the choice is to use *LessThan* that is *Strict*, so we use $$<$$.
-
-Well, now we understand what the *TotallyOrdered* concept means (I hope), but this post is ended and we haven't written any new code.  
-You must be thinking: *"Anyone knows how to write the min function without having any knowledge about abstract algebra"*.
-The Alex's answer is: *"Yes, they may know how to write it, but they implemented it incorrectly time and time again. How I know that? Because I was one of them."*
-
-And this is mine: Remembering some mathematics doesn't do any harm.
-
-In the next post I will write some code. Be patient!
 
 
 
