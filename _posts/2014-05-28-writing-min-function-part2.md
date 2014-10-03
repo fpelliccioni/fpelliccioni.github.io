@@ -30,13 +30,13 @@ Here we specify that:
 Now, let's review the formal definition of the *TotallyOrdered* concept:
 
 $$TotallyOrdered(\texttt{T}) \triangleq \qquad \qquad\quad\texttt{line1}\\
-\qquad  \texttt{Regular(T)} \qquad \qquad\qquad\texttt{ line2}\\
+\qquad  \texttt{Regular(T)} \qquad \qquad\qquad\texttt{ }\texttt{ line2}\\
 \quad \land <\texttt{: T x T} \rightarrow \text{bool} \qquad \qquad\texttt{line3}\\
 \quad \land total\_ordering(<) \qquad \qquad\texttt{ line4}$$
  
-This reads as:
-
+This reads as:  
 (line1) A type T models the *TotallyOrdered* concept if:
+
 - (line2) T also has to model the [*Regular*[1]](#Ref1) concept. This means that *TotallyOrdered* is defined in terms of *Regular*.
 - (line3) A procedure less-than-operator (<) with the signature:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T x T -> bool,  
