@@ -79,7 +79,7 @@ Why?
 First, in C++, there is no way of comparing two Employees using the less-than-operator required by the *TotallyOrdered* concept.  
 If we use C++ without *Concepts* (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done.  
 
-{% highlight %}
+{% highlight c++ %}
 min.cpp: In instantiation of 'const T& min(const T&, const T&) [with T = employee]':
 min.cpp:23:26:   required from here
 min.cpp:10:9: error: no match for 'operator<' (operand types are 'const employee' and 'const employee')
