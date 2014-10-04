@@ -245,14 +245,6 @@ Even so, if you want to take a look at the code, write me by private and I will 
 I didn’t want to make an article explaining Const-Correctness so long, because there are countless [books and articles on the Internet [3]](#Ref3) that explain the topic better than me. But as I tried to explain some things, I thought it was necessary to extend the explanation, which ended in this article. 
 
 
-
---------------------------------------------------------------------------------------
- For all a, b and c in the domain of r, the following must hold:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Transitivity*: if r(a, b) and r(b, c) then r(a, c)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Trichotomy*: only one of the following holds, r(a, b), r(b, a) or a = b  
-
-
-
 ---
 
 ## The Series
