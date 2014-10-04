@@ -11,7 +11,7 @@ Now we understand what **Concepts** are (do we?), I will try to complete the min
 
 What do I mean with "complete"?
 
-Well, we need to see how to use our min function, for that purpose I want to use a real programming language.  
+Well, first we need to see how to use our min function, for that purpose I want to use a real programming language.  
 So in this article I will write code in [C++](http://www.open-std.org/jtc1/sc22/wg21/). Why C++?, it is a topic for another article.  
 But, don't worry if you're not a C++ programmer, the code will be easy to understand, and, the ideas that I want to talk here are very important for programming algorithms, beyond the programming language.  
 Later on, I will try to write the same code (and analyze it) using another programming languages.
@@ -76,10 +76,20 @@ Well, we should get a compile-time error saying that the employee type doesn't s
 
 Why?
 
-First, syntactically there is no way of comparing two employees using the less-than-operator required by the *TotallyOrdered* concept.  
+First, in C++, there is no way of comparing two Employees using the less-than-operator required by the *TotallyOrdered* concept.  
 If we use C++ without *Concepts* (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done.  
-Instead, if we use a dynamic duck-typing programming language (like Python or Javascript) we will get a similar error but at runtime.  
-The compiler (or interpreter) doesn't know how to do a < b for employees, so this is the reason why we get the error.
+
+{% code %}
+min.cpp: In instantiation of 'const T& min(const T&, const T&) [with T = employee]':
+min.cpp:23:26:   required from here
+min.cpp:10:9: error: no match for 'operator<' (operand types are 'const employee' and 'const employee')
+   if (a < b) return a;
+         ^
+{% code %}
+
+If we use a dynamic duck-typed programming language (like Python or Javascript) we will get a similar error but at runtime.  
+The compiler (or interpreter) doesn't know how to do a < b for Employees, so this is the reason why we get the error.  
+We have to tell the compiler how to compare two Employees.  
 
 So, how to make Employee to satisfy the *TotallyOrdered* concept?
 
