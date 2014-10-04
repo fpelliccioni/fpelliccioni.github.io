@@ -209,20 +209,20 @@ employee e4 { 4, "Frank", 5000.0f };
 {% endhighlight %}
 And our salary_comparator, here called r in order to abbreviate the text:
 
-- Take e1 and e2: According to *trichotomy*: only one of the following holds,  
-r(e1, e2), r(e2, e1) or e1 = e2  
+- Take e1 and e2: According to *trichotomy*: only one of the following holds, r(e1, e2), r(e2, e1) or e1 = e2  
 What is the result of r(e1, e2)? r(e1, e2) means e1.salary < e2.salary, which means: 5000 < 6000, so it holds. The other two propositions are false (intentionally omitted), so *trichotomy* holds in that case.
 - Take e1 and e3: Following the same analysis,  r(e1, e3) means e1.salary < e3.salary, which means: 5000 < 4500, so it doesn't hold. But r(e3, e1) means ... 4500 < 5000 which is true, and the last proposition is false (again, intentionally omitted), so *trichotomy* holds.
 - Now, take e1 and e4: Following the same analysis, r(e1, e4) and r(e4, e1) are both false, so, the proposition e1 = e4 have to be true if we want *trichotomy* holds.  
 Is e1 = e4 true?  
 No! because **e1 is not equal to e4**, they are differents employees, they are not the same.  
 
-Then, the *trichotomy* axiom does not hold, that is, the salary_comparator relation is not a *Total Ordering* on the Employee Set. This means that *Total Ordering* is too restrictive.
+Then, the *trichotomy* axiom does not hold, that is, the salary_comparator relation is not a *Total Ordering* on the Employee Set. This means that *Total Ordering* is **too restrictive**.
 
-So, what kind of ordering relation should be our *Comparator*?
+So, what kind of *ordering relation* should be our *Comparator*?
 
-*Partial Ordering*? No, we saw in [Part1]({% post_url 2014-05-20-writing-min-function-part1 %}) that *Partial Ordering* is too weak to define min.
-We need something in between *Partial* and *Total Ordering*: what we need is called [**Weak Ordering**[1]](#Ref1).
+*Partial Ordering*?  
+No, we saw in [Part 1]({% post_url 2014-05-20-writing-min-function-part1 %}) that *Partial Ordering* is **too weak** to define min.
+We need something between *Partial* and *Total Ordering*: what we need is called [**Weak Ordering**[1]](#Ref1).
 
 Roughly speaking, *weak ordering* says that if r(a, b) and r(b, a) are false, then, a and b are **equivalents**.
 
@@ -242,28 +242,11 @@ The code above means that we have a function called min, that takes two formal p
 The funcion has a third formal parameter, cmp, that models the concept called **StrictWeakOrdering**. The "requires" clause means that T (the type of a and b) and the argument type of the *Comparator* (Cmp) must be the same.
 
 Well, in this article I explained what *Weak Ordering* means and why it is important, I want to end it with a quote from Alex:  
-*"Mathematicians are happy with Total and Partial ordering. But most of them don't know what is *Weak Ordering*. It is not a common term in mathematics but it is essential in computer science, because when we want to order things, we want to order by something. For example by social security number, by name, by age"*.
+*"Mathematicians are happy with Total and Partial ordering. But most of them don't know what is Weak Ordering. It is not a common term in mathematics but it is essential in computer science, because when we want to order things, we want to order by something. For example by social security number, by name, by age"*.
 
 In the next article, finally, I will tell you what are the mistakes that remain to be addressed.
 
-You can get the complete source code on my Github repository.
-
-
-
---------------------------------------------
-
-
----
-**Exercise 1**: Prove that  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. $$\leq$$ is a Transitive relation  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$\leq$$ is an Antisymmetric relation  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. $$\leq$$ is a Total relation  
-on $$\mathbb{N}$$
-
-
-
-
-
+You can get the complete source code on my [Github repository](https://github.com/fpelliccioni/componentsprogramming).
 
 ---
 
