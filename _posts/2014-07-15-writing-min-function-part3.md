@@ -76,7 +76,7 @@ Well, we should get a compile-time error saying that the employee type doesn't s
 
 Why?
 
-First, in C++, there is no way of comparing two Employees using the less-than-operator required by the *TotallyOrdered* concept.  
+First, in C++, there is no way of comparing two Employees using the *less-than-operator* required by the *TotallyOrdered* concept.  
 If we use C++ without *Concepts* (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done.  
 
 {% highlight c++ %}
@@ -87,11 +87,10 @@ min.cpp:10:9: error: no match for 'operator<' (operand types are 'const employee
          ^
 {% endhighlight %}
 
-The error is not very instructive, right?
+The error message is not very instructive, right? The error message points to the min function, when the real problem is in the use of it, specifically in line marked as #1 on usage_with_employees function.
 
 If we use a dynamic duck-typed programming language (like Python or Javascript) we will get a similar error but at runtime.  
 The compiler (or interpreter) doesn't know how to do a < b for Employees, so this is the reason why we get the error.  
-We have to tell the compiler how to compare two Employees.  
 
 So, how to make Employee to satisfy the *TotallyOrdered* concept?
 
@@ -102,6 +101,7 @@ Let's start satisfying the requirements imposed by the concept:
 - The operator< must be a total ordering relation.
 
 For now I want to skip the points 1 and 3, we will see them later. So let's concentrate on point 2 (remember, it is a syntactic requirement):
+We have to tell the compiler how to compare two Employees.  
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
@@ -109,7 +109,7 @@ bool operator<(employee const& a, employee const& b) {
 }
 {% endhighlight %}
 
-This is the canonical way on C++ for implementing a less-than-operator, but ... What should I put on line 2?
+This is the canonical way on C++ for implementing a *less-than-operator*, but ... What should I put on line 2?
 
 Actually, I don't know. That answer should be given by the designer of the Employee class. Well..., that's me (?).
 
@@ -119,7 +119,7 @@ Maybe the natural ordering of employees is by name, maybe by salary, ... I don't
 {% highlight cpp %}
 struct employee { int id; string name; float salary; };
 {% endhighlight %}
-Now, let's finalize our less-than-operator:
+Now, let's finalize our *less-than-operator*:
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
@@ -128,7 +128,7 @@ bool operator<(employee const& a, employee const& b) {
 {% endhighlight %}
 Now, we have an Employee class with a natural ordering (by id) that satisfies the *TotallyOrdered* concept (remember, we are ignoring the points 1 and 3).
 
-But, what if we want to know who is the lowest paid employee, and then raise his salary. Should we modify the less-than-operator to compare by salary?
+But, what if we want to know who is the lowest paid employee, and then raise his salary. Should we modify the *less-than-operator* to compare by salary?
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
