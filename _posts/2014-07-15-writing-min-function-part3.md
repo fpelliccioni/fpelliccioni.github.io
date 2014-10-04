@@ -77,7 +77,7 @@ Well, we should get a compile-time error saying that the employee type doesn't s
 Why?
 
 First, in C++, there is no way of comparing two Employees using the *less-than-operator* required by the *TotallyOrdered* concept.  
-If we use C++ without *Concepts* (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done.  
+If we use old-C++, without *Concepts* (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done.  
 
 {% highlight c++ %}
 min.cpp: In instantiation of 'const T& min(const T&, const T&) [with T = employee]':
@@ -87,17 +87,17 @@ min.cpp:10:9: error: no match for 'operator<' (operand types are 'const employee
          ^
 {% endhighlight %}
 
-The error message is not very instructive, right? The error message points to the min function, when the real problem is in the use of it, specifically in line marked as #1 on usage_with_employees function.
+The error message is not very instructive, right? The error message points to the min function, when the real problem is in the use of it, specifically in line marked as #1 in the *usage_with_employees()* function.
 
 If we use a dynamic duck-typed programming language (like Python or Javascript) we will get a similar error but at runtime.  
+
 The compiler (or interpreter) doesn't know how to do a < b for Employees, so this is the reason why we get the error.  
-
 So, how to make Employee to satisfy the *TotallyOrdered* concept?
-
 Let's start satisfying the requirements imposed by the concept:
 
 - Employee must satisfy the *Regular* concept.
-- We have to provide an operator< with the signature: Employee x Employee -> bool
+- We have to provide an operator< with the signature:  
+Employee x Employee -> bool
 - The operator< must be a total ordering relation.
 
 For now I want to skip the points 1 and 3, we will see them later. So let's concentrate on point 2 (remember, it is a syntactic requirement):
