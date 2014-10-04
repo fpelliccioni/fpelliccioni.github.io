@@ -87,6 +87,8 @@ min.cpp:10:9: error: no match for 'operator<' (operand types are 'const employee
          ^
 {% endhighlight %}
 
+The error is not very instructive, right?
+
 If we use a dynamic duck-typed programming language (like Python or Javascript) we will get a similar error but at runtime.  
 The compiler (or interpreter) doesn't know how to do a < b for Employees, so this is the reason why we get the error.  
 We have to tell the compiler how to compare two Employees.  
