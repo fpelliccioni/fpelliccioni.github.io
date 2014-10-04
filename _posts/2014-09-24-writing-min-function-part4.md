@@ -236,19 +236,14 @@ HERE_SOME_MAGIC min(T&& a, U&& b) {
 
 Then, I presented the code to Alex, because I wanted to know what he thought, and he answered me with the following advice:
 
-- Alex Stepanov: *“My standard advice: concentrate on algorithms and data structures. Do not spend time on meta-programming. If it is not in Knuth (or something like Knuth), do not do it.”*
+\- Alex Stepanov: *“My standard advice: concentrate on algorithms and data structures. Do not spend time on meta-programming. If it is not in Knuth (or something like Knuth), do not do it.”* [[2]](#Ref2)
 
 At first I did not understand the reason for his answer, but then, after spending hours focusing on details of the template-metaprogramming code, I understood that it is better to focus on real problems, which are the algorithms.
 
 Even so, if you want to take a look at the code, write me by private and I will gladly share it (See [About page](http://componentsprogramming.com/about/)).
 
-I didn’t want to make an article explaining Const-Correctness so long, because there are countless books and articles on the Internet [3] that explain the topic better than me. But as I tried to explain some things, I thought it was necessary to extend the explanation, which ended in this article. 
+I didn’t want to make an article explaining Const-Correctness so long, because there are countless [books and articles on the Internet [3]](#Ref3) that explain the topic better than me. But as I tried to explain some things, I thought it was necessary to extend the explanation, which ended in this article. 
 
-
-[Knuth[3]](#Ref3)
-
-[3](http://componentsprogramming.com/about/) 
-http://en.wikipedia.org/wiki/Donald_Knuth
 
 
 --------------------------------------------------------------------------------------
@@ -277,7 +272,8 @@ http://en.wikipedia.org/wiki/Donald_Knuth
 
 <a name="Ref2">[2]</a> Here Alex refers to [Donald Knuth](http://en.wikipedia.org/wiki/Donald_Knuth), but more specifically to his series of books, called ["The Art of Computer Programming"](http://en.wikipedia.org/wiki/The_Art_of_Computer_Programming) ([Amazon](http://www.amazon.com/Computer-Programming-Volumes-1-4A-Boxed/dp/0321751043))
 
-<a name="Ref3">[3]</a> For better references about Const-Correctness and ROM-ability, see:  
+<a name="Ref3">[3]</a> For better references about Const-Correctness and ROM-ability, see:
+
 - Standard C++ FAQ about Const Correctness:  
 <https://isocpp.org/wiki/faq/const-correctness>
 - The "Guru of the Week" (GotW) articles about Const-Correctness (the original and the new one), from [Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter):  
