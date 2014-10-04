@@ -241,7 +241,8 @@ T const& min(T const& a, T const& b, Cmp cmp) {
 The code above means that we have a function called min, that takes two formal parameters, a and b, both of the same type, called T.  
 The funcion has a third formal parameter, cmp, that models the concept called **StrictWeakOrdering**. The "requires" clause means that T (the type of a and b) and the argument type of the *Comparator* (Cmp) must be the same.
 
-Well, in this article I explained what *Weak Ordering* means and why it is important, I want to end it with a quote from Alex:  
+Well, in this article I explained what *Weak Ordering* means and why it is important, I want to end it with a quote from Alex:
+
 *"Mathematicians are happy with Total and Partial ordering. But most of them don't know what is Weak Ordering. It is not a common term in mathematics but it is essential in computer science, because when we want to order things, we want to order by something. For example by social security number, by name, by age"*.
 
 In the next article, finally, I will tell you what are the mistakes that remain to be addressed.
