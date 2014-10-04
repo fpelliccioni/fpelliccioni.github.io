@@ -13,7 +13,7 @@ Originally, I wanted to address the two mistakes in the same article, but when I
 
 Therefore, this article will deal with an issue that only concerns to C++ programmers, so if C++ is not of your interest, feel free to jump directly to the fifth article.
 
-In general, I want that the algorithms written in my articles are not tied to a specific programming language, but in order to write the algorithms in a practical way, I have to do it in a real language, and C++ is my choice.
+In general, I want that the algorithms written in my articles are not tied to a specific programming language, but in order to write the algorithms in a practical way, I have to do it in a real language, and C++ is my choice.  
 Once the mistakes have been corrected, with the help of other people, I'll start writing the min function in other programming languages.
 
 So, to start, I'll update the usage code example to reflect things I would like to do using the min function:
@@ -40,7 +40,7 @@ void usage_with_mutable_objects() {
 
 (*employee* and *salary_comparator* were defined in [Part 3]({% post_url 2014-07-15-writing-min-function-part3 %}))
 
-In #1 we get a compile-time error, but, why?
+In #1 we get a compile-time error, but, why?  
 Remember our last version of the min function:
 
 {% highlight cpp %}
@@ -60,7 +60,7 @@ T const& min(T const& a, T const& b, Cmp cmp) {
 
 (**Note**: When I refer to the min function, actually I am not referring to a single function, but to a family of functions)
 
-It takes two constant-references to two objects (and a comparator); and returns a constant reference to one of the objects. That means that the returned reference cannot be modified, because it is returned as const.
+It takes two constant-references to two objects (and a comparator); and returns a constant reference to one of the objects. That means that the returned reference cannot be modified, because it is returned as const.  
 The *raise_salary* function tries to modify the object returned by the min function, causing the compilation-time error, because you can’t modify something declared as const.
 
 If I manually expand (or “inliniarize”) the code of the functions min and *raise_salary* I would get something like:
@@ -75,9 +75,9 @@ employee const& m = e1 < e2 ? e1 : e2;
 m.salary += 500.0f; //Compile-time error
 {% endhighlight %}
 
-In the last code, it is more clear that we are trying to modify something that is constant.
-The variable m is a constant-reference pointing (or rather, referencing) to e1 or to e2.
-Both e1 and e2 were not declared as constant, so they are mutable objects.
+In the last code, it is more clear that we are trying to modify something that is constant.  
+The variable m is a constant-reference pointing (or rather, referencing) to e1 or to e2.  
+Both e1 and e2 were not declared as constant, so they are mutable objects.  
 Then,  why the min function returns a constant reference and not just an ordinary (non-const) reference?
 Consider the following variation of a wrong min function:
 
@@ -91,7 +91,7 @@ T& wrong_min(T const& a, T const& b, Cmp cmp) {
 }
 {% endhighlight %}
 
-It is not valid C++ code (or using Standard C++ terminology, it is ill-formed code), it doesn’t compiles, because we are trying to return something that is constant as non-constant. And what's up with that?
+It is not valid C++ code (or using Standard C++ terminology, it is ill-formed code), it doesn’t compiles, because we are trying to return something that is constant as non-constant. And what's up with that?  
 Well, suppose that the *wrong_min* function compiles, in a fictitious programming language, then consider the following usage code:
 
 {% highlight cpp %}
@@ -143,7 +143,7 @@ If we wrote the min function as above, then we would have problems with the foll
 int m = min(5, 7); // Compile-time error
 {% endhighlight %}
 
-The code above doesn’t compile. Why?
+The code above doesn’t compile. Why?  
 In C++, the values 5 and 7 are called integer-literal, more specifically they are called decimal integer literal (base ten). Literals are something that can’t be modified, they are constants. So to accept the code above we have to return to our original min function, using const everywhere.  
 But, remember, we want our min function also allows us to work with mutable objects.
 
