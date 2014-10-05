@@ -11,7 +11,7 @@ Now we understand what **Concepts** are (do we?), I will try to complete the min
 
 What do I mean with "complete"?
 
-Well, we need to see how to use our min function, for that purpose I want to use a real programming language.  
+Well, first we need to see how to use our min function, for that purpose I want to use a real programming language.  
 So in this article I will write code in [C++](http://www.open-std.org/jtc1/sc22/wg21/). Why C++?, it is a topic for another article.  
 But, don't worry if you're not a C++ programmer, the code will be easy to understand, and, the ideas that I want to talk here are very important for programming algorithms, beyond the programming language.  
 Later on, I will try to write the same code (and analyze it) using another programming languages.
@@ -76,20 +76,31 @@ Well, we should get a compile-time error saying that the employee type doesn't s
 
 Why?
 
-First, syntactically there is no way of comparing two employees using the less-than-operator required by the *TotallyOrdered* concept.  
-If we use C++ without *Concepts* (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done.  
-Instead, if we use a dynamic duck-typing programming language (like Python or Javascript) we will get a similar error but at runtime.  
-The compiler (or interpreter) doesn't know how to do a < b for employees, so this is the reason why we get the error.
+First, in C++, there is no way of comparing two Employees using the *less-than-operator* required by the *TotallyOrdered* concept.  
+If we use old-C++, without *Concepts* (or duck-typing templates) we will get a compile-time error pointing to the min function, saying that a < b could not be done.  
 
+{% highlight c++ %}
+min.cpp: In instantiation of 'const T& min(const T&, const T&) [with T = employee]':
+min.cpp:23:26:   required from here
+min.cpp:10:9: error: no match for 'operator<' (operand types are 'const employee' and 'const employee')
+   if (a < b) return a;
+         ^
+{% endhighlight %}
+
+The error message is not very instructive, right? The error message points to the min function, when the real problem is in the use of it, specifically in line marked as #1 in the *usage_with_employees()* function.
+
+If we use a dynamic duck-typed programming language (like Python or Javascript) we will get a similar error but at runtime.  
+
+The compiler (or interpreter) doesn't know how to do a < b for Employees, so this is the reason why we get the error.  
 So, how to make Employee to satisfy the *TotallyOrdered* concept?
-
 Let's start satisfying the requirements imposed by the concept:
 
 - Employee must satisfy the *Regular* concept.
-- We have to provide an operator< with the signature: Employee x Employee -> bool
-- The operator< must be a total ordering relation.
+- We have to provide an operator< with the signature:  
+Employee x Employee -> bool
+- The operator< must be a *total ordering* relation.
 
-For now I want to skip the points 1 and 3, we will see them later. So let's concentrate on point 2 (remember, it is a syntactic requirement):
+For now I want to skip the points 1 and 3, we will see them later. Let's focus on point 2 (remember, it is a syntactic requirement), we have to give the compiler a way to compare two Employees.
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
@@ -97,26 +108,26 @@ bool operator<(employee const& a, employee const& b) {
 }
 {% endhighlight %}
 
-This is the canonical way on C++ for implementing a less-than-operator, but ... What should I put on line 2?
+This is the canonical C++ way for implementing a *less-than-operator*, but ... What should I put on line 2?
 
-Actually, I don't know. That answer should be given by the designer of the Employee class. Well..., that's me (?).
+This should be answered by the designer of the Employee class. Well..., that's me (?).
 
-First, remember, *total ordering*, is, roughly speaking, some kind of *Natural Ordering*. So we need to know what is the natural ordering of Employees.
-Maybe the natural ordering of employees is by name, maybe by salary, ... I don't know. This depends on the domain of the application. In a company, I think, employees may have a unique identification number, which seems to be a good candidate for implement total ordering. So, let's modify our Employee class:
+Remember that *total ordering* is, roughly speaking, some kind of *Natural Ordering*. So we need to know what is the *natural ordering* of Employees.
+Maybe the *natural ordering* of employees is by name, maybe by salary, ... I don't know. This depends on the domain of the application. In a company, I think, employees may have a unique identification number, which seems to be a good candidate for implement *total ordering*. So, let's modify our Employee class:
 
 {% highlight cpp %}
 struct employee { int id; string name; float salary; };
 {% endhighlight %}
-Now, let's finalize our less-than-operator:
+Now, let's finalize our *less-than-operator* using *id* as the *natural ordering*:
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
   return a.id < b.id;
 }
 {% endhighlight %}
-Now, we have an Employee class with a natural ordering (by id) that satisfies the *TotallyOrdered* concept (remember, we are ignoring the points 1 and 3).
+Now, we have an Employee class with a *natural ordering* (by id) that satisfies the *TotallyOrdered* concept (remember, we are ignoring the points 1 and 3).
 
-But, what if we want to know who is the lowest paid employee, and then raise his salary. Should we modify the less-than-operator to compare by salary?
+But, what if we want to know who is the lowest paid employee, and then raise his salary. Should we modify the *less-than-operator* to compare by salary?
 
 {% highlight cpp %}
 bool operator<(employee const& a, employee const& b) {
@@ -124,11 +135,11 @@ bool operator<(employee const& a, employee const& b) {
 }
 {% endhighlight %}
 Is it OK?
-No, we are imposing an unnatural ordering to employees by default, it is not the right way to do it.
+No, we are imposing an **unnatural** ordering to employees by default, it is not the right way to do it.
 
-Changing the Employee’s natural ordering is not an option, so, we need another way of selecting the minimum employee using an unnatural ordering relation.  
+Changing the Employee’s *natural ordering* is not an option, so, we need another way of selecting the minimum employee using an *unnatural ordering* relation.  
 What we need is another min function, one that takes a relation as parameter.  
-Let’s do it using the old C++ way (without Concepts):
+Let’s do it using the old-C++ way (without Concepts):
 
 {% highlight cpp %}
 //Note: It compiles, but is incorrect, still, be patient!
@@ -167,22 +178,28 @@ void usage_with_employees() {
   });
 }
 {% endhighlight %}
-But so far, I have not mentioned anything that an experienced programmer does not know, the use of predicates (comparators) is a common thing in practically all programming languages.
-What most programmers (and most of the APIs provided by programming languages) forget is to specify the semantic requirements of the predicate.
+But so far, I have not mentioned anything that an experienced programmer does not know, the use of *predicates* (the cmp comparator) is a common thing in practically all programming languages.
+What most programmers (and most of the APIs provided by programming languages) forget is to specify the semantics requirements of the *predicate*.
 
 So, what are the semantic requirements?
-We need to answer: What our comparator (cmp) is?
+We need to answer: What our *comparator* (cmp) is?
 
-A comparator is a Relation, that is, a binary Predicate. What kind of relation?
-It is an ordering. What kind of ordering?
-Is it a total ordering relation? Well, let’s check it:
+A *comparator* is a *Relation*, that is, a *binary Predicate*. What kind of *relation*?
+It is an *Ordering*. What kind of *ordering*?
+Is it a *Total Ordering relation*? Well, let’s check it:
 
-Remember, a Relation r is a Strict Total Ordering if: For all a, b and c in the domain of the r, the following must hold:
-Transitivity: if r(a, b) and r(b, c) then r(a, c)
-Trichotomy: only one of the following holds, r(a, b), r(b, a) or a = b
+---
+
+Remember, a *Relation* r is a *Strict Total Ordering* if:  
+For all a, b and c in the domain of r, the following must hold:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Transitivity*: if r(a, b) and r(b, c) then r(a, c)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Trichotomy*: only one of the following holds, r(a, b), r(b, a) or a = b  
+
+---
  
-It's easy to prove that the transitivity axiom holds, let's leave it as an exercise for the reader.  
-What about trichotomy? Let’s prove it with an example. Given our previous defined employees:
+It's easy to prove that the *transitivity* axiom holds, let's leave it as an exercise for the reader.  
+What about *trichotomy*? Let’s prove it with an example.  
+Given our previous defined employees:
 
 {% highlight cpp %}
 employee e1 { 1, "John", 5000.0f };
@@ -190,24 +207,26 @@ employee e2 { 2, "Peter", 6000.0f };
 employee e3 { 3, "George", 4500.0f };
 employee e4 { 4, "Frank", 5000.0f };
 {% endhighlight %}
-And our salary_comparator, here called r in order to abbreviate it:
+And our salary_comparator, here called r in order to abbreviate the text:
 
-Take e1 and e2: According to trichotomy: only one of the following holds, r(e1, e2), r(e2, e1) or e1 = e2
-What is the result of r(e1, e2)? r(e1, e2) means e1.salary < e2.salary, which means: 5000 < 6000, so it holds. The other two propositions are false (intentionally omitted), so trichotomy holds in that case.
-Take e1 and e3: Following the same analysis,  r(e1, e3) means e1.salary < e3.salary, which means: 5000 < 4500, so it doesn't hold. But r(e3, e1) means ... 4500 < 5000 which is true, and the last proposition is false (again, intentionally omitted), so trichotomy holds.
-Now, take e1 and e4: Following the same analysis, r(e1, e4) and r(e4, e1) are both false, so, the proposition e1 = e4 have to be true if we want trichotomy holds.
-Is e1 = e4 true?
-No! because e1 is not equal to e4, they are differents employees, they are not the same.
-Then, the trichotomy axiom does not hold, that is, the salary_comparator relation is not a Total Ordering on the Employee Set. This means that Total Ordering is too restrictive.
+- Take e1 and e2: According to *trichotomy*: only one of the following holds, r(e1, e2), r(e2, e1) or e1 = e2  
+What is the result of r(e1, e2)? r(e1, e2) means e1.salary < e2.salary, which means: 5000 < 6000, so it holds. The other two propositions are false (intentionally omitted), so *trichotomy* holds in that case.
+- Take e1 and e3: Following the same analysis,  r(e1, e3) means e1.salary < e3.salary, which means: 5000 < 4500, so it doesn't hold. But r(e3, e1) means ... 4500 < 5000 which is true, and the last proposition is false (again, intentionally omitted), so *trichotomy* holds.
+- Now, take e1 and e4: Following the same analysis, r(e1, e4) and r(e4, e1) are both false, so, the proposition e1 = e4 have to be true if we want *trichotomy* holds.  
+Is e1 = e4 true?  
+No! because **e1 is not equal to e4**, they are differents employees, they are not the same.  
 
-So, what kind of ordering relation should be our Comparator?
+Then, the *trichotomy* axiom does not hold, that is, the salary_comparator relation is not a *Total Ordering* on the Employee Set. This means that *Total Ordering* is **too restrictive**.
 
-Partial Ordering? No, we saw in Part1 that Partial Ordering is too weak to define min.
-We need something in between Partial and Total Ordering: what we need is called Weak Ordering[1].
+So, what kind of *ordering relation* should be our *Comparator*?
 
-Roughly speaking, weak ordering says that if r(a, b) and r(b, a) are false, then, a and b are equivalents.
+*Partial Ordering*?  
+No, we saw in [Part 1]({% post_url 2014-05-20-writing-min-function-part1 %}) that *Partial Ordering* is **too weak** to define min.
+We need something between *Partial* and *Total Ordering*: what we need is called [**Weak Ordering**[1]](#Ref1).
 
-So, let’s modify the min function to introduce weak ordering:
+Roughly speaking, *weak ordering* says that if r(a, b) and r(b, a) are false, then, a and b are **equivalents**.
+
+So, let’s modify the min function to introduce *weak ordering*:
 
 {% highlight cpp %}
 //Note: yes! you guess it, it is incorrect, still!
@@ -218,32 +237,17 @@ T const& min(T const& a, T const& b, Cmp cmp) {
   return b;
 }
 {% endhighlight %}
-The code above means that we have a function called min, that takes two formal parameters, a and b, both of the same type, called T.
-The funcion has a third formal parameter, cmp, that models the concept called StrictWeakOrdering. The "requires" clause means that T (the type of a and b) and the argument type of the Comparator (Cmp) must be the same.
 
-Well, in this article I explained what Weak Ordering means and why it is important, I want to end it with a quote from Alex:
-"Mathematicians are happy with Total and Partial ordering. But most of them don't know what is Weak Ordering. It is not a common term in mathematics but it is essential in computer science, because when we want to order things, we want to order by something. For example by social security number, by name, by age".
+The code above means that we have a function called min, that takes two formal parameters, a and b, both of the same type, called T.  
+The funcion has a third formal parameter, cmp, that models the concept called **StrictWeakOrdering**. The "requires" clause means that T (the type of a and b) and the argument type of the *Comparator* (Cmp) must be the same.
+
+Well, in this article I explained what *Weak Ordering* means and why it is important, I want to end it with a quote from Alex:
+
+*"Mathematicians are happy with Total and Partial ordering. But most of them don't know what is Weak Ordering. It is not a common term in mathematics but it is essential in computer science, because when we want to order things, we want to order by something. For example by social security number, by name, by age"*.
 
 In the next article, finally, I will tell you what are the mistakes that remain to be addressed.
 
-You can get the complete source code on my Github repository.
-
-
-
---------------------------------------------
-
-
----
-**Exercise 1**: Prove that  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. $$\leq$$ is a Transitive relation  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. $$\leq$$ is an Antisymmetric relation  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. $$\leq$$ is a Total relation  
-on $$\mathbb{N}$$
-
-
-
-
-
+You can get the complete source code on my [Github repository](https://github.com/fpelliccioni/componentsprogramming).
 
 ---
 
@@ -261,9 +265,3 @@ on $$\mathbb{N}$$
 
 <a name="Ref1">[1]</a>  For a formal definition of *Weak Ordering* see:  
 <http://www.elementsofprogramming.com/eop-concepts.pdf>
-
-
-
-<a name="Ref1">[1]</a>  For a formal definition of *Weak Ordering* see:  
-<http://www.elementsofprogramming.com/eop-concepts.pdf>
-
