@@ -62,10 +62,10 @@ And now we use the min function with Employees:
 
 {% highlight cpp %}
 void usage_with_employees() {
-  employee e1 {"John", 5000.0f};
-  employee e2 {"Peter", 6000.0f};
-  employee e3 {"George", 4500.0f};
-  employee e4 {"Frank", 5000.0f};
+  employee e1 {"John", 5'000.0f};
+  employee e2 {"Peter", 6'000.0f};
+  employee e3 {"George", 4'500.0f};
+  employee e4 {"Frank", 5'000.0f};
 
   employee m = min(e1, e2); // #1
 }
@@ -160,10 +160,10 @@ struct salary_comparator {
 };
 
 void usage_with_employees() {
-  employee e1 {1, "John", 5000.0f};
-  employee e2 {2, "Peter", 6000.0f};
-  employee e3 {3, "George", 4500.0f};
-  employee e4 {4, "Frank", 5000.0f};
+  employee e1 {1, "John", 5'000.0f};
+  employee e2 {2, "Peter", 6'000.0f};
+  employee e3 {3, "George", 4'500.0f};
+  employee e4 {4, "Frank", 5'000.0f};
 
   // using natural employee ordering (by id)
   employee m = min(e1, e2);
@@ -202,10 +202,10 @@ What about *trichotomy*? Let’s prove it with an example.
 Given our previous defined employees:
 
 {% highlight cpp %}
-employee e1 { 1, "John", 5000.0f };
-employee e2 { 2, "Peter", 6000.0f };
-employee e3 { 3, "George", 4500.0f };
-employee e4 { 4, "Frank", 5000.0f };
+employee e1 { 1, "John", 5'000.0f };
+employee e2 { 2, "Peter", 6'000.0f };
+employee e3 { 3, "George", 4'500.0f };
+employee e4 { 4, "Frank", 5'000.0f };
 {% endhighlight %}
 And our salary_comparator, here called r in order to abbreviate the text:
 
@@ -256,7 +256,7 @@ You can get the complete source code on my [Github repository](https://github.co
 &nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url 2014-05-20-writing-min-function-part1 %})  
 &nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url 2014-05-28-writing-min-function-part2 %})  
 &nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url 2014-07-15-writing-min-function-part3 %})  
-&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url 2014-05-20-writing-min-function-part1 %})  
+&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url 2014-09-24-writing-min-function-part4 %})  
 
 
 ---
