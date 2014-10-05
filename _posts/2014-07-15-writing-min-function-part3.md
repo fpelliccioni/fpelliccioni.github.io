@@ -162,18 +162,18 @@ void usage_with_employees() {
 
   // using another (unnatural) ordering, with lambdas   
   employee m3 = min(e1, e2, [](employee const& a, 
-                               employee const& b){
+                               employee const& b) {
           return a.name < b.name; 
   });
 }
 {% endhighlight %}
 But so far, I have not mentioned anything that an experienced programmer does not know, the use of predicates (comparators) is a common thing in practically all programming languages.
-What most programmers (and most of the API provided by programming languages) forget is to specify the semantics requirements of the predicate.
+What most programmers (and most of the APIs provided by programming languages) forget is to specify the semantic requirements of the predicate.
 
 So, what are the semantic requirements?
-We need to answer: What is Comparator?
+We need to answer: What our comparator (cmp) is?
 
-Comparator is a Relation, that is, a binary Predicate. What kind of relation?
+A comparator is a Relation, that is, a binary Predicate. What kind of relation?
 It is an ordering. What kind of ordering?
 Is it a total ordering relation? Well, let’s check it:
 
