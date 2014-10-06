@@ -205,7 +205,7 @@ max(a, b, cmp) {
 {% endhighlight %}
                         
 
-You could argue, "Stability is not a property of the min (or max) function, according to its definition. So, if we add stability to min, it will become in another function, that is not min”
+You could argue, "*Stability* is not a property of the *min* (or *max*) function, according to its definition. So, if we add *stability* to *min*, it will become something else, other than *min*”
 
 Thoughts like this are wrong.  
 The first thing you have to think is: What is the definition of *min*?  
