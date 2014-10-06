@@ -223,12 +223,14 @@ The *stable* way is more useful and as efficient as the *anti-stable* one.
 
 So, what would you choose?
 
-Whatever your decision, you must specify (document) in your library/API the behavior of the function *min* (and *max*) in case of equality (or equivalence) of its arguments.
-Do not make me guess or have to look at the implementation details of your API to discover the behavior. This would be wrong, for sure. 
+Whatever your decision, you must **specify** (document) in your library/API the behavior of *min* (and *max*) in case of equality (or equivalence) of its arguments.  
+Do not make me guess or have to look at the implementation details of your API to discover the behavior!  
+This would be wrong, for sure.
 
 We will see in the following articles some languages/libraries whose specification ​​is definitely wrong.
 
-**Conclusion**: Make *min* and *max* functions **stable**, and so **consistent** with the other functions of your API. **Specify** their behavior in the library documentation.
+**Conclusion**: Make *min* and *max* functions **stable**, and so **consistent** with the other functions of your API.  
+**Specify** their behavior in the library documentation.
 
 
 ---
