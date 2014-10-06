@@ -120,7 +120,7 @@ The 3rd case sounds more illogical still.
 But, what about the case 2?
 
 The answer here lies in the concept of **stability**.  
-Surely you know the property of *stability* from  such as *sort*.
+Surely you know the property of *stability* from algorithms such as *sort*.
 An *stable algorithm* preserves the relative order of equivalent objects.
 
 But, have to do *stability* and sorting with *min* and *max*?  
