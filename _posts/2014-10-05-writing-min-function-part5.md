@@ -214,9 +214,9 @@ Remember this is Computer Science.
 Think!. What are our options?  
 There are three ways a library can implement *min*:
 
-1. Anti-Stable
-2. Stable
-3. Random
+1. Random
+2. Anti-Stable
+3. Stable
 
 The *random* way is obviously crazy and expensive.  
 The *stable* way is more useful and as efficient as the *anti-stable* one.
