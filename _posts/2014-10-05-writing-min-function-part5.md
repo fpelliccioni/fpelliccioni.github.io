@@ -100,7 +100,7 @@ In mathematics, this question makes sense, because for example, in the set of Na
 
 returning the first 14 or the second 14 does not matter, because they are the same number.
 
-But, in computer science we deal with things that reside in memory (objects. In the computer, I can represent, for example, the chair where I'm sitting now. My chair maybe is equal to the chair next, but for sure they are not the same chair, they are not identical.  
+But, in computer science we deal with things that reside in memory (objects). In a computer I can represent, for example, the chair where I'm sitting now. My chair maybe **is equal to** the chair next, but for sure they are not the same chair, they are not **identical**.  
 So, in cases like this, it is important to distinguish exactly what to return.
 
 Let's look at what options we have for returning object in case of equality.
