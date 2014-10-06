@@ -123,6 +123,7 @@ In the next post I will write some code. Be patient!
 &nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url 2014-05-28-writing-min-function-part2 %})  
 &nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url 2014-07-15-writing-min-function-part3 %})  
 &nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url 2014-09-24-writing-min-function-part4 %})  
+&nbsp;&nbsp;&nbsp;[Part 5: Stabilizing the algorithm]({% post_url 2014-10-05-writing-min-function-part5 %})  
 
 
 ---
