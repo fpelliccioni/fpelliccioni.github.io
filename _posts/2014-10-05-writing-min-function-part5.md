@@ -63,7 +63,7 @@ usage_with_employees() {
     e4 := employee {4, "Frank", 5000.0}
 
     min_e1 := min(e1, e2, salary_comparator{})
-    max_e1: = max(e1, e2, salary_comparator{})
+    max_e1 := max(e1, e2, salary_comparator{})
     min_e2 := min(e1, e4, salary_comparator{})
     max_e2 := max(e1, e4, salary_comparator{})
 
