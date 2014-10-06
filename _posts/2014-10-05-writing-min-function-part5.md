@@ -120,10 +120,10 @@ The 3rd case sounds more illogical still.
 But, what about the case 2?
 
 The answer here lies in the concept of **stability**.  
-Surely you know the property of *stability* from algorithms such as *sort*.
+Surely you know the property of *stability* from algorithms such as *sort*.  
 An *stable algorithm* preserves the relative order of equivalent objects.
 
-But, have to do *stability* and sorting with *min* and *max*?  
+But, what have to do *stability* and sorting with *min* and *max*?  
 *“To see it, let us implement another function that could be done with two objects and a strict weak ordering on them, namely, a sorting function”* [1]
 
 {% highlight cpp %}
