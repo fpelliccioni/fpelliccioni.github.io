@@ -170,7 +170,7 @@ In the code above, note the specification of the postcondition written as a comm
 a = min(a, b) and b = max(a, b)
 {% endhighlight %}
 
-But the postcondition does not hold. Our *min* function returns the second object and our *max* function returns the first one when both objects are equivalent.  
+But this postcondition never holds. Our *min* function returns the second object and our *max* function returns the first one when both objects are equivalent.  
 We need to make *min* and *max* *stable* [2]: 
 
 {% highlight cpp %}
