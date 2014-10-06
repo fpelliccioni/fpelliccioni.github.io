@@ -103,36 +103,28 @@ returning the first 14 or the second 14 does not matter, because they are the sa
 But, in computer science we deal with things that reside in memory (objects). In a computer I can represent, for example, the chair where I'm sitting now. My chair maybe **is equal to** the chair next, but for sure they are not the same chair, they are not **identical**.  
 So, in cases like this, it is important to distinguish exactly what to return.
 
-Let's look at what options we have for returning object in case of equality.
-Consider:
-
-{% highlight cpp %}
-    a := some_value
-    b := a
-    //so a = b
-    m = min(a, b)
-{% endhighlight %}
+Let's look at what options we have for returning in case of equality of the objects:
 
 1. *min* returns a and *max* returns a
 2. *min* returns a and *max* returns b
 3. *min* returns b and *max* returns a
 4. *min* returns b and *max* returns b
 
-Our functions fall in the case number 3. But… why? Have we consciously designed that way?
+Our *min/max* functions fall in the case number 3. But... why? Have we consciously designed in that way?  
 Which of these options is more correct?
 
-The 1 case looks good, both functions returns the same object, the left-hand object, in case of equality, sounds consistent.
-The 4 function too, both functions returns the same object, but... returning the right-hand object?, at least to me, it seems a bit odd.
-The 3 case sounds more illogical still.
+The 1st case looks good, both functions returns the same object, the left-hand object, in case of equality, sounds consistent.  
+The 4th function too, both functions returns the same object, but... returning the right-hand object?, at least to me, it seems a bit odd.  
+The 3rd case sounds more illogical still.
 
 But, what about the case 2?
 
-The answer lies in the concept of stability.
-Stability is a very common property of sorting algorithms.
-An stable algorithm preserves the relative order of equivalent objects.
+The answer lies in the concept of **stability**.  
+Surely you know the property of *stability* from  such as *sort*.
+An *stable algorithm* preserves the relative order of equivalent objects.
 
-But, have to do stability and sorting with *min* and *max*?
-“To see it, let us implement another function that could be done with two objects and a strict weak ordering on them, namely, a sorting function” [1]
+But, have to do *stability* and sorting with *min* and *max*?  
+*“To see it, let us implement another function that could be done with two objects and a strict weak ordering on them, namely, a sorting function”* [1]
 
 {% highlight cpp %}
 // Requires:
@@ -145,11 +137,12 @@ sort_2_wrong( ref a, ref b) {
 //Note: the swap function exchanges the values a and b.
 {% endhighlight %}
 
-sort_2_wrong has two problems:
-it does more work than necessary, because equivalent objects are swapped
-it is not stable, because the relative order of equivalent objects is not preserved.
+*sort_2_wrong* has two problems:
+
+- it does more work than necessary, because equivalent objects are swapped
+- it is not stable, because the relative order of equivalent objects is not preserved.
                     
-“Stability is an important property, and we should not abandon it without necessity. As a matter of fact, it is trivial to fix the problem by performing the swap only when the second object is strictly less than the first” [1]
+*“Stability is an important property, and we should not abandon it without necessity. As a matter of fact, it is trivial to fix the problem by performing the swap only when the second object is strictly less than the first”* [1]
                 
 {% highlight cpp %}
 // Requires:
@@ -177,8 +170,8 @@ In the code above, note the specification of the postcondition written as a comm
 a = min(a, b) and b = max(a, b)
 {% endhighlight %}
 
-But the postcondition does not hold. Our *min* function returns the second object and our *max* function returns the first one when both objects are equivalent.
-We need to make *min* and *max* stable [2]: 
+But the postcondition does not hold. Our *min* function returns the second object and our *max* function returns the first one when both objects are equivalent.  
+We need to make *min* and *max* *stable* [2]: 
 
 {% highlight cpp %}
 // Requires:
@@ -213,11 +206,11 @@ max(a, b, cmp) {
 
 You could argue, "Stability is not a property of the min (or max) function, according to its definition. So, if we add stability to min, it will become in another function, that is not min”
 
-Thoughts like this are wrong. 
-The first thing you have to think is: What is the definition of *min*? 
+Thoughts like this are wrong.  
+The first thing you have to think is: What is the definition of *min*?  
 Remember this is Computer Science.
 
-Think!. What are our options? 
+Think!. What are our options?  
 There are three ways a library can implement *min*:
 
 1. Anti-Stable
@@ -234,7 +227,7 @@ Do not make me guess or have to look at the implementation details of your API t
 
 We will see in the following articles some languages/libraries whose specification ​​is definitely wrong.
 
-**Conclusion**: Make *min* and *max* functions **stable**, and then, **consistent** with the other functions of your API. **Specify** their behavior in the library documentation.
+**Conclusion**: Make *min* and *max* functions **stable**, and so **consistent** with the other functions of your API. **Specify** their behavior in the library documentation.
 
 
 ---
