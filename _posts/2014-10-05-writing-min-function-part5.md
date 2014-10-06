@@ -89,18 +89,18 @@ Let’s analyze it:
 - max_e2 is the employee with higher salary between e1 and e4. Doing a similar analysis, in #2 “John” will be printed.
 
 Let's focus on the last two cases, where we have the equal or equivalent objects.
-Are our *min* and *max* functions correct? 
+Are our *min* and *max* functions correct?  
 What should they return in that case?
 
 You might wonder:  
-“Why worry about returning one or another object if both are equal?”
-In mathematics, this question makes sense, because for example in the natural numbers set, 14 is equal to 14, indeed they are identical, so in:
+“Why worry about returning one or another object if both are equal?”  
+In mathematics, this question makes sense, because for example, in the set of Natural numbers, 14 is equal to 14, indeed they are **identical**, so in:
 
-min(14, 14)
+    min(14, 14)
 
 returning the first 14 or the second 14 does not matter, because they are the same number.
 
-But, in computer science we deal with things that reside in memory (objects. In the computer, I can represent, for example, the chair where I'm sitting now. My chair maybe is equal to the chair next, but for sure they are not the same chair, they are not identical.
+But, in computer science we deal with things that reside in memory (objects. In the computer, I can represent, for example, the chair where I'm sitting now. My chair maybe is equal to the chair next, but for sure they are not the same chair, they are not identical.  
 So, in cases like this, it is important to distinguish exactly what to return.
 
 Let's look at what options we have for returning object in case of equality.
