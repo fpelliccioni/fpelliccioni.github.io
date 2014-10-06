@@ -130,7 +130,7 @@ But, what have to do *stability* and sorting with *min* and *max*?
 // Requires:
 //       a and b are of the same type, here called T,
 //  and, T models TotallyOrdered
-sort_2_wrong( ref a, ref b) {
+sort_2_wrong(ref a, ref b) {
     if (!(a < b)) swap(a, b)
 }
 //Note: ref if used for passing by reference
@@ -148,7 +148,7 @@ sort_2_wrong( ref a, ref b) {
 // Requires:
 //       a and b are of the same type, here called T,
 //  and, T models TotallyOrdered
-sort_2( ref a, ref b) {
+sort_2(ref a, ref b) {
     if (b < a) swap(a, b)
 }
 {% endhighlight %}
