@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "(DRAFT) - Writing min function, part 5: Stabilizing the algorithm"
+title:  "Writing min function, part 5: Stabilizing the algorithm"
 date:   2014-10-05 00:00:00
 comments: true
 ---
@@ -209,7 +209,7 @@ You could argue, "*Stability* is not a property of the *min* (or *max*) function
 
 Thoughts like this are wrong.  
 The first thing you have to think is: What is the definition of *min*?  
-Remember this is Computer Science.
+Remember, this is Computer Science, we deal non-identical things.
 
 Think!. What are our options?  
 There are three ways a library can implement *min*:
