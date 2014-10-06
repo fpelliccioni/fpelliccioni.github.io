@@ -218,8 +218,8 @@ There are three ways a library can implement *min*:
 2. Stable
 3. Random
 
-The Random version is obviously crazy and expensive.
-The Stable version is more useful and as efficient as the Anti-Stable version.
+The *random* way is obviously crazy and expensive.
+The *stable* way is more useful and as efficient as the *anti-stable* one.
 
 So, what would you choose?
 
