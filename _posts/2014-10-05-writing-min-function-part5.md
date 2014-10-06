@@ -124,7 +124,7 @@ Surely you know the property of *stability* from algorithms such as *sort*.
 An *stable algorithm* preserves the relative order of equivalent objects.
 
 But, what have to do *stability* and sorting with *min* and *max*?  
-*“To see it, let us implement another function that could be done with two objects and a strict weak ordering on them, namely, a sorting function”* [1]
+*“To see it, let us implement another function that could be done with two objects and a strict weak ordering on them, namely, a sorting function”* [[1]](#Ref1)
 
 {% highlight cpp %}
 // Requires:
@@ -142,7 +142,7 @@ sort_2_wrong( ref a, ref b) {
 - it does more work than necessary, because equivalent objects are swapped
 - it is not *stable*, because the relative order of equivalent objects is not preserved.
                     
-*“Stability is an important property, and we should not abandon it without necessity. As a matter of fact, it is trivial to fix the problem by performing the swap only when the second object is strictly less than the first”* [1]
+*“Stability is an important property, and we should not abandon it without necessity. As a matter of fact, it is trivial to fix the problem by performing the swap only when the second object is strictly less than the first”* [[1]](#Ref1)
                 
 {% highlight cpp %}
 // Requires:
@@ -172,7 +172,7 @@ a = min(a, b) and b = max(a, b)
 {% endhighlight %}
 
 But this postcondition never holds. Our *min* function returns the second object and our *max* function returns the first one when both objects are equivalent.  
-We need to make *min* and *max* *stable* [2]: 
+We need to make *min* and *max* *stable* [[2]](#Ref2): 
 
 {% highlight cpp %}
 // Requires:
@@ -248,5 +248,5 @@ We will see in the following articles some languages/libraries whose specificati
 
 ## References
 
-<a name="Ref1">[1]</a> Notes on Programming by Alexander Stepanov [2007, Pages 61-62]
+<a name="Ref1">[1]</a> Notes on Programming by Alexander Stepanov [2007, Pages 61-62]  
 <a name="Ref2">[2]</a> Note the use of the [Conditional operator](http://en.wikipedia.org/wiki/%3F:)
