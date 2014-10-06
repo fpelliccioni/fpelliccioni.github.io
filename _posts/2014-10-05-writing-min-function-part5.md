@@ -156,9 +156,10 @@ Now, we can see that there should be a relationship between *min*, *max* and *so
 
 {% highlight cpp %}
 // Type Requirement:
-//       a and b are of the same type, here called T,
-//  and, T models TotallyOrdered
-// *Postcondition*: a = min(a, b) and b = max(a, b)
+//            a and b are of the same type, here called T,
+//       and, T models TotallyOrdered
+// Postcondition: 
+//       a = min(a, b) and b = max(a, b)
 sort_2(ref a, ref b) {
     if (b < a) swap(a, b)
 }
