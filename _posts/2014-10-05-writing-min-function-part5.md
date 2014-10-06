@@ -64,13 +64,12 @@ usage_with_employees() {
 
     min_e1 := min(e1, e2, salary_comparator{})
     max_e1: = max(e1, e2, salary_comparator{})
-
     min_e2 := min(e1, e4, salary_comparator{})
     max_e2 := max(e1, e4, salary_comparator{})
 
     print(min_e1.name) //#1
-    print(min_e1.name) //#2
-    print(max_e2.name) //#3
+    print(max_e1.name) //#2
+    print(min_e2.name) //#3
     print(max_e2.name) //#4
 }
 {% endhighlight %}
