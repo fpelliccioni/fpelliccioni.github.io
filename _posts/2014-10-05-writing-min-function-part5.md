@@ -113,13 +113,13 @@ Let's look at what options we have for returning in case of equality of the obje
 Our *min/max* functions fall in the case number 3. But... why? Have we consciously designed in that way?  
 Which of these options is more correct?
 
-The 1st case looks good, both functions returns the same object, the left-hand object, in case of equality, sounds consistent.  
-The 4th function too, both functions returns the same object, but... returning the right-hand object?, at least to me, it seems a bit odd.  
+The 1st case looks good, both functions returns the same object in case of equality, the left-hand object. Sounds consistent.  
+The 4th function too, both functions returns the same object, but... they are returning the right-hand object... hmm, at least to me, it seems a bit odd.  
 The 3rd case sounds more illogical still.
 
 But, what about the case 2?
 
-The answer lies in the concept of **stability**.  
+The answer here lies in the concept of **stability**.  
 Surely you know the property of *stability* from  such as *sort*.
 An *stable algorithm* preserves the relative order of equivalent objects.
 
