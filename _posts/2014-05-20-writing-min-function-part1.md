@@ -3,6 +3,7 @@ layout: post
 title:  "Writing min function, part 1: The rise of Concepts"
 date:   2014-05-20 11:48:29
 comments: true
+tags: [stepanov, programming, components, generic, concepts, math, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel]
 ---
 
 This is the first in a series of articles in which I want to transmit what I learned (or what I think I learned) from the books, papers and lectures of Alexander Stepanov.

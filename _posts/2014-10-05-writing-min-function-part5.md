@@ -3,6 +3,7 @@ layout: post
 title:  "Writing min function, part 5: Stabilizing the algorithm"
 date:   2014-10-05 00:00:00
 comments: true
+tags: [stepanov, programming, components, generic, concepts, math, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel]
 ---
 
 This is the fifth article of the series called *"Writing min function"*.

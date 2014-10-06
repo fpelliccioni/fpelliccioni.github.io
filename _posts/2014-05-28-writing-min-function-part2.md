@@ -3,6 +3,7 @@ layout: post
 title:  "Writing min function, part 2: Understanding Concepts"
 date:   2014-05-28 11:48:29
 comments: true
+tags: [stepanov, programming, components, generic, concepts, math, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel]
 ---
 
 This is the second article of the series called *"Writing min function"*.
