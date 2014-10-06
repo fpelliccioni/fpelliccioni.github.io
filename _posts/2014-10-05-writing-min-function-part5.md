@@ -133,14 +133,14 @@ But, what have to do *stability* and sorting with *min* and *max*?
 sort_2_wrong( ref a, ref b) {
     if (!(a < b)) swap(a, b)
 }
-//Note: ref if used to pass by reference
+//Note: ref if used for passing by reference
 //Note: the swap function exchanges the values a and b.
 {% endhighlight %}
 
 *sort_2_wrong* has two problems:
 
 - it does more work than necessary, because equivalent objects are swapped
-- it is not stable, because the relative order of equivalent objects is not preserved.
+- it is not *stable*, because the relative order of equivalent objects is not preserved.
                     
 *“Stability is an important property, and we should not abandon it without necessity. As a matter of fact, it is trivial to fix the problem by performing the swap only when the second object is strictly less than the first”* [1]
                 
@@ -158,7 +158,7 @@ Now, we can see that there should be a relationship between *min*, *max* and *so
 // Type Requirement:
 //       a and b are of the same type, here called T,
 //  and, T models TotallyOrdered
-// Postcondition: a = min(a, b) and b = max(a, b)
+// *Postcondition*: a = min(a, b) and b = max(a, b)
 sort_2(ref a, ref b) {
     if (b < a) swap(a, b)
 }
