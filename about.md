@@ -4,7 +4,7 @@ permalink: /about/index.html
 <!-- title: About the Theme -->
 title: About me
 <!-- description: Balzac is a new, fluid & responsive theme for Jekyll (and AnchorCMS). It's gloriously beautiful and suited to long form. Built on a SCSS foundation, it's organized and awesome. -->
-tags: [about, Jekyll, theme, responsive]
+tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming]
 image:
   feature: soft-trees.jpg
 ---
