@@ -350,10 +350,11 @@ header.site-header nav {
     
     .featured-image {
         vertical-align: middle;
-        //min-height: 360px;
+        min-height: 360px;
         //height: 50vh;
+        height: 10vh;
         width: 100%;
-        //max-height: 800px;
+        max-height: 800px;
         background-position: center center;
         background-size: cover;
         vertical-align: middle;
@@ -363,9 +364,9 @@ header.site-header nav {
         position: relative;
         top: 0;
         z-index: -1;
-        //img {
-        //    max-height: 800px;
-        //}
+        img {
+            max-height: 800px;
+        }
     }
     
     // Header Stuff
