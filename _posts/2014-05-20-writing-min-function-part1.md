@@ -6,7 +6,7 @@ comments: true
 tags: [stepanov, programming, components, generic, concepts, math, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel]
 image:
   feature: typewriter_small.jpg
-  ---
+---
 
 This is the first in a series of articles in which I want to transmit what I learned (or what I think I learned) from the books, papers and lectures of Alexander Stepanov.
 
