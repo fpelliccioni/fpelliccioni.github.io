@@ -79,4 +79,4 @@ Stay tuned.
 ## References
 
 
-[Efficient Programming with Components: Lecture 4, Part 1](http://youtu.be/4pSqzrbjq4Q)
+[[1] Efficient Programming with Components: Lecture 4, Part 1](http://youtu.be/4pSqzrbjq4Q)
