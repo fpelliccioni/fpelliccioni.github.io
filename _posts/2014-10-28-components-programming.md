@@ -80,10 +80,3 @@ Stay tuned.
 
 
 [Efficient Programming with Components: Lecture 4, Part 1](http://youtu.be/4pSqzrbjq4Q)
-http://www.stepanovpapers.com/
-
-
-
-
-
-
