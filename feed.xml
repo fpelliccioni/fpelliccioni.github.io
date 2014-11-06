@@ -9,7 +9,7 @@ layout: none
     <link>{{ site.url }}</link>
     <image>
       <url>
-        http://0.gravatar.com/blavatar/4554b8d24c7f200dc5e2e1b18db1893f?s=96&d=http%3A%2F%2Fs2.wp.com%2Fi%2Fbuttonw-com.png
+        http://componentsprogramming.com/sutter.png
       </url>
       <title>{{ site.title }}</title>
       <link>{{ site.url }}</link>
