@@ -6,7 +6,7 @@ comments: true
 tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming]
 ---
 
-As you may have noticed, *Components Programming* is the name of this blog.  
+As you may have noticed, *Components Programming* is the name of [this blog](http://componentsprogramming.com/).  
 And perhaps you're wondering, what *Components Programming* means?
 
 It is convenient to clarify it now, since, in upcoming articles I want to test several programming languages to determine which ones are good for *Components Programming*.
