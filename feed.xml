@@ -7,6 +7,13 @@ layout: none
     <title>{{ site.title }}</title>
     <description>{{ site.tagline }}</description>
     <link>{{ site.url }}</link>
+    <image>
+      <url>
+        http://componentsprogramming.com/icon.png
+      </url>
+      <title>{{ site.title }}</title>
+      <link>{{ site.url }}</link>
+    </image>
     <atom:link href="{{ site.url }}/feed.links.xml" rel="self" type="application/rss+xml" />
     {% for post in site.posts limit:20 %}
       <item>
