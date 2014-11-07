@@ -8,7 +8,9 @@ tags: [components, programming, components programming, componentsprogramming, s
 
 The new book by Alexander Stepanov, and his colleague Daniel Rose, is about to go on sale.
 
-["From Mathematics to Generic Programming"](http://www.amazon.com/Mathematics-Generic-Programming-Alexander-Stepanov/dp/0321942043/).
+<a href="http://www.amazon.com/Mathematics-Generic-Programming-Alexander-Stepanov/dp/0321942043/">
+	<img src="/images/fmgp.jpg" alt="Drawing" style="width: 50%; height:80%;" />
+</a>
 
 The book is based on the ["Algorithmic Journeys"](http://www.stepanovpapers.com/) course taught by Alex at A9.
 
@@ -17,7 +19,7 @@ It combines mathematics, programming and history in a gorgeous and unique way. (
 It is a pleasure to read.
 
 I enjoyed reading it the same way I enjoyed watching the videos of the course.  
-I absolutely recommend it for all programmers who love their profession.
+I strongly recommend it for all programmers who love their profession.
 
 You can pre order it on [Amazon here](http://www.amazon.com/Mathematics-Generic-Programming-Alexander-Stepanov/dp/0321942043/).
 
