@@ -8,48 +8,6 @@ image:
   feature: typewriter_small.jpg
 ---
 
-Are you a programmer? I think so.
-As programmers, we write code that must satisfy certain purpose
-but we do not write the code in the air. 
-We write code to be executed on a machine.
-
-An algorithm can be thought of in the abstract, without thinking of a particular machine where the algorithm is executed.
-But at some point, as programmers, we will translate the algorithm to code and we will make it run on a machine.
-
-If you are a serious programmer, surely you are interested in the efficiency of your code. If you're not, you can skip reading the rest of the article.
-
-So, if performance is important to you, you must know your machine and you must know the internals of your programming language.
-
-Why should I care about the details of my machine if high-level programming languages are designed to abstract from it?
-
-I hope that after reading this article it will be clear that you should know these details.
-So, let's start.
-
-I want to write a simple program, run it using different programming languages, and then analyze memory consumption and memory layout.
-Here is the program in my pseudo-language:
-
-
-The program consists of a main function (entry-point) in which is created an object of type "test".
-The test class has three data members (or Fields, in order to use Java/C# jargons):
-	- a: it is 32-bits natural number (like C/C++'s uint32_t). It is set to 88FF7799 (base16)
-	- employees: it is a sequence of elements of type "employee".
-	             The employees sequence is filled with three elements.
-	- b: it is 32-bits natural number. It is set to 12345678 (base16)
-The employee class has two data members:
-	- id: it is 32-bits natural number
-	- other: it is 32-bits natural number
-
-Note: "array" is a data structure that stores elements contiguosly in memory.
-	  The size of the sequence is dynamic, it is resizable.
-	  Equivalents: C++ std::vector, .Net List<T>, Java ArrayList<T>		 
-
-For example it is not necessary runtime polymorphism neither runtime type introspection (aka Reflection).
-For simplicity all the data members are public.
-
-
-Now, let's code in real programming languages:
-
-
 
 
 
