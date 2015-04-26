@@ -28,21 +28,6 @@ So, let's start.
 I want to write a simple program, run it using different programming languages, and then analyze memory consumption and memory layout.
 Here is the program in my pseudo-language:
 
-{% highlight cpp %}
-class employee {
-public:
-	id: natural32
-	other: natural32	
-}
-
-
-//program entry-point
-main() {	
-	tc := test{}
-	//measure here!
-}
-{% endhighlight %}
-
 
 The program consists of a main function (entry-point) in which is created an object of type "test".
 The test class has three data members (or Fields, in order to use Java/C# jargons):
