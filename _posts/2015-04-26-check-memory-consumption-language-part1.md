@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Check the memory consumption of your language, part 1: Introduction"
-date:   2014-05-20 11:48:29
+date:   2015-04-26 11:48:29
 comments: true
 tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, efficient, efficiency, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming]
 image:
