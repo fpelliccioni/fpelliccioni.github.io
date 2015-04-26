@@ -35,12 +35,6 @@ public:
 	other: natural32	
 }
 
-class test {
-public:
-	a: natural32 := 0x88FF7799
-	employees: array<employee> := { {0xA1B2C3D4, 0x11223344}, {0x92817348, 0x96161728}, {0x61592308, 0xa8857472 } }
-	b: natural32 := 0x12345678
-}
 
 //program entry-point
 main() {	
