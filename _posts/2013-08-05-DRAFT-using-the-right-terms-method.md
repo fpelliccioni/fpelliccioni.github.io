@@ -224,7 +224,7 @@ Java
     Identifier ( [FormalParameterList] ) [Dims]
     The following production from §4.3 is shown here for convenience:
     Dims:
-    {Annotation} [ ] {{Annotation} [ ]}
+    
     The FormalParameterList is described in §8.4.1, the MethodModifier clause in §8.4.3, the TypeParameters clause in §8.4.4, the Result clause in §8.4.5, the Throws clause in §8.4.6, and the MethodBody in §8.4.7.
     The Identifier in a MethodDeclarator may be used in a name to refer to the method (§6.5.7.1, §15.12).
     It is a compile-time error for the body of a class to declare as members two methods with override-equivalent signatures (§8.4.2).
