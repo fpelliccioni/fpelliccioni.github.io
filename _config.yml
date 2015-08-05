@@ -38,9 +38,29 @@ tools:
   standards:      "HTML, SCSS, Jekyll"
   software:       "git"
 
+
+
+defaults:
+  -
+    scope:
+      path: _posts/en
+    values:
+      layout: default
+      lang: en
+  -
+    scope:
+      path: _posts/es
+    values:
+      layout: default
+      lang: es
+
+
+
 # Links to include in top navigation
 # For external links add external: true
 links:
+  - title: Spanish
+    url: /spanish
   - title: About
     url: /about
   - title: Github
