@@ -58,8 +58,6 @@ defaults:
 # Links to include in top navigation
 # For external links add external: true
 links:
-  - title: Spanish
-    url: /spanish
   - title: About
     url: /about
   - title: Github
