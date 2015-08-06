@@ -66,17 +66,17 @@ defaults:
       desc: "Personnal website mostly about programming in Python, Ruby, TeX, R..."
 
 
-# Links to include in top navigation
-# For external links add external: true
-links:
-  - title: About
-    url: /about
-  - title: Github
-    url: https://github.com/fpelliccioni/componentsprogramming
-    external: true
-#  - title: Cole Who?
-#    url: http://coletownsend.com
-#    external: true
+# # Links to include in top navigation
+# # For external links add external: true
+# links:
+#   - title: About
+#     url: /about
+#   - title: Github
+#     url: https://github.com/fpelliccioni/componentsprogramming
+#     external: true
+# #  - title: Cole Who?
+# #    url: http://coletownsend.com
+# #    external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    America/Argentina/Buenos_Aires
