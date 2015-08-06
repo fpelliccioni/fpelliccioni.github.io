@@ -1,10 +1,7 @@
 en:
   logo:
-    title: "sylvain durand"
+    title: "home"
     url:   "/"
-  journal:
-    title: "journal"
-    url:   "/index.html"
   about:
     title: "about"
     url:   "/about/"
@@ -14,14 +11,11 @@ en:
     external: true    
 es:
   logo:
-    title: "sylvain durand"
-    url:   "/journal/"
-  journal:
-    title: "journal"
-    url:   "/journal/"
+    title: "inicio"
+    url:   "/inicio/"
   about:
-    title: "à propos"
-    url:   "/a-propos/"
+    title: "acerca de"
+    url:   "/acerca-de/"
   github: 
     title: Github
     url:   https://github.com/fpelliccioni/componentsprogramming
