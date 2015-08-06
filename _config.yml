@@ -1,0 +1,45 @@
+permalink: /:title/
+base: http://www.sylvaindurand.org
+
+markdown: redcarpet
+redcarpet:
+  extensions: ['smart', 'superscript']
+
+gems:
+  - jekyll-redirect-from
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      lang: en
+      layout: default
+  -
+    scope:
+      path: _posts/fr
+    values:
+      lang: fr
+  -
+    scope:
+      path: _posts/fr/pages
+    values:
+      type: pages
+      desc: "Site personnel traitant essentiellement de programmation en Python, Ruby, TeX, R..."
+  -
+    scope:
+      path: _posts/en/pages
+    values:
+      type: pages
+      desc: "Personnal website mostly about programming in Python, Ruby, TeX, R..."
+
+  -
+    scope:
+      path: _posts/fr/projects
+    values:
+      type: projects
+  -
+    scope:
+      path: _posts/en/projects
+    values:
+      type: projects
