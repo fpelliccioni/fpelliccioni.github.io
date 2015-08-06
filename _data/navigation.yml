@@ -8,6 +8,10 @@ en:
   about:
     title: "about"
     url:   "/about/"
+  github: 
+    title: Github
+    url:   https://github.com/fpelliccioni/componentsprogramming
+    external: true    
 es:
   logo:
     title: "sylvain durand"
@@ -18,3 +22,7 @@ es:
   about:
     title: "à propos"
     url:   "/a-propos/"
+  github: 
+    title: Github
+    url:   https://github.com/fpelliccioni/componentsprogramming
+    external: true  
