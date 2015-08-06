@@ -52,7 +52,18 @@ defaults:
       path: _posts/es
     values:
       lang: es
-
+  -
+    scope:
+      path: _posts/es/pages
+    values:
+      type: pages
+      desc: "Site personnel traitant essentiellement de programmation en Python, Ruby, TeX, R..."
+  -
+    scope:
+      path: _posts/en/pages
+    values:
+      type: pages
+      desc: "Personnal website mostly about programming in Python, Ruby, TeX, R..."
 
 
 # Links to include in top navigation
