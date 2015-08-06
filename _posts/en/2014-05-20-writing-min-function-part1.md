@@ -1,5 +1,6 @@
 ---
 layout: post
+type: post
 title:  "Writing min function, part 1: The rise of Concepts"
 name: writingmin1
 date:   2014-05-20 11:48:29

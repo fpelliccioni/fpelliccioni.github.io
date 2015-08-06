@@ -1,5 +1,6 @@
 ---
 layout: post
+type: post
 title:  "Components Programming"
 date:   2014-10-28 00:00:00
 comments: true

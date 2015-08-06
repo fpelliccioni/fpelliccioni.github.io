@@ -1,5 +1,6 @@
 ---
 layout: post
+type: post
 title:  "Writing min function, part 2: Understanding Concepts"
 date:   2014-05-28 11:48:29
 comments: true

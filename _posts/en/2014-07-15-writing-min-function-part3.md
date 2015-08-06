@@ -1,5 +1,6 @@
 ---
 layout: post
+type: post
 title:  "Writing min function, part 3: Weakening the ordering"
 date:   2014-07-15 08:39:29
 comments: true

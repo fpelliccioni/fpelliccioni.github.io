@@ -43,15 +43,14 @@ tools:
 defaults:
   -
     scope:
-      path: _posts/en
+      path: ""
     values:
-      layout: default
       lang: en
+      layout: default
   -
     scope:
       path: _posts/es
     values:
-      layout: default
       lang: es
 
 

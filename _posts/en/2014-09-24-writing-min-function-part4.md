@@ -1,5 +1,6 @@
 ---
 layout: post
+type: post
 title:  "Writing min function, part 4: Const-Correctness"
 date:   2014-09-24 12:10:00
 comments: true

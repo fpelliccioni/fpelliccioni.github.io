@@ -1,5 +1,6 @@
 ---
 layout: post
+type: post
 title:  "Writing min function, part 5: Stabilizing the algorithm"
 date:   2014-10-05 12:00:00
 comments: true

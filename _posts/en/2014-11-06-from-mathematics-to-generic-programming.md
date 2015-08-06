@@ -1,5 +1,6 @@
 ---
 layout: post
+type: post
 title:  "Stepanov's new book: From Mathematics to Generic Programming"
 date:   2014-11-06 00:00:00
 comments: true
