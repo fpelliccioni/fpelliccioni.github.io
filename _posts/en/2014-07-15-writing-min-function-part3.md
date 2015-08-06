@@ -17,7 +17,7 @@ So in this article I will write code in [C++](http://www.open-std.org/jtc1/sc22/
 But, don't worry if you're not a C++ programmer, the code will be easy to understand, and, the ideas that I want to talk here are very important for programming algorithms, beyond the programming language.  
 Later on, I will try to write the same code (and analyze it) using another programming languages.
 
-This is the C++ equivalent of the min function code from [Part 2]({% post_url 2014-05-28-writing-min-function-part2 %}):
+This is the C++ equivalent of the min function code from [Part 2]({% post_url en/2014-05-28-writing-min-function-part2 %}):
 
 {% highlight cpp %}
 //Note 1: this code is Concept-enabled C++.
@@ -28,7 +28,7 @@ T const& min(T const& a, T const& b) {
   return b;
 }
 {% endhighlight %}
-(We will see how to **define** the *TotallyOrdered* concept in C++ later. For now, think in the mathematical definition presented [before]({% post_url 2014-05-20-writing-min-function-part1 %})  )
+(We will see how to **define** the *TotallyOrdered* concept in C++ later. For now, think in the mathematical definition presented [before]({% post_url en/2014-05-20-writing-min-function-part1 %})  )
 
 And we use it in this way:
 
@@ -222,7 +222,7 @@ Then, the *trichotomy* axiom does not hold, that is, the salary_comparator relat
 So, what kind of *ordering relation* should be our *Comparator*?
 
 *Partial Ordering*?  
-No, we saw in [Part 1]({% post_url 2014-05-20-writing-min-function-part1 %}) that *Partial Ordering* is **too weak** to define min.
+No, we saw in [Part 1]({% post_url en/2014-05-20-writing-min-function-part1 %}) that *Partial Ordering* is **too weak** to define min.
 We need something between *Partial* and *Total Ordering*: what we need is called [**Weak Ordering**[1]](#Ref1).
 
 Roughly speaking, *weak ordering* says that if r(a, b) and r(b, a) are false, then, a and b are **equivalents**.
@@ -254,11 +254,11 @@ You can get the complete source code on my [Github repository](https://github.co
 
 ## The Series
 
-&nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url 2014-05-20-writing-min-function-part1 %})  
-&nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url 2014-05-28-writing-min-function-part2 %})  
-&nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url 2014-07-15-writing-min-function-part3 %})  
-&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url 2014-09-24-writing-min-function-part4 %})  
-&nbsp;&nbsp;&nbsp;[Part 5: Stabilizing the algorithm]({% post_url 2014-10-05-writing-min-function-part5 %})  
+&nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url en/2014-05-20-writing-min-function-part1 %})  
+&nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url en/2014-05-28-writing-min-function-part2 %})  
+&nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url en/2014-07-15-writing-min-function-part3 %})  
+&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url en/2014-09-24-writing-min-function-part4 %})  
+&nbsp;&nbsp;&nbsp;[Part 5: Stabilizing the algorithm]({% post_url en/2014-10-05-writing-min-function-part5 %})  
 
 
 ---

@@ -39,7 +39,7 @@ void usage_with_mutable_objects() {
 }
 {% endhighlight %}
 
-(*employee* and *salary_comparator* were defined in [Part 3]({% post_url 2014-07-15-writing-min-function-part3 %}))
+(*employee* and *salary_comparator* were defined in [Part 3]({% post_url en/2014-07-15-writing-min-function-part3 %}))
 
 In #1 we get a compile-time error, but, why?  
 Remember our last version of the min function:
@@ -250,11 +250,11 @@ I didn’t want to make an article explaining Const-Correctness so long, because
 
 ## The Series
 
-&nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url 2014-05-20-writing-min-function-part1 %})  
-&nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url 2014-05-28-writing-min-function-part2 %})  
-&nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url 2014-07-15-writing-min-function-part3 %})  
-&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url 2014-09-24-writing-min-function-part4 %})  
-&nbsp;&nbsp;&nbsp;[Part 5: Stabilizing the algorithm]({% post_url 2014-10-05-writing-min-function-part5 %})  
+&nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url en/2014-05-20-writing-min-function-part1 %})  
+&nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url en/2014-05-28-writing-min-function-part2 %})  
+&nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url en/2014-07-15-writing-min-function-part3 %})  
+&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url en/2014-09-24-writing-min-function-part4 %})  
+&nbsp;&nbsp;&nbsp;[Part 5: Stabilizing the algorithm]({% post_url en/2014-10-05-writing-min-function-part5 %})  
 
 
 ---
