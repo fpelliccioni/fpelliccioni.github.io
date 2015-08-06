@@ -17,12 +17,12 @@ defaults:
       layout: default
   -
     scope:
-      path: _posts/fr
+      path: _posts/es
     values:
-      lang: fr
+      lang: es
   -
     scope:
-      path: _posts/fr/pages
+      path: _posts/es/pages
     values:
       type: pages
       desc: "Site personnel traitant essentiellement de programmation en Python, Ruby, TeX, R..."
@@ -35,7 +35,7 @@ defaults:
 
   -
     scope:
-      path: _posts/fr/projects
+      path: _posts/es/projects
     values:
       type: projects
   -
