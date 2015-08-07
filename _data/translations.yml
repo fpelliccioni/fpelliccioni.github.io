@@ -1,8 +1,12 @@
 en:
+  recent_posts: "Recent Posts"
+  contact_me: "Contact Me"
   created: "Published on the"
   author: "by"
   description: "Personal website, made with real pieces of code: articles about Jekyll, Raspberry Pi, R..."
 es:
+  recent_posts: "Artículos recientes"
+  contact_me: "Contactame"
   created: "Publié le"
   author: "par"
   description: "Site personnel, avec des vrais bouts de code dedans : articles sur Jekyll, Raspberry Pi, R..."

@@ -117,7 +117,7 @@ MathJax.Hub.Queue(function() {
     <header class="site-header">
       <div class="wrap">
         <hgroup>
-          <h1><a href="/">HEAD NO DARK -- {{ page.lang }} --  {{ site.title }}</a></h1>
+          <h1><a href="/">{{ site.title }}</a></h1>
         </hgroup>
         <a href="#nav" class="menu"><span class='icons'>☰</span></a>
 
@@ -154,17 +154,11 @@ MathJax.Hub.Queue(function() {
 
             <li>
               {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
-              HOLA
-              <!-- {{ site.posts }}  -->
-              {{ page.date }}
-              HOLA
-              
+
+<!--               {{ page.lang }}
+              {{ post.lang }} -->
 
               {% for post in posts %}
-                {{ page.lang }} 
-                {{ post.lang }} 
-
-
                 {% if page.lang != post.lang %}
                   {% if page.lang == "en" %}
                   <a href="{{ post.url }}" class="{{ post.lang }}">Español</a>
@@ -175,12 +169,6 @@ MathJax.Hub.Queue(function() {
               {% endfor %}
             </li>
           </ul>
-
         </nav>
-
-
-
-
-
       </div>
     </header>

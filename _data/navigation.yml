@@ -4,18 +4,18 @@ en:
     url:   "/"
   about:
     title: "about"
-    url:   "/about/"
+    url:   "/about-me/"
   github: 
     title: Github
     url:   https://github.com/fpelliccioni/componentsprogramming
-    external: true    
+    external: true
 es:
   logo:
     title: "inicio"
     url:   "/inicio/"
   about:
     title: "acerca de"
-    url:   "/acerca/"
+    url:   "/acerca-de/"
   github: 
     title: Github
     url:   https://github.com/fpelliccioni/componentsprogramming
