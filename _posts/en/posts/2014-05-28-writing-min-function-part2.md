@@ -9,7 +9,7 @@ tags: [components, programming, components programming, componentsprogramming, s
 
 This is the second article of the series called *"Writing min function"*.
 
-I want complete the *min* function and fix the mistakes mentioned in the [previous post]({% post_url en/2014-05-20-writing-min-function-part1 %}). But first, we have to understand *Concepts*, so let's review the last version of the function with its requirements.
+I want complete the *min* function and fix the mistakes mentioned in the [previous post]({% post_url en/posts/2014-05-20-writing-min-function-part1 %}). But first, we have to understand *Concepts*, so let's review the last version of the function with its requirements.
 
 
 {% highlight cpp %}
@@ -121,11 +121,11 @@ In the next post I will write some code. Be patient!
 
 ## The Series
 
-&nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url en/2014-05-20-writing-min-function-part1 %})  
-&nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url en/2014-05-28-writing-min-function-part2 %})  
-&nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url en/2014-07-15-writing-min-function-part3 %})  
-&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url en/2014-09-24-writing-min-function-part4 %})  
-&nbsp;&nbsp;&nbsp;[Part 5: Stabilizing the algorithm]({% post_url en/2014-10-05-writing-min-function-part5 %})  
+&nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url en/posts/2014-05-20-writing-min-function-part1 %})  
+&nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url en/posts/2014-05-28-writing-min-function-part2 %})  
+&nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url en/posts/2014-07-15-writing-min-function-part3 %})  
+&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url en/posts/2014-09-24-writing-min-function-part4 %})  
+&nbsp;&nbsp;&nbsp;[Part 5: Stabilizing the algorithm]({% post_url en/posts/2014-10-05-writing-min-function-part5 %})  
 
 
 ---

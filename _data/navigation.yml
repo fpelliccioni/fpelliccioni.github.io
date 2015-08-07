@@ -15,7 +15,7 @@ es:
     url:   "/inicio/"
   about:
     title: "acerca de"
-    url:   "/acerca-de/"
+    url:   "/acerca/"
   github: 
     title: Github
     url:   https://github.com/fpelliccioni/componentsprogramming

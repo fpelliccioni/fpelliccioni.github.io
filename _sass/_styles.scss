@@ -1,3 +1,5 @@
+
+
 /************ Basic *************/
 
 body {
@@ -243,7 +245,7 @@ header.site-header {
 }
 
 #bump .darken {
-      
+
       a {
       color: $black;
       @include transit(all, .2s, ease-in-out);
@@ -258,6 +260,7 @@ header.site-header {
           color: $black;
       }
       
+      
       nav ul li a {
             color: $black;
             &:active {
@@ -269,6 +272,10 @@ header.site-header {
             }
         }
 
+      nav ul .lang {
+            float: right
+        }        
+      
 }
 
 

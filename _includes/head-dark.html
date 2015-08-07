@@ -58,12 +58,12 @@
     <header class="site-header darken">
       <div class="wrap">
         <hgroup>
-          <h1><a href="/">{{ site.title }}</a></h1>
+          <h1><a href="/">HEAD DARK -- {{ page.lang }} -- {{ site.title }}</a></h1>
         </hgroup>
         <a href="#nav" class="menu"><span class='icons'>☰</span></a>
         <nav role="navigation">
 
-          
+
 <!--           <ul>
             <li>
               <a href="/" title="{{ site.title }}">Home</a>
@@ -73,19 +73,41 @@
                 <li><a href="{% if link.external %}{{ link.url }}{% else %}{{ site.url }}{{ link.url }}{% endif %}" {% if link.external %}target="_blank"{% endif %}>{{ link.title }}</a></li>
             {% endfor %}
 
-          </ul> -->
-
+          </ul>
+ -->
 
           <ul>
             {% for menu in site.data.navigation[page.lang] %}
               <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
             {% endfor %}
-            <li class="lang">
+
+            <li>
+              {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
+
+              HOLA
+              <!-- {{ site.posts }}  -->
+              {{ page.date }}
+              HOLA
+              
+              {% for post in posts %}
+                {% if page.lang != post.lang %}
+                  {% if page.lang == "en" %}
+                  <a href="{{ post.url }}" class="{{ post.lang }}">Español</a>
+                  {% else %}
+                  <a href="{{ post.url }}" class="{{ post.lang }}">English</a>
+                  {% endif %}
+                {% endif %}
+                <!-- <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a> -->
+              {% endfor %}
+            </li>
+
+
+<!--             <li class="lang">
               {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
               {% for post in posts %}
                 <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
               {% endfor %}
-            </li>
+            </li> -->
           </ul>
 
         </nav>
