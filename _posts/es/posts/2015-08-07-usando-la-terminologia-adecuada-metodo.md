@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "DRAFT - Using the right terms: Method?"
+title:  "Usando la terminología adecuada: ¿Método?"
 date:   2013-08-05 12:00:00
 comments: true
 
-description: "Portland in shoreditch Vice, labore typewriter pariatur hoodie fap sartorial Austin. Pinterest literally occupy Schlitz forage."
+# description: "Portland in shoreditch Vice, labore typewriter pariatur hoodie fap sartorial Austin. Pinterest literally occupy Schlitz forage."
 category: spanish
 
 tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp]
@@ -12,21 +12,43 @@ tags: [components, programming, components programming, componentsprogramming, s
 
 
 
-(REVISIONISMO)
+En esta serie de artículos mi intensión es revisar por qué los programadores usamos cierta terminología, ciertas palabras, algunas de las cuales considero inadecuadas.  
+En este caso quiero hablar sobre la palabra _método_ (_method_ en inglés).
 
-En esta serie de articulos mi intension es revisar por qué algunos programadores usamos cierta terminologia, ciertas palabras, algunas de las cuales, considero inadecuadas.
-En este caso quiero hablar sobre la palabra "method".
+Antes que nada...
 
-Algunos colegas mios, más que nada colegas con background en Java o .Net suelen usar esta palabra, como por ejemplo: "Escribí un método que tome una fecha y retorne un string con el nombre del día".
-Yo me pregunto: ¿Por qué decimos "metodo" y no utilizamos otra palabra como "procedimiento", "función", etc?
+## ¿Qué es un _método_?
 
-Cuando yo empecé a programar, casi nadie usaba la palabra "metodo" y de repente ahora es muy común.
+(En el contexto de la programación, obviamente)
+Cualquier programador moderno sabe que un _objeto_ tiene _estado_ y _comportamiento_.
+El estado se almacena en _campos_ (_fields_ en inglés) y el comportamiento se logra a través de _métodos_.
+
+Ejemplo en pseudo-código:
+
+{% highlight cpp %}
+class empleado {
+  sueldo : real
+
+  trabajar() {
+    //...
+  }
+}
+{% endhighlight %}
+
+En el ejemplo de arriba, un empleado tiene un sueldo (estado) y realiza acciones, como "trabajar" (comportamiento). "trabajar" es un _método_.
+El método trabajar no tiene código, pero si lo tuviese, el código sería <span class="underline">una secuencia de acciones con el fin de lograr cierto objetivo</span>, en este caso... trabajar :)
+
+Recuerdo que cuando mi padre me enseño a programar, hace casi 30 años, no me enseñó lo que es un método, él no usaba esa palabra y supongo que la mayoría de los programadores de la época tampoco la usaban.
+usaba la palabra "metodo" y de repente ahora es muy común.
 Pero, antes de continuar con mi conjetura, me gustaría repasar (muy burdamente) sobre teoría de objetos.
 
-¿Qué es un método?
+Algunos de mis colegas, más que nada colegas con background en Java o .Net suelen usar esta palabra, como por ejemplo: "Escribí un método que tome una fecha y retorne un string con el nombre del día".
+Yo me pregunto: ¿Por qué decimos "metodo" y no utilizamos otra palabra como "procedimiento", "función", etc?
 
-Cualquier programador Java o C# (y otros lenguajes) le diría que un objeto tiene estado y comportamiento.
-El estado se almacena en Fields y el comportamiento shown via Métodos.
+
+
+
+
 
 
 O sea, un método es un procedimiento, funcion, routine, subroutine, pero que está incluido dentro de una clase en particular.

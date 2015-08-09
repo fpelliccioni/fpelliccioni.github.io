@@ -85,6 +85,11 @@ future:      true
 highlighter: pygments			#Python bases syntax highlighter
 markdown:    kramdown			#Default
 # markdown:    redcarpet			#Used by this blog ... http://gastonsanchez.com/blog/opinion/2014/02/16/Mathjax-with-jekyll.html ... to suport Latex
+# redcarpet:
+#   extensions: ["underline"]
+#   # extensions: ["smart", "tables", "no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", "with_toc_data"]
+
+
 
 kramdown:
   auto_ids: true
