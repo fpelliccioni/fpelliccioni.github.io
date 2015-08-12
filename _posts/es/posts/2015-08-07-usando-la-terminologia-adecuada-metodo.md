@@ -1,5 +1,6 @@
 ---
 layout: post
+type: post
 title:  "Usando la terminología adecuada: ¿Método?"
 date:   2013-08-05 12:00:00
 comments: true
