@@ -151,7 +151,7 @@ Para rastrear el origen de la palabra "método" he hecho una búsqueda en la bib
   - [Elements of Programming](http://www.elementsofprogramming.com/) by Alexander A. Stepanov and Paul McJones
   - The Art of Computer Programming Volumes 1, 2, 3 and 4A by Donald E. Knuth
 
-En ninguna de las 3.456 páginas de estos 5 libros he encontrado la palabra "método" haciendo referencia a un "procedimiento". Obviamente la palabra "método" parece en varias oportunidades, pero no en el sentido que estoy buscando.
+En ninguna de las 3.456 páginas de estos 5 libros he encontrado la palabra "método" haciendo referencia a un "procedimiento". Obviamente la palabra "método" aparece en varias oportunidades, pero no en el sentido que estoy buscando.
 
 
 ## Conclusiones
