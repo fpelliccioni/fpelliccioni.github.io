@@ -148,7 +148,7 @@ Objective-C cuenta con el concepto de mensajes y también el de método. [[10]](
 
 Para rastrear el origen de la palabra "método" he hecho una búsqueda en la bibliografía (sobre programación en general) que tengo a mi disposición, textos que considero clásicos.
 
-  - Elements of Programming by Alexander A. Stepanov and Paul McJones
+  - [Elements of Programming](http://www.elementsofprogramming.com/) by Alexander A. Stepanov and Paul McJones
   - The Art of Computer Programming Volumes 1, 2, 3 and 4A by Donald E. Knuth
 
 En ninguna de las 3.456 páginas de estos 5 libros he encontrado la palabra "método" haciendo referencia a un "procedimiento". Obviamente la palabra "método" parece en varias oportunidades, pero no en el sentido que estoy buscando.
@@ -180,7 +180,7 @@ Usted use el término que más le guste, yo me voy a seguir usando **procedimien
 <a name="Ref1">[1]</a> Aquí nos referimos a la definición de "objeto" en el contexto de la _Programación Orientada a Objetos_:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]  
 Que difiere de la definición de "objeto" dada en:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elements of Programming of Alexander Stepanov and Paul McJones by Stepanov and McJones [2009, page 4]  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Elements of Programming](http://www.elementsofprogramming.com/) of Alexander Stepanov and Paul McJones by Stepanov and McJones [2009, page 4]  
 Esta última definición es la preferida por el autor del blog, en caso de que no se aclare a cuál de las dos definiciones se hace referencia, el lector debe asumir que se está hablando de la definición dada por Stepanov.
 
 <a name="Ref2">[2]</a> Definición simplificada, para una definición más detallada referirse a:  
@@ -193,7 +193,10 @@ Esta última definición es la preferida por el autor del blog, en caso de que n
 <a name="Ref5">[5]</a> Hay muy poca bibliografía disponible acerca del lenguaje, pero [aquí](http://www.edelweb.fr/Simula/) pueden encontrar un excelente trabajo de recopilación de viejos manuales.  
 
 <a name="Ref6">[6]</a> Lenguajes muy influyentes como Fortran, Algol y C no hacen mención a la palabra "método" en sus especificaciones / manuales.
-
+Si desea documentación sobre estos lenguajes:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- FORTRAN y ALGOL: [Paul McJones](http://www.softwarepreservation.org/author/pmcjones), miembro del [Software Preservation Group](http://www.softwarepreservation.org/) y coautor de [Elements of Programming](http://www.elementsofprogramming.com/), ha hecho un excelente trabajo recopilando código, manuales, documentos, tanto de [FORTRAN](http://www.softwarepreservation.org/projects/FORTRAN/) como [ALGOL](http://www.softwarepreservation.org/projects/ALGOL/).  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- C: Referirse a [ISO/IEC JTC1/SC22/WG14 - The international standardization working group for the programming language C](http://www.open-std.org/JTC1/SC22/WG14/) 
+ 
 <a name="Ref7">[7]</a> [ANSI Smalltalk Standard v1.9 199712 NCITS X3J20 draft](http://smalltalk.org/versions/ANSISmalltalk/ANSISmalltalkStandard_v1.9_199712_NCITS_X3J20_draft.pdf), Section 3.1 [page 9]
 
 <a name="Ref8">[8]</a> Se especifica en:  
