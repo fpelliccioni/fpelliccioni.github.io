@@ -2,7 +2,7 @@
 layout: post
 type: post
 title:  "Usando la terminología adecuada: ¿Método?"
-date:   2013-08-05 12:00:00
+date:   2015-08-12 12:00:00
 comments: true
 
 # description: "Portland in shoreditch Vice, labore typewriter pariatur hoodie fap sartorial Austin. Pinterest literally occupy Schlitz forage."
