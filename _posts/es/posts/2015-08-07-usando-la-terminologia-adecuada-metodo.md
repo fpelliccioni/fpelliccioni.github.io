@@ -38,13 +38,13 @@ Me sigo preguntando, ...
 
 ### ¿Por qué usamos el término "_método_" y no "_procedimiento_"?
 
-Mi deducción es que con el establecimiento de [Java](https://es.wikipedia.org/wiki/Java_(lenguaje_de_programaci%C3%B3n)) como uno de los lenguajes de programación más populares, también se produjo la popularización de su terminología.
+Mi deducción es que con el establecimiento de [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) como uno de los lenguajes de programación más populares, también se produjo la popularización de su terminología.
 
 Quiero ahora hacer una búsqueda a través de la historia de los lenguajes de programación para entender por qué comenzamos a llamar "método" a los "procedimientos". Voy a ir desde tiempos más modernos a tiempos más remotos...
 
 ### Java
 
-En [Java](https://es.wikipedia.org/wiki/Java_(lenguaje_de_programaci%C3%B3n)), no existen los _procedimientos libres_, todos los procedimientos deben ser miembro de una clase, estos procedimientos miembro efectivamente se llaman métodos.
+En [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), no existen los _procedimientos libres_, todos los procedimientos deben ser miembro de una clase, estos procedimientos miembro efectivamente se llaman métodos.
 
 Según la [especificación de Java 8 [3]](#Ref3):
 
@@ -55,11 +55,11 @@ La especificación de Java describe la relación entre un método y una clase, a
 
 Más allá de la definición, en la especificación no vamos a encontrar por qué los diseñadores del lenguaje decidieron llamar "método" a los procedimientos, así que debemos ir más atrás.
 
-Java hereda la mayor parte de su sintáxis (no así su semántica) y terminología de [C++](https://es.wikipedia.org/wiki/C%2B%2B).
+Java hereda la mayor parte de su sintaxis (no así su semántica) y terminología de [C++](https://en.wikipedia.org/wiki/C%2B%2B).
 
 ### C++
 
-[C++](https://es.wikipedia.org/wiki/C%2B%2B) nace, a finales de la década de 1970, como un super-conjunto del [lenguaje de programación C](https://es.wikipedia.org/wiki/C_(lenguaje_de_programaci%C3%B3n)) con el agregado tecnología de objetos.
+[C++](https://en.wikipedia.org/wiki/C%2B%2B) nace, a finales de la década de 1970, como un súper-conjunto del [lenguaje de programación C](https://en.wikipedia.org/wiki/C_(programming_language)) con el agregado tecnología de objetos.
 
 Por lo tanto, en C++ tenemos procedimientos miembros y libres, denominados _member_ y _non-member functions_.
 
@@ -79,9 +79,9 @@ C++ hereda su "parte" de objetos del [lenguaje de programación Simula](https://
 [Simula](https://en.wikipedia.org/wiki/Simula) es considerado el primer lenguaje de programación _orientado a objetos_.
 Es un lenguaje de tipado estático basado en [ALGOL 60](https://en.wikipedia.org/wiki/ALGOL_60).
 
-Simula permite que los procedimentos sean declarados dentro de una clase y también fuera de ella. A los primeros los denomica _local procedures_ y a los últimos _non-local procedures_. [[5]](#Ref5)
+Simula permite que los procedimientos sean declarados dentro de una clase y también fuera de ella. A los primeros los denomina _local procedures_ y a los últimos _non-local procedures_. [[5]](#Ref5)
 
-Entonces, si C++ y Simula no hacen mención a algo llamado "método", ¿De dónde saca Java esa palabra? ¿Es una invención de los diseñadores del lenguaje? ¿La copial de algún otro lenguaje? 
+Entonces, si C++ y Simula no hacen mención a algo llamado "método", ¿De dónde saca Java esa palabra? ¿Es una invención de los diseñadores del lenguaje? ¿La copia de algún otro lenguaje? 
 
 La respuesta es...
 
@@ -121,7 +121,7 @@ En Eiffel todas las _routines_ son miembros de una clase, no se permite la exist
 
 ### C\#
 
-[C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) es un lenguaje de programación que nace siendo muy similar a Java (casi idéntico) con algunas reminisencias de C++. 
+[C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) es un lenguaje de programación que nace siendo muy similar a Java (casi idéntico) con algunas reminiscencias de C++. 
 Luego, con los años el lenguaje formó su propia identidad.
 
 C# copia en su gran mayoría la terminología de Java. Una de las palabras que copia es "método".
@@ -132,23 +132,15 @@ Según el [estándar C# [9]](#Ref9):
 
 A diferencia de Java, el estándar C# sí define el significado de la palabra "método".
 
-Al ser un lenguaje muy usado, especialmente por seguidores de la "filosofía" Microsoft, C# también ha contribuído a la popularización del término.
+Al ser un lenguaje muy usado, especialmente por seguidores de la "filosofía" Microsoft, C# también ha contribuido a la popularización del término.
 
 
 ### Objective-C
 
-Objective-C es un lenguaje desarrollado a principios de los 1980's. Al igual que C++, nace como un super-conjunto de C al que se le agrega tecnología de objetos.  
-A diferencia de C++, el modelo de objetos de Objective-C está basado en el estilo de Smalltalk y no en el de Simula.
+[Objective-C](https://en.wikipedia.org/wiki/Objective-C) es un lenguaje desarrollado a principios de los 1980's. Al igual que C++, nace como un súper-conjunto de C al que se le agrega tecnología de objetos.  
+A diferencia de C++, el modelo de objetos de Objective-C está basado en Smalltalk y no en Simula.
 
-Objective-C cuenta con el concepto de mensajes y también el de método.
-
-***
-https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/DefiningClasses/DefiningClasses.html#//apple_ref/doc/uid/TP40011210-CH3-SW1
-
-
-### Python
-
-  https://docs.python.org/release/1.4/ref/
+Objective-C cuenta con el concepto de mensajes y también el de método. [[10]](#Ref10)
 
 
 ### Otras fuentes
@@ -156,34 +148,28 @@ https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Programmi
 Para rastrear el origen de la palabra "método" he hecho una búsqueda en la bibliografía (sobre programación en general) que tengo a mi disposición, textos que considero clásicos.
 
   - Elements of Programming by Alexander A. Stepanov and Paul McJones
-  - The Art of Computer Programming Volume 1 by Donald E. Knuth
-  - The Art of Computer Programming Volume 2 by Donald E. Knuth
-  - The Art of Computer Programming Volume 3 by Donald E. Knuth
-  - The Art of Computer Programming Volume 4A by Donald E. Knuth
+  - The Art of Computer Programming Volumes 1, 2, 3 and 4A by Donald E. Knuth
 
-En ninguna de las 3.456 páginas de estós 5 libros he encontrado la palabra "método" haciendo referencia a un "procedimiento". Obviamente la palabra "método" parece en varias oportunidades, pero no en el sentido que estoy buscando.
+En ninguna de las 3.456 páginas de estos 5 libros he encontrado la palabra "método" haciendo referencia a un "procedimiento". Obviamente la palabra "método" parece en varias oportunidades, pero no en el sentido que estoy buscando.
 
 
-### Conclusiones
+## Conclusiones
 
 La palabra "método" ha sido introducida al mundo de la programación por el lenguaje Smalltalk. Al ser un lenguaje prácticamente no usado en la industria, la palabra no era muy conocida allá por los 80's y principios de los 90's.
 
-Quizás fue un error de los diseñadores de Smalltalk el no haber utilizado nomenclatura existente, o quizás no fue un error, ya que Smalltalk introdujo un modelo de objetos distinto al de Simula y ese cambio quizás ameritó un cambio de nombres. Es muy dificil de determinar si fue una desición equivocada o no.
+Quizás fue un error de los diseñadores de Smalltalk el no haber utilizado nomenclatura existente, o quizás no fue un error, ya que Smalltalk introdujo un modelo de objetos distinto al de Simula y ese cambio quizás ameritó un cambio de nombres. Es muy difícil de determinar si fue una decisión equivocada o no.
 
 Lo que sí considero un error es el haber introducido nomenclatura de Smalltalk en Java, dado que el modelo de objetos de Java es heredado de C++ -> Simula. No encuentro nada en común entre Java y Smalltalk que justifique el uso del término.
 
 C++, Objective-C y Eiffel utilizan terminología similar a sus predecesores, puede que con algunas variaciones, que pueden ser mínimas o necesarias para adaptarse a cambios introducidos por los lenguajes.
 
 
-Lenguajes subsiguientes a Java arrastran el error e incorporan "método" a su terminología.
+Algunos lenguajes basados en Java arrastran el error e incorporan "método" a su terminología.
 
 La palabra "método" se infiltra en el vocabulario de los programadores.  
 Ya no hay vuelta atrás ;)
 
-Usted use el término que más le guste, yo me voy a seguir usando **Procedimiento** (siempre y cuando recuerde que no me gusta la palabra "método").
-
-
-
+Usted use el término que más le guste, yo me voy a seguir usando **procedimiento** ó **función** (siempre y cuando recuerde que no me gusta la palabra "método").
 
 
 ---
@@ -209,16 +195,12 @@ Esta última definición es la preferida por el autor del blog, en caso de que n
 
 <a name="Ref7">[7]</a> [ANSI Smalltalk Standard v1.9 199712 NCITS X3J20 draft](http://smalltalk.org/versions/ANSISmalltalk/ANSISmalltalkStandard_v1.9_199712_NCITS_X3J20_draft.pdf), Section 3.1 [page 9]
 
-<a name="Ref8">[8]</a> Se espeficica en: 
+<a name="Ref8">[8]</a> Se especifica en:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, pages 174, 175]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y en:
+y en:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Standard ECMA-367. Eiffel: Analysis, Design and Programming Language. 2nd edition (June 2006)](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-367.pdf), Section 8.5.10 [page 38]  
-
 
 <a name="Ref9">[9]</a> [Standard ECMA-334. C# Language Specification. 4th edition (June 2006)](http://www.ecma-international.org/publications/standards/Ecma-334.htm), Section 8.7.3 [page 34]
 
-
-
-
-
-
+<a name="Ref10">[10]</a> Objective-C no cuenta ni con un estándard ni una especificación. Lo más "formal" que encontré fue una página web:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Programming With ObjectiveC](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
