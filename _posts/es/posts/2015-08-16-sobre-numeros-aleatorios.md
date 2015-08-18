@@ -36,6 +36,15 @@ Al final del artículo voy a hacer algunos comentarios que no tienen nada que ve
 - 
 
 
+- Mersene Twister
+	- Variantes de este
+- Hillmann (o algo asi) que es mencionado en la documentacion de Python
+- Chequear la implementacion de Python
+- Chequear la implementacion de Java 
+- Chequear la implementacion de C++ (chequeado, mediante a Boost)
+- Chequear la implementacion de C# (chequeado)
+
+
 ***
 En la obra maestra de la programación, The Art of Computer Programming ***, Donald Knuth *** le decica casi 200 páginas a los números aleatorios. (*** Referencia al Volumen 2, Capítulo 3)
 
