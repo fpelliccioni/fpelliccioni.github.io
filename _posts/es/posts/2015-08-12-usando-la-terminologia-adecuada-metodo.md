@@ -120,6 +120,16 @@ En Eiffel todo miembro de una clase se lo llama _feature_. Al estado se lo denom
 En Eiffel todas las _routines_ son miembros de una clase, no se permite la existencia de procedimientos libres.
 
 
+### Python
+
+El lenguaje de programación [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) nace a finales de los 80's pero recién se hace popular aproximadamente en el año 2003.
+
+En Eiffel todo miembro de una clase se lo llama _feature_. Al estado se lo denomina _attributes_ y al comportamiento _routines_. A su vez, las _routines_ se dividen en _functions_ y _procedures_ dependiendo si retornan o no un resultado. [[8]](#Ref8)
+
+En Eiffel todas las _routines_ son miembros de una clase, no se permite la existencia de procedimientos libres.
+
+
+
 ### C\#
 
 [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) es un lenguaje de programación que nace siendo muy similar a Java (casi idéntico) con algunas reminiscencias de C++. 
