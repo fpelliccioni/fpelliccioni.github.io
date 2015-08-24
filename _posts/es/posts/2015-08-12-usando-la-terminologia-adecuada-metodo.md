@@ -113,7 +113,7 @@ Como no pude encontrar referencias anteriores a Smalltalk sobre algún otro leng
 Dan Ingall’s 1978 POPL paper on Smalltalk-76 is the earliest paper I’ve found so far that uses method in the sense you are interested in...
 
 
-
+Paul me dice que "método" no es mencionado en el manual de Smalltalk-72, pero si
 
 
 
