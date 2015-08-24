@@ -68,7 +68,7 @@ Según el [estándar de C++ [4]](#Ref4):
 
 - Member functions: Functions declared in the definition of a class, excluding those declared with a friend specifier, are called member functions of that class.
 
-O sea, en C++ no se usa la palabra "método". Puede que algunos programadores C++ usen la palabra "método" debido a que el término es muy popular hoy día; pero, tanto el estándar como los programadores más cercanos al riñón del lenguaje no lo utilizan.
+O sea, en C++ no se usa la palabra "método". Puede que algunos programadores C++ usen la palabra "método" debido a que el término es muy popular hoy día; pero, tanto el estándar C++ como los programadores más cercanos al riñón del lenguaje no lo utilizan.
 
 Entonces... ¿Cuál es el término correcto para designar el código que modela el comportamiento de los objetos? ¿Es "método"? ¿Es "procedimiento"? ¿Qué lenguaje usa la terminología más adecuada?
 
@@ -88,10 +88,10 @@ La respuesta es...
 
 ### Smalltalk
 
-[Smalltalk](https://en.wikipedia.org/wiki/Smalltalk) es un lenguaje de programación orientado a objetos, inspirado en Simula, que fue desarrollado durante la década de 1970 y vio la luz a principio de los 80's.
+[Smalltalk](https://en.wikipedia.org/wiki/Smalltalk) es un lenguaje de programación orientado a objetos, inspirado en Simula (en parte), que fue desarrollado durante la década de 1970 y vio la luz a principios de los 80's.
 A diferencia de Simula, Smalltalk es un lenguaje de tipado dinámico.
 
-Smalltalk incorpora los conceptos de mensajes y métodos. Antes de Smalltalk no encuentro referencias sobre ningún otro lenguaje que utilice la palabra "método". [[6]](#Ref6)
+Smalltalk incorpora los conceptos de mensajes y métodos. 
 
 Según el [estándar de Smalltalk [7]](#Ref7):
 
@@ -104,6 +104,25 @@ Según el [estándar de Smalltalk [7]](#Ref7):
 - A method consists of a sequence of expressions. Program execution proceeds by sequentially
   evaluating the expressions in one of more methods. There are three types of expressions:
   assignments, message sends, and returns.
+
+Como no pude encontrar referencias anteriores a Smalltalk sobre algún otro lenguaje que utilice la palabra "método" [[6]](#Ref6), le consulté a [Paul McJones](http://www.softwarepreservation.org/author/pmcjones), miembro del [Software Preservation Group](http://www.softwarepreservation.org/) y co-autor de [Elements of Programming](http://www.elementsofprogramming.com/), para mi es una eminencia en lo que respecta a historia de los lenguajes de programación y sobre la historia de la computación en general.
+
+> Fernando: ... Do you know any programming language, before Smalltalk, that use the word "method"? ...
+
+> Paul: You ask a very interesting question. I think you are correct that the word “method” was first used in that sense by the Smalltalk community. I looked through some early documents, such as the Smalltalk-72 Instruction Manual, and I don’t see “method” being used yet...
+Dan Ingall’s 1978 POPL paper on Smalltalk-76 is the earliest paper I’ve found so far that uses method in the sense you are interested in...
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -122,12 +141,27 @@ En Eiffel todas las _routines_ son miembros de una clase, no se permite la exist
 
 ### Python
 
-El lenguaje de programación [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) nace a finales de los 80's pero recién se hace popular aproximadamente en el año 2003.
+El lenguaje de programación [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) admite tanto procedimientos libres como procedimientos miembros. Los denomina _functions_ y _methods_ respectivamente. [[9]](#Ref9)
 
-En Eiffel todo miembro de una clase se lo llama _feature_. Al estado se lo denomina _attributes_ y al comportamiento _routines_. A su vez, las _routines_ se dividen en _functions_ y _procedures_ dependiendo si retornan o no un resultado. [[8]](#Ref8)
+Python me llamó la atención porque es creado unos años antes que Java; la primera implementación de Python es de 1989 [[10]](#Ref10) mientras que la primera de Java es de 1995 [[11]](#Ref11).  
+Pareciera que este hecho rompe mi conjetura de que Java fue el _impulsor_ de la palabra "método".
 
-En Eiffel todas las _routines_ son miembros de una clase, no se permite la existencia de procedimientos libres.
+Si bien la primera implementación de Java sale a la luz en 1995, en tan solo unos años, en 1998, ya era unos de los lenguajes más populares. En cambio Python tuvo un camino bastante más lento hacia su popularización, recién comenzó a ser popular por los años 2003/2004. [[12]](#Ref12)  
+Por lo que mi conjetura todavía sigue siendo válida, el impulsor de "método" fue Java y no Python.
 
+Volviendo a Python, la palabra "método" es mencionada en las versiones recientes (3.4.3 y 2.7.10) de la documentación del lenguaje.
+Me queda la duda si Python utiliza "método" desde sus orígenes o si fue mutando su terminología con el tiempo, sobre todo con la popularización de Java.  
+Gracias a que los muchachos de [python.org](http://python.org) hacen un excelente trabajo manteniendo las versiones históricas de la documentación, pude verificar que la palabra "método" es utilizada desde la versión 0.9.1 [[13]](#Ref13) (salvo que la documentación haya sido alterada con el tiempo, pero confiemos en que no sea así).
+
+O sea, Python es el primer lenguaje, después de Smalltalk, en usar la palabra "método". Al menos de los lenguajes que he podido verificar.
+
+Al igual que me lo pregunto con Java, ¿Por qué Python usa método y no algún otro término más común para esa época?.
+
+Nadie mejor que el creador del lenguaje, [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) para iluminarme. Me tomé el atrevimiento de escribirle un correo electrónico; Guido fue muy amable en responderme y permitir que lo cite en este artículo:
+
+> Fernando: Why did you use "method" instead of any other word? Have you taken from Smalltalk?  Or,... from any other programming language?
+
+> Guido: Good question. I don't recall, but it's likely that I was somehow influenced by Smalltalk, or people around me who were influenced by Smalltalk. I definitely opened a big book about Smalltalk to learn about byte code, and I also recall we had a Smalltalk implementation that we sometimes played with (some things that were wrong with that influenced some of my philosophy for Python).
 
 
 ### C\#
@@ -185,6 +219,13 @@ Usted use el término que más le guste, yo me voy a seguir usando **procedimien
 
 ---
 
+## Agradecimientos
+
+***Paul McJones, Guido van Rossum, Mario dal Lago, Javier Velilla***
+
+
+---
+
 ## Notas / Referencias
 
 <a name="Ref1">[1]</a> Aquí nos referimos a la definición de "objeto" en el contexto de la _Programación Orientada a Objetos_:  
@@ -209,12 +250,52 @@ Si desea documentación sobre estos lenguajes:
  
 <a name="Ref7">[7]</a> [ANSI Smalltalk Standard v1.9 199712 NCITS X3J20 draft](http://smalltalk.org/versions/ANSISmalltalk/ANSISmalltalkStandard_v1.9_199712_NCITS_X3J20_draft.pdf), Section 3.1 [page 9]
 
+
+https://classes.soe.ucsc.edu/cmps112/Spring03/readings/Ingalls78.html
+The design of the Smalltalk language supports this principle through uniform reference to objects, sending messages to obtain results, and through organization of object descriptions and computational methods into classes.
+…
+The response to a message is implemented by a method, which reads or writes some data field, or sends further messages to achieve the desired response.
+
+
+
+
+
+
+
 <a name="Ref8">[8]</a> Se especifica en:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, pages 174, 175]  
 y en:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Standard ECMA-367. Eiffel: Analysis, Design and Programming Language. 2nd edition (June 2006)](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-367.pdf), Section 8.5.10 [page 38]  
 
+<a name="Ref9">[9]</a> [Python 2.7.10 Documentation](https://docs.python.org/2/download.html)
+
+<a name="Ref10">[10]</a> [A Brief Timeline of Python](http://python-history.blogspot.com.ar/2009/01/brief-timeline-of-python.html)
+
+<a name="Ref11">[11]</a> [The History of Java Technology](http://www.oracle.com/technetwork/java/javase/overview/javahistory-index-198355.html)
+
+<a name="Ref12">[12]</a> Sobre la popularización de los lenguajes, una de las fuentes es [Tiobe Index](http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html). Aunque tengo ciertas dudas sobre el método de medición de Tiobe, hoy en día es lo mejor que tenemos.   
+La otra fuente es mi memoria. No recuerdo a Python como un lenguaje popular en los 90's. Yo creo que Python comienza a popularizarse con el boom de los lenguajes dinámicos a comienzo de los 2000's y tiene un empuje aun mayor con la creación del framework Web [Django](https://en.wikipedia.org/wiki/Django_(web_framework)).
+
+
+https://en.wikibooks.org/wiki/Java_Programming/History
+http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html
+https://en.wikibooks.org/wiki/Java_Programming/History
+https://en.wikipedia.org/wiki/Django_(web_framework)#History
+
+
+[The History of Java Technology](http://www.oracle.com/technetwork/java/javase/overview/javahistory-index-198355.html)
+
+<a name="Ref13">[13]</a> [Repositorio de viejas versiones de Python](https://www.python.org/ftp/python/src/)
+
+
+
+
+---
+
+
+
 <a name="Ref9">[9]</a> [Standard ECMA-334. C# Language Specification. 4th edition (June 2006)](http://www.ecma-international.org/publications/standards/Ecma-334.htm), Section 8.7.3 [page 34]
 
 <a name="Ref10">[10]</a> Objective-C no cuenta ni con un estándard ni una especificación. Lo más "formal" que encontré fue una página web:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Programming With ObjectiveC](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
+
