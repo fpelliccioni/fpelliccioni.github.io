@@ -105,7 +105,7 @@ Según el [estándar de Smalltalk [6]](#Ref6):
   evaluating the expressions in one of more methods. There are three types of expressions:
   assignments, message sends, and returns.
 
-Como no pude encontrar referencias anteriores a Smalltalk sobre algún otro lenguaje que utilice la palabra "método", le consulté a [Paul McJones](http://www.softwarepreservation.org/author/pmcjones), miembro del [Software Preservation Group](http://www.softwarepreservation.org/) y coautor de [Elements of Programming](http://www.elementsofprogramming.com/), para mi es una eminencia en lo que respecta a historia de los lenguajes de programación y sobre la historia de la computación en general.
+Como no pude encontrar referencias anteriores a Smalltalk sobre algún otro lenguaje que utilice la palabra "método", le consulté a [Paul McJones](http://www.softwarepreservation.org/author/pmcjones), miembro del [Software Preservation Group](http://www.softwarepreservation.org/) y coautor de [Elements of Programming](http://www.elementsofprogramming.com/). Considero a Paul una eminencia en lo que respecta a historia de la computación y en particular los lenguajes de programación.
 
 > Fernando: ... Do you know any programming language, before Smalltalk, that use the word "method"? ...
 
