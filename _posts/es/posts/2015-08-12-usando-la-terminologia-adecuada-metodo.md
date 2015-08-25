@@ -181,7 +181,7 @@ Objective-C cuenta con el concepto de mensajes y también el de método. [[16]](
 ### Lenguajes anteriores a Smalltalk
 
 He buscado en manuales, estándares y documentación de lenguajes de programación anteriores a Smalltalk, no relacionados con _orientación a objetos_, pero sí muy reconocidos por su influencia sobre los demás lenguajes de programación.  
-Específicamente los lenguajes son: [Fortran](https://en.wikipedia.org/wiki/Fortran), [Algol](https://en.wikipedia.org/wiki/ALGOL) y [C](https://en.wikipedia.org/wiki/C_(programming_language)). En la documentación de ninguno de ellos se hace mención a la palabra "método" en sus especificaciones / manuales. En cambio usan términos como _routine_, _subroutine_, _procedure_ o _function_ [[17]](#Ref17).
+Específicamente los lenguajes son: [Fortran](https://en.wikipedia.org/wiki/Fortran), [Algol](https://en.wikipedia.org/wiki/ALGOL) y [C](https://en.wikipedia.org/wiki/C_(programming_language)). En la documentación de ninguno de ellos se hace mención a la palabra "método". En cambio usan términos como _routine_, _subroutine_, _procedure_ o _function_ [[17]](#Ref17).
 
 
 ### Otras fuentes
