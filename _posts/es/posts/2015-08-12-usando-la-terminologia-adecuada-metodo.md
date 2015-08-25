@@ -72,7 +72,7 @@ O sea, en C++ no se usa la palabra "método". Puede que algunos programadores C+
 
 Entonces... ¿Cuál es el término correcto para designar el código que modela el comportamiento de los objetos? ¿Es "método"? ¿Es "procedimiento"? ¿Qué lenguaje usa la terminología más adecuada?
 
-Para ello debo ir aun más atrás.  
+Para ello debo ir aún más atrás.  
 C++ hereda su "parte" de objetos del [lenguaje de programación Simula](https://en.wikipedia.org/wiki/Simula).
 
 ### Simula
