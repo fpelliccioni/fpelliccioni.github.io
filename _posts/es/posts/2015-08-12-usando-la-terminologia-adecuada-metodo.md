@@ -231,7 +231,7 @@ Java y Python adoptan terminología de Smalltalk en su vocabulario. No encuentro
 
 C++, Objective-C y Eiffel utilizan terminología similar a sus predecesores, puede que con algunas variaciones, que pueden ser mínimas o necesarias para adaptarse a cambios introducidos por los lenguajes.
 
-Algunos lenguajes, como C#, copian características de Java, pero también copian el error de incorporar "método" a su terminología.
+Algunos lenguajes, como C#, copian características de Java, pero también copian el "error" de incorporar "método" a su terminología.
 
 La palabra "método" se **infiltra** en el vocabulario de los programadores.  
 Ya no hay vuelta atrás ;)
