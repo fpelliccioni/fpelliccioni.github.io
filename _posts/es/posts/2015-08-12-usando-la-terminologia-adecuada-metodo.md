@@ -227,7 +227,7 @@ La palabra "método" ha sido introducida al mundo de la programación por el len
 
 Quizás fue un error de los diseñadores de Smalltalk el no haber utilizado nomenclatura existente, o quizás no fue un error, ya que Smalltalk introdujo un modelo de objetos distinto al de Simula y ese cambio quizás ameritó un cambio de nombres. Es muy difícil de determinar si fue una decisión equivocada o no.
 
-Java y Python adoptan terminología de Smalltalk en su vocabulario. No encuentro un vínculo muy fuerte entre Smalltalk y Java/Python que justifique el uso del término, esto me hace pensar en que el uso de "método" es un error en estos lenguajes. Aunque, como dije antes, es muy dificil de juzgar si la desición de usar cierta nomenclatura es errónea.
+Java y Python adoptan terminología de Smalltalk en su vocabulario. No encuentro un vínculo muy fuerte entre Smalltalk y Java/Python que justifique el uso del término, esto me hace pensar en que el uso de "método" es un error en estos lenguajes. Aunque, como dije antes, es muy difícil de juzgar si la decisión de usar cierta nomenclatura es errónea.
 
 C++, Objective-C y Eiffel utilizan terminología similar a sus predecesores, puede que con algunas variaciones, que pueden ser mínimas o necesarias para adaptarse a cambios introducidos por los lenguajes.
 
