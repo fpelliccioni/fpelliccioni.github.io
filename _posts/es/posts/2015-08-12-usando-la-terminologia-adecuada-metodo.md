@@ -105,7 +105,7 @@ Según el [estándar de Smalltalk [6]](#Ref6):
   evaluating the expressions in one of more methods. There are three types of expressions:
   assignments, message sends, and returns.
 
-Como no pude encontrar referencias anteriores a Smalltalk sobre algún otro lenguaje que utilice la palabra "método", le consulté a [Paul McJones](http://www.softwarepreservation.org/author/pmcjones), miembro del [Software Preservation Group](http://www.softwarepreservation.org/) y co-autor de [Elements of Programming](http://www.elementsofprogramming.com/), para mi es una eminencia en lo que respecta a historia de los lenguajes de programación y sobre la historia de la computación en general.
+Como no pude encontrar referencias anteriores a Smalltalk sobre algún otro lenguaje que utilice la palabra "método", le consulté a [Paul McJones](http://www.softwarepreservation.org/author/pmcjones), miembro del [Software Preservation Group](http://www.softwarepreservation.org/) y coautor de [Elements of Programming](http://www.elementsofprogramming.com/), para mi es una eminencia en lo que respecta a historia de los lenguajes de programación y sobre la historia de la computación en general.
 
 > Fernando: ... Do you know any programming language, before Smalltalk, that use the word "method"? ...
 
@@ -114,7 +114,7 @@ Dan Ingalls’s 1978 POPL paper on Smalltalk-76 is the earliest paper I’ve fou
 
 Paul cree, al igual que yo, que la palabra "método" fue usada por primera vez por la comunidad de programadores Smalltalk, pero me informa que estuvo revisando viejos manuales y en el manual de Smalltalk-72 [[7]](#Ref7) no se hace mención sobre "método", pero sí es mencionado en un paper de 1978 que habla sobre Smalltalk-76. [[8]](#Ref8) 
 
-O sea, estoy casi seguro que la comunidad Smalltalk acuñó el término, pero no lo hizo desde el pricipio sino a medida que el lenguaje fue evolucionando.
+O sea, estoy casi seguro que la comunidad Smalltalk acuñó el término, pero no lo hizo desde el principio sino a medida que el lenguaje fue evolucionando.
 
 ### Otros lenguajes
 
@@ -180,8 +180,8 @@ Objective-C cuenta con el concepto de mensajes y también el de método. [[16]](
 
 ### Lenguajes anteriores a Smalltalk
 
-He buscado en manuales, estándars y documentación de lenguajes de programación anteriores a Smalltalk, no relacionados con _orientación a objetos_, pero sí muy reconocidos por su influencia sobre los demás lenguajes de programación.  
-Específicamente los lenguajes son: [Fortran](https://en.wikipedia.org/wiki/Fortran), [Algol](https://en.wikipedia.org/wiki/ALGOL) y [C](https://en.wikipedia.org/wiki/C_(programming_language)). En la documentación de ninguno de ellos se hace mención a la palabra "método" en sus especificaciones / manuales. En cambio usan términos como _routine_, _subroutine_, _procedure_ ó _function_ [[17]](#Ref17).
+He buscado en manuales, estándares y documentación de lenguajes de programación anteriores a Smalltalk, no relacionados con _orientación a objetos_, pero sí muy reconocidos por su influencia sobre los demás lenguajes de programación.  
+Específicamente los lenguajes son: [Fortran](https://en.wikipedia.org/wiki/Fortran), [Algol](https://en.wikipedia.org/wiki/ALGOL) y [C](https://en.wikipedia.org/wiki/C_(programming_language)). En la documentación de ninguno de ellos se hace mención a la palabra "método" en sus especificaciones / manuales. En cambio usan términos como _routine_, _subroutine_, _procedure_ o _function_ [[17]](#Ref17).
 
 
 ### Otras fuentes
@@ -211,7 +211,7 @@ En ninguna de las 3.456 páginas de estos 5 libros he encontrado la palabra "mé
 	- [Structured Programming, First Edition Edition](http://www.amazon.com/Structured-Programming-A-P-I-C-studies-processing/dp/0122005503/ref=pd_sim_14_3?ie=UTF8&refRID=1WFYYC7DTMCR58G3TVVA) by Edsger W. Dijkstra, C. A. R. Hoare and Ole-Johan Dahl
 	- [Systematic Programming: An Introduction](http://www.amazon.com/Systematic-Programming-Introduction-Prentice-Hall-Computation/dp/0138803692/ref=pd_sim_14_4?ie=UTF8&refRID=0E9BAZYMCCHZFEB38592) by Niklaus Wirth
 
-3. Enviarle mi consulta a los siguientes diseñadores de lenguajes de programación:
+3. Enviar mi consulta a los siguientes diseñadores de lenguajes de programación:
 
 	- Alan Kay
 	- Dan Ingalls
@@ -219,7 +219,7 @@ En ninguna de las 3.456 páginas de estos 5 libros he encontrado la palabra "mé
 	- James Gosling
 	- Anders Hejlsberg
 
-He tratado de contactar a alguno de ellos, pero no he recibido respuesta aun.
+He tratado de contactar a alguno de ellos, pero no he recibido respuesta aún.
 
 ## Conclusiones
 
@@ -236,7 +236,7 @@ Algunos lenguajes copian características de Java, pero también copian el error
 La palabra "método" se **infiltra** en el vocabulario de los programadores.  
 Ya no hay vuelta atrás ;)
 
-Usted use el término que más le guste, yo me voy a seguir usando **procedimiento** ó **función** (siempre y cuando recuerde que no me gusta la palabra "método").
+Usted use el término que más le guste, yo me voy a seguir usando **procedimiento** o **función** (siempre y cuando recuerde que no me gusta la palabra "método").
 
 
 ---
@@ -244,7 +244,7 @@ Usted use el término que más le guste, yo me voy a seguir usando **procedimien
 ## Agradecimientos
 
 Un agradecimiento especial para Paul McJones y Guido van Rossum por responder amablemente a mis preguntas y por brindarme información trascendental.  
-También quiero agradecer a Mario dal Lago y Javier Velilla por revisar el artículo y sugerirme correcciones.
+También quiero agradecer a Mario dal Lago y Javier Velilla por revisar el artículo y sugerir correcciones.
 
 
 ---
@@ -285,13 +285,13 @@ y en:
 
 <a name="Ref13">[13]</a> Sobre la popularización de los lenguajes, una de las fuentes en las que me baso es [Tiobe Index](http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html). Aunque tengo ciertas dudas sobre el método de medición de Tiobe, hoy en día es lo mejor que tenemos.   
 La otra fuente es mi memoria. No recuerdo a Python como un lenguaje popular en los 90's.  
-Yo creo que Python comienza a popularizarse con el boom de los lenguajes dinámicos a comienzo de los 2000's y tiene un empuje aun mayor con la creación del framework web [Django](https://en.wikipedia.org/wiki/Django_(web_framework)).
+Yo creo que Python comienza a popularizarse con el boom de los lenguajes dinámicos a comienzo de los 2000's y tiene un empuje aún mayor con la creación del framework web [Django](https://en.wikipedia.org/wiki/Django_(web_framework)).
 
 <a name="Ref14">[14]</a> [Repositorio de viejas versiones de Python](https://www.python.org/ftp/python/src/)
 
 <a name="Ref15">[15]</a> [Standard ECMA-334. C# Language Specification. 4th edition (June 2006)](http://www.ecma-international.org/publications/standards/Ecma-334.htm), Section 8.7.3 [page 34]
 
-<a name="Ref16">[16]</a> Objective-C no cuenta ni con un estándard ni una especificación. Lo más "formal" que encontré fue una página web:  
+<a name="Ref16">[16]</a> Objective-C no cuenta ni con un estándar ni una especificación. Lo más "formal" que encontré fue una página web:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Programming With ObjectiveC](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
 
 
