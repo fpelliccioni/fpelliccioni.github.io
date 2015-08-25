@@ -112,7 +112,7 @@ Como no pude encontrar referencias anteriores a Smalltalk sobre algún otro leng
 > Paul: You ask a very interesting question. I think you are correct that the word “method” was first used in that sense by the Smalltalk community. I looked through some early documents, such as the Smalltalk-72 Instruction Manual, and I don’t see “method” being used yet...
 Dan Ingalls’s 1978 POPL paper on Smalltalk-76 is the earliest paper I’ve found so far that uses method in the sense you are interested in...
 
-Paul cree, al igual que yo, que la palabra "método" fue usada por primera vez por la comunidad de programadores Smalltalk, pero me informa que estuvo revisando viejos manuales y en el manual de Smalltalk-72 [[7]](#Ref7) no se hace mención sobre "método", pero sí es mencionado en un paper de 1978 que habla sobre Smalltalk-76. [[8]](#Ref8) 
+Paul cree, al igual que yo, que la palabra "método" fue usada por primera vez por la comunidad de programadores Smalltalk. Además me indica que estuvo revisando viejos manuales y en el manual de Smalltalk-72 [[7]](#Ref7) no se hace mención sobre "método", pero sí es mencionado en un paper de 1978 que habla sobre Smalltalk-76. [[8]](#Ref8) 
 
 O sea, estoy casi seguro que la comunidad Smalltalk acuñó el término, pero no lo hizo desde el principio sino a medida que el lenguaje fue evolucionando.
 
