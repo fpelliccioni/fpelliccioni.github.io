@@ -2,18 +2,17 @@
 layout: post
 type: draft
 title:  "Sobre números aleatorios"
-date:   2015-08-16 12:00:00
+date:   2015-08-25 12:00:00
 comments: true
 
-# description: "Portland in shoreditch Vice, labore typewriter pariatur hoodie fap sartorial Austin. Pinterest literally occupy Schlitz forage."
 category: spanish
 
 tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp, smalltalk, fortran, algol, simula, method, procedure, routine, function, history]
 ---
 
-En esta oportunidad quería escribir sobre números aleatorios, a partir de una publicación que vi a través de Facebook.
+En esta oportunidad quería escribir sobre _números aleatorios_.
 
-La empresa argentina [Hexacta](http://www.hexacta.com/) publicó este desafío y por alguna razón apareció como publicidad cuando estaba "chequeando Facebook".
+La empresa argentina [Hexacta](http://www.hexacta.com/) publicó el siguiente desafío en su cuenta de Facebook y a partir de éste me surgieron algunos comentarios al respecto. 
 
 ![Desafío Hexacta]({{ site.url }}/images/hexacta-random.jpg)
 

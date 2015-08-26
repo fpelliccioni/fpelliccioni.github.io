@@ -1,0 +1,229 @@
+---
+layout: post
+title:  "Know your programming language memory consumption"
+date:   2015-05-13 12:00:00
+comments: true
+tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp]
+---
+
+Are you a programmer? I think so.  
+As programmers, we write code that must satisfy certain purpose, 
+
+but we do not write the code in the air. 
+We write code to be executed on a machine.
+
+An algorithm can be thought of in the abstract, without thinking of a particular machine where the algorithm is executed.
+But at some point, as programmers, we will translate the algorithm to code and we will make it run on a machine.
+
+If you are a serious programmer, surely you are interested in the efficiency of your code. If you're not, you can skip reading the rest of the article.
+
+So, if performance is important to you, you must know your machine and you must know the internals of your programming language.
+
+Why should I care about the details of my machine if high-level programming languages are designed to abstract from it?
+
+I hope that after reading this article it will be clear that you should know these details.
+So, let's start.
+
+I want to write a simple program, run it using different programming languages, and then analyze memory consumption and memory layout.
+
+Here is the program in my pseudo programming language:
+
+{% highlight cpp %}
+class employee {
+  id: natural32
+  other: natural32	
+}
+
+class test {
+  a: natural32 := 0x88FF7799
+  employees: array<employee> := { {0xA1B2C3D4, 0x11223344}, 
+                                  {0x92817348, 0x96161728}, 
+                                  {0x61592308, 0xa8857472 } }
+  b: natural32 := 0x12345678
+}
+
+//program entry-point
+main() {	
+  tc := test{}
+  // analyze memory here!
+}
+{% endhighlight %}
+
+
+
+The program consists of a main function (entry-point) in which is created an object of type "test".  
+The test class has three data members (or Fields, in order to use Java/C# jargons):
+
+- a: it is 32-bits natural number (like C/C++'s uint32_t). It is set to 88FF7799 (base16)
+- employees: it is a sequence of elements of type "employee".
+             The employees sequence is filled with three elements.
+- b: it is 32-bits natural number. It is set to 12345678 (base16)
+
+The employee class has two data members:
+- id: it is 32-bits natural number
+- other: it is 32-bits natural number
+
+Note: "array" is a data structure that stores elements contiguosly in memory.
+	  The size of the sequence is dynamic, it is resizable.
+	  Equivalents: C++ std::vector, .Net List<T>, Java ArrayList<T>		 
+
+For example it is not necessary runtime polymorphism neither runtime type introspection (aka Reflection).
+For simplicity all the data members are public.
+
+
+Now, let's code in real programming languages:
+
+
+
+
+
+
+
+
+C++ code
+
+{% highlight cpp %}
+#include <vector>
+using namespace std;
+
+struct employee {
+  uint32_t id;
+  uint32_t other;
+};
+
+struct test {
+  uint32_t a {0x88FF7799};
+  vector<employee> employees { {0xA1B2C3D4, 0x11223344}, 
+                               {0x92817348, 0x96161728}, 
+                               {0x61592308, 0xa8857472}};
+  uint32_t b {0x12345678};
+};
+
+int main(int argc, char const* argv[]) {
+  test t;
+  // analyze memory here!
+  return 0;
+}
+{% endhighlight %}
+
+
+
+Java code: 
+
+{% highlight cpp %}
+import java.util.ArrayList;
+
+class Employee {
+  public int id;
+  public int other;
+
+  public Employee(int id, int other) {
+    this.id = id;
+    this.other = other;
+  }
+}
+
+class Test {
+  public int a = 0x88FF7799;
+  public ArrayList<Employee> employees = new ArrayList<Employee>();
+  public int b = 0x12345678;
+
+  public Test() {
+    employees.add(new Employee(0xA1B2C3D4, 0x11223344));
+    employees.add(new Employee(0x92817348, 0x96161728));
+    employees.add(new Employee(0x61592308, 0xa8857472));
+  }
+}
+
+public class MainClass {
+  public static void main(String args[]) {
+    Test t = new Test();
+    // analyze memory here!
+  }    
+}
+{% endhighlight %}
+
+
+
+C# code
+
+{% highlight cpp %}
+using System;
+using System.Collections.Generic;
+
+internal class Employee
+{
+  public uint Id;
+  public uint Other;
+
+  public Employee(uint id, uint other)
+  {
+    Id = id;
+    Other = other;
+  }
+}
+
+internal class Test
+{
+  public uint A = 0x88FF7799;
+  public List<Employee> Employees = new List<Employee> {
+    new Employee(0xA1B2C3D4, 0x11223344),
+    new Employee(0x92817348, 0x96161728),
+    new Employee(0x61592308, 0xa8857472) };
+  public uint B = 0x12345678;
+}
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    var t = new Test();
+    // analyze memory here!
+  }
+}
+{% endhighlight %}
+
+
+
+
+I tried to write idiomatic code (as possible) in each of the languages.
+I am not trying to be OO-purist.
+I just tried to write the simplest code to later analyze the memory more easily.
+Disclaimer: ....
+
+
+
+
+
+
+
+
+
+References:
+
+	.Net BCL System.Array class specification:
+		https://msdn.microsoft.com/en-us/library/system.array%28v=vs.110%29.aspx
+
+	.Net BCL System.Array class source code:
+		http://referencesource.microsoft.com/#mscorlib/system/array.cs,1f52f2a267c6dbe7
+
+	.Net BCL System.Collections.Generic.List<T> class specification:
+		https://msdn.microsoft.com/en-us/library/6sh2ey19%28v=vs.110%29.aspx
+		
+	.Net BCL System.Collections.Generic.List<T> class source code:
+		http://referencesource.microsoft.com/#mscorlib/system/collections/generic/list.cs,cf7f4095e4de7646
+
+
+	Drill Into .NET Framework Internals to See How the CLR Creates Runtime Objects
+		https://msdn.microsoft.com/en-us/magazine/cc163791.aspx
+
+
+	Java ARTICLES
+		https://www.yourkit.com/docs/kb/sizes.jsp
+		https://wikis.oracle.com/display/HotSpotInternals/CompressedOops
+		http://www.docjar.com/docs/api/sun/misc/Unsafe.html
+		http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/
+		http://java-performance.info/memory-introspection-using-sun-misc-unsafe-and-reflection/
+
+
+

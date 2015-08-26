@@ -1,0 +1,37 @@
+On my machine
+
+C++ 
+	vector<uint64_t> x {1, 2, 3};
+
+Memory:
+
+					-------------------------
+					|        Stack          |
+					-------------------------
+	address of x ->	| start ptr             | 64 bits
+					| end ptr		        | 64 bits
+					| end of storage ptr	| 64 bits
+					|.......................| sizeof(x) = 24 bytes = 192 bits (CHAR_BIT == 8)
+					|				        |
+					|			.	        |
+					|			.	        |
+					|			.	        |
+					-------------------------
+					|			.	        |
+					|			.	        |
+					|			.	        |
+					|				        |
+	end ptr     	|.......................|
+					|				        |
+					|				        |
+	start ptr       |			 	        |
+					-------------------------
+					|         Heap          |
+					-------------------------
+
+A tipical implementation of std::vector uses three pointers.
+
+Typically, the size of a vector (if measured with sizeof) would be that of three pointers, because three pointers are enough to represent a vector: one pointer indicates the beginning of memory allocated for vector, one pointer indicates the end of the memory piece, the third indicates what portion of this memory is really used by vector elements. 
+
+Java
+ArrayList<int> x = {1, 2, 3};
