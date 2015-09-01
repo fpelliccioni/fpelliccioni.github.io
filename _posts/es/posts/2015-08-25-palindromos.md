@@ -1,7 +1,7 @@
 ---
 layout: post
 type: draft
-title:  "Palíndromos"
+title:  "Palíndromos???????"
 date:   2015-08-25 12:00:00
 comments: true
 
@@ -10,13 +10,446 @@ category: spanish
 tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp, smalltalk, fortran, algol, simula, method, procedure, routine, function, history]
 ---
 
+Decidí escribir este artículo a partir de una pregunta de que vi en [stackoverflow.com](http://stackoverflow.com)
+
+[Aquí](http://stackoverflow.com/questions/4138827/check-string-for-palindrome) el enlace a la pregunta.
+
+El autor de la pregunta intenta escribir un algoritmo que identifique si una "palabra" es un [palíndromo](https://es.wikipedia.org/wiki/Pal%C3%ADndromo) o no lo es.
+El algoritmo está escrito usando el lenguaje de programación [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
+
+No me interesa analizar el algoritmo propuesto por el autor, sino que me interesa analizar el algoritmo propuesto por el autor de la respuesta más votada. Tiene 53 votos contra 46 votos que tiene la respuesta más votada (a día de la fecha, 26 de Agosto de 2015).
+
+[Aquí](http://stackoverflow.com/a/4139065/1006264) el enlace a la respuesta que me interesa.
+
+Acá el código:
+
+{% highlight java %}
+public static boolean isPalindrome(String str) {
+    return str.equals(
+       new StringBuilder(str)
+       .reverse()
+       .toString()
+    );
+}
+{% endhighlight %}
+
+El algoritmo funciona correctamente y la lógica es muy intuitiva. Básicamente compara por igualdad la palabra original su reverso.
+
+El problema con este algoritmo es que es muy ineficiente comparado con el algoritmo óptimo.
+
+Hice un comentario al autor de esta respuesta en Stackoverflow: "Compare the complexity of your algorithm with respect to others."  
+El usuario [@aioobe](http://stackoverflow.com/users/276052/aioobe) me respondió: "I think it's the same complexity as the other solutions, no?"
+
+En parte tiene razón.
+No fui muy específico en mi comentario. Seguramente @aioobe asumió que yo me refería a la [complejidad computacional asintótica](https://en.wikipedia.org/wiki/Asymptotic_computational_complexity) y está bien que lo haya asumido de esa forma, ya que usualmente cuando decimos "complejidad" sin especificar nada más, se asume que nos estamos refiriendo a la _complejidad computacional asintótica_.
+
+
+### Complejidad Computacional Asintótica
+
+Con _complejidad computacional asintótica_ nos referimos a la medición de cómo responden los algoritmos en tiempo/espacio a medida que el input crece.  
+Usualmente está asociada a la [O-notation](https://en.wikipedia.org/wiki/Big_O_notation) introducida por [Paul Bachmann](https://en.wikipedia.org/wiki/Paul_Gustav_Heinrich_Bachmann) en su libro [Die Analytische Zahlentheorie](https://archive.org/details/dieanalytischeza00bachuoft) en 1894. 
+
+De esta forma podemos medir la escalabilidad de los algoritmos sin depender de la arquitectura de la máquina, de la velocidad del procesador, del lenguaje en el que está implementado el algoritmo, etc...
+
+Si bien es muy útil en muchas circunstancias, el problema forma de medición es que no es exacta, sino que es **aproximada**.  
+
+No quiero aquí extenderme en más detalles sobre O-notation ni complejidad asintótica, para información referirse a [1]
+
+
+### Complejidad Computacional Concreta
+
+Otra forma de medir algoritmos es no usar aproximaciones sino cantidad concreta de ciertas operaciones, siempre dependiendo de la entrada al algoritmo.
+
+Por ejemplo, supongamos el algoritmo para encontrar el mínimo (o máximo) de N elementos. Podemos decir que dicho algoritmo tiene una complejidad (en tiempo) de O(n) o linear.
+Pero específicamente se necesitan <span style="font-family:'Courier New';">n - 1</span> comparaciones.
+
+¿Qué pasaría en el caso de necesitar un algoritmo para encontra ambos, tanto el mínimo como el máximo de N elementos?
+
+Un algoritmo naïve lo haría en <span style="font-family:'Courier New';">2n – 2</span> o <span style="font-family:'Courier New';">2n – 3</span> comparaciones. Esto sigue siendo O(n).  
+Pero el algoritmo óptimo lo resuelve en <span style="font-family:'Courier New';">&#8968;3/2 n&#8969; - 2</span> comparaciones. [2]  
+También O(n), como los anteriores, pero podemos notar una diferencia considerable en la complejidad si la medimos con operaciones exactas.
+
+
+A Sorting Problem and Its Complexity, Ira Pohl
+
+Communications of the ACM 
+Volume 15 Issue 6, June 1972 
+Pages 462-464 
+
+http://www.researchgate.net/publication/220427257_A_Sorting_Problem_and_Its_Complexity
+
+### Volviendo a los Palíndromos
+
+Repito el código en cuestión:
+
+{% highlight java %}
+public static boolean isPalindrome(String str) {
+    return str.equals(
+       new StringBuilder(str)
+       .reverse()
+       .toString()
+    );
+}
+{% endhighlight %}
+
+Podríamos decir que isPalindrome es O(n), pero, ¿cómo podemos asegurarlo sin conocer la complejidad de los componentes en los que isPalindrome está basado?
+
+Para medir la complejidad del algoritmo anterior deberíamos poder saber la complejidad de los componentes que está usando.
+
+Para ello, debemos revisar la documentación Java, por ejemplo, veamos la función [String.equals(...)](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#equals-java.lang.Object-). [3] ?????? Por que le llama funcion?????
+La documentación de Java no incluye la complejidad en tiempo ni espacio de sus algoritmos.  
+
+Considero esto una gran falta ya que nos dificulta la especificación en complejidad de nuestros algoritmos, al menos en los algoritmos que están basados en clases provistas por Java.
+
+Para continuar tratando de especificar la complejidad de isPalindrome, no nos queda otra que revisar directamente el código fuente de las clases Java.  
+Veamos el [código fuente de String.equals(...)](http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/lang/String.java) (presione sobre el link y busque la función equals).
+
+Como podemos ver en el código, String.equals(...) tiene complejidad linear en tiempo, O(n).  
+Específicamente se realizan N comparaciones por desigualdad. (Más allá de todo el ruido impuesto por Java, como los casts, instanceof, etc...).
+
+
+
+
+
+### Análisis detallado
+
+	COMPLEJIDAD DE:???
+		- StringBuilder constructor 
+		- StringBuilder.reverse()
+		- StringBuilder.toString()
+		- String.equals
+
+
+
+
+	Construcción de StringBuilder
+		- Alocacion de memoria dinámica para el objeto de tipo StringBuilder (free store, heap, o lo que fuere)
+		- Inicialización en 0 del count de StringBuilder (está dentro de AbstractStringBuilder)
+		- Alocacion de memoria dinámica para el array interno dentro de StringBuilder (está dentro de AbstractStringBuilder)
+			De acuerdo con la documentación, el tamaño del array interno es de 16 + initialString.length().
+		- Inicialización en 0 array interno dentro de StringBuilder
+		  	En Java los arrays de tipo integrales se inicializan en 0, garantizado por la especificación del lenguaje. [4]
+		- Copia de los bytes del string original al array interno del StringBuilder
+
+
+
+
+
+	- Garbage Collection
+
+
+	Consumo de Memoria
+		- StringBuilder full object
+			- StringBuilder object (AbstractStringBuilder included)
+				32 bits 								 8 bytes (object header) + 
+				                                         4 bytes (count, internal array useful size) + 
+				                                         4 bytes (value, reference to internal array) 
+				                                         = 16 bytes
+				64 bits without UseCompressedOops 		16 bytes (object header) + 
+														 4 bytes (count, internal array useful size) + 
+														 4 bytes (padding) 
+														 8 bytes (value, reference to internal array) + 
+														 = 32 bytes
+				64 bits with CompressedOops 			12 bytes (object header) + 
+														 4 bytes (count, internal array useful size) + 
+														 4 bytes (value, reference to internal array) + 
+														 4 bytes (padding) 
+														 = 24 bytes
+
+			- StringBuilder internal array
+				32 bits 								 8 bytes (object header) + 
+														 4 bytes (array length) + 
+														50 bytes (array data, 9 + 16 chars, 2 bytes per char) + 
+														 2 bytes (padding) 
+														 = 64 bytes
+				64 bits without UseCompressedOops 		16 bytes (object header) + 
+														4 bytes (array length) + 
+														50 bytes (array data, 9 + 16 chars, 2 bytes per char) + 
+														2 bytes (padding) 
+														= 72 bytes
+				64 bits with CompressedOops 			12 bytes (object header) + 
+														4 bytes (array length) + 
+														50 bytes (array data, 9 + 16 chars, 2 bytes per char) + 
+														6 bytes (padding) 
+														= 72 bytes
+
+			TOTAL SIZE FOR THE StringBuilder full object
+			32 bits 								 	16 bytes + 64 bytes =  80 bytes
+			64 bits without UseCompressedOops 			32 bytes + 72 bytes = 104 bytes
+			64 bits with CompressedOops 				24 bytes + 72 bytes =  96 bytes
+			
+		- String full object (for the reversed word)
+			- String object
+				32 bits 								 8 bytes (object header) + 
+														 4 bytes (value, reference to internal array) + 
+														 4 bytes (hash) + 
+														 = 16 bytes
+				64 bits without UseCompressedOops 		16 bytes (object header) + 
+														 8 bytes (value, reference to internal array) + 
+														 4 bytes (hash) + 
+														 4 bytes (padding) 														                   
+														 = 32 bytes
+				64 bits with CompressedOops 			12 bytes (object header) + 
+														 4 bytes (value, reference to internal array) + 
+														 4 bytes (hash) + 
+														 4 bytes (padding)                    
+														 = 24 bytes			
+
+			- String internal array
+				32 bits 								 8 bytes (object header) + 
+														4 bytes (array length) + 
+														18 bytes (array data, 9 chars, 2 bytes per char) + 
+														2 bytes (padding) 
+														= 32 bytes
+				64 bits without UseCompressedOops 		16 bytes (object header) + 
+														4 bytes (array length) + 
+														18 bytes (array data, 9 chars, 2 bytes per char) + 
+														2 bytes (padding) 
+														= 40 bytes
+				64 bits with CompressedOops 			12 bytes (object header) + 
+														4 bytes (array length) + 
+														18 bytes (array data, 9 chars, 2 bytes per char) + 
+														6 bytes (padding) 
+														= 40 bytes
+
+			TOTAL SIZE FOR THE String full object
+			32 bits 								 	16 bytes + 32 bytes = 48 bytes
+			64 bits without UseCompressedOops 			24 bytes + 40 bytes = 64 bytes
+			64 bits with CompressedOops 	            16 bytes + 40 bytes = 56 bytes
+
+
+		TOTAL EXTRA SPACE (espacio innecesario)
+			32 bits 								 	 80 bytes + 48 bytes = 128 bytes
+			64 bits without UseCompressedOops 			104 bytes + 64 bytes = 168 bytes
+			64 bits with CompressedOops 	             96 bytes + 56 bytes = 152 bytes
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+	EN FUNCION DE N 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	M:  numero de caracteres (char) del input string
+	N:  numero de bytes del input string
+		N = M * 2
+
+
+	Consumo de Memoria
+		- StringBuilder full object
+			- StringBuilder object (AbstractStringBuilder included)
+				32 bits 								16 bytes (fixed, idem anterior)
+				64 bits without UseCompressedOops 		32 bytes (fixed, idem anterior)
+				64 bits with CompressedOops 			24 bytes (fixed, idem anterior)
+
+			- StringBuilder internal array
+				32 bits 								 8 bytes (object header) + 4 bytes (array length) + N bytes + 16 * 2 bytes + P bytes (padding) = 44 bytes + N bytes + P bytes
+
+44 + n + p = 8x
+
+p = 8x - (n + 44)
+
+n = 18
+p = 8x - 18 - 44
+p = 8x - 62
+
+
+x = ceil((18 + 44)/8)
+
+
+8 * &#8968;(n + 44) / 8&#8969; - (n + 44)
+
+<span style="font-family:'Courier New';">8 * &#8968;(n + 44) / 8&#8969; - (n + 44)</span>
+
+<span>8 * &#8968;(n + 44) / 8&#8969; - (n + 44)</span>
+
+
+
+
+
+
+
+				64 bits without UseCompressedOops 		16 bytes (object header) + 4 bytes (array length) + N bytes + 16 * 2 bytes + P bytes (padding) = 52 bytes + N bytes + P bytes
+				64 bits with CompressedOops 			12 bytes (object header) + 4 bytes (array length) + N bytes + 16 * 2 bytes + P bytes (padding) = 48 bytes + N bytes + P bytes
+
+			TOTAL SIZE FOR THE StringBuilder full object
+			32 bits 								 	16 bytes + 64 bytes =  80 bytes
+			64 bits without UseCompressedOops 			32 bytes + 72 bytes = 104 bytes
+			64 bits with CompressedOops 				24 bytes + 72 bytes =  96 bytes
+			
+		- String full object (for the reversed word)
+			- String object
+				32 bits 								 8 bytes (object header) + 4 bytes (reference to internal array) + 4 bytes (padding) = 16 bytes
+				64 bits without UseCompressedOops 		16 bytes (object header) + 8 bytes (reference to internal array)                     = 24 bytes
+				64 bits with CompressedOops 			12 bytes (object header) + 4 bytes (reference to internal array)                     = 16 bytes			
+
+			- String internal array
+				32 bits 								 8 bytes (object header) + 4 bytes (array length) + 18 bytes (array data, 9 chars, 2 bytes per char) + 2 bytes (padding) = 32 bytes
+				64 bits without UseCompressedOops 		16 bytes (object header) + 4 bytes (array length) + 18 bytes (array data, 9 chars, 2 bytes per char) + 2 bytes (padding) = 40 bytes
+				64 bits with CompressedOops 			12 bytes (object header) + 4 bytes (array length) + 18 bytes (array data, 9 chars, 2 bytes per char) + 6 bytes (padding) = 40 bytes
+
+			TOTAL SIZE FOR THE String full object
+			32 bits 								 	16 bytes + 32 bytes = 48 bytes
+			64 bits without UseCompressedOops 			24 bytes + 40 bytes = 64 bytes
+			64 bits with CompressedOops 	            16 bytes + 40 bytes = 56 bytes
+
+
+		TOTAL EXTRA SPACE (espacio innecesario)
+			32 bits 								 	 80 bytes + 48 bytes = 128 bytes
+			64 bits without UseCompressedOops 			104 bytes + 64 bytes = 168 bytes
+			64 bits with CompressedOops 	             96 bytes + 56 bytes = 152 bytes
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+ptr_to_string_builder: 00000000D6660E20
+0x00000000D6660E20: 01 00 00 00 00 00 00 00 da 02 00 20 38 0e 66 d6
+                    ----------- ----------- ----------- +++++++++++ 
+0x00000000D6660E30: 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00
+                    ........... ........... 
+0x00000000D6660E40: 41 00 00 20 09 00 00 00 78 00 6f 00 64 00 6e 00
+0x00000000D6660E50: 61 00 6e 00 72 00 65 00 66 00 00 00 00 00 00 00
+0x00000000D6660E60: --------------------------------------
+
+
+ptr_to_string_internal_storage: 00000000D6660E38
+0x00000000D6660E38: 01 00 00 00 00 00 00 00 41 00 00 20 09 00 00 00      Lenght: 9 (dec)
+0x00000000D6660E48: 78 00 6f 00 64 00 6e 00 61 00 6e 00 72 00 65 00
+                    x     o     d     n     a     n     r     e  
+0x00000000D6660E58: 66 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+                    f     .........................................
+0x00000000D6660E68: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0x00000000D6660E78: --------------------------------------
+
+
+
+	[4]
+	https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.12.5
+	4.12.5 Initial Values of Variables
+
+	http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html#StringBuilder-java.lang.String-
+
+
+
+
+
+
+
+  	
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+
+java -version
+java version "1.8.0_45"
+Java(TM) SE Runtime Environment (build 1.8.0_45-b15)
+Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)
+
+
+----------------------
+
+
+JOL (Java Object Layout)
+	Instructivo Oficial:		http://openjdk.java.net/projects/code-tools/jol/
+	Binarios Descarga:			http://central.maven.org/maven2/org/openjdk/jol/jol-cli/
+	Otras fuentes:              http://stackoverflow.com/questions/24836854/object-size-difference-in-32-bit-and-64-bit-systems-in-java
+
+
+	cd D:\Downloads\Dropbox\Dev\Algorithms\PalindromeJava
+	d:
+	java -jar jol-cli-0.3.2-full.jar internals java.util.HashMap
+
+
+	Windows 10 - 64 bits - JVM 64 bits
+		Running 64-bit HotSpot VM.
+		Using compressed oop with 3-bit shift.
+		Using compressed klass with 3-bit shift.
+		Objects are 8 bytes aligned.
+		Field sizes by type: 4, 1, 1, 2, 2, 4, 4, 8, 8 [bytes]
+		Array element sizes: 4, 1, 1, 2, 2, 4, 4, 8, 8 [bytes]
+
+	Windows XP - 32 bits - JVM 32 bits
+		Running 32-bit HotSpot VM.
+		Objects are 8 bytes aligned.
+		Field sizes by type: 4, 1, 1, 2, 2, 4, 4, 8, 8 [bytes]
+		Array element sizes: 4, 1, 1, 2, 2, 4, 4, 8, 8 [bytes]
+
+	Ubuntu 64 bits - JVM 64 bits
+
+
+	Ubuntu 32 bits - JVM 32 bits
+	OSX 10??? 64 bits - JVM 64 bits
+
+
+----------------------
+
+Depends on JVM. As to HotSpot JVM, the correct answer is:
+
+32-bit JVM:                        24 bytes = align8(4 bytes mark_word + 4 bytes class reference + 4 + 4 + 2 bytes field data)
+64-bit JVM -XX:+UseCompressedOops: 24 bytes = align8(8 bytes mark_word + 4 bytes class reference + 4 + 4 + 2 bytes field data)
+64-bit JVM -XX:-UseCompressedOops: 32 bytes = align8(8 bytes mark_word + 8 bytes class reference + 4 + 4 + 2 bytes field data)
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+*1.2.11.1. The .  introduced a very convenient
+notation for approximations in his book Analytische Zahlentheorie A894). It is
+
+
+
+*1.2.11. Asymptotic Representations
+We often want to know a quantity approximately, instead of exactly, in order to
+compare it to another. For example, Stirling's approximation to n! is a useful
+representation of this type, when n is large, and we have also made use of the
+fact that Hn w Inn + 7. The derivations of such asymptotic formulas generally
+involve higher mathematics, although in the following subsections we will use
+nothing more than elementary calculus to get the results we need.
+*1.2.11.1. The O-notation. Paul Bachmann introduced a very convenient
+
+
+  	
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+![Java StringBuffer memory representation]({{ site.url }}/images/JavaStringBuilderMemoryRepresentation.svg)
+
 
 http://stackoverflow.com/questions/4138827/check-string-for-palindrome/4139065#4139065
 
 CompressedOops Enabled
 -XX:+UseCompressedOops
 
+
+64.747
+32.373
 ---------------------------------------------------------------------------------------------------------------------------
+Para StringBuilder (compressedoops_enabled)
 
 public StringBuilder sb = new StringBuilder("fernandox");
 
@@ -58,6 +491,7 @@ ptr_to_string_builder_internal_storage: 00000000D6660D78
 
 
 ---------------------------------------------------------------------------------------------------------------------------
+Para String (compressedoops_enabled)
 
 public String ss = new StringBuilder("fernandox").reverse().toString();
 
@@ -71,7 +505,7 @@ object: 00000000D6660BA8
 0x00000000D6660BE8: --------------------------------------
 
 
-ptr_to_string_builder: 00000000D6660E20
+ptr_to_string: 00000000D6660E20
 0x00000000D6660E20: 01 00 00 00 00 00 00 00 da 02 00 20 38 0e 66 d6
                     ----------- ----------- ----------- +++++++++++ 
 0x00000000D6660E30: 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00
@@ -90,6 +524,66 @@ ptr_to_string_internal_storage: 00000000D6660E38
 0x00000000D6660E68: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 0x00000000D6660E78: --------------------------------------
 
+
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+Para StringBuilder (compressedoops_disabled)
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+Para String (compressedoops_disabled)
+
+
+reference: 000000FE691EEA10
+--------------------------------------
+object: 000000FECD286908
+0x000000FECD286908: 01 00 00 00 00 00 00 00 78 04 ff fb fe 00 00 00
+                    ----------- ----------- ----------- -----------
+0x000000FECD286918: 99 77 ff 88 78 56 34 12 08 6c 28 cd fe 00 00 00
+                    +++++++++++ *********** +++++++++++ +++++++++++
+0x000000FECD286928: 01 00 00 00 00 00 00 00 70 8f bf fb fe 00 00 00
+0x000000FECD286938: 48 69 28 cd fe 00 00 00 00 00 00 00 00 00 00 00
+0x000000FECD286948: --------------------------------------
+
+
+ptr_to_string: 0000008172686C08
+0x0000008172686C08: 01 00 00 00 00 00 00 00 70 8f ff a0 81 00 00 00
+                    ----------- ----------- ----------- -----------
+0x0000008172686C18: 28 6c 68 72 81 00 00 00 00 00 00 00 00 00 00 00
+                    +++++++++++ +++++++++++ ........... ...........
+0x0000008172686C28: 01 00 00 00 00 00 00 00 08 02 ff a0 81 00 00 00
+0x0000008172686C38: 09 00 00 00 00 00 00 00 78 00 6f 00 64 00 6e 00
+0x0000008172686C48: --------------------------------------
+
+
+ptr_to_string_internal_storage: 000000A285286C28
+0x000000A285286C28: 01 00 00 00 00 00 00 00 08 02 cf b3 a2 00 00 00
+                    ----------- ----------- ----------- -----------
+0x000000A285286C38: 09 00 00 00 00 00 00 00 78 00 6f 00 64 00 6e 00
+                    +++++++++++ ........... ***** +++++ ***** +++++
+0x000000A285286C48: 61 00 6e 00 72 00 65 00 66 00 00 00 00 00 00 00
+                    ***** +++++ ***** +++++ ***** ..... ..... .....
+0x000000A285286C58: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0x000000A285286C68: --------------------------------------
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -163,6 +657,43 @@ ptr_to_string_internal_storage: 00000000D6660E38
             throw new StringIndexOutOfBoundsException(srcEnd - srcBegin);
         }
         System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);
+    }
+
+    /**
+     * Compares this string to the specified object.  The result is {@code
+     * true} if and only if the argument is not {@code null} and is a {@code
+     * String} object that represents the same sequence of characters as this
+     * object.
+     *
+     * @param  anObject
+     *         The object to compare this {@code String} against
+     *
+     * @return  {@code true} if the given object represents a {@code String}
+     *          equivalent to this string, {@code false} otherwise
+     *
+     * @see  #compareTo(String)
+     * @see  #equalsIgnoreCase(String)
+     */
+    public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;
+        }
+        if (anObject instanceof String) {
+            String anotherString = (String)anObject;
+            int n = value.length;
+            if (n == anotherString.value.length) {
+                char v1[] = value;
+                char v2[] = anotherString.value;
+                int i = 0;
+                while (n-- != 0) {
+                    if (v1[i] != v2[i])
+                        return false;
+                    i++;
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
 
