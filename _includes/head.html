@@ -71,16 +71,24 @@ MathJax.Hub.Config({
 // }); 
 
 
+ // MathJax.Hub.Config({
+ //  "HTML-CSS": {
+ //    scale: (MathJax.Hub.Browser.isChrome && MathJax.Hub.Browser.isPC ? 200 : 100)
+ //  }
+
  MathJax.Hub.Config({
   "HTML-CSS": {
-    scale: (MathJax.Hub.Browser.isChrome && MathJax.Hub.Browser.isPC ? 200 : 100)
-  }
-});
+    scale: (MathJax.Hub.Browser.isChrome && MathJax.Hub.Browser.isPC ? 100 : 100)
+ }});
 
 MathJax.Hub.Config({
   displayAlign: "left",
   displayIndent: "100px"
 });
+
+// MathJax {
+//   font-size: 1.3em;
+// }
 
 // displayIndent: "2em"
 
@@ -93,6 +101,10 @@ MathJax.Hub.Queue(function() {
         
     }
 });
+
+$("#inline_math").css("font-size","300%");
+$("#some_math").css("font-size","500%");
+
 </script>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
