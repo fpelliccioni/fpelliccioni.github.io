@@ -122,7 +122,7 @@ Vamos a determinar la complejidad del *Algoritmo I*, analizando uno a sus compon
 
 Entonces, la complejidad total del algoritmo ineficiente sería de:
 
-**Tiempo:**  \\( n \\)  comparaciones por *desigualdad*. \\( 2n + 2 \left\lfloor\dfrac{n}{2}\right\rfloor + 16 \\) asignaciones.  
+**Tiempo:**  En el peor caso, cuando la palabra es un *palíndromo*, este algoritmo realiza \\( n \\)  comparaciones por *desigualdad* y \\( 2n + 2 \left\lfloor\dfrac{n}{2}\right\rfloor + 16 \\) asignaciones.  
 **Espacio:**  \\( 2n + 16 \\) elementos.
 
 Como pueden observar, este algoritmo es muy ineficiente, hace uso de memoria innecesariamente y como veremos más adelante, realiza más de \\( 8x \\) operaciones que el [algoritmo óptimo](#RefAlgoritmoOptimo).
@@ -143,8 +143,8 @@ public static boolean isPalindrome(String str) {
 }
 {% endhighlight %}
 
-Tiempo: \\( n \\) comparaciones por *desigualdad*.  
-Espacio: constante
+**Tiempo:** En el peor caso, cuando la palabra es un *palíndromo*, este algoritmo realiza \\( n \\) comparaciones por *desigualdad*.  
+**Espacio:** constante
 
 No se hace uso de memoria adicional y la cantidad de operaciones son \\( > 4x \\) que el *Algoritmo I*.
 Si bien el código se hace un poco más complejo, es un código fácilmente entendible y el incremento en la complejidad es insignificante con respecto a la mejora en eficiencia.
@@ -175,12 +175,12 @@ public static boolean isPalindrome(String str) {
 {% endhighlight %}
 
 
-**Tiempo**: \\( \left\lfloor\dfrac{n}{2}\right\rfloor \\) comparaciones por *desigualdad*.  
+**Tiempo**: En el peor caso, cuando la palabra es un *palíndromo*, este algoritmo realiza \\( \left\lfloor\dfrac{n}{2}\right\rfloor \\) comparaciones por *desigualdad*.  
 **Espacio**: constante
 
 
 
-### *Algoritmo I* - Análisis detallado
+### Análisis detallado del *Algoritmo I* 
 
 Como vimos anteriormente, el *Algoritmo I* es mucho más ineficiente que los algoritmos N y O.  
 Pero además del análisis de complejidad que vimos antes, tenemos que tener en cuenta otras cuestiones que afectan la eficiencia del *Algoritmo I*.
@@ -243,14 +243,14 @@ El tamaño del array es de 16 caracteres sumado a la cantidad de caracteres del 
 Los caracteres en Java tienen un tamaño de 2 bytes. [[6]](#Ref6)  
 O sea que en nuestro ejemplo el array va a tener un tamaño de \\( 2 \cdot (9 + 16) = 50 \\) bytes.
 
-En Java todos los objetos tienen un [*header*](http://hg.openjdk.java.net/jdk8/jdk8/hotspot/file/87ee5ee27509/src/share/vm/oops/oop.hpp) (si conoce alguna implementación que no los tenga, [me avisa](https://twitter.com/ferpelliccioni)), en nuestra plataforma el header es de 12 bytes. En otras plataformas populares puede ser de 8 o 16 bytes, cualquier cosa ver aquí ***.
+En Java todos los objetos tienen un [*header*](http://hg.openjdk.java.net/jdk8/jdk8/hotspot/file/87ee5ee27509/src/share/vm/oops/oop.hpp) (si conoce alguna implementación que no los tenga, [me avisa](https://twitter.com/ferpelliccioni)), en nuestra plataforma el header es de 12 bytes. En otras plataformas populares puede ser de 8 o 16 bytes, cualquier cosa [ver aquí [7]](#Ref7).
 
 Otra cosa a tener en cuenta es el [padding](https://en.wikipedia.org/wiki/Data_structure_alignment#Data_structure_padding), que básicamente es cierto espacio de memoria que se adiciona para satisfacer el [alineamiento](https://en.wikipedia.org/wiki/Data_structure_alignment) de los objetos. En nuestro caso, los objetos deben estar alineados en direcciones de memoria múltiplos de 8.
 
 En resumen, nuestro objeto StringBuilder tiene el siguiente tamaño en memoria (en bytes):
 
 Primera parte: \\( 24 \\)  
-Segunda parte: \\( 16 + 2n + 32 + padding \\) [[X]](#RefX)
+Segunda parte: \\( 16 + 2n + 32 + padding \\) [[8]](#Ref8)
 
 Total: \\( 8(\left\lceil\dfrac{n}{4}\right\rceil + 9) \\) bytes
 
@@ -266,12 +266,12 @@ Un objeto del tipo String consiste en dos partes (no necesariamente contiguas en
 - Primera parte: referencia al array donde están los datos y [hash](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#hashCode--).
 - Segunda parte: tamaño del array (que sirve como Length del String) y el array con los datos.  
 
-El objeto String aquí descripto pertenece a la especificación de [Java 8](http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/lang/String.java). En [versiones anteriores](http://hg.openjdk.java.net/jdk6/jdk6/jdk/file/814bf0775b52/src/share/classes/java/lang/String.java) de Java, la clase String contaba con más campos, por consiguiente su tamaño en memoria era mayor. [X] ***
+El objeto String aquí descripto pertenece a la especificación de [Java 8](http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/lang/String.java). En [versiones anteriores](http://hg.openjdk.java.net/jdk6/jdk6/jdk/file/814bf0775b52/src/share/classes/java/lang/String.java) de Java, la clase String contaba con más campos, por consiguiente su tamaño en memoria era mayor. [[7]](#Ref7)
 
 En resumen, nuestro objeto String tiene el siguiente tamaño en memoria (en bytes):
 
 Primera parte: \\( 24 \\)  
-Segunda parte: \\( 16 + 2n + padding \\) [[X]](#RefX)
+Segunda parte: \\( 16 + 2n + padding \\) [[8]](#Ref8)
 
 Total: \\( 8(\left\lceil\dfrac{n}{4}\right\rceil + 5) \\) bytes
 
@@ -295,60 +295,43 @@ En ese promedio no estoy considerando un benchmark que arroja **586x** de penali
 
 Puede ver el código fuente de los benchmarks en [GitHub](https://github.com/fpelliccioni/componentsprogramming/tree/master/palindrome/part1/java).
 
-No voy a explicar el código ni los benchmarks aquí, eso quedará para un futuro artículo.
+La explicación del los benchmarks y el código quedará para un próximo artículo.
 
 
 ### *Algoritmo N* vs *Algoritmo O*
 
-Hablar sobre la poca diferencia en performance. Muchas veces más rápido el AlgoN por sobre el AlgoO.
-Cache vs Division
+Si bien anteriormente vimos que el *Algoritmo O* realiza la mitad de operaciones que el *Algoritmo N*, en el peor caso; el tiempo de ejecución de ambos algoritmos se ve afectado por diversos factores, como por ejemplo: el largo de la palabra, si la palabra es palíndromo o no y otros factores correspondientes a la plataforma.
 
+En muchos casos el *Algoritmo N* es más rápido en tiempo de ejecución que el *Algoritmo O*.
 
-
-
+Analizaremos ésto en un futuro artículo.
 
 ## ¿Solución definitiva?
+
+Considero que ninguno de los tres algoritmos presentados en éste artículo representan una solución definitiva, un [Componente]({% post_url en/posts/2014-10-28-components-programming %}).
+
+Un *componente* debe ser algo que se pueda reutilizar y en muchos casos los algoritmos aquí descriptos no son aptos para ser reutilizados. 
+
+***
 
 Versión genérica.
 Enteros
 DNA
 ¿Cómo lo logro en Java?
 
+
 ## Pendientes
 
-
-C#
-http://stackoverflow.com/questions/9790749/check-if-a-string-is-a-palindrome
-http://codereview.stackexchange.com/questions/58395/check-a-string-to-see-if-it-is-a-palindrome
-
-
+Replicar el *Algoritmo I* en C# y analizar su eficiencia en tiempo de ejecución y consumo de memoria.
 
 
 ## Conclusiones
 
+Los programadores
+Abstracciones
+Componentes
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -361,13 +344,11 @@ Un agradecimiento especial para ...
 
 ---
 
-
-
 ## Notas
 
 Byte = 8-bits.  
 Hay arquitecturas donde 1 byte no necesariamente equivale a 8 bits. Estas arquitecturas son inusuales hoy en día. 
-No existe un estándar que especifique que el tamaño. El estándar *de facto* es que 1 byte = 8 bits, es lo más común en arquitecturas de computadores modernas.
+No existe un estándar que especifique el tamaño de un byte, pero se puede decir que el estándar *de facto* es que 1 byte = 8 bits, es lo más común en arquitecturas de computadores modernas.
 
 <a name="RefPlataforma"></a> 
 
@@ -389,7 +370,7 @@ No existe un estándar que especifique que el tamaño. El estándar *de facto* e
     - [Compressed Oops](http://docs.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html#compressedOop) activado  
     - [Objects alignment](https://en.wikipedia.org/wiki/Data_structure_alignment): 8 bytes.
 
-Para el análisis en otras plataformas, por favor referirse a [Y].
+Para el análisis en otras plataformas, por favor [referirse a [7]](#Ref7).
 
 ## Referencias
 
@@ -405,10 +386,9 @@ Para el análisis en otras plataformas, por favor referirse a [Y].
 
 <a name="Ref6">[6]</a> [Java Primitive Data Types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 
+<a name="Ref7">[7]</a> [Análisis de consumo de memoria en otras plataformas]({% post_url es/posts/2015-08-26-palindromos-otras-plataformas %}). 
 
-
-
-<a name="RefX">[X]</a> La fórmula para calcular el [padding](https://en.wikipedia.org/wiki/Data_structure_alignment#Data_structure_padding) de los arrays internos de StringBuilder y String son las siguientes (todo medido en bytes):  
+<a name="Ref8">[8]</a> La fórmula para calcular el [padding](https://en.wikipedia.org/wiki/Data_structure_alignment#Data_structure_padding) de los arrays internos de StringBuilder y String son las siguientes (todo medido en bytes):  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuilder internal array padding = \\( 8\left\lceil\dfrac{2n + 48}{8}\right\rceil - (2n + 48) \\)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String internal array padding  = \\( 8\left\lceil\dfrac{2n + 16}{8}\right\rceil - (2n + 16) \\)  
 
@@ -417,4 +397,9 @@ Para el análisis en otras plataformas, por favor referirse a [Y].
 La fórmula general para calcular el padding de objetos es la siguiente:
 
 $$ alignment\left\lceil\dfrac{size}{alignment}\right\rceil - size $$
+
+
+
+
+
 
