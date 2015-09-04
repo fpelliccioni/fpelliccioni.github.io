@@ -308,6 +308,7 @@ Analizaremos ésto en un futuro artículo.
 
 ## ¿Solución definitiva?
 
+
 Considero que ninguno de los tres algoritmos presentados en éste artículo representan una solución definitiva, un [Componente]({% post_url en/posts/2014-10-28-components-programming %}).
 
 Un *componente* debe ser algo que se pueda reutilizar y en muchos casos los algoritmos aquí descriptos no son aptos para ser reutilizados. 
