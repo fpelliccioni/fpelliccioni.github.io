@@ -384,6 +384,7 @@ Para el análisis en otras plataformas, por favor [referirse a [7]](#Ref7).
 
 <a name="Ref6">[6]</a> [Java Primitive Data Types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 
+<a name="Ref7">[7]</a> [Análisis de consumo de memoria en otras plataformas]({% post_url es/posts/2015-08-26-palindromos-otras-plataformas %}). 
 
 <a name="Ref8">[8]</a> La fórmula para calcular el [padding](https://en.wikipedia.org/wiki/Data_structure_alignment#Data_structure_padding) de los arrays internos de StringBuilder y String son las siguientes (todo medido en bytes):  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuilder internal array padding = \\( 8\left\lceil\dfrac{2n + 48}{8}\right\rceil - (2n + 48) \\)  
