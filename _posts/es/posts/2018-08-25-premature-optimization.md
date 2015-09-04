@@ -2,7 +2,7 @@
 layout: post
 type: draft
 title:  "Palíndromos"
-date:   2015-08-25 12:00:00
+date:   2018-08-25 12:00:00
 comments: true
 
 category: spanish
