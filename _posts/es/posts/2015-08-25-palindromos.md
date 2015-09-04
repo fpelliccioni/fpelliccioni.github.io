@@ -308,8 +308,6 @@ Analizaremos ésto en un futuro artículo.
 
 ## ¿Solución definitiva?
 
-
-
 Un *componente* debe ser algo que se pueda reutilizar y en muchos casos los algoritmos aquí descriptos no son aptos para ser reutilizados. 
 
 ***
