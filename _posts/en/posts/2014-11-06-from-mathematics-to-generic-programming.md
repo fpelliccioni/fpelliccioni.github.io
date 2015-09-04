@@ -2,7 +2,7 @@
 layout: post
 type: post
 title:  "Stepanov's new book: From Mathematics to Generic Programming"
-date:   2014-11-06 00:00:00
+date:   2014-11-06 12:00:00
 comments: true
 tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp]
 ---
