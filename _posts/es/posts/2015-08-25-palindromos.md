@@ -25,7 +25,7 @@ Decidí escribir este artículo a partir de una pregunta que vi en [Stackoverflo
 El autor de la pregunta intenta escribir un algoritmo que identifique si una "palabra" es un [palíndromo](https://es.wikipedia.org/wiki/Pal%C3%ADndromo) o no lo es.
 El algoritmo está escrito usando el [lenguaje de programación Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
 
-No me interesa analizar el algoritmo propuesto por el autor, sino que me interesa analizar el algoritmo propuesto por el autor de la respuesta más votada. Tiene 53 votos contra 46 votos que tiene la respuesta más votada (a día de la fecha, 26 de Agosto de 2015).
+No me interesa analizar el algoritmo propuesto por el autor, sino que me interesa analizar el algoritmo propuesto por el autor de la respuesta más votada. Este último tiene 53 votos contra 46 votos que tiene la respuesta aceptada (a día de la fecha, 26 de Agosto de 2015).
 
 [Aquí](http://stackoverflow.com/a/4139065/1006264) el enlace a la respuesta que me interesa.
 

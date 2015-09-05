@@ -27,7 +27,7 @@ The questioner tries to write an algorithm to identify whether a "word" is a [pa
 No me interesa analizar el algoritmo propuesto por el autor, sino que me interesa analizar el algoritmo propuesto por el autor de la respuesta más votada. Tiene 53 votos contra 46 votos que tiene la respuesta más votada (a día de la fecha, 26 de Agosto de 2015).
 
 
-I do not want to analyze the algorithm proposed by the author, but I want to analyze proposed by the author of the most voted answer algorithm. There are 53 votes to 46 votes that has received the most votes (a day of the date, August 26, 2015) Answercode:..
+I do not want to analyze the algorithm proposed by the questioner, but I want to analyze the most voted answer algorithm. There are 53 votes to 46 votes that has received the most votes (a day of the date, August 26, 2015) Answercode:..
 
 
 
