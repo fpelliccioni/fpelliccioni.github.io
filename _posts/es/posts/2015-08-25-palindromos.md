@@ -18,12 +18,12 @@ tags: [components, programming, components programming, componentsprogramming, s
  }});
 </script>
 
-Decidí escribir este artículo a partir de una pregunta de que vi en [stackoverflow.com](http://stackoverflow.com)
+Decidí escribir este artículo a partir de una pregunta que vi en [Stackoverflow](http://stackoverflow.com).
 
 [Aquí](http://stackoverflow.com/questions/4138827/check-string-for-palindrome) el enlace a la pregunta.
 
 El autor de la pregunta intenta escribir un algoritmo que identifique si una "palabra" es un [palíndromo](https://es.wikipedia.org/wiki/Pal%C3%ADndromo) o no lo es.
-El algoritmo está escrito usando el lenguaje de programación [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
+El algoritmo está escrito usando el [lenguaje de programación Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
 
 No me interesa analizar el algoritmo propuesto por el autor, sino que me interesa analizar el algoritmo propuesto por el autor de la respuesta más votada. Tiene 53 votos contra 46 votos que tiene la respuesta más votada (a día de la fecha, 26 de Agosto de 2015).
 
@@ -59,14 +59,14 @@ Usualmente está asociada a la [O-notation](https://en.wikipedia.org/wiki/Big_O_
 
 De esta forma podemos medir la escalabilidad de los algoritmos sin depender de la arquitectura de la máquina, de la velocidad del procesador, del lenguaje en el que está implementado el algoritmo, etc...
 
-Si bien es muy útil en muchas circunstancias, el problema forma de medición es que no es exacta, sino que es **aproximada**.  
+Si bien es muy útil en muchas circunstancias, el problema de esta forma de medición es que no es exacta, sino que es **aproximada**.  
 
 No quiero aquí extenderme en más detalles sobre *O-notation* ni complejidad asintótica, para información referirse a [[2]](#Ref2).
 
 
 ### Complejidad Computacional Concreta
 
-Otra forma de medir algoritmos es no usar aproximaciones sino cantidades concretas operaciones, dependiendo de la entrada al algoritmo.
+Otra forma de medir algoritmos es no usar aproximaciones sino cantidades concretas de operaciones, dependiendo de la entrada al algoritmo.
 
 Por ejemplo, supongamos el algoritmo para encontrar el mínimo (o máximo) de \\( n \\) elementos. Podemos decir que dicho algoritmo tiene una complejidad (en tiempo) de \\( O(n) \\) o *lineal*.
 Pero específicamente se necesitan \\( n - 1 \\) comparaciones.
@@ -90,7 +90,7 @@ Al código anterior lo vamos a denominar *Algoritmo I* ("I" de ineficiente).
 
 Podríamos decir que *Algoritmo I* es \\( O(n) \\), pero, ¿Cómo podemos asegurarlo sin conocer la complejidad de los componentes en los que el algoritmo está basado?
 
-Para ello, debemos revisar la documentación provista para el lenguaje Java. Por ejemplo, veamos la función [String.equals()](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#equals-java.lang.Object-). [[3]](#Ref3)
+Para ello, debemos revisar la documentación provista por Java. Por ejemplo, veamos la función [String.equals()](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#equals-java.lang.Object-). [[3]](#Ref3)
 
 Como habrán notado en la página anterior, la documentación de Java no incluye la complejidad en tiempo ni espacio de sus algoritmos y estructuras de datos.  
 Considero esto una gran falta ya que nos dificulta la especificación de la complejidad de nuestros algoritmos, al menos de los algoritmos que están basados en clases provistas por Java.
