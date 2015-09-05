@@ -13,7 +13,8 @@ tags: [components, programming, components programming, componentsprogramming, s
 <script type="text/x-mathjax-config">
  MathJax.Hub.Config({
   "HTML-CSS": {
-    scale: 200
+    // scale: 200
+    scale: (MathJax.Hub.Browser.isChrome && MathJax.Hub.Browser.isPC ? 100 : 100)
  }});
 </script>
 
@@ -88,8 +89,6 @@ public static boolean isPalindrome(String str) {
 Al código anterior lo vamos a denominar *Algoritmo I* ("I" de ineficiente).
 
 Podríamos decir que *Algoritmo I* es \\( O(n) \\), pero, ¿Cómo podemos asegurarlo sin conocer la complejidad de los componentes en los que el algoritmo está basado?
-
-Para poder medir la complejidad deberíamos saber la complejidad de los componentes utilizados por el algoritmos.
 
 Para ello, debemos revisar la documentación provista para el lenguaje Java. Por ejemplo, veamos la función [String.equals()](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#equals-java.lang.Object-). [[3]](#Ref3)
 
@@ -193,7 +192,7 @@ Analicémoslo en detalle.
 - Inicialización en cero (Zero-Initialization) de los miembros de StringBuilder. [[4]](#Ref4)
 - Asignación de memoria dinámica para el array interno dentro de StringBuilder.
 	De acuerdo con la documentación, el tamaño del array interno es de 16 caracteres sumado al tamaño del String original. [[5]](#Ref5)
-- Inicialización en cero (Zero-Initialization) de los miembros del array interno de StringBuilder. Length y el Array en sí. [[4]](#Ref4)
+- Inicialización en cero (Zero-Initialization) de los miembros del array interno de StringBuilder. Length y del Array en sí. [[4]](#Ref4)
 - Copia de los bytes del string original al array interno del StringBuilder.
 
 #### reverse() (StringBuilder)
@@ -203,14 +202,14 @@ Analicémoslo en detalle.
 - Asignación de memoria (memory allocation) dinámicamente para el objeto de tipo [String](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html) ([heap, free store](https://en.wikipedia.org/wiki/Memory_management#HEAP), o como quieran llamarlo).
 - Inicialización en cero (Zero-Initialization) de los miembros de String. [[4]](#Ref4)
 - Asignación de memoria dinámica para el array interno dentro de String.
-- Inicialización en cero (Zero-Initialization) de los miembros del array interno de String. Length y el Array en sí. [[4]](#Ref4)
+- Inicialización en cero (Zero-Initialization) de los miembros del array interno de String. Length y del Array en sí. [[4]](#Ref4)
 - Copia de los bytes del string original al array interno del nuevo String.
 
 #### equals() (String)
 - Sólo lo mencionado anteriormente. Esta función no utiliza memoria adicional y es eficiente en tiempo de ejecución.
 
 #### Garbage Collection
-- El GC debe liberar toda la memoria adicional (innecesaria) que fue utilizada.
+- El GC debe liberar toda la memoria adicional (innecesaria) que fue utilizada y obviamente esta operación no es "gratuita".
 
 #### Data Cache Misses
 - Otro inconveniente asociado al consumo innecesario de memoria es la probabilidad de que nuestros objetos sean muy grandes para entrar en el cache, provocando [cache misses](https://en.wikipedia.org/wiki/CPU_cache#Cache_miss) impactando en el tiempo de ejecución.
@@ -219,7 +218,7 @@ Analicémoslo en detalle.
 
 ### Consumo de memoria (memory footprint)
 
-Para analizar el consumo de memoria del *Algoritmo I*, vamos a hacerlo con un ejemplo concreto. Vamos usar una palabra (de habla inglesa) de 9 caracteres. La palabra en este caso es "evitative" y es un palíndromo.
+Para analizar el consumo de memoria del *Algoritmo I*, vamos a hacerlo con un ejemplo concreto. Vamos usar una palabra (de habla inglesa) de 9 caracteres, a palabra en este caso es "evitative" y es un palíndromo.
 
 {% highlight java %}
 isPalindrome("evitative");
@@ -235,7 +234,7 @@ Los objetos de tipo [StringBuilder](http://docs.oracle.com/javase/8/docs/api/jav
 
 ![Java StringBuffer memory representation]({{ site.url }}/images/JavaStringBuilderMemoryRepresentation64CompressedOopsEnabled.svg)
 
-Un objeto del tipo StringBuilder consiste en dos partes (no necesariamente contiguas en memoria):
+Un objeto del tipo StringBuilder consiste de dos partes (no necesariamente contiguas en memoria):
 
 - Primera parte: tamaño de utilización del array (buffer) y una referencia al array donde están los datos.
 - Segunda parte: tamaño del array (que sirve como Capacity del StringBuilder) y el array con los datos.  
@@ -261,7 +260,7 @@ Los objetos de tipo [String](http://docs.oracle.com/javase/8/docs/api/java/lang/
 
 ![Java StringBuffer memory representation]({{ site.url }}/images/JavaStringMemoryRepresentation64CompressedOopsEnabledJdk18.svg)
 
-Un objeto del tipo String consiste en dos partes (no necesariamente contiguas en memoria):
+Un objeto del tipo String consiste de dos partes (no necesariamente contiguas en memoria):
 
 - Primera parte: referencia al array donde están los datos y [hash](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#hashCode--).
 - Segunda parte: tamaño del array (que sirve como Length del String) y el array con los datos.  
@@ -287,8 +286,7 @@ Recuerden que estos 160 bytes es un consumo totalmente innecesario de memoria.
 
 ## Benchmarks
 
-Estuve haciendo algunas mediciones de performance de los algoritmos.
-Las pruebas que estuve haciendo arrojan una penalidad en performance de un promedio de **8.5x** del *Algoritmo I* por sobre los *Algoritmos O y N*.
+Estuve haciendo algunas mediciones de performance de los algoritmos y en las mismas se percibe una penalidad en tiempo de ejecución promedio de **8.5x** del *Algoritmo I* por sobre los *Algoritmos O y N*. O sea, el *Algoritmo I* es más de 8 veces más lento que los otros dos, en promedio.
 
 En ese promedio no estoy considerando un benchmark que arroja **586x** de penalidad, ya que el algoritmo usado en este benchmark no fue presentado en este artículo. Lo veremos en un futuro artículo.
 
@@ -304,22 +302,18 @@ Si bien anteriormente vimos que el *Algoritmo O* realiza la mitad de operaciones
 
 En muchos casos el *Algoritmo N* es más rápido en tiempo de ejecución que el *Algoritmo O*.
 
-Analizaremos ésto en un futuro artículo.
+Analizaremos esto en un futuro artículo.
 
 ## ¿Solución definitiva?
 
-Considero que ninguno de los tres algoritmos presentados en éste artículo representan una solución definitiva, ninguno es un [Componente]({% post_url en/posts/2014-10-28-components-programming %}).
+Considero que ninguno de los tres algoritmos presentados en este artículo representan una solución definitiva, ninguno es un [Componente]({% post_url en/posts/2014-10-28-components-programming %}).
 
 Un *componente* debe ser algo que se pueda reutilizar y en muchos casos los algoritmos aquí descriptos no son aptos para ser reutilizados.  
-Un palíndromo no solo es una secuencia de caracteres que se lee igual al derecho que al revez. Un palíndromo puede encontrarse en 
 
-***
+Además, los tres algoritmos sólo aceptan un String como input. Un palíndromo no solo es una secuencia de caracteres que se lee igual al derecho que al revez. Un palíndromo puede encontrarse en forma de notas musicales, números y como si fuera poco, los [palíndromos también se encuentran en cadenas de ADN](https://en.wikipedia.org/wiki/Palindromic_sequence).  
+Los palíndromos en cadenas de ADN son tan importantes que son considerados los responsables de evitar la extinción de la especie humana (y en otras especies también) ya que de no existir los palíndromos en las cadenas de ADN, se producirían mutaciones genéticas irreversibles e incorregibles, que con el paso del tiempo provocarían la extensión de la especie.
 
-Versión genérica.
-Enteros
-DNA
-¿Cómo lo logro en Java?
-
+La genética no es mi especialidad, pero ya conocía esta propiedad tan importante de los palíndromos, por lo que más adelante, en algún otro artículo, me gustaría revisar los algoritmos.
 
 ## Pendientes
 
@@ -328,19 +322,21 @@ Replicar el *Algoritmo I* en C# y analizar su eficiencia en tiempo de ejecución
 
 ## Conclusiones
 
-Los programadores
-Abstracciones
-Componentes
+Las abstracciones nos facilitan nuestra labor, nos permiten concentrarnos en el problema a resolver sin tener que pensar en el contexto, como por ejemplo, la máquina (computadora).
 
----
+Si bien las abstraciones son buenas, tienen una gran desventaja y es que nos hacen olvidar cómo funciona la máquina en la cual nuestro programa se ejecutará. Los programadores modernos suelen abusar de las abstraciones y no tienen conocimiento alguno sobre temas muy importantes que afectan el comportamiento de nuestros programas, como: memoria, cache, load/store buffers, branch prediction, pipelines, modelos de memoria, etc...
 
+Considero que como programadores, debemos conocer en profundidad la computadora, el lenguaje de programación y la complejidad de los componentes que usamos. Pero lamentablemente, los programadores de hoy se han olvidado de esto y están concentrados en otras cuestiones, como testing, agile, metaprogramming y frameworks específicos que tiene una vida útil no mayor a dos años.
 
+Volviendo a las abstracciones, la mejor de todas las abstracciones fue descubierta por [Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz) en 1679. Esa abstracción es la que nos permite modelar el mundo real en una computadora. Esa abstracción es el **BIT**.
+
+Y por último, se puede decir que *le debemos la vida a los palíndromos*, así que, no los tomemos tan a la ligera.
 
 ---
 
 ## Agradecimientos
 
-Un agradecimiento especial para ...
+Un agradecimiento especial para,..., *los palíndromos* :).
 
 
 ---
@@ -349,7 +345,7 @@ Un agradecimiento especial para ...
 
 Byte = 8-bits.  
 Hay arquitecturas donde 1 byte no necesariamente equivale a 8 bits. Estas arquitecturas son inusuales hoy en día. 
-No existe un estándar que especifique el tamaño de un byte, pero se puede decir que el estándar *de facto* es que 1 byte = 8 bits, es lo más común en arquitecturas de computadores modernas.
+No existe un estándar que especifique el tamaño de un byte, pero se puede decir que el estándar *de facto* es que 1 byte = 8 bits, es lo más común en arquitecturas de computadoras modernas.
 
 <a name="RefPlataforma"></a> 
 
