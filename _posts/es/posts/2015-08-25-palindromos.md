@@ -1,13 +1,13 @@
 ---
 layout: post
 type: draft
-title:  "Palíndromos???????"
+title:  "Palíndromos y algo más"
 date:   2015-08-25 12:00:00
 comments: true
 
 category: spanish
 
-tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp, smalltalk, fortran, algol, simula, method, procedure, routine, function, history]
+tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp, smalltalk, fortran, algol, simula, method, procedure, routine, function, history, palindromos, palindromes]
 ---
 
 <script type="text/x-mathjax-config">
@@ -288,7 +288,7 @@ Recuerden que estos 160 bytes es un consumo totalmente innecesario de memoria.
 ## Benchmarks
 
 Estuve haciendo algunas mediciones de performance de los algoritmos.
-Las pruebas que estuve haciendo arrojan una penalidad en performance de un promedio de **8.5x** del *Algoritmo I* por sobre los *Algoritmos O y N*
+Las pruebas que estuve haciendo arrojan una penalidad en performance de un promedio de **8.5x** del *Algoritmo I* por sobre los *Algoritmos O y N*.
 
 En ese promedio no estoy considerando un benchmark que arroja **586x** de penalidad, ya que el algoritmo usado en este benchmark no fue presentado en este artículo. Lo veremos en un futuro artículo.
 
@@ -308,9 +308,10 @@ Analizaremos ésto en un futuro artículo.
 
 ## ¿Solución definitiva?
 
-Considero que ninguno de los tres algoritmos presentados en éste artículo representan una solución definitiva, un [Componente]({% post_url en/posts/2014-10-28-components-programming %}).
+Considero que ninguno de los tres algoritmos presentados en éste artículo representan una solución definitiva, ninguno es un [Componente]({% post_url en/posts/2014-10-28-components-programming %}).
 
-Un *componente* debe ser algo que se pueda reutilizar y en muchos casos los algoritmos aquí descriptos no son aptos para ser reutilizados. 
+Un *componente* debe ser algo que se pueda reutilizar y en muchos casos los algoritmos aquí descriptos no son aptos para ser reutilizados.  
+Un palíndromo no solo es una secuencia de caracteres que se lee igual al derecho que al revez. Un palíndromo puede encontrarse en 
 
 ***
 
