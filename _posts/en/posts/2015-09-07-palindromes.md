@@ -2,7 +2,7 @@
 layout: post
 type: draft
 title:  "Palindromes and more"
-date:   2015-09-05 12:00:00
+date:   2015-09-07 12:00:00
 comments: true
 
 category: spanish
@@ -24,7 +24,7 @@ I decided to write this article from a question I saw in [stackoverflow.com](htt
 
 The questioner tries to write an algorithm to identify whether a "word" is a [palindrome](https://en.wikipedia.org/wiki/Palindrome) or it is not. The algorithm is written using the [Java programming language](https://en.wikipedia.org/wiki/Java_(programming_language))
 
-I do not want to analyze the algorithm proposed by the questioner, but I want to analyze the most voted answer algorithm. The latter has 53 votes versus 46 votes that have the accepted answer (to today's date, September 5, 2015).
+I do not want to analyze the algorithm proposed by the questioner, but I want to analyze the most voted answer algorithm. The latter has 55 votes versus 47 votes that have the accepted answer (to today's date, September 7, 2015).
 
 [Here](http://stackoverflow.com/a/4139065/1006264) the link to the algorithm that I want to analyze.
 
