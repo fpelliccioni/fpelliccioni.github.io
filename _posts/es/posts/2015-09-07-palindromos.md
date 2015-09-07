@@ -2,7 +2,7 @@
 layout: post
 type: draft
 title:  "Palíndromos y algo más"
-date:   2015-08-25 12:00:00
+date:   2015-09-07 12:00:00
 comments: true
 
 category: spanish
@@ -352,7 +352,7 @@ public static boolean isPalindrome(String str) {
 ## Agradecimientos
 
 Quiero agradecer a Mario dal Lago y Javier Velilla por revisar el artículo y sugerir correcciones.  
-Y por último, ya que se puede decir que *le debemos la vida a los palíndromos*, un agradecimiento especial ellos. :)
+Y por último, ya que se puede decir que *le debemos la vida a los palíndromos*, un agradecimiento especial para ellos. :)
 
 ---
 
