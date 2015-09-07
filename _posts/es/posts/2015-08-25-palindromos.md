@@ -107,7 +107,7 @@ Esto quiere decir que se utiliza una cantidad de memoria constante más allá de
 
 ### Determinando la complejidad
 
-Vamos a determinar la complejidad del *Algoritmo I*, analizando uno a sus componentes.
+Vamos a determinar la complejidad del *Algoritmo I*, analizando uno a uno sus componentes.
 
 [String.equals()](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#equals-java.lang.Object-). Tiempo lineal,  \\( n \\)  *comparaciones por desigualdad*. Espacio constante.
 
@@ -119,7 +119,7 @@ Vamos a determinar la complejidad del *Algoritmo I*, analizando uno a sus compon
 [StringBuilder constructor](http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/lang/StringBuilder.java). Tiempo lineal,  \\( n + 16 \\)  asignaciones. Espacio lineal,  \\( n + 16 \\) elementos.
 
 
-Entonces, la complejidad total del algoritmo ineficiente sería de:
+Entonces, la complejidad total del *Algoritmo I* es:
 
 **Tiempo:**  En el peor caso, cuando la palabra es un *palíndromo*, este algoritmo realiza \\( n \\)  comparaciones por *desigualdad* y \\( 2n + 2 \left\lfloor\dfrac{n}{2}\right\rfloor + 16 \\) asignaciones.  
 **Espacio:**  \\( 2n + 16 \\) elementos.
@@ -145,14 +145,14 @@ public static boolean isPalindrome(String str) {
 **Tiempo:** En el peor caso, cuando la palabra es un *palíndromo*, este algoritmo realiza \\( n \\) comparaciones por *desigualdad*.  
 **Espacio:** constante
 
-No se hace uso de memoria adicional y la cantidad de operaciones son \\( > 4x \\) que el *Algoritmo I*.
-Si bien el código se hace un poco más complejo, es un código fácilmente entendible y el incremento en la complejidad es insignificante con respecto a la mejora en eficiencia.
+No se hace uso de memoria adicional y ejecuta aproximadamente \\( \dfrac{1}{4} \\) de las operaciones que el *Algoritmo I*.
+Si bien el código se hace un poco más complejo, es un código fácilmente entendible y el incremento en la complejidad es insignificante comparado a la mejora en eficiencia.
 
 <a name="RefAlgoritmoOptimo"></a>
 
 ### Algoritmo óptimo
 
-Como podemos ver en la siguiente imagen, no hace falta hacer \\( n \\) comparaciones para determinar si una palabra es un palíndromo.
+Como podemos ver en la siguiente imagen, no hace falta hacer \\( n \\) comparaciones para determinar si una palabra es un *palíndromo*.
 
 ![Optimal Algorithm]({{ site.url }}/images/OptimalAlgorithm.svg)
 
@@ -203,7 +203,7 @@ Analicémoslo en detalle.
 - Inicialización en cero (Zero-Initialization) de los miembros de String. [[4]](#Ref4)
 - Asignación de memoria dinámica para el array interno dentro de String.
 - Inicialización en cero (Zero-Initialization) de los miembros del array interno de String. Length y del Array en sí. [[4]](#Ref4)
-- Copia de los bytes del string original al array interno del nuevo String.
+- Copia de los bytes del array interno de StringBuilder al array interno del nuevo String.
 
 #### equals() (String)
 - Sólo lo mencionado anteriormente. Esta función no utiliza memoria adicional y es eficiente en tiempo de ejecución.
@@ -232,12 +232,12 @@ Básicamente en nuestro ejemplo se crean dos objetos, uno de tipo StringBuilder 
 
 Los objetos de tipo [StringBuilder](http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html) tienen la siguiente representación en memoria. 
 
-![Java StringBuffer memory representation]({{ site.url }}/images/JavaStringBuilderMemoryRepresentation64CompressedOopsEnabled.svg)
+![Java StringBuilder memory representation]({{ site.url }}/images/JavaStringBuilderMemoryRepresentation64CompressedOopsEnabled.svg)
 
 Un objeto del tipo StringBuilder consiste de dos partes (no necesariamente contiguas en memoria):
 
-- Primera parte: tamaño de utilización del array (buffer) y una referencia al array donde están los datos.
-- Segunda parte: tamaño del array (que sirve como Capacity del StringBuilder) y el array con los datos.  
+- Primera parte: tamaño de utilización del array (length() del StringBuilder) y una referencia al array donde están los datos.
+- Segunda parte: tamaño del array (capacity() del StringBuilder) y el array con los datos.  
 El tamaño del array es de 16 caracteres sumado a la cantidad de caracteres del String original ("evitative") [[5]](#Ref5). En la imagen se muestran esos 16 caracteres como recuadros de color rojo, debido a que es espacio desperdiciado.
 Los caracteres en Java tienen un tamaño de 2 bytes. [[6]](#Ref6)  
 O sea que en nuestro ejemplo el array va a tener un tamaño de \\( 2 \cdot (9 + 16) = 50 \\) bytes.
@@ -258,12 +258,12 @@ Total: \\( 8(\left\lceil\dfrac{n}{4}\right\rceil + 9) \\) bytes
 
 Los objetos de tipo [String](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html) tienen la siguiente representación en memoria. 
 
-![Java StringBuffer memory representation]({{ site.url }}/images/JavaStringMemoryRepresentation64CompressedOopsEnabledJdk18.svg)
+![Java String memory representation]({{ site.url }}/images/JavaStringMemoryRepresentation64CompressedOopsEnabledJdk18.svg)
 
 Un objeto del tipo String consiste de dos partes (no necesariamente contiguas en memoria):
 
 - Primera parte: referencia al array donde están los datos y [hash](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html#hashCode--).
-- Segunda parte: tamaño del array (que sirve como Length del String) y el array con los datos.  
+- Segunda parte: tamaño del array (length() del String) y el array con los datos.  
 
 El objeto String aquí descripto pertenece a la especificación de [Java 8](http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/java/lang/String.java). En [versiones anteriores](http://hg.openjdk.java.net/jdk6/jdk6/jdk/file/814bf0775b52/src/share/classes/java/lang/String.java) de Java, la clase String contaba con más campos, por consiguiente su tamaño en memoria era mayor. [[7]](#Ref7)
 
@@ -310,34 +310,50 @@ Considero que ninguno de los tres algoritmos presentados en este artículo repre
 
 Un *componente* debe ser algo que se pueda reutilizar y en muchos casos los algoritmos aquí descriptos no son aptos para ser reutilizados.  
 
-Además, los tres algoritmos sólo aceptan un String como input. Un palíndromo no solo es una secuencia de caracteres que se lee igual al derecho que al revez. Un palíndromo puede encontrarse en forma de notas musicales, números y como si fuera poco, los [palíndromos también se encuentran en cadenas de ADN](https://en.wikipedia.org/wiki/Palindromic_sequence).  
-Los palíndromos en cadenas de ADN son tan importantes que son considerados los responsables de evitar la extinción de la especie humana (y en otras especies también) ya que de no existir los palíndromos en las cadenas de ADN, se producirían mutaciones genéticas irreversibles e incorregibles, que con el paso del tiempo provocarían la extensión de la especie.
+Además, los tres algoritmos sólo aceptan un String como input. Un palíndromo no sólo es una secuencia de caracteres que se lee igual al derecho y al revés. Un palíndromo puede encontrarse en forma de notas musicales, números y también en la naturaleza.
 
-La genética no es mi especialidad, pero ya conocía esta propiedad tan importante de los palíndromos, por lo que más adelante, en algún otro artículo, me gustaría revisar los algoritmos.
+No soy experto en genética, pero se que los [palíndromos también pueden encontrarse en cadenas de ADN](https://en.wikipedia.org/wiki/Palindromic_sequence).  
+Los palíndromos en el ADN son tan importantes que algunos los consideran como responsables de evitar la extinción de la especie humana (y también otras especies) ya que de no existir los palíndromos en el ADN, se producirían mutaciones genéticas irreversibles e incorregibles, que con el paso del tiempo provocarían la extensión de la especie.  
+En algún futuro artículo charlaremos este tema.
 
 ## Pendientes
 
-Replicar el *Algoritmo I* en C# y analizar su eficiencia en tiempo de ejecución y consumo de memoria.
+Replicar el *Algoritmo I* en [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) y analizar su eficiencia en tiempo de ejecución y consumo de memoria.
 
 
 ## Conclusiones
 
-Las abstracciones nos facilitan nuestra labor, nos permiten concentrarnos en el problema a resolver sin tener que pensar en el contexto, como por ejemplo, la máquina (computadora).
+El *Algoritmo I* es un excelente ejemplo de [concisión](http://buscon.rae.es/drae/srv/search?val=concisiones) y legibilidad, hace buen uso de abstracciones disponibles para lograr este objetivo. El problema con el *Algoritmo I* es que es un pésimo ejemplo de eficiencia.
 
-Si bien las abstraciones son buenas, tienen una gran desventaja y es que nos hacen olvidar cómo funciona la máquina en la cual nuestro programa se ejecutará. Los programadores modernos suelen abusar de las abstraciones y no tienen conocimiento alguno sobre temas muy importantes que afectan el comportamiento de nuestros programas, como: memoria, cache, load/store buffers, branch prediction, pipelines, modelos de memoria, etc...
+Las abstracciones facilitan nuestra labor, nos permiten concentrarnos en el problema a resolver sin tener que pensar en el contexto, en nuestro caso la computadora.
 
-Considero que como programadores, debemos conocer en profundidad la computadora, el lenguaje de programación y la complejidad de los componentes que usamos. Pero lamentablemente, los programadores de hoy se han olvidado de esto y están concentrados en otras cuestiones, como testing, agile, metaprogramming y frameworks específicos que tiene una vida útil no mayor a dos años.
+Si bien las abstracciones son buenas, tienen una gran desventaja y es que nos hacen olvidar cómo funciona la máquina en la cual nuestro programa se ejecutará.  
+Los programadores modernos suelen abusar de las abstracciones y carecen de conocimiento o no le dan importancia a cuestiones importantes que afectan el comportamiento de nuestros programas, como: cache, load/store buffers, branch prediction, pipelines, modelos de memoria, instrucciones vectoriales (SIMD), etc...
 
-Volviendo a las abstracciones, la mejor de todas las abstracciones fue descubierta por [Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz) en 1679. Esa abstracción es la que nos permite modelar el mundo real en una computadora. Esa abstracción es el **BIT**.
+Como programadores, debemos conocer en profundidad la computadora, el lenguaje de programación y la complejidad de los componentes que usamos. Pero, lamentablemente los programadores modernos se han olvidado de esto y están concentrados en otras cuestiones, como testing, agile, metaprogramming y frameworks/bibliotecas cuyo tiempo de vida no es mayor a dos años.
 
-Y por último, se puede decir que *le debemos la vida a los palíndromos*, así que, no los tomemos tan a la ligera.
+Volviendo a las abstracciones, la mejor de todas ellas fue descubierta por [Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz) en 1679. Esa abstracción es la que nos permite modelar el mundo real en una computadora. Esa abstracción es el [**Bit**](https://en.wikipedia.org/wiki/Bit).
+
+Por último, cabe destacar que el *Algoritmo I* podría ser útil como postcondición:
+
+{% highlight java %}
+public static boolean isPalindrome(String str) {
+    //postcondition: Result := reverse(str) = str
+    int n = str.length();
+    for (int i = 0; i < n/2; ++i) {
+        if (str.charAt(i) != str.charAt(n-i-1)) return false;
+    }
+    return true;    
+}
+{% endhighlight %}
 
 ---
 
 ## Agradecimientos
 
-Un agradecimiento especial para,..., *los palíndromos* :).
-
+Quiero agradecer a Andreas Lundblad por haber hecho la pregunta que hizo que este artículo existiese.  
+También a Mario dal Lago y Javier Velilla por revisar el artículo y sugerir correcciones.  
+Y por último, ya que se puede decir que *le debemos la vida a los palíndromos*, un agradecimiento especial ellos. :)
 
 ---
 
