@@ -67,7 +67,7 @@ For more information on O-notation and asymptotic complexity, see [[2]](#Ref2).
 
 Another way to measure algorithms is no use approximations but concrete quantity of operations, depending on the input to the algorithm.
 
-For example, imagine the algorithm to find the minimum (or maximum) of \\( n \\) elements. We can say that the algorithm has *lineal complexity* (in time), or the algorithm is \\( O(n) \\). But specifically, the algorithm needs \\( n - 1 \\) comparisons to find the minimum element.
+For example, imagine the algorithm to find the minimum (or maximum) of \\( n \\) elements. We can say that the algorithm has *linear complexity* (in time), or the algorithm is \\( O(n) \\). But specifically, the algorithm needs \\( n - 1 \\) comparisons to find the minimum element.
 
 
 ### Back to Palindromes
@@ -192,7 +192,7 @@ Let us analyze in detail.
 - Copy of the bytes of the original String to the StringBuilder's internal array.
 
 #### reverse() (StringBuilder)
-- Sólo lo mencionado anteriormente. Esta función no utiliza memoria adicional y es eficiente en tiempo de ejecución.
+- Mentioned above. This function does not use additional memory and it is efficient at runtime.
 
 #### toString() (StringBuilder)
 - Dynamic memory allocation of the [String](http://docs.oracle.com/javase/8/docs/api/java/lang/String.html) object ([heap, free store](https://en.wikipedia.org/wiki/Memory_management#HEAP), or whatever you call it).
@@ -201,9 +201,8 @@ Let us analyze in detail.
 - Zero-Initialization of Array's members. Length and the array itself. [[4]](#Ref4)
 - Copy of the bytes from the StringBuilder's internal array to the String's internal array.
 
-
 #### equals() (String)
-- Sólo lo mencionado anteriormente. Esta función no utiliza memoria adicional y es eficiente en tiempo de ejecución.
+- Mentioned above. This function does not use additional memory and it is efficient at runtime.
 
 #### Garbage Collection
 - The GC must release any additional memory (unnecessary) that was used and obviously this operation is not "free."
@@ -344,9 +343,8 @@ public static boolean isPalindrome(String str) {
 
 ## Acknowledgements
 
-I want to thank Andreas Lundblad for having asked the question that made this article possible.  
-Also Mario dal Lago and Javier Velilla for reviewing the article and suggest corrections.
-And finally, since we can say that *we owe our lives to palindromes*, a special thank them. :)
+I want to thank Mario dal Lago and Javier Velilla for reviewing the article and suggest corrections.  
+And finally, since we can say that *we owe our lives to palindromes*, so, a special thank to them. :)
 
 ---
 
@@ -399,7 +397,7 @@ For analysis on other platforms, please [refer to [7]](#Ref7).
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuilder internal array padding = \\( 8\left\lceil\dfrac{2n + 48}{8}\right\rceil - (2n + 48) \\)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String internal array padding  = \\( 8\left\lceil\dfrac{2n + 16}{8}\right\rceil - (2n + 16) \\)  
 
-(Estas fórmulas son específicas para la plataforma descripta en el artículo)
+(These formulas are specific to the platform described in the article)
 
 The general formula for the padding of objects is:
 

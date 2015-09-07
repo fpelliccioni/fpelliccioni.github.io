@@ -351,8 +351,7 @@ public static boolean isPalindrome(String str) {
 
 ## Agradecimientos
 
-Quiero agradecer a Andreas Lundblad por haber hecho la pregunta que hizo que este artículo existiese.  
-También a Mario dal Lago y Javier Velilla por revisar el artículo y sugerir correcciones.  
+Quiero agradecer a Mario dal Lago y Javier Velilla por revisar el artículo y sugerir correcciones.  
 Y por último, ya que se puede decir que *le debemos la vida a los palíndromos*, un agradecimiento especial ellos. :)
 
 ---
