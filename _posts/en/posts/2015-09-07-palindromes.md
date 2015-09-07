@@ -143,7 +143,7 @@ public static boolean isPalindrome(String str) {
 **Space**: Constant
 
 No extra memory usage and runs approximately \\( \dfrac{1}{4} \\) of operations that the *Algorithm I*.
-While the code is a bit more complex now, it is an easily understandable code, the increased complexity is negligible compared to the improvement in efficiency.
+While the code is a bit more complex now, it is an easily understandable code, the increased code complexity is negligible compared to the improvement in efficiency.
 
 
 <a name="RefAlgoritmoOptimo"></a>
