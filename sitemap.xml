@@ -7,7 +7,8 @@ layout: nil
         <loc>{{ site.url }}</loc>
     </url>
 
-    {% for post in site.posts %}
+    {% assign posts=site.posts | where:"lang", page.lang | where:"type", "post" %}
+    {% for post in posts %}
     <url>
         <loc>{{ site.url }}{{ post.url }}</loc>
     </url>

@@ -15,7 +15,8 @@ layout: none
       <link>{{ site.url }}</link>
     </image>
     <atom:link href="{{ site.url }}/feed.links.xml" rel="self" type="application/rss+xml" />
-    {% for post in site.posts limit:20 %}
+    {% assign posts=site.posts | where:"lang", page.lang | where:"type", "post" %}
+    {% for post in posts limit:20 %}
       <item>
         <title>{{ site.url }}{{ post.url }}</title>
         <link>{{ site.url }}{{ post.url }}</link>
