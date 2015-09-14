@@ -1,6 +1,6 @@
 ---
 layout: post
-type: draft
+type: post
 title:  "Using the proper terminology: Method?"
 date:   2015-08-12 12:00:00
 comments: true
