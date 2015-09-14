@@ -254,7 +254,7 @@ También quiero agradecer a Mario dal Lago y Javier Velilla por revisar el artí
 <a name="Ref1">[1]</a> Aquí nos referimos a la definición de "objeto" en el contexto de la _Programación Orientada a Objetos_:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]  
 Que difiere de la definición de "objeto" dada en:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Elements of Programming](http://www.elementsofprogramming.com/) of Alexander Stepanov and Paul McJones by Stepanov and McJones [2009, page 4]  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Elements of Programming](http://www.elementsofprogramming.com/) by Stepanov and McJones [2009, page 4]  
 Esta última definición es la preferida por el autor del blog, en caso de que no se aclare a cuál de las dos definiciones se hace referencia, el lector debe asumir que se está hablando de la definición dada por Stepanov.
 
 <a name="Ref2">[2]</a> Definición simplificada, para una definición más detallada referirse a:  

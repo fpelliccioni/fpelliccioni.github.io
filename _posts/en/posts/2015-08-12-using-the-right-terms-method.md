@@ -1,7 +1,7 @@
 ---
 layout: post
 type: draft
-title:  "DRAFT - Using the proper terminology: Method?"
+title:  "Using the proper terminology: Method?"
 date:   2015-08-12 12:00:00
 comments: true
 
@@ -17,82 +17,85 @@ First of all ...
 
 ### What is a *method*?
 
-Cualquier programador sabe que un [_objeto_ [1]](#Ref1) tiene _estado_ y _comportamiento_.
-El estado se almacena en _campos_ (_fields_ en inglés) y el comportamiento se logra a través de _métodos_.  
-Un *método* (en el contexto de la programación) es una secuencia de instrucciones, es parte de un objeto o clase. [[2]](#Ref2)
+Any programmer knows that an [_object_ [1]](#Ref1) has state and behavior.  
+The state is stored in *fields* and behavior is achieved through *methods*.
+A *method* (in programming) is a sequence of instructions, is part of an object or class. [[2]](#Ref2)
 
-Pero...
+But ...
 
-### ¿Por qué "_método_"?
+### Why "method"?
 
-¿Qué diferencia hay entre un _método_ y un _procedimiento_?  
-Un _procedimiento_ es una secuencia de instrucciones. [[2]](#Ref2)
+What is the difference between a *method* and a *procedure*?
 
-¿La única diferencia consiste en que un método debe pertenecer a una clase mientras en que un procedimiento no se aclara nada con respecto a clases? (De hecho el término 
-"procedimiento" es usado desde mucho antes de la existencia del término "clase").
+A *procedure* is a sequence of instructions. [[2]](#Ref2)
 
-Resumiendo, un método es un procedimiento que es miembro de una clase.  
-Entonces, tenemos procedimientos que son _miembros_ y procedimientos _libres_ (fuera de una clase).
+The only difference is that a method must belong to a class while in the definition of procedure it is unclear whether it belongs to a class or not. The term "procedure" is used long before the existence of the term "class".
 
-Me sigo preguntando, ...
+In summary, a method is a procedure that is a member of a class.  
+So, we have *member* procedures and *free* procedures (outside a class).
 
-### ¿Por qué usamos el término "_método_" y no "_procedimiento_"?
+I keep wondering ...
 
-Mi hipótesis es que con el establecimiento de [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) como uno de los lenguajes de programación más populares, también se produjo la popularización de su terminología. A partir de ese momento, otros lenguajes y programadores adoptan la terminología popularizada por Java y se vuelve más frecuente su uso que la terminología tradicional.
+### Why we use the term "*method*" insted of "*procedure*"?
 
-Quiero ahora hacer una búsqueda a través de la historia de los lenguajes de programación para entender por qué comenzamos a llamar "método" a los "procedimientos". Voy a ir desde tiempos más modernos a tiempos más remotos...
+My guess is that with the establishment of [Java](https://en.wikipedia.org/wiki/Java_(programming_language)) as one of the most popular programming languages, also saw the popularization of its terminology. From that moment, other languages ​​and programmers adopt the terminology popularized by Java and it becomes more frequent use than traditional terminology.
+
+Now, I want to make a search through the history of programming languages ​​to understand why we began calling "method" to the "procedures". I will go from modern to ancient times ...
 
 ### Java
 
-En [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), no existen los _procedimientos libres_, todos los procedimientos deben ser miembro de una clase, estos procedimientos miembro efectivamente se llaman métodos.
+In [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), there are no *free procedures*, all procedures have to be a member of a class, these member procedures actually are called methods.
 
-Según la [especificación de Java 8 [3]](#Ref3):
+According to [Java 8 specification [3]](#Ref3):
 
 - The body of a class declares members (fields and methods and nested classes and interfaces), instance and static initializers, and constructors.
 - Method declarations describe code that may be invoked by method invocation expressions.
 
-La especificación de Java describe la relación entre un método y una clase, aunque no establece cuál es la definición de la palabra "método".
+The Java specification describes the relationship between a method and a class, but it does not specify what the word "method" means.
 
-Más allá de la definición, en la especificación no vamos a encontrar por qué los diseñadores del lenguaje decidieron llamar "método" a los procedimientos, así que debemos ir más atrás.
+Beyond the definition, in the specification we will not find why language designers decided to call "method" to procedures, so we must go even further back.
 
-Java hereda la mayor parte de su sintaxis (no así su semántica) y terminología de [C++](https://en.wikipedia.org/wiki/C%2B%2B).
+Java inherits most of its syntax (not its semantics) and terminology from [C++](https://en.wikipedia.org/wiki/C%2B%2B).
+
 
 ### C++
 
-[C++](https://en.wikipedia.org/wiki/C%2B%2B) nace, a finales de la década de 1970, como un súper-conjunto del [lenguaje de programación C](https://en.wikipedia.org/wiki/C_(programming_language)) con el agregado tecnología de objetos.
+[C++](https://en.wikipedia.org/wiki/C%2B%2B) born in the late 1970s, as a superset of the [C programming language](https://en.wikipedia.org/wiki/C_(programming_language)) with the addition object technology.
 
-Por lo tanto, en C++ tenemos procedimientos miembros y libres, denominados _member_ y _non-member functions_.
+Therefore, in C++ we have member procedures and free procedures, called *member* and *non-member functions*.
 
-Según el [estándar de C++ [4]](#Ref4):
+According to the [C++ standard [4]](#Ref4):
 
 - Member functions: Functions declared in the definition of a class, excluding those declared with a friend specifier, are called member functions of that class.
 
-O sea, en C++ no se usa la palabra "método". Puede que algunos programadores C++ usen la palabra "método" debido a que el término es muy popular hoy día; pero, tanto el estándar C++ como los programadores más cercanos al riñón del lenguaje no lo utilizan.
+In other words, the word "method" is not used by C++ programmers. Maybe some C++ programmers use it because the term is very popular today; but neither the C++ standard nor the core C++ programmers use "method".
 
-Entonces... ¿Cuál es el término correcto para designar el código que modela el comportamiento de los objetos? ¿Es "método"? ¿Es "procedimiento"? ¿Qué lenguaje usa la terminología más adecuada?
+So ... What is the correct term for the code that models the behavior of objects? Is it "method"? Is it "procedure"? Which language uses the most appropriate terminology?  
 
-Para ello debo ir aún más atrás.  
-C++ hereda su "parte" de objetos del [lenguaje de programación Simula](https://en.wikipedia.org/wiki/Simula).
+I must go back in time.
+
+C++ inherits its objects "side" from [the Simula programming language](https://en.wikipedia.org/wiki/Simula).
 
 ### Simula
 
-[Simula](https://en.wikipedia.org/wiki/Simula) es considerado el primer lenguaje de programación _orientado a objetos_.
-Es un lenguaje de tipado estático basado en [ALGOL 60](https://en.wikipedia.org/wiki/ALGOL_60).
+[Simula](https://en.wikipedia.org/wiki/Simula) is considered the first *object-oriented* programming language.  
+It is a statically typed language based on [ALGOL 60](https://en.wikipedia.org/wiki/ALGOL_60).
 
-Simula permite que los procedimientos sean declarados dentro de una clase y también fuera de ella. A los primeros los denomina _local procedures_ y a los últimos _non-local procedures_. [[5]](#Ref5)
+Simula allows procedures to be declared within a class and also outside it. The former are called the *local procedures* and the last *non-local procedures*. [[5]](#Ref5)
 
-Entonces, si C++ y Simula no hacen mención a algo llamado "método", ¿De dónde saca Java esa palabra? ¿Es una invención de los diseñadores del lenguaje? ¿La copia de algún otro lenguaje? 
+So, if C++ and Simula not make mention of something called "method" Where does Java take that word? Is it an invention of language designers? Is it copied from some other language?
 
-La respuesta es...
+The answer is ...
+
 
 ### Smalltalk
 
-[Smalltalk](https://en.wikipedia.org/wiki/Smalltalk) es un lenguaje de programación orientado a objetos, inspirado en Simula (en parte), que fue desarrollado durante la década de 1970 y vio la luz a principios de los 80's.
-A diferencia de Simula, Smalltalk es un lenguaje de tipado dinámico.
+[Smalltalk](https://en.wikipedia.org/wiki/Smalltalk) is an object-oriented programming language, it is inspired by Simula (in part), it was developed during the 1970s and was born in the early 80's.  
+Unlike Simula, Smalltalk is a dynamically typed language.
 
-Smalltalk incorpora los conceptos de mensajes y métodos. 
+Smalltalk incorporates the concepts of *messages* and *methods*.
 
-Según el [estándar de Smalltalk [6]](#Ref6):
+According to the [Smalltalk standard [6]](#Ref6):
 
 - A message is a request to perform a designated computation. An object is a computational entity
   that is capable of responding to a well defined set of messages. An object may also encapsulate
@@ -104,98 +107,95 @@ Según el [estándar de Smalltalk [6]](#Ref6):
   evaluating the expressions in one of more methods. There are three types of expressions:
   assignments, message sends, and returns.
 
-Como no pude encontrar referencias anteriores a Smalltalk sobre algún otro lenguaje que utilice la palabra "método", le consulté a [Paul McJones](http://www.softwarepreservation.org/author/pmcjones), miembro del [Software Preservation Group](http://www.softwarepreservation.org/) y coautor de [Elements of Programming](http://www.elementsofprogramming.com/). Considero a Paul una eminencia en lo que respecta a historia de la computación y en particular los lenguajes de programación.
+As I could not find references of the word "method" on languages older than Smalltalk, I consulted [Paul McJones](http://www.softwarepreservation.org/author/pmcjones), member of the [Software Preservation Group](http://www.softwarepreservation.org/) and coauthor of [Elements of Programming](http://www.elementsofprogramming.com/). 
+I consider Paul an authority when it comes to computing and programming language history.
 
 > Fernando: ... Do you know any programming language, before Smalltalk, that use the word "method"? ...
 
 > Paul: You ask a very interesting question. I think you are correct that the word “method” was first used in that sense by the Smalltalk community. I looked through some early documents, such as the Smalltalk-72 Instruction Manual, and I don’t see “method” being used yet...
 Dan Ingalls’s 1978 POPL paper on Smalltalk-76 is the earliest paper I’ve found so far that uses method in the sense you are interested in...
 
-Paul cree, al igual que yo, que la palabra "método" fue usada por primera vez por la comunidad de programadores Smalltalk. Además me indica que estuvo revisando viejos manuales y en el manual de Smalltalk-72 [[7]](#Ref7) no se hace mención sobre "método", pero sí es mencionado en un paper de 1978 que habla sobre Smalltalk-76. [[8]](#Ref8) 
+Paul believes, as I do, that the word "method" was first used by the Smalltalk community. He also said that he was reviewing old manuals; the word "method" seems to emerge between 1972 and 1976, acording to the Smalltalk-72 Instruction Manual [[7]](#Ref7) and a paper of 1978 which talks about Smalltalk-76. [[8]](#Ref8)  
 
-O sea, estoy casi seguro que la comunidad Smalltalk acuñó el término, pero no lo hizo desde el principio sino a medida que el lenguaje fue evolucionando.
+In other words, I'm pretty sure the Smalltalk community coined the term, but they didn't do from the beginning but as the language evolved.
 
-### Otros lenguajes
+### Other languages
 
-Quiero aquí analizar otros lenguajes que también soportan tecnología de objetos para verificar como nomenclan a sus procedimientos.
+Here I want to discuss other programming languages that also support object technology to verify how "procedures" are called.
 
 ### Eiffel
 
-[Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)) es un lenguaje que nace a mediados de 1980 y, al igual que C++, es heredero directo de Simula.
+[Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)) is is a language born in the mid 1980s and, like C++, is a direct heir of Simula.
 
-En Eiffel todo miembro de una clase se lo llama _feature_. Al estado se lo denomina _attributes_ y al comportamiento _routines_. A su vez, las _routines_ se dividen en _functions_ y _procedures_ dependiendo si retornan o no un resultado. [[9]](#Ref9)
+In Eiffel every member of a class is called *feature*. The state is called *attributes* and the behavior *routines*. In turn, the *routines* are divided into *functions* and *procedures* depending on whether or not return a result. [[9]](#Ref9)
 
-En Eiffel todas las _routines_ son miembros de una clase, no se permite la existencia de procedimientos libres.
-
+In Eiffel all *routines* are members of a class, the existence of free procedures is not allowed.
 
 ### Python
 
-El lenguaje de programación [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) admite tanto procedimientos libres como procedimientos miembros. Los denomina _functions_ y _methods_ respectivamente. [[10]](#Ref10)
+The [Python programming language](https://en.wikipedia.org/wiki/Python_(programming_language)) supports free and member procedures. They are called *functions* and *methods* respectively. [[10]](#Ref10)
 
-Python me llamó la atención porque es creado unos años antes que Java; la primera implementación de Python es de 1989 [[11]](#Ref11) mientras que la primera de Java es de 1995 [[12]](#Ref12).  
-Pareciera que este hecho rompe mi conjetura de que Java fue el _impulsor_ de la palabra "método".
+Python caught my attention because it's created a few years before Java; the first implementation of Python is about 1989 [[11]](#Ref11) while Java first implementation is from 1995 [[12]](#Ref12).  
+It seems that this breaks my guess that Java was the *promoter* of the word "method".
 
-Si bien la primera implementación de Java sale a la luz en 1995, en tan solo unos años, en 1998, ya era unos de los lenguajes más populares. En cambio Python tuvo un camino bastante más lento hacia su popularización, recién comenzó a ser popular por los años 2003/2004. [[13]](#Ref13)  
-Por lo que mi conjetura todavía sigue siendo válida, el impulsor de "método" fue Java y no Python.
+While the first implementation of Java comes out in 1995, in just a few years, in 1998, Java was one of the most popular languages. Instead, Python had a longer way to popularity, it began to be popular in 2003/2004. [[13]](#Ref13)  
+So my guess is still valid, the *promoter* of "method" was Java and not Python.
 
-Volviendo a Python, la palabra "método" es mencionada en las versiones recientes (3.4.3 y 2.7.10) de la documentación del lenguaje.
-Entonces dudé sobre si Python utiliza "método" desde sus orígenes o si fue mutando su terminología con el tiempo, sobre todo con la popularización de Java.  
-Gracias a que los muchachos de [python.org](http://python.org) hacen un excelente trabajo manteniendo las versiones históricas de la documentación, pude verificar que la palabra "método" es utilizada desde la versión 0.9.1 [[14]](#Ref14) (salvo que la documentación haya sido alterada con el tiempo, pero confiemos en que no sea así).
+Returning to Python, the word "method" is mentioned in recent versions (3.4.3 and 2.7.10) of the language documentation.  
+Then I hesitated about whether Python uses "method" from its origins or its terminology was mutating over time, especially with the popularity of Java.  
+Thanks to excellent job done by the [python.org](http://python.org) guys keeping the historical versions of documentation I could verify that the word "method" is used since version 0.9.1 [[14]](#Ref14) (unless the documentation has been altered over time, but I hope that is not the case).
 
-O sea, Python es el primer lenguaje, después de Smalltalk, en usar la palabra "método". Al menos de los lenguajes que he podido verificar.
+In other words, Python is the first language, after Smalltalk, to use the word "method". At least in the languages ​​I could verify.
 
-Al igual que me lo pregunto con Java, ¿Por qué Python usa método y no algún otro término más común para esa época?.
-
-Nadie mejor que el creador del lenguaje, [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) para iluminarme. Me tomé el atrevimiento de escribirle un correo electrónico; Guido fue muy amable en responderme y permitir que lo cite en este artículo:
+Now I wonder, why Python used method instead of a more common term?.
+No one better than the creator of language, [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) to enlighten. I wrote an email to him, Guido was very king to answer and let me quote him:
 
 > Fernando: Why did you use "method" instead of any other word? Have you taken from Smalltalk?  Or,... from any other programming language?
 
 > Guido: Good question. I don't recall, but it's likely that I was somehow influenced by Smalltalk, or people around me who were influenced by Smalltalk. I definitely opened a big book about Smalltalk to learn about byte code, and I also recall we had a Smalltalk implementation that we sometimes played with (some things that were wrong with that influenced some of my philosophy for Python).
 
-Guido no recuerda bien, pero admite haber sido influenciado por Smalltalk en aquella época.
+Guido does not remember well, but admits to being influenced by Smalltalk at that time.
 
 ### C\#
 
-[C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) es un lenguaje de programación que nace siendo muy similar a Java (casi idéntico) con algunas reminiscencias de C++. 
-Luego, con los años el lenguaje formó su propia identidad.
+[C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) is a programming language that is born being very similar to Java (almost identical) with some reminiscences of C++.  
+Then, over the years the language formed his own identity.
 
-C# copia en su gran mayoría la terminología de Java. Una de las palabras que copia es "método".
+C# copy many terms of Java. One of the words that copy is "method".
 
-Según el [estándar C# [15]](#Ref15):
+According to the [C# standard [15]](#Ref15):
 
   - A method is a member that implements a computation or action that can be performed by an object or class.
 
-A diferencia de Java, el estándar C# sí define el significado de la palabra "método".
+Unlike Java spec, the C# standard defines the meaning of the word "method".
 
-Al ser un lenguaje muy usado, especialmente por seguidores de la "filosofía" Microsoft, C# también ha contribuido a la popularización del término.
-
+As C# is a widely used language, especially by followers of the Microsoft "philosophy", it is a major contributor on the popularization of the term.
 
 ### Objective-C
 
-[Objective-C](https://en.wikipedia.org/wiki/Objective-C) es un lenguaje desarrollado a principios de los 1980's. Al igual que C++, nace como un súper-conjunto de C al que se le agrega tecnología de objetos.  
-A diferencia de C++, el modelo de objetos de Objective-C está basado en Smalltalk y no en Simula.
+[Objective-C](https://en.wikipedia.org/wiki/Objective-C) is a language developed in the early 1980's. Like C ++, born as a super-set of C adding object technology.  
+Unlike C++, the object model of Objective-C is based on Smalltalk and not in Simula.
 
-Objective-C cuenta con el concepto de mensajes y también el de método. [[16]](#Ref16)
+Objective-C, like Smalltalk, has the concept of messages and methods. [[16]](#Ref16)
 
-### Lenguajes anteriores a Smalltalk
+### Languages ​​before Smalltalk
 
-He buscado en manuales, estándares y documentación de lenguajes de programación anteriores a Smalltalk, no relacionados con _orientación a objetos_, pero sí muy reconocidos por su influencia sobre los demás lenguajes de programación.  
-Específicamente los lenguajes son: [Fortran](https://en.wikipedia.org/wiki/Fortran), [Algol](https://en.wikipedia.org/wiki/ALGOL) y [C](https://en.wikipedia.org/wiki/C_(programming_language)). En la documentación de ninguno de ellos se hace mención a la palabra "método". En cambio usan términos como _routine_, _subroutine_, _procedure_ o _function_ [[17]](#Ref17).
+I looked in manuals, standards and documentation of programming languages older than Smalltalk, unrelated to object-oriented programming, but very recognized for their influence on others languages.  
+Specifically, the languages ​​are [Fortran](https://en.wikipedia.org/wiki/Fortran), [Algol](https://en.wikipedia.org/wiki/ALGOL) and [C](https://en.wikipedia.org/wiki/C_(programming_language)). The word "method" is not mentioned in the documentation of any of them. Instead they use terms like routine, subroutine, procedure or function [[17]](#Ref17).
 
 
-### Otras fuentes
+### Other sources
 
-Para mejorar mi investigación he hecho una búsqueda en la bibliografía (sobre programación en general) que tengo a mi disposición, textos que considero clásicos.
+To enhance my investigation I've done a search in some books (about programming in general) I have at my disposal:
 
   - [Elements of Programming](http://www.elementsofprogramming.com/) by Alexander A. Stepanov and Paul McJones
   - The Art of Computer Programming Volumes 1, 2, 3 and 4A by Donald E. Knuth
 
-En ninguna de las 3.456 páginas de estos 5 libros he encontrado la palabra "método" haciendo referencia a un "procedimiento". Obviamente la palabra "método" aparece en varias oportunidades, pero no en el sentido que estoy buscando.
+I found no reference to the word "method" in any of the 3,456 pages of these 5 books. Obviously the word "method" appears on several occasions, but not in the sense that I'm looking for.
 
+### Pending issues 
 
-### Pendientes 
-
-1. Leer documentación/manuales originales sobre los siguientes lenguajes de programación:
+1. Read documentation/manuals about the following programming languages:
 	- Lisp
 	- Scheme
 	- Ada
@@ -203,67 +203,63 @@ En ninguna de las 3.456 páginas de estos 5 libros he encontrado la palabra "mé
 	- Common Lisp
 
 
-2. Buscar en algunos textos clásicos:
-
+2. Look at some classic texts:
 	- [A Discipline of Programming](http://www.amazon.com/Discipline-Programming-Edsger-W-Dijkstra/dp/013215871X/ref=sr_1_1?s=books&ie=UTF8&qid=1440444447&sr=1-1) by Edsger W. Dijkstra
 	- [Algorithms and Data Structures](http://www.amazon.com/Algorithms-Data-Structures-Niklaus-Wirth/dp/0130220051/ref=pd_sim_14_5?ie=UTF8&refRID=1WFYYC7DTMCR58G3TVVA) by Niklaus Wirth
 	- [Structured Programming, First Edition Edition](http://www.amazon.com/Structured-Programming-A-P-I-C-studies-processing/dp/0122005503/ref=pd_sim_14_3?ie=UTF8&refRID=1WFYYC7DTMCR58G3TVVA) by Edsger W. Dijkstra, C. A. R. Hoare and Ole-Johan Dahl
 	- [Systematic Programming: An Introduction](http://www.amazon.com/Systematic-Programming-Introduction-Prentice-Hall-Computation/dp/0138803692/ref=pd_sim_14_4?ie=UTF8&refRID=0E9BAZYMCCHZFEB38592) by Niklaus Wirth
 
-3. Enviar mi consulta a los siguientes diseñadores de lenguajes de programación:
-
+3. Send the question to the following programming languages designers:
 	- Alan Kay
 	- Dan Ingalls
 	- Dick Gabriel
 	- James Gosling
 	- Anders Hejlsberg
 
-He tratado de contactar a alguno de ellos, pero no he recibido respuesta aún.
+I have tried to contact them, unsuccessfully at the moment.
 
-## Conclusiones
+## Conclusions
 
-La palabra "método" ha sido introducida al mundo de la programación por el lenguaje Smalltalk. Al ser un lenguaje prácticamente no usado en la industria, la palabra no era muy conocida allá por los 80's y principios de los 90's.
+The word "method" was introduced to programming by the Smalltalk community. Smalltalk was not practically used in the industry in the late 80's and early 90's, so I think the word "method" was not as common as it is now.
 
-Quizás fue un error de los diseñadores de Smalltalk el no haber utilizado nomenclatura existente, o quizás no fue un error, ya que Smalltalk introdujo un modelo de objetos distinto al de Simula y ese cambio quizás ameritó un cambio de nombres. Es muy difícil de determinar si fue una decisión equivocada o no.
+Maybe it was a mistake of the Smalltalk designers had not used existing nomenclature, or maybe not, as Smalltalk introduced a object model different from Simula and that change perhaps merited a change of names. It is very difficult to determine if it was a wrong decision or not.
 
-Java y Python adoptan terminología de Smalltalk en su vocabulario. No encuentro un vínculo muy fuerte entre Smalltalk y Java/Python que justifique el uso del término, esto me hace pensar en que el uso de "método" es un error en estos lenguajes. Aunque, como dije antes, es muy difícil de juzgar si la decisión de usar cierta nomenclatura es errónea.
+Java and Python adopt Smalltalk terminology in their vocabulary. I do not find a strong relation between Smalltalk and Java / Python justifying the use of the term, this makes me think that the use of "method" is an error in these languages. Although, as I said, is very difficult to judge whether the decision to use certain nomenclature is wrong or not.
 
-C++, Objective-C y Eiffel utilizan terminología similar a sus predecesores, puede que con algunas variaciones, que pueden ser mínimas o necesarias para adaptarse a cambios introducidos por los lenguajes.
+C++, Objective-C and Eiffel used similar terminology than its predecessors, perhaps with some variations, which may be minimal or necessary to adapt to changes introduced by the languages.
 
-Algunos lenguajes, como C#, copian características de Java, pero también copian el "error" de incorporar "método" a su terminología.
+Some languages, such as C#, copied Java features, but also copied the "error" to incorporate "method" to its terminology.
 
-La palabra "método" se **infiltra** en el vocabulario de los programadores.  
-Ya no hay vuelta atrás ;)
+The word "method" is infiltrated into the vocabulary of programmers.  
+There is no turning back ;)
 
-Usted use el término que más le guste, yo me voy a seguir usando **procedimiento** o **función** (siempre y cuando recuerde que no me gusta la palabra "método").
-
-
----
-
-## Agradecimientos
-
-Un agradecimiento especial para Paul McJones y Guido van Rossum por responder amablemente a mis preguntas y por brindarme información trascendental.  
-También quiero agradecer a Mario dal Lago y Javier Velilla por revisar el artículo y sugerir correcciones.
-
+You can use the term that you like, I'll keep using procedure or function (as long as I remember that I do not like the word "method").
 
 ---
 
-## Notas / Referencias
+## Acknowledgements
 
-<a name="Ref1">[1]</a> Aquí nos referimos a la definición de "objeto" en el contexto de la _Programación Orientada a Objetos_:  
+Special thanks to Paul McJones and Guido van Rossum for kindly respond to my questions and for giving very useful information.  
+Also thanks to Mario dal Lago and Javier Velilla for reviewing the article and suggest corrections.
+
+---
+
+## Notes / References
+
+<a name="Ref1">[1]</a> Here we refer to the definition of "object" in the context of *Object-Oriented Programming*:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 1198]  
-Que difiere de la definición de "objeto" dada en:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Elements of Programming](http://www.elementsofprogramming.com/) of Alexander Stepanov and Paul McJones by Stepanov and McJones [2009, page 4]  
-Esta última definición es la preferida por el autor del blog, en caso de que no se aclare a cuál de las dos definiciones se hace referencia, el lector debe asumir que se está hablando de la definición dada por Stepanov.
+which differs from the definition of "object" given in:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Elements of Programming](http://www.elementsofprogramming.com/) by Stepanov and McJones [2009, page 4]  
+This last definition is preferred by the author of the blog. If it is not specified, the reader must assume that I am talking about the definition given by Stepanov.
 
-<a name="Ref2">[2]</a> Definición simplificada, para una definición más detallada referirse a:  
+<a name="Ref2">[2]</a> This is a simplified definition, for a more detailed definition refer to:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, page 174]
 
 <a name="Ref3">[3]</a> [The Java Language Specification (Java SE 8 Edition)](https://docs.oracle.com/javase/specs/jls/se8/jls8.pdf), Chapter 8 [pages 191, 192]
 
 <a name="Ref4">[4]</a> [ISO International Standard ISO/IEC 14882:2014(E) – Programming Language C++, current working draft (at Aug, 2015)](http://open-std.org/JTC1/SC22/WG21/docs/papers/2015/n4527.pdf), sections: 9.3 [class.mfct] and 8.3.5 [dcl.fct]  
 
-<a name="Ref5">[5]</a> Hay muy poca bibliografía disponible acerca del lenguaje, pero [aquí](http://www.edelweb.fr/Simula/) pueden encontrar un excelente trabajo de recopilación de viejos manuales.  
+<a name="Ref5">[5]</a> There is almost no bibliography available about Simula, but [here](http://www.edelweb.fr/Simula/) you can find an excellent collection of old manuals.
 
 <a name="Ref6">[6]</a> [ANSI Smalltalk Standard v1.9 199712 NCITS X3J20 draft](http://smalltalk.org/versions/ANSISmalltalk/ANSISmalltalkStandard_v1.9_199712_NCITS_X3J20_draft.pdf), Section 3.1 [page 9]
 
@@ -271,9 +267,9 @@ Esta última definición es la preferida por el autor del blog, en caso de que n
 
 <a name="Ref8">[8]</a> [The Smalltalk-76 Programming System. Design and Implementation](https://classes.soe.ucsc.edu/cmps112/Spring03/readings/Ingalls78.html)
 
-<a name="Ref9">[9]</a> Se especifica en:  
+<a name="Ref9">[9]</a> Specified in:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object-Oriented Software Construction (2nd Ed) by Bertrand Meyer [1997, pages 174, 175]  
-y en:  
+and:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Standard ECMA-367. Eiffel: Analysis, Design and Programming Language. 2nd edition (June 2006)](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-367.pdf), Section 8.5.10 [page 38]  
 
 <a name="Ref10">[10]</a> [Python 2.7.10 Documentation](https://docs.python.org/2/download.html)
@@ -282,16 +278,15 @@ y en:
 
 <a name="Ref12">[12]</a> [The History of Java Technology](http://www.oracle.com/technetwork/java/javase/overview/javahistory-index-198355.html)
 
-<a name="Ref13">[13]</a> Sobre la popularización de los lenguajes, una de las fuentes en las que me baso es [Tiobe Index](http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html). Aunque tengo ciertas dudas sobre el método de medición de Tiobe, hoy en día es lo mejor que tenemos.   
-La otra fuente es mi memoria. No recuerdo a Python como un lenguaje popular en los 90's.  
-Yo creo que Python comienza a popularizarse con el boom de los lenguajes dinámicos a comienzo de los 2000's y tiene un empuje aún mayor con la creación del framework web [Django](https://en.wikipedia.org/wiki/Django_(web_framework)).
+<a name="Ref13">[13]</a> On the popularization of languages, one of the sources on which I rely is [Tiobe Index](http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html). Although I have some doubts about the measuring method, Tiobe it is the best we have today.  
+The other source is my memory. I do not remember Python as a popular language in the 90's.  
+I think Python starts to become popular with the boom of dynamic languages ​​in the early 2000's and it had an even greater impetus to the creation of the [Django web framework](https://en.wikipedia.org/wiki/Django_(web_framework)).
 
-<a name="Ref14">[14]</a> [Repositorio de viejas versiones de Python](https://www.python.org/ftp/python/src/)
+<a name="Ref14">[14]</a> [Repository of older versions of Python](https://www.python.org/ftp/python/src/)
 
 <a name="Ref15">[15]</a> [Standard ECMA-334. C# Language Specification. 4th edition (June 2006)](http://www.ecma-international.org/publications/standards/Ecma-334.htm), Section 8.7.3 [page 34]
 
-<a name="Ref16">[16]</a> Objective-C no cuenta ni con un estándar ni una especificación. Lo más "formal" que encontré fue una página web:  
+<a name="Ref16">[16]</a> Objective-C has neither a standard nor a specification. The only "formal" documentation I could find was a website:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Programming With ObjectiveC](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
 
-
-<a name="Ref17">[17]</a> Para documentación sobre [FORTRAN](http://www.softwarepreservation.org/projects/FORTRAN/), [ALGOL](http://www.softwarepreservation.org/projects/ALGOL/) y C: [ISO/IEC JTC1/SC22/WG14 - The international standardization working group for the programming language C](http://www.open-std.org/JTC1/SC22/WG14/).
+<a name="Ref17">[17]</a> For documentation on [FORTRAN](http://www.softwarepreservation.org/projects/FORTRAN/), [ALGOL](http://www.softwarepreservation.org/projects/ALGOL/) and C: [ISO/IEC JTC1/SC22/WG14 - The international standardization working group for the programming language C](http://www.open-std.org/JTC1/SC22/WG14/).
