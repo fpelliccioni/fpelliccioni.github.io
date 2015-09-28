@@ -1,6 +1,6 @@
 ---
 layout: post
-type: draft
+type: post
 title:  "¿Cuál es tu sabor de Objeto preferido?"
 
 date:   2015-09-26 12:00:00
