@@ -11,7 +11,7 @@ category: english
 tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp, smalltalk, fortran, algol, simula, method, procedure, routine, function, history]
 ---
 
-En este artículo quiero continuar la discusión sobre la terminología que usamos los programadores diariamente, siguiendo con la línea de '[Usando la terminología adecuada: ¿Método?"]({% post_url es/posts/2015-08-12-usando-la-terminologia-adecuada-metodo %}).
+En este artículo quiero continuar la discusión sobre la terminología que usamos los programadores diariamente, siguiendo con la línea de ["Usando la terminología adecuada: ¿Método?"]({% post_url es/posts/2015-08-12-usando-la-terminologia-adecuada-metodo %}).
 
 
 ## Introducción
@@ -71,7 +71,7 @@ Se destaca:
 
 ### Eiffel - Object-Oriented Software Construction
 
-[Object-Oriented Software Construction](http://www.amazon.com/Object-Oriented-Software-Construction-CD-ROM-Edition/dp/0136291554) es una de las más importantes referencias disponibles en cuanto a *orientación a objetos*. Está escrito por [Bertrand Meyer](https://en.wikipedia.org/wiki/Bertrand_Meyer), el diseñador del [lenguaje de programación Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)).  
+[Object-Oriented Software Construction](http://www.amazon.com/Object-Oriented-Software-Construction-CD-ROM-Edition/dp/0136291554) es una de las más importantes referencias disponibles en cuanto a *orientación a objetos*. Fue escrito por [Bertrand Meyer](https://en.wikipedia.org/wiki/Bertrand_Meyer), el diseñador del [lenguaje de programación Eiffel](https://en.wikipedia.org/wiki/Eiffel_(programming_language)).  
 
 Eiffel es uno de los denominados *lenguajes puramente orientados a objetos*, ya que incluso sus tipos básicos (built-in types), como *integer* o *real*, están creados mediante clases.
 
