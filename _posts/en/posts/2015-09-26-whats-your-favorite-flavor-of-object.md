@@ -128,9 +128,9 @@ It is the most complete definition, because it begins to develop a taxonomy of i
 
 It is the most practical definition, since it is aware that all programs run on computers with memory and these constitutes the only available realization of a universal computational device. 
 
-It is the broadest definition, since it does not exclude ​​non-object-oriented paradigm languages.
+It is the broadest definition, since it does not exclude ​​non-object-oriented languages.
 
-Again, I made ​​my choice, but there is not need to sat that you can choose any definition you like, just make sure that your thinking is free of influences disseminated by the *Objects* propaganda machinery :)
+Again, I made ​​my choice, but there is not need to say that you can choose any definition you like, just make sure that your thinking is free of influences disseminated by the *Objects* propaganda machinery :)
 
 ---
 
