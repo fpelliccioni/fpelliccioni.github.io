@@ -13,15 +13,33 @@ tags: [components, programming, components programming, componentsprogramming, s
 
 Estuve por [Stackoverflow.com](http://stackoverflow.com) y vi una [pregunta/respuesta](http://stackoverflow.com/questions/6026824/detecting-a-nullable-type-via-reflection) que me llamó la atención y me llevó a escribir este artículo, en el cual quiero discutir la diferencia entre *objeto* y *valor*.
 
-En el [artículo anterior]({% post_url es/posts/2015-09-26-cual-es-tu-sabor-de-objeto-preferido %}) vimos varias definiciones de *objeto* y mencioné cual es mi definición de preferecia, argumentando las bondades de la misma.
+En el [artículo anterior]({% post_url es/posts/2015-09-26-cual-es-tu-sabor-de-objeto-preferido %}) vimos varias definiciones de *objeto* y mencioné cuál es mi definición de preferecia, argumentando las bondades de la misma.
 
-Con un ejemplo práctico y real, voy a señalar cuál es la diferencia entre *objeto* y *valor*.
+Ahora quiero usar la pregunta de Stackoverflow como ejemplo para señalar las diferencias entre *objeto* y *valor*.
 
-En la pregunta de Stackoverflow, el autor de la pregunta quiere saber específicamente cuándo un objeto es de tipo [Nullable<T/>](https://msdn.microsoft.com/en-us/library/b3h38hb0(v=vs.110).aspx) o cuándo no lo es. La pregunta es específica del [lenguaje de programación C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)), pero voy a tratar de ser lo más general posible, tratando de que el código pueda ser interpretado en "varios" lenguajes de programación. Luego voy a mencionar algunos aspectos específicos del código C# que pueden ser mejorados.
-
-La pregunta es la siguiente:
+El autor de la pregunta quiere saber sobre algún mecanismo que le indique cuándo un objeto es de tipo [Nullable\<T>](https://msdn.microsoft.com/en-us/library/b3h38hb0(v=vs.110).aspx) o cuándo no lo es. La pregunta es específica del [lenguaje de programación C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)). 
 
 >"...So just out curiosity, how can you determine if a given instance is a **Nullable<> object** or not?"
+
+Español: "...Sólo por curiosidad, ¿cómo se puede determinar si una instancia dada es un **objeto Nullable** o no?"
+
+
+Me interesa analizar [la respuesta aceptada](http://stackoverflow.com/questions/6026824/detecting-a-nullable-type-via-reflection/6026873#6026873), cuyo autor es [Jon Skeet](http://stackoverflow.com/users/22656/jon-skeet), una persona muy reconocida en el mundo .Net, y autor de [C# in Depth](http://csharpindepth.com/).
+
+La parte que me interesa es donde Jon dice:
+
+>"Well firstly, **Nullable\<T>** is a **struct**, so there isn't an **object** as such..."
+
+Español: "Bueno en primer lugar, **Nullable\<T>** es un **struct**, por lo tanto, no es un **objeto**..."
+
+Veamos primero, antes de analizar lo que Jon quiso decir, qué es un *ValueType*, qué es un *struct* y qué es *Nullable\<T>*.
+
+ValueType:
+
+struct:
+
+Nullable\<T>:
+
 
 Lo que el autor de la pregunta necesita, es una función como la siguiente: [1](#Ref1)
 
@@ -41,9 +59,6 @@ bool IsNullable<T>(T x)
 [Aquí el link a la respuesta](http://stackoverflow.com/questions/6026824/detecting-a-nullable-type-via-reflection/6026873#6026873).
 
 
-La parte que me interesa es donde Jon dice:
-
->"Well firstly, **Nullable\<T>** is a **struct**, so there isn't an **object** as such..."
 
 
 El autor de la pregunta Está hablando del [lenguaje de programación C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)).  
