@@ -34,7 +34,11 @@ Español: "Bueno en primer lugar, **Nullable\<T>** es un **struct**, por lo tant
 
 Veamos primero, antes de analizar lo que Jon quiso decir, qué es un *ValueType*, qué es un *struct* y qué es *Nullable\<T>*.
 
-ValueType:
+## ValueType
+
+Los tipos de C# son: Value types, reference types, type-parameter types y pointers (en código unsafe). De estas cuatro categorías por el momento nos interensan sólo las dos primeras, value types y reference types.
+
+
 
 struct:
 
