@@ -260,18 +260,18 @@ REF PARA SPECIES Y DATUM
 
 Cualquier lenguaje de programación que diga soportar *value types* reales, tiene que soportar *inmutablidad absoluta* de los *values*. Veremos más adelante que implica que un lenguaje soporte *inmutabilidad absoluta*.
 
-## C# e inmutabilidad de *value types*
+## Inmutabilidad de los *C# ValueType's*
 
 En C# los *values* no son necesariamente inmutables, por ejemplo:
 
-Por ejemplo, los objetos de tipo System.Int32 o int no son inmutables.
+Los objetos (o ¿valores?) de tipo *int* (o System.Int32 REF?) no son inmutables:
 
 {% highlight csharp %}
 int a = 15;
 a = 34;
 {% endhighlight %}
 
-Uno puede modificar sus datos sin que esto equivalga a hacer una copia del objeto manteniendo dos copias inmutables, como sucede en algunos lenguajes funcionales, como Haskell. REF?
+Uno puede modificar sus datos sin que esto equivalga a hacer una copia del objeto manteniendo dos copias inmutables, como sucede en algunos lenguajes funcionales, como por ejemplo Haskell. REF?
 
 Aquí otro ejemplo de un *C# Value Type* que tambiés es mutable:
 
@@ -280,34 +280,18 @@ Nulable<int> x = 15;
 x = null;
 {% endhighlight %}
 
+
+C# has no way to describe *values* and *value types* as separate from *objects* and *object types*. ???????
+
+
+
 Aquí otro ejemplo de un *C# Value Type* que es mutable.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 - Los *values* son inmutables.
 - El lenguaje no debe permitir acceder a la memoria mediante punteros o referencias.  
 Ya que si los punteros/referencias son permitidos, se viola la condición de inmutabilidad, ya que la memoria es modificable. 
 
 
-C# has no way to describe *values* and *value types* as separate from *objects* and *object types*. ???????
 
 
 ## Condiciones anteriores en C# ????
