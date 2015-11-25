@@ -16,6 +16,7 @@ I got these two gifts.
 ![Elements of Programming and From Mathematics to Generic Programming]({{ site.url }}/images/EoPAndFM2GP.jpg)
 
 These are two great books.
+
 It is an honor for me that are autographed by one of the greatest of our discipline.
 
 Do not deprive the pleasure of reading them.
