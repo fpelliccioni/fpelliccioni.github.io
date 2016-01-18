@@ -11,7 +11,7 @@ Alex has retired.
 
 This is a very nice Commemorative Stamp, by [Joyce Croft](https://twitter.com/joycecroft) and Alexander Zeyliger of [A9](http://a9.com/).
 
-![Alex Stepanov Commemorative Stamp]({{ site.url }}/images/alex-commemorative-stamp.jpg)
+![Alex Stepanov Commemorative Stamp]({{ site.url }}/images/Stepanov_poster_FINAL.png)
 
 I have to confess that I feel sad because I really wished that Alex continue contributing ideas for much longer time.  
 But he has retired and I'm happy for him.

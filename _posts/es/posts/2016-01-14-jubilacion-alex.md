@@ -11,7 +11,7 @@ Alex se ha jubilado.
 
 Les comparto una estampilla conmemorativa, diseñada por [Joyce Croft](https://twitter.com/joycecroft) y Alexander Zeyliger de [A9](http://a9.com/).
 
-![Alex Stepanov Commemorative Stamp]({{ site.url }}/images/alex-commemorative-stamp.jpg)
+![Alex Stepanov Commemorative Stamp]({{ site.url }}/images/Stepanov_poster_FINAL.png)
 
 Tengo que confesar que siento tristeza, ya que me hubiera gustado que Alex siga aportando ideas por mucho tiempo más tiempo.  
 Pero se ha retirado y estoy feliz por él.
