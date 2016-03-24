@@ -287,6 +287,8 @@ I think Python starts to become popular with the boom of dynamic languages â€‹â€
 <a name="Ref15">[15]</a> [Standard ECMA-334. C# Language Specification. 4th edition (June 2006)](http://www.ecma-international.org/publications/standards/Ecma-334.htm), Section 8.7.3 [page 34]
 
 <a name="Ref16">[16]</a> Objective-C has neither a standard nor a specification. The only "formal" documentation I could find was a website:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Programming With ObjectiveC](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Programming With ObjectiveC](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html)  
+Kimberley Hagan wrote me to share a resource that she thinks may be valuable for Objective-C programmers, so here I leave the link in case you want to hit a glance:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Objective-C: Guide and Resources](http://www.whoishostingthis.com/resources/objective-c/)  
 
 <a name="Ref17">[17]</a> For documentation on [FORTRAN](http://www.softwarepreservation.org/projects/FORTRAN/), [ALGOL](http://www.softwarepreservation.org/projects/ALGOL/) and C: [ISO/IEC JTC1/SC22/WG14 - The international standardization working group for the programming language C](http://www.open-std.org/JTC1/SC22/WG14/).
