@@ -81,8 +81,8 @@ defaults:
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    America/Argentina/Buenos_Aires
 future:      true
-# highlighter: rouge				#Ruby bases syntax highlighter
-highlighter: pygments			#Python bases syntax highlighter
+highlighter: rouge				#Ruby bases syntax highlighter
+# highlighter: pygments			#Python bases syntax highlighter
 markdown:    kramdown			#Default
 # markdown:    redcarpet			#Used by this blog ... http://gastonsanchez.com/blog/opinion/2014/02/16/Mathjax-with-jekyll.html ... to suport Latex
 # redcarpet:

@@ -81,18 +81,53 @@
               <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
             {% endfor %}
 
-            <li>
+
+<!--             <li><a href="">{{ page.lang | slice: 0, 2 }}</a></li>
+            <li><a href="">{{ page.date }}</a></li>
+
+            {% assign postsfer=site.posts | where:"date", page.date | sort: 'path' %}
+            {% for post in postsfer %}
+            <li><a href="">{{ post.date }}</a></li>
+            {% endfor %}
+ -->
+
+<!--             <li>
               {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
+
               {% for post in posts %}
-                {% if page.lang != post.lang %}
-                  {% if page.lang == "en" %}
-                  <a href="{{ post.url }}" class="{{ post.lang }}">Español</a>
+                {% if page.lang | slice: 0, 2 != post.lang | slice: 0, 2 %}
+                  {% if page.lang | slice: 0, 2 == "en" %}
+                  <a href="{{ post.url }}" class="{{ post.lang | slice: 0, 2 }}">Español</a>
                   {% else %}
-                  <a href="{{ post.url }}" class="{{ post.lang }}">English</a>
+                  <a href="{{ post.url }}" class="{{ post.lang | slice: 0, 2 }}">English</a>
                   {% endif %}
                 {% endif %}
               {% endfor %}
             </li>
+ -->
+
+
+            {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
+
+            {% for post in posts %}
+              {% assign pageLang = page.lang | slice: 0, 2 %}
+              {% assign postLang = post.lang | slice: 0, 2 %}
+
+              {% if pageLang != postLang %}
+                {% if pageLang == "en" %}
+                <li><a href="{{ post.url }}" class="{{ postLang }}">Español</a></li>
+                {% else %}
+                <li><a href="{{ post.url }}" class="{{ postLang }}">English</a></li>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+
+
+
+            
+
+
+
           </ul>
         </nav>
       </div>
