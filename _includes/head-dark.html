@@ -82,14 +82,14 @@
             {% endfor %}
 
 
-            <li><a href="">{{ page.lang | slice: 0, 2 }}</a></li>
+<!--             <li><a href="">{{ page.lang | slice: 0, 2 }}</a></li>
             <li><a href="">{{ page.date }}</a></li>
 
-            {% assign postsfer=site.posts | sort: 'path' %}
+            {% assign postsfer=site.posts | where:"date", page.date | sort: 'path' %}
             {% for post in postsfer %}
             <li><a href="">{{ post.date }}</a></li>
             {% endfor %}
-
+ -->
 
             <li>
               {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
@@ -100,11 +100,11 @@
 
 
               {% for post in posts %}
-                {% if page.lang.substr(0, 2).toLowerCase() != post.lang.substr(0, 2).toLowerCase() %}
-                  {% if page.lang.substr(0, 2).toLowerCase() == "en" %}
-                  <a href="{{ post.url }}" class="{{ post.lang.substr(0, 2).toLowerCase() }}">Español</a>
+                {% if page.lang | slice: 0, 2 != post.lang | slice: 0, 2 %}
+                  {% if page.lang | slice: 0, 2 == "en" %}
+                  <a href="{{ post.url }}" class="{{ post.lang | slice: 0, 2 }}">Español</a>
                   {% else %}
-                  <a href="{{ post.url }}" class="{{ post.lang.substr(0, 2).toLowerCase() }}">English</a>
+                  <a href="{{ post.url }}" class="{{ post.lang | slice: 0, 2 }}">English</a>
                   {% endif %}
                 {% endif %}
               {% endfor %}
