@@ -171,11 +171,11 @@ $("#some_math").css("font-size","500%");
               {{ post.lang }} -->
 
               {% for post in posts %}
-                {% if page.lang != post.lang %}
-                  {% if page.lang == "en" %}
-                  <a href="{{ post.url }}" class="{{ post.lang }}">Español</a>
+                {% if page.lang.substring(0, 2).toLowerCase() != post.lang.substring(0, 2).toLowerCase() %}
+                  {% if page.lang.substring(0, 2).toLowerCase() == "en" %}
+                  <a href="{{ post.url }}" class="{{ post.lang.substring(0, 2).toLowerCase() }}">Español</a>
                   {% else %}
-                  <a href="{{ post.url }}" class="{{ post.lang }}">English</a>
+                  <a href="{{ post.url }}" class="{{ post.lang.substring(0, 2).toLowerCase() }}">English</a>
                   {% endif %}
                 {% endif %}
               {% endfor %}
