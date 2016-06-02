@@ -148,7 +148,7 @@ Thanks to excellent job done by the [python.org](http://python.org) guys keeping
 In other words, Python is the first language, after Smalltalk, to use the word "method". At least in the languages ​​I could verify.
 
 Now I wonder, why Python used method instead of a more common term?.
-No one better than the creator of language, [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) to enlighten. I wrote an email to him, Guido was very king to answer and let me quote him:
+No one better than the creator of language, [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) to enlighten. I wrote an email to him, Guido was very kind to answer and let me quote him:
 
 > Fernando: Why did you use "method" instead of any other word? Have you taken from Smalltalk?  Or,... from any other programming language?
 
