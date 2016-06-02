@@ -83,6 +83,9 @@
 
             <!-- <li><a href="">{{ page.lang }}</a></li> -->
 
+            <li><a href="">{{ post.lang.substring(0, 2).toLowerCase() }}</a></li>
+            <li><a href="">{{ page.date }}</a></li>
+
             <li>
               {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
               {% for post in posts %}
