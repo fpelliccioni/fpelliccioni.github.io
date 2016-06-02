@@ -81,6 +81,8 @@
               <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
             {% endfor %}
 
+            <li><a href="">{{ page.lang }}</a></li>
+
             <li>
               {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
               {% for post in posts %}
