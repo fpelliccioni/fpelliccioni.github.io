@@ -1,6 +1,6 @@
 ---
 layout: post
-type: draft
+type: post
 title:  "Palindromes and more"
 date:   2015-09-07 12:00:00
 comments: true
@@ -10,13 +10,13 @@ category: spanish
 tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp, smalltalk, fortran, algol, simula, method, procedure, routine, function, history, palindromos, palindromes]
 ---
 
-<script type="text/x-mathjax-config">
+<!-- <script type="text/x-mathjax-config">
  MathJax.Hub.Config({
   "HTML-CSS": {
     // scale: 200
     scale: (MathJax.Hub.Browser.isChrome && MathJax.Hub.Browser.isPC ? 100 : 100)
  }});
-</script>
+</script> -->
 
 I decided to write this article from a question I saw in [stackoverflow.com](http://stackoverflow.com)
 
@@ -24,7 +24,7 @@ I decided to write this article from a question I saw in [stackoverflow.com](htt
 
 The questioner tries to write an algorithm to identify whether a "word" is a [palindrome](https://en.wikipedia.org/wiki/Palindrome) or it is not. The algorithm is written using the [Java programming language](https://en.wikipedia.org/wiki/Java_(programming_language))
 
-I do not want to analyze the algorithm proposed by the questioner, but I want to analyze the most voted answer algorithm. The latter has 55 votes versus 47 votes that have the accepted answer (to today's date, September 7, 2015).
+I do not want to analyze the algorithm proposed by the questioner, but I want to analyze the most voted answer algorithm. The latter has 73 votes versus 65 votes that have the accepted answer (to today's date, June 6, 2016).
 
 [Here](http://stackoverflow.com/a/4139065/1006264) the link to the algorithm that I want to analyze.
 
@@ -67,7 +67,7 @@ For more information on O-notation and asymptotic complexity, see [[2]](#Ref2).
 
 Another way to measure algorithms is no use approximations but concrete quantity of operations, depending on the input to the algorithm.
 
-For example, imagine the algorithm to find the minimum (or maximum) of \\( n \\) elements. We can say that the algorithm has *linear complexity* (in time), or the algorithm is \\( O(n) \\). But specifically, the algorithm needs \\( n - 1 \\) comparisons to find the minimum element.
+For example, imagine the algorithm to find the minimum (or maximum) of \\( n \\) elements. We can say that the algorithm has *linear complexity* (in time), or the algorithm is \\( O(n) \\). But specifically, the algorithm needs $$( n - 1 )$$ comparisons to find the minimum element.
 
 
 ### Back to Palindromes
@@ -372,7 +372,7 @@ There is no standard that specifies the size of a byte, but can say that the *de
     - Version 1.8.0_60  
     - Java(TM) SE Runtime Environment (build 1.8.0_60-b27)  
     - 64-bit [HotSpot VM](https://en.wikipedia.org/wiki/HotSpot).  
-    - [Compressed Oops](http://docs.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html#compressedOop) activado  
+    - [Compressed Oops](http://docs.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html#compressedOop) enabled.  
     - [Objects alignment](https://en.wikipedia.org/wiki/Data_structure_alignment): 8 bytes.
 
 For analysis on other platforms, please [refer to [7]](#Ref7).
