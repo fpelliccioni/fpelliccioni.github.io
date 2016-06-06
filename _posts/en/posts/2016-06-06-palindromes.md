@@ -2,7 +2,7 @@
 layout: post
 type: post
 title:  "Palindromes and more"
-date:   2015-09-07 12:00:00
+date:   2016-06-06 12:00:00
 comments: true
 
 category: spanish
