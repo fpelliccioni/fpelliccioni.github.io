@@ -218,6 +218,53 @@ Thanks in particular to the following for their feedback to improve this article
 
 Some of the definitions presented here are based on: <http://www.elementsofprogramming.com/eop-concepts.pdf>
 
+<!-- <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+    }
+});
+
+MathJax.Hub.Config({
+   "HTML-CSS": {
+     scale: (MathJax.Hub.Browser.isChrome && MathJax.Hub.Browser.isPC ? 100 : 100)
+  }});
+
+ // MathJax.Hub.Config({
+ //  "HTML-CSS": {
+ //    scale: (MathJax.Hub.Browser.isChrome && MathJax.Hub.Browser.isPC ? 100 : 100)
+ // }});
+
+MathJax.Hub.Config({
+  displayAlign: "left",
+  displayIndent: "100px"
+});
+
+// MathJax {
+//   font-size: 1.3em;
+// }
+
+// displayIndent: "2em"
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        if (all[i].SourceElement().parentNode.className.indexOf(' has-jax') == -1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';  
+        }
+        
+    }
+});
+
+$("#inline_math").css("font-size","300%");
+$("#some_math").css("font-size","500%");
+
+</script>
+ -->
+
+
 `$$Relation(\texttt{Op}) \triangleq \\
 \qquad HomogeneousPredicate(\texttt{Op}) \\
 \quad \land \texttt{ Arity(Op) = 2}$$`
