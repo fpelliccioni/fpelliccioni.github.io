@@ -313,7 +313,7 @@ Un *componente* debe ser algo que se pueda reutilizar y en muchos casos los algo
 Además, los tres algoritmos sólo aceptan un String como input. Un palíndromo no sólo es una secuencia de caracteres que se lee igual al derecho y al revés. Un palíndromo puede encontrarse en forma de notas musicales, números y también en la naturaleza.
 
 No soy experto en genética, pero se que los [palíndromos también pueden encontrarse en cadenas de ADN](https://en.wikipedia.org/wiki/Palindromic_sequence).  
-Los palíndromos en el ADN son tan importantes que algunos los consideran como responsables de evitar la extinción de la especie humana (y también otras especies) ya que de no existir los palíndromos en el ADN, se producirían mutaciones genéticas irreversibles e incorregibles, que con el paso del tiempo provocarían la extensión de la especie.  
+Los palíndromos en el ADN son tan importantes que algunos los consideran como responsables de evitar la extinción de la especie humana (y también otras especies) ya que de no existir los palíndromos en el ADN, se producirían mutaciones genéticas irreversibles e incorregibles, que con el paso del tiempo provocarían la extinción de la especie.  
 En algún futuro artículo charlaremos este tema.
 
 ## Pendientes

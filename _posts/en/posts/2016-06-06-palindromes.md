@@ -306,7 +306,7 @@ A *component* should be something that can be reused and, in many cases, the alg
 In addition, the three algorithms only accept a String as input. A palindrome is not just a sequence of characters that reads the same forwards and backwards. A palindrome can be found in music, in numbers and also in nature.
 
 I am no expert in genetics, but I know that [palindromes can be found in DNA strands](https://en.wikipedia.org/wiki/Palindromic_sequence).  
-Palindromes in DNA are so important that some experts consider them to be responsible for preventing the extinction of the human race (and other species too). Without palindromes in DNA, incorrigible and irreversible genetic mutations would occur, causing the extension of the species, with the passing of generations.
+Palindromes in DNA are so important that some experts consider them to be responsible for preventing the extinction of the human race (and other species too). Without palindromes in DNA, incorrigible and irreversible genetic mutations would occur, causing the extinction of the species, with the passing of generations.
 In a future article we'll talk about this topic.
 
 ## Pending issues
