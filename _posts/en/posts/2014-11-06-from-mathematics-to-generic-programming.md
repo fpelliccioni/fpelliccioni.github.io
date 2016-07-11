@@ -10,7 +10,8 @@ tags: [components, programming, components programming, componentsprogramming, s
 The new book by Alexander Stepanov, and his colleague Daniel Rose, is about to go on sale.
 
 <a href="http://www.amazon.com/Mathematics-Generic-Programming-Alexander-Stepanov/dp/0321942043/">
-	<img src="/images/fmgp.jpg" alt="Drawing" style="width: 50%; height:80%;" />
+	<!-- <img src="/images/fmgp.jpg" alt="Drawing" style="width: 50%; height:80%;" /> -->
+	<img src="/images/fm2gp_portada.jpg" alt="Drawing" style="width: 50%; height:80%;" />
 </a>
 
 The book is based on the ["Algorithmic Journeys"](http://www.stepanovpapers.com/) course taught by Alex at A9.
