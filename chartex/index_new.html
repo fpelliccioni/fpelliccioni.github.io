@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
+<div id="chart_lines" style="width: 900px; height: 500px;"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="jquery.csv.min.js"></script>
+
+<script>
+
+google.setOnLoadCallback(drawChart);
+
+  // function drawChart() {
+  //       $.get("https://raw.githubusercontent.com/tao-cpp/algorithm/gh-pages/data/testchart.csv", function(csvString) {
+        
+  //         var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+  //         var data = new google.visualization.arrayToDataTable(arrayData);
+  //         var view = new google.visualization.DataView(data);
+  //         view.setColumns([0,1]);
+
+  //         var options = {
+  //             title: "A Chart from a CSV!",
+  //             hAxis: {title: data.getColumnLabel(0), minValue: data.getColumnRange(0).min, maxValue: data.getColumnRange(0).max},
+  //             vAxis: {title: data.getColumnLabel(1), minValue: data.getColumnRange(1).min, maxValue: data.getColumnRange(1).max},
+  //             legend: 'none'
+  //         };
+  //         var chart = new google.visualization.ScatterChart(document.getElementById('chart_lines'));
+  //         chart.draw(view, options);
+  //     });
+  // }
+
+
+
+      // function drawChart() {
+      //   var data = new google.visualization.DataTable();
+
+      //   data.addColumn('string', 'n');
+      //   data.addColumn('number', 'mult_big_vector_hot_201_101');
+      //   data.addColumn({type: 'number', role: 'interval'});
+      //   data.addColumn({type: 'number', role: 'interval'});
+      //   data.addColumn('number', 'mult_big_vector_no_out_hot_201_101');
+      //   data.addColumn({type: 'number', role: 'interval'});
+      //   data.addColumn({type: 'number', role: 'interval'});
+      //   data.addColumn('number', 'mult_big_vector_hot_64_32');
+      //   data.addColumn({type: 'number', role: 'interval'});
+      //   data.addColumn({type: 'number', role: 'interval'});
+      //   data.addColumn('number', 'mult_big_vector_no_out_hot_64_32');
+      //   data.addColumn({type: 'number', role: 'interval'});
+      //   data.addColumn({type: 'number',role: 'interval'});
+
+      //   data.addRows([
+      //     ['16', 101.95, 96.08, 107.82, 67.78, 61.56, 74.01, 2.58373, 2.12, 3.05, 8.28015, 7.12, 9.44],
+      //     ['32', 103.40, 93.86, 112.94, 69.21, 65.20, 73.22, 2.77122, 2.44, 3.10, 8.42064, 7.42, 9.42],
+      //     ['64', 103.26, 98.49, 108.04, 70.41, 63.98, 76.84, 2.69391, 2.27, 3.12, 8.50984, 7.70, 9.32],
+      //     ['128', 103.87, 95.79, 111.94, 69.42, 65.16, 73.68, 2.69058, 2.36, 3.02, 8.46755, 8.06, 8.87],
+      //     ['256', 108.68, 84.14, 133.23, 70.90, 61.63, 80.17, 2.71297, 2.42, 3.01, 8.57265, 8.00, 9.15],
+      //     ['512', 105.51, 96.14, 114.88, 70.73, 63.85, 77.61, 2.76892, 2.57, 2.97, 8.80321, 8.45, 9.16],
+      //     ['1,024', 104.87, 97.71, 112.04, 69.54, 66.20, 72.89, 2.83956, 2.71, 2.97, 8.70670, 8.48, 8.93],
+      //     ['2,048', 104.03, 100.01, 108.05, 69.66, 66.78, 72.53, 2.89042, 2.70, 3.08, 8.74056, 8.61, 8.87],
+      //     ['4,096', 102.94, 100.50, 105.38, 70.59, 68.69, 72.48, 2.84090, 2.73, 2.95, 8.74903, 8.68, 8.82],
+      //     ['8,192', 102.57, 101.37, 103.77, 69.11, 67.77, 70.45, 2.84246, 2.80, 2.89, 8.73745, 8.62, 8.85],
+      //   ]);
+
+
+      // var datacsv = google.visualization.dataTableToCsv(data);
+      // console.log(datacsv);
+
+      //   var options_bars = {
+      //     title: 'Performance comparison',
+
+      //     intervals: {
+      //       style: 'bars'
+      //     },
+
+      //     hAxis: {
+      //       title: '# elements'
+      //     },
+      //     vAxis: {
+      //       title: 'Time (ns)'
+      //     }
+      //   };
+
+      //   var chart_lines = new google.visualization.LineChart(document.getElementById('chart_lines'));
+      //   chart_lines.draw(data, options_bars);
+      // }
+
+
+    // function drawChart() {
+
+    //   var wrapper = new google.visualization.ChartWrapper({
+    //     chartType: 'ColumnChart',
+    //     dataTable: [['Germany', 'USA', 'Brazil', 'Canada', 'France', 'RU'],
+    //                 [700, 300, 400, 500, 600, 800]],
+    //     options: {'title': 'Countries'},
+    //     containerId: 'chart_lines'
+    //   });
+
+    //   wrapper.draw();
+
+    // }      
+
+    // function drawChart() {
+
+    //   var wrapper = new google.visualization.ChartWrapper({
+    //     chartType: 'LineChart',
+    //     dataTable: [['Germany', 'USA', 'Brazil', 'Canada', 'France', 'RU'],
+    //                 [700, 300, 400, 500, 600, 800]],
+    //     options: {'title': 'Countries', 
+    //               intervals: {style: 'bars'},
+    //               hAxis: { title: '# elements'},
+    //               vAxis: { title: 'Time (ns)'}},
+    //     containerId: 'chart_lines'
+    //   });
+
+    //   wrapper.draw();
+
+    // }      
+
+
+    // function drawChart() {
+
+
+    //   var jsonData = `{ "chartType": "LineChart",
+    //     "dataTable": {
+    //                   "cols": [
+    //                         {"id":"","label":"n","pattern":"","type":"string"},
+    //                         {"id":"","label":"a","pattern":"","type":"number"},
+    //                         {"type": "number", "role": "interval"},
+    //                         {"type": "number", "role": "interval"},
+    //                         {"id":"","label":"b","pattern":"","type":"number"},
+    //                         {"type": "number", "role": "interval"},
+    //                         {"type": "number", "role": "interval"},                            
+    //                         {"id":"","label":"c","pattern":"","type":"number"},
+    //                         {"type": "number", "role": "interval"},
+    //                         {"type": "number", "role": "interval"},                            
+    //                         {"id":"","label":"d","pattern":"","type":"number"},
+    //                         {"type": "number", "role": "interval"},
+    //                         {"type": "number", "role": "interval"}                            
+    //                       ],
+    //                   "rows": [
+    //                             {"c":[{"v":"16"},   {"v": 101.95},{"v": 96.08}, {"v": 107.82},{"v": 67.78},{"v": 61.56},{"v": 74.01},{"v": 2.58373},{"v": 2.12},{"v": 3.05},{"v": 8.28015},{"v": 7.12},{"v": 9.44}]},
+    //                             {"c":[{"v":"32"},   {"v": 103.40},{"v": 93.86}, {"v": 112.94},{"v": 69.21},{"v": 65.20},{"v": 73.22},{"v": 2.77122},{"v": 2.44},{"v": 3.10},{"v": 8.42064},{"v": 7.42},{"v": 9.42}]},
+    //                             {"c":[{"v":"64"},   {"v": 103.26},{"v": 98.49}, {"v": 108.04},{"v": 70.41},{"v": 63.98},{"v": 76.84},{"v": 2.69391},{"v": 2.27},{"v": 3.12},{"v": 8.50984},{"v": 7.70},{"v": 9.32}]},
+    //                             {"c":[{"v":"128"},  {"v": 103.87},{"v": 95.79}, {"v": 111.94},{"v": 69.42},{"v": 65.16},{"v": 73.68},{"v": 2.69058},{"v": 2.36},{"v": 3.02},{"v": 8.46755},{"v": 8.06},{"v": 8.87}]},
+    //                             {"c":[{"v":"256"},  {"v": 108.68},{"v": 84.14}, {"v": 133.23},{"v": 70.90},{"v": 61.63},{"v": 80.17},{"v": 2.71297},{"v": 2.42},{"v": 3.01},{"v": 8.57265},{"v": 8.00},{"v": 9.15}]},
+    //                             {"c":[{"v":"512"},  {"v": 105.51},{"v": 96.14}, {"v": 114.88},{"v": 70.73},{"v": 63.85},{"v": 77.61},{"v": 2.76892},{"v": 2.57},{"v": 2.97},{"v": 8.80321},{"v": 8.45},{"v": 9.16}]},
+    //                             {"c":[{"v":"1,024"},{"v": 104.87},{"v": 97.71}, {"v": 112.04},{"v": 69.54},{"v": 66.20},{"v": 72.89},{"v": 2.83956},{"v": 2.71},{"v": 2.97},{"v": 8.70670},{"v": 8.48},{"v": 8.93}]},
+    //                             {"c":[{"v":"2,048"},{"v": 104.03},{"v": 100.01},{"v": 108.05},{"v": 69.66},{"v": 66.78},{"v": 72.53},{"v": 2.89042},{"v": 2.70},{"v": 3.08},{"v": 8.74056},{"v": 8.61},{"v": 8.87}]},
+    //                             {"c":[{"v":"4,096"},{"v": 102.94},{"v": 100.50},{"v": 105.38},{"v": 70.59},{"v": 68.69},{"v": 72.48},{"v": 2.84090},{"v": 2.73},{"v": 2.95},{"v": 8.74903},{"v": 8.68},{"v": 8.82}]},
+    //                             {"c":[{"v":"8,192"},{"v": 102.57},{"v": 101.37},{"v": 103.77},{"v": 69.11},{"v": 67.77},{"v": 70.45},{"v": 2.84246},{"v": 2.80},{"v": 2.89},{"v": 8.73745},{"v": 8.62},{"v": 8.85}]}
+    //                       ]
+    //                 },
+    //     "options": {"title": "Performance comparison", 
+    //               "intervals": {"style": "bars"},
+    //               "hAxis": { "title": "# elements"},
+    //               "vAxis": { "title": "Time (ns)"}
+    //             },
+    //     "containerId": "chart_lines"
+    //   }`;
+
+
+    //   var wrapper = new google.visualization.ChartWrapper(jsonData);
+
+    //   // var wrapper = new google.visualization.ChartWrapper({
+    //   //   chartType: "LineChart",
+    //   //   dataTable: {
+    //   //                 "cols": [
+    //   //                       {"id":"","label":"n","pattern":"","type":"string"},
+    //   //                       {"id":"","label":"mult_big_vector_hot_201_101","pattern":"","type":"number"},
+    //   //                       {type: "number", role: "interval"},
+    //   //                       {type: "number", role: "interval"},
+    //   //                       {"id":"","label":"mult_big_vector_no_out_hot_201_101","pattern":"","type":"number"},
+    //   //                       {type: "number", role: "interval"},
+    //   //                       {type: "number", role: "interval"},                            
+    //   //                       {"id":"","label":"mult_big_vector_hot_64_32","pattern":"","type":"number"},
+    //   //                       {type: "number", role: "interval"},
+    //   //                       {type: "number", role: "interval"},                            
+    //   //                       {"id":"","label":"mult_big_vector_no_out_hot_64_32","pattern":"","type":"number"},
+    //   //                       {type: "number", role: "interval"},
+    //   //                       {type: "number", role: "interval"}                            
+    //   //                     ],
+    //   //                 "rows": [
+    //   //                           {"c":[{"v":"16"},   {"v": 101.95},{"v": 96.08}, {"v": 107.82},{"v": 67.78},{"v": 61.56},{"v": 74.01},{"v": 2.58373},{"v": 2.12},{"v": 3.05},{"v": 8.28015},{"v": 7.12},{"v": 9.44}]},
+    //   //                           {"c":[{"v":"32"},   {"v": 103.40},{"v": 93.86}, {"v": 112.94},{"v": 69.21},{"v": 65.20},{"v": 73.22},{"v": 2.77122},{"v": 2.44},{"v": 3.10},{"v": 8.42064},{"v": 7.42},{"v": 9.42}]},
+    //   //                           {"c":[{"v":"64"},   {"v": 103.26},{"v": 98.49}, {"v": 108.04},{"v": 70.41},{"v": 63.98},{"v": 76.84},{"v": 2.69391},{"v": 2.27},{"v": 3.12},{"v": 8.50984},{"v": 7.70},{"v": 9.32}]},
+    //   //                           {"c":[{"v":"128"},  {"v": 103.87},{"v": 95.79}, {"v": 111.94},{"v": 69.42},{"v": 65.16},{"v": 73.68},{"v": 2.69058},{"v": 2.36},{"v": 3.02},{"v": 8.46755},{"v": 8.06},{"v": 8.87}]},
+    //   //                           {"c":[{"v":"256"},  {"v": 108.68},{"v": 84.14}, {"v": 133.23},{"v": 70.90},{"v": 61.63},{"v": 80.17},{"v": 2.71297},{"v": 2.42},{"v": 3.01},{"v": 8.57265},{"v": 8.00},{"v": 9.15}]},
+    //   //                           {"c":[{"v":"512"},  {"v": 105.51},{"v": 96.14}, {"v": 114.88},{"v": 70.73},{"v": 63.85},{"v": 77.61},{"v": 2.76892},{"v": 2.57},{"v": 2.97},{"v": 8.80321},{"v": 8.45},{"v": 9.16}]},
+    //   //                           {"c":[{"v":"1,024"},{"v": 104.87},{"v": 97.71}, {"v": 112.04},{"v": 69.54},{"v": 66.20},{"v": 72.89},{"v": 2.83956},{"v": 2.71},{"v": 2.97},{"v": 8.70670},{"v": 8.48},{"v": 8.93}]},
+    //   //                           {"c":[{"v":"2,048"},{"v": 104.03},{"v": 100.01},{"v": 108.05},{"v": 69.66},{"v": 66.78},{"v": 72.53},{"v": 2.89042},{"v": 2.70},{"v": 3.08},{"v": 8.74056},{"v": 8.61},{"v": 8.87}]},
+    //   //                           {"c":[{"v":"4,096"},{"v": 102.94},{"v": 100.50},{"v": 105.38},{"v": 70.59},{"v": 68.69},{"v": 72.48},{"v": 2.84090},{"v": 2.73},{"v": 2.95},{"v": 8.74903},{"v": 8.68},{"v": 8.82}]},
+    //   //                           {"c":[{"v":"8,192"},{"v": 102.57},{"v": 101.37},{"v": 103.77},{"v": 69.11},{"v": 67.77},{"v": 70.45},{"v": 2.84246},{"v": 2.80},{"v": 2.89},{"v": 8.73745},{"v": 8.62},{"v": 8.85}]}
+    //   //                     ]
+    //   //               },
+    //   //   options: {"title": "Performance comparison", 
+    //   //             intervals: {style: "bars"},
+    //   //             hAxis: { title: "# elements"},
+    //   //             vAxis: { title: "Time (ns)"}
+    //   //           },
+    //   //   containerId: "chart_lines"
+    //   // });
+
+    //   //   data.addColumn('string', 'n');
+    //   //   data.addColumn('number', 'mult_big_vector_hot_201_101');
+    //   //   data.addColumn({type: 'number', role: 'interval'});
+    //   //   data.addColumn({type: 'number', role: 'interval'});
+    //   //   data.addColumn('number', 'mult_big_vector_no_out_hot_201_101');
+    //   //   data.addColumn({type: 'number', role: 'interval'});
+    //   //   data.addColumn({type: 'number', role: 'interval'});
+    //   //   data.addColumn('number', 'mult_big_vector_hot_64_32');
+    //   //   data.addColumn({type: 'number', role: 'interval'});
+    //   //   data.addColumn({type: 'number', role: 'interval'});
+    //   //   data.addColumn('number', 'mult_big_vector_no_out_hot_64_32');
+    //   //   data.addColumn({type: 'number', role: 'interval'});
+    //   //   data.addColumn({type: 'number',role: 'interval'});  
+
+    //     // dataTable: {
+    //     //               "cols": [
+    //     //                     {"id":"","label":"Topping","pattern":"","type":"string"},
+    //     //                     {"id":"","label":"Slices","pattern":"","type":"number"}
+    //     //                   ],
+    //     //               "rows": [
+    //     //                     {"c":[{"v":"Mushrooms","f":null},{"v":3,"f":null}]},
+    //     //                     {"c":[{"v":"Onions","f":null},{"v":1,"f":null}]},
+    //     //                     {"c":[{"v":"Olives","f":null},{"v":1,"f":null}]},
+    //     //                     {"c":[{"v":"Zucchini","f":null},{"v":1,"f":null}]},
+    //     //                     {"c":[{"v":"Pepperoni","f":null},{"v":2,"f":null}]}
+    //     //                   ]
+    //     //             },
+
+    //     // [['Germany', 'USA', 'Brazil', 'Canada', 'France', 'RU'],
+    //     //             ['16', 101.95, 96.08, 107.82, 67.78, 61.56, 74.01, 2.58373, 2.12, 3.05, 8.28015, 7.12, 9.44],
+    //     //             ['32', 103.40, 93.86, 112.94, 69.21, 65.20, 73.22, 2.77122, 2.44, 3.10, 8.42064, 7.42, 9.42],
+    //     //             ['64', 103.26, 98.49, 108.04, 70.41, 63.98, 76.84, 2.69391, 2.27, 3.12, 8.50984, 7.70, 9.32],
+    //     //             ['128', 103.87, 95.79, 111.94, 69.42, 65.16, 73.68, 2.69058, 2.36, 3.02, 8.46755, 8.06, 8.87],
+    //     //             ['256', 108.68, 84.14, 133.23, 70.90, 61.63, 80.17, 2.71297, 2.42, 3.01, 8.57265, 8.00, 9.15],
+    //     //             ['512', 105.51, 96.14, 114.88, 70.73, 63.85, 77.61, 2.76892, 2.57, 2.97, 8.80321, 8.45, 9.16],
+    //     //             ['1,024', 104.87, 97.71, 112.04, 69.54, 66.20, 72.89, 2.83956, 2.71, 2.97, 8.70670, 8.48, 8.93],
+    //     //             ['2,048', 104.03, 100.01, 108.05, 69.66, 66.78, 72.53, 2.89042, 2.70, 3.08, 8.74056, 8.61, 8.87],
+    //     //             ['4,096', 102.94, 100.50, 105.38, 70.59, 68.69, 72.48, 2.84090, 2.73, 2.95, 8.74903, 8.68, 8.82],
+    //     //             ['8,192', 102.57, 101.37, 103.77, 69.11, 67.77, 70.45, 2.84246, 2.80, 2.89, 8.73745, 8.62, 8.85]],
+
+    
+
+    //   wrapper.draw();
+
+    // }      
+
+
+  function drawChart() {
+        $.get("https://raw.githubusercontent.com/tao-cpp/algorithm/gh-pages/data/data.json", function(jsonData) {
+
+
+        var wrapper = new google.visualization.ChartWrapper(jsonData);
+        wrapper.draw();
+        
+          // var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+          // var data = new google.visualization.arrayToDataTable(arrayData);
+          // var view = new google.visualization.DataView(data);
+          // view.setColumns([0,1]);
+
+          // var options = {
+          //     title: "A Chart from a CSV!",
+          //     hAxis: {title: data.getColumnLabel(0), minValue: data.getColumnRange(0).min, maxValue: data.getColumnRange(0).max},
+          //     vAxis: {title: data.getColumnLabel(1), minValue: data.getColumnRange(1).min, maxValue: data.getColumnRange(1).max},
+          //     legend: 'none'
+          // };
+          // var chart = new google.visualization.ScatterChart(document.getElementById('chart_lines'));
+          // chart.draw(view, options);
+      });
+  }
+
+
+
+
+</script>
