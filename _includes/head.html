@@ -182,15 +182,26 @@ $("#some_math").css("font-size","500%");
             </li>
  -->
 
+            {% assign postsfer=site.posts | sort: 'path' %}
+            {% for post in postsfer %}
+              {% assign pageLang = page.lang | slice: 0, 2 %}
+              {% assign postLang = post.lang | slice: 0, 2 %}
+
+              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ post.date }}-{{ pageLang }}</a></li>
+              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ post.date }}-{{ postLang }}</a></li>
+            {% endfor %}
+
             {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
 
             {% for post in posts %}
               {% assign pageLang = page.lang | slice: 0, 2 %}
               {% assign postLang = post.lang | slice: 0, 2 %}
 
-              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ pageLang }}</a></li>
-              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ postLang }}</a></li>
+              <li><a href="{{ post.url }}" class="{{ postLang }}">HOLA</a></li>
 
+<!--               <li><a href="{{ post.url }}" class="{{ postLang }}">{{ pageLang }}</a></li>
+              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ postLang }}</a></li>
+ -->
               {% if pageLang != postLang %}
                 {% if pageLang == "en" %}
                 <li><a href="{{ post.url }}" class="{{ postLang }}">Español</a></li>
