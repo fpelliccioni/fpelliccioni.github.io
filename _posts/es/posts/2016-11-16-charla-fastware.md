@@ -11,7 +11,7 @@ tags: [components, programming, components programming, componentsprogramming, s
 
 Les comparto el enlace a las *filminas* de mi charla denominada ["¿Fastware?"](http://es.slideshare.net/FernandoPelliccioni/fastware-64059921) que fue expuesta en el ["Segundo Encuentro de programadores C++ de Buenos Aires"](https://www.meetup.com/cpp-ba/events/232269015/) el día 14 de Julio de 2016.
 
-En ese encuentro también tuvimos el agrado de presenciar la excelentes charlas brindadas por nuestros colegas: [Agustín (K-Ballo) Bergé](talesofcpp.fusionfenix.com), Francisco Tufró y Hernan Saez. [Los links de las demás presentacines aquí.](https://www.meetup.com/cpp-ba/pages/20784343/Presentaciones/).
+En ese encuentro también tuvimos el agrado de presenciar la excelentes charlas brindadas por nuestros colegas: [Agustín (K-Ballo) Bergé](http://talesofcpp.fusionfenix.com/), Francisco Tufró y Hernan Saez. [Los links de las demás presentacines aquí.](https://www.meetup.com/cpp-ba/pages/20784343/Presentaciones/).
 
 Espero que les gusten nuestras presentaciones y les de ganas de sumarse a [nuestra comunidad](www.meetup.com/cpp-ba/).
 

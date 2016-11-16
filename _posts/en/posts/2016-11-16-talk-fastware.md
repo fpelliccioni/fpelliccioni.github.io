@@ -11,7 +11,7 @@ Hello!
 
 Here is the the link to the slides of my talk entitled ["¿Fastware?"](http://es.slideshare.net/FernandoPelliccioni/fastware-64059921) (Spanish resource), which was exhibited at the ["Second C++ Buenos Aires Meeting"](https://www.meetup.com/cpp-ba/events/232269015/) on July 14, 2016.
 
-At that meeting we had the pleasure to view excellent talks provided by our colleagues [Agustín (K-Ballo) Bergé](talesofcpp.fusionfenix.com), Francisco Tufró y Hernan Saez. [See the other talks here.](https://www.meetup.com/cpp-ba/pages/20784343/Presentaciones/).
+At that meeting we had the pleasure to view excellent talks provided by our colleagues [Agustín (K-Ballo) Bergé](http://talesofcpp.fusionfenix.com/), Francisco Tufró y Hernan Saez. [See the other talks here.](https://www.meetup.com/cpp-ba/pages/20784343/Presentaciones/).
 
 I hope you like our presentations and you feel like to join [our community](www.meetup.com/cpp-ba/).
 
