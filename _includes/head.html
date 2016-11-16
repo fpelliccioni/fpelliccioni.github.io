@@ -184,7 +184,7 @@ $("#some_math").css("font-size","500%");
             <li><a href="{{ post.url }}" class="{{ postLang }}">***{{ page.date }}***</a></li>
 
 
-            {% assign postsfer=site.posts | sort: 'path' %}
+<!--             {% assign postsfer=site.posts | sort: 'path' %}
             {% for post in postsfer %}
               {% assign pageLang = page.lang | slice: 0, 2 %}
               {% assign postLang = post.lang | slice: 0, 2 %}
@@ -194,28 +194,23 @@ $("#some_math").css("font-size","500%");
               {% else %}
                 <li><a href="{{ post.url }}" class="{{ postLang }}">**NOT EQUAL {{ post.date }}-{{ page.date }}</a></li>
               {% endif %}
-
-              <!-- <li><a href="{{ post.url }}" class="{{ postLang }}">{{ post.date }}-{{ pageLang }}</a></li> -->
-              <!-- <li><a href="{{ post.url }}" class="{{ postLang }}">{{ post.date }}-{{ postLang }}</a></li> -->
-
             {% endfor %}
+ -->
 
-            {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
+            <!-- {% assign posts=site.posts | where:"date", page.date | sort: 'path' %} -->
+            {% assign posts=site.posts  | sort: 'path' %}
 
             {% for post in posts %}
               {% assign pageLang = page.lang | slice: 0, 2 %}
               {% assign postLang = post.lang | slice: 0, 2 %}
 
-              <li><a href="{{ post.url }}" class="{{ postLang }}">HOLA</a></li>
-
-<!--               <li><a href="{{ post.url }}" class="{{ postLang }}">{{ pageLang }}</a></li>
-              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ postLang }}</a></li>
- -->
-              {% if pageLang != postLang %}
-                {% if pageLang == "en" %}
-                <li><a href="{{ post.url }}" class="{{ postLang }}">Español</a></li>
-                {% else %}
-                <li><a href="{{ post.url }}" class="{{ postLang }}">English</a></li>
+              {% if post.date == page.date %}
+                {% if pageLang != postLang %}
+                  {% if pageLang == "en" %}
+                  <li><a href="{{ post.url }}" class="{{ postLang }}">Español</a></li>
+                  {% else %}
+                  <li><a href="{{ post.url }}" class="{{ postLang }}">English</a></li>
+                  {% endif %}
                 {% endif %}
               {% endif %}
             {% endfor %}
