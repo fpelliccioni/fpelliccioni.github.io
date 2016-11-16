@@ -189,8 +189,15 @@ $("#some_math").css("font-size","500%");
               {% assign pageLang = page.lang | slice: 0, 2 %}
               {% assign postLang = post.lang | slice: 0, 2 %}
 
-              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ post.date }}-{{ pageLang }}</a></li>
-              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ post.date }}-{{ postLang }}</a></li>
+              {% if post.date == page.date %}
+                <li><a href="{{ post.url }}" class="{{ postLang }}">**EQUAL {{ post.date }}-{{ page.date }}</a></li>
+              {% else %}
+                <li><a href="{{ post.url }}" class="{{ postLang }}">**NOT EQUAL {{ post.date }}-{{ page.date }}</a></li>
+              {% endif %}
+
+              <!-- <li><a href="{{ post.url }}" class="{{ postLang }}">{{ post.date }}-{{ pageLang }}</a></li> -->
+              <!-- <li><a href="{{ post.url }}" class="{{ postLang }}">{{ post.date }}-{{ postLang }}</a></li> -->
+
             {% endfor %}
 
             {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
