@@ -188,6 +188,9 @@ $("#some_math").css("font-size","500%");
               {% assign pageLang = page.lang | slice: 0, 2 %}
               {% assign postLang = post.lang | slice: 0, 2 %}
 
+              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ pageLang }}</a></li>
+              <li><a href="{{ post.url }}" class="{{ postLang }}">{{ postLang }}</a></li>
+
               {% if pageLang != postLang %}
                 {% if pageLang == "en" %}
                 <li><a href="{{ post.url }}" class="{{ postLang }}">Español</a></li>
