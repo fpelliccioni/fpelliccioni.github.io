@@ -7,13 +7,31 @@ comments: true
 tags: [copla, gis, programming, geography, math, mathematics, geophysics, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel]
 ---
 
-¡Buenas!
 
-Les comparto el enlace a las *filminas* de mi charla denominada ["¿Fastware?"](http://es.slideshare.net/FernandoPelliccioni/fastware-64059921) que fue expuesta en el ["Segundo Encuentro de programadores C++ de Buenos Aires"](https://www.meetup.com/cpp-ba/events/232269015/) el día 14 de Julio de 2016.
+El día 29 de noviembre de 2016 tuve el honor y agrado de recibir, como miembro del equipo científico de la [Comisión Nacional del Límite Exterior de la Plataforma Continental (COPLA)](http://www.plataformaargentina.gov.ar/), la *Mención de Honor "Senador Domingo Faustino Sarmiento"*, por nuestra labor, que posibilitó la determinación del nuevo límite exterior de la plataforma continental de la República Argentina.
 
-En ese encuentro también tuvimos el agrado de presenciar la excelentes charlas brindadas por nuestros colegas: [Agustín (K-Ballo) Bergé](http://talesofcpp.fusionfenix.com/), Francisco Tufró y Hernan Saez. [Los links de las demás presentacines aquí.](https://www.meetup.com/cpp-ba/pages/20784343/Presentaciones/).
+La distinción fue entregada por la vice presidente de la Nación, la Lic. [Gabriela Michetti](https://twitter.com/gabimichetti), junto al senador [Omar Perotti](https://twitter.com/omarperotti). 
 
-Espero que les gusten nuestras presentaciones y les de ganas de sumarse a [nuestra comunidad](www.meetup.com/cpp-ba/).
 
-¡Saludos!
 
+
+La Mención de Honor "Senador Domingo Faustino Sarmiento" constituye el máximo galardón que entrega el Honorable Senado de la Nación a personas físicas o jurídicas del quehacer cultural, deportivo, profesional y académico, por su *obra emprendedora destinada a mejorar la calidad de vida de sus semejantes*, de las instituciones y de sus comunidades. 
+El acto de entrega de la distinción fue realizado en el Salón Azul del Honorable Senado de la Nación.
+
+
+---
+
+Del evento también partiparon el vice canciller y presidente de [COPLA](http://www.plataformaargentina.gov.ar/), [Carlos Foradori](https://twitter.com/cmforadori), el ex canciller [Jorge Taiana](https://twitter.com/JorgeTaiana), el ex vice canciller Fernando Petrella, los senadores Mario Pais, Dalmacio Mera, Norma Durango, Beatriz Mirkin, y la diputada Daniela Castro. Además participaron destacadas figuras del ámbito académico y científico.
+
+La canciller [Susana Malcorra](https://twitter.com/SusanaMalcorra) no pudo estar presente ya que ha viajado a Cuba para los funerales de Fidel Castro en representación de la Argentina.
+
+---
+
+### Enlaces a Noticias:
+
+- https://twitter.com/SenadoArgentina/status/803687588653572096
+- https://twitter.com/CancilleriaARG/status/803711684993024006
+- https://twitter.com/gabimichetti/status/803697167063912448
+- https://twitter.com/omarperotti/status/803723193844371456
+- http://omarperotti.com.ar/el-senado-distinguio-a-los-cientificos-que-trabajaron-en-el-nuevo-limite-de-la-plataforma-continental/
+- http://www.senado.gov.ar/prensa/14713/noticias
