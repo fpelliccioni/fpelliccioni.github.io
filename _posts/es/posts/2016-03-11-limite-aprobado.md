@@ -25,3 +25,5 @@ Ha sido un honor y orgullo el haber sido miembro de este equipo y de este proyec
 ### Referencias
 
 [FOLLETO-COPLA-2016_1](http://www.plataformaargentina.gov.ar/userfiles/userfiles/FOLLETO-COPLA-2016_1.pdf)
+
+---
