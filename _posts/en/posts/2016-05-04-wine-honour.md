@@ -23,6 +23,6 @@ On May 4, 2016, I was invited by the Argentine Minister of Foreign Affairs, [Sus
 
 ### References
 
-[Twitter oficial de Susana Malcorra](https://twitter.com/SusanaMalcorra/status/727976624239554560)
+[Official Twitter of Susana Malcorra](https://twitter.com/SusanaMalcorra/status/727976624239554560)
 
 ---
