@@ -17,6 +17,8 @@ La distinción fue entregada por la vice presidente de la Nación, la Lic. [Gabr
 
 ![Sarmiento2]({{ site.url }}/images/copla/sarmiento2.png)
 
+![Sarmiento3]({{ site.url }}/images/copla/sarmiento3.jpg)
+
 ---
 
 > La Mención de Honor "Senador Domingo Faustino Sarmiento" constituye el máximo galardón que entrega el Honorable Senado de la Nación a personas físicas o jurídicas del quehacer cultural, deportivo, profesional y académico, por su **obra emprendedora destinada a mejorar la calidad de vida de sus semejantes**, de las instituciones y de sus comunidades. 
