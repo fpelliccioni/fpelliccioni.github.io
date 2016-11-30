@@ -1,6 +1,6 @@
 ---
 layout: post
-type: draft
+type: post
 title:  "Límite Exterior de la Plataforma Continental"
 date:   2016-03-11 12:00:00
 comments: true
