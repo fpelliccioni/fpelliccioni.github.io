@@ -97,7 +97,9 @@ You might wonder:
 “Why worry about returning one or another object if both are equal?”  
 In mathematics, this question makes sense, because for example, in the set of Natural numbers, 14 is equal to 14, indeed they are **identical**, so in:
 
-    min(14, 14)
+{% highlight cpp %}
+min(14, 14)
+{% endhighlight %}
 
 returning the first 14 or the second 14 does not matter, because they are the same number.
 
