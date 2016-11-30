@@ -1,6 +1,6 @@
 ---
 layout: post
-type: draft
+type: post
 title:  "Mención de Honor 'Senador Domingo Faustino Sarmiento'"
 date:   2016-11-30 12:00:00
 comments: true
