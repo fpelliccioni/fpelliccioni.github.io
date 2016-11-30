@@ -20,7 +20,7 @@ The award was presented by the Vice President of the Nation, [Gabriela Michetti]
 
 ---
 
-> The Honorable Mention "Senator Domingo Faustino Sarmiento" is the highest award given by the Honorable Senate of the Nation to natural or legal persons of the cultural, sports, professional and academic work, for his entrepreneurial work aimed at improving the quality of life of another individuals, institutions and their communities. 
+> The Honorable Mention "Senator Domingo Faustino Sarmiento" is the highest award given by the Honorable Senate of the Nation to natural or legal persons of the cultural, sports, professional and academic work, for his **entrepreneurial work aimed at improving the quality of life of another individuals**, institutions and their communities. 
 The ceremony was made in the "Salón Azul" (Blue Room) of the Honorable Senate of the Nation.
 
 ---
