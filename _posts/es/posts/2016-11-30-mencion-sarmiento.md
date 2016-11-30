@@ -16,11 +16,10 @@ El día 29 de noviembre de 2016 tuve el honor y agrado de recibir, como miembro 
 La distinción fue entregada por la vice presidente de la Nación, la Lic. [Gabriela Michetti](https://twitter.com/gabimichetti), junto al senador [Omar Perotti](https://twitter.com/omarperotti). 
 
 
+---
 
-
-La Mención de Honor "Senador Domingo Faustino Sarmiento" constituye el máximo galardón que entrega el Honorable Senado de la Nación a personas físicas o jurídicas del quehacer cultural, deportivo, profesional y académico, por su *obra emprendedora destinada a mejorar la calidad de vida de sus semejantes*, de las instituciones y de sus comunidades. 
+> La Mención de Honor "Senador Domingo Faustino Sarmiento" constituye el máximo galardón que entrega el Honorable Senado de la Nación a personas físicas o jurídicas del quehacer cultural, deportivo, profesional y académico, por su *obra emprendedora destinada a mejorar la calidad de vida de sus semejantes*, de las instituciones y de sus comunidades. 
 El acto de entrega de la distinción fue realizado en el Salón Azul del Honorable Senado de la Nación.
-
 
 ---
 
