@@ -4,7 +4,7 @@ type: draft
 title:  "Mención de Honor 'Senador Domingo Faustino Sarmiento'"
 date:   2016-11-30 12:00:00
 comments: true
-tags: [components, programming, components programming, componentsprogramming, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, math, mathematics, elements, eop, contracts, performance, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel, templates, metaprogramming, book, fmgp]
+tags: [copla, gis, programming, geography, math, mathematics, geophysics, stepanov, knuth, stroustrup, generic, genericprogramming, generic programming, genericity, concepts, c++, cpp, c, java, dotnet, c#, csharp, python, ruby, javascript, haskell, dlang, rust, golang, eiffel]
 ---
 
 ¡Buenas!
