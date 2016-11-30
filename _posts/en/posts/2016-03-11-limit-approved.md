@@ -17,12 +17,12 @@ It has been an honor and pride for me to have been a member of this team and thi
 
 ---
 
-> El límite más extenso de la Argentina – Nuestra frontera con la humanidad
+> The most extensive limit of Argentina - Our border with humanity
 
 ---
 
-### Referencias
+### References
 
-[FOLLETO-COPLA-2016_1](http://www.plataformaargentina.gov.ar/userfiles/userfiles/FOLLETO-COPLA-2016_1.pdf)
+[COPLA-2016_1](http://www.plataformaargentina.gov.ar/userfiles/userfiles/FOLLETO-COPLA-2016_1.pdf)
 
 ---
