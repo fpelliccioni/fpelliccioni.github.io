@@ -8,17 +8,18 @@ tags: [copla, gis, programming, geography, math, mathematics, geophysics, stepan
 ---
 
 
-El día 29 de noviembre de 2016 tuve el honor y agrado de recibir, como miembro del equipo científico de la [Comisión Nacional del Límite Exterior de la Plataforma Continental (COPLA)](http://www.plataformaargentina.gov.ar/), la **Mención de Honor "Senador Domingo Faustino Sarmiento"**, por nuestra labor, que posibilitó la determinación del nuevo *Límite Exterior de la Plataforma Continental de la República Argentina*. (El Límite fue [aprobado el 11 marzo de 2016](http://www.plataformaargentina.gov.ar/userfiles/userfiles/FOLLETO-COPLA-2016_1.pdf) por las [Naciones Unidas](http://www.un.org/es/index.html), por consenso y sin un solo voto en contra).
-
-
-
+El día 29 de noviembre de 2016 tuve el honor y agrado de recibir, como miembro del equipo científico de la [Comisión Nacional del Límite Exterior de la Plataforma Continental (COPLA)](http://www.plataformaargentina.gov.ar/), la **Mención de Honor "Senador Domingo Faustino Sarmiento"**, por nuestra labor, que posibilitó la determinación del nuevo *Límite Exterior de la Plataforma Continental de la República Argentina*. [[1]](#Ref1)
 
 La distinción fue entregada por la vice presidente de la Nación, la Lic. [Gabriela Michetti](https://twitter.com/gabimichetti), junto al senador [Omar Perotti](https://twitter.com/omarperotti). 
 
 
+![Sarmiento1]({{ site.url }}/images/copla/sarmiento1.jpg)
+
+![Sarmiento2]({{ site.url }}/images/copla/sarmiento1.jpg)
+
 ---
 
-> La Mención de Honor "Senador Domingo Faustino Sarmiento" constituye el máximo galardón que entrega el Honorable Senado de la Nación a personas físicas o jurídicas del quehacer cultural, deportivo, profesional y académico, por su *obra emprendedora destinada a mejorar la calidad de vida de sus semejantes*, de las instituciones y de sus comunidades. 
+> La Mención de Honor "Senador Domingo Faustino Sarmiento" constituye el máximo galardón que entrega el Honorable Senado de la Nación a personas físicas o jurídicas del quehacer cultural, deportivo, profesional y académico, por su **obra emprendedora destinada a mejorar la calidad de vida de sus semejantes**, de las instituciones y de sus comunidades. 
 El acto de entrega de la distinción fue realizado en el Salón Azul del Honorable Senado de la Nación.
 
 ---
@@ -29,7 +30,12 @@ La canciller [Susana Malcorra](https://twitter.com/SusanaMalcorra) no pudo estar
 
 ---
 
-### Enlaces a Noticias:
+### Referencias
+
+<a name="Ref1">[1]</a> El Límite fue aprobado el 11 marzo de 2016 por las [Naciones Unidas](http://www.un.org/es/index.html), por consenso, es decir sin un solo voto en contra. Ver: [Límite Exterior de la Plataforma Continental]({% post_url es/posts/2016-03-11-limite-aprobado %}).
+
+
+### Enlaces a Noticias
 
 - https://twitter.com/SenadoArgentina/status/803687588653572096
 - https://twitter.com/CancilleriaARG/status/803711684993024006
@@ -38,8 +44,5 @@ La canciller [Susana Malcorra](https://twitter.com/SusanaMalcorra) no pudo estar
 - http://omarperotti.com.ar/el-senado-distinguio-a-los-cientificos-que-trabajaron-en-el-nuevo-limite-de-la-plataforma-continental/
 - http://www.senado.gov.ar/prensa/14718/noticias
 - https://www.mrecic.gov.ar/copla-recibio-la-maxima-distincion-del-senado
-
-
-http://www.ellitoral.com/index.php/id_um/139846-el-senado-distinguio-a-los-cientificos-que-trabajaron-en-el-nuevo-limite-de-la-plataforma-continental-reconocimiento
 
 ---
