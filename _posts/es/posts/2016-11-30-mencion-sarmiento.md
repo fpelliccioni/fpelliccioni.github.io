@@ -15,7 +15,7 @@ La distinción fue entregada por la vice presidente de la Nación, la Lic. [Gabr
 
 ![Sarmiento1]({{ site.url }}/images/copla/sarmiento1.jpg)
 
-![Sarmiento2]({{ site.url }}/images/copla/sarmiento1.jpg)
+![Sarmiento2]({{ site.url }}/images/copla/sarmiento2.png)
 
 ---
 
