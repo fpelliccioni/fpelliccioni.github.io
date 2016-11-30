@@ -11,10 +11,14 @@ El día 11 de marzo de 2016, el plenario de la 40º Sesión de la [Comisión de 
 
 Ha sido un honor y orgullo el haber sido miembro de este equipo y de este proyecto, que espero que sirva para mejorar la calidad de vida de todos los argentinos. 
 
+![Equipo COPLA]({{ site.url }}/images/copla/copla1.jpg)
+
 **¡Felicitaciones a todo el equipo!**
 
-> El límite más extenso de la Argentina – Nuestra frontera con la humanidad
 
+---
+
+> El límite más extenso de la Argentina – Nuestra frontera con la humanidad
 
 ---
 
