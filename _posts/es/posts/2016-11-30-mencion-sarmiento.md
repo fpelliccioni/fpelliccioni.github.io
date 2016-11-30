@@ -34,15 +34,16 @@ La canciller [Susana Malcorra](https://twitter.com/SusanaMalcorra) no pudo estar
 
 <a name="Ref1">[1]</a> El Límite fue aprobado el 11 marzo de 2016 por las [Naciones Unidas](http://www.un.org/es/index.html), por consenso, es decir sin un solo voto en contra. Ver: [Límite Exterior de la Plataforma Continental]({% post_url es/posts/2016-03-11-limite-aprobado %}).
 
+---
 
 ### Enlaces a Noticias
 
-- https://twitter.com/SenadoArgentina/status/803687588653572096
-- https://twitter.com/CancilleriaARG/status/803711684993024006
-- https://twitter.com/gabimichetti/status/803697167063912448
-- https://twitter.com/omarperotti/status/803723193844371456
-- http://omarperotti.com.ar/el-senado-distinguio-a-los-cientificos-que-trabajaron-en-el-nuevo-limite-de-la-plataforma-continental/
-- http://www.senado.gov.ar/prensa/14718/noticias
-- https://www.mrecic.gov.ar/copla-recibio-la-maxima-distincion-del-senado
+- [https://twitter.com/SenadoArgentina/status/803687588653572096](https://twitter.com/SenadoArgentina/status/803687588653572096)
+- [https://twitter.com/CancilleriaARG/status/803711684993024006](https://twitter.com/CancilleriaARG/status/803711684993024006)
+- [https://twitter.com/gabimichetti/status/803697167063912448](https://twitter.com/gabimichetti/status/803697167063912448)
+- [https://twitter.com/omarperotti/status/803723193844371456](https://twitter.com/omarperotti/status/803723193844371456)
+- [http://omarperotti.com.ar/el-senado-distinguio-a-los-cientificos-que-trabajaron-en-el-nuevo-limite-de-la-plataforma-continental/](http://omarperotti.com.ar/el-senado-distinguio-a-los-cientificos-que-trabajaron-en-el-nuevo-limite-de-la-plataforma-continental/)
+- [http://www.senado.gov.ar/prensa/14718/noticias](http://www.senado.gov.ar/prensa/14718/noticias)
+- [https://www.mrecic.gov.ar/copla-recibio-la-maxima-distincion-del-senado](https://www.mrecic.gov.ar/copla-recibio-la-maxima-distincion-del-senado)
 
 ---
