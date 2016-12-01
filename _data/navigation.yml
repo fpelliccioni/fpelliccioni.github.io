@@ -8,10 +8,6 @@ en:
   contact:
     title: "contact"
     url:   "/contact/"
-  github: 
-    title: Github
-    url:   https://github.com/fpelliccioni/componentsprogramming
-    external: true
 es:
   logo:
     title: "inicio"
@@ -22,7 +18,3 @@ es:
   contact:
     title: "contacto"
     url:   "/contact/"
-  github: 
-    title: Github
-    url:   https://github.com/fpelliccioni/componentsprogramming
-    external: true  
