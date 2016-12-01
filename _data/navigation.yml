@@ -20,7 +20,7 @@ es:
     title: "acerca de"
     url:   "/acerca-de/"
   contact:
-    title: "contact"
+    title: "contacto"
     url:   "/contact/"
   github: 
     title: Github
