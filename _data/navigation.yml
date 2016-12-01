@@ -5,6 +5,9 @@ en:
   about:
     title: "about"
     url:   "/about-me/"
+  contact:
+    title: "contact"
+    url:   "/contact/"
   github: 
     title: Github
     url:   https://github.com/fpelliccioni/componentsprogramming
@@ -16,6 +19,9 @@ es:
   about:
     title: "acerca de"
     url:   "/acerca-de/"
+  contact:
+    title: "contact"
+    url:   "/contact/"
   github: 
     title: Github
     url:   https://github.com/fpelliccioni/componentsprogramming
