@@ -7,5 +7,16 @@ image:
   feature: soft-trees.jpg
 ---
 
-Si el contenido de este blog le resulta interesante, podría colaborar conmigo para que siga escribiendo.
+SSSSi el contenido de este blog le resulta interesante, podría colaborar conmigo para que siga escribiendo. XXXX
+
+![BCHLogo]({{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg)
+
+![BCHQR]({{ site.url }}/images/donate/qr-bch.png)
+
+![BTCLogo]({{ site.url }}/images/donate/2000px-Bitcoin_logo.svg.png)
+
+![LTCLogo]({{ site.url }}/images/donate/ltc800.png)
+
+![ETHLogo]({{ site.url }}/images/donate/ETHEREUM-ICON_Black.png)
+
 
