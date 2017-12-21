@@ -2,6 +2,9 @@ en:
   logo:
     title: "home"
     url:   "/"
+  donate:
+    title: "donate"
+    url:   "/donate/"
   about:
     title: "about"
     url:   "/about-me/"
@@ -12,6 +15,9 @@ es:
   logo:
     title: "inicio"
     url:   "/inicio/"
+  donate:
+    title: "donaciones"
+    url:   "/donaciones/"
   about:
     title: "acerca de"
     url:   "/acerca-de/"
