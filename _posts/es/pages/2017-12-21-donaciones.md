@@ -9,7 +9,20 @@ image:
 
 ### Si el contenido de este blog le resulta interesante, podría colaborar conmigo para que siga escribiendo. 
 
+<img src="{{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg" alt="BCHLogo" style="width: 200px;"/>
+
+<img src="{{ site.url }}/images/donate/qr-bch.png" alt="BCHQR" style="width: 500px;"/>
+
+<!-- 
 <img src="{{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg" alt="BCHLogo" style="width: 250px;"/>
+
+<img src="{{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg" alt="BCHLogo" style="width: 250px;"/>
+
+<img src="{{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg" alt="BCHLogo" style="width: 250px;"/>
+
+<img src="{{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg" alt="BCHLogo" style="width: 250px;"/>
+
+
 
 ![BCHLogo]({{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg)
 
@@ -19,6 +32,6 @@ image:
 
 ![LTCLogo]({{ site.url }}/images/donate/ltc800.png)
 
-![ETHLogo]({{ site.url }}/images/donate/ETHEREUM-ICON_Black.png)
+![ETHLogo]({{ site.url }}/images/donate/ETHEREUM-ICON_Black.png) -->
 
 
