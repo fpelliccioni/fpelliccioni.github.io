@@ -9,14 +9,14 @@ image:
 
 SSSSi el contenido de este blog le resulta interesante, podría colaborar conmigo para que siga escribiendo. XXXX
 
-![BCHLogo]({{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg)
+![BCHLogo]({{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg =250x)
 
-![BCHQR]({{ site.url }}/images/donate/qr-bch.png)
+![BCHQR]({{ site.url }}/images/donate/qr-bch.png =250x)
 
-![BTCLogo]({{ site.url }}/images/donate/2000px-Bitcoin_logo.svg.png)
+![BTCLogo]({{ site.url }}/images/donate/2000px-Bitcoin_logo.svg.png =250x)
 
-![LTCLogo]({{ site.url }}/images/donate/ltc800.png)
+![LTCLogo]({{ site.url }}/images/donate/ltc800.png =250x)
 
-![ETHLogo]({{ site.url }}/images/donate/ETHEREUM-ICON_Black.png)
+![ETHLogo]({{ site.url }}/images/donate/ETHEREUM-ICON_Black.png =250x)
 
 
