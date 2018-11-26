@@ -10,7 +10,7 @@ pisano, fibonacci, greek, arabs, merkle, fm2gp, generic, programming, math, math
 
 Hello!
 
-I share with you the links to the video and films of my talk entitled _The Gift of the Arabs_, which was presented at the _Algorithms Study Group_ meetup in May 2017 in Buenos Aires, Argentina.
+I share with you the links to the video and slides of my talk entitled _The Gift of the Arabs_, which was presented at the _Algorithms Study Group_ meetup in May 2017 in Buenos Aires, Argentina.
 
 The content of my talk is based on [Three Algorithmic Journeys](http://stepanovpapers.com/Journeys/Journeys-0.3.pdf) and [From Mathematics to Generic Programming](https://www.amazon.es/Mathematics-Generic-Programming-Alexander-Stepanov/dp/0321942043) by [Alex Stepanov](https://en.wikipedia.org/wiki/Alexander_Stepanov).
 
