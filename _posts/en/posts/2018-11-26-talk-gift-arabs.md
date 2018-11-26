@@ -16,7 +16,7 @@ The content of my talk is based on [Three Algorithmic Journeys](http://stepanovp
 
 It's my interpretation of what would have been his fourth episode, which was never presented, and would have had the same name.
 
-Hope you like!
+Hope you like it!
 
 [Link to the Video](https://www.youtube.com/watch?v=ZgC6MDh7zJc)
 
