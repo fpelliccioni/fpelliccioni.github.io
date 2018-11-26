@@ -17,13 +17,10 @@ El contenido de mi charla está basado en [Three Algorithmic Journeys](http://st
 
 Es mi interpretación de lo que hubiera sido su cuarto episodio, que nunca fue presentado, y hubiera tenido el mismo nombre.
 
-Espero que les gusten nuestras presentaciones y les de ganas de sumarse a [nuestra comunidad](www.meetup.com/cpp-ba/).
-
+¡Espero que les guste!
 
 [Enlace a Video](https://www.youtube.com/watch?v=ZgC6MDh7zJc)
 
-![Enlace a Filmina]({{ site.url }}/images/fpelliccioni-ElRegaloDeLosArabes.pdf)
-
+[Enlace a Filmina]({{ site.url }}/images/fpelliccioni-ElRegaloDeLosArabes.pdf)
 
 ¡Saludos!
-
