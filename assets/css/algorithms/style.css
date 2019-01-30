@@ -58,6 +58,7 @@ body {
   height: 32%;
   background:blue;
   position:fixed;
+  border-left: 1px solid #009900;
 }
 
 #ME { 
@@ -150,7 +151,7 @@ p {
 #sequence {
   width: 100%;
   height:100%;
-  background:white;
+  background:#23241f;
   /* float:right; */
   /* width: 80%; */
 } 

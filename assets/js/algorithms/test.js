@@ -59,7 +59,7 @@ function drawPastLast(two, x, y) {
 
 }
 
-function drawIterator(two, elem, text, color = '#000075') {
+function drawIterator(two, elem, text, color = '#99ff99') {
     var x = elem.rect.translation._x;
     var y = elem.rect.translation._y + elem.rect.height / 2 + 20;
 

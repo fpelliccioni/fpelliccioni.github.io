@@ -113,7 +113,7 @@ function initAlert(interpreter, scope) {
         return it;
     };
 
-    var begin_wrapper = function(arr, name, color = '#000075') {
+    var begin_wrapper = function(arr, name, color = '#99ff99') {
         var index = 0
         var it = new Iterator(arr, index, name);
         var it_gui = drawIterator(two, elements[index], name, color);
@@ -126,7 +126,7 @@ function initAlert(interpreter, scope) {
         return it;
     };
 
-    var end_wrapper = function(arr, name, color = '#000075') {
+    var end_wrapper = function(arr, name, color = '#99ff99') {
         var length = arr.properties['length']
         var index = length
         var it = new Iterator(arr, index, name);
@@ -163,7 +163,7 @@ function initAlert(interpreter, scope) {
         return a.index == b.index;
     };
 
-    var copy_it_wrapper = function(it, name, color = '#000075') {
+    var copy_it_wrapper = function(it, name, color = '#99ff99') {
         var index = it.index
         var it = new Iterator(it.data, it.index, name);
         var it_gui = drawIterator(two, elements[index], name, color);
