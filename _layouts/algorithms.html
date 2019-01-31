@@ -65,12 +65,33 @@ function min_element(f, l, r) {
     return m;
 }
 
+function max_element(f, l, r) {
+
+    if (equal(f, l)) return l;
+ 
+    //I m = f++;
+    var m = copy_it(f, 'm', '#9000d8');
+    f = successor(f);
+
+    while ( ! equal(f, l)) {
+        if ( ! r(source(f), source(m))) {
+            m = assign_it(m, f);
+        }
+        f = successor(f);
+    }
+    remove_it(m);
+    return m;
+}
+
 var f = begin(data, "f");
 var l = end(data, "l", "#d80500");
 
-f = assign_it(f, min_element(f, l, rel));
+var min = assign_it(f, min_element(f, l, rel));
+var max = assign_it(f, max_element(f, l, rel));
+
 if ( ! equal(f, l)) {
-    print("The min element is: " + source(f));
+    print("The min element is: " + source(min));
+    print("The max element is: " + source(max));
 }
         </textarea>
         
