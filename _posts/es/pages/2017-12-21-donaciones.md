@@ -11,11 +11,18 @@ Si el contenido de este blog le resulta interesante, podría colaborar conmigo p
 
 _Formato CashAddr de BCH:_
 
-`bitcoincash:qq0jaxy09a8m9u9xe6nry354l8n4y3fdyyfnykj643`
+```
+bitcoincash:qq0jaxy09a8m9u9xe6nry354l8n4y3fdyyfnykj643
+```
 
 <img src="{{ site.url }}/images/donate/qr-bch.png" alt="BCHQR" style="width: 500px;"/>
 
 
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
 ---
 ---
 
