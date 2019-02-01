@@ -14,10 +14,10 @@ Puede respaldar al-Khwārizmī a través de [PayPal], [Coinbase] o un pago direc
 
 Puede respaldar a _Components Programming_ via <a href="https://www.paypal.me/algorismi/5" target="_blank">[PayPal]</a>, <a href="https://commerce.coinbase.com/checkout/6c06a644-c63c-489e-a78b-654bdb137541" target="_blank">[Coinbase]</a> o un pago directo Bitcoin Cash usando la dirección de abajo.
 
-<p class="quiet wrap">(Los montos inferiores a $1 no suelen llegar a mi cuenta luego del pago de comisiones. Por favor sea paciente; Algunas transacciones, especialmente utilizando criptomonedas, pueden tardar una o dos horas en completarse.)</p>
+(Los montos inferiores a $1 no suelen llegar a mi cuenta luego del pago de comisiones. Por favor sea paciente; Algunas transacciones, especialmente utilizando criptomonedas, pueden tardar una o dos horas en completarse.)
 
 
-_Formato CashAddr de BCH:_
+### Formato CashAddr de BCH:
 
 {% highlight cpp %}
 bitcoincash:qq0jaxy09a8m9u9xe6nry354l8n4y3fdyyfnykj643
