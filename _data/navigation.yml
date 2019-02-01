@@ -5,6 +5,9 @@ en:
   donate:
     title: "donate"
     url:   "/donate/"
+  algorithms:
+    title: "algorithms"
+    url:   "/algorithms/"
   about:
     title: "about"
     url:   "/about-me/"
@@ -18,6 +21,9 @@ es:
   donate:
     title: "donaciones"
     url:   "/donaciones/"
+  algorithms:
+    title: "algoritmos"
+    url:   "/algoritmos/"
   about:
     title: "acerca de"
     url:   "/acerca-de/"
