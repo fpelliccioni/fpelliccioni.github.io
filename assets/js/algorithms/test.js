@@ -1,4 +1,13 @@
-var leftMargin = 30;
+/*
+Copyright Fernando Pelliccioni 2019
+
+Distributed under the Boost Software License, Version 1.0. (See accompanying
+file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) 
+*/
+
+var defaultLeftMargin = 10;
+var defaultTopMargin = 40;
+var sequenceTotalHeight = 135;
 
 // var rectWidth = 80;
 // var rectHeight = 120;
@@ -8,9 +17,9 @@ var rectWidth = 40;
 var rectHeight = 60;
 var fontSize = 50;
 var pointerFontSize = 40;
+var labelFontSize = 24;
 
 var pointerTriangleSize = 5;
-
 
 function drawElement(two, x, y, text, color = '#bfffb3') {
     var rect = two.makeRectangle(x, y, rectWidth, rectHeight);
@@ -23,15 +32,15 @@ function drawElement(two, x, y, text, color = '#bfffb3') {
 
 
     // var text = two.makeText(text, x, y + 15);
-    var text = two.makeText(text, x, y);
+    var text = two.makeText(text, x, y + 1.5);
     // text.family = "DejaVu Sans Mono"
     // text.family = "Consolas"
     // text.family = "Lucida Console"
-    text.family = "Courier"
-
+    // text.family = "Courier"
+    text.family = "Source Code Pro";
     text.size = fontSize
-    text.alignment = 'center'
-    text.baseline = 'middle'
+    // text.alignment = 'center'
+    // text.baseline = 'middle'
 
     var group = two.makeGroup(rect, text);
     // console.log(group.x)
@@ -59,6 +68,7 @@ function drawPastLast(two, x, y) {
 
 }
 
+// function drawIterator(two, elem, text, color = '#000075') {
 function drawIterator(two, elem, text, color = '#99ff99') {
     var x = elem.rect.translation._x;
     var y = elem.rect.translation._y + elem.rect.height / 2 + 20;
@@ -67,21 +77,25 @@ function drawIterator(two, elem, text, color = '#99ff99') {
     tri.fill = color;
     tri.noStroke();
 
-    var line = two.makeLine(x, y + pointerTriangleSize, x, y + 50);
-    line.stroke = color;
+    // var line = two.makeLine(x, y + pointerTriangleSize, x, y + 50);
+    // line.stroke = color;
 
-    var text = two.makeText(text, x, y + 80);
+    // var text = two.makeText(text, x, y + 80);
+
+    var text = two.makeText(text, x, y + 30);
     // text.family = "DejaVu Sans Mono"
     // text.family = "Consolas"
     // text.family = "Lucida Console"
-    text.family = "Courier"
+    // text.family = "Courier"
+    text.family = "Source Code Pro";
     
     text.size = pointerFontSize //80
     text.alignment = 'center'
     text.baseline = 'middle'
     text.fill = color;
 
-    var group = two.makeGroup(tri, line, text);
+    // var group = two.makeGroup(tri, line, text);
+    var group = two.makeGroup(tri, text);
     return group;
     // return {
     //     group: group,
@@ -96,66 +110,31 @@ function moveIteratorTo(two, it, elem) {
     // it.group.translation.set(elem.rect.translation._x - it.tri.translation._x, 0);
 }
 
-
-function start(two) {
-
-    var e0 = drawElement(two, leftMargin + 0 * rectWidth, rectWidth, "0");
-    var e1 = drawElement(two, leftMargin + 1 * rectWidth, rectWidth, "1");
-    var e2 = drawElement(two, leftMargin + 2 * rectWidth, rectWidth, "3");
-    var e3 = drawElement(two, leftMargin + 3 * rectWidth, rectWidth, "5");
-    var e4 = drawElement(two, leftMargin + 4 * rectWidth, rectWidth, "6", '#ff9191');
-    var e5 = drawElement(two, leftMargin + 5 * rectWidth, rectWidth, "9");
-    var e6 = drawPastLast(two,leftMargin + 6 * rectWidth, rectWidth);
-    // var e7 = drawPastLast(two, leftMargin + 7 * rectWidth, rectWidth);
-    
-    // console.log(e1.width)
-
-    var f = drawIterator(two, e0, "f");
-    var l = drawIterator(two, e6, "l", '#d80500');
-
-    return {
-        elements: [e0, e1, e2, e3, e4, e5, e6],
-        its: [f, l]
-    };
-}
-
-// function drawArray(two, arr) {
-    
-//     var elements = []
-
-//     for (let index = 0; index < arr.length; ++index) {
-//         let value = arr[index];
-//         var e = drawElement(two,  100 + index * rectWidth, rectWidth, value);
-//         elements.push(e)
-//         // console.log(value);
-//     }
-
-//     var e_last = drawPastLast(two, 100 + arr.length * rectWidth, rectWidth);
-//     elements.push(e_last)
-
-//     var f = drawIterator(two, elements[0], "f");
-//     var l = drawIterator(two, e_last, "l", '#d80500');
-
-//     two.update();
-
-//     return {
-//         elements: elements,
-//         its: [f, l]
-//     };
-// }
-
-function drawArray(two, arr) {
+function drawArray(two, arr, name, id) {
     
     var elements = []
 
+    var leftMargin = defaultLeftMargin;
+    var topMargin = defaultTopMargin + id * sequenceTotalHeight;
+
+    if (name) {
+        name += ":"
+        var text = two.makeText(name, leftMargin, topMargin);
+        text.family = "Source Code Pro";
+        text.size = labelFontSize
+        text.alignment = 'left'
+        text.fill = '#99ff99';
+        leftMargin += 14.46 * name.length
+    }
+
     for (let index = 0; index < arr.length; ++index) {
         let value = arr[index];
-        var e = drawElement(two,  leftMargin + index * rectWidth, rectWidth, value);
+        var e = drawElement(two,  leftMargin + rectWidth / 2 + index * rectWidth, topMargin, value);
         elements.push(e)
         // console.log(value);
     }
 
-    var e_last = drawPastLast(two, leftMargin + arr.length * rectWidth, rectWidth);
+    var e_last = drawPastLast(two, leftMargin + rectWidth / 2 + arr.length * rectWidth, topMargin);
     elements.push(e_last)
 
     two.update();
