@@ -10,8 +10,9 @@ image:
 ### Si el contenido de este blog le resulta interesante, podría colaborar conmigo para que siga escribiendo. 
 
 
+Formato CashAddr de BCH:
 
-<img src="{{ site.url }}/images/donate/BCH-flat,800x800,075,f.u1.jpg" alt="BCHLogo" style="width: 200px;"/>
+`bitcoincash:qq0jaxy09a8m9u9xe6nry354l8n4y3fdyyfnykj643`
 
 <img src="{{ site.url }}/images/donate/qr-bch.png" alt="BCHQR" style="width: 500px;"/>
 
