@@ -11,9 +11,10 @@ Si el contenido de este blog le resulta interesante, podría colaborar conmigo p
 
 _Formato CashAddr de BCH:_
 
-```
+{% highlight cpp %}
 bitcoincash:qq0jaxy09a8m9u9xe6nry354l8n4y3fdyyfnykj643
-```
+{% endhighlight %}
+
 
 <img src="{{ site.url }}/images/donate/qr-bch.png" alt="BCHQR" style="width: 500px;"/>
 
