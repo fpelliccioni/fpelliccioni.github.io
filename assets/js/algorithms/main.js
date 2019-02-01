@@ -1,7 +1,39 @@
+/*
+Copyright Fernando Pelliccioni 2019
+
+Distributed under the Boost Software License, Version 1.0. (See accompanying
+file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) 
+*/
+
 function Iterator(data, index, name) {
     this.data = data;
     this.index = index;
     this.name = name;
+}
+
+
+function resetState() {
+    var MEW = document.getElementById('MEW');
+    MEW.innerHTML = '';
+
+
+    lines = [];
+    prevLine = "";
+    iterators_int = {};
+    iterators_gui = {};
+    predicates = [];
+    sequences = {};
+
+    stats_it_moves = 0;
+    stats_it_cmps = 0;
+    stats_pred_appls = 0;
+    stats_swaps = 0;
+    stats_assigments = 0;    
+}
+
+function resetStats() {
+    var MEE = document.getElementById('MEE');
+    MEE.innerHTML = '';
 }
 
 function updateState() {
@@ -11,9 +43,14 @@ function updateState() {
     for (var key in iterators_int) {
         // console.log(iterators_int[key]);
         var it = iterators_int[key];
-        var data = it.data;
-        var length = data.properties['length'];
-        var text = '<p id="Status">source(<b>' + key + '</b>) = ' + data.properties[it.index] + '</p>';
+        var data = it.data.data;
+        // console.log(data)
+        // var length = data.properties['length'];
+        // var text = '<p id="Status">source(<b>' + key + '</b>) = ' + data.properties[it.index] + '</p>';
+ 
+        var length = data.length;
+        var text = '<p id="Status">source(<b>' + key + '</b>) = ' + data[it.index] + '</p>';
+
         MEW.innerHTML += text;
     }
 }
@@ -24,7 +61,7 @@ function updateStats() {
 
     MEE.innerHTML += '<p id="Status"><b>Iterator movements</b>: ' + stats_it_moves+ '</p>';
     MEE.innerHTML += '<p id="Status"><b>Iterator comparisons</b>: ' + stats_it_cmps+ '</p>';
-    MEE.innerHTML += '<p id="Status"><b>Predicate applications</b>: ' + stats_pred_appls+ '</p>';
+    MEE.innerHTML += '<p id="Status"><b>Predicate/Relation applications</b>: ' + stats_pred_appls+ '</p>';
     MEE.innerHTML += '<p id="Status"><b>Swaps</b>: ' + stats_swaps+ '</p>';
     MEE.innerHTML += '<p id="Status"><b>Assignments</b>: ' + stats_assigments+ '</p>';
 }
@@ -34,15 +71,33 @@ function updateStatus() {
     updateStats();
 }
 
-function initAlert(interpreter, scope) {
+function resetStatus() {
+    resetState();
+    resetStats();
+}
+
+
+function initFunctions(interpreter, scope) {
     var alert_wrapper = function(text) {
         return alert(arguments.length ? text : '');
     };
 
-    var print_wrapper = function(text) {
+    var error = function(text) {
+        var msg = '<p id="OutputMsg"><span style="color:red">ERROR: </span>' + text + '</p>';
 
         var output = document.getElementById('output');
-        output.innerHTML += text;
+        output.innerHTML += msg;
+        // hljs.highlightBlock(output);
+
+        console.log(arguments.length ? text : '');
+
+    }
+
+    var print_wrapper = function(text) {
+        var msg = '<p id="OutputMsg"><span style="color:cyan">INFO: </span>' + text + '</p>';
+
+        var output = document.getElementById('output');
+        output.innerHTML += msg;
         // hljs.highlightBlock(output);
 
         console.log(arguments.length ? text : '');
@@ -52,9 +107,7 @@ function initAlert(interpreter, scope) {
 
     var assign_it_wrapper = function(target, source) {
 
-        // console.log(target)
-        // console.log(source)
-        // console.log(iterators_gui[target.name])
+        var elements = target.data.elements;
 
         target = new Iterator(target.data, source.index, target.name);
         iterators_int[target.name] = target;
@@ -72,17 +125,18 @@ function initAlert(interpreter, scope) {
 
 
     var successor_wrapper = function(it, move = true) {
-        var max = it.data.properties['length'];
+        var data = it.data.data;
+        var max = data.length;
 
         // console.log(it.index)
         if (it.index >= max) {
-            print_wrapper('ERROR: out of range');
+            error('out of range');
             disable('disabled');
             return;
         }
 
         if (move) {
-            moveIteratorTo(two, iterators_gui[it.name], elements[it.index + 1])
+            moveIteratorTo(two, iterators_gui[it.name], it.data.elements[it.index + 1])
         }
         var it = new Iterator(it.data, it.index + 1, it.name);
         iterators_int[it.name] = it;
@@ -96,13 +150,13 @@ function initAlert(interpreter, scope) {
     var predecessor_wrapper = function(it, move = true) {
         // console.log(it.index)
         if (it.index <= 0) {
-            print_wrapper('ERROR: out of range');
+            error('out of range');
             disable('disabled');
             return;
         }
 
         if (move) {
-            moveIteratorTo(two, iterators_gui[it.name], elements[it.index - 1])
+            moveIteratorTo(two, iterators_gui[it.name], it.data.elements[it.index - 1])
         }
         var it = new Iterator(it.data, it.index - 1, it.name);
         iterators_int[it.name] = it;
@@ -112,11 +166,27 @@ function initAlert(interpreter, scope) {
 
         return it;
     };
+    
+    var begin_wrapper = function(arr, name, color) {
+        // console.log(arr)
 
-    var begin_wrapper = function(arr, name, color = '#99ff99') {
+        if (iterators_int[name] != undefined) {
+            var gui = iterators_gui[name];
+            // console.log(gui)
+            color = gui.children[0].fill;
+            // console.log(color)
+            remove_it_wrapper(iterators_int[name]);
+        }
+
+        if ( ! color) {
+            // console.log(Object.keys(iterators_int).length)
+            color = iterators_colors[Object.keys(iterators_int).length];
+        }
+
+
         var index = 0
         var it = new Iterator(arr, index, name);
-        var it_gui = drawIterator(two, elements[index], name, color);
+        var it_gui = drawIterator(two, arr.elements[index], name, color);
         iterators_gui[name] = it_gui;
         iterators_int[name] = it;
         two.update();
@@ -126,11 +196,25 @@ function initAlert(interpreter, scope) {
         return it;
     };
 
-    var end_wrapper = function(arr, name, color = '#99ff99') {
-        var length = arr.properties['length']
+    var end_wrapper = function(arr, name, color) {
+
+        if (iterators_int[name] != undefined) {
+            var gui = iterators_gui[name];
+            // console.log(gui)
+            color = gui.children[0].fill;
+            // console.log(color)
+            remove_it_wrapper(iterators_int[name]);
+        }
+
+        if ( ! color) {
+            // console.log(Object.keys(iterators_int).length)
+            color = iterators_colors[Object.keys(iterators_int).length];
+        }
+
+        var length = arr.data.length
         var index = length
         var it = new Iterator(arr, index, name);
-        var it_gui = drawIterator(two, elements[index], name, color);
+        var it_gui = drawIterator(two, arr.elements[index], name, color);
         iterators_gui[name] = it_gui;
         iterators_int[name] = it;
         two.update();
@@ -141,20 +225,39 @@ function initAlert(interpreter, scope) {
     };
 
     var source_wrapper = function(it) {
-        var max = it.data.properties['length'];
+        var data = it.data.data;
+        var max = data.length;
         if (it.index >= max) {
-            // print_wrapper('ERROR: not valid iterator to take the source');
-            print_wrapper('<p><span style="color:red">ERROR: </span>not valid iterator to take the source.</p>');
-
+            error('not valid iterator to take the source.');
             disable('disabled');
             return;
         }
-        var s = it.data.properties[it.index];
+        var s = data[it.index];
 
-        ++stats_pred_appls;
-        updateStatus();
+        //TODO
+        // ++stats_pred_appls;
+        // updateStatus();
 
         return s;
+    };
+
+    var sink_wrapper = function(it, x) {
+        var data = it.data.data;
+        var elements = it.data.elements;
+
+        var max = data.length;
+        if (it.index >= max) {
+            error('not valid iterator to take the source.');
+            disable('disabled');
+            return;
+        }
+        
+        data[it.index] = x;
+        elements[it.index].group.children[1].value = x;
+
+        ++stats_assigments;
+        updateStatus();
+        two.update();
     };
 
     var equal_wrapper = function(a, b) {
@@ -163,10 +266,17 @@ function initAlert(interpreter, scope) {
         return a.index == b.index;
     };
 
-    var copy_it_wrapper = function(it, name, color = '#99ff99') {
+    
+    var copy_it_wrapper = function(it, name, color) {
+
+        if ( ! color) {
+            console.log(Object.keys(iterators_int).length)
+            color = iterators_colors[Object.keys(iterators_int).length];
+        }
+
         var index = it.index
         var it = new Iterator(it.data, it.index, name);
-        var it_gui = drawIterator(two, elements[index], name, color);
+        var it_gui = drawIterator(two, it.data.elements[index], name, color);
         iterators_gui[name] = it_gui;
         iterators_int[name] = it;
         two.update();
@@ -188,18 +298,12 @@ function initAlert(interpreter, scope) {
 
     var iter_swap_wrapper = function(a, b) {
         var data = a.data;
+        var elements = a.data.elements;
 
         var tmp_fill = elements[a.index].group.children[0].fill;
         elements[a.index].group.children[0].fill = elements[b.index].group.children[0].fill;
         elements[b.index].group.children[0].fill = tmp_fill;
 
-        // console.log(elements[a.index].group.children[0])
-        // console.log(elements[b.index].group.children[0])
-
-        // console.log(source_wrapper(a))
-        // console.log(source_wrapper(b))
-        
-        // console.log(data)
         var tmp = source_wrapper(a);
         // data[a.index] = source_wrapper(b);
         data.properties[a.index] = source_wrapper(b);
@@ -211,11 +315,6 @@ function initAlert(interpreter, scope) {
         // console.log(data)
 
 
-
-
-        // console.log(elements[a.index].group.children[0])
-        // console.log(elements[b.index].group.children[0])
-
         ++stats_swaps;
         stats_assigments += 3;
 
@@ -223,72 +322,158 @@ function initAlert(interpreter, scope) {
         two.update();
     };
 
-    // var paint_data_pred_wrapper = function(p) {
 
-    //     for (let index = 0; index < elements.length - 1; ++index) {
-    //         let value = data[index];
-    //         let elem = elements[index];
+    var add_sequence_internal_wrapper = function(data_par, name, paint_pred) {
+        // console.log(data_par);
 
-    //         console.log(value)
-    //         console.log(elem)
-    //         console.log(p)
+        if (sequences[name] != undefined) {
+            error('sequence "' + name + '" already exists.');
+            disable('disabled');
+            return null;
+        }
 
-            
+        var data = [];
+        var length = data_par.properties['length'];
 
-    //         if ( ! p(value)) {
-    //             elem.rect.fill = '#ff9191';
-    //         }
-    //     }
-    // }
+        for (let i = 0; i < length; ++i) {
+            data.push(data_par.properties[i]);
+        }
+
+        // console.log(data);
+        // elements = drawArray(two, data, name);
+        var elems = drawArray(two, data, name, Object.keys(sequences).length);
+
+        
+
+        var retobj = {
+            name: name,
+            data: data,
+            elements: elems
+        };
+
+        sequences[name] = retobj;
+
+        updateStatus();
+        two.update();
+        return retobj;
+    };    
 
 
+    var set_predicate_wrapper = function(p) {
+       
+        // console.log(p.node.id.name);
+        // interpreter.appendCode(p.node.id.name+'();');
 
-    interpreter.setProperty(scope, 'alert',       interpreter.createNativeFunction(alert_wrapper));
-    interpreter.setProperty(scope, 'print',       interpreter.createNativeFunction(print_wrapper));
-    interpreter.setProperty(scope, 'successor',   interpreter.createNativeFunction(successor_wrapper));
-    interpreter.setProperty(scope, 'predecessor', interpreter.createNativeFunction(predecessor_wrapper));
-    interpreter.setProperty(scope, 'begin',       interpreter.createNativeFunction(begin_wrapper));
-    interpreter.setProperty(scope, 'end',         interpreter.createNativeFunction(end_wrapper));
-    interpreter.setProperty(scope, 'source',      interpreter.createNativeFunction(source_wrapper));
-    interpreter.setProperty(scope, 'equal',       interpreter.createNativeFunction(equal_wrapper));
-    interpreter.setProperty(scope, 'copy_it',     interpreter.createNativeFunction(copy_it_wrapper));
-    interpreter.setProperty(scope, 'remove_it',   interpreter.createNativeFunction(remove_it_wrapper));
-    interpreter.setProperty(scope, 'iter_swap',   interpreter.createNativeFunction(iter_swap_wrapper));
-    interpreter.setProperty(scope, 'assign_it',   interpreter.createNativeFunction(assign_it_wrapper));
+        predicates.push(p);
+        
+        updateStatus();
+        two.update();
+    };    
 
-    // interpreter.setProperty(scope, 'paint_data_pred',   interpreter.createNativeFunction(paint_data_pred_wrapper));
+    var increment_predicate_stats_wrapper = function(p, x) {
+        ++stats_pred_appls;
+        updateStatus();
+    };    
+
+    var fill_elem_wrapper = function(i, c) {
+        let elem = elements[i];
+        elem.rect.fill = c;
+    };    
+
+    interpreter.setProperty(scope, 'alert',          interpreter.createNativeFunction(alert_wrapper));
+    interpreter.setProperty(scope, 'print',          interpreter.createNativeFunction(print_wrapper));
+    interpreter.setProperty(scope, 'successor',      interpreter.createNativeFunction(successor_wrapper));
+    interpreter.setProperty(scope, 'predecessor',    interpreter.createNativeFunction(predecessor_wrapper));
+    interpreter.setProperty(scope, 'begin',          interpreter.createNativeFunction(begin_wrapper));
+    interpreter.setProperty(scope, 'end',            interpreter.createNativeFunction(end_wrapper));
+    interpreter.setProperty(scope, 'source',         interpreter.createNativeFunction(source_wrapper));
+    interpreter.setProperty(scope, 'sink',           interpreter.createNativeFunction(sink_wrapper));
+    interpreter.setProperty(scope, 'equal',          interpreter.createNativeFunction(equal_wrapper));
+    interpreter.setProperty(scope, 'copy_it',        interpreter.createNativeFunction(copy_it_wrapper));
+    interpreter.setProperty(scope, 'remove_it',      interpreter.createNativeFunction(remove_it_wrapper));
+    interpreter.setProperty(scope, 'iter_swap',      interpreter.createNativeFunction(iter_swap_wrapper));
+    interpreter.setProperty(scope, 'assign_it',      interpreter.createNativeFunction(assign_it_wrapper));
+    interpreter.setProperty(scope, 'add_sequence_internal',   interpreter.createNativeFunction(add_sequence_internal_wrapper));
+    // interpreter.setProperty(scope, 'set_predicate',  interpreter.createNativeFunction(set_predicate_wrapper));
+    interpreter.setProperty(scope, 'fill_elem',      interpreter.createNativeFunction(fill_elem_wrapper));
+    interpreter.setProperty(scope, 'increment_predicate_stats', interpreter.createNativeFunction(increment_predicate_stats_wrapper));
 }
+
+function callPredCode() {
+    return 'function call_predicate(p, x){var res = p(x); increment_predicate_stats(); return res;};\n'
+         + 'function predicate(p) {return function(x) {return call_predicate(p, x);};}\n'
+         + 'function call_relation(r, x, y){var res = r(x, y);increment_predicate_stats();return res;}\n'
+         + 'function relation(r){return function(x, y){return call_relation(r, x, y);};}\n';
+}
+
+function addSequenceCode() {
+    return 'function add_sequence(d, n, p) {' + '\n' +
+    '    var obj = add_sequence_internal(d, n, p);' + '\n' +
+    '    if ( ! obj) return obj;' + '\n' +
+    '    if (p) {' + '\n' +    
+    '        for (var i = 0; i < data.length; ++i) {' + '\n' +
+    '            var value = data[i];' + '\n' +
+    '            if ( ! p(value)) {' + '\n' +
+    '                fill_elem(i, "#ff9191");' + '\n' +
+    '            }' + '\n' +
+    '        }' + '\n' +
+    '    }' + '\n' +
+    '    return obj;' + '\n' +
+    '}'+ '\n'
+}
+
+function invisibleCode() {
+    return callPredCode() + addSequenceCode();
+}
+
 
 function getAllCode() {
-    var dataCodeText = document.getElementById('dataCodeArea').value;
-    var codeText = document.getElementById('codeArea').value;
-    return dataCodeText + '\n' + codeText;
+    // var dataCodeText = document.getElementById('dataCodeArea').value;
+    // var codeText = document.getElementById('codeArea').value;
+    // return dataCodeText + '\n' + codeText;
+
+    return invisibleCode() + document.getElementById('codeArea').value;
 }
 
-function paint_data_pred(p) {
+function getViewCode() {
+    // var dataCodeText = document.getElementById('dataCodeArea').value;
+    // var codeText = document.getElementById('codeArea').value;
+    // return dataCodeText + '\n' + codeText;
 
-    for (let index = 0; index < elements.length - 1; ++index) {
-        let value = data[index];
-        let elem = elements[index];
-
-        // console.log(value)
-        // console.log(elem)
-        console.log(p)
-
-        if ( ! p(value)) {
-            elem.rect.fill = '#ff9191';
-        }
-    }
+    return document.getElementById('codeArea').value;
 }
+
+
+// function paint_data_pred(interpreter, p, data) {
+
+//     for (let index = 0; index < elements.length - 1; ++index) {
+//         let value = data[index];
+//         let elem = elements[index];
+
+//         // console.log(value)
+//         // console.log(elem)
+//         // console.log(p)
+//         // interpreter.appendCode(p.node.id.name+'();');
+//         var code = 'if ( ! ' + p.node.id.name+'(' + value + ')) { fill_elem(' + index + ', "#ff9191"); }';
+//         // console.log(code);
+//         interpreter.appendCode(code);
+
+//         // if ( ! p(value)) {
+//         //     elem.rect.fill = '#ff9191';
+//         // }
+//     }
+// }
+
 
 function editButton() {
-    document.getElementById('dataCodeArea').style.display = "inline";
+    // document.getElementById('dataCodeArea').style.display = "inline";
     document.getElementById('codeArea').style.display = "inline";
     document.getElementById('codeHighlightPre').style.display = "none";
 
     document.getElementById('startButton').style.display = "inline";
     document.getElementById('stepButton').style.display = "none";
     document.getElementById('editButton').style.display = "none";
+    document.getElementById('restartButton').style.display = "none";
 
     var output = document.getElementById('output');
     output.innerHTML = '';
@@ -299,15 +484,15 @@ function editButton() {
     two.clear();
 }
 
-function startButton() {
-    var code = getAllCode();
-    document.getElementById('dataCodeArea').style.display = "none";
-    document.getElementById('codeArea').style.display = "none";
-    document.getElementById('codeHighlightPre').style.display = "block";
+function restartButton() {
+    // document.getElementById('dataCodeArea').style.display = "inline";
+    document.getElementById('codeArea').style.display = "inline";
+    document.getElementById('codeHighlightPre').style.display = "none";
 
-    document.getElementById('startButton').style.display = "none";
-    document.getElementById('stepButton').style.display = "inline";
-    document.getElementById('editButton').style.display = "inline";
+    document.getElementById('startButton').style.display = "inline";
+    document.getElementById('stepButton').style.display = "none";
+    document.getElementById('editButton').style.display = "none";
+    document.getElementById('restartButton').style.display = "none";
 
     var output = document.getElementById('output');
     output.innerHTML = '';
@@ -315,25 +500,44 @@ function startButton() {
     var MEW = document.getElementById('MEW');
     MEW.innerHTML = '';
 
-
-    // console.log(data)
-    var yyy = eval(document.getElementById('dataCodeArea').value);
-    // console.log(data)
+    resetStatus();
     two.clear();
-    elements = drawArray(two, data);
 
-    if (pred) {
-        paint_data_pred(pred);
-    } 
+    startButton();
+}
+
+
+function startButton() {
+    var codeAll = getAllCode();
+    // console.log(codeAll);
+    var codeView = getViewCode();
+    
+    // document.getElementById('dataCodeArea').style.display = "none";
+    document.getElementById('codeArea').style.display = "none";
+    document.getElementById('codeHighlightPre').style.display = "block";
+
+    document.getElementById('startButton').style.display = "none";
+    document.getElementById('stepButton').style.display = "inline";
+    document.getElementById('editButton').style.display = "inline";
+    document.getElementById('restartButton').style.display = "inline";
+
+    var output = document.getElementById('output');
+    output.innerHTML = '';
+
+    var MEW = document.getElementById('MEW');
+    MEW.innerHTML = '';
+
+    two.clear();
+    resetStatus();
 
     var codeHighlight = document.getElementById('codeHighlight');
-    codeHighlight.innerHTML = code;
+    codeHighlight.innerHTML = codeView;
     hljs.highlightBlock(codeHighlight);
 
     var output = document.getElementById('output');
     hljs.highlightBlock(output);
 
-    myInterpreter = new Interpreter(code, initAlert);
+    myInterpreter = new Interpreter(codeAll, initFunctions);
     disable('');
 }
 
@@ -356,7 +560,8 @@ function stepButton() {
         // createSelection(start, end);
 
 
-        var code = getAllCode();
+        var codeAll = getAllCode();
+        var codeView = getViewCode();
 
         try {
             var ok = myInterpreter.step();
@@ -366,19 +571,32 @@ function stepButton() {
                 // console.log('break 2')
 
                 var codeHighlight = document.getElementById('codeHighlight');
-                codeHighlight.innerHTML = code;
+                codeHighlight.innerHTML = codeView;
                 hljs.highlightBlock(codeHighlight);
         
                 break;
             }
         }
 
-        // var code = document.getElementById('codeArea').value;
-        var code = getAllCode();
-        var codeSelected = code.substring(start, end);
+        // console.log('-----------------------');
+        // console.log(start);
+        // console.log(end);
+
+        if (start < invisibleCode().length) {
+            continue;
+        }
+
+        start -= invisibleCode().length;
+        end -= invisibleCode().length;
+
+        // console.log(start);
+        // console.log(end);
+        // console.log('-----------------------');
+
+        var codeSelected = codeView.substring(start, end);
         // console.log(codeSelected);
 
-        var codeHtml = [code.slice(0, end), "</mark>", code.slice(end)].join('');
+        var codeHtml = [codeView.slice(0, end), "</mark>", codeView.slice(end)].join('');
             codeHtml = [codeHtml.slice(0, start), "<mark>", codeHtml.slice(start)].join('');
         // console.log(codeHtml);
         var codeHighlight = document.getElementById('codeHighlight');
