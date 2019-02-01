@@ -10,9 +10,7 @@ image:
 Si el contenido de este blog le resulta interesante, podría colaborar conmigo para que siga escribiendo. 
 
 
-Puede respaldar al-Khwārizmī a través de [PayPal], [Coinbase] o un pago directo [Bitcoin Cash].
-
-Puede respaldar a _Components Programming_ via <a href="https://www.paypal.me/algorismi/5" target="_blank">[PayPal]</a>, <a href="https://commerce.coinbase.com/checkout/6c06a644-c63c-489e-a78b-654bdb137541" target="_blank">[Coinbase]</a> o un pago directo Bitcoin Cash usando la dirección de abajo.
+Puede respaldar a _Components Programming_ via <a href="https://www.paypal.me/algorismi/5" target="_blank">PayPal</a>, <a href="https://commerce.coinbase.com/checkout/6c06a644-c63c-489e-a78b-654bdb137541" target="_blank">Coinbase</a> o un pago directo Bitcoin Cash usando la dirección de abajo.
 
 (Los montos inferiores a $1 no suelen llegar a mi cuenta luego del pago de comisiones. Por favor sea paciente; Algunas transacciones, especialmente utilizando criptomonedas, pueden tardar una o dos horas en completarse.)
 
