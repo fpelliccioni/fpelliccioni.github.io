@@ -39,9 +39,9 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             </nav>
             </header>
         </div>
-        <div class="hijo-grande">
-            <div class="hijo-grande-left">
-                <div class="hijo-grande-left-b">
+        <div class="hg">
+            <div class="hg-left">
+                <div class="hg-left-b">
                     <pre id="codeHighlightPre"><code id="codeHighlight" class="javascript"></code></pre>
 
 <!-- <textarea id="codeArea">
@@ -115,7 +115,7 @@ function find_backward_if(f, l, p) {
     return l;
 }
         
-var even = predicate(function(x) {return x % 2 == 0;});
+var even = predicate(function(x) {return x % 2 == 0;}, "even");
 var data = add_sequence([1, 2, 3, 4, 5, 6, 3, 1, 7], "data");
 var f = begin(data, "f");
 var l = end(data, "l");
@@ -155,7 +155,7 @@ print(r);
 </textarea>
     
 </div>
-                <div class="hijo-grande-left-c">
+                <div class="hg-left-c">
                     <div id="Buttons">
                         <button id="startButton" onclick="startButton()">Start (Ctrl-F9)</button>
                         <button id="stepButton" onclick="stepButton()" disabled="disabled">Step (Ctrl-F10)</button>
@@ -164,7 +164,7 @@ print(r);
                     </div>​
                 </div>
 
-                <div class="hijo-grande-left-d">
+                <div class="hg-left-d">
                 <!-- <div id="CopyrightDiv"> -->
                     <p id="CopyrightP">
                     <a id="Copyright" href="http://componentsprogramming.com/about-me/">Copyright &copy; Fernando Pelliccioni 2019.</a>
@@ -173,21 +173,39 @@ print(r);
                 </div>
     
             </div>
-            <div class="hijo-grande-right">
-                <div class="hijo-grande-right-a">
-                    <div id="sequence"></div>
+
+            <div class="hg-right">
+                <div id="hg-right-a" class="hg-right-a">
+                    <div id="sequence"></div>                    
                 </div>
-                <div class="hijo-grande-right-b">
-                    <div id="MEW"></div>​
-                    <div id="MEE"></div>​
-                </div>
-                <div class="hijo-grande-right-c">
-                    <pre id="outputPre"><code id="output" class="javascript"></code></pre>                    
+                <div class="hg-right-b">
+                    <div id="hg-right-b-a">
+                        <div id="hg-right-x">
+                            <div id="hg-right-x-a"></div>
+                            <div id="hg-right-x-b"></div>
+                        </div>
+                        <div id="hg-right-y">
+                            <pre id="outputPre"><code id="output" class="javascript"></code></pre>                            
+                        </div>
+                    </div>
+                    <div id="hg-right-b-b"></div>
                 </div>
             </div>
+    
         </div>
     </div>
           
+                <!-- <div class="hg-right-a">
+                    <div id="sequence"></div>
+                </div>
+                <div class="hg-right-b">
+                    <div id="MEW"></div>​
+                    <div id="MEE"></div>​
+                </div>
+                <div class="hg-right-c">
+                    <pre id="outputPre"><code id="output" class="javascript"></code></pre>                    
+                </div> -->
+
     <script>
             var lines = [];
             var prevLine = "";
@@ -198,9 +216,6 @@ print(r);
 
             var iterators_int = {};
             var iterators_gui = {};
-            // var data = [];
-            // var pred;
-
             var predicates = [];
             var sequences = {};
 
@@ -210,15 +225,15 @@ print(r);
             var stats_swaps = 0;
             var stats_assigments = 0;
     
-            // var two = new Two({
-            //         fullscreen: false,
-            //         autostart: true
-            // });
-    
+            // console.log(document.getElementById('hg-right-a').offsetWidth)
+            // console.log(document.getElementById('hg-right-a').offsetHeight)
+
             var two = new Two({
                     fullscreen: false,
-                    width: document.getElementById('sequence').offsetWidth,
-                    height: 600,
+                    // width: document.getElementById('sequence').offsetWidth,
+                    // height: 600,
+                    width: document.getElementById('hg-right-a').offsetWidth,
+                    height: document.getElementById('hg-right-a').offsetHeight,
                     autostart: true
             }).appendTo(sequence);
     
@@ -262,7 +277,6 @@ print(r);
 
 
 
-            // var url_string = "http://www.example.com/t.html?a=1&b=3&c=m2-m3-m4-m5"; //window.location.href
             var url_string = window.location.href;
             var url = new URL(url_string);
             var c = url.searchParams.get("code");
