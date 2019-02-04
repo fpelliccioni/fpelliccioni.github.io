@@ -7,7 +7,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 var defaultLeftMargin = 10;
 var defaultTopMargin = 0;
-var sequenceTotalHeight = 135;
+var sequenceTotalHeight = 140;
 
 // var rectWidth = 80;
 // var rectHeight = 120;
