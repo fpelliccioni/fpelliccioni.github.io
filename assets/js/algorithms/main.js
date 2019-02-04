@@ -224,7 +224,7 @@ function fillCatalog() {
         // console.log(value)
     
         // list.innerHTML += '<li><a href="http://componentsprogramming.com/algorithms?snippet=">[About]</a></li>';
-        list.innerHTML += '<li><a href="file:///Users/fernando/dev/algorithms-animator/interpreter/index.html?snippet=' + key + '">[' + key + ']</a></li>';
+        list.innerHTML += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + key + '">[' + key + ']</a></li>';
     }
 }
 
