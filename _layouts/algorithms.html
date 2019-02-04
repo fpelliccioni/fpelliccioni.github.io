@@ -48,7 +48,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
                     <pre id="codeHighlightPre"><code id="codeHighlight" class="javascript"></code></pre>
 
 <textarea id="codeArea">
-//ADD YOUR CODE HERE!
+//CODE HERE!
 var d = add_sequence(random_array(), "d");
 </textarea>
     
@@ -56,7 +56,7 @@ var d = add_sequence(random_array(), "d");
                 <div class="hg-left-c">
                     <div id="Buttons">
                         <button id="startButton" onclick="startButton()">Start (Ctrl-F9)</button>
-                        <button id="stepButton" onclick="stepButton()" disabled="disabled">Step (->)</button>
+                        <button id="stepButton" onclick="stepButton()" disabled="disabled">Step (&darr;)</button>
                         <button id="restartButton" onclick="restartButton()">Restart</button>
                         <button id="editButton" onclick="editButton()">Edit</button>
                     </div>​
@@ -154,7 +154,7 @@ var d = add_sequence(random_array(), "d");
                     }
                 }
 
-                if ( (e.ctrlKey && e.keyCode == 121) || (e.keyCode == 39)) {
+                if ( (e.ctrlKey && e.keyCode == 121) || (e.keyCode == 39)|| (e.keyCode == 40)) {
                     // if (document.getElementById('stepButton').disabled) {
                     //     startButton()
                     // }
@@ -186,14 +186,8 @@ var d = add_sequence(random_array(), "d");
                 }
             }
 
-            
-
             editButton();
-            
         </script>      
-    
-
-
 </body>
 </html>
 
