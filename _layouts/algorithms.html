@@ -35,7 +35,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
                     <li><a href="http://componentsprogramming.com/algorithms-about/">[About]</a></li>
                     <li><a href="http://componentsprogramming.com/algorithms-support/">[Support]</a></li>
                     <li><a href="http://componentsprogramming.com/algorithms-catalog/">[Catalog]</a></li>
-                    <!-- <li><a href="file:///Users/fernando/dev/algorithms-animator/interpreter/catalog.html">[Catalog]</a></li> -->
+                    <!-- <li><a href="catalog.html">[Catalog]</a></li> -->
                     <li><a href="http://componentsprogramming.com/">[Components Programming]</a></li>
                     <!-- <li><a href="http://componentsprogramming.com/algorithms-help/">[Help]</a></li> -->
                 </ul>
@@ -87,9 +87,9 @@ var d = add_sequence(random_array(), "d");
                         </div> -->
                         <div id="hg-right-y"></div>
                         </div>
-                    <div id="hg-right-b-b">
-                        <!-- <pre id="logPre"><code id="log" class="javascript"></code></pre> -->
-                    </div>
+                        <div id="hg-right-b-b">
+                            <textarea id="hg-right-b-b-data" readonly></textarea>
+                        </div>
                 </div>
             </div>
     
@@ -108,6 +108,7 @@ var d = add_sequence(random_array(), "d");
             var iterators_gui = {};
             var predicates = [];
             var sequences = {};
+            var variables = {};
 
             var stats_it_moves = 0;
             var stats_it_cmps = 0;
