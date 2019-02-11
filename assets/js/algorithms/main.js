@@ -173,6 +173,11 @@ if ( ! equal(it, l)) {
 ,partition_semistable:
 `//Nico Lomutos's partition algorithm: https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme
 //Code taken from: https://github.com/tao-cpp/algorithm/blob/master/include/tao/algorithm/partition/partition.hpp#L58
+
+var r = range_bounded("f", "l");
+var r2 = range_bounded("j", "l");
+var r3 = range_bounded("p", "l");
+
 function partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l)) return f;
@@ -198,14 +203,18 @@ var d = add_sequence(random_array(), "d", even);
 var f = begin(d);
 var l = end(d);
 
-var it = partition_semistable(f, l, even);
-if ( ! equal(it, l)) {
-    print('partition point: ' + source(it));
+var p = partition_semistable(f, l, even);
+if ( ! equal(p, l)) {
+    print('partition point: ' + source(p));
 }`
 
 ,partition_semistable_nonempty:
 `//Nico Lomutos's partition algorithm: https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme
 //Code taken from: https://github.com/tao-cpp/algorithm/blob/master/include/tao/algorithm/partition/partition.hpp#L91
+
+var r = range_bounded("f", "l");
+var r2 = range_bounded("j", "l");
+
 function partition_semistable_nonempty(f, l, p) {
     //precondition: nonempty: ! equal(f, l)
     while ( ! p(source(f))) {
@@ -233,6 +242,151 @@ var f = begin(d);
 var l = end(d);
 
 partition_semistable_nonempty(f, l, even);`
+
+
+,partition_copy:
+`function partition_copy(f, l, r_b, r_g, p) {
+    while ( ! equal(f, l)) {
+        if (p(source(f))) {
+            sink(r_g, source(f));
+            r_g = successor(r_g);
+        } else {
+            sink(r_b, source(f));
+            r_b = successor(r_b);
+        }
+        f = successor(f);
+    }
+    return [r_b, r_g];
+}
+
+
+var even = predicate(function(x) {return x % 2 == 0;}, "even");
+var d = add_sequence(random_array(), "d", even);
+var bad = add_sequence(new Array(size(d)), "bad");
+var good = add_sequence(new Array(size(d)), "good");
+
+var res = partition_copy(begin(d), end(d), begin(bad), begin(good), even);
+
+var fg = res[0];
+var fb = res[1];
+
+print('...');`
+
+
+
+,partition_stable_with_buffer_0:
+`function partition_copy(f, l, r_b, r_g, p) {
+    while ( ! equal(f, l)) {
+        if (p(source(f))) {
+            sink(r_g, source(f));
+            r_g = successor(r_g);
+        } else {
+            sink(r_b, source(f));
+            r_b = successor(r_b);
+        }
+        f = successor(f);
+    }
+    return [r_b, r_g];
+}
+
+function copy(f, l, o) {
+    while ( ! equal(f, l)) {
+        sink(o, source(f));
+        o = successor(o);
+        f = successor(f);
+    }
+}
+
+function partition_stable_with_buffer_0(f, l, p, b) {
+    var tmp = partition_copy(f, l, f, b, p);
+    var tf = tmp[0];
+    var ts = tmp[1];
+    copy(b, ts, tf);
+    return tf;
+}
+
+var even = predicate(function(x) {return x % 2 == 0;}, "even");
+var d = add_sequence(random_array(), "d", even);
+var buf = add_sequence(new Array(size(d)), "buf");
+
+var p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));
+if ( ! equal(p, l)) {
+    print('partition point: ' + source(p));
+}`
+
+
+,partition_stable_forward:
+`//Variation of Nico Lomutos's partition algorithm: https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme
+//Code taken from: https://github.com/tao-cpp/algorithm/blob/master/include/tao/algorithm/partition/partition.hpp#L58
+
+var r = range_bounded("f", "l");
+var r2 = range_bounded("j", "l");
+var r3 = range_bounded("p", "l");
+
+function partition_stable_forward(f, l, p) {
+    while (true) {
+        if (equal(f, l)) return f;
+        if (p(source(f))) break;
+        f = successor(f);
+    }
+
+    var j = f;
+    j = successor(j)
+
+    while ( ! equal(j, l)) {
+        if ( ! p(source(j))) {
+            rotate(f, j, successor(j));     //TODO: refine rotate(...)
+            f = successor(f);
+        }
+        j = successor(j);
+    }
+    return f;
+}
+
+var even = predicate(function(x) {return x % 2 == 0;}, "even");
+var d = add_sequence(random_array(), "d", even);
+var f = begin(d);
+var l = end(d);
+
+var p = partition_stable_forward(f, l, even);
+if ( ! equal(p, l)) {
+    print('partition point: ' + source(p));
+}`
+
+
+
+,partition_point_n:
+`skip_debug('half_nonnegative');
+var r = range_counted("f", "n");
+
+function half_nonnegative(n) {
+    return n >> 1;
+}
+
+function partition_point_n(f, n, p) {
+    while (n != 0) {
+        var h = half_nonnegative(n);
+        var m = successor(f, h);
+
+        if (p(source(m))) {
+            n = h;
+        } else {
+            n -= h + 1;
+            f = successor(m);
+        }
+    }
+    return f;
+}
+
+var even = predicate(function(x) {return x % 2 == 0;}, "even");
+var d = add_sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
+
+var p = partition_point_n(begin(d), size(d), even);
+print('partition point: ' + source(p));`
+
+
+
+
 
 
 
@@ -269,7 +423,8 @@ print(m);`
 
 
 ,gcd:
-`function remainder(a, b) {
+`skip_debug('remainder');
+function remainder(a, b) {
     return a % b;
 }
 
@@ -318,8 +473,7 @@ print(res);`
 
 
 , palindrome_naive:
-`
-function equal_r(f, l, f2, r) {
+`function equal_r(f, l, f2, r) {
     while ( ! equal(f, l)) {
         if ( ! r(source(f), source(f2))) {
             return false;
@@ -360,7 +514,8 @@ if (res) {
 
 
 , palindrome_forward_recursive:
-`function palindrome_forward_recursive(f, n, r) {
+`var r = range_counted("f", "n");
+function palindrome_forward_recursive(f, n, r) {
     if (n == 0) return [true, f];
     if (n == 1) return [true, successor(f)];
 
@@ -469,6 +624,16 @@ function Sequence(name, data, elements, colors) {
     this.colors = colors;
 }
 
+function RangeBounded(fname, lname) {
+    this.fname = fname;
+    this.lname = lname;
+}
+
+function RangeCounted(fname, nname) {
+    this.fname = fname;
+    this.nname = nname;
+}
+
 
 function resetState() {
     
@@ -478,6 +643,8 @@ function resetState() {
 
     lines = [];
     prevLine = "";
+    prevLine2 = "";
+    prevNodeType = "";
     iterators_int = {};
     iterators_gui = {};
     predicates = [];
@@ -648,9 +815,10 @@ function showError(text) {
 
 
 function initFunctions(interpreter, scope) {
-    var alert_wrapper = function(text) {
-        return alert(arguments.length ? text : '');
-    };
+
+    // var alert_wrapper = function(text) {
+    //     return alert(arguments.length ? text : '');
+    // };
 
 
     var print_wrapper = function(text) {
@@ -678,21 +846,18 @@ function initFunctions(interpreter, scope) {
     // };
 
 
-    var successor_wrapper = function(it_par, move = true) {
+    var successor_wrapper = function(it_par, step = 1) {
         var data = it_par.data.data;
         var max = data.length;
 
         // console.log(it_par.index)
-        if (it_par.index >= max) {
+        if (it_par.index + step > max) {
             showError('out of range');
             disable('disabled');
             return;
         }
 
-        // if (move && iterators_gui[it_par.name]) {
-        //     moveIteratorTo(two, iterators_gui[it_par.name], it_par.data.elements[it_par.index + 1])
-        // }
-        var it = new Iterator(it_par.data, it_par.index + 1, it_par.name);
+        var it = new Iterator(it_par.data, it_par.index + step, it_par.name);
         if (iterators_int[it.name]) {
             iterators_int[it.name] = it;
         }
@@ -706,18 +871,15 @@ function initFunctions(interpreter, scope) {
         return it;
     };
 
-    var predecessor_wrapper = function(it_par, move = true) {
+    var predecessor_wrapper = function(it_par, step = 1) {
         // console.log(it_par.index)
-        if (it_par.index <= 0) {
+        if (it_par.index - step < 0) {
             showError('out of range');
             disable('disabled');
             return;
         }
 
-        // if (move && iterators_gui[it_par.name]) {
-        //     moveIteratorTo(two, iterators_gui[it_par.name], it_par.data.elements[it_par.index - 1])
-        // }
-        var it = new Iterator(it_par.data, it_par.index - 1, it_par.name);
+        var it = new Iterator(it_par.data, it_par.index - step, it_par.name);
         if (iterators_int[it.name]) {
             iterators_int[it.name] = it;
         }
@@ -1015,11 +1177,24 @@ function initFunctions(interpreter, scope) {
         log_stats_enabled = false;
     };    
     
+    var skip_debug_wrapper = function(name) {
+        skipped.push(name);
+        // console.log(skipped);
+    };    
+
+    var range_bounded_wrapper = function(f, l) {
+        return new RangeBounded(f, l);
+    };    
+
+    var range_counted_wrapper = function(f, n) {
+        return new RangeCounted(f, n);
+    };    
 
     
+
     
 
-    interpreter.setProperty(scope, 'alert',          interpreter.createNativeFunction(alert_wrapper));
+    // interpreter.setProperty(scope, 'alert',          interpreter.createNativeFunction(alert_wrapper));
     interpreter.setProperty(scope, 'print',          interpreter.createNativeFunction(print_wrapper));
     interpreter.setProperty(scope, 'successor',      interpreter.createNativeFunction(successor_wrapper));
     interpreter.setProperty(scope, 'predecessor',    interpreter.createNativeFunction(predecessor_wrapper));
@@ -1043,7 +1218,13 @@ function initFunctions(interpreter, scope) {
 
     interpreter.setProperty(scope, 'enable_log_stats', interpreter.createNativeFunction(enable_log_stats_wrapper));
     interpreter.setProperty(scope, 'disable_log_stats', interpreter.createNativeFunction(disable_log_stats_wrapper));
-    
+ 
+    interpreter.setProperty(scope, 'skip_debug', interpreter.createNativeFunction(skip_debug_wrapper));
+
+    interpreter.setProperty(scope, 'range_bounded', interpreter.createNativeFunction(range_bounded_wrapper));
+    interpreter.setProperty(scope, 'range_counted', interpreter.createNativeFunction(range_counted_wrapper));
+ 
+
 }
 
 function callPredCode() {
@@ -1221,7 +1402,163 @@ function addVariable(name, value, seqn) {
     variables[name] = retobj;
 }
 
+function find_ranges(scope) {
+
+    if (scope == null) return [];
+
+    var res = find_ranges(scope.parentScope);
+    var keys = Object.keys(scope.properties).sort();
+
+    for (var x in keys) {
+        var key = keys[x];
+        var value = scope.properties[key];
+        if (value && value instanceof RangeCounted) {
+            // console.log(value)
+            res.push(value);
+        } else if (value && value instanceof RangeBounded) {
+            res.push(value);
+        }
+    }
+    return res;
+}
+
+
+var prevScopeOrder = [];
+
+function scopeComparer(a, b) {
+    var ai = prevScopeOrder.indexOf(a);
+    var bi = prevScopeOrder.indexOf(b);
+
+    if (ai == -1 && bi == -1) return 0;
+    if (ai == -1 && bi != -1) return 1;
+    if (ai != -1 && bi == -1) return -1;
+
+    // console.log(a)
+    // console.log(b)
+    // console.log(ai)
+    // console.log(bi)
+
+    if (ai < bi) return -1;
+    if (ai == bi) return 0;
+    return 1;
+}
+
+function scopeOrder(scope) {
+
+    var res = [];
+
+    var reserved = ['arguments', 'this', 'undefined', 'NaN', 'Infinity',
+        'Array', 'Boolean','Date', 'Error', 'EvalError', 'Function',
+        'JSON', 'Math', 'Number', 'Object', 'RangeError', 'ReferenceError',
+        'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
+        'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self', 
+        'window',
+        'add_sequence', 'add_sequence_internal', 'alert', 'assign_it',
+        'begin', 'call_predicate', 'call_predicate_internal', 'call_relation',
+        'call_relation_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
+        'end',  'equal', 'fill_elem', 'find_if', 'sink', 'source', 'successor', 'remove_it',
+        'print', 'random_array', 'relation', 'iter_swap', 'predecessor', 'predicate'];
+
+    variables = [];
+
+    // var ranges = find_ranges(scope);
+
+
+    // var keys = Object.keys(scope.properties).sort();
+    var keys = Object.keys(scope.properties);
+
+    for (var x in keys) {
+        var key = keys[x];
+        if ( ! reserved.includes(key)) {
+            var value = scope.properties[key];
+            if (value && value instanceof Sequence) {
+                res.push(key);
+            }
+        }
+    }
+
+    for (var x in keys) {
+        var key = keys[x];
+        if ( ! reserved.includes(key)) {
+            var value = scope.properties[key];
+            if (value && value instanceof Iterator) {
+                res.push(key);
+            }
+        }
+    }
+
+    for (var x in keys) {
+        var key = keys[x];
+
+        if ( ! reserved.includes(key)) {
+            var value = scope.properties[key];
+        
+            if (value != undefined) {
+
+                if (value instanceof Sequence) {
+                } else if (value instanceof Iterator) {
+                } else if (value instanceof RangeBounded) {
+                } else if (value instanceof RangeCounted) {
+                } else if (value instanceof Interpreter.Object) {
+                } else {
+                    res.push(key);
+                }
+
+                // if ( ! value.class) {
+                //     addVariable(key, value, seqn);
+                // }
+            } else {
+                // console.log(key);
+                // console.log(value);
+                // addVariable(key, value, seqn);
+            }
+        }
+    }
+
+    // console.log(res);
+    res.sort(scopeComparer);
+
+    return res;
+}
+
+
+function scopePairComparer(a, b) {
+
+    // console.log(a)
+    // console.log(b)
+
+    var ai = prevScopeOrder.indexOf(a.key);
+    var bi = prevScopeOrder.indexOf(b.key);
+
+    if (ai == -1 && bi == -1) return 0;
+    if (ai == -1 && bi != -1) return 1;
+    if (ai != -1 && bi == -1) return -1;
+
+    // console.log(a)
+    // console.log(b)
+    // console.log(ai)
+    // console.log(bi)
+
+    if (ai < bi) return -1;
+    if (ai == bi) return 0;
+    return 1;
+}
+
+// function alert2(n, its_internal) {
+//     var s = "------------- " + n + '\n';
+//     for (var i in its_internal) {
+//         var key = its_internal[i].key;
+//         var value = its_internal[i].value;
+//         s += key + " - " + value.name + "\n";
+//     }
+//     alert(s);
+// }
+
 function drawScope(scope) {
+    // console.log(scope.properties);
+    prevScopeOrder = scopeOrder(scope);
+    // console.log(prevScopeOrder);
+
 
     var reserved = ['arguments', 'this', 'undefined', 'NaN', 'Infinity',
         'Array', 'Boolean','Date', 'Error', 'EvalError', 'Function',
@@ -1238,15 +1575,22 @@ function drawScope(scope) {
     // console.clear();
     two.clear();
     variables = [];
-    
+
+    var ranges = find_ranges(scope);
+    // console.log(r);
+
     // console.log(two.width);
 
-    var keys = Object.keys(scope.properties).sort();
-    // var keys = Object.keys(scope.properties);
+    // console.log(scope.properties);
+
+    // var keys = Object.keys(scope.properties).sort();
+    var keys = Object.keys(scope.properties);
 
     // First Sequences
 
     var seq_internal = [];
+    var its_internal = [];
+    var vars_internal = [];
 
     for (var x in keys) {
         var key = keys[x];
@@ -1258,22 +1602,71 @@ function drawScope(scope) {
         }
     }
 
+    
+
+    // console.log(keys)
     for (var x in keys) {
         var key = keys[x];
         if ( ! reserved.includes(key)) {
             var value = scope.properties[key];
             if (value && value instanceof Iterator) {
+                // console.log(key)
+                // console.log(value)
+                // console.log(its_internal)
+                its_internal.push({key: key, value: new Iterator(value.data, value.index, value.name)});
 
-                var found = seq_internal.find(function(x) {
-                    return x.value && x.value.name == value.data.name;
-                });
-
-                if ( ! found) {
-                    seq_internal.push({key: value.data.name, value: value.data});
-                }
+                // console.log(its_internal)
             }
         }
     }
+
+    // if (its_internal.length >= 2) {
+    //     console.log("----------- 1")
+    //     console.log(its_internal)
+    //     alert2(1, its_internal)
+    // }
+
+    its_internal.sort(scopePairComparer);
+
+    // if (its_internal.length >= 2) {
+    //     console.log("----------- 2")
+    //     console.log(its_internal)
+
+    //     alert2(2, its_internal)
+    // }
+
+    for (var i in its_internal) {
+        var key = its_internal[i].key;
+        var value = its_internal[i].value;
+
+        var found = seq_internal.find(function(x) {
+            return x.value && x.value.name == value.data.name;
+        });
+
+        if ( ! found) {
+            seq_internal.push({key: value.data.name, value: value.data});
+        }
+
+    }
+    // for (var x in keys) {
+    //     var key = keys[x];
+    //     if ( ! reserved.includes(key)) {
+    //         var value = scope.properties[key];
+    //         if (value && value instanceof Iterator) {
+
+    //             var found = seq_internal.find(function(x) {
+    //                 return x.value && x.value.name == value.data.name;
+    //             });
+
+    //             if ( ! found) {
+    //                 seq_internal.push({key: value.data.name, value: value.data});
+    //             }
+    //         }
+    //     }
+    // }
+
+
+    seq_internal.sort(scopePairComparer);
 
     var seqn = 0;
     for (var i in seq_internal) {
@@ -1284,39 +1677,81 @@ function drawScope(scope) {
         ++seqn;
     }
 
+    // var itn = 0;
+    // for (var x in keys) {
+    //     var key = keys[x];
+    //     if ( ! reserved.includes(key)) {
+    //         var value = scope.properties[key];
+    //         if (value && value instanceof Iterator) {
+
+    //             // console.log(key)
+    //             // console.log(value)
+
+    //             if ( ! value.name) {
+    //                 value.name = key;
+    //                 iterators_int[key] = value;
+    //                 updateStatus();
+    //             }
+
+    //             if (key != value.name) {
+    //                 value.name = key;
+    //                 iterators_int[key] = value;
+    //                 updateStatus();
+    //             }
+
+
+    //             // var it = new Iterator(arr, index, null);
+    //             // iterators_int[name] = it;
+
+    //             var color = iterators_colors[itn];
+    //             var it_gui = drawIterator(two, value.data.elements[value.index], key, color);
+    //             iterators_gui[value.name] = it_gui;
+    //             ++itn;
+    //         }
+    //     }
+    // }
+
     var itn = 0;
-    for (var x in keys) {
-        var key = keys[x];
-        if ( ! reserved.includes(key)) {
-            var value = scope.properties[key];
-            if (value && value instanceof Iterator) {
 
-                // console.log(key)
-                // console.log(value)
+    // if (its_internal.length >= 2) {
+    //     // console.log("----------- 3")
+    //     // console.log(its_internal)
+    //     alert2(3, its_internal)
+    // }
+    
+    for (var i in its_internal) {
+        var key = its_internal[i].key;
+        var value = its_internal[i].value;
 
-                if ( ! value.name) {
-                    value.name = key;
-                    iterators_int[key] = value;
-                    updateStatus();
-                }
-
-                if (key != value.name) {
-                    value.name = key;
-                    iterators_int[key] = value;
-                    updateStatus();
-                }
-
-
-                // var it = new Iterator(arr, index, null);
-                // iterators_int[name] = it;
-
-                var color = iterators_colors[itn];
-                var it_gui = drawIterator(two, value.data.elements[value.index], key, color);
-                iterators_gui[value.name] = it_gui;
-                ++itn;
-            }
+        if ( ! value.name) {
+            // console.log('********************** 1')
+            // console.log(value);
+            value.name = key;
+            // console.log(value);
+            iterators_int[key] = value;
+            updateStatus();
         }
+
+        if (key != value.name) {
+            // console.log('********************** 2')
+            // console.log(value);
+            value.name = key;
+            iterators_int[key] = value;
+            updateStatus();
+        }
+
+        var color = iterators_colors[itn];
+        var it_gui = drawIterator(two, value.data.elements[value.index], key, color);
+        iterators_gui[value.name] = it_gui;
+        ++itn;
     }
+
+    // if (its_internal.length >= 2) {
+    //     // console.log("----------- 3")
+    //     // console.log(its_internal)
+    //     alert2(4, its_internal)
+    // }
+
 
     for (var x in keys) {
         // console.log(x);
@@ -1335,11 +1770,12 @@ function drawScope(scope) {
 
                 if (value instanceof Sequence) {
                 } else if (value instanceof Iterator) {
+                } else if (value instanceof RangeBounded) {
+                } else if (value instanceof RangeCounted) {
                 } else if (value instanceof Interpreter.Object) {
                 } else {
-                    // console.log(key);
-                    // console.log(value);
-                    addVariable(key, value, seqn);
+                    // addVariable(key, value, seqn);
+                    vars_internal.push({key: key, value: value});
                 }
 
                 // if ( ! value.class) {
@@ -1351,10 +1787,72 @@ function drawScope(scope) {
                 // addVariable(key, value, seqn);
             }
         }
+    }
 
+    vars_internal.sort(scopePairComparer);
+    for (var i in vars_internal) {
+        var key = vars_internal[i].key;
+        var value = vars_internal[i].value;
+
+        addVariable(key, value, seqn);
+    }
+
+    // console.log(ranges);
+
+    for (var i = 0; i < ranges.length; i++) {
+        var r = ranges[i];
+
+        if (r instanceof RangeBounded) {
+            // var f = scope.properties[r.fname];
+            // var l = scope.properties[r.lname];
+
+            var f = its_internal.find( x => x.key === r.fname );
+            var l = its_internal.find( x => x.key === r.lname );
+            
+            if (f != undefined && l != undefined) {
+                drawBoundedRange(f.value, l.value);
+            }
+
+        } else if (r instanceof RangeCounted) {
+            // var f = scope.properties[r.fname];
+            // var n = scope.properties[r.nname];
+
+            var f = its_internal.find( x => x.key === r.fname );
+            var n = vars_internal.find( x => x.key === r.nname );
+
+            // console.log(r)
+            // console.log(f)
+            // console.log(n)
+
+            if (f != undefined && n != undefined) {
+                drawCountedRange(f.value, n.value);
+            }
+        }
     }
 }
 
+
+// Object.prototype.getName = function() { 
+//     var funcNameRegex = /function (.{1,})\(/;
+//     var results = (funcNameRegex).exec((this).constructor.toString());
+//     return (results && results.length > 1) ? results[1] : "";
+//  };
+
+
+function inside_skipped_function(scope) {
+    if (scope.parentScope == null) return false;
+
+    for (var i = 0; i < skipped.length; i+=1) {
+        // console.log("En el índice '" + i + "' hay este valor: " + skipped[i]);
+        // console.log()
+
+        if (scope.properties[skipped[i]] != undefined) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 function stepButton() {
     var codeHighlight = document.getElementById('codeHighlight');
@@ -1368,7 +1866,8 @@ function stepButton() {
         if (myInterpreter.stateStack.length) {
             // console.log("stepButton 1");
             var node = myInterpreter.stateStack[myInterpreter.stateStack.length - 1].node;
-            var scope = myInterpreter.stateStack[myInterpreter.stateStack.length - 1].scope;
+            // var scope = myInterpreter.stateStack[myInterpreter.stateStack.length - 1].scope;
+            var scope = myInterpreter.getScope();
             var start = node.start;
             var end = node.end;
         } else {
@@ -1402,6 +1901,7 @@ function stepButton() {
         // console.log(end);
 
         if (start < invisibleCode().length) {
+            //console.log('continue 0')
             continue;
         }
         start -= invisibleCode().length;
@@ -1422,11 +1922,9 @@ function stepButton() {
         hljs.highlightBlock(codeHighlight);
 
 
-        // break; //TODO
-
 
         if (codeSelected.length == 1) {
-            // console.log('continue 1')
+            //console.log('continue 1')
             continue;
         }
 
@@ -1434,12 +1932,12 @@ function stepButton() {
         // console.log(countLineEnd);
 
         if (countLineEnd > 1) {
-            // console.log('continue 2')
+            //console.log('continue 2')
             continue;
         }
 
         if (codeSelected[0] == '[' && codeSelected[codeSelected.length - 1] == ']') {
-            // console.log('continue 3')
+            //console.log('continue 3')
             continue;
         }
 
@@ -1457,13 +1955,101 @@ function stepButton() {
         // console.log(codeSelected)
         if (prevLine.includes(codeSelected)) {
             // prevLine = codeSelected;
-            // console.log('continue 4')
+            //console.log('continue 4')
             continue;
         }
 
-        drawScope(scope);
+        if (prevLine2.includes(codeSelected)) {
+            continue;
+        }
+
+        if (node.type == 'Literal') {
+            //console.log('continue 5')
+            // console.log(node);
+            continue;
+        }
+
+        if (node.expression && node.expression.callee && node.expression.callee.name == 'skip_debug') {
+            //console.log('continue 6')
+            // console.log(node.expression.callee.name);
+            // console.log(node);
+            continue;
+        }
+
+        if (node.callee && node.callee.name == 'skip_debug') {
+            //console.log('continue 7')
+            // console.log(node.expression.callee.name);
+            // console.log(node);
+            continue;
+        }
+
+        if (node.name && node.name == 'skip_debug') {
+            //console.log('continue 8')
+            // console.log(node.expression.callee.name);
+            // console.log(node);
+            continue;
+        }
+
+        if (inside_skipped_function(scope)) {
+            //console.log('continue 9')
+            continue;
+        }
+
+
+        // console.log(codeSelected);
+        // console.log(myInterpreter.stateStack);
+        // console.log(scope);
+        // console.log(node);
+        // console.log(node.type);
+        // console.log(node.getName);
+
+
+
+        // console.log('*********************')
+        // console.log(node.type);
+        // console.log(prevNodeType);
+        // console.log('*********************')
+
+
+        // console.log(codeSelected);
+        // console.log(prevLine);
+
+        prevLine2 = codeSelected;
+
+
+        if (node.type == 'CallExpression' && prevNodeType == 'BlockStatement') {
+            prevNodeType = node.type;
+            //console.log('continue 11')
+            continue;
+        }
+
+        if (node.type == 'ReturnStatement' && prevNodeType == 'BlockStatement') {
+            prevNodeType = node.type;
+            //console.log('continue 11')
+            continue;
+        }
+
+        if (node.type == 'VariableDeclaration' && prevNodeType == 'CallExpression') {
+            prevNodeType = node.type;
+            //console.log('continue 12')
+            continue;
+        }
+
+
+        prevNodeType = node.type;
+
+        if (node.type == 'BlockStatement') {
+            //console.log('continue 10')
+            // console.log(node);
+            continue;
+        }
+
 
         prevLine = codeSelected;
+
+        // console.log('-----------------------------------')
+        drawScope(scope);
+
 
 
         // if (countLineEnd == 0) {
