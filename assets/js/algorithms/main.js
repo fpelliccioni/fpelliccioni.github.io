@@ -7,10 +7,67 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 var log_stats_enabled = true;
 
+
+var snippets_cat = {
+      find_if: null
+    , find_backward_if: null
+    , iota: null
+
+    , gcd: null
+    , equal: null 
+    , swap_ranges: null
+    , swap_ranges_bounded: null
+    , swap_ranges_n: null
+
+    , reverse_n_indexed: 'rearrangements-position-based-reverse'
+    , reverse_bidirectional: 'rearrangements-position-based-reverse'
+    , reverse_n_forward: 'rearrangements-position-based-reverse'
+    , reverse_copy: 'rearrangements-position-based-reverse'
+    , reverse_n_with_buffer: 'rearrangements-position-based-reverse'
+    , reverse_n_adaptive: 'rearrangements-position-based-reverse'
+    , rotate_bidirectional: 'rearrangements-position-based-rotate'
+    , rotate_random_access: 'rearrangements-position-based-rotate'
+
+    , partition_semistable_1: 'rearrangements-predicate-based-partition'
+    , partition_semistable: 'rearrangements-predicate-based-partition'
+    , partition_semistable_nonempty: 'rearrangements-predicate-based-partition'
+    , partition_copy: 'rearrangements-predicate-based-partition'
+    , partition_stable_with_buffer_0: 'rearrangements-predicate-based-partition'
+    , partition_stable_forward: 'rearrangements-predicate-based-partition'
+    , partition_point_n: 'rearrangements-predicate-based-partition'
+
+    , max_element: 'selection'
+    , min_element: 'selection'
+    , select_1_3: 'selection'
+
+    , insert_naive: null
+    , insert: null
+
+    , palindrome_naive: null
+    , palindrome_forward_recursive: null
+    , palindrome_bidirectional: null
+};
+    
+
+var categories = [
+    {id: 'rearrangements', name: 'Rearrangements', categories: [
+        {id: 'rearrangements-position-based', name: 'Position-based', categories: [
+              {id: 'rearrangements-position-based-reverse', name: 'Reverse', categories: []}
+            , {id: 'rearrangements-position-based-rotate', name: 'Rotate', categories: []}      
+        ]}
+      , {id: 'rearrangements-predicate-based', name: 'Predicate-based', categories: [
+            {id: 'rearrangements-predicate-based-partition', name: 'Partition', categories: []}          
+        ]}
+          
+      , {id: 'rearrangements-ordering-based', name: 'Ordering-based', categories: []}
+    ]}
+  , {id: 'selection', name: 'Selection', categories: []}
+];
+
+
 var snippets = {
 
-
-find_if: 
+    find_if: 
 `function find_if(f, l, p) {
     while ( ! equal(f, l) && ! p(source(f))) {
         f = successor(f)
@@ -586,6 +643,442 @@ if (res) {
 
 
 
+,swap_ranges:
+`function swap_ranges(f0, l0, f1) {
+    while ( ! equal(f0, l0)) {
+        iter_swap(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+    }
+    return f1; 
+}
+
+var s1 = add_sequence(random_array(), "s1");
+var s2 = add_sequence(random_array(), "s2");
+
+var r = swap_ranges(begin(s1), end(s1), begin(s2));
+print('...');`
+
+
+,swap_ranges_bounded:
+`function swap_ranges_bounded(f0, l0, f1, l1) {
+    while ( ! equal(f0, l0) && ! equal(f1, l1)) {
+        iter_swap(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+    } 
+    return [f0, f1];
+}
+
+var s1 = add_sequence(random_array(), "s1");
+var s2 = add_sequence(random_array(5), "s2");
+
+var r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
+var f0 = r[0];
+var f1 = r[1];
+print('...');`
+
+
+
+,swap_ranges_n:
+`var r0 = range_counted("f0", "n");
+var r1 = range_counted("f1", "n");
+function swap_ranges_n(f0, f1, n) {
+    while (n != 0) {
+        iter_swap(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n;
+    }
+    return [f0, f1];
+}
+
+var s1 = add_sequence(random_array(), "s1");
+var s2 = add_sequence(random_array(5), "s2");
+
+var r = swap_ranges_n(begin(s1), begin(s2), 5);
+var f0 = r[0];
+var f1 = r[1];
+print('...');`
+
+
+,reverse_n_indexed:
+`var r = range_counted("f", "n");
+
+function reverse_n_indexed(f, n) {
+    var i = 0;
+    --n;
+    while (i < n) {
+        iter_swap(successor(f, i), successor(f, n)); 
+        ++i;
+        --n;
+    } 
+}
+
+var s = add_sequence(random_array(), "s1");
+print(s);
+reverse_n_indexed(begin(s), size(s));
+print(s);
+print('...');`
+
+
+
+,reverse_bidirectional:
+`var r = range_bounded("f", "l");
+
+function reverse_bidirectional(f, l) {
+
+    while (true) {
+        if (equal(f, l)) return;
+        l = predecessor(l);
+        if (equal(f, l)) return;
+        iter_swap(f, l);
+        f = successor(f);        
+    }
+}
+
+var s = add_sequence(random_array(), "s1");
+print(s);
+reverse_bidirectional(begin(s), end(s));
+print(s);
+print('...');`
+
+,reverse_n_forward:
+`skip_debug('half_nonnegative');
+skip_debug('twice');
+skip_debug('swap_ranges_n');
+var r = range_counted("f", "n");
+
+function half_nonnegative(n) {return n >> 1;}
+function twice(n) {return n + n;}
+
+function swap_ranges_n(f0, f1, n) {
+    while (n != 0) {
+        iter_swap(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n;
+    }
+    return [f0, f1];
+}
+
+function reverse_n_forward(f, n) {
+    if (n < 2) return successor(f, n);
+    var h = half_nonnegative(n);
+    var n_mod_2 = n - twice(h);
+
+    var m = successor(reverse_n_forward(f, h), n_mod_2);
+    var l = reverse_n_forward(m, h);
+
+    swap_ranges_n(f, m, h);
+    return l;
+}
+
+var s = add_sequence(random_array(), "s1");
+print(s);
+var r = reverse_n_forward(begin(s), size(s));
+print(s);
+print('...');`
+
+
+,reverse_copy:
+`//var r = range_counted("f", "n");
+function reverse_copy(f_i, l_i, f_o) {
+    while ( ! equal(f_i, l_i)) {
+        l_i = predecessor(l_i);
+        sink(f_o, source(l_i));
+        f_o = successor(f_o);
+
+    } 
+    return f_o;
+}
+
+var d = add_sequence(random_array(), "d");
+var b = add_sequence(new Array(size(d)), "b");
+
+var res = reverse_copy(begin(d), end(d), begin(b));
+print(d);
+print(b);`
+
+
+,reverse_n_with_buffer:
+`//var r = range_counted("f", "n");
+
+function copy_n(f_i, n, f_o) {
+    while (n != 0) {
+        sink(f_o, source(f_i));
+        f_i = successor(f_i);
+        f_o = successor(f_o);
+        --n;
+    }
+    return [f_i, f_o];
+}
+
+function reverse_copy(f_i, l_i, f_o) {
+    while ( ! equal(f_i, l_i)) {
+        l_i = predecessor(l_i);
+        sink(f_o, source(l_i));
+        f_o = successor(f_o);
+
+    } 
+    return f_o;
+}
+
+function reverse_n_with_buffer(f_i, n, f_b) {
+    return reverse_copy(f_b, copy_n(f_i, n, f_b)[1], f_i);
+}
+
+var s = add_sequence(random_array(), "s");
+var b = add_sequence(new Array(size(s)), "b");
+print(s);
+var r = reverse_n_with_buffer(begin(s), size(s), begin(b));
+print(s);`
+
+,reverse_n_adaptive:
+`skip_debug('half_nonnegative');
+skip_debug('twice');
+skip_debug('swap_ranges_n');
+skip_debug('copy_n');
+skip_debug('reverse_copy');
+skip_debug('reverse_n_with_buffer');
+var r = range_counted("f_i", "n_i");
+
+function half_nonnegative(n) {return n >> 1;}
+function twice(n) {return n + n;}
+
+function swap_ranges_n(f0, f1, n) {
+    while (n != 0) {
+        iter_swap(f0, f1);
+        f0 = successor(f0);
+        f1 = successor(f1);
+        --n;
+    }
+    return [f0, f1];
+}
+
+function copy_n(f_i, n, f_o) {
+    while (n != 0) {
+        sink(f_o, source(f_i));
+        f_i = successor(f_i);
+        f_o = successor(f_o);
+        --n;
+    }
+    return [f_i, f_o];
+}
+
+function reverse_copy(f_i, l_i, f_o) {
+    while ( ! equal(f_i, l_i)) {
+        l_i = predecessor(l_i);
+        sink(f_o, source(l_i));
+        f_o = successor(f_o);
+
+    } 
+    return f_o;
+}
+
+function reverse_n_with_buffer(f_i, n, f_b) {
+    return reverse_copy(f_b, copy_n(f_i, n, f_b)[1], f_i);
+}
+
+function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
+    if (n_i < 2) return successor(f_i, n_i);
+    if (n_i <= n_b) return reverse_n_with_buffer(f_i, n_i, f_b);
+
+    var h_i = half_nonnegative(n_i);
+    var n_mod_2 = n_i - twice(h_i);
+    var m_i = successor(reverse_n_adaptive(f_i, h_i, f_b, n_b), n_mod_2);
+    var l_i = reverse_n_adaptive(m_i, h_i, f_b, n_b);
+
+    swap_ranges_n(f_i, m_i, h_i);
+    return l_i;
+
+}
+
+var s = add_sequence(random_array(16), "s");
+//var b = add_sequence(new Array(size(s)), "b");
+var b = add_sequence(new Array(4), "b");
+print(s);
+var r = reverse_n_adaptive(begin(s), size(s), begin(b), size(b));
+print(s);`
+
+
+
+,rotate_bidirectional:
+`var r0 = range_bounded("f", "m");
+var r1 = range_bounded("m", "l");
+
+function reverse(f, l) {
+    while (true) {
+        if (equal(f, l)) return;
+        l = predecessor(l);
+        if (equal(f, l)) return;
+        iter_swap(f, l);
+        f = successor(f);        
+    }
+}
+
+function rotate_bidirectional(f, m, l) {
+    reverse(f, m);
+    reverse(m, l);
+    reverse(f, l);
+}
+var s = add_sequence(random_array(), "s");
+print(s);
+rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
+print(s);
+print('...');`
+
+
+
+,rotate_random_access:
+`skip_debug("k_rotate_from_permutation_random_access");
+skip_debug("remainder");
+skip_debug("gcd");
+
+function remainder(a, b) {
+    return a % b;
+}
+
+function gcd(a, b) {
+    while (b != 0) {
+        var r = remainder(a, b);
+        a = b;
+        b = r;
+    }
+    return a;
+}
+
+function cycle_from(i, f) {
+    var tmp = source(i);
+    var j = i;
+    var k = f(i);
+    while ( ! equal(k, i)) {
+        sink(j, source(k));
+        j = k;
+        k = f(k);
+    }
+    sink(j, tmp);
+}
+
+function rotate_cycles(f, m, l, from) {
+    var d = gcd(distance(f, m), distance(m, l));
+
+    while (d != 0) {
+        --d;
+        cycle_from(successor(f, d), from);
+    }
+    return successor(f, distance(m, l));
+}
+
+function k_rotate_from_permutation_random_access(f, m, l) {
+    var k = distance(m, l);
+    var n_minus_k = distance(f, m);
+    var m_prime = successor(f, distance(m, l));
+
+    return function(x) {
+        if ( distance(x, m_prime) > 0) return successor(x, n_minus_k);
+        return predecessor(x, k);
+    };
+}
+
+function rotate_random_access_nontrivial(f, m, l) {
+    var p = k_rotate_from_permutation_random_access(f, m, l);
+    return rotate_cycles(f, m, l, p);
+}
+
+var s = add_sequence(random_array(12), "s");
+print(s);
+rotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));
+print(s);
+print('...');`
+
+
+
+
+
+,insert_naive:
+`function copy_backward(f_i, l_i, l_o) {
+    while ( ! equal(f_i, l_i)) {
+        // copy_backward_step(l_i, l_o);
+        l_i = predecessor(l_i);
+        l_o = predecessor(l_o);
+        sink(l_o, source(l_i));
+    } 
+    return l_o;
+}
+function shift_right_by_one(f, l) {
+    if (equal(f, l)) return;
+    copy_backward(f, predecessor(l), l);
+}
+
+function insert_naive(s, ip, f, l) {
+    var d = distance(begin(s), ip);
+    
+    while ( ! equal(f, l)) {
+        // s = increase_capacity(s, 1)
+        s = push_back(s, 0);
+        ip = successor(begin(s), d)
+        shift_right_by_one(ip, end(s));
+        sink(ip, source(f));
+        f = successor(f);
+        ++d;
+    }
+
+    return s;
+}
+
+var s = add_sequence(random_array(), "s");
+var i = add_sequence(random_array(5), "i");
+
+print(s);
+print(i);
+s = insert_naive(s, begin(s), begin(i), end(i));
+print(s);
+print('...');`
+
+
+
+,insert:
+`function reverse(f, l) {
+    while (true) {
+        if (equal(f, l)) return;
+        l = predecessor(l);
+        if (equal(f, l)) return;
+        iter_swap(f, l);
+        f = successor(f);        
+    }
+}
+
+function rotate(f, m, l) {
+    reverse(f, m);
+    reverse(m, l);
+    reverse(f, l);
+}
+
+function insert(s, ip, f, l) {
+    var d = distance(begin(s), ip);
+    var ld = distance(ip, end(s));
+    
+    while ( ! equal(f, l)) {
+        s = push_back(s, source(f));
+        f = successor(f);
+        ++d;
+    }
+
+    rotate(begin(s), successor(begin(s), ld), end(s));
+
+    return s;
+}
+
+var s = add_sequence(random_array(), "s");
+var i = add_sequence(random_array(5), "i");
+
+print(s);
+print(i);
+s = insert(s, begin(s), begin(i), end(i));
+print(s);
+print('...');`
+
 };
 
 function getSnippet(snippet) {
@@ -596,19 +1089,92 @@ function getSnippet(snippet) {
     return '';
 }
 
-function fillCatalog() {
-    var list = document.getElementById('list');
-    list.innerHTML = '';
 
-    // for(var key in Object.keys(snippets)){
-    for(var key in snippets){
-        // var value = snippets[key];
-        // console.log(key)
-        // console.log(value)
-    
-        // list.innerHTML += '<li><a href="index.html?snippet=' + key + '">[' + key + ']</a></li>';
-        list.innerHTML += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + key + '">[' + key + ']</a></li>';
+function catHasChilds(cat) {
+    if (cat.categories == undefined) return false;
+    if (cat.categories == null) return false;
+    return cat.categories.length > 0;
+}
+
+function getSnippets(cat) {
+    var sns = []
+    for(var key in snippets_cat){
+        var value = snippets_cat[key];
+        if (cat.id == value) {
+            sns.push(key)
+        }
     }
+    return sns;
+}
+
+function getUncataloguedSnippets() {
+    var sns = []
+    for(var key in snippets_cat){
+        var value = snippets_cat[key];
+
+        if (value == null) {
+            sns.push(key)
+        }
+    }
+    return sns;
+}
+
+function fillCatalogRecursive(str, categories) {
+
+    if (categories == undefined) return;
+    if (categories == null) return;
+
+    for(var i in categories) {
+        var cat = categories[i];
+       
+        str += '<li class="linested"><span class="caret">' + cat.name + '</span><ul class="nested">';
+        if (catHasChilds(cat)) {
+            str = fillCatalogRecursive(str, cat.categories);
+        } else {
+            snippets = getSnippets(cat);
+            for(var si in snippets) {
+                var s = snippets[si]
+                str += '<li><a href="index.html?snippet=' + s + '">[' + s + ']</a></li>';
+                // str += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
+            }
+        }
+        
+        str +=  '</ul></li>';
+    }
+
+    return str;
+}
+
+function fillCatalog() {
+
+    var str = fillCatalogRecursive('', categories);
+
+    str += '<li class="linested"><span class="caret">' + 'Uncatalogued' + '</span><ul class="nested">';
+
+    snippets = getUncataloguedSnippets();
+    for(var si in snippets) {
+        var s = snippets[si]
+        str += '<li><a href="index.html?snippet=' + s + '">[' + s + ']</a></li>';
+        // str += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
+    }
+    str +=  '</ul></li>';
+
+    var list = document.getElementById('list');
+    list.innerHTML = str;
+
+
+    
+
+
+    // // for(var key in Object.keys(snippets)){
+    // for(var key in snippets){
+    //     // var value = snippets[key];
+    //     // console.log(key)
+    //     // console.log(value)
+    
+    //     list.innerHTML += '<li><a href="index.html?snippet=' + key + '">[' + key + ']</a></li>';
+    //     // list.innerHTML += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + key + '">[' + key + ']</a></li>';
+    // }
 }
 
 function Iterator(data, index, name) {
@@ -617,11 +1183,15 @@ function Iterator(data, index, name) {
     this.name = name;
 }
 
-function Sequence(name, data, elements, colors) {
+function Sequence(name, data, elements, colors, capacity) {
+    if (capacity == undefined) {
+        capacity = data.length
+    }
     this.name = name;
     this.data = data;
     this.elements = elements;
     this.colors = colors;
+    this.capacity = capacity;
 }
 
 function RangeBounded(fname, lname) {
@@ -642,9 +1212,12 @@ function resetState() {
 
 
     lines = [];
+
     prevLine = "";
     prevLine2 = "";
     prevNodeType = "";
+    prevNode = null;
+
     iterators_int = {};
     iterators_gui = {};
     predicates = [];
@@ -822,6 +1395,11 @@ function initFunctions(interpreter, scope) {
 
 
     var print_wrapper = function(text) {
+
+        if (text instanceof Sequence) {
+            text = text.data.join(", ");
+        }
+
         var msg = '<p id="OutputMsg"><span style="color:cyan">INFO: </span>' + text + '</p>';
 
         var output = document.getElementById('hg-right-y');
@@ -948,13 +1526,44 @@ function initFunctions(interpreter, scope) {
         return it;
     };
 
-    var size_wrapper = function(arr, name, color) {
-
+    var size_wrapper = function(arr) {
         var length = arr.data.length
         return length;
+    };
 
-        // updateStatus();
-        // return it;
+    var capacity_wrapper = function(arr) {
+        var c = arr.capacity
+        return c;
+    };
+
+    var increase_capacity_wrapper = function(seq, n) {
+        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n);
+        sequences[seq.name] = retobj;
+        return retobj;
+    };
+
+
+    var push_back_wrapper = function(seq, x) {
+
+        var cap = seq.capacity
+        var data = seq.data;
+
+        console.log(data)
+        console.log(cap)
+
+        if (cap == data.length) {
+            ++cap;
+        }
+
+        data.push(x)
+
+        console.log(data)
+        console.log(cap)
+
+
+        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap);
+        sequences[seq.name] = retobj;
+        return retobj;
     };
 
 
@@ -964,16 +1573,15 @@ function initFunctions(interpreter, scope) {
         return s;
     };
 
-
     var source_wrapper = function(it) {
         var data = it.data.data;
         var max = data.length;
+
         if (it.index >= max) {
             showError('not valid iterator to take the source.');
             disable('disabled');
             return;
         }
-        
 
         var s = data[it.index];
         addLogSource(it, s)
@@ -1023,6 +1631,17 @@ function initFunctions(interpreter, scope) {
         return res;
     };
 
+    var distance_wrapper = function(a, b) {
+        // if (log_stats_enabled) {
+        //     ++stats_it_cmps;
+        // }
+
+        // updateStatus();
+        var res = b.index - a.index;
+        // addLogEqual(a, b, res)
+        return res;
+    };
+
     
     // var copy_it_wrapper = function(it, name, color) {
 
@@ -1054,26 +1673,18 @@ function initFunctions(interpreter, scope) {
 
 
     var iter_swap_wrapper = function(a, b) {
-        var data = a.data.data;
-        // console.log(a)
-        // console.log(data)
-        // var elements = a.data.elements;
-        var colors = a.data.colors;
+        var data_a = a.data.data;
+        var data_b = b.data.data;
+        var colors_a = a.data.colors;
+        var colors_b = b.data.colors;
 
-        // var tmp_fill = elements[a.index].group.children[0].fill;
-        // elements[a.index].group.children[0].fill = elements[b.index].group.children[0].fill;
-        // elements[b.index].group.children[0].fill = tmp_fill;
-
-        var tmp_color = colors[a.index];
-        colors[a.index] = colors[b.index];
-        colors[b.index] = tmp_color;
+        var tmp_color = colors_a[a.index];
+        colors_a[a.index] = colors_b[b.index];
+        colors_b[b.index] = tmp_color;
 
         var tmp = source_value(a);
-        data[a.index] = source_value(b);
-        // elements[a.index].group.children[1].value = source_value(b);
-
-        data[b.index] = tmp;
-        // elements[b.index].group.children[1].value = tmp;
+        data_a[a.index] = source_value(b);
+        data_b[b.index] = tmp;
 
         if (log_stats_enabled) {
             ++stats_swaps;
@@ -1086,7 +1697,7 @@ function initFunctions(interpreter, scope) {
     };
 
 
-    var add_sequence_internal_wrapper = function(data_par, name, paint_pred) {
+    var add_sequence_internal_wrapper = function(data_par, name) {
         // console.log(data_par);
 
         if (sequences[name] != undefined) {
@@ -1201,24 +1812,23 @@ function initFunctions(interpreter, scope) {
     interpreter.setProperty(scope, 'begin',          interpreter.createNativeFunction(begin_wrapper));
     interpreter.setProperty(scope, 'end',            interpreter.createNativeFunction(end_wrapper));
     interpreter.setProperty(scope, 'size',           interpreter.createNativeFunction(size_wrapper));
+    interpreter.setProperty(scope, 'capacity',       interpreter.createNativeFunction(capacity_wrapper));
+    interpreter.setProperty(scope, 'increase_capacity', interpreter.createNativeFunction(increase_capacity_wrapper));
+    interpreter.setProperty(scope, 'push_back', interpreter.createNativeFunction(push_back_wrapper));
     
     interpreter.setProperty(scope, 'source',         interpreter.createNativeFunction(source_wrapper));
     interpreter.setProperty(scope, 'sink',           interpreter.createNativeFunction(sink_wrapper));
     interpreter.setProperty(scope, 'equal',          interpreter.createNativeFunction(equal_wrapper));
-    // interpreter.setProperty(scope, 'copy_it',        interpreter.createNativeFunction(copy_it_wrapper));
-    // interpreter.setProperty(scope, 'remove_it',      interpreter.createNativeFunction(remove_it_wrapper));
+    interpreter.setProperty(scope, 'distance',       interpreter.createNativeFunction(distance_wrapper));
+
     interpreter.setProperty(scope, 'iter_swap',      interpreter.createNativeFunction(iter_swap_wrapper));
-    // interpreter.setProperty(scope, 'assign_it',      interpreter.createNativeFunction(assign_it_wrapper));
     interpreter.setProperty(scope, 'add_sequence_internal',   interpreter.createNativeFunction(add_sequence_internal_wrapper));
-    // interpreter.setProperty(scope, 'set_predicate',  interpreter.createNativeFunction(set_predicate_wrapper));
     interpreter.setProperty(scope, 'fill_elem',      interpreter.createNativeFunction(fill_elem_wrapper));
-    // interpreter.setProperty(scope, 'increment_predicate_stats', interpreter.createNativeFunction(increment_predicate_stats_wrapper));
     interpreter.setProperty(scope, 'call_predicate_internal', interpreter.createNativeFunction(call_predicate_internal_wrapper));
     interpreter.setProperty(scope, 'call_relation_internal', interpreter.createNativeFunction(call_relation_internal_wrapper));
 
     interpreter.setProperty(scope, 'enable_log_stats', interpreter.createNativeFunction(enable_log_stats_wrapper));
     interpreter.setProperty(scope, 'disable_log_stats', interpreter.createNativeFunction(disable_log_stats_wrapper));
- 
     interpreter.setProperty(scope, 'skip_debug', interpreter.createNativeFunction(skip_debug_wrapper));
 
     interpreter.setProperty(scope, 'range_bounded', interpreter.createNativeFunction(range_bounded_wrapper));
@@ -1239,7 +1849,7 @@ function callPredCode() {
 function addSequenceCode() {
     return 'function add_sequence(d, n, p) {' + '\n' +
     '    disable_log_stats();' + '\n' +
-    '    var obj = add_sequence_internal(d, n, p);' + '\n' +
+    '    var obj = add_sequence_internal(d, n);' + '\n' +
     '    //print(obj);' + '\n' +
     '    if ( ! obj) {enable_log_stats(); return obj;}' + '\n' +
     '    if (p) {' + '\n' +    
@@ -1672,7 +2282,7 @@ function drawScope(scope) {
     for (var i in seq_internal) {
         var key = seq_internal[i].key;
         var value = seq_internal[i].value;
-        var elems = drawArray(two, key, seqn, value.data, value.colors);
+        var elems = drawArray(two, key, seqn, value.data, value.colors, value.capacity);
         sequences[value.name].elements = elems;
         ++seqn;
     }
@@ -1860,6 +2470,8 @@ function stepButton() {
 
 
     while (true) {
+
+
         // console.log(myInterpreter)
         // console.log(myInterpreter.stateStack)
 
@@ -1921,6 +2533,9 @@ function stepButton() {
         codeHighlight.innerHTML = codeHtml;
         hljs.highlightBlock(codeHighlight);
 
+
+
+        // console.log(node);
 
 
         if (codeSelected.length == 1) {
@@ -2045,7 +2660,20 @@ function stepButton() {
         }
 
 
+        if (prevNode != null && prevNode.type == 'VariableDeclaration') {
+            if (prevNode.declarations[0].init.callee && prevNode.declarations[0].init.callee.name == "source") {
+                if (log_stats_enabled) {
+                    ++stats_assigments;
+                    updateStatus();
+                }
+            }
+        }
+
+
         prevLine = codeSelected;
+        prevNode = node;
+
+        
 
         // console.log('-----------------------------------')
         drawScope(scope);
