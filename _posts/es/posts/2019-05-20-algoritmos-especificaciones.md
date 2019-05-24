@@ -145,7 +145,7 @@ CBlockIndex const* GetSuitableBlock(CBlockIndex const* pindex) {
 Mucho más breve y entendible, ¿no?.
 
 Antes de seguir, tenemos que corregir un problema: no sabemos si el _Ordenamiento Natural_ especificado en la clase `CBlockIndex` está dado por el timestamp del bloque (atributo `nTime`).
-Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strick weak ordering relation_, [para más información consulte Aquí](http://componentsprogramming.com/writing-min-function-part3/)).
+Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strick weak ordering relation_, [para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part3/)).
 
 
 {% highlight cpp %}
@@ -177,7 +177,88 @@ CBlockIndex const* GetSuitableBlock(CBlockIndex const* pindex) {
 }
 {% endhighlight %}
 
+Nos queda un último problema por resolver. Hagamos una pequeña prueba del algoritmo original y del nuevo:
 
+
+{% highlight cpp %}
+struct CBlockIndex {
+    int nHeight;
+    int nTime;
+    CBlockIndex* pprev;
+};
+
+static const CBlockIndex *GetSuitableBlock(const CBlockIndex *pindex) {
+    assert(pindex->nHeight >= 3);
+
+    /**
+    * In order to avoid a block is a very skewed timestamp to have too much
+    * influence, we select the median of the 3 top most blocks as a starting
+    * point.
+    */
+    const CBlockIndex *blocks[3];
+    blocks[2] = pindex;
+    blocks[1] = pindex->pprev;
+    blocks[0] = blocks[1]->pprev;
+
+    // cout << blocks[0]->nTime << std::endl;
+    // cout << blocks[1]->nTime << std::endl;
+    // cout << blocks[2]->nTime << std::endl;
+
+    // Sorting network.
+    if (blocks[0]->nTime > blocks[2]->nTime) {
+        // cout << "swap 1" << std::endl;
+        std::swap(blocks[0], blocks[2]);
+    }
+
+    if (blocks[0]->nTime > blocks[1]->nTime) {
+        // cout << "swap 2" << std::endl;
+        std::swap(blocks[0], blocks[1]);
+    }
+
+    if (blocks[1]->nTime > blocks[2]->nTime) {
+        // cout << "swap 3" << std::endl;
+        std::swap(blocks[1], blocks[2]);
+    }
+
+     // We should have our candidate in the middle now.
+    return blocks[1];
+}
+
+template <Regular T, StrictWeakOrdering R>
+T const& median_3_ab(T const& a, T const& b, T const& c, R r) {
+    // precondition: a <= b
+    
+    return ! r(c, b) ? b :           // a, b, c are sorted
+                       std::max(a, c, r); // b is not the median
+}
+
+template <Regular T, StrictWeakOrdering R>
+T const& median_3(T const& a, T const& b, T const& c, R r) {
+    return r(b, a) ? median_3_ab(b, a, c, r) 
+                   : median_3_ab(a, b, c, r);
+}
+
+static 
+CBlockIndex const* GetSuitableBlock2(CBlockIndex const* pindex) {
+    assert(pindex->nHeight >= 3);
+
+    return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex, [](auto const& a, auto const& b){
+        return a.nTime < b.nTime;
+    });
+}
+
+int main() {
+    CBlockIndex ba {1, 2, nullptr};
+    CBlockIndex bb {2, 2, &ba};
+    CBlockIndex bc {3, 1, &bb};
+
+    auto r = GetSuitableBlock2(&bc);
+    cout << "GetSuitableBlock2: " << r->nHeight << std::endl;
+
+    r = GetSuitableBlock(&bc);
+    cout << "GetSuitableBlock:  " << r->nHeight << std::endl;
+}
+{% endhighlight %}
 
 
 
