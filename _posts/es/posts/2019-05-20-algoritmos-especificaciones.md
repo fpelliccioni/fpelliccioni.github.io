@@ -83,9 +83,9 @@ Lo que hace el algoritmo es básicamente crear una sequencia de 3 elementos (arr
 
 La complejidad en tiempo de este algoritmo es: 
 
-    - Caso mejor:    0 swaps,   3 comparaciones
-    - Caso peor:     2 swaps,   3 comparaciones
-    - Caso promedio: 7/6 swaps, 3 comparaciones; asumiendo una distribución uniforme de los datos de entrada.
+- Caso mejor:    0 swaps,   3 comparaciones
+- Caso peor:     2 swaps,   3 comparaciones
+- Caso promedio: 7/6 swaps, 3 comparaciones; asumiendo una distribución uniforme de los datos de entrada.
 
 Ahora, vuelva a observar con detenimiento el algoritmo. Se está creando un array (usando los datos de entrada), para luego ordenarlo ascendentemente y retornar el elemento del medio. Este es un algoritmo conocido y se llama _mediana_, en particular, _mediana de 3 elementos_. (https://en.wikipedia.org/wiki/Median).
 
