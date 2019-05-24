@@ -87,28 +87,44 @@ La complejidad en tiempo de este algoritmo es:
 - Caso peor:     2 swaps,   3 comparaciones
 - Caso promedio: 7/6 swaps, 3 comparaciones; asumiendo una distribución uniforme de los datos de entrada.
 
-Ahora, vuelva a observar con detenimiento el algoritmo. Se está creando un array (usando los datos de entrada), para luego ordenarlo ascendentemente y retornar el elemento del medio. Este es un algoritmo conocido y se llama _mediana_, en particular, _mediana de 3 elementos_. (https://en.wikipedia.org/wiki/Median).
+Ahora, vuelva a observar con detenimiento el algoritmo. Se está creando un array (usando los datos de entrada), para luego ordenarlo ascendentemente y retornar el elemento del medio. Este es un algoritmo conocido y se llama [mediana](https://en.wikipedia.org/wiki/Median), en particular, _mediana de 3 elementos_.
 
 La mediana es un algoritmo de _selección_. A diferencia de los algoritmos de ordenamiento (inplace), los algoritmos de selección no deberían mutar los datos de entrada, sino, retornar uno de ellos.
 
 Aquí les dejo un boceto del algoritmo _mediana de 3_, en `C++`:
 
 {% highlight cpp %}
-template <Regular T>
+template <TotallyOrdered T>
 auto median_3_ab(T const& a, T const& b, T const& c) {
     // precondition: a <= b
     
     return ! (c < b) ? b :        // a, b, c are sorted
-                       max(a, c)  // b is not the median
+                       max(a, c); // b is not the median
 }
 
-template <Regular T>
+template <TotallyOrdered T>
 auto median_3(T const& a, T const& b, T const& c) {
     return b < a ? median_3_ab(b, a, c) 
-                 : median_3_ab(a, b, c)
+                 : median_3_ab(a, b, c);
 }
 {% endhighlight %}
 
+O si prefiere la version _inline_ del algoritmo:
+
+{% highlight cpp %}
+template <TotallyOrdered T>
+auto median_3(T const& a, T const& b, T const& c) {
+    if (b < a) {
+        if (c >= a) return a;  // b, a, c are sorted
+        return max(b, c);      // a is not the median
+    } else {    // a <= b
+        if (c >= b) return b;  // a, b, c are sorted
+        return max(a, c);      // b is not the median
+    }
+}
+{% endhighlight %}
+
+Dejo el análisis del código para el lector, para el vago: lo que hace el algoritmo es simplemente seleccionar el elemento del medio entre `a`, `b` y `c`, haciendo de cuenta que los 3 estuviesen ordenados ascendentemente. Esto lo hace sin mutar ni reordenar los datos de entrada.
 
 
 {% highlight cpp %}
@@ -117,13 +133,13 @@ auto median_3_ab(T const& a, T const& b, T const& c, R r) {
     // precondition: a <= b
     
     return ! r(c, b) ? b :           // a, b, c are sorted
-                       max(a, c, r)  // b is not the median
+                       max(a, c, r); // b is not the median
 }
 
 template <Regular T, StrictWeakOrdering R>
 auto median_3(T const& a, T const& b, T const& c, R r) {
     return r(b, a) ? median_3_ab(b, a, c, r) 
-                   : median_3_ab(a, b, c, r)
+                   : median_3_ab(a, b, c, r);
 }
 {% endhighlight %}
 
@@ -134,13 +150,13 @@ auto median_3_ab(T const& a, T const& b, T const& c) {
     // precondition: a <= b
     
     return ! (c < b) ? b :        // a, b, c are sorted
-                       max(a, c)  // b is not the median
+                       max(a, c); // b is not the median
 }
 
 template <Regular T>
 auto median_3(T const& a, T const& b, T const& c) {
     return b < a ? median_3_ab(b, a, c) 
-                 : median_3_ab(a, b, c)
+                 : median_3_ab(a, b, c);
 }
 {% endhighlight %}
 
@@ -180,14 +196,14 @@ template <Regular T, Regular U, StrictWeakOrdering R>
     requires(Same<T, U> && Domain<R, T>)
 inline constexpr
 auto max(T&& a, U&& b, R r) {
-    return r(b, a) ? std::forward<T>(a) : std::forward<U>(b)
+    return r(b, a) ? std::forward<T>(a) : std::forward<U>(b);
 }
 
 template <TotallyOrdered T, TotallyOrdered U>
     requires(Same<T, U>)
 inline constexpr
 auto max(T&& a, U&& b) {
-    return  b < a ? std::forward<T>(a) : std::forward<U>(b)
+    return  b < a ? std::forward<T>(a) : std::forward<U>(b);
 }
 
 template <Regular T, Regular U, Regular V, StrictWeakOrdering R>
@@ -197,17 +213,16 @@ auto median_3_ab(T&& a, U&& b, V&& c, R r) {
     // precondition: a <= b
     
     ! r(c, b) ? //!(c < b) -> c >= b
-                std::forward<U>(b) :                               // a, b, c are sorted
-                max(std::forward<T>(a), std::forward<V>(c), r)     // b is not the median
+                std::forward<U>(b) :                            // a, b, c are sorted
+                max(std::forward<T>(a), std::forward<V>(c), r); // b is not the median
 }
 
 template <Regular T, Regular U, Regular V, StrictWeakOrdering R>
     requires(Same<T, U, V> && Domain<R, T>)
 inline constexpr
 auto median_3(T&& a, U&& b, V&& c, R r) {
-    
     r(b, a) ? median_3_ab(std::forward<U>(b), std::forward<T>(a), std::forward<V>(c), r) 
-            : median_3_ab(std::forward<T>(a), std::forward<U>(b), std::forward<V>(c), r)
+            : median_3_ab(std::forward<T>(a), std::forward<U>(b), std::forward<V>(c), r);
 }
 {% endhighlight %}
 
