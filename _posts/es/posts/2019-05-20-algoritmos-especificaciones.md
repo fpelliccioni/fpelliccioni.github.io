@@ -83,14 +83,9 @@ Observe bien el algoritmo anterior. Lo que está haciendo es básicamente crear 
 
 La complejidad en tiempo de este algoritmo es: 
 
-{% highlight cpp %}
-Caso mejor: 0 swaps, 3 comparaciones
-Caso peor:  2 swaps, 3 comparaciones
-Caso promedio: 7/6 swaps, 3 comparaciones; asumiendo una distribución uniforme de los datos de entrada.
-{% endhighlight %}
-
-
-
+    - Caso mejor:    0 swaps,   3 comparaciones
+    - Caso peor:     2 swaps,   3 comparaciones
+    - Caso promedio: 7/6 swaps, 3 comparaciones; asumiendo una distribución uniforme de los datos de entrada.
 
 
 
