@@ -12,3 +12,6 @@ _site
 /_posts/en/2014-12-23-dont-wrap-builtin-types.md
 /_posts/en/2015-05-13-from-mathematics-to-generic-programming - Copy.md
 feed - Copy - Copy.xml
+.vscode/ipch/31982dda83a6fc6e/algorithms_and_specs.ipch
+.vscode/ipch/31982dda83a6fc6e/mmap_address.bin
+_code_tests/a.out
