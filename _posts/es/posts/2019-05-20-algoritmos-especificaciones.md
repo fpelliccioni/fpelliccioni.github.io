@@ -144,7 +144,7 @@ Ahora, podríamos usar nuestro nuevo algoritmo en la función `GetSuitableBlock`
 
 {% highlight cpp %}
 static 
-CBlockIndex const* GetSuitableBlock(CBlockIndex const* pindex) {
+CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
     assert(pindex->nHeight >= 3);
     return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex);
 }
@@ -178,11 +178,11 @@ auto median_3(T const& a, T const& b, T const& c, R r) {
 {% endhighlight %}
 
 
-Ahora sí, podemos implementar correctamente `GetSuitableBlock`, comparando por `nTime`:
+Ahora sí, podemos implementar correctamente `GetSuitableBlockNewVersion`, comparando por `nTime`:
 
 {% highlight cpp %}
 static 
-CBlockIndex const* GetSuitableBlock(CBlockIndex const* pindex) {
+CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
     assert(pindex->nHeight >= 3);
     return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex, [](auto const& a, auto const& b){
         return a.nTime < b.nTime;
