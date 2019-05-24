@@ -193,10 +193,10 @@ int main() {
     CBlockIndex bc {3, 1558730000, &bb};
 
     auto r = GetSuitableBlockNewVersion(&bc);
-    cout << "GetSuitableBlockNewVersion: " << r->nHeight << std::endl;
+    cout << "GetSuitableBlockNewVersion: " << r->nHeight << endl;
 
     r = GetSuitableBlock(&bc);
-    cout << "GetSuitableBlock:           " << r->nHeight << std::endl;
+    cout << "GetSuitableBlock:           " << r->nHeight << endl;
 }
 {% endhighlight %}
 
@@ -208,8 +208,8 @@ GetSuitableBlock:           2
 {% endhighlight %}
 
 Lo que estamos intentando probar con el código anterior es la _estabilidad_ de ambos algoritmos.
-Nuestro algoritmo *median_3* es _estable_ lo que quiere decir que el orden de los elementos equivalentes se preserva.
-([para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part5/))
+Nuestro algoritmo *median_3* es _estable_ lo que quiere decir que el orden de los elementos equivalentes se preserva
+([para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part5/)).
 
 Para demostrarlo con datos, vamos a utilizar el ejemplo anterior, en el cual tenemos los siguientes datos de entrada para nuestros algoritmos:
 
@@ -226,8 +226,9 @@ Si ordenamos la sequencia anterior por `nTime` usando un algoritmo de ordenamien
 s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
 {% endhighlight %}
 
+Note que el elemento del medio es el que tiene `nHeight = 1`.
 
-
+Si usted prueba con todas las combinaciones posibles de elementos va a poder verificar que nuestro algoritmo `median_3` es estable, pero no así el algoritmo original usado en el DAA de Bitcoin Cash.
 
 
 
@@ -265,6 +266,13 @@ inline constexpr auto select_0_2(T&& a, U&& b, R r) FN(
 
 
 
+
+
+
+
+
+
+Otro problema en la versión original del algoritmo es el uso de `std::swap`. La forma correcta de usar `std::swap` es de la siguiente manera:
 
 
 
