@@ -125,6 +125,12 @@ auto median_3(T const& a, T const& b, T const& c) {
 
 Dejo el análisis del código para el lector, para el vago: lo que hace el algoritmo es simplemente seleccionar el elemento del medio entre `a`, `b` y `c`, haciendo de cuenta que los 3 estuviesen ordenados ascendentemente. Esto lo hace sin mutar ni reordenar los datos de entrada.
 
+La complejidad en tiempo de `median_3` es: 
+
+- Caso mejor:    0 swaps, 2 comparaciones
+- Caso peor:     0 swaps, 3 comparaciones
+- Caso promedio: 0 swaps, 8/3 comparaciones; asumiendo una distribución uniforme de los datos de entrada.
+
 
 Ahora, podríamos usar nuestro nuevo algoritmo en la función `GetSuitableBlock` original:
 
@@ -139,7 +145,7 @@ CBlockIndex const* GetSuitableBlock(CBlockIndex const* pindex) {
 Mucho más breve y entendible, ¿no?.
 
 Antes de seguir, tenemos que corregir un problema: no sabemos si el _Ordenamiento Natural_ especificado en la clase `CBlockIndex` está dado por el timestamp del bloque (atributo `nTime`).
-Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strick weak ordering relation_, [Para más información consulte Aquí](http://componentsprogramming.com/writing-min-function-part3/)).
+Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strick weak ordering relation_, [para más información consulte Aquí](http://componentsprogramming.com/writing-min-function-part3/)).
 
 
 {% highlight cpp %}
@@ -159,7 +165,7 @@ auto median_3(T const& a, T const& b, T const& c, R r) {
 {% endhighlight %}
 
 
-Ahora sí, podemos implementar correctamente `GetSuitableBlock`:
+Ahora sí, podemos implementar correctamente `GetSuitableBlock`, comparando por `nTime`:
 
 {% highlight cpp %}
 static 
