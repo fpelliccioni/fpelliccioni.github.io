@@ -19,7 +19,9 @@ El cambio más importante de fue en el _Algoritmo de Ajuste de Dificultad_, en a
 
 [Aquí la descripción del algoritmo](https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/nov-13-hardfork-spec.md#difficulty-adjustment-algorithm-description).
 
-No quiero entrar en detalles acerca del concepto de _difultad_ ni del DAA. Para ello puede referirse a https://en.bitcoin.it/wiki/Difficulty. Lo que me interesa son los puntos 2 y 3 de la descripción del DAA:
+No quiero entrar en detalles acerca del concepto de _difultad_ ni del DAA. Para ello puede referirse a: [Difficulty](https://en.bitcoin.it/wiki/Difficulty). 
+
+Lo que me interesa son los puntos 2 y 3 de la descripción del DAA:
 
 {% highlight cpp %}
 2. Let B_last be chosen[2] from [B_n-2, B_n-1, B_n].
