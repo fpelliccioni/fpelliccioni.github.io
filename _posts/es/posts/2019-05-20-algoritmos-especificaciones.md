@@ -94,6 +94,11 @@ Aquí les dejo un boceto del algoritmo _mediana de 3_, en `C++`:
 
 {% highlight cpp %}
 template <TotallyOrdered T>
+auto max(T const& a, U const& b) {
+    return b < a ? b : a;
+}
+
+template <TotallyOrdered T>
 auto median_3_ab(T const& a, T const& b, T const& c) {
     // precondition: a <= b
     
@@ -149,6 +154,11 @@ Necesitamos una versión de `median_3` que acepte una forma de comparar especifi
 
 
 {% highlight cpp %}
+template <Regular T, StrictWeakOrdering R>
+auto max(T const& a, U const& b, R r) {
+    return r(b, a) ? b : a;
+}
+
 template <Regular T, StrictWeakOrdering R>
 auto median_3_ab(T const& a, T const& b, T const& c, R r) {
     // precondition: a <= b
@@ -230,7 +240,9 @@ Note que el elemento del medio es el que tiene `nHeight = 1`.
 
 Si usted prueba con todas las combinaciones posibles de elementos va a poder verificar que nuestro algoritmo `median_3` es estable, pero no así el algoritmo original usado en el DAA de Bitcoin Cash.
 
+En mi primer implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código para obtener la mediana de 3 de la implementación de referencia, había asumido erróneamente que también era estable. Luego esto provocó errores en tiempo de ejecución de nuestro nodo ante un ajuste de dificultad. No se daba siempre, pero hubo un caso en particular en el que lo pudimos detectar. Luego de varias horas de debugging pude detectar que el problema era que el algoritmo usado por mí no era compatible con el "especificado" en DAA.
 
+Por lo tanto, tuve que "corregir" mi algoritmo para hacelo no-estable de la misma forma que el de la especificación.
 
 
 
@@ -394,44 +406,6 @@ int main() {
 
 
 
-
-
-
-
-
-
-
-{% highlight cpp %}
-template <Regular T>
-auto median_3_ab(T const& a, T const& b, T const& c) {
-    // precondition: a <= b
-    
-    return ! (c < b) ? b :        // a, b, c are sorted
-                       max(a, c); // b is not the median
-}
-
-template <Regular T>
-auto median_3(T const& a, T const& b, T const& c) {
-    return b < a ? median_3_ab(b, a, c) 
-                 : median_3_ab(a, b, c);
-}
-{% endhighlight %}
-
-
-
-
-
-
-
-
-
-
-{% highlight cpp %}
-static const CBlockIndex *GetSuitableBlock(const CBlockIndex *pindex) {
-    assert(pindex->nHeight >= 3);
-    return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex);
-}
-{% endhighlight %}
 
 
 
