@@ -187,6 +187,99 @@ struct CBlockIndex {
     CBlockIndex* pprev;
 };
 
+int main() {
+    CBlockIndex ba {1, 2, nullptr};
+    CBlockIndex bb {2, 2, &ba};     //same nTime as previous
+    CBlockIndex bc {3, 1, &bb};
+
+    auto r = GetSuitableBlockNewVersion(&bc);
+    cout << "GetSuitableBlockNewVersion: " << r->nHeight << std::endl;
+
+    r = GetSuitableBlock(&bc);
+    cout << "GetSuitableBlock:  " << r->nHeight << std::endl;
+}
+{% endhighlight %}
+
+El código anterior imprime:
+
+{% highlight cpp %}
+GetSuitableBlockNewVersion: 1
+GetSuitableBlock:           2
+{% endhighlight %}
+
+
+
+
+
+
+
+
+
+
+
+
+{% highlight cpp %}
+
+#define FN(body) \
+    ->decltype(body) { return body; }
+
+template <typename T, typename U, typename R>
+// requires(SameType<T, U> && Domain<R, T>)
+inline constexpr auto select_0_2(T&& a, U&& b, R r) FN(
+    r(b, a) ? std::forward<U>(b) : std::forward<T>(a))
+
+    template <typename T, typename U, typename V, typename R>
+    // requires(SameType<T, U> && SameType<U, V> && Domain<R, T>)
+    inline constexpr auto select_1_3_ac(T&& a, U&& b, V&& c, R r) FN(
+        // precondition: ! r(c, a)
+        r(b, a) ? std::forward<T>(a)                                     // b, a, c
+                : select_0_2(std::forward<U>(b), std::forward<V>(c), r)  // a is not the median
+        )
+
+        template <typename T, typename U, typename V, typename R>
+        // requires(SameType<T, U> && SameType<U, V> && Domain<R, T>)
+        inline constexpr auto select_1_3(T&& a, U&& b, V&& c, R r) FN(
+            r(c, a) ? select_1_3_ac(std::forward<V>(c), std::forward<U>(b), std::forward<T>(a), r)
+                    : select_1_3_ac(std::forward<T>(a), std::forward<U>(b), std::forward<V>(c), r))
+#undef FN
+
+{% endhighlight %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% highlight cpp %}
+struct CBlockIndex {
+    int nHeight;
+    int nTime;
+    CBlockIndex* pprev;
+};
+
 static const CBlockIndex *GetSuitableBlock(const CBlockIndex *pindex) {
     assert(pindex->nHeight >= 3);
 
@@ -249,7 +342,7 @@ CBlockIndex const* GetSuitableBlock2(CBlockIndex const* pindex) {
 
 int main() {
     CBlockIndex ba {1, 2, nullptr};
-    CBlockIndex bb {2, 2, &ba};
+    CBlockIndex bb {2, 2, &ba};     //same nTime as previous
     CBlockIndex bc {3, 1, &bb};
 
     auto r = GetSuitableBlock2(&bc);
@@ -263,34 +356,18 @@ int main() {
 
 
 
-{% highlight cpp %}
 
 
 
-#define FN(body) \
-    ->decltype(body) { return body; }
 
-template <typename T, typename U, typename R>
-// requires(SameType<T, U> && Domain<R, T>)
-inline constexpr auto select_0_2(T&& a, U&& b, R r) FN(
-    r(b, a) ? std::forward<U>(b) : std::forward<T>(a))
 
-    template <typename T, typename U, typename V, typename R>
-    // requires(SameType<T, U> && SameType<U, V> && Domain<R, T>)
-    inline constexpr auto select_1_3_ac(T&& a, U&& b, V&& c, R r) FN(
-        // precondition: ! r(c, a)
-        r(b, a) ? std::forward<T>(a)                                     // b, a, c
-                : select_0_2(std::forward<U>(b), std::forward<V>(c), r)  // a is not the median
-        )
 
-        template <typename T, typename U, typename V, typename R>
-        // requires(SameType<T, U> && SameType<U, V> && Domain<R, T>)
-        inline constexpr auto select_1_3(T&& a, U&& b, V&& c, R r) FN(
-            r(c, a) ? select_1_3_ac(std::forward<V>(c), std::forward<U>(b), std::forward<T>(a), r)
-                    : select_1_3_ac(std::forward<T>(a), std::forward<U>(b), std::forward<V>(c), r))
-#undef FN
 
-{% endhighlight %}
+
+
+
+
+
 
 
 
