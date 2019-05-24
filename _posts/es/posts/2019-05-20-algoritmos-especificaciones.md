@@ -75,7 +75,6 @@ static const CBlockIndex *GetSuitableBlock(const CBlockIndex *pindex) {
      // We should have our candidate in the middle now.
     return blocks[1];
 }
-
 {% endhighlight %}
 
 
@@ -127,6 +126,22 @@ auto median_3(T const& a, T const& b, T const& c) {
 Dejo el análisis del código para el lector, para el vago: lo que hace el algoritmo es simplemente seleccionar el elemento del medio entre `a`, `b` y `c`, haciendo de cuenta que los 3 estuviesen ordenados ascendentemente. Esto lo hace sin mutar ni reordenar los datos de entrada.
 
 
+Ahora, podríamos usar nuestro nuevo algoritmo en la función `GetSuitableBlock` original:
+
+{% highlight cpp %}
+static 
+CBlockIndex const* GetSuitableBlock(CBlockIndex const* pindex) {
+    assert(pindex->nHeight >= 3);
+    return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex);
+}
+{% endhighlight %}
+
+Mucho más breve y entendible, ¿no?.
+
+Antes de seguir, tenemos que corregir un problema: no sabemos si el _Ordenamiento Natural_ especificado en la clase `CBlockIndex` está dado por el timestamp del bloque (atributo `nTime`).
+Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strick weak ordering relation_, [Para más información consulte Aquí](http://componentsprogramming.com/writing-min-function-part3/)).
+
+
 {% highlight cpp %}
 template <Regular T, StrictWeakOrdering R>
 auto median_3_ab(T const& a, T const& b, T const& c, R r) {
@@ -142,6 +157,61 @@ auto median_3(T const& a, T const& b, T const& c, R r) {
                    : median_3_ab(a, b, c, r);
 }
 {% endhighlight %}
+
+
+Ahora sí, podemos implementar correctamente `GetSuitableBlock`:
+
+{% highlight cpp %}
+static 
+CBlockIndex const* GetSuitableBlock(CBlockIndex const* pindex) {
+    assert(pindex->nHeight >= 3);
+    return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex, [](auto const& a, auto const& b){
+        return a.nTime < b.nTime;
+    });
+}
+{% endhighlight %}
+
+
+
+
+
+
+{% highlight cpp %}
+
+
+
+#define FN(body) \
+    ->decltype(body) { return body; }
+
+template <typename T, typename U, typename R>
+// requires(SameType<T, U> && Domain<R, T>)
+inline constexpr auto select_0_2(T&& a, U&& b, R r) FN(
+    r(b, a) ? std::forward<U>(b) : std::forward<T>(a))
+
+    template <typename T, typename U, typename V, typename R>
+    // requires(SameType<T, U> && SameType<U, V> && Domain<R, T>)
+    inline constexpr auto select_1_3_ac(T&& a, U&& b, V&& c, R r) FN(
+        // precondition: ! r(c, a)
+        r(b, a) ? std::forward<T>(a)                                     // b, a, c
+                : select_0_2(std::forward<U>(b), std::forward<V>(c), r)  // a is not the median
+        )
+
+        template <typename T, typename U, typename V, typename R>
+        // requires(SameType<T, U> && SameType<U, V> && Domain<R, T>)
+        inline constexpr auto select_1_3(T&& a, U&& b, V&& c, R r) FN(
+            r(c, a) ? select_1_3_ac(std::forward<V>(c), std::forward<U>(b), std::forward<T>(a), r)
+                    : select_1_3_ac(std::forward<T>(a), std::forward<U>(b), std::forward<V>(c), r))
+#undef FN
+
+{% endhighlight %}
+
+
+
+
+
+
+
+
 
 
 {% highlight cpp %}
@@ -170,15 +240,10 @@ auto median_3(T const& a, T const& b, T const& c) {
 
 
 {% highlight cpp %}
-/**
- * To reduce the impact of timestamp manipulation, we select the block we are
- * basing our computation on via a median of 3.
- */
 static const CBlockIndex *GetSuitableBlock(const CBlockIndex *pindex) {
     assert(pindex->nHeight >= 3);
-    return median_3(pindex->pprev->pprev, pindex->pprev, pindex);
+    return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex);
 }
-
 {% endhighlight %}
 
 
