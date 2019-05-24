@@ -236,14 +236,14 @@ Si ordenamos la sequencia anterior por `nTime` usando un algoritmo de ordenamien
 s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
 {% endhighlight %}
 
-Note que el elemento del medio es el que tiene `nHeight = 1`.
+Note que el elemento del medio es el que tiene `nHeight = 1`. Lo cual indica que nuestro algoritmo se comportó de manera estable y no así el algoritmo original usado en el DAA de Bitcoin Cash. 
 
-Si usted prueba con todas las combinaciones posibles de elementos va a poder verificar que nuestro algoritmo `median_3` es estable, pero no así el algoritmo original usado en el DAA de Bitcoin Cash.
-
-En mi primer implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código para obtener la mediana de 3 de la implementación de referencia, había asumido erróneamente que también era estable. Luego esto provocó errores en tiempo de ejecución de nuestro nodo ante un ajuste de dificultad. No se daba siempre, pero hubo un caso en particular en el que lo pudimos detectar. Luego de varias horas de debugging pude detectar que el problema era que el algoritmo usado por mí no era compatible con el "especificado" en DAA.
+En mi primer implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código de la especificación, yo había asumido erróneamente que también era estable.  
+Luego esto provocó errores en tiempo de ejecución de nuestro nodo ante un ajuste de dificultad. No se daba siempre, pero hubo un caso en particular en el que lo pudimos detectar. Luego de varias horas de debugging pude detectar que el problema era que el algoritmo usado por mí no era compatible con el "especificado" en DAA.
 
 Por lo tanto, tuve que "corregir" mi algoritmo para hacelo no-estable de la misma forma que el de la especificación.
 
+En realidad, si mal no recuero, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock, sino que decía que se calculaba la mediana de 3 elementos.
 
 
 {% highlight cpp %}
