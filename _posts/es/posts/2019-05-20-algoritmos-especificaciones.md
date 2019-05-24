@@ -20,14 +20,14 @@ Aquí la descripción del algoritmo: https://github.com/bitcoincashorg/bitcoinca
 
 No quiero entrar en detalles acerca del concepto de _difultad_ ni del DAA. Para ello puede referirse a https://en.bitcoin.it/wiki/Difficulty. Lo que me interesa son los puntos 2 y 3 de la descripción del DAA:
 
-```
+{% highlight cpp %}
 2. Let B_last be chosen[2] from [B_n-2, B_n-1, B_n].
 3. Let B_first be chosen[2] from [B_n-146, B_n-145, B_n-144].
-```
+{% endhighlight %}
 
 Ambos apuntan a la nota al pie `[2]`:
 
-```
+{% highlight cpp %}
 2. A block is chosen via the following mechanism: 
 
 Given a list: S = [B_n-2, B_n-1, B_n] 
@@ -37,7 +37,7 @@ c. If timestamp(S[1]) greater than timestamp(S[2]) then swap S[1] and S[2].
 d. Return S[1]. 
 
 See GetSuitableBlock
-```
+{% endhighlight %}
 
 La especificación del algoritmo apunta a su implementación, en una función llamada [GetSuitableBlock](https://github.com/Bitcoin-ABC/bitcoin-abc/commit/be51cf295c239ff6395a0aa67a3e13906aca9cb2#diff-ba91592f703a9d0badf94e67144bc0aaR208). Aquí su código:
 
