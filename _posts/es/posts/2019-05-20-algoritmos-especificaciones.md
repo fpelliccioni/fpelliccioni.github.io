@@ -182,21 +182,21 @@ Nos queda un último problema por resolver. Hagamos una pequeña prueba del algo
 
 {% highlight cpp %}
 struct CBlockIndex {
-    int nHeight;
-    int nTime;
+    size_t nHeight;
+    size_t nTime;
     CBlockIndex* pprev;
 };
 
 int main() {
-    CBlockIndex ba {1, 2, nullptr};
-    CBlockIndex bb {2, 2, &ba};     //same nTime as previous
-    CBlockIndex bc {3, 1, &bb};
+    CBlockIndex ba {1, 1558731500, nullptr};
+    CBlockIndex bb {2, 1558731500, &ba};        //same nTime as previous
+    CBlockIndex bc {3, 1558730000, &bb};
 
     auto r = GetSuitableBlockNewVersion(&bc);
     cout << "GetSuitableBlockNewVersion: " << r->nHeight << std::endl;
 
     r = GetSuitableBlock(&bc);
-    cout << "GetSuitableBlock:  " << r->nHeight << std::endl;
+    cout << "GetSuitableBlock:           " << r->nHeight << std::endl;
 }
 {% endhighlight %}
 
@@ -207,9 +207,24 @@ GetSuitableBlockNewVersion: 1
 GetSuitableBlock:           2
 {% endhighlight %}
 
+Lo que estamos intentando probar con el código anterior es la _estabilidad_ de ambos algoritmos.
+Nuestro algoritmo *median_3* es _estable_ lo que quiere decir que el orden de los elementos equivalentes se preserva.
+([para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part5/))
 
+Para demostrarlo con datos, vamos a utilizar el ejemplo anterior, en el cual tenemos los siguientes datos de entrada para nuestros algoritmos:
 
+{% highlight cpp %}
+s = [{1, 1558731500}, {2, 1558731500}, {3, 1558730000}]
+{% endhighlight %}
 
+Donde el primer elemento de cada par es el identificador del bloque `nHeight` y el segundo elemento es el timestamp `nTime`.  
+Note que el `nTime` de los primeros 2 elementos es igual.
+
+Si ordenamos la sequencia anterior por `nTime` usando un algoritmo de ordenamiento estable, como por ejemplo [Merge sort](https://en.wikipedia.org/wiki/Merge_sort) nos quedaría algo así:
+
+{% highlight cpp %}
+s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
+{% endhighlight %}
 
 
 
