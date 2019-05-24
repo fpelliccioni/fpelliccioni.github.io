@@ -256,6 +256,6 @@ De toda esta experiencia saco algunas conclusiones sobre `GetSuitableBlock` vs. 
 - `median_3` es estable, `GetSuitableBlock` no lo es. `median_3` es lo que cualquiera espera de un algoritmo que calcule la mediana de 3 elementos. (Correctitud)
 
 El autor de la especificación de DAA podría haber optado por usar un algoritmo conocido y "estándar", pero no lo hizo.  
-Es más, quizás lo peor de todo esto que es que la especificación hace referencia a código. **El código no debe ser nunca especificación. El código debe ser creador a partir de una especificación.** Por lo que si una especificación hace referencia a código no existe dicha especificación.
+Es más, quizás lo peor de todo esto es que la especificación hace referencia al código. **El código no debe ser nunca especificación. El código debe ser creador a partir de una especificación.** Por lo que si una especificación hace referencia a código no existe dicha especificación.
 
 ¡Saludos!
