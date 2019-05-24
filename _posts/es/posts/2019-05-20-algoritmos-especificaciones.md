@@ -239,14 +239,15 @@ Si ordenamos la sequencia anterior por `nTime` usando un algoritmo de ordenamien
 s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
 {% endhighlight %}
 
-Note que el elemento del medio es el que tiene `nHeight = 1`. Lo cual indica que nuestro algoritmo se comportó de manera estable y no así el algoritmo original usado en el DAA de Bitcoin Cash. 
+Note que el elemento del medio es el que tiene `nHeight = 1`. Lo cual indica que nuestro algoritmo se comportó de manera estable pero no así el algoritmo original usado en el DAA de Bitcoin Cash. 
 
 En mi primer implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código de la especificación, yo había asumido erróneamente que también era estable.  
 Luego esto provocó errores en tiempo de ejecución de nuestro nodo ante un ajuste de dificultad. No se daba siempre, pero hubo un caso en particular en el que lo pudimos detectar. Luego de varias horas de debugging pude detectar que el problema era que el algoritmo usado por mí no era compatible con el "especificado" en DAA.
 
 Por lo tanto, tuve que "corregir" mi algoritmo para hacelo no-estable de la misma forma que el de la especificación.
 
-En realidad, si mal no recuero, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock`, sino que decía que se calculaba la mediana de 3 elementos.
+En realidad, si mal no recuero, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock`, sino que decía que se calculaba la mediana de 3 elementos. Como la implementación de la mediana fue "incorrecta" tuvieron que adaptar la especificación para que se condiga con el código.  
+Tenga en cuenta, que una vez que el código de un nodo Bitcoin o de cualquier criptomoneda está en funcionamiento, una modificación en su comportamiento introduce incompatibilidades con versiones anteriores y produce los denominados _forks_. Por lo que una vez que el código está corriendo, se trata de no cambiarlo. Por esta razón es por la que se tuvo que adaptar la especificación en vez de corregir el código.
 
 De toda esta experiencia saco algunas conclusiones sobre `GetSuitableBlock` vs. `median_3`:
 - `median_3` no efectua ningún swap, `GetSuitableBlock` puede efectuar entre 0, 7/6 o 2 swaps, innecesariamente. (Eficiencia)
