@@ -94,10 +94,91 @@ Caso promedio: 7/6 swaps, 3 comparaciones; asumiendo una distribución uniforme 
 
 
 
+{% highlight cpp %}
+template <Regular T, StrictWeakOrdering R>
+auto select_1_3_ab(T const& a, T const& b, T const& c, R r) {
+    // precondition: a <= b
+    
+    return ! r(c, b) ? b :                  // a, b, c are sorted
+                       select_1_2(a, c, r)  // b is not the median
+}
+
+template <Regular T, StrictWeakOrdering R>
+auto select_1_3(T const& a, T const& b, T const& c, R r) {
+    return r(b, a) ? select_1_3_ab(b, a, c, r) 
+                   : select_1_3_ab(a, b, c, r)
+}
+{% endhighlight %}
+
+
+{% highlight cpp %}
+template <Regular T>
+auto select_1_3_ab(T const& a, T const& b, T const& c) {
+    // precondition: a <= b
+    
+    return ! (c < b) ? b :               // a, b, c are sorted
+                       select_1_2(a, c)  // b is not the median
+}
+
+template <Regular T>
+auto select_1_3(T const& a, T const& b, T const& c) {
+    return b < a ? select_1_3_ab(b, a, c) 
+                 : select_1_3_ab(a, b, c)
+}
+{% endhighlight %}
 
 
 
 
+
+
+
+
+
+
+{% highlight cpp %}
+/**
+ * To reduce the impact of timestamp manipulation, we select the block we are
+ * basing our computation on via a median of 3.
+ */
+static const CBlockIndex *GetSuitableBlock(const CBlockIndex *pindex) {
+    assert(pindex->nHeight >= 3);
+    return select_1_3(pindex->pprev->pprev, pindex->pprev, pindex);
+}
+
+{% endhighlight %}
+
+
+
+
+
+
+
+
+
+
+{% highlight cpp %}
+
+template <Regular T, Regular U, Regular V, StrictWeakOrdering R>
+    requires(Same<T, U, V> && Domain<R, T>)
+inline constexpr
+auto select_1_3_ab(T&& a, U&& b, V&& c, R r) {
+    // precondition: a <= b
+    
+    ! r(c, b) ? //!(c < b) -> c >= b
+                std::forward<U>(b) :                               // a, b, c are sorted
+                select_1_2(std::forward<T>(a), std::forward<V>(c), r)  // b is not the median
+}
+
+template <Regular T, Regular U, Regular V, StrictWeakOrdering R>
+    requires(Same<T, U, V> && Domain<R, T>)
+inline constexpr
+auto select_1_3(T&& a, U&& b, V&& c, R r) {
+    
+    r(b, a) ? select_1_3_ab(std::forward<U>(b), std::forward<T>(a), std::forward<V>(c), r) 
+            : select_1_3_ab(std::forward<T>(a), std::forward<U>(b), std::forward<V>(c), r)
+}
+{% endhighlight %}
 
 
 
