@@ -19,7 +19,7 @@ El cambio más importante de fue en el _Algoritmo de Ajuste de Dificultad_, en a
 
 [Aquí la descripción del algoritmo](https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/nov-13-hardfork-spec.md#difficulty-adjustment-algorithm-description).
 
-No quiero entrar en detalles acerca del concepto de _difultad_ ni del DAA. Para ello puede referirse a: [Difficulty](https://en.bitcoin.it/wiki/Difficulty). 
+No quiero entrar en detalles acerca del concepto de _dificultad_ ni del DAA. Para ello puede referirse a: [Difficulty](https://en.bitcoin.it/wiki/Difficulty). 
 
 Lo que me interesa son los puntos 2 y 3 de la descripción del DAA:
 
@@ -153,7 +153,7 @@ CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
 Mucho más breve y entendible, ¿no?.
 
 Antes de seguir, tenemos que corregir un problema: no sabemos si el _Ordenamiento Natural_ especificado en la clase `CBlockIndex` está dado por el timestamp del bloque (atributo `nTime`).
-Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strick weak ordering relation_, [para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part3/)).
+Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strict weak ordering relation_, [para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part3/)).
 
 
 {% highlight cpp %}
@@ -241,12 +241,12 @@ s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
 
 Note que el elemento del medio es el que tiene `nHeight = 1`. Lo cual indica que nuestro algoritmo se comportó de manera estable pero no así el algoritmo original usado en el DAA de Bitcoin Cash. 
 
-En mi primer implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código de la especificación, yo había asumido erróneamente que también era estable.  
+En mi primera implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código de la especificación, yo había asumido erróneamente que también era estable.  
 Luego esto provocó errores en tiempo de ejecución de nuestro nodo ante un ajuste de dificultad. No se daba siempre, pero hubo un caso en particular en el que lo pudimos detectar. Luego de varias horas de debugging pude detectar que el problema era que el algoritmo usado por mí no era compatible con el "especificado" en DAA.
 
-Por lo tanto, tuve que "corregir" mi algoritmo para hacelo no-estable de la misma forma que el de la especificación.
+Por lo tanto, tuve que "corregir" mi algoritmo para hacerlo no-estable de la misma forma que el de la especificación.
 
-En realidad, si mal no recuero, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock`, sino que decía que se calculaba la mediana de 3 elementos. Como la implementación de la mediana fue "incorrecta" tuvieron que adaptar la especificación para que se condiga con el código.  
+En realidad, si mal no recuerdo, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock`, sino que decía que se calculaba la mediana de 3 elementos. Como la implementación de la mediana fue "incorrecta" tuvieron que adaptar la especificación para que se condiga con el código.  
 Tenga en cuenta, que una vez que el código de un nodo Bitcoin o de cualquier criptomoneda está en funcionamiento, una modificación en su comportamiento introduce incompatibilidades con versiones anteriores y produce los denominados _forks_. Por lo que una vez que el código está corriendo, se trata de no cambiarlo. Por esta razón es por la que se tuvo que adaptar la especificación en vez de corregir el código.
 
 De toda esta experiencia saco algunas conclusiones sobre `GetSuitableBlock` vs. `median_3`:
@@ -256,6 +256,6 @@ De toda esta experiencia saco algunas conclusiones sobre `GetSuitableBlock` vs. 
 - `median_3` es estable, `GetSuitableBlock` no lo es. `median_3` es lo que cualquiera espera de un algoritmo que calcule la mediana de 3 elementos. (Correctitud)
 
 El autor de la especificación de DAA podría haber optado por usar un algoritmo conocido y "estándar", pero no lo hizo.  
-Es más, quizás lo peor de todo esto es que la especificación hace referencia al código. **El código no debe ser nunca especificación. El código debe ser creador a partir de una especificación.** Por lo que si una especificación hace referencia a código no existe dicha especificación.
+Es más, quizás lo peor de todo esto es que la especificación hace referencia al código. **El código no debe ser nunca especificación. El código debe ser creado a partir de una especificación.** Por lo que si una especificación hace referencia a código, no existe dicha especificación.
 
 ¡Saludos!
