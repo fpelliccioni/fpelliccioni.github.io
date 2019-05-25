@@ -81,7 +81,7 @@ static const CBlockIndex *GetSuitableBlock(const CBlockIndex *pindex) {
 {% endhighlight %}
 
 
-Lo que hace el algoritmo es básicamente crear una sequencia de 3 elementos (array), la ordena de menor a mayor y retorna el segundo elemento.
+Lo que hace el algoritmo es básicamente crear una secuencia de 3 elementos (array), la ordena de menor a mayor y retorna el segundo elemento.
 
 La complejidad en tiempo de este algoritmo es: 
 
@@ -116,7 +116,7 @@ auto median_3(T const& a, T const& b, T const& c) {
 }
 {% endhighlight %}
 
-O si prefiere la version _inline_ del algoritmo:
+O si prefiere la versión _inline_ del algoritmo:
 
 {% highlight cpp %}
 template <TotallyOrdered T>
@@ -233,7 +233,7 @@ s = [{1, 1558731500}, {2, 1558731500}, {3, 1558730000}]
 Donde el primer elemento de cada par es el identificador del bloque `nHeight` y el segundo elemento es el timestamp `nTime`.  
 Note que el `nTime` de los primeros 2 elementos es igual.
 
-Si ordenamos la sequencia anterior por `nTime` usando un algoritmo de ordenamiento estable, como por ejemplo [Merge sort](https://en.wikipedia.org/wiki/Merge_sort) nos quedaría algo así:
+Si ordenamos la secuencia anterior por `nTime` usando un algoritmo de ordenamiento estable, como por ejemplo [Merge sort](https://en.wikipedia.org/wiki/Merge_sort) nos quedaría algo así:
 
 {% highlight cpp %}
 s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
@@ -250,7 +250,7 @@ En realidad, si mal no recuerdo, en la primera versión de la especificación de
 Tenga en cuenta, que una vez que el código de un nodo Bitcoin o de cualquier criptomoneda está en funcionamiento, una modificación en su comportamiento introduce incompatibilidades con versiones anteriores y produce los denominados _forks_. Por lo que una vez que el código está corriendo, se trata de no cambiarlo. Por esta razón es por la que se tuvo que adaptar la especificación en vez de corregir el código.
 
 De toda esta experiencia saco algunas conclusiones sobre `GetSuitableBlock` vs. `median_3`:
-- `median_3` no efectua ningún swap, `GetSuitableBlock` puede efectuar entre 0, 7/6 o 2 swaps, innecesariamente. (Eficiencia)
+- `median_3` no efectúa ningún swap, `GetSuitableBlock` puede efectuar entre 0, 7/6 o 2 swaps, innecesariamente. (Eficiencia)
 - `GetSuitableBlock` crea un array innecesariamente. (Eficiencia)
 - `median_3` realiza 2, 8/3 o 3 comparaciones, `GetSuitableBlock` realiza siempre 3 comparaciones. (Eficiencia)
 - `median_3` es estable, `GetSuitableBlock` no lo es. `median_3` es lo que cualquiera espera de un algoritmo que calcule la mediana de 3 elementos. (Correctitud)
