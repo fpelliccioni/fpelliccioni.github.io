@@ -249,11 +249,13 @@ Por lo tanto, tuve que "corregir" mi algoritmo para hacerlo no-estable de la mis
 En realidad, si mal no recuerdo, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock`, sino que decía que se calculaba la mediana de 3 elementos. Como la implementación de la mediana fue "incorrecta" tuvieron que adaptar la especificación para que se condiga con el código.  
 Tenga en cuenta, que una vez que el código de un nodo Bitcoin o de cualquier criptomoneda está en funcionamiento, una modificación en su comportamiento introduce incompatibilidades con versiones anteriores y produce los denominados _forks_. Por lo que una vez que el código está corriendo, se trata de no cambiarlo. Por esta razón es por la que se tuvo que adaptar la especificación en vez de corregir el código.
 
-De toda esta experiencia saco algunas conclusiones sobre `GetSuitableBlock` vs. `median_3`:
+Antes de terminar, hagamos una comparación de ambos algoritmos, `GetSuitableBlock` vs. `median_3`:
 - `median_3` no efectúa ningún swap, `GetSuitableBlock` puede efectuar entre 0, 7/6 o 2 swaps, innecesariamente. (Eficiencia)
 - `GetSuitableBlock` crea un array innecesariamente. (Eficiencia)
 - `median_3` realiza 2, 8/3 o 3 comparaciones, `GetSuitableBlock` realiza siempre 3 comparaciones. (Eficiencia)
 - `median_3` es estable, `GetSuitableBlock` no lo es. `median_3` es lo que cualquiera espera de un algoritmo que calcule la mediana de 3 elementos. (Correctitud)
+
+Y ahora sí, para finalizar, algunas conclusiones: 
 
 El autor de la especificación de DAA podría haber optado por usar un algoritmo conocido y "estándar", pero no lo hizo.  
 Es más, quizás lo peor de todo esto es que la especificación hace referencia al código. **El código no debe ser nunca especificación. El código debe ser creado a partir de una especificación.** Por lo que si una especificación hace referencia a código, no existe dicha especificación.
