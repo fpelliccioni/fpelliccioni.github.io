@@ -15,8 +15,6 @@ I'm going to use a real experience, which happened some time ago:
 For 3 years now I have maintained a multi-currency node (Bitcoin, Bitcoin Cash and Litecoin) called [Bitprim](https://github.com/bitprim/bitprim).  
 In November 2017 [Bitcoin Cash](https://www.bitcoincash.org/) made its first protocol change after its birth in August of the same year. My job at that time was to update the code of our node to support the protocol changes. From that moment I want to write this article, but ... for one or several reasons I did not do it at that moment, I am doing it now.
 
-El cambio más importante de fue en el _Algoritmo de Ajuste de Dificultad_, en adelante _DAA_ (del inglés _Difficulty Adjustment Algorithm_).
-
 The most important change was in the Difficulty Adjustment Algorithm, from now DAA.
 
 [Here the description of the algorithm](https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/nov-13-hardfork-spec.md#difficulty-adjustment-algorithm-description).
