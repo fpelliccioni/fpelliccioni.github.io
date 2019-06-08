@@ -15,7 +15,7 @@ I'm going to use a real experience, which happened some time ago:
 For 3 years now I have maintained a multi-currency node (Bitcoin, Bitcoin Cash and Litecoin) called [Bitprim](https://github.com/bitprim/bitprim).  
 In November 2017 [Bitcoin Cash](https://www.bitcoincash.org/) made its first protocol change after its birth in August of the same year. My job at that time was to update the code of our node to support the protocol changes. From that moment I want to write this article, but ... for one or several reasons I did not do it at that moment, I am doing it now.
 
-The most important change was in the Difficulty Adjustment Algorithm, from now DAA.
+The most important change was in the _Difficulty Adjustment Algorithm_, from now _DAA_.
 
 [Here the description of the algorithm](https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/nov-13-hardfork-spec.md#difficulty-adjustment-algorithm-description).
 
@@ -41,8 +41,6 @@ d. Return S[1].
 
 See GetSuitableBlock
 {% endhighlight %}
-
-La especificación del algoritmo apunta a su implementación, en una función llamada [GetSuitableBlock](https://github.com/Bitcoin-ABC/bitcoin-abc/commit/be51cf295c239ff6395a0aa67a3e13906aca9cb2#diff-ba91592f703a9d0badf94e67144bc0aaR208). Aquí su código:
 
 The specification of the algorithm points to its implementation, in a function called [GetSuitableBlock](https://github.com/Bitcoin-ABC/bitcoin-abc/commit/be51cf295c239ff6395a0aa67a3e13906aca9cb2#diff-ba91592f703a9d0badf94e67144bc0aaR208). Here the code:
 
@@ -92,7 +90,7 @@ The complexity in time of this algorithm is:
 
 Now, look again at the algorithm. An array is being created (using the input data), then sort it up and return the middle element. This is a known algorithm and is called [median](https://en.wikipedia.org/wiki/Median), in particular, _median of 3 elements_.
 
-The median is a _selection_ algorithm. Unlike the ordering algorithms (inplace), the selection algorithms should not mutate the input data, but return one of the elements.
+The median is a _selection_ algorithm. Unlike the sorting (inplace) algorithms, the selection algorithms should not mutate the input data, but return one of the elements.
 
 Here is a sketch of the _median of 3_ algorithm, in `C++`:
 
@@ -257,3 +255,9 @@ The author of the DAA specification could have chosen a known and "standard" alg
 And perhaps the worst of all is that the specification refers to the code. **The code must never be specification. The code must be created from a specification.** So if a specification refers to code, there is no such specification.
 
 Bye!
+
+---
+
+## Acknowledgments
+
+Thanks in particular to the following for their feedback to improve this article: Dario Ramos and Nubis Bruno.

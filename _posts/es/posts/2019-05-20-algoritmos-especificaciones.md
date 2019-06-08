@@ -261,3 +261,9 @@ El autor de la especificación de DAA podría haber optado por usar un algoritmo
 Es más, quizás lo peor de todo esto es que la especificación hace referencia al código. **El código no debe ser nunca especificación. El código debe ser creado a partir de una especificación.** Por lo que si una especificación hace referencia a código, no existe dicha especificación.
 
 ¡Saludos!
+
+---
+
+## Agradecimientos
+
+Quiero agradecer a Dario Ramos y Nubis Bruno por revisar el artículo y sugerir correcciones.  
