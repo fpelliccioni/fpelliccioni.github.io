@@ -13,9 +13,9 @@ This year Elements of Programming celebrates 10 years since its publication, but
 
 Alex Stepanov and Paul McJones have just released Elements of Programming _Authors’ Edition_ in two versions:
 
-1. A free PDF, ["click here to download it"](http://elementsofprogramming.com/).
+1. A free PDF, [click here to download it](http://elementsofprogramming.com/).
 
-2. A trade paperback from Semigroup Press, just for USD 9.94, ["click here to buy it"](http://www.lulu.com/shop/alexander-stepanov-and-paul-mcjones/elements-of-programming/paperback/product-24142479.html).
+2. A trade paperback from Semigroup Press, just for USD 9.94, [click here to buy it](http://www.lulu.com/shop/alexander-stepanov-and-paul-mcjones/elements-of-programming/paperback/product-24142479.html).
 
 Amazon listing coming soon.
 
