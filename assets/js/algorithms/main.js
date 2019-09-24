@@ -58,11 +58,12 @@ var categories = [
               {id: 'rearrangements-position-based-reverse', name: 'Reverse', categories: []}
             , {id: 'rearrangements-position-based-rotate', name: 'Rotate', categories: []}      
         ]}
-      , {id: 'rearrangements-predicate-based', name: 'Predicate-based', categories: [
-            {id: 'rearrangements-predicate-based-partition', name: 'Partition', categories: []}          
+       ,{id: 'rearrangements-predicate-based', name: 'Predicate-based', categories: [
+            {id: 'rearrangements-predicate-based-partition', name: 'Partition', categories: []}
         ]}
-          
-      , {id: 'rearrangements-ordering-based', name: 'Ordering-based', categories: []}
+       ,{id: 'rearrangements-ordering-based', name: 'Ordering-based', categories: [
+            {id: 'rearrangements-ordering-based-sort', name: 'Sorting', categories: []}
+        ]}
     ]}
   , {id: 'selection', name: 'Selection', categories: []}
 ];
