@@ -1082,6 +1082,32 @@ s = insert(s, begin(s), begin(i), end(i));
 print(s);
 print('...');`
 
+
+,insertion_sort:
+`var r0 = range_bounded("f", "m");
+var r1 = range_bounded("m", "l");
+
+function reverse(f, l) {
+    while (true) {
+        if (equal(f, l)) return;
+        l = predecessor(l);
+        if (equal(f, l)) return;
+        iter_swap(f, l);
+        f = successor(f);        
+    }
+}
+
+function rotate_bidirectional(f, m, l) {
+    reverse(f, m);
+    reverse(m, l);
+    reverse(f, l);
+}
+var s = add_sequence(random_array(), "s");
+print(s);
+rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
+print(s);
+print('...');`
+
 };
 
 function getSnippet(snippet) {
