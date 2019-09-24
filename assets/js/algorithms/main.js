@@ -1085,24 +1085,33 @@ print('...');`
 
 
 ,insertion_sort:
-`var r0 = range_bounded("f", "m");
-var r1 = range_bounded("m", "l");
+`var r = range_bounded("f", "l");
 
-function reverse(f, l) {
-    while (true) {
-        if (equal(f, l)) return;
-        l = predecessor(l);
-        if (equal(f, l)) return;
-        iter_swap(f, l);
-        f = successor(f);        
-    }
+function linear_insert(f, current, r) {
+  var value = source(current);
+  while ( ! equal(f, current) && r(value, source(predecessor(current)))) {
+    sink(current, source(predecessor(current));
+    current = predecessor(current);
+  }
+  sink(current, value); 
+  return current;
 }
 
+function insertion_sort_classic(f, l, r) {
+    if (equal(f, l)) return; 
+    var current = successor(f);
+    while ( ! equal(current, l)) {
+        linear_insert(f, current, r);     
+        current = successor(current);
+    }
+}
+  
 function rotate_bidirectional(f, m, l) {
     reverse(f, m);
     reverse(m, l);
     reverse(f, l);
 }
+
 var s = add_sequence(random_array(), "s");
 print(s);
 rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
