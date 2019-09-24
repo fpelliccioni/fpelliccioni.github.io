@@ -36,6 +36,9 @@ var snippets_cat = {
     , partition_stable_forward: 'rearrangements-predicate-based-partition'
     , partition_point_n: 'rearrangements-predicate-based-partition'
 
+
+    , insertion_sort: 'rearrangements-ordering-based-sort'
+
     , max_element: 'selection'
     , min_element: 'selection'
     , select_1_3: 'selection'
