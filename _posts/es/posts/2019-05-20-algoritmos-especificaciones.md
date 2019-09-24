@@ -13,13 +13,13 @@ En este artículo quiero hablar sobre 2 temas en los que creo que la mayoría de
 Me voy a ayudar de una experiencia real, ocurrida ya hace un tiempo:
 
 Desde hace ya 3 años mantengo un nodo multimoneda (Bitcoin, Bitcoin Cash y Litecoin) llamado [Bitprim](https://github.com/bitprim/bitprim).   
-En Noviembre de 2017 [Bitcoin Cash](https://www.bitcoincash.org/) hizo su primer cambio de protocolo luego de su nacimiento en Agosto del mismo año. Mi trabajo en ese momento era actualizar el código de nuestro nodo para que soporte los cambios de protocolo. Desde aquel momento que quiero escribir este artículo, pero... por alguna o varias razones no lo hice en ese momento, lo estoy haciendo ahora.
+En noviembre de 2017 [Bitcoin Cash](https://www.bitcoincash.org/) hizo su primer cambio de protocolo luego de su nacimiento en agosto del mismo año. Mi trabajo en ese momento era actualizar el código de nuestro nodo para que soporte los cambios de protocolo. Desde aquel momento que quiero escribir este artículo, pero... por alguna o varias razones no lo hice en ese momento, lo estoy haciendo ahora.
 
 El cambio más importante de fue en el _Algoritmo de Ajuste de Dificultad_, en adelante _DAA_ (del inglés _Difficulty Adjustment Algorithm_).
 
 [Aquí la descripción del algoritmo](https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/nov-13-hardfork-spec.md#difficulty-adjustment-algorithm-description).
 
-No quiero entrar en detalles acerca del concepto de _difultad_ ni del DAA. Para ello puede referirse a: [Difficulty](https://en.bitcoin.it/wiki/Difficulty). 
+No quiero entrar en detalles acerca del concepto de _dificultad_ ni del DAA. Para ello puede referirse a: [Difficulty](https://en.bitcoin.it/wiki/Difficulty). 
 
 Lo que me interesa son los puntos 2 y 3 de la descripción del DAA:
 
@@ -81,7 +81,7 @@ static const CBlockIndex *GetSuitableBlock(const CBlockIndex *pindex) {
 {% endhighlight %}
 
 
-Lo que hace el algoritmo es básicamente crear una sequencia de 3 elementos (array), la ordena de menor a mayor y retorna el segundo elemento.
+Lo que hace el algoritmo es básicamente crear una secuencia de 3 elementos (array), la ordena de menor a mayor y retorna el segundo elemento.
 
 La complejidad en tiempo de este algoritmo es: 
 
@@ -116,7 +116,7 @@ auto median_3(T const& a, T const& b, T const& c) {
 }
 {% endhighlight %}
 
-O si prefiere la version _inline_ del algoritmo:
+O si prefiere la versión _inline_ del algoritmo:
 
 {% highlight cpp %}
 template <TotallyOrdered T>
@@ -153,7 +153,7 @@ CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
 Mucho más breve y entendible, ¿no?.
 
 Antes de seguir, tenemos que corregir un problema: no sabemos si el _Ordenamiento Natural_ especificado en la clase `CBlockIndex` está dado por el timestamp del bloque (atributo `nTime`).
-Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strick weak ordering relation_, [para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part3/)).
+Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strict weak ordering relation_, [para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part3/)).
 
 
 {% highlight cpp %}
@@ -233,7 +233,7 @@ s = [{1, 1558731500}, {2, 1558731500}, {3, 1558730000}]
 Donde el primer elemento de cada par es el identificador del bloque `nHeight` y el segundo elemento es el timestamp `nTime`.  
 Note que el `nTime` de los primeros 2 elementos es igual.
 
-Si ordenamos la sequencia anterior por `nTime` usando un algoritmo de ordenamiento estable, como por ejemplo [Merge sort](https://en.wikipedia.org/wiki/Merge_sort) nos quedaría algo así:
+Si ordenamos la secuencia anterior por `nTime` usando un algoritmo de ordenamiento estable, como por ejemplo [Merge sort](https://en.wikipedia.org/wiki/Merge_sort) nos quedaría algo así:
 
 {% highlight cpp %}
 s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
@@ -241,21 +241,29 @@ s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
 
 Note que el elemento del medio es el que tiene `nHeight = 1`. Lo cual indica que nuestro algoritmo se comportó de manera estable pero no así el algoritmo original usado en el DAA de Bitcoin Cash. 
 
-En mi primer implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código de la especificación, yo había asumido erróneamente que también era estable.  
+En mi primera implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código de la especificación, yo había asumido erróneamente que también era estable.  
 Luego esto provocó errores en tiempo de ejecución de nuestro nodo ante un ajuste de dificultad. No se daba siempre, pero hubo un caso en particular en el que lo pudimos detectar. Luego de varias horas de debugging pude detectar que el problema era que el algoritmo usado por mí no era compatible con el "especificado" en DAA.
 
-Por lo tanto, tuve que "corregir" mi algoritmo para hacelo no-estable de la misma forma que el de la especificación.
+Por lo tanto, tuve que "corregir" mi algoritmo para hacerlo no-estable de la misma forma que el de la especificación.
 
-En realidad, si mal no recuero, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock`, sino que decía que se calculaba la mediana de 3 elementos. Como la implementación de la mediana fue "incorrecta" tuvieron que adaptar la especificación para que se condiga con el código.  
+En realidad, si mal no recuerdo, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock`, sino que decía que se calculaba la mediana de 3 elementos. Como la implementación de la mediana fue "incorrecta" tuvieron que adaptar la especificación para que se condiga con el código.  
 Tenga en cuenta, que una vez que el código de un nodo Bitcoin o de cualquier criptomoneda está en funcionamiento, una modificación en su comportamiento introduce incompatibilidades con versiones anteriores y produce los denominados _forks_. Por lo que una vez que el código está corriendo, se trata de no cambiarlo. Por esta razón es por la que se tuvo que adaptar la especificación en vez de corregir el código.
 
-De toda esta experiencia saco algunas conclusiones sobre `GetSuitableBlock` vs. `median_3`:
-- `median_3` no efectua ningún swap, `GetSuitableBlock` puede efectuar entre 0, 7/6 o 2 swaps, innecesariamente. (Eficiencia)
+Antes de terminar, hagamos una comparación de ambos algoritmos, `GetSuitableBlock` vs. `median_3`:
+- `median_3` no efectúa ningún swap, `GetSuitableBlock` puede efectuar entre 0, 7/6 o 2 swaps, innecesariamente. (Eficiencia)
 - `GetSuitableBlock` crea un array innecesariamente. (Eficiencia)
 - `median_3` realiza 2, 8/3 o 3 comparaciones, `GetSuitableBlock` realiza siempre 3 comparaciones. (Eficiencia)
 - `median_3` es estable, `GetSuitableBlock` no lo es. `median_3` es lo que cualquiera espera de un algoritmo que calcule la mediana de 3 elementos. (Correctitud)
 
+Y ahora sí, para finalizar, algunas conclusiones: 
+
 El autor de la especificación de DAA podría haber optado por usar un algoritmo conocido y "estándar", pero no lo hizo.  
-Es más, quizás lo peor de todo esto es que la especificación hace referencia al código. **El código no debe ser nunca especificación. El código debe ser creador a partir de una especificación.** Por lo que si una especificación hace referencia a código no existe dicha especificación.
+Es más, quizás lo peor de todo esto es que la especificación hace referencia al código. **El código no debe ser nunca especificación. El código debe ser creado a partir de una especificación.** Por lo que si una especificación hace referencia a código, no existe dicha especificación.
 
 ¡Saludos!
+
+---
+
+## Agradecimientos
+
+Quiero agradecer a Dario Ramos y Nubis Bruno por revisar el artículo y sugerir correcciones.  

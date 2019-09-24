@@ -12,7 +12,7 @@ canonical: http://componentsprogramming.com
 owner:
   name:           Fernando Pelliccioni
   avatar:         avatar.jpg
-  bio:            "Nature & Programming"
+  bio:            "Programming, Algorithms, Bitcoin"
   email:          fpelliccioni@gmail.com
   twitter:        ferpelliccioni
   github:         fpelliccioni
@@ -37,8 +37,6 @@ analytics :
 tools:
   standards:      "HTML, SCSS, Jekyll"
   software:       "git"
-
-
 
 defaults:
   -

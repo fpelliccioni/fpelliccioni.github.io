@@ -2,6 +2,14 @@
    VARIABLES
    ========================================================================== */
 
+
+@font-face {
+    font-family: 'FellType';
+    // src: url("fonts/myFont.ttf") format("truetype");
+    // src:url('fonts/Icons.eot');
+    src: url("../fonts/Historical FellType Roman.otf") format("truetype");
+ }
+
 /* Colors
    ========================================================================== */
 
@@ -27,6 +35,8 @@ $accent: #24536B;
 /* Typography
    ========================================================================== */
 
+// $sans: "FellType", "Source Sans Pro", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
+// $serif: "FellType", "Calendas Plus","Crimson Text", "Hoefler Text", "Georgia", serif;
 $sans: "Source Sans Pro", "Open Sans", "Helvetica Neue", "Arial", sans-serif;
 $serif: "Calendas Plus","Crimson Text", "Hoefler Text", "Georgia", serif;
 
