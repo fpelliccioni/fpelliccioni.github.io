@@ -7,3 +7,5 @@ gem 'rake'
 
 gem 'github-pages'
 gem 'html-proofer'
+
+gem "yajl-ruby", ">= 1.3.1"
