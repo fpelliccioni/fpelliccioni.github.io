@@ -37,7 +37,8 @@ var snippets_cat = {
     , partition_point_n: 'rearrangements-predicate-based-partition'
 
 
-    , insertion_sort: 'rearrangements-ordering-based-sort'
+    , insertion_sort_classic: 'rearrangements-ordering-based-sort'
+    , insertion_sort_backward: 'rearrangements-ordering-based-sort'
 
     , max_element: 'selection'
     , min_element: 'selection'
@@ -1084,37 +1085,67 @@ print(s);
 print('...');`
 
 
-,insertion_sort:
+,insertion_sort_classic:
 `var r = range_bounded("f", "l");
 
-function linear_insert(f, current, r) {
-  var value = source(current);
-  while ( ! equal(f, current) && r(value, source(predecessor(current)))) {
-    sink(current, source(predecessor(current));
-    current = predecessor(current);
+function linear_insert(f, c, r) {
+  var value = source(c);
+  while ( ! equal(f, c) && r(value, source(predecessor(c)))) {
+    sink(c, source(predecessor(c)));
+    c = predecessor(c);
   }
-  sink(current, value); 
-  return current;
+  sink(c, value); 
+  return c;
 }
 
 function insertion_sort_classic(f, l, r) {
     if (equal(f, l)) return; 
-    var current = successor(f);
-    while ( ! equal(current, l)) {
-        linear_insert(f, current, r);     
-        current = successor(current);
+    var c = successor(f);
+    while ( ! equal(c, l)) {
+        linear_insert(f, c, r);     
+        c = successor(c);
     }
 }
   
-function rotate_bidirectional(f, m, l) {
-    reverse(f, m);
-    reverse(m, l);
-    reverse(f, l);
-}
-
+var rel = relation(function(x, y) { return x < y; }, 'less');
 var s = add_sequence(random_array(), "s");
 print(s);
-rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
+insertion_sort_classic(begin(s), end(s), rel);
+print(s);
+print('...');`
+
+
+,insertion_sort_backward:
+`var r = range_bounded("f", "l");
+
+function complement(r) {
+    return function(x, y) { return !r(x, y); }
+}
+
+function linear_insert_backward(c, l, r) {
+  var value = source(c);
+  while ( ! equal(c, l) && r(value, source(successor(c)))) {
+    sink(c, source(successor(c)));
+    c = successor(c);
+  }
+  sink(c, value); 
+  return c;
+}
+
+function insertion_sort_backward(f, l, r) {
+    r = complement(r);
+    if (equal(f, l)) return; 
+    var c = predecessor(l);
+    while ( ! equal(c, f)) {
+        c = predecessor(c);
+        linear_insert_backward(c, l, r);     
+    }
+}
+  
+var rel = relation(function(x, y) { return x < y; }, 'less');
+var s = add_sequence(random_array(), "s");
+print(s);
+insertion_sort_backward(begin(s), end(s), rel);
 print(s);
 print('...');`
 
@@ -1847,7 +1878,9 @@ function initFunctions(interpreter, scope) {
     // interpreter.setProperty(scope, 'alert',          interpreter.createNativeFunction(alert_wrapper));
     interpreter.setProperty(scope, 'print',          interpreter.createNativeFunction(print_wrapper));
     interpreter.setProperty(scope, 'successor',      interpreter.createNativeFunction(successor_wrapper));
+    interpreter.setProperty(scope, 'next',           interpreter.createNativeFunction(successor_wrapper));
     interpreter.setProperty(scope, 'predecessor',    interpreter.createNativeFunction(predecessor_wrapper));
+    interpreter.setProperty(scope, 'pred',           interpreter.createNativeFunction(predecessor_wrapper));
     interpreter.setProperty(scope, 'begin',          interpreter.createNativeFunction(begin_wrapper));
     interpreter.setProperty(scope, 'end',            interpreter.createNativeFunction(end_wrapper));
     interpreter.setProperty(scope, 'size',           interpreter.createNativeFunction(size_wrapper));
