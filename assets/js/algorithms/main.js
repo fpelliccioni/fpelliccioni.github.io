@@ -37,6 +37,7 @@ var snippets_cat = {
     , partition_point_n: 'rearrangements-predicate-based-partition'
 
 
+    , insertion_sort_classic_0: 'rearrangements-ordering-based-sort'
     , insertion_sort_classic: 'rearrangements-ordering-based-sort'
     , insertion_sort_backward: 'rearrangements-ordering-based-sort'
 
@@ -1085,7 +1086,7 @@ print(s);
 print('...');`
 
 
-,insertion_sort_classic:
+,insertion_sort_classic_0:
 `var r = range_bounded("f", "l");
 
 function linear_insert(f, c, r) {
@@ -1096,6 +1097,42 @@ function linear_insert(f, c, r) {
   }
   sink(c, value); 
   return c;
+}
+
+function insertion_sort_classic_0(f, l, r) {
+    if (equal(f, l)) return; 
+    var c = successor(f);
+    while ( ! equal(c, l)) {
+        linear_insert(f, c, r);     
+        c = successor(c);
+    }
+}
+  
+var rel = relation(function(x, y) { return x < y; }, 'less');
+//var s = add_sequence(random_array(), "s");
+var s = add_sequence([34, 5], "s");
+print(s);
+insertion_sort_classic_0(begin(s), end(s), rel);
+print(s);
+print('...');`
+
+,insertion_sort_classic:
+`var r = range_bounded("f", "l");
+
+function shift_right_while(f, l, p) {
+    if (equal(f, l)) return f;
+    while ( ! equal(f, l) && p(source(predecessor(l)))) {
+        sink(l, source(predecessor(l)));
+        l = predecessor(l);
+    }
+    return l;
+}
+
+function linear_insert(f, c, r) {
+    var value = source_move(c);
+    c = shift_right_while(f, c, function(x) { return r(value, x);});
+    // sink(c, move(value));
+    return c;
 }
 
 function insertion_sort_classic(f, l, r) {
@@ -1109,23 +1146,23 @@ function insertion_sort_classic(f, l, r) {
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
 var s = add_sequence(random_array(), "s");
+// var s = add_sequence([34, 5], "s");
 print(s);
 insertion_sort_classic(begin(s), end(s), rel);
 print(s);
 print('...');`
 
 
+
+
 ,insertion_sort_backward:
 `var r = range_bounded("f", "l");
 
-function complement(r) {
-    return function(x, y) { return !r(x, y); }
-}
-
 function linear_insert_backward(c, l, r) {
   var value = source(c);
-  while ( ! equal(c, l) && r(value, source(successor(c)))) {
-    sink(c, source(successor(c)));
+  c = successor(c);
+  while ( ! equal(c, l) && r(value, source(c))) {
+    sink(c, source(c));
     c = successor(c);
   }
   sink(c, value); 
@@ -1133,8 +1170,9 @@ function linear_insert_backward(c, l, r) {
 }
 
 function insertion_sort_backward(f, l, r) {
+    if (equal(f, l)) return;
+
     r = complement(r);
-    if (equal(f, l)) return; 
     var c = predecessor(l);
     while ( ! equal(c, f)) {
         c = predecessor(c);
@@ -1143,7 +1181,10 @@ function insertion_sort_backward(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var s = add_sequence(random_array(), "s");
+// var s = add_sequence(random_array(), "s");
+// var s = add_sequence([81, 28, 20, 67, 36, 84, 86, 48, 34, 5], "s");
+var s = add_sequence([34, 5], "s");
+
 print(s);
 insertion_sort_backward(begin(s), end(s), rel);
 print(s);
@@ -1298,7 +1339,8 @@ function resetState() {
     stats_it_cmps = 0;
     stats_pred_appls = 0;
     stats_swaps = 0;
-    stats_assigments = 0;    
+    stats_assigments = 0;
+    stats_moves = 0;
 }
 
 function resetStats() {
@@ -1329,11 +1371,12 @@ function updateStats() {
     var hg_right_x_b = document.getElementById('hg-right-x-b');
     hg_right_x_b.innerHTML = '';
 
-    hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator displacements</b>: ' + stats_it_moves+ '</p>';
-    hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator comparisons</b>:   ' + stats_it_cmps+ '</p>';
-    hg_right_x_b.innerHTML += '<p id="Status"><b>Pred/Rel applications</b>:  ' + stats_pred_appls+ '</p>';
-    hg_right_x_b.innerHTML += '<p id="Status"><b>Swaps</b>:                  ' + stats_swaps+ '</p>';
-    hg_right_x_b.innerHTML += '<p id="Status"><b>Assignments</b>:            ' + stats_assigments+ '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator displacements</b>: ' + stats_it_moves + '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator comparisons</b>:   ' + stats_it_cmps + '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Pred/Rel applications</b>:  ' + stats_pred_appls + '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Swaps</b>:                  ' + stats_swaps + '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Assignments</b>:            ' + stats_assigments + '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Moves</b>:                  ' + stats_moves + '</p>';
 }
 
 function subscript_digit(digit) {
@@ -1419,6 +1462,10 @@ function addLogSource(it, res) {
 function addLogSink(it, x) {
     // addLog('sink(' + it.data.name + '<sub>' + it.index + '</sub>, ' + x + ')');
     addLog('sink(' + it.data.name + subscript(it.index) + ', ' + x + ')');
+}
+
+function addLogMove(x) {
+    addLog('move(' + x + ')');
 }
 
 function addLogSwap(a, b) {
@@ -1663,6 +1710,26 @@ function initFunctions(interpreter, scope) {
         return s;
     };
 
+    var source_move_wrapper = function(it) {
+        var data = it.data.data;
+        var max = data.length;
+
+        if (it.index >= max) {
+            showError('not valid iterator to take the source.');
+            disable('disabled');
+            return;
+        }
+
+        var s = data[it.index];
+        addLogSource(it, s)
+        addLogMove(s)
+
+        ++stats_moves;
+        updateStatus();
+
+        return s;
+    };
+
     var sink_wrapper = function(it, x) {
         var data = it.data.data;
         var elements = it.data.elements;
@@ -1741,6 +1808,12 @@ function initFunctions(interpreter, scope) {
     //     updateStatus();
     // };
 
+
+    // var move_wrapper = function(x) {
+    //     addLogMove(x)
+    //     ++stats_moves;
+    //     return x;
+    // };
 
     var iter_swap_wrapper = function(a, b) {
         var data_a = a.data.data;
@@ -1823,7 +1896,7 @@ function initFunctions(interpreter, scope) {
         }
     };    
 
-    var call_relation_internal_wrapper = function(name, x, y, res) {
+    var log_relation_call_internal_wrapper = function(name, x, y, res) {
         if (log_stats_enabled) {
             ++stats_pred_appls;
         }
@@ -1889,15 +1962,19 @@ function initFunctions(interpreter, scope) {
     interpreter.setProperty(scope, 'push_back', interpreter.createNativeFunction(push_back_wrapper));
     
     interpreter.setProperty(scope, 'source',         interpreter.createNativeFunction(source_wrapper));
+    interpreter.setProperty(scope, 'source_move',    interpreter.createNativeFunction(source_move_wrapper));
     interpreter.setProperty(scope, 'sink',           interpreter.createNativeFunction(sink_wrapper));
+    interpreter.setProperty(scope, 'sink_move',      interpreter.createNativeFunction(sink_move_wrapper));
     interpreter.setProperty(scope, 'equal',          interpreter.createNativeFunction(equal_wrapper));
     interpreter.setProperty(scope, 'distance',       interpreter.createNativeFunction(distance_wrapper));
+    // interpreter.setProperty(scope, 'move',           interpreter.createNativeFunction(move_wrapper));
 
     interpreter.setProperty(scope, 'iter_swap',      interpreter.createNativeFunction(iter_swap_wrapper));
+
     interpreter.setProperty(scope, 'add_sequence_internal',   interpreter.createNativeFunction(add_sequence_internal_wrapper));
     interpreter.setProperty(scope, 'fill_elem',      interpreter.createNativeFunction(fill_elem_wrapper));
     interpreter.setProperty(scope, 'call_predicate_internal', interpreter.createNativeFunction(call_predicate_internal_wrapper));
-    interpreter.setProperty(scope, 'call_relation_internal', interpreter.createNativeFunction(call_relation_internal_wrapper));
+    interpreter.setProperty(scope, 'log_relation_call_internal', interpreter.createNativeFunction(log_relation_call_internal_wrapper));
 
     interpreter.setProperty(scope, 'enable_log_stats', interpreter.createNativeFunction(enable_log_stats_wrapper));
     interpreter.setProperty(scope, 'disable_log_stats', interpreter.createNativeFunction(disable_log_stats_wrapper));
@@ -1912,8 +1989,8 @@ function initFunctions(interpreter, scope) {
 // function callPredCode() {
 //     return 'function call_predicate(p, name, x){var res = p(x); call_predicate_internal(name, x, res); return res;};\n'
 //          + 'function predicate(p, name) {return function(x) {return call_predicate(p, name, x);};}\n'
-//          + 'function call_relation(r, name, x, y){var res = r(x, y); call_relation_internal(name, x, y, res); return res;}\n'
-//          + 'function relation(r, name){return function(x, y){return call_relation(r, name, x, y);};}\n'
+//          + 'function log_relation_call(r, name, x, y){var res = r(x, y); log_relation_call_internal(name, x, y, res); return res;}\n'
+//          + 'function relation(r, name){return function(x, y){return log_relation_call(r, name, x, y);};}\n'
 //          + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n'
 //          + 'function random_array(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
 // }
@@ -1922,14 +1999,17 @@ function initFunctions(interpreter, scope) {
 function callPredCode() {
     return 'function call_predicate(p, name, x){var res = p(x); call_predicate_internal(name, x, res); return res;};\n'
          + 'function predicate(p, name) {return function(x) {return call_predicate(p, name, x);};}\n'
-         + 'function call_relation(r, name, x, y){var res = r(x, y); call_relation_internal(name, x, y, res); return res;}\n'
+         + 'function log_relation_call(r, name, x, y){var res = r(x, y); log_relation_call_internal(name, x, y, res); return res;}\n'
 
-         + "function relation(_r, _name) { var code = `(function ${_name}(x, y) {return log_relation_call(_r, '${_name}', x, y);})`; var func = eval(code); func.inner_relation = _r; func.inner_name = _name; return func; }\n"
-         + "function complement(_r) { var _cr = function(x, y) { return !_r.inner_relation(x, y); }; var code = `(function complement_of_${_r.inner_name}(x, y) {return log_relation_call(_cr, '\u00AC${_r.inner_name}', x, y);})`; var func = eval(code); func.inner_relation = _cr; func.inner_name = `\u00AC${_r.inner_name}`; return func; }\n"
+         + 'function relation(_r, _name) {var code = "(function " + _name + "(x, y) {return log_relation_call(_r, \\"" + _name + "\\", x, y);})";var func = eval(code);func.inner_relation = _r;func.inner_name = _name;return func;}\n'
+         + 'function complement(_r) {var _cr = function(x, y) { return !_r.inner_relation(x, y); };var code = "(function complement_of_" + _r.inner_name + "(x, y) {return log_relation_call(_cr, \\"\\u00AC" + _r.inner_name + "\\", x, y);})";var func = eval(code);func.inner_relation = _cr;func.inner_name = "\\u00AC" + _r.inner_name;return func;}\n'
+         + 'function converse(_r) {var _cr = function(x, y) { return _r.inner_relation(y, x); };var code = "(function converse_of_" + _r.inner_name + "(x, y) {return log_relation_call(_cr, \\"" + _r.inner_name + "\\", y, x);})";var func = eval(code);func.inner_relation = _cr;return func;}\n'
 
          + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n'
          + 'function random_array(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
 }
+
+
 
 
 
@@ -2151,8 +2231,8 @@ function scopeOrder(scope) {
         'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self', 
         'window',
         'add_sequence', 'add_sequence_internal', 'alert', 'assign_it',
-        'begin', 'call_predicate', 'call_predicate_internal', 'call_relation',
-        'call_relation_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
+        'begin', 'call_predicate', 'call_predicate_internal', 'log_relation_call',
+        'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'fill_elem', 'find_if', 'sink', 'source', 'successor', 'remove_it',
         'print', 'random_array', 'relation', 'iter_swap', 'predecessor', 'predicate'];
 
@@ -2264,8 +2344,8 @@ function drawScope(scope) {
         'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self', 
         'window',
         'add_sequence', 'add_sequence_internal', 'alert', 'assign_it',
-        'begin', 'call_predicate', 'call_predicate_internal', 'call_relation',
-        'call_relation_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
+        'begin', 'call_predicate', 'call_predicate_internal', 'log_relation_call',
+        'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'fill_elem', 'find_if', 'sink', 'source', 'successor', 'remove_it',
         'print', 'random_array', 'relation', 'iter_swap', 'predecessor', 'predicate'];
 
