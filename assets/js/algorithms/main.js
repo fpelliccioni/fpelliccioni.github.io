@@ -1909,14 +1909,29 @@ function initFunctions(interpreter, scope) {
 
 }
 
+// function callPredCode() {
+//     return 'function call_predicate(p, name, x){var res = p(x); call_predicate_internal(name, x, res); return res;};\n'
+//          + 'function predicate(p, name) {return function(x) {return call_predicate(p, name, x);};}\n'
+//          + 'function call_relation(r, name, x, y){var res = r(x, y); call_relation_internal(name, x, y, res); return res;}\n'
+//          + 'function relation(r, name){return function(x, y){return call_relation(r, name, x, y);};}\n'
+//          + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n'
+//          + 'function random_array(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
+// }
+
+
 function callPredCode() {
     return 'function call_predicate(p, name, x){var res = p(x); call_predicate_internal(name, x, res); return res;};\n'
          + 'function predicate(p, name) {return function(x) {return call_predicate(p, name, x);};}\n'
          + 'function call_relation(r, name, x, y){var res = r(x, y); call_relation_internal(name, x, y, res); return res;}\n'
-         + 'function relation(r, name){return function(x, y){return call_relation(r, name, x, y);};}\n'
+
+         + "function relation(_r, _name) { var code = `(function ${_name}(x, y) {return log_relation_call(_r, '${_name}', x, y);})`; var func = eval(code); func.inner_relation = _r; func.inner_name = _name; return func; }\n"
+         + "function complement(_r) { var _cr = function(x, y) { return !_r.inner_relation(x, y); }; var code = `(function complement_of_${_r.inner_name}(x, y) {return log_relation_call(_cr, '\u00AC${_r.inner_name}', x, y);})`; var func = eval(code); func.inner_relation = _cr; func.inner_name = `\u00AC${_r.inner_name}`; return func; }\n"
+
          + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n'
          + 'function random_array(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
 }
+
+
 
 function addSequenceCode() {
     return 'function add_sequence(d, n, p) {' + '\n' +
