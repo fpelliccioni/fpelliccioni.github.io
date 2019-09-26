@@ -37,10 +37,11 @@ var snippets_cat = {
     , partition_point_n: 'rearrangements-predicate-based-partition'
 
 
-    , insertion_sort_classic_0: 'rearrangements-ordering-based-sort'
-    , insertion_sort_classic_1: 'rearrangements-ordering-based-sort'
-    , insertion_sort_classic:   'rearrangements-ordering-based-sort'
-    , insertion_sort_backward:  'rearrangements-ordering-based-sort'
+    , insertion_sort_classic_0: 'rearrangements-ordering-based-sort-insertion-sort'
+    , insertion_sort_classic_1: 'rearrangements-ordering-based-sort-insertion-sort'
+    , insertion_sort_classic_2: 'rearrangements-ordering-based-sort-insertion-sort'
+    , insertion_sort_classic:   'rearrangements-ordering-based-sort-insertion-sort'
+    , insertion_sort_backward:  'rearrangements-ordering-based-sort-insertion-sort'
 
     , max_element: 'selection'
     , min_element: 'selection'
@@ -65,7 +66,9 @@ var categories = [
             {id: 'rearrangements-predicate-based-partition', name: 'Partition', categories: []}
         ]}
        ,{id: 'rearrangements-ordering-based', name: 'Ordering-based', categories: [
-            {id: 'rearrangements-ordering-based-sort', name: 'Sorting', categories: []}
+            {id: 'rearrangements-ordering-based-sort', name: 'Sorting', categories: [
+                {id: 'rearrangements-ordering-based-sort-insertion-sort', name: 'Insertion Sort', categories: []}    
+            ]}
         ]}
     ]}
   , {id: 'selection', name: 'Selection', categories: []}
@@ -83,7 +86,7 @@ var snippets = {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = add_sequence(random_array(), "d");
+var d = sequence(random_array(), "d");
 var f = begin(d);
 var l = end(d);
 
@@ -103,7 +106,7 @@ if ( ! equal(it, l)) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = add_sequence(random_array(), "d");
+var d = sequence(random_array(), "d");
 var f = begin(d);
 var l = end(d);
 
@@ -130,7 +133,7 @@ if ( ! equal(it, f)) {
 }
 
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var d = add_sequence(random_array(), "d");
+var d = sequence(random_array(), "d");
 
 var f = begin(d);
 var l = end(d);
@@ -157,7 +160,7 @@ if ( ! equal(f, l)) {
 }
 
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var d = add_sequence(random_array(), "d");
+var d = sequence(random_array(), "d");
 
 var f = begin(d);
 var l = end(d);
@@ -181,8 +184,8 @@ if ( ! equal(f, l)) {
     return start;
 }
 
-var d1 = add_sequence(new Array(8), "d1");
-var d2 = add_sequence(new Array(5), "d2");
+var d1 = sequence(new Array(8), "d1");
+var d2 = sequence(new Array(5), "d2");
 
 var f = successor(begin(d1));
 var l = predecessor(end(d1));
@@ -225,7 +228,7 @@ function partition_semistable_1(f, l, p) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = add_sequence(random_array(), "d", even);
+var d = sequence(random_array(), "d", even);
 var f = begin(d);
 var l = end(d);
 
@@ -263,7 +266,7 @@ function partition_semistable(f, l, p) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = add_sequence(random_array(), "d", even);
+var d = sequence(random_array(), "d", even);
 var f = begin(d);
 var l = end(d);
 
@@ -301,7 +304,7 @@ function partition_semistable_nonempty(f, l, p) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = add_sequence(random_array(), "d", even);
+var d = sequence(random_array(), "d", even);
 var f = begin(d);
 var l = end(d);
 
@@ -325,9 +328,9 @@ partition_semistable_nonempty(f, l, even);`
 
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = add_sequence(random_array(), "d", even);
-var bad = add_sequence(new Array(size(d)), "bad");
-var good = add_sequence(new Array(size(d)), "good");
+var d = sequence(random_array(), "d", even);
+var bad = sequence(new Array(size(d)), "bad");
+var good = sequence(new Array(size(d)), "good");
 
 var res = partition_copy(begin(d), end(d), begin(bad), begin(good), even);
 
@@ -370,8 +373,8 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = add_sequence(random_array(), "d", even);
-var buf = add_sequence(new Array(size(d)), "buf");
+var d = sequence(random_array(), "d", even);
+var buf = sequence(new Array(size(d)), "buf");
 
 var p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));
 if ( ! equal(p, l)) {
@@ -408,7 +411,7 @@ function partition_stable_forward(f, l, p) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = add_sequence(random_array(), "d", even);
+var d = sequence(random_array(), "d", even);
 var f = begin(d);
 var l = end(d);
 
@@ -443,7 +446,7 @@ function partition_point_n(f, n, p) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = add_sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
+var d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
 
 var p = partition_point_n(begin(d), size(d), even);
 print('partition point: ' + source(p));`
@@ -525,8 +528,8 @@ var d1_raw = ['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'];
 var d2_raw = ['e', 'v', 'i', 't', 'x', 't', 'i', 'v', 'e'];
 
 var eq = relation(function(x, y) {return x == y;}, "eq");
-var d1 = add_sequence(d1_raw, "d1");
-var d2 = add_sequence(d2_raw, "d2");
+var d1 = sequence(d1_raw, "d1");
+var d2 = sequence(d2_raw, "d2");
 
 var f = begin(d1);
 var l = end(d1);
@@ -550,9 +553,9 @@ print(res);`
 }
 
 function palindrome_naive(seq_arr, r) {
-    var seq = add_sequence(seq_arr, "seq");
+    var seq = sequence(seq_arr, "seq");
     var seq_arr_rev = seq_arr.slice().reverse();
-    var seq_rev = add_sequence(seq_arr_rev, "seq_rev");
+    var seq_rev = sequence(seq_arr_rev, "seq_rev");
 
     var f = begin(seq);
     var l = end(seq);
@@ -599,8 +602,8 @@ function palindrome_forward(f, n, r) {
 
 var eq_rel = relation(function(x, y) {return x == y;}, "eq_rel");
 
-var word = add_sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
-// var word = add_sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
+var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
+// var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
 
 var f = begin(word);
 var n = size(word);
@@ -633,9 +636,9 @@ if (res[0]) {
 
 var eq_rel = relation(function(x, y) {return x == y;}, "eq_rel");
 
-//var word = add_sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
-//var word = add_sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
-var word = add_sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e'], "word");
+//var word = sequence(['e', 'v', 'i', 't', 'a', 't', 'i', 'v', 'e'], "word");
+//var word = sequence(['e', 'v', 'i', 'x', 'a', 't', 'i', 'v', 'e'], "word");
+var word = sequence(['e', 'v', 'i', 't', 't', 'i', 'v', 'e'], "word");
 
 var f = begin(word);
 var l = end(word);
@@ -660,8 +663,8 @@ if (res) {
     return f1; 
 }
 
-var s1 = add_sequence(random_array(), "s1");
-var s2 = add_sequence(random_array(), "s2");
+var s1 = sequence(random_array(), "s1");
+var s2 = sequence(random_array(), "s2");
 
 var r = swap_ranges(begin(s1), end(s1), begin(s2));
 print('...');`
@@ -677,8 +680,8 @@ print('...');`
     return [f0, f1];
 }
 
-var s1 = add_sequence(random_array(), "s1");
-var s2 = add_sequence(random_array(5), "s2");
+var s1 = sequence(random_array(), "s1");
+var s2 = sequence(random_array(5), "s2");
 
 var r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
 var f0 = r[0];
@@ -700,8 +703,8 @@ function swap_ranges_n(f0, f1, n) {
     return [f0, f1];
 }
 
-var s1 = add_sequence(random_array(), "s1");
-var s2 = add_sequence(random_array(5), "s2");
+var s1 = sequence(random_array(), "s1");
+var s2 = sequence(random_array(5), "s2");
 
 var r = swap_ranges_n(begin(s1), begin(s2), 5);
 var f0 = r[0];
@@ -722,7 +725,7 @@ function reverse_n_indexed(f, n) {
     } 
 }
 
-var s = add_sequence(random_array(), "s1");
+var s = sequence(random_array(), "s1");
 print(s);
 reverse_n_indexed(begin(s), size(s));
 print(s);
@@ -744,7 +747,7 @@ function reverse_bidirectional(f, l) {
     }
 }
 
-var s = add_sequence(random_array(), "s1");
+var s = sequence(random_array(), "s1");
 print(s);
 reverse_bidirectional(begin(s), end(s));
 print(s);
@@ -781,7 +784,7 @@ function reverse_n_forward(f, n) {
     return l;
 }
 
-var s = add_sequence(random_array(), "s1");
+var s = sequence(random_array(), "s1");
 print(s);
 var r = reverse_n_forward(begin(s), size(s));
 print(s);
@@ -800,8 +803,8 @@ function reverse_copy(f_i, l_i, f_o) {
     return f_o;
 }
 
-var d = add_sequence(random_array(), "d");
-var b = add_sequence(new Array(size(d)), "b");
+var d = sequence(random_array(), "d");
+var b = sequence(new Array(size(d)), "b");
 
 var res = reverse_copy(begin(d), end(d), begin(b));
 print(d);
@@ -835,8 +838,8 @@ function reverse_n_with_buffer(f_i, n, f_b) {
     return reverse_copy(f_b, copy_n(f_i, n, f_b)[1], f_i);
 }
 
-var s = add_sequence(random_array(), "s");
-var b = add_sequence(new Array(size(s)), "b");
+var s = sequence(random_array(), "s");
+var b = sequence(new Array(size(s)), "b");
 print(s);
 var r = reverse_n_with_buffer(begin(s), size(s), begin(b));
 print(s);`
@@ -901,9 +904,9 @@ function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
 
 }
 
-var s = add_sequence(random_array(16), "s");
-//var b = add_sequence(new Array(size(s)), "b");
-var b = add_sequence(new Array(4), "b");
+var s = sequence(random_array(16), "s");
+//var b = sequence(new Array(size(s)), "b");
+var b = sequence(new Array(4), "b");
 print(s);
 var r = reverse_n_adaptive(begin(s), size(s), begin(b), size(b));
 print(s);`
@@ -929,7 +932,7 @@ function rotate_bidirectional(f, m, l) {
     reverse(m, l);
     reverse(f, l);
 }
-var s = add_sequence(random_array(), "s");
+var s = sequence(random_array(), "s");
 print(s);
 rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
 print(s);
@@ -993,7 +996,7 @@ function rotate_random_access_nontrivial(f, m, l) {
     return rotate_cycles(f, m, l, p);
 }
 
-var s = add_sequence(random_array(12), "s");
+var s = sequence(random_array(12), "s");
 print(s);
 rotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));
 print(s);
@@ -1034,8 +1037,8 @@ function insert_naive(s, ip, f, l) {
     return s;
 }
 
-var s = add_sequence(random_array(), "s");
-var i = add_sequence(random_array(5), "i");
+var s = sequence(random_array(), "s");
+var i = sequence(random_array(5), "i");
 
 print(s);
 print(i);
@@ -1077,8 +1080,8 @@ function insert(s, ip, f, l) {
     return s;
 }
 
-var s = add_sequence(random_array(), "s");
-var i = add_sequence(random_array(5), "i");
+var s = sequence(random_array(), "s");
+var i = sequence(random_array(5), "i");
 
 print(s);
 print(i);
@@ -1110,12 +1113,11 @@ function insertion_sort_classic_0(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-//var s = add_sequence(random_array(), "s");
-var s = add_sequence([34, 5], "s");
+//var s = sequence(random_array(), "s");
+var s = sequence([34, 5], "s");
 print(s);
 insertion_sort_classic_0(begin(s), end(s), rel);
-print(s);
-print('...');`
+print(s);`
 
 
 ,insertion_sort_classic_1:
@@ -1146,16 +1148,15 @@ function insertion_sort_classic_1(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var s = add_sequence(random_array(), "s");
-// var s = add_sequence([34, 5], "s");
+var s = sequence(random_array(), "s");
+// var s = sequence([34, 5], "s");
 print(s);
 insertion_sort_classic_1(begin(s), end(s), rel);
-print(s);
-print('...');`
+print(s);`
 
 
 
-,insertion_sort_classic:
+,insertion_sort_classic_2:
 `var r = range_bounded("f", "l");
 
 function shift_right_while_nonempty(f, l, p) {
@@ -1175,6 +1176,46 @@ function linear_insert(f, c, r) {
     return c;
 }
 
+function insertion_sort_classic_2(f, l, r) {
+    if (equal(f, l)) return; 
+    var c = successor(f);
+    while ( ! equal(c, l)) {
+        linear_insert(f, c, r);
+        c = successor(c);
+    }
+}
+  
+var rel = relation(function(x, y) { return x < y; }, 'less');
+var s = sequence(random_array(), "s");
+// var s = sequence([34, 5], "s");
+print(s);
+insertion_sort_classic_2(begin(s), end(s), rel);
+print(s);`
+
+
+
+
+,insertion_sort_classic:
+`var r = range_bounded("f", "l");
+
+function shift_right_while_nonempty(f, l, p) {
+    //precondition: ! equal(f, l)
+    while (p(source(predecessor(l)))) {
+        sink(l, source(predecessor(l)));
+        l = predecessor(l);
+        if (equal(f, l)) break;
+    }
+    return l;
+}
+
+function linear_insert(f, c, r) {
+    var value = source_move(c);
+    // c = shift_right_while_nonempty(f, c, function(x) { return r(value, x);});
+    c = shift_right_while_nonempty(f, c, bind(r, value));
+    sink_move(c, value);
+    return c;
+}
+
 function insertion_sort_classic(f, l, r) {
     if (equal(f, l)) return; 
     var c = successor(f);
@@ -1185,12 +1226,12 @@ function insertion_sort_classic(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var s = add_sequence(random_array(), "s");
-// var s = add_sequence([34, 5], "s");
+var s = sequence(random_array(), "s");
+// var s = sequence([34, 5], "s");
 print(s);
 insertion_sort_classic(begin(s), end(s), rel);
-print(s);
-print('...');`
+print(s);`
+
 
 
 
@@ -1220,14 +1261,13 @@ function insertion_sort_backward(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-// var s = add_sequence(random_array(), "s");
-// var s = add_sequence([81, 28, 20, 67, 36, 84, 86, 48, 34, 5], "s");
-var s = add_sequence([34, 5], "s");
+// var s = sequence(random_array(), "s");
+// var s = sequence([81, 28, 20, 67, 36, 84, 86, 48, 34, 5], "s");
+var s = sequence([34, 5], "s");
 
 print(s);
 insertion_sort_backward(begin(s), end(s), rel);
-print(s);
-print('...');`
+print(s);`
 
 };
 
@@ -1908,7 +1948,7 @@ function initFunctions(interpreter, scope) {
     };
 
 
-    var add_sequence_internal_wrapper = function(data_par, name) {
+    var sequence_internal_wrapper = function(data_par, name) {
         // console.log(data_par);
 
         if (sequences[name] != undefined) {
@@ -2039,7 +2079,7 @@ function initFunctions(interpreter, scope) {
 
     interpreter.setProperty(scope, 'iter_swap',      interpreter.createNativeFunction(iter_swap_wrapper));
 
-    interpreter.setProperty(scope, 'add_sequence_internal',   interpreter.createNativeFunction(add_sequence_internal_wrapper));
+    interpreter.setProperty(scope, 'sequence_internal',   interpreter.createNativeFunction(sequence_internal_wrapper));
     interpreter.setProperty(scope, 'fill_elem',      interpreter.createNativeFunction(fill_elem_wrapper));
     interpreter.setProperty(scope, 'call_predicate_internal', interpreter.createNativeFunction(call_predicate_internal_wrapper));
     interpreter.setProperty(scope, 'log_relation_call_internal', interpreter.createNativeFunction(log_relation_call_internal_wrapper));
@@ -2054,14 +2094,19 @@ function initFunctions(interpreter, scope) {
 
 }
 
-// function callPredCode() {
-//     return 'function call_predicate(p, name, x){var res = p(x); call_predicate_internal(name, x, res); return res;};\n'
-//          + 'function predicate(p, name) {return function(x) {return call_predicate(p, name, x);};}\n'
-//          + 'function log_relation_call(r, name, x, y){var res = r(x, y); log_relation_call_internal(name, x, y, res); return res;}\n'
-//          + 'function relation(r, name){return function(x, y){return log_relation_call(r, name, x, y);};}\n'
-//          + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n'
-//          + 'function random_array(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
+// function bind(r, value, arg=0) {
+//     if (arg == 0)
+//         return function(x) { return r(value, x);};
+    
+//     return function(x) { return r(x, value);};
 // }
+
+
+// function bind(r, value) {
+//     return function(x) { return r(value, x);};
+// }
+
+
 
 
 function callPredCode() {
@@ -2073,18 +2118,17 @@ function callPredCode() {
          + 'function complement(_r) {var _cr = function(x, y) { return !_r.inner_relation(x, y); };var code = "(function complement_of_" + _r.inner_name + "(x, y) {return log_relation_call(_cr, \\"\\u00AC" + _r.inner_name + "\\", x, y);})";var func = eval(code);func.inner_relation = _cr;func.inner_name = "\\u00AC" + _r.inner_name;return func;}\n'
          + 'function converse(_r) {var _cr = function(x, y) { return _r.inner_relation(y, x); };var code = "(function converse_of_" + _r.inner_name + "(x, y) {return log_relation_call(_cr, \\"" + _r.inner_name + "\\", y, x);})";var func = eval(code);func.inner_relation = _cr;return func;}\n'
 
+        //  + 'function bind(r, value, arg=0) {if (arg == 0) return function(x) { return r(value, x);}; return function(x) { return r(x, value);};}\n'
+         + 'function bind(r, value, arg) {return function(x) { return r(value, x);};}\n'
+
          + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n'
          + 'function random_array(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
 }
 
-
-
-
-
 function addSequenceCode() {
-    return 'function add_sequence(d, n, p) {' + '\n' +
+    return 'function sequence(d, n, p) {' + '\n' +
     '    disable_log_stats();' + '\n' +
-    '    var obj = add_sequence_internal(d, n);' + '\n' +
+    '    var obj = sequence_internal(d, n);' + '\n' +
     '    //print(obj);' + '\n' +
     '    if ( ! obj) {enable_log_stats(); return obj;}' + '\n' +
     '    if (p) {' + '\n' +    
@@ -2298,7 +2342,7 @@ function scopeOrder(scope) {
         'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
         'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self', 
         'window',
-        'add_sequence', 'add_sequence_internal', 'alert', 'assign_it',
+        'sequence', 'sequence_internal', 'alert', 'assign_it',
         'begin', 'call_predicate', 'call_predicate_internal', 'log_relation_call',
         'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'fill_elem', 'find_if', 'sink', 'source', 'successor', 'remove_it',
@@ -2411,7 +2455,7 @@ function drawScope(scope) {
         'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
         'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self', 
         'window',
-        'add_sequence', 'add_sequence_internal', 'alert', 'assign_it',
+        'sequence', 'sequence_internal', 'alert', 'assign_it',
         'begin', 'call_predicate', 'call_predicate_internal', 'log_relation_call',
         'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'fill_elem', 'find_if', 'sink', 'source', 'successor', 'remove_it',
