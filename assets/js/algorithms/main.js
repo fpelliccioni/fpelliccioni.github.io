@@ -40,8 +40,14 @@ var snippets_cat = {
     , insertion_sort_classic_0: 'rearrangements-ordering-based-sort-insertion-sort'
     , insertion_sort_classic_1: 'rearrangements-ordering-based-sort-insertion-sort'
     , insertion_sort_classic_2: 'rearrangements-ordering-based-sort-insertion-sort'
+    , insertion_sort_classic_3: 'rearrangements-ordering-based-sort-insertion-sort'
     , insertion_sort_classic:   'rearrangements-ordering-based-sort-insertion-sort'
+    , insertion_sort:           'rearrangements-ordering-based-sort-insertion-sort'
     , insertion_sort_backward:  'rearrangements-ordering-based-sort-insertion-sort'
+
+    , selection_sort_classic:   'rearrangements-ordering-based-sort-selection-sort'
+    , selection_sort_stable:   'rearrangements-ordering-based-sort-selection-sort'
+
 
     , max_element: 'selection'
     , min_element: 'selection'
@@ -67,7 +73,8 @@ var categories = [
         ]}
        ,{id: 'rearrangements-ordering-based', name: 'Ordering-based', categories: [
             {id: 'rearrangements-ordering-based-sort', name: 'Sorting', categories: [
-                {id: 'rearrangements-ordering-based-sort-insertion-sort', name: 'Insertion Sort', categories: []}    
+                {id: 'rearrangements-ordering-based-sort-insertion-sort', name: 'Insertion Sort', categories: []},
+                {id: 'rearrangements-ordering-based-sort-selection-sort', name: 'Selection Sort', categories: []}
             ]}
         ]}
     ]}
@@ -77,7 +84,7 @@ var categories = [
 
 var snippets = {
 
-    find_if: 
+find_if:
 `function find_if(f, l, p) {
     while ( ! equal(f, l) && ! p(source(f))) {
         f = successor(f)
@@ -86,7 +93,7 @@ var snippets = {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = sequence(random_array(), "d");
+var d = sequence(array_random(), "d");
 var f = begin(d);
 var l = end(d);
 
@@ -106,7 +113,7 @@ if ( ! equal(it, l)) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = sequence(random_array(), "d");
+var d = sequence(array_random(), "d");
 var f = begin(d);
 var l = end(d);
 
@@ -133,7 +140,7 @@ if ( ! equal(it, f)) {
 }
 
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var d = sequence(random_array(), "d");
+var d = sequence(array_random(), "d");
 
 var f = begin(d);
 var l = end(d);
@@ -160,7 +167,7 @@ if ( ! equal(f, l)) {
 }
 
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var d = sequence(random_array(), "d");
+var d = sequence(array_random(), "d");
 
 var f = begin(d);
 var l = end(d);
@@ -228,7 +235,7 @@ function partition_semistable_1(f, l, p) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = sequence(random_array(), "d", even);
+var d = sequence(array_random(), "d", even);
 var f = begin(d);
 var l = end(d);
 
@@ -266,7 +273,7 @@ function partition_semistable(f, l, p) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = sequence(random_array(), "d", even);
+var d = sequence(array_random(), "d", even);
 var f = begin(d);
 var l = end(d);
 
@@ -304,7 +311,7 @@ function partition_semistable_nonempty(f, l, p) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = sequence(random_array(), "d", even);
+var d = sequence(array_random(), "d", even);
 var f = begin(d);
 var l = end(d);
 
@@ -328,7 +335,7 @@ partition_semistable_nonempty(f, l, even);`
 
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = sequence(random_array(), "d", even);
+var d = sequence(array_random(), "d", even);
 var bad = sequence(new Array(size(d)), "bad");
 var good = sequence(new Array(size(d)), "good");
 
@@ -373,7 +380,7 @@ function partition_stable_with_buffer_0(f, l, p, b) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = sequence(random_array(), "d", even);
+var d = sequence(array_random(), "d", even);
 var buf = sequence(new Array(size(d)), "buf");
 
 var p = partition_stable_with_buffer_0(begin(d), end(d), even, begin(buf));
@@ -411,7 +418,7 @@ function partition_stable_forward(f, l, p) {
 }
 
 var even = predicate(function(x) {return x % 2 == 0;}, "even");
-var d = sequence(random_array(), "d", even);
+var d = sequence(array_random(), "d", even);
 var f = begin(d);
 var l = end(d);
 
@@ -480,7 +487,7 @@ function select_1_3(a, b, c, r) {
 
 var r = relation(function(x, y) { return x < y; }, 'less');
 
-var tmp = random_array(3);
+var tmp = array_random(3);
 var a = tmp[0];
 var b = tmp[1];
 var c = tmp[2];
@@ -663,8 +670,8 @@ if (res) {
     return f1; 
 }
 
-var s1 = sequence(random_array(), "s1");
-var s2 = sequence(random_array(), "s2");
+var s1 = sequence(array_random(), "s1");
+var s2 = sequence(array_random(), "s2");
 
 var r = swap_ranges(begin(s1), end(s1), begin(s2));
 print('...');`
@@ -680,8 +687,8 @@ print('...');`
     return [f0, f1];
 }
 
-var s1 = sequence(random_array(), "s1");
-var s2 = sequence(random_array(5), "s2");
+var s1 = sequence(array_random(), "s1");
+var s2 = sequence(array_random(5), "s2");
 
 var r = swap_ranges_bounded(begin(s1), end(s1), begin(s2), end(s2));
 var f0 = r[0];
@@ -703,8 +710,8 @@ function swap_ranges_n(f0, f1, n) {
     return [f0, f1];
 }
 
-var s1 = sequence(random_array(), "s1");
-var s2 = sequence(random_array(5), "s2");
+var s1 = sequence(array_random(), "s1");
+var s2 = sequence(array_random(5), "s2");
 
 var r = swap_ranges_n(begin(s1), begin(s2), 5);
 var f0 = r[0];
@@ -725,7 +732,7 @@ function reverse_n_indexed(f, n) {
     } 
 }
 
-var s = sequence(random_array(), "s1");
+var s = sequence(array_random(), "s1");
 print(s);
 reverse_n_indexed(begin(s), size(s));
 print(s);
@@ -747,7 +754,7 @@ function reverse_bidirectional(f, l) {
     }
 }
 
-var s = sequence(random_array(), "s1");
+var s = sequence(array_random(), "s1");
 print(s);
 reverse_bidirectional(begin(s), end(s));
 print(s);
@@ -784,7 +791,7 @@ function reverse_n_forward(f, n) {
     return l;
 }
 
-var s = sequence(random_array(), "s1");
+var s = sequence(array_random(), "s1");
 print(s);
 var r = reverse_n_forward(begin(s), size(s));
 print(s);
@@ -803,7 +810,7 @@ function reverse_copy(f_i, l_i, f_o) {
     return f_o;
 }
 
-var d = sequence(random_array(), "d");
+var d = sequence(array_random(), "d");
 var b = sequence(new Array(size(d)), "b");
 
 var res = reverse_copy(begin(d), end(d), begin(b));
@@ -838,7 +845,7 @@ function reverse_n_with_buffer(f_i, n, f_b) {
     return reverse_copy(f_b, copy_n(f_i, n, f_b)[1], f_i);
 }
 
-var s = sequence(random_array(), "s");
+var s = sequence(array_random(), "s");
 var b = sequence(new Array(size(s)), "b");
 print(s);
 var r = reverse_n_with_buffer(begin(s), size(s), begin(b));
@@ -904,7 +911,7 @@ function reverse_n_adaptive(f_i, n_i, f_b, n_b) {
 
 }
 
-var s = sequence(random_array(16), "s");
+var s = sequence(array_random(16), "s");
 //var b = sequence(new Array(size(s)), "b");
 var b = sequence(new Array(4), "b");
 print(s);
@@ -932,7 +939,7 @@ function rotate_bidirectional(f, m, l) {
     reverse(m, l);
     reverse(f, l);
 }
-var s = sequence(random_array(), "s");
+var s = sequence(array_random(), "s");
 print(s);
 rotate_bidirectional(begin(s), successor(begin(s), 3), end(s));
 print(s);
@@ -996,7 +1003,7 @@ function rotate_random_access_nontrivial(f, m, l) {
     return rotate_cycles(f, m, l, p);
 }
 
-var s = sequence(random_array(12), "s");
+var s = sequence(array_random(12), "s");
 print(s);
 rotate_random_access_nontrivial(begin(s), successor(begin(s), 3), end(s));
 print(s);
@@ -1037,8 +1044,8 @@ function insert_naive(s, ip, f, l) {
     return s;
 }
 
-var s = sequence(random_array(), "s");
-var i = sequence(random_array(5), "i");
+var s = sequence(array_random(), "s");
+var i = sequence(array_random(5), "i");
 
 print(s);
 print(i);
@@ -1080,8 +1087,8 @@ function insert(s, ip, f, l) {
     return s;
 }
 
-var s = sequence(random_array(), "s");
-var i = sequence(random_array(5), "i");
+var s = sequence(array_random(), "s");
+var i = sequence(array_random(5), "i");
 
 print(s);
 print(i);
@@ -1113,7 +1120,7 @@ function insertion_sort_classic_0(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-//var s = sequence(random_array(), "s");
+//var s = sequence(array_random(), "s");
 var s = sequence([34, 5], "s");
 print(s);
 insertion_sort_classic_0(begin(s), end(s), rel);
@@ -1148,8 +1155,7 @@ function insertion_sort_classic_1(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var s = sequence(random_array(), "s");
-// var s = sequence([34, 5], "s");
+var s = sequence(array_random(), "s");
 print(s);
 insertion_sort_classic_1(begin(s), end(s), rel);
 print(s);`
@@ -1186,8 +1192,7 @@ function insertion_sort_classic_2(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var s = sequence(random_array(), "s");
-// var s = sequence([34, 5], "s");
+var s = sequence(array_random(), "s");
 print(s);
 insertion_sort_classic_2(begin(s), end(s), rel);
 print(s);`
@@ -1195,23 +1200,57 @@ print(s);`
 
 
 
+,insertion_sort_classic_3:
+`var r = range_bounded("f", "l");
+
+function linear_insert(f, c, r) {
+    if ( ! r(source(c), source(predecessor(c)))) return c;
+
+    var value = source_move(c);
+    while (true) {
+        sink_move(c, source(predecessor(c)));
+        c = predecessor(c);
+        
+        if (equal(f, c)) break;
+        if ( ! r(value, source(predecessor(c)))) break;
+    }
+    sink_move(c, value);
+    return c;
+}
+
+function insertion_sort_classic_3(f, l, r) {
+    if (equal(f, l)) return; 
+    var c = successor(f);
+    while ( ! equal(c, l)) {
+        linear_insert(f, c, r);
+        c = successor(c);
+    }
+}
+  
+var rel = relation(function(x, y) { return x < y; }, 'less');
+var s = sequence(array_random(), "s");
+print(s);
+insertion_sort_classic_3(begin(s), end(s), rel);
+print(s);`
+
+
 ,insertion_sort_classic:
 `var r = range_bounded("f", "l");
 
-function shift_right_while_nonempty(f, l, p) {
-    //precondition: ! equal(f, l)
-    while (p(source(predecessor(l)))) {
-        sink(l, source(predecessor(l)));
+function shift_right_while(f, l, p) {
+    while ( ! equal(f, l) && p(source(predecessor(l)))) {
+        sink_move(l, source(predecessor(l)));
         l = predecessor(l);
-        if (equal(f, l)) break;
     }
     return l;
 }
 
 function linear_insert(f, c, r) {
+    if ( ! r(source(c), source(predecessor(c)))) return c;
+
     var value = source_move(c);
-    // c = shift_right_while_nonempty(f, c, function(x) { return r(value, x);});
-    c = shift_right_while_nonempty(f, c, bind(r, value));
+    sink_move(c, source(predecessor(c)));
+    c = shift_right_while(f, predecessor(c), bind(r, value));
     sink_move(c, value);
     return c;
 }
@@ -1226,12 +1265,75 @@ function insertion_sort_classic(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var s = sequence(random_array(), "s");
-// var s = sequence([34, 5], "s");
+var s = sequence(array_random(), "s");
 print(s);
 insertion_sort_classic(begin(s), end(s), rel);
 print(s);`
 
+
+,insertion_sort:
+`var r = range_bounded("f", "l");
+
+function move_backward(f_i, l_i, l_o) {
+    while (! equal(f_i, l_i)) {
+        //move_backward_step(l_i, l_o);
+        l_i = predecessor(l_i);
+        l_o = predecessor(l_o);
+        sink_move(l_o, source(l_i));
+    } 
+    return l_o;
+}
+
+function rotate_right_by_one_nonempty(f, l) {
+    var butlast = predecessor(l);
+    var x = source_move(butlast);
+    move_backward(f, butlast, l);
+    sink_move(f, x);
+}
+
+function linear_insert_with_sentinel(f, c, r) {
+    var value = source_move(c);
+
+    while (r(value, source(predecessor(c)))) {
+        sink_move(c, source(predecessor(c)));
+        c = predecessor(c);
+    }
+    sink_move(c, value);
+    return c;
+}
+
+function insertion_sort_suffix_nonempty(f, l, r) {
+    //if (equal(f, l)) return; 
+    var c = successor(f);
+    while ( ! equal(c, l)) {
+        linear_insert_with_sentinel(f, c, r);     
+        c = successor(c);
+    }
+}
+
+function insertion_sort(f, l, r) {
+    if (equal(f, l)) return; 
+    var c = successor(f);
+    if (equal(c, l)) return;
+
+    // create a sentinel
+    var min = min_element_nonempty(f, l, r);
+    rotate_right_by_one_nonempty(f, successor(min));
+    insertion_sort_suffix_nonempty(c, l, r);
+}
+  
+var rel = relation(function(x, y) { return x < y; }, 'less');
+// var s = sequence([1, 2, 3, 4, 5], "s");
+// var s = sequence([1, 2], "s");
+
+// var s = sequence(array_random(), "s");
+// var s = sequence(array_all_equal(), "s");
+// var s = sequence(array_ascending(), "s");
+var s = sequence(array_descending(), "s");
+
+print(s);
+insertion_sort(begin(s), end(s), rel);
+print(s);`
 
 
 
@@ -1261,7 +1363,7 @@ function insertion_sort_backward(f, l, r) {
 }
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-// var s = sequence(random_array(), "s");
+// var s = sequence(array_random(), "s");
 // var s = sequence([81, 28, 20, 67, 36, 84, 86, 48, 34, 5], "s");
 var s = sequence([34, 5], "s");
 
@@ -1269,6 +1371,94 @@ print(s);
 insertion_sort_backward(begin(s), end(s), rel);
 print(s);`
 
+
+
+
+,selection_sort_classic:
+
+`//Unstable selection sort
+
+var r = range_bounded("f", "l");
+
+function min_element(f, l, r) {
+    if (equal(f, l)) return l;
+
+    var m = f;
+    f = successor(f);
+
+    while ( ! equal(f, l)) {
+        if (r(source(f), source(m))) {
+            m = f;
+        }
+        f = successor(f);
+    }
+    return m;
+}
+
+function selection_sort_classic(f, l, r) {
+    while ( ! equal(f, l)) {
+        iter_swap(f, min_element(f, l, r));
+        f = successor(f);
+    }
+}
+  
+var rel = relation(function(x, y) { return x < y; }, 'less');
+var s = sequence(array_random(), "s");
+print(s);
+selection_sort_classic(begin(s), end(s), rel);
+print(s);`
+
+
+,selection_sort_stable:
+`//Stable selection sort
+
+var r = range_bounded("f", "l");
+
+function min_element(f, l, r) {
+    if (equal(f, l)) return l;
+
+    var m = f;
+    f = successor(f);
+
+    while ( ! equal(f, l)) {
+        if (r(source(f), source(m))) {
+            m = f;
+        }
+        f = successor(f);
+    }
+    return m;
+}
+
+function move_backward(f_i, l_i, l_o) {
+    while (! equal(f_i, l_i)) {
+        //move_backward_step(l_i, l_o);
+        l_i = predecessor(l_i);
+        l_o = predecessor(l_o);
+        sink_move(l_o, source(l_i));
+    } 
+    return l_o;
+}
+
+function rotate_right_by_one(f, l) {
+    if (equal(f, l)) return;
+    var butlast = predecessor(l);
+    var x = source_move(butlast);
+    move_backward(f, butlast, l);
+    sink_move(f, x);
+}
+
+function selection_sort_stable(f, l, r) {
+    while (! equal(f, l)) {
+        rotate_right_by_one(f, successor(min_element(f, l, r)));
+        f = successor(f);
+    }
+}
+  
+var rel = relation(function(x, y) { return x < y; }, 'less');
+var s = sequence(array_random(), "s");
+print(s);
+selection_sort_stable(begin(s), end(s), rel);
+print(s);`
 };
 
 function getSnippet(snippet) {
@@ -1593,7 +1783,7 @@ function initFunctions(interpreter, scope) {
     var print_wrapper = function(text) {
 
         if (text instanceof Sequence) {
-            text = text.data.join(", ");
+            text = "[" + text.data.join(", ") + "]";
         }
 
         var msg = '<p id="OutputMsg"><span style="color:cyan">INFO: </span>' + text + '</p>';
@@ -1800,6 +1990,7 @@ function initFunctions(interpreter, scope) {
         }
 
         var s = data[it.index];
+        data[it.index] = '_';
         addLogSource(it, s)
         addLogMove(s)
 
@@ -2121,8 +2312,8 @@ function callPredCode() {
         //  + 'function bind(r, value, arg=0) {if (arg == 0) return function(x) { return r(value, x);}; return function(x) { return r(x, value);};}\n'
          + 'function bind(r, value, arg) {return function(x) { return r(value, x);};}\n'
 
-         + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n'
-         + 'function random_array(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
+         + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n';
+        //  + 'function array_random(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
 }
 
 function addSequenceCode() {
@@ -2145,8 +2336,84 @@ function addSequenceCode() {
     '}'+ '\n'
 }
 
+function add_utils_lib() {
+    return `
+    function array_random(n, from, to) {
+        if ( ! n) n = 10;
+        if ( ! from) from = 0;
+        if ( ! to) to = 99;
+        var res = []; 
+        while (n != 0) {
+            var rand = Math.floor(Math.random() * to) + from; 
+            res.push(rand); 
+            --n;
+        } return res; 
+    }
+    function array_all_equal(n, x) {
+        if ( ! n) n = 10;
+        if ( ! x) x = 1;
+        var res = []; 
+        while (n != 0) { 
+            res.push(x); 
+            --n;
+        } 
+        return res; 
+    }
+    function array_ascending(n, from) {
+        if ( ! n) n = 10;
+        if ( ! from) from = 0;
+        var res = []; 
+        while (n != 0) {
+            res.push(from); 
+            ++from;
+            --n;
+        } return res; 
+    }
+    function array_descending(n, from) {
+        if ( ! n) n = 10;
+        if ( ! from) from = n - 1;
+        var res = []; 
+        while (n != 0) {
+            res.push(from); 
+            --from;
+            --n;
+        } return res; 
+    }
+    `;
+}
+
+function add_std_lib() {
+    return `
+    function min_element_nonempty(f, l, r) {
+        var m = f;
+        f = successor(f);
+        while ( ! equal(f, l)) {
+            if (r(source(f), source(m))) {
+                m = f;
+            }
+            f = successor(f);
+        }
+        return m;
+    }
+    `;
+
+    // `function iota(f, l, start, step) {
+    //     if ( ! start) start = 0;
+    //     if ( ! step) step = 1;
+    
+    //     while ( ! equal(f, l)) {
+    //         sink(f, start);
+    //         start += step;
+    //         f = successor(f);
+    //     }
+    //     return start;
+    // }`    
+}
+
+
+
 function invisibleCode() {
-    return callPredCode() + addSequenceCode();
+    return callPredCode() + addSequenceCode() + add_std_lib() + add_utils_lib();
 }
 
 
@@ -2346,7 +2613,8 @@ function scopeOrder(scope) {
         'begin', 'call_predicate', 'call_predicate_internal', 'log_relation_call',
         'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'fill_elem', 'find_if', 'sink', 'source', 'successor', 'remove_it',
-        'print', 'random_array', 'relation', 'iter_swap', 'predecessor', 'predicate'];
+        'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending', 
+        'relation', 'iter_swap', 'predecessor', 'predicate'];
 
     variables = [];
 
@@ -2459,7 +2727,8 @@ function drawScope(scope) {
         'begin', 'call_predicate', 'call_predicate_internal', 'log_relation_call',
         'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'fill_elem', 'find_if', 'sink', 'source', 'successor', 'remove_it',
-        'print', 'random_array', 'relation', 'iter_swap', 'predecessor', 'predicate'];
+        'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending',
+        'relation', 'iter_swap', 'predecessor', 'predicate'];
 
     // console.clear();
     two.clear();
