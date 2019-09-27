@@ -1317,7 +1317,7 @@ function insertion_sort(f, l, r) {
     if (equal(c, l)) return;
 
     // create a sentinel
-    var min = min_element_nonempty(f, l, r);
+    var min = std_min_element_nonempty(f, l, r);
     rotate_right_by_one_nonempty(f, successor(min));
     insertion_sort_suffix_nonempty(c, l, r);
 }
@@ -1380,32 +1380,37 @@ print(s);`
 
 var r = range_bounded("f", "l");
 
-function min_element(f, l, r) {
-    if (equal(f, l)) return l;
-
-    var m = f;
-    f = successor(f);
-
-    while ( ! equal(f, l)) {
-        if (r(source(f), source(m))) {
-            m = f;
-        }
-        f = successor(f);
-    }
-    return m;
-}
 
 function selection_sort_classic(f, l, r) {
     while ( ! equal(f, l)) {
-        iter_swap(f, min_element(f, l, r));
+        var m = std_min_element(f, l, r);
+        iter_swap(f, m);
         f = successor(f);
     }
 }
+
+
+function is_sorted(f, l, r) {
+    if (equal(f, l)) return true;
+    var n = successor(f);
+    while ( ! equal(n, l)) {
+        if ( ! r(source(f), source(n))) return false;
+        f = n;
+        n = successor(n);
+    }
+    return true;
+}
   
 var rel = relation(function(x, y) { return x < y; }, 'less');
-var s = sequence(array_random(), "s");
+// var s = sequence(array_random(), "s");
+// var s = sequence([1, 2, 3, 4], "s");
+// var s = sequence([], "s");
+// var s = sequence([1], "s");
+var s = sequence([1, 2], "s");
 print(s);
-selection_sort_classic(begin(s), end(s), rel);
+// selection_sort_classic(begin(s), end(s), rel);
+var x = is_sorted(begin(s), end(s), rel);
+print(x);
 print(s);`
 
 
@@ -1413,21 +1418,6 @@ print(s);`
 `//Stable selection sort
 
 var r = range_bounded("f", "l");
-
-function min_element(f, l, r) {
-    if (equal(f, l)) return l;
-
-    var m = f;
-    f = successor(f);
-
-    while ( ! equal(f, l)) {
-        if (r(source(f), source(m))) {
-            m = f;
-        }
-        f = successor(f);
-    }
-    return m;
-}
 
 function move_backward(f_i, l_i, l_o) {
     while (! equal(f_i, l_i)) {
@@ -1449,7 +1439,8 @@ function rotate_right_by_one(f, l) {
 
 function selection_sort_stable(f, l, r) {
     while (! equal(f, l)) {
-        rotate_right_by_one(f, successor(min_element(f, l, r)));
+        var m = std_min_element(f, l, r);
+        rotate_right_by_one(f, successor(m));
         f = successor(f);
     }
 }
@@ -1708,29 +1699,34 @@ function addLog(text) {
     }
 }
 
+
+function serializeIterCompleteForLog(it) {
+    const val = it.data.data[it.index] ? it.data.data[it.index] : '\u2205';
+    return it.data.name + subscript(it.index) + '=' + val;
+}
+
+function serializeIterForLog(x) {
+    return x.data.name + subscript(x.index);
+}
+
 function addLogEqual(a, b, res) {
-    // addLog('equal(' + a.data.name + '<sub>' + a.index + '</sub>, ' + b.data.name + '<sub>' + b.index + '</sub>) = ' + res);
-    addLog('equal(' + a.data.name + subscript(a.index) + ', ' + b.data.name  + subscript(b.index) + ') = ' + res);
+    addLog('equal(' + serializeIterForLog(a) + ', ' + serializeIterForLog(b) + ') = ' + res);
 }
 
 function addLogSuccessor(it, res_it) {
-    // addLog('successor(' + it.data.name + '<sub>' + it.index + '</sub>) = ' + res_it.data.name + '<sub>' + res_it.index + '</sub>');
-    addLog('successor(' + it.data.name + subscript(it.index) + ') = ' + res_it.data.name + subscript(res_it.index) + '');
+    addLog('successor(' + serializeIterForLog(it) + ') = ' + serializeIterForLog(res_it) + '');
 }
 
 function addLogPredecessor(it, res_it) {
-    // addLog('predecessor(' + it.data.name + '<sub>' + it.index + '</sub>) = ' + res_it.data.name + '<sub>' + res_it.index + '</sub>');
-    addLog('predecessor(' + it.data.name + subscript(it.index) + ') = ' + res_it.data.name + subscript(res_it.index) + '');
+    addLog('predecessor(' + it.data.name + subscript(it.index) + ') = ' + serializeIterForLog(res_it)+ '');
 }
 
 function addLogSource(it, res) {
-    // addLog('source(' + it.data.name + '<sub>' + it.index + '</sub>) = ' + res);
-    addLog('source(' + it.data.name + subscript(it.index) + ') = ' + res);
+    addLog('source(' + serializeIterForLog(it) + ') = ' + res);
 }
 
 function addLogSink(it, x) {
-    // addLog('sink(' + it.data.name + '<sub>' + it.index + '</sub>, ' + x + ')');
-    addLog('sink(' + it.data.name + subscript(it.index) + ', ' + x + ')');
+    addLog('sink(' + serializeIterForLog(it) + ', ' + x + ')');
 }
 
 function addLogMove(x) {
@@ -1738,8 +1734,7 @@ function addLogMove(x) {
 }
 
 function addLogSwap(a, b) {
-    // addLog('swap(' + a.data.name + '<sub>' + a.index + '</sub>, ' + b.data.name + '<sub>' + b.index + '</sub>)');
-    addLog('swap(' + a.data.name + subscript(a.index) + ', ' + b.data.name + subscript(b.index) + ')');
+    addLog('swap(' + serializeIterForLog(a) + ', ' + serializeIterForLog(b) + ')');
 }
 
 function addLogPredicate(name, x, res) {
@@ -2243,6 +2238,69 @@ function initFunctions(interpreter, scope) {
         return new RangeCounted(f, n);
     };    
 
+    // var log_f_wrapper = function() {
+    //     // var myName = arguments.callee.toString();
+    //     // console.log(name)
+    //     // console.log(arguments)
+    //     // var myName = arguments.caller;
+    //     // console.log(arguments.caller);
+    //     // console.log(arguments.caller.caller);
+    //     // console.log(arguments.caller.caller.name);
+    //     // console.log(4_wrapper.caller);
+    //     // console.log(log_f_wrapper.caller.caller);
+    //     // console.log(log_f_wrapper.caller.caller.name);
+    //     // myName = myName.substr('function '.length);
+    //     // myName = myName.substr(0, myName.indexOf('('));
+    //     // console.log(myName);
+    //     // addLog(myName)
+
+    //     if (arguments.length == 0) return;
+
+    //     to_print = arguments[0] + '(';
+
+    //     for (var i = 1; i < arguments.length; ++i) {
+    //         // console.log(arguments[i]);
+    //         if (arguments[i] && arguments[i] instanceof Iterator) {
+    //             if (i > 1) {
+    //                 to_print += ', ';
+    //             }
+    //             to_print += serializeIterForLog(arguments[i]);
+    //         }
+    //     }
+
+    //     to_print += ')';
+
+    //     // console.log(to_print);
+    //     addLog("-- start: " + to_print);
+    //     return to_print
+    // }; 
+
+
+    var start_f_wrapper = function() {
+        if (arguments.length == 0) return;
+
+        to_print = arguments[0] + '(';
+
+        for (var i = 1; i < arguments.length; ++i) {
+            if (arguments[i] && arguments[i] instanceof Iterator) {
+                if (i > 1) {
+                    to_print += ', ';
+                }
+                to_print += serializeIterCompleteForLog(arguments[i]);
+            }
+        }
+
+        to_print += ')';
+        addLog("-- start: " + to_print);
+        return to_print
+    }; 
+
+    var end_f_wrapper = function(str) {
+        addLog("-- end: " + str);
+    }
+
+
+
     
 
     
@@ -2283,6 +2341,8 @@ function initFunctions(interpreter, scope) {
     interpreter.setProperty(scope, 'range_counted', interpreter.createNativeFunction(range_counted_wrapper));
  
 
+    interpreter.setProperty(scope, 'start_f', interpreter.createNativeFunction(start_f_wrapper));
+    interpreter.setProperty(scope, 'end_f', interpreter.createNativeFunction(end_f_wrapper));
 }
 
 // function bind(r, value, arg=0) {
@@ -2384,7 +2444,8 @@ function add_utils_lib() {
 
 function add_std_lib() {
     return `
-    function min_element_nonempty(f, l, r) {
+    function std_min_element_nonempty(f, l, r) {
+        _f_ = start_f('std_min_element_nonempty', f, l, r);
         var m = f;
         f = successor(f);
         while ( ! equal(f, l)) {
@@ -2393,8 +2454,26 @@ function add_std_lib() {
             }
             f = successor(f);
         }
+        end_f(_f_);
         return m;
     }
+    function std_min_element(f, l, r) {
+        _f_ = start_f('std_min_element', f, l, r);
+        if (equal(f, l)) return l;
+    
+        var m = f;
+        f = successor(f);
+    
+        while ( ! equal(f, l)) {
+            if (r(source(f), source(m))) {
+                m = f;
+            }
+            f = successor(f);
+        }
+
+        end_f(_f_);
+        return m;
+    }    
     `;
 
     // `function iota(f, l, start, step) {
@@ -2951,7 +3030,9 @@ function drawScope(scope) {
     for (var i in vars_internal) {
         var key = vars_internal[i].key;
         var value = vars_internal[i].value;
-
+        if (key.startsWith("_")) continue;
+        // console.log(key)
+        // console.log(value)
         addVariable(key, value, seqn);
     }
 
