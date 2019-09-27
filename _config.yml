@@ -113,3 +113,16 @@ permalink: /:title/
 include: [".htaccess"]
 exclude: ["vendor", "lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp"]
 
+
+
+# webserver_headers:
+#   - - Access-Control-Allow-Origin
+#     - "*"
+#   - - Access-Control-Allow-Methods
+#     - GET, OPTIONS, HEAD
+
+
+webrick:
+  headers:
+    Access-Control-Allow-Origin: "*"
+
