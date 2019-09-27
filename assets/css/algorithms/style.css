@@ -1,17 +1,23 @@
+@font-face {
+    font-family: 'FiraCode';
+    src:  url('../../fonts/FiraCode-Regular.woff2') format('woff2'),
+          url('../../fonts/FiraCode-Regular.woff') format('woff');
+}
+
 body {
   /* 337 x 5 */
   background: #0f0f23;
   /* background: #23241f;  */
   
   color: #cccccc;
-  font-family: "Source Code Pro", monospace;
+  font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 14pt;
   min-width: 60em;
 }
 img { border:0; }
 a { outline:0; }
 main, figure, figcaption { display:block; }
-pre, code { font-family: "Source Code Pro", monospace; }
+pre, code { font-family: "FiraCode","Source Code Pro", monospace; }
 header, main {
   -webkit-text-size-adjust: none;
 }
@@ -627,7 +633,7 @@ form#settings input[type="checkbox"] ~ span {
 
 #hg-right-b-b-data { 
 
-  font-family: "Source Code Pro", monospace;
+  font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 10pt;
   margin:0; 
   padding:0;
@@ -736,7 +742,7 @@ button {
   color: #009900;
   outline: 0;
 
-  font-family: "Source Code Pro", monospace;
+  font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 14pt;
 }
 
@@ -747,7 +753,7 @@ button:hover {
 
 
 #CopyrightP {
-  font-family: "Source Code Pro", monospace;
+  font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 8pt;
   /* margin:0;  */
   /* padding:0; */
@@ -778,7 +784,7 @@ button:hover {
 }
 
 #Copyright {
-    font-family: "Source Code Pro", monospace;
+    font-family: "FiraCode", "Source Code Pro", monospace;
     font-size: 8pt;
     margin:0; 
     padding:0;
@@ -811,7 +817,7 @@ button:hover {
   height:100%;
   max-width: 100%;
 
-  font-family: "Source Code Pro", monospace;
+  font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 10pt;
   background: #0f0f23;
 
@@ -839,14 +845,14 @@ button:hover {
     height: 100%;
     margin:0; 
     padding:0;
-    font-family: "Source Code Pro", monospace;
+    font-family: "FiraCode", "Source Code Pro", monospace;
     font-size: 10pt;
     background: #0f0f23;
 } */
   
 
 /* p {
-    font-family: "Source Code Pro", monospace;
+    font-family: "FiraCode", "Source Code Pro", monospace;
     font-size: 12pt;
     margin:0; 
     padding:0;
@@ -854,7 +860,7 @@ button:hover {
 
 
 #Status {
-  font-family: "Source Code Pro", monospace;
+  font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 10pt;
   margin:0; 
   padding:0;
@@ -863,7 +869,7 @@ button:hover {
 }
 
 #OutputMsg {
-  font-family: "Source Code Pro", monospace;
+  font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 10pt;
   margin:0; 
   padding:0;
@@ -871,7 +877,7 @@ button:hover {
 
 
 .caret {
-    font-family: "Source Code Pro", monospace;
+    font-family: "FiraCode", "Source Code Pro", monospace;
     font-size: 14pt;
     /* font-style: italic; */
     /* font-style: oblique; */

@@ -88,7 +88,8 @@ function setSizes() {
 function drawElement(two, x, y, text, index, color = defaultElementColor) {
 
     var textIndex = two.makeText(index, x, y + escale_y(8));
-    textIndex.family = "Source Code Pro";
+    textIndex.family = "FiraCode"; //"Source Code Pro";
+    
     textIndex.size = indexFontSize
     textIndex.fill = 'white';
 
@@ -102,7 +103,7 @@ function drawElement(two, x, y, text, index, color = defaultElementColor) {
 
 
     var text = two.makeText(text, x, y + escale_y(45) + escale_y(1.5));
-    text.family = "Source Code Pro";
+    text.family = "FiraCode"; //"Source Code Pro";
     text.size = fontSize
 
     var group = two.makeGroup(rect, text);//, textIndex);
@@ -146,7 +147,7 @@ function drawIterator(two, elem, text, color = '#99ff99') {
     // var text = two.makeText(text, x, y + 80);
 
     var text = two.makeText(text, x, y + escale_y(24));
-    text.family = "Source Code Pro";
+    text.family = "FiraCode"; //"Source Code Pro";
     
     text.size = pointerFontSize //80
     text.alignment = 'center'
@@ -188,7 +189,7 @@ function drawArray(two, name, id, arr, colors, capacity) {
     if (name) {
         name += ":"
         var text = two.makeText(name, leftMargin, topMargin +  escale_y(45));
-        text.family = "Source Code Pro";
+        text.family = "FiraCode"; //"Source Code Pro";
         text.size = labelFontSize
         text.alignment = 'left'
         text.fill = '#99ff99';
@@ -254,7 +255,7 @@ function drawNamedElementSimple(two, x, y, name, text, color = defaultElementCol
     if (name) {
         name += ":"
         var nameElement = two.makeText(name, x, y + escale_y(30));
-        nameElement.family = "Source Code Pro";
+        nameElement.family = "FiraCode"; //"Source Code Pro";
         nameElement.size = labelFontSize
         nameElement.alignment = 'left'
         nameElement.fill = '#99ff99';
@@ -267,7 +268,7 @@ function drawNamedElementSimple(two, x, y, name, text, color = defaultElementCol
     rect.linewidth = 1;
 
     var textElement = two.makeText(text, x + escale_x(14.46) * name.length + w / 2, y + escale_y(30) + escale_y(1.5));
-    textElement.family = "Source Code Pro";
+    textElement.family = "FiraCode"; //"Source Code Pro";
     textElement.size = fontSize
 
     var group = two.makeGroup(nameElement, rect, textElement);
@@ -403,7 +404,7 @@ function drawCountedRange(f, n) {
     // // var text = two.makeText(text, x, y + 80);
 
     // var text = two.makeText(text, x, y + 30);
-    // text.family = "Source Code Pro";
+    // text.family = "FiraCode"; //"Source Code Pro";
     
     // text.size = pointerFontSize //80
     // text.alignment = 'center'
