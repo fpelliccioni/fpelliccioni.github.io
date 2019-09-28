@@ -170,10 +170,45 @@ function drawIterator(two, elem, text, color = '#99ff99') {
 //     // it.group.translation.set(elem.rect.translation._x - it.tri.translation._x, 0);
 // }
 
-function drawArray(two, name, id, arr, colors, capacity) {
+
+function is_predicate(callable) {
+    return callable.properties.inner_parameters == 1;
+}
+
+function is_relation(callable) {
+    return callable.properties.inner_parameters == 2;
+}
+
+function execute_callable() {
+    if (arguments.length == 0) return undefined;
+    var callable = arguments[0];
+    if (arguments.length != callable.properties.inner_parameters + 1) return undefined;
+
+    var full_code = callable.properties.inner_code;
+    full_code += callable.properties.inner_name + "(";
+    full_code += arguments[1];
+
+    if (callable.properties.inner_parameters == 2) {
+        full_code += ", ";
+        full_code += arguments[2];
+    }
+
+    full_code += ");";
+
+    // console.log(full_code)
+    var res = eval(full_code)
+    // console.log(res)
+    return res;
+
+}
+
+function drawArray(two, name, id, arr, colors, capacity, pred) {
     
-    // console.log("drawArray")
-    // console.log(capacity)
+
+
+    console.log(execute_callable(pred, 33));
+    console.log(execute_callable(pred, 32));
+
 
     if (capacity == undefined) {
         capacity = arr.length
@@ -199,10 +234,32 @@ function drawArray(two, name, id, arr, colors, capacity) {
     for (let index = 0; index < arr.length; ++index) {
         let value = arr[index];
         let color = colors[index];
+
+        // console.log(color);
+        // execute_callable(pred, value)
+
+        if ( ! execute_callable(pred, value)) {
+            color = "#ff9191";
+        }
+
         var e = drawElement(two,  leftMargin + rectWidth / 2 + index * rectWidth, topMargin, value, index, color);
         elements.push(e)
         // console.log(value);
     }
+
+
+    // if ( ! obj) {enable_log_stats(); return obj;}
+    // if (p) {    
+    //     for (var i = 0; i < d.length; ++i) {
+    //         var value = d[i];
+    //         if ( ! p(value)) {
+    //             fill_elem(obj, i, "#ff9191");
+    //             //obj.colors[i] = "#ff9191";
+    //         }
+    //     }
+    // }
+    // enable_log_stats();
+
 
     var cap_len = capacity - arr.length;
 

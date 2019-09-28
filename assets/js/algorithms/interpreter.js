@@ -124,20 +124,25 @@ Interpreter.VARIABLE_DESCRIPTOR = {
  * added it to the stack, and will be thrown within the user's program.
  * When STEP_ERROR is thrown in the JS-Interpreter, the error can be ignored.
  */
-Interpreter.STEP_ERROR = {};
+Interpreter.STEP_ERROR = {'STEP_ERROR': true};
 
 /**
  * Unique symbol for indicating that a reference is a variable on the scope,
  * not an object property.
  */
-Interpreter.SCOPE_REFERENCE = {};
+Interpreter.SCOPE_REFERENCE = {'SCOPE_REFERENCE': true};
 
 /**
  * Unique symbol for indicating, when used as the value of the value
  * parameter in calls to setProperty and friends, that the value
  * should be taken from the property descriptor instead.
  */
-Interpreter.VALUE_IN_DESCRIPTOR = {};
+Interpreter.VALUE_IN_DESCRIPTOR = {'VALUE_IN_DESCRIPTOR': true};
+
+/**
+ * Unique symbol for indicating that a RegExp timeout has occurred in a VM.
+ */
+Interpreter.REGEXP_TIMEOUT = {'REGEXP_TIMEOUT': true};
 
 /**
  * For cycle detection in array to string and error conversion;
@@ -145,6 +150,63 @@ Interpreter.VALUE_IN_DESCRIPTOR = {};
  * Since this is for atomic actions only, it can be a class property.
  */
 Interpreter.toStringCycles_ = [];
+
+/**
+ * Node's vm module, if loaded and required.
+ * @type {Object}
+ */
+Interpreter.vm = null;
+
+/**
+ * Code for executing regular expressions in a thread.
+ */
+Interpreter.WORKER_CODE = [
+  "onmessage = function(e) {",
+    "var result;",
+    "var data = e.data;",
+    "switch (data[0]) {",
+      "case 'split':",
+        // ['split', string, separator, limit]
+        "result = data[1].split(data[2], data[3]);",
+        "break;",
+      "case 'match':",
+        // ['match', string, regexp]
+        "result = data[1].match(data[2]);",
+        "break;",
+      "case 'search':",
+        // ['search', string, regexp]
+        "result = data[1].search(data[2]);",
+        "break;",
+      "case 'replace':",
+        // ['replace', string, regexp, newSubstr]
+        "result = data[1].replace(data[2], data[3]);",
+        "break;",
+      "case 'exec':",
+        // ['exec', regexp, lastIndex, string]
+        "var regexp = data[1];",
+        "regexp.lastIndex = data[2];",
+        "result = [regexp.exec(data[3]), data[1].lastIndex];",
+        "break;",
+      "default:",
+        "throw 'Unknown RegExp operation: ' + data[0];",
+    "}",
+    "postMessage(result);",
+  "};"];
+
+/**
+ * Some pathological regular expressions can take geometric time.
+ * Regular expressions are handled in one of three ways:
+ * 0 - throw as invalid.
+ * 1 - execute natively (risk of unresponsive program).
+ * 2 - execute in separate thread (not supported by IE 9).
+ */
+Interpreter.prototype.REGEXP_MODE = 2;
+
+/**
+ * If REGEXP_MODE = 2, the length of time (in ms) to allow a RegExp
+ * thread to execute before terminating it.
+ */
+Interpreter.prototype.REGEXP_THREAD_TIMEOUT = 1000;
 
 /**
  * Add more code to the interpreter.
@@ -321,8 +383,6 @@ Interpreter.prototype.initFunction = function(scope) {
   var identifierRegexp = /^[A-Za-z_$][\w$]*$/;
   // Function constructor.
   wrapper = function(var_args) {
-    // console.log('fer2')
-    // console.log(var_args)
     if (thisInterpreter.calledWithNew()) {
       // Called as new Function().
       var newFunc = this;
@@ -331,13 +391,11 @@ Interpreter.prototype.initFunction = function(scope) {
       var newFunc =
           thisInterpreter.createObjectProto(thisInterpreter.FUNCTION_PROTO);
     }
-    // console.log(arguments)
     if (arguments.length) {
       var code = String(arguments[arguments.length - 1]);
     } else {
       var code = '';
     }
-    // console.log(code)
     var argsStr = Array.prototype.slice.call(arguments, 0, -1).join(',').trim();
     if (argsStr) {
       var args = argsStr.split(/\s*,\s*/);
@@ -350,7 +408,6 @@ Interpreter.prototype.initFunction = function(scope) {
       }
       argsStr = args.join(', ');
     }
-    // console.log(argsStr)
     // Interestingly, the scope for constructed functions is the global scope,
     // even if they were constructed in some other scope.
     newFunc.parentScope = thisInterpreter.global;
@@ -375,10 +432,7 @@ Interpreter.prototype.initFunction = function(scope) {
     return newFunc;
   };
   wrapper.id = this.functionCounter_++;
-  // console.log('fer');
   this.FUNCTION = this.createObjectProto(this.FUNCTION_PROTO);
-  // console.log(this.FUNCTION);
-  // console.log(scope);
 
   this.setProperty(scope, 'Function', this.FUNCTION);
   // Manually setup type and prototype because createObj doesn't recognize
@@ -413,7 +467,6 @@ Interpreter.prototype.initFunction = function(scope) {
   };
 
   wrapper = function(thisArg, args) {
-    // console.log('apply fer');
     var state =
         thisInterpreter.stateStack[thisInterpreter.stateStack.length - 1];
     // Rewrite the current 'CallExpression' to apply a different function.
@@ -433,12 +486,8 @@ Interpreter.prototype.initFunction = function(scope) {
     state.doneExec_ = false;
   };
   this.setNativeFunctionPrototype(this.FUNCTION, 'apply', wrapper);
-//   console.log(this.FUNCTION);
-
 
   wrapper = function(thisArg /*, var_args */) {
-    // console.log('call fer');
-
     var state =
         thisInterpreter.stateStack[thisInterpreter.stateStack.length - 1];
     // Rewrite the current 'CallExpression' to call a different function.
@@ -484,8 +533,7 @@ Interpreter.prototype.initFunction = function(scope) {
   // Function has no parent to inherit from, so it needs its own mandatory
   // toString and valueOf functions.
   wrapper = function() {
-    // console.log('toString fer');
-    return this.toString();
+    return String(this);
   };
   this.setNativeFunctionPrototype(this.FUNCTION, 'toString', wrapper);
   this.setProperty(this.FUNCTION, 'toString',
@@ -1109,40 +1157,167 @@ Interpreter.prototype.initString = function(scope) {
   };
   this.setNativeFunctionPrototype(this.STRING, 'localeCompare', wrapper);
 
-  wrapper = function(separator, limit) {
+  wrapper = function(separator, limit, callback) {
+    var string = String(this);
+    limit = limit ? Number(limit) : undefined;
+    // Example of catastrophic split RegExp:
+    // 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac'.split(/^(a+)+b/)
     if (thisInterpreter.isa(separator, thisInterpreter.REGEXP)) {
       separator = separator.data;
+      thisInterpreter.maybeThrowRegExp(separator, callback);
+      if (thisInterpreter.REGEXP_MODE === 2) {
+        if (Interpreter.vm) {
+          // Run split in vm.
+          var sandbox = {
+            'string': string,
+            'separator': separator,
+            'limit': limit
+          };
+          var code = 'string.split(separator, limit)';
+          var jsList =
+              thisInterpreter.vmCall(code, sandbox, separator, callback);
+          if (jsList !== Interpreter.REGEXP_TIMEOUT) {
+            callback(thisInterpreter.arrayNativeToPseudo(jsList));
+          }
+        } else {
+          // Run split in separate thread.
+          var splitWorker = thisInterpreter.createWorker();
+          var pid = thisInterpreter.regExpTimeout(separator, splitWorker,
+              callback);
+          splitWorker.onmessage = function(e) {
+            clearTimeout(pid);
+            callback(thisInterpreter.arrayNativeToPseudo(e.data));
+          };
+          splitWorker.postMessage(['split', string, separator, limit]);
+        }
+        return;
+      }
     }
-    var jsList = String(this).split(separator, limit);
-    return thisInterpreter.arrayNativeToPseudo(jsList);
+    // Run split natively.
+    var jsList = string.split(separator, limit);
+    callback(thisInterpreter.arrayNativeToPseudo(jsList));
   };
-  this.setNativeFunctionPrototype(this.STRING, 'split', wrapper);
+  this.setAsyncFunctionPrototype(this.STRING, 'split', wrapper);
 
-  wrapper = function(regexp) {
+  wrapper = function(regexp, callback) {
+    var string = String(this);
     if (thisInterpreter.isa(regexp, thisInterpreter.REGEXP)) {
       regexp = regexp.data;
+    } else {
+      regexp = new RegExp(regexp);
     }
-    var m = String(this).match(regexp);
-    return m && thisInterpreter.arrayNativeToPseudo(m);
+    // Example of catastrophic match RegExp:
+    // 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac'.match(/^(a+)+b/)
+    thisInterpreter.maybeThrowRegExp(regexp, callback);
+    if (thisInterpreter.REGEXP_MODE === 2) {
+      if (Interpreter.vm) {
+        // Run match in vm.
+        var sandbox = {
+          'string': string,
+          'regexp': regexp
+        };
+        var code = 'string.match(regexp)';
+        var m = thisInterpreter.vmCall(code, sandbox, regexp, callback);
+        if (m !== Interpreter.REGEXP_TIMEOUT) {
+          callback(m && thisInterpreter.arrayNativeToPseudo(m));
+        }
+      } else {
+        // Run match in separate thread.
+        var matchWorker = thisInterpreter.createWorker();
+        var pid = thisInterpreter.regExpTimeout(regexp, matchWorker, callback);
+        matchWorker.onmessage = function(e) {
+          clearTimeout(pid);
+          callback(e.data && thisInterpreter.arrayNativeToPseudo(e.data));
+        };
+        matchWorker.postMessage(['match', string, regexp]);
+      }
+      return;
+    }
+    // Run match natively.
+    var m = string.match(regexp);
+    callback(m && thisInterpreter.arrayNativeToPseudo(m));
   };
-  this.setNativeFunctionPrototype(this.STRING, 'match', wrapper);
+  this.setAsyncFunctionPrototype(this.STRING, 'match', wrapper);
 
-  wrapper = function(regexp) {
+  wrapper = function(regexp, callback) {
+    var string = String(this);
     if (thisInterpreter.isa(regexp, thisInterpreter.REGEXP)) {
       regexp = regexp.data;
+    } else {
+      regexp = new RegExp(regexp);
     }
-    return String(this).search(regexp);
+    // Example of catastrophic search RegExp:
+    // 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac'.search(/^(a+)+b/)
+    thisInterpreter.maybeThrowRegExp(regexp, callback);
+    if (thisInterpreter.REGEXP_MODE === 2) {
+      if (Interpreter.vm) {
+        // Run search in vm.
+        var sandbox = {
+          'string': string,
+          'regexp': regexp
+        };
+        var code = 'string.search(regexp)';
+        var n = thisInterpreter.vmCall(code, sandbox, regexp, callback);
+        if (n !== Interpreter.REGEXP_TIMEOUT) {
+          callback(n);
+        }
+      } else {
+        // Run search in separate thread.
+        var searchWorker = thisInterpreter.createWorker();
+        var pid = thisInterpreter.regExpTimeout(regexp, searchWorker, callback);
+        searchWorker.onmessage = function(e) {
+          clearTimeout(pid);
+          callback(e.data);
+        };
+        searchWorker.postMessage(['search', string, regexp]);
+      }
+      return;
+    }
+    // Run search natively.
+    callback(string.search(regexp));
   };
-  this.setNativeFunctionPrototype(this.STRING, 'search', wrapper);
+  this.setAsyncFunctionPrototype(this.STRING, 'search', wrapper);
 
-  wrapper = function(substr, newSubstr) {
+  wrapper = function(substr, newSubstr, callback) {
     // Support for function replacements is the responsibility of a polyfill.
+    var string = String(this);
+    newSubstr = String(newSubstr);
+    // Example of catastrophic replace RegExp:
+    // 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac'.replace(/^(a+)+b/, '')
     if (thisInterpreter.isa(substr, thisInterpreter.REGEXP)) {
       substr = substr.data;
+      thisInterpreter.maybeThrowRegExp(substr, callback);
+      if (thisInterpreter.REGEXP_MODE === 2) {
+        if (Interpreter.vm) {
+          // Run replace in vm.
+          var sandbox = {
+            'string': string,
+            'substr': substr,
+            'newSubstr': newSubstr
+          };
+          var code = 'string.replace(substr, newSubstr)';
+          var str = thisInterpreter.vmCall(code, sandbox, substr, callback);
+          if (str !== Interpreter.REGEXP_TIMEOUT) {
+            callback(str);
+          }
+        } else {
+          // Run replace in separate thread.
+          var replaceWorker = thisInterpreter.createWorker();
+          var pid = thisInterpreter.regExpTimeout(substr, replaceWorker,
+              callback);
+          replaceWorker.onmessage = function(e) {
+            clearTimeout(pid);
+            callback(e.data);
+          };
+          replaceWorker.postMessage(['replace', string, substr, newSubstr]);
+        }
+        return;
+      }
     }
-    return String(this).replace(substr, newSubstr);
+    // Run replace natively.
+    callback(string.replace(substr, newSubstr));
   };
-  this.setNativeFunctionPrototype(this.STRING, 'replace', wrapper);
+  this.setAsyncFunctionPrototype(this.STRING, 'replace', wrapper);
   // Add a polyfill to handle replace's second argument being a function.
   this.polyfills_.push(
 "(function() {",
@@ -1358,8 +1533,8 @@ Interpreter.prototype.initRegExp = function(scope) {
       // Called as RegExp().
       var rgx = thisInterpreter.createObjectProto(thisInterpreter.REGEXP_PROTO);
     }
-    pattern = pattern ? pattern.toString() : '';
-    flags = flags ? flags.toString() : '';
+    pattern = pattern ? String(pattern) : '';
+    flags = flags ? String(flags) : '';
     thisInterpreter.populateRegExp(rgx, new RegExp(pattern, flags));
     return rgx;
   };
@@ -1376,33 +1551,74 @@ Interpreter.prototype.initRegExp = function(scope) {
   this.setProperty(this.REGEXP.properties['prototype'], 'source', '(?:)',
       Interpreter.READONLY_NONENUMERABLE_DESCRIPTOR);
 
-  wrapper = function(str) {
-    return this.data.test(str);
-  };
-  this.setNativeFunctionPrototype(this.REGEXP, 'test', wrapper);
+  // Use polyfill to avoid complexity of regexp threads.
+  this.polyfills_.push(
+"Object.defineProperty(RegExp.prototype, 'test',",
+    "{configurable: true, writable: true, value:",
+  "function(str) {",
+    "return String(str).search(this) !== -1",
+  "}",
+"});");
 
-  wrapper = function(str) {
-    str = str.toString();
+  wrapper = function(string, callback) {
+    var thisPseudoRegExp = this;
+    var regexp = thisPseudoRegExp.data;
+    string = String(string);
     // Get lastIndex from wrapped regex, since this is settable.
-    this.data.lastIndex =
+    regexp.lastIndex =
         Number(thisInterpreter.getProperty(this, 'lastIndex'));
-    var match = this.data.exec(str);
-    thisInterpreter.setProperty(this, 'lastIndex', this.data.lastIndex);
-
-    if (match) {
-      var result =
-          thisInterpreter.createObjectProto(thisInterpreter.ARRAY_PROTO);
-      for (var i = 0; i < match.length; i++) {
-        thisInterpreter.setProperty(result, i, match[i]);
+    // Example of catastrophic exec RegExp:
+    // /^(a+)+b/.exec('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaac')
+    thisInterpreter.maybeThrowRegExp(regexp, callback);
+    if (thisInterpreter.REGEXP_MODE === 2) {
+      if (Interpreter.vm) {
+        // Run exec in vm.
+        var sandbox = {
+          'string': string,
+          'regexp': regexp
+        };
+        var code = 'regexp.exec(string)';
+        var match = thisInterpreter.vmCall(code, sandbox, regexp, callback);
+        if (match !== Interpreter.REGEXP_TIMEOUT) {
+          thisInterpreter.setProperty(thisPseudoRegExp, 'lastIndex',
+              regexp.lastIndex);
+          callback(matchToPseudo(match));
+        }
+      } else {
+        // Run exec in separate thread.
+        // Note that lastIndex is not preserved when a RegExp is passed to a
+        // Web Worker.  Thus it needs to be passed back and forth separately.
+        var execWorker = thisInterpreter.createWorker();
+        var pid = thisInterpreter.regExpTimeout(regexp, execWorker, callback);
+        execWorker.onmessage = function(e) {
+          clearTimeout(pid);
+          // Return tuple: [result, lastIndex]
+          thisInterpreter.setProperty(thisPseudoRegExp, 'lastIndex',
+              e.data[1]);
+          callback(matchToPseudo(e.data[0]));
+        };
+        execWorker.postMessage(['exec', regexp, regexp.lastIndex, string]);
       }
-      // match has additional properties.
-      thisInterpreter.setProperty(result, 'index', match.index);
-      thisInterpreter.setProperty(result, 'input', match.input);
-      return result;
+      return;
     }
-    return null;
+    // Run exec natively.
+    var match = regexp.exec(string);
+    thisInterpreter.setProperty(thisPseudoRegExp, 'lastIndex',
+        regexp.lastIndex);
+    callback(matchToPseudo(match));
+
+    function matchToPseudo(match) {
+      if (match) {
+        var result = thisInterpreter.arrayNativeToPseudo(match);
+        // match has additional properties.
+        thisInterpreter.setProperty(result, 'index', match.index);
+        thisInterpreter.setProperty(result, 'input', match.input);
+        return result;
+      }
+      return null;
+    }
   };
-  this.setNativeFunctionPrototype(this.REGEXP, 'exec', wrapper);
+  this.setAsyncFunctionPrototype(this.REGEXP, 'exec', wrapper);
 };
 
 /**
@@ -1501,7 +1717,7 @@ Interpreter.prototype.initJSON = function(scope) {
 
   var wrapper = function(text) {
     try {
-      var nativeObj = JSON.parse(text.toString());
+      var nativeObj = JSON.parse(String(text));
     } catch (e) {
       thisInterpreter.throwException(thisInterpreter.SYNTAX_ERROR, e.message);
     }
@@ -1547,6 +1763,125 @@ Interpreter.prototype.isa = function(child, constructor) {
     child = child.proto;
   }
   return false;
+};
+
+/**
+ * Initialize a pseudo regular expression object based on a native regular
+ * expression object.
+ * @param {!Interpreter.Object} pseudoRegexp The existing object to set.
+ * @param {!RegExp} nativeRegexp The native regular expression.
+ */
+Interpreter.prototype.populateRegExp = function(pseudoRegexp, nativeRegexp) {
+  pseudoRegexp.data = nativeRegexp;
+  // lastIndex is settable, all others are read-only attributes
+  this.setProperty(pseudoRegexp, 'lastIndex', nativeRegexp.lastIndex,
+      Interpreter.NONENUMERABLE_DESCRIPTOR);
+  this.setProperty(pseudoRegexp, 'source', nativeRegexp.source,
+      Interpreter.READONLY_NONENUMERABLE_DESCRIPTOR);
+  this.setProperty(pseudoRegexp, 'global', nativeRegexp.global,
+      Interpreter.READONLY_NONENUMERABLE_DESCRIPTOR);
+  this.setProperty(pseudoRegexp, 'ignoreCase', nativeRegexp.ignoreCase,
+      Interpreter.READONLY_NONENUMERABLE_DESCRIPTOR);
+  this.setProperty(pseudoRegexp, 'multiline', nativeRegexp.multiline,
+      Interpreter.READONLY_NONENUMERABLE_DESCRIPTOR);
+};
+
+/**
+ * Create a Web Worker to execute regular expressions.
+ * Using a separate file fails in Chrome when run locally on a file:// URI.
+ * Using a data encoded URI fails in IE and Edge.
+ * Using a blob works in IE11 and all other browsers.
+ * @return {!Worker} Web Worker with regexp execution code loaded.
+ */
+Interpreter.prototype.createWorker = function() {
+  var blob = this.createWorker.blob_;
+  if (!blob) {
+    blob = new Blob([Interpreter.WORKER_CODE.join('\n')],
+        {type: 'application/javascript'});
+    // Cache the blob, so it doesn't need to be created next time.
+    this.createWorker.blob_ = blob;
+  }
+  return new Worker(URL.createObjectURL(blob));
+};
+
+/**
+ * Execute regular expressions in a node vm.
+ * @param {string} code Code to execute.
+ * @param {!Object} sandbox Global variables for new vm.
+ * @param {!RegExp} nativeRegExp Regular expression.
+ * @param {!Function} callback Asynchronous callback function.
+ */
+Interpreter.prototype.vmCall = function(code, sandbox, nativeRegExp, callback) {
+  var options = {'timeout': this.REGEXP_THREAD_TIMEOUT};
+  try {
+    return Interpreter.vm['runInNewContext'](code, sandbox, options);
+  } catch (e) {
+    callback(null);
+    this.throwException(this.ERROR, 'RegExp Timeout: ' + nativeRegExp);
+  }
+  return Interpreter.REGEXP_TIMEOUT;
+};
+
+/**
+ * If REGEXP_MODE is 0, then throw an error.
+ * Also throw if REGEXP_MODE is 2 and JS doesn't support Web Workers or vm.
+ * @param {!RegExp} nativeRegExp Regular expression.
+ * @param {!Function} callback Asynchronous callback function.
+ */
+Interpreter.prototype.maybeThrowRegExp = function(nativeRegExp, callback) {
+  var ok;
+  if (this.REGEXP_MODE === 0) {
+    // Fail: No RegExp support.
+    ok = false;
+  } else if (this.REGEXP_MODE === 1) {
+    // Ok: Native RegExp support.
+    ok = true;
+  } else {
+    // Sandboxed RegExp handling.
+    if (Interpreter.vm) {
+      // Ok: Node's vm module already loaded.
+      ok = true;
+    } else if (typeof Worker === 'function' && typeof URL === 'function') {
+      // Ok: Web Workers available.
+      ok = true;
+    } else if (typeof require === 'function') {
+      // Try to load Node's vm module.
+      try {
+        Interpreter.vm = require('vm');
+      } catch (e) {};
+      ok = !!Interpreter.vm;
+    } else {
+      // Fail: Neither Web Workers nor vm available.
+      ok = false;
+    }
+  }
+  if (!ok) {
+    callback(null);
+    this.throwException(this.ERROR, 'Regular expressions not supported: ' +
+        nativeRegExp);
+  }
+};
+
+/**
+ * Set a timeout for regular expression threads.  Unless cancelled, this will
+ * terminate the thread and throw an error.
+ * @param {!RegExp} nativeRegExp Regular expression (used for error message).
+ * @param {!Worker} worker Thread to terminate.
+ * @param {!Function} callback Async callback function to continue execution.
+ * @return {number} PID of timeout.  Used to cancel if thread completes.
+ */
+Interpreter.prototype.regExpTimeout = function(nativeRegExp, worker, callback) {
+  var thisInterpreter = this;
+  return setTimeout(function() {
+      worker.terminate();
+      callback(null);
+      try {
+        thisInterpreter.throwException(thisInterpreter.ERROR,
+            'RegExp Timeout: ' + nativeRegExp);
+      } catch (e) {
+        // Eat the expected Interpreter.STEP_ERROR.
+      }
+  }, this.REGEXP_THREAD_TIMEOUT);
 };
 
 /**
@@ -1649,8 +1984,8 @@ Interpreter.Object.prototype.toString = function() {
     } while ((obj = obj.proto));
     cycles.push(this);
     try {
-      name = name && name.toString();
-      message = message && message.toString();
+      name = name && String(name);
+      message = message && String(message);
     } finally {
       cycles.pop();
     }
@@ -1719,27 +2054,6 @@ Interpreter.prototype.createObjectProto = function(proto) {
     obj.class = 'Error';
   }
   return obj;
-};
-
-/**
- * Initialize a pseudo regular expression object based on a native regular
- * expression object.
- * @param {!Interpreter.Object} pseudoRegexp The existing object to set.
- * @param {!RegExp} nativeRegexp The native regular expression.
- */
-Interpreter.prototype.populateRegExp = function(pseudoRegexp, nativeRegexp) {
-  pseudoRegexp.data = nativeRegexp;
-  // lastIndex is settable, all others are read-only attributes
-  this.setProperty(pseudoRegexp, 'lastIndex', nativeRegexp.lastIndex,
-      Interpreter.NONENUMERABLE_DESCRIPTOR);
-  this.setProperty(pseudoRegexp, 'source', nativeRegexp.source,
-      Interpreter.READONLY_NONENUMERABLE_DESCRIPTOR);
-  this.setProperty(pseudoRegexp, 'global', nativeRegexp.global,
-      Interpreter.READONLY_NONENUMERABLE_DESCRIPTOR);
-  this.setProperty(pseudoRegexp, 'ignoreCase', nativeRegexp.ignoreCase,
-      Interpreter.READONLY_NONENUMERABLE_DESCRIPTOR);
-  this.setProperty(pseudoRegexp, 'multiline', nativeRegexp.multiline,
-      Interpreter.READONLY_NONENUMERABLE_DESCRIPTOR);
 };
 
 /**
@@ -2050,7 +2364,6 @@ Interpreter.prototype.hasProperty = function(obj, name) {
  */
 Interpreter.prototype.setProperty = function(obj, name, value, opt_descriptor) {
   name = String(name);
-  // console.log(name)
   if (obj === undefined || obj === null) {
     this.throwException(this.TYPE_ERROR,
                         "Cannot set property '" + name + "' of " + obj);
@@ -2205,6 +2518,20 @@ Interpreter.prototype.setNativeFunctionPrototype =
     function(obj, name, wrapper) {
   this.setProperty(obj.properties['prototype'], name,
       this.createNativeFunction(wrapper, false),
+      Interpreter.NONENUMERABLE_DESCRIPTOR);
+};
+
+/**
+ * Convenience method for adding an async function as a non-enumerable property
+ * onto an object's prototype.
+ * @param {!Interpreter.Object} obj Data object.
+ * @param {Interpreter.Value} name Name of property.
+ * @param {!Function} wrapper Function object.
+ */
+Interpreter.prototype.setAsyncFunctionPrototype =
+    function(obj, name, wrapper) {
+  this.setProperty(obj.properties['prototype'], name,
+      this.createAsyncFunction(wrapper),
       Interpreter.NONENUMERABLE_DESCRIPTOR);
 };
 
@@ -2475,15 +2802,15 @@ Interpreter.prototype.throwException = function(errorClass, opt_message) {
  * the stack being completely unwound the thread will be terminated
  * and the appropriate error being thrown.
  * @param {Interpreter.Completion} type Completion type.
- * @param {Interpreter.Value=} value Value computed, returned or thrown.
- * @param {string=} label Target label for break or return.
+ * @param {Interpreter.Value} value Value computed, returned or thrown.
+ * @param {string|undefined} label Target label for break or return.
  */
 Interpreter.prototype.unwind = function(type, value, label) {
   if (type === Interpreter.Completion.NORMAL) {
     throw TypeError('Should not unwind for NORMAL completions');
   }
 
-  for (var stack = this.stateStack; stack.length > 0; stack.pop()) {
+  loop: for (var stack = this.stateStack; stack.length > 0; stack.pop()) {
     var state = stack[stack.length - 1];
     switch (state.node['type']) {
       case 'TryStatement':
@@ -2497,6 +2824,12 @@ Interpreter.prototype.unwind = function(type, value, label) {
         } else if (type !== Interpreter.Completion.THROW) {
           throw Error('Unsynatctic break/continue not rejected by Acorn');
         }
+        break;
+      case 'Program':
+        // Don't pop the stateStack.
+        // Leave the root scope on the tree in case the program is appended to.
+        state.done = true;
+        break loop;
     }
     if (type === Interpreter.Completion.BREAK) {
       if (label ? (state.labels && state.labels.indexOf(label) !== -1) :
@@ -2523,10 +2856,10 @@ Interpreter.prototype.unwind = function(type, value, label) {
       'TypeError': TypeError,
       'URIError': URIError
     };
-    var name = this.getProperty(value, 'name').toString();
+    var name = String(this.getProperty(value, 'name'));
     var message = this.getProperty(value, 'message').valueOf();
-    var type = errorTable[name] || Error;
-    realError = type(message);
+    var errorConstructor = errorTable[name] || Error;
+    realError = errorConstructor(message);
   } else {
     realError = String(value);
   }
@@ -2855,7 +3188,7 @@ Interpreter.prototype['stepCallExpression'] = function(stack, state, node) {
         state.value = code;
       } else {
         try {
-          var ast = acorn.parse(code.toString(), Interpreter.PARSE_OPTIONS);
+          var ast = acorn.parse(String(code), Interpreter.PARSE_OPTIONS);
         } catch (e) {
           // Acorn threw a SyntaxError.  Rethrow as a trappable error.
           this.throwException(this.SYNTAX_ERROR, 'Invalid code: ' + e.message);
@@ -2884,7 +3217,11 @@ Interpreter.prototype['stepCallExpression'] = function(stack, state, node) {
         state.value = value;
         thisInterpreter.paused_ = false;
       };
-      var argsWithCallback = state.arguments_.concat(callback);
+      // Force the argument lengths to match, then append the callback.
+      var argLength = func.asyncFunc.length - 1;
+      var argsWithCallback = state.arguments_.concat(
+          new Array(argLength)).slice(0, argLength);
+      argsWithCallback.push(callback);
       this.paused_ = true;
       func.asyncFunc.apply(state.funcThis_, argsWithCallback);
       return;
@@ -3310,7 +3647,8 @@ Interpreter.prototype['stepObjectExpression'] = function(stack, state, node) {
         get: kinds['get'],
         set: kinds['set']
       };
-      this.setProperty(state.object_, key, null, descriptor);
+      this.setProperty(state.object_, key, Interpreter.VALUE_IN_DESCRIPTOR,
+                       descriptor);
     } else {
       // Set a normal property with a value.
       this.setProperty(state.object_, key, kinds['init']);

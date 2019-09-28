@@ -1375,11 +1375,9 @@ print(s);`
 
 
 ,selection_sort_classic:
-
 `//Unstable selection sort
 
 var r = range_bounded("f", "l");
-
 
 function selection_sort_classic(f, l, r) {
     while ( ! equal(f, l)) {
@@ -1388,7 +1386,6 @@ function selection_sort_classic(f, l, r) {
         f = successor(f);
     }
 }
-
 
 function is_sorted(f, l, r) {
     if (equal(f, l)) return true;
@@ -1401,17 +1398,17 @@ function is_sorted(f, l, r) {
     return true;
 }
   
-var rel = relation(function(x, y) { return x < y; }, 'less');
-// var s = sequence(array_random(), "s");
-// var s = sequence([1, 2, 3, 4], "s");
-// var s = sequence([], "s");
-// var s = sequence([1], "s");
-var s = sequence([1, 2], "s");
+var less = callable(function less(x, y) { return x < y; });
+var even = callable(function even(x) { return (x & 1) == 0; });
+// var s = sequence(array_random(), "s", even);
+var s = sequence(array_random(), "s", less);
+
 print(s);
-// selection_sort_classic(begin(s), end(s), rel);
-var x = is_sorted(begin(s), end(s), rel);
+selection_sort_classic(begin(s), end(s), less);
+var x = is_sorted(begin(s), end(s), less);
 print(x);
-print(s);`
+print(s);
+`
 
 
 ,selection_sort_stable:
@@ -1554,7 +1551,7 @@ function Iterator(data, index, name) {
     this.name = name;
 }
 
-function Sequence(name, data, elements, colors, capacity) {
+function Sequence(name, data, elements, colors, capacity, pred) {
     if (capacity == undefined) {
         capacity = data.length
     }
@@ -1563,6 +1560,7 @@ function Sequence(name, data, elements, colors, capacity) {
     this.elements = elements;
     this.colors = colors;
     this.capacity = capacity;
+    this.pred = pred;
 }
 
 function RangeBounded(fname, lname) {
@@ -1787,6 +1785,7 @@ function initFunctions(interpreter, scope) {
         output.innerHTML += msg;
         // hljs.highlightBlock(output);
 
+        // console.log(text);
         console.log(arguments.length ? text : '');
     };
 
@@ -1918,7 +1917,7 @@ function initFunctions(interpreter, scope) {
     };
 
     var increase_capacity_wrapper = function(seq, n) {
-        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n);
+        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.pred);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -1929,8 +1928,8 @@ function initFunctions(interpreter, scope) {
         var cap = seq.capacity
         var data = seq.data;
 
-        console.log(data)
-        console.log(cap)
+        // console.log(data)
+        // console.log(cap)
 
         if (cap == data.length) {
             ++cap;
@@ -1938,11 +1937,10 @@ function initFunctions(interpreter, scope) {
 
         data.push(x)
 
-        console.log(data)
-        console.log(cap)
+        // console.log(data)
+        // console.log(cap)
 
-
-        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap);
+        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.pred);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -2133,15 +2131,65 @@ function initFunctions(interpreter, scope) {
         two.update();
     };
 
+    var g_rel_count = 0;
+    var g_pred_count = 0;
 
-    var sequence_internal_wrapper = function(data_par, name) {
-        // console.log(data_par);
+    var callable_create_wrapper = function (f) {
+        var codeAll = getAllCode();
+        var codeSelected = codeAll.substring(f.node.start, f.node.end);
 
+        if (f.node.id) {
+            var name = f.node.id.name;
+        } else {
+            if (f.node.params.length == 1) {
+                var name = "pred" + g_pred_count;
+                ++g_pred_count;
+            } else if (f.node.params.length == 2) {
+                var name = "rel" + g_rel_count;
+                ++g_rel_count;
+            }
+        }
+
+        return {
+            name: name,
+            parameters: f.node.params.length,
+            code: codeSelected
+        };
+    }
+
+    var callable_get_code_wrapper = function (c) {
+        return c.code;
+    }
+
+    var callable_get_name_wrapper = function (c) {
+        return c.name;
+    }
+
+    var callable_get_parameters_wrapper = function (c) {
+        return c.parameters;
+    }
+
+    var sequence_internal_wrapper = function(data_par, name, pred) {
         if (sequences[name] != undefined) {
             showError('sequence "' + name + '" already exists.');
             disable('disabled');
             return null;
         }
+
+        // // var codeView = getViewCode();
+        // var codeAll = getAllCode();
+
+        // console.log(pred)
+        // // console.log(pred.node)
+        // // console.log(pred.node.start)
+        // // console.log(pred.node.end)
+        // // console.log(codeView)
+        // console.log(pred.node.id.name)
+        // console.log(pred.node.params.length)
+
+        // // var codeSelected = codeView.substring(start, end);
+        // var codeSelected = codeAll.substring(pred.node.start, pred.node.end);
+        // console.log(codeSelected)
 
         var data = [];
         var colors = [];
@@ -2154,7 +2202,7 @@ function initFunctions(interpreter, scope) {
 
         // var elems = drawArray(two, data, name, Object.keys(sequences).length);
         var elems = null;
-        var retobj = new Sequence(name, data, elems, colors);
+        var retobj = new Sequence(name, data, elems, colors, undefined, pred);
         sequences[name] = retobj;
 
         updateStatus();
@@ -2174,7 +2222,7 @@ function initFunctions(interpreter, scope) {
         two.update();
     };    
 
-    var call_predicate_internal_wrapper = function(name, x, res) {
+    var log_predicate_call_internal_wrapper = function(name, x, res) {
         if (log_stats_enabled) {
             ++stats_pred_appls;
         }
@@ -2191,6 +2239,13 @@ function initFunctions(interpreter, scope) {
     };    
 
     var log_relation_call_internal_wrapper = function(name, x, y, res) {
+        console.log('log_relation_call_internal_wrapper')
+        // console.log(name)
+        // console.log(x)
+        // console.log(y)
+        // console.log(res)
+        // console.log(log_stats_enabled)
+        
         if (log_stats_enabled) {
             ++stats_pred_appls;
         }
@@ -2330,7 +2385,7 @@ function initFunctions(interpreter, scope) {
 
     interpreter.setProperty(scope, 'sequence_internal',   interpreter.createNativeFunction(sequence_internal_wrapper));
     interpreter.setProperty(scope, 'fill_elem',      interpreter.createNativeFunction(fill_elem_wrapper));
-    interpreter.setProperty(scope, 'call_predicate_internal', interpreter.createNativeFunction(call_predicate_internal_wrapper));
+    interpreter.setProperty(scope, 'log_predicate_call_internal', interpreter.createNativeFunction(log_predicate_call_internal_wrapper));
     interpreter.setProperty(scope, 'log_relation_call_internal', interpreter.createNativeFunction(log_relation_call_internal_wrapper));
 
     interpreter.setProperty(scope, 'enable_log_stats', interpreter.createNativeFunction(enable_log_stats_wrapper));
@@ -2343,6 +2398,13 @@ function initFunctions(interpreter, scope) {
 
     interpreter.setProperty(scope, 'start_f', interpreter.createNativeFunction(start_f_wrapper));
     interpreter.setProperty(scope, 'end_f', interpreter.createNativeFunction(end_f_wrapper));
+
+
+    interpreter.setProperty(scope, 'callable_create', interpreter.createNativeFunction(callable_create_wrapper));
+    interpreter.setProperty(scope, 'callable_get_code', interpreter.createNativeFunction(callable_get_code_wrapper));
+    interpreter.setProperty(scope, 'callable_get_name', interpreter.createNativeFunction(callable_get_name_wrapper));
+    interpreter.setProperty(scope, 'callable_get_parameters', interpreter.createNativeFunction(callable_get_parameters_wrapper));
+
 }
 
 // function bind(r, value, arg=0) {
@@ -2361,43 +2423,115 @@ function initFunctions(interpreter, scope) {
 
 
 function callPredCode() {
-    return 'function call_predicate(p, name, x){var res = p(x); call_predicate_internal(name, x, res); return res;};\n'
-         + 'function predicate(p, name) {return function(x) {return call_predicate(p, name, x);};}\n'
-         + 'function log_relation_call(r, name, x, y){var res = r(x, y); log_relation_call_internal(name, x, y, res); return res;}\n'
+    return '';
+    
+    // var res = '' + 
+    //     // 'function log_predicate_call(p, name, x){var res = p(x); log_predicate_call_internal(name, x, res); return res;};\n'
+    //     // + 'function predicate(p, name) {return function(x) {return log_predicate_call(p, name, x);};}\n'
+    //     // + 'function log_relation_call(r, name, x, y){var res = r(x, y); log_relation_call_internal(name, x, y, res); return res;}\n'
 
-         + 'function relation(_r, _name) {var code = "(function " + _name + "(x, y) {return log_relation_call(_r, \\"" + _name + "\\", x, y);})";var func = eval(code);func.inner_relation = _r;func.inner_name = _name;return func;}\n'
-         + 'function complement(_r) {var _cr = function(x, y) { return !_r.inner_relation(x, y); };var code = "(function complement_of_" + _r.inner_name + "(x, y) {return log_relation_call(_cr, \\"\\u00AC" + _r.inner_name + "\\", x, y);})";var func = eval(code);func.inner_relation = _cr;func.inner_name = "\\u00AC" + _r.inner_name;return func;}\n'
-         + 'function converse(_r) {var _cr = function(x, y) { return _r.inner_relation(y, x); };var code = "(function converse_of_" + _r.inner_name + "(x, y) {return log_relation_call(_cr, \\"" + _r.inner_name + "\\", y, x);})";var func = eval(code);func.inner_relation = _cr;return func;}\n'
+    //     + 'function complement(_r) {var _cr = function(x, y) { return !_r.inner_relation(x, y); };var code = "(function complement_of_" + _r.inner_name + "(x, y) {return log_relation_call(_cr, \\"\\u00AC" + _r.inner_name + "\\", x, y);})";var func = eval(code);func.inner_relation = _cr;func.inner_name = "\\u00AC" + _r.inner_name;return func;}\n'
+    //     + 'function converse(_r) {var _cr = function(x, y) { return _r.inner_relation(y, x); };var code = "(function converse_of_" + _r.inner_name + "(x, y) {return log_relation_call(_cr, \\"" + _r.inner_name + "\\", y, x);})";var func = eval(code);func.inner_relation = _cr;return func;}\n'
 
-        //  + 'function bind(r, value, arg=0) {if (arg == 0) return function(x) { return r(value, x);}; return function(x) { return r(x, value);};}\n'
-         + 'function bind(r, value, arg) {return function(x) { return r(value, x);};}\n'
+    //     //  + 'function bind(r, value, arg=0) {if (arg == 0) return function(x) { return r(value, x);}; return function(x) { return r(x, value);};}\n'
+    //     + 'function bind(r, value, arg) {return function(x) { return r(value, x);};}\n'
 
-         + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n';
-        //  + 'function array_random(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
+    //     + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n';
+    //     //  + 'function array_random(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
+
+    // res += `function relation(_r, _name) {
+    //         var code = "(function " + _name + "(x, y) {return log_relation_call(_r, \\"" + _name + "\\", x, y);})";
+    //         var func = eval(code);
+    //         func.inner_relation = _r;
+    //         func.inner_name = _name;
+    //         return func;
+    //     }`
+
+    // res += `function predicate(p, name) {
+    //             return function(x) {
+    //                 return log_predicate_call(p, name, x);
+    //             };
+    //         }`;
+    
+    
+    // res += `
+    // function log_relation_call(r, name, x, y) {
+    //     var res = r(x, y); 
+    //     log_relation_call_internal(name, x, y, res); 
+    //     return res;
+    // }`;
+
+    return res;
 }
 
 function addSequenceCode() {
-    return 'function sequence(d, n, p) {' + '\n' +
-    '    disable_log_stats();' + '\n' +
-    '    var obj = sequence_internal(d, n);' + '\n' +
-    '    //print(obj);' + '\n' +
-    '    if ( ! obj) {enable_log_stats(); return obj;}' + '\n' +
-    '    if (p) {' + '\n' +    
-    '        for (var i = 0; i < d.length; ++i) {' + '\n' +
-    '            var value = d[i];' + '\n' +
-    '            if ( ! p(value)) {' + '\n' +
-    '                fill_elem(obj, i, "#ff9191");' + '\n' +
-    '                //obj.colors[i] = "#ff9191";' + '\n' +
-    '            }' + '\n' +
-    '        }' + '\n' +
-    '    }' + '\n' +
-    '    enable_log_stats();' + '\n' +
-    '    return obj;' + '\n' +
-    '}'+ '\n'
+    // return `
+    // function sequence(d, n, p) {
+    //     disable_log_stats();
+    //     var obj = sequence_internal(d, n, p);
+
+    //     if ( ! obj) {enable_log_stats(); return obj;}
+    //     if (p) {    
+    //         for (var i = 0; i < d.length; ++i) {
+    //             var value = d[i];
+    //             if ( ! p(value)) {
+    //                 fill_elem(obj, i, "#ff9191");
+    //                 //obj.colors[i] = "#ff9191";
+    //             }
+    //         }
+    //     }
+    //     enable_log_stats();
+    //     return obj;
+    // }`
+
+    return `
+    function sequence(d, n, p) {
+        // disable_log_stats();
+        var obj = sequence_internal(d, n, p);
+
+        // if ( ! obj) {enable_log_stats(); return obj;}
+        // if (p) {    
+        //     for (var i = 0; i < d.length; ++i) {
+        //         var value = d[i];
+        //         if ( ! p(value)) {
+        //             fill_elem(obj, i, "#ff9191");
+        //             //obj.colors[i] = "#ff9191";
+        //         }
+        //     }
+        // }
+        // enable_log_stats();
+        return obj;
+    }`
+
 }
 
 function add_utils_lib() {
     return `
+    function callable(f) {
+        var c = callable_create(f);
+        var fname = callable_get_name(c);
+        var params = callable_get_parameters(c);
+    
+        if (params == 2) {
+            var wrapped_func = function(x, y) {
+                var res = f(x, y); 
+                log_relation_call_internal(fname, x, y, res); 
+                return res;
+            };        
+        } else if (params == 1) {
+            var wrapped_func = function(x) {
+                var res = f(x); 
+                log_predicate_call_internal(fname, x, res); 
+                return res;
+            };
+        }
+        wrapped_func.inner_callable = c;
+        wrapped_func.inner_function = f;
+        wrapped_func.inner_name = fname;
+        wrapped_func.inner_code = callable_get_code(c);
+        wrapped_func.inner_parameters = params;
+        return wrapped_func;
+    }    
     function array_random(n, from, to) {
         if ( ! n) n = 10;
         if ( ! from) from = 0;
@@ -2582,6 +2716,28 @@ function restartButton() {
 
 
 function startButton() {
+    // alert("fer")
+
+
+    // console.log("fer")
+
+    // function printfff(f) {
+    //     var fString = f.toString();
+    //     console.log(fString);
+    // }
+    
+    // var myFunction = function () {
+    // // Any codes here
+    // console.log('This is myFunction');
+    // };
+    
+    // printfff(myFunction)
+
+
+    // return;
+
+
+
     var codeAll = getAllCode();
     var codeView = getViewCode();
     
@@ -2689,7 +2845,7 @@ function scopeOrder(scope) {
         'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self', 
         'window',
         'sequence', 'sequence_internal', 'alert', 'assign_it',
-        'begin', 'call_predicate', 'call_predicate_internal', 'log_relation_call',
+        'begin', 'log_predicate_call', 'log_predicate_call_internal', 'log_relation_call',
         'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'fill_elem', 'find_if', 'sink', 'source', 'successor', 'remove_it',
         'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending', 
@@ -2803,7 +2959,7 @@ function drawScope(scope) {
         'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self', 
         'window',
         'sequence', 'sequence_internal', 'alert', 'assign_it',
-        'begin', 'call_predicate', 'call_predicate_internal', 'log_relation_call',
+        'begin', 'log_predicate_call', 'log_predicate_call_internal', 'log_relation_call',
         'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'fill_elem', 'find_if', 'sink', 'source', 'successor', 'remove_it',
         'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending',
@@ -2909,7 +3065,8 @@ function drawScope(scope) {
     for (var i in seq_internal) {
         var key = seq_internal[i].key;
         var value = seq_internal[i].value;
-        var elems = drawArray(two, key, seqn, value.data, value.colors, value.capacity);
+        // console.log(value);
+        var elems = drawArray(two, key, seqn, value.data, value.colors, value.capacity, value.pred);
         sequences[value.name].elements = elems;
         ++seqn;
     }
