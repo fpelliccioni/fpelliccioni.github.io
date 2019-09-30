@@ -184,11 +184,14 @@ function execute_callable() {
     var callable = arguments[0];
     if (arguments.length != callable.properties.inner_parameters + 1) return undefined;
 
+    if (arguments[1] == '_') return undefined;
+
     var full_code = callable.properties.inner_code;
     full_code += callable.properties.inner_name + "(";
     full_code += arguments[1];
 
     if (callable.properties.inner_parameters == 2) {
+        if (arguments[2] == '_') return undefined;
         full_code += ", ";
         full_code += arguments[2];
     }
@@ -202,22 +205,48 @@ function execute_callable() {
 
 }
 
-function drawArray(two, name, id, arr, colors, capacity, pred) {
-    
+function toPaddedHexString(num, len) {
+    str = num.toString(16);
+    // console.log(num)
+    // console.log(str)
+    return "0".repeat(len - str.length) + str;
+}
 
+function rgb_to_str(color) {
+    return "#" +
+        toPaddedHexString(color.r, 2) +
+        toPaddedHexString(color.g, 2) +
+        toPaddedHexString(color.b, 2);
+}
 
-    console.log(execute_callable(pred, 33));
-    console.log(execute_callable(pred, 32));
+function darker(color) {
+    // color.r -= 15;
+    // color.r %= 256;
+    // color.g -= 15;
+    // color.g %= 256;
+    // color.b -= 15;
+    // color.b %= 256;
 
+    color.r -= 10;
+    color.r %= 256;
+    color.g -= 10;
+    color.g %= 256;
+    color.b -= 10;
+    color.b %= 256;
+    return color
+}
+
+function clone_color(color) {
+    return { r: color.r, g: color.g, b: color.b };
+}
+
+function drawArray(two, name, id, arr, colors, capacity, callable) {
 
     if (capacity == undefined) {
         capacity = arr.length
     }
 
-    // console.log(capacity)
-
     var elements = []
-
     var leftMargin = defaultLeftMargin;
     var topMargin = defaultTopMargin + id * sequenceTotalHeight;
 
@@ -230,36 +259,52 @@ function drawArray(two, name, id, arr, colors, capacity, pred) {
         text.fill = '#99ff99';
         leftMargin += 14.46 * name.length
     }
+    var green_def = { r: 191, g: 255, b: 179 };
+    var red_def = { r: 0xd8, g: 0x98, b: 0xa7 };
+    var green = clone_color(green_def);
+    var red = clone_color(red_def);
 
     for (let index = 0; index < arr.length; ++index) {
         let value = arr[index];
         let color = colors[index];
 
-        // console.log(color);
-        // execute_callable(pred, value)
+        if (callable) {
+            if (is_predicate(callable) && ! execute_callable(callable, value)) {
+                color = rgb_to_str(red);
+            } else {
+                color = rgb_to_str(green);
+            }
+            if (is_relation(callable)) {
+                if (index != 0) {
+                    let prev = arr[index - 1];
+    
+                    var res = execute_callable(callable, value, prev);
+                    // console.log(res)
+                    // console.log(res != undefined)
+                    // console.log(! res)
 
-        if ( ! execute_callable(pred, value)) {
-            color = "#ff9191";
+                    if ( res != undefined && ! res) {
+                        color = rgb_to_str(green);
+                        green = darker(green)
+                        red = clone_color(red_def);
+                    } else {
+                        color = rgb_to_str(red);
+                        red = darker(red)
+                        green = clone_color(green_def);
+                    }
+                } else {
+                    color = rgb_to_str(green);
+                    green = darker(green)
+                }
+            }
+        } else {
+            color = rgb_to_str(green);
         }
 
         var e = drawElement(two,  leftMargin + rectWidth / 2 + index * rectWidth, topMargin, value, index, color);
         elements.push(e)
         // console.log(value);
     }
-
-
-    // if ( ! obj) {enable_log_stats(); return obj;}
-    // if (p) {    
-    //     for (var i = 0; i < d.length; ++i) {
-    //         var value = d[i];
-    //         if ( ! p(value)) {
-    //             fill_elem(obj, i, "#ff9191");
-    //             //obj.colors[i] = "#ff9191";
-    //         }
-    //     }
-    // }
-    // enable_log_stats();
-
 
     var cap_len = capacity - arr.length;
 
