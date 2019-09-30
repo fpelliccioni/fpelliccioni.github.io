@@ -220,13 +220,6 @@ function rgb_to_str(color) {
 }
 
 function darker(color) {
-    // color.r -= 15;
-    // color.r %= 256;
-    // color.g -= 15;
-    // color.g %= 256;
-    // color.b -= 15;
-    // color.b %= 256;
-
     color.r -= 10;
     color.r %= 256;
     color.g -= 10;
@@ -266,8 +259,10 @@ function drawArray(two, name, id, arr, colors, capacity, callable) {
 
     for (let index = 0; index < arr.length; ++index) {
         let value = arr[index];
-        let color = colors[index];
+        // let color = colors[index];
+        let color = defaultElementColor;
 
+        
         if (callable) {
             if (is_predicate(callable) && ! execute_callable(callable, value)) {
                 color = rgb_to_str(red);
