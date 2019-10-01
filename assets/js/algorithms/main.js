@@ -2920,28 +2920,6 @@ function restartButton() {
 
 
 function startButton() {
-    // alert("fer")
-
-
-    // console.log("fer")
-
-    // function printfff(f) {
-    //     var fString = f.toString();
-    //     console.log(fString);
-    // }
-    
-    // var myFunction = function () {
-    // // Any codes here
-    // console.log('This is myFunction');
-    // };
-    
-    // printfff(myFunction)
-
-
-    // return;
-
-
-
     var codeAll = getAllCode();
     var codeView = getViewCode();
     
@@ -2968,9 +2946,14 @@ function startButton() {
     var codeHighlight = document.getElementById('codeHighlight');
     codeHighlight.innerHTML = codeView;
     hljs.highlightBlock(codeHighlight);
+    codeHighlight.style.fontSize = "12pt";
+
+
 
     // var output = document.getElementById('hg-right-y');
     // hljs.highlightBlock(output);
+
+    console.log(codeAll)
 
     try {
         myInterpreter = new Interpreter(codeAll, initFunctions);    
@@ -2989,6 +2972,7 @@ function showFunction() {
     // document.getElementById('dataCodeArea').style.display = "none";
     document.getElementById('codeArea').style.display = "none";
     document.getElementById('codeHighlightPre').style.display = "block";
+
 
     document.getElementById('startButton').style.display = "none";
     document.getElementById('stepButton').style.display = "none";
@@ -3009,16 +2993,10 @@ function showFunction() {
     var codeHighlight = document.getElementById('codeHighlight');
     codeHighlight.innerHTML = codeView;
     hljs.highlightBlock(codeHighlight);
+    codeHighlight.style.fontSize = "20pt";
 
-
-    // try {
-    //     myInterpreter = new Interpreter(codeAll, initFunctions);    
-    //     disable('');
-    //     updateStatus();
-    // } catch (error) {
-    //     editButton();
-    //     showError("parsing error");
-    // }
+    document.getElementById('hg-left').style.width = "60%";
+    document.getElementById('hg-left').style.maxWidth = "60%";
 }
 
 

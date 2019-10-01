@@ -715,7 +715,7 @@ form#settings input[type="checkbox"] ~ span {
 
   /* margin-top: 1em; */
 
-  font-size: 10pt;
+  font-size: 12pt;
 
   border: none;
   resize: none;
@@ -818,7 +818,7 @@ button:hover {
   max-width: 100%;
 
   font-family: "FiraCode", "Source Code Pro", monospace;
-  font-size: 10pt;
+  font-size: 12pt;
   background: #0f0f23;
 
   overflow-y: scroll;
