@@ -16,7 +16,8 @@ var log_stats_enabled = true;
 var g_disable_function_printing = false;
 
 var snippets_cat = {
-      find_if: null
+    find_if: null
+    , find: null
     , find_backward_if: null
     , iota: null
 
@@ -106,6 +107,22 @@ var l = end(d);
 
 var it = find_if(f, l, even);
 if ( ! equal(it, l)) {
+    print(source(it));
+}`
+
+,find:
+`function find(f, l, x) {
+    while ( ! equal(f, l) && ! source(f) != x) {
+        f = successor(f)
+    }
+    return f;
+}
+
+print(array_from("Hello, World!"))
+var s = sequence(array_from("Hello, World!"), "s");
+
+var it = find(begin(s), end(s), 'x');
+if ( ! equal(it, end(s))) {
     print(source(it));
 }`
 
@@ -1501,8 +1518,8 @@ function fillCatalogRecursive(str, categories) {
             snippets = getSnippets(cat);
             for(var si in snippets) {
                 var s = snippets[si]
-                // str += '<li><a href="index.html?snippet=' + s + '">[' + s + ']</a></li>';
-                str += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
+                // str += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
+                str += '<li><a href="/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
             }
         }
         
@@ -1521,27 +1538,13 @@ function fillCatalog() {
     snippets = getUncataloguedSnippets();
     for(var si in snippets) {
         var s = snippets[si]
-        // str += '<li><a href="index.html?snippet=' + s + '">[' + s + ']</a></li>';
-        str += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
+        // str += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
+        str += '<li><a href="/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
     }
     str +=  '</ul></li>';
 
     var list = document.getElementById('list');
     list.innerHTML = str;
-
-
-    
-
-
-    // // for(var key in Object.keys(snippets)){
-    // for(var key in snippets){
-    //     // var value = snippets[key];
-    //     // console.log(key)
-    //     // console.log(value)
-    
-    //     list.innerHTML += '<li><a href="index.html?snippet=' + key + '">[' + key + ']</a></li>';
-    //     // list.innerHTML += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + key + '">[' + key + ']</a></li>';
-    // }
 }
 
 function Iterator(data, index, name) {
@@ -2203,6 +2206,8 @@ function initFunctions(interpreter, scope) {
     }
 
     var sequence_internal_wrapper = function(data_par, name, pred) {
+        console.log(data_par)
+        
         if (sequences[name] != undefined) {
             showError('sequence "' + name + '" already exists.');
             disable('disabled');
@@ -2378,6 +2383,10 @@ function initFunctions(interpreter, scope) {
         addLog("-- end: " + pars[1]);
     }
 
+    var array_from_wrapper = function(str) {
+        return Array.from(str);
+    }
+
 
 
     
@@ -2438,6 +2447,9 @@ function initFunctions(interpreter, scope) {
     interpreter.setProperty(scope, 'callable_get_name', interpreter.createNativeFunction(callable_get_name_wrapper));
     interpreter.setProperty(scope, 'callable_get_parameters', interpreter.createNativeFunction(callable_get_parameters_wrapper));
 
+    interpreter.setProperty(scope, 'array_from_internal', interpreter.createNativeFunction(array_from_internal_wrapper));
+
+    
 }
 
 // function bind(r, value, arg=0) {
@@ -2595,7 +2607,8 @@ function add_utils_lib() {
             res.push(from); 
             ++from;
             --n;
-        } return res; 
+        } 
+        return res; 
     }
     function array_descending(n, from) {
         if ( ! n) n = 10;
@@ -2605,34 +2618,114 @@ function add_utils_lib() {
             res.push(from); 
             --from;
             --n;
-        } return res; 
+        } 
+        return res; 
+    }
+    function array_from(str) {
+        // var tmp = array_from_internal(str);
+        var res = []; 
+        // for (var i = 0; i < tmp.lenght; ++i) {
+            // res.push(tmp[i]); 
+        // }
+        return res; 
     }
     `;
 }
 
 
+function sort_keys(dict) {
+    var sorted = [];
+    for(var key in dict) {
+        sorted[sorted.length] = key;
+    }
+    return sorted.sort();
+}
+
+function getFunction(name) {
+    var libs = add_std_lib_dict();
+    var res = libs[name];
+    if (res) {
+        return res;
+    }
+    return '';
+}
+
+
+function fillStdLib() {
+    // var str = fillCatalogRecursive('', categories);
+    // str += '<li class="linested"><span class="caret">' + 'Uncatalogued' + '</span><ul class="nested">';
+    // snippets = getUncataloguedSnippets();
+
+    var libs = add_std_lib_dict();
+    var keys = sort_keys(libs);
+    var str = '';
+
+    for(var i = 0; i < keys.length; ++i) {
+        str += '<li><a href="/algorithms?function=' + keys[i] + '">[' + keys[i] + ']</a></li>';
+    }
+
+    // for (var key in libs) {
+    //     str += '<li><a href="/algorithms?function=' + key + '">[' + key + ']</a></li>';
+    // }
+    str +=  '</ul></li>';
+
+    var list = document.getElementById('list');
+    list.innerHTML = str;
+}
+
+
+function add_std_lib_prepare_code(code_lines) {
+    var res = []
+    for (var i = 0; i < code_lines.length; ++i) {
+        if (!code_lines[i].includes('start_f') && !code_lines[i].includes('end_f')) {
+            res.push(code_lines[i]);
+        }
+    }
+
+    return res.join('\n');
+}
+
 function add_std_lib_get_function_name(e) {
-    e = e.trim();
-    var lines = a.split("\n");
+    var code = e.trim();
+    var lines = code.split("\n");
     if (lines.length == 0) return undefined;
     if ( ! lines[0].startsWith('function')) return undefined;
 
-    var parens = lines[0].startsWith('(');
+    var parens = lines[0].indexOf('(');
     if (parens < 0) return undefined;
 
-    var res = lines[0].substring('function'.length, parens); //.trim();
-    alert(res);
+    var res = lines[0].substring('function'.length, parens).trim();
+    // return { key: res, value: code };
+    return { key: res, value: add_std_lib_prepare_code(lines) };
+}
+
+function add_std_lib_dict_temp() {
+    var list = add_std_lib_array();
+    var res = {};
+    for (var i = 0; i < list.length; ++i) {
+        var data = add_std_lib_get_function_name(list[i]);
+        if (data != undefined) {
+            res[data.key] = data.value;
+        }
+    }
     return res;
 }
 
-function add_std_lib_list() {
-    var list = add_std_lib_array();
+function add_std_lib_dict() {
+    var dict = add_std_lib_dict_temp();
 
-    for (var i = 0; i < list.length; ++i) {
-
+    var res = {};
+    for (var key in dict) {
+        if (key.includes("_internal")) continue;
+        
+        if ((key + "_internal") in dict) {
+            res[key] = dict[key + "_internal"].replace(key + "_internal", key);
+        } else {
+            res[key] = dict[key];
+        }
     }
+    return res;
 }
-
 
 function add_std_lib() {
     return add_std_lib_array().join('\n');
@@ -2888,6 +2981,46 @@ function startButton() {
         showError("parsing error");
     }
 }
+
+function showFunction() {
+    var codeAll = getAllCode();
+    var codeView = getViewCode();
+    
+    // document.getElementById('dataCodeArea').style.display = "none";
+    document.getElementById('codeArea').style.display = "none";
+    document.getElementById('codeHighlightPre').style.display = "block";
+
+    document.getElementById('startButton').style.display = "none";
+    document.getElementById('stepButton').style.display = "none";
+    document.getElementById('editButton').style.display = "none";
+    document.getElementById('restartButton').style.display = "none";
+
+    var output = document.getElementById('hg-right-y');
+    output.innerHTML = '';
+
+    var hg_right_x_a = document.getElementById('hg-right-x-a');
+    hg_right_x_a.innerHTML = '';
+
+    clearLog();
+
+    two.clear();
+    resetStatus();
+
+    var codeHighlight = document.getElementById('codeHighlight');
+    codeHighlight.innerHTML = codeView;
+    hljs.highlightBlock(codeHighlight);
+
+
+    // try {
+    //     myInterpreter = new Interpreter(codeAll, initFunctions);    
+    //     disable('');
+    //     updateStatus();
+    // } catch (error) {
+    //     editButton();
+    //     showError("parsing error");
+    // }
+}
+
 
 function addVariable(name, value, seqn) {
 

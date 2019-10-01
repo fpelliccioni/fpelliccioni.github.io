@@ -28,15 +28,21 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             <header>
             <h1 class="title-global">
                 <!-- <a href="/algorithms">Algorithms &#120572;</a>-->
-                <a href="http://componentsprogramming.com/algorithms">al-Khw&#257;rizm&#299; (&#120572;)</a>
+                <a href="/algorithms">al-Khw&#257;rizm&#299; (&#120572;)</a>
             </h1>
             <nav>
                 <ul>
-                    <li><a href="http://componentsprogramming.com/algorithms-about/">[About]</a></li>
+                    <!-- <li><a href="http://componentsprogramming.com/algorithms-about/">[About]</a></li>
                     <li><a href="http://componentsprogramming.com/algorithms-support/">[Support]</a></li>
                     <li><a href="http://componentsprogramming.com/algorithms-catalog/">[Catalog]</a></li>
-                    <!-- <li><a href="catalog.html">[Catalog]</a></li> -->
-                    <li><a href="http://componentsprogramming.com/">[Components Programming]</a></li>
+                    <li><a href="http://componentsprogramming.com/">[Components Programming]</a></li> -->
+
+                    <li><a href="/algorithms-about/">[About]</a></li>
+                    <li><a href="/algorithms-support/">[Support]</a></li>
+                    <li><a href="/algorithms-stdlib/">[Std Lib]</a></li>
+                    <li><a href="/algorithms-catalog/">[Catalog]</a></li>
+                    <li><a href="/">[Components Programming]</a></li>
+
                     <!-- <li><a href="http://componentsprogramming.com/algorithms-help/">[Help]</a></li> -->
                 </ul>
             </nav>
@@ -97,90 +103,7 @@ var d = add_sequence(random_array(), "d");
     </div>
           
     <script>
-            var lines = [];
-            var prevLine = "";
-            var myInterpreter;
-
-            var iterators_colors = ['#99ff99', '#d80500', '#afafff', '#ffaff7', '#fdffaf'
-                                  , '#affffb', '#ffe2af', '#d0afff', '#e1ffaf', '#ffafb9'];
-
-            var iterators_int = {};
-            var iterators_gui = {};
-            var predicates = [];
-            var sequences = {};
-            var variables = {};
-
-            // var skipped = ['skip_debug'];
-            var skipped = [];
-
-            var stats_it_moves = 0;
-            var stats_it_cmps = 0;
-            var stats_pred_appls = 0;
-            var stats_swaps = 0;
-            var stats_assigments = 0;
-    
-            // console.log(document.getElementById('hg-right-a').offsetWidth)
-            // console.log(document.getElementById('hg-right-a').offsetHeight)
-
-            var twp_width = document.getElementById('hg-right-a').offsetWidth
-            var two_height = document.getElementById('hg-right-a').offsetHeight
-
-
-            // console.log(twp_width)
-            // console.log(two_height)
-
-
-            var two = new Two({
-                    fullscreen: false,
-                    // width: document.getElementById('sequence').offsetWidth,
-                    // height: 600,
-                    width: twp_width,
-                    height: two_height,
-                    autostart: true
-            }).appendTo(sequence);
-
-            setSizes();
-    
-            // document.onkeypress = function (e) {
-            //     e = e || window.event;
-            //     console.log(e.keyCode)
-            //     // // console.log(document.getElementById('stepButton').disabled);
-            //     // if (e.keyCode == 13) {
-            //     //     if (document.getElementById('stepButton').disabled) {
-            //     //         startButton()
-            //     //     }
-            //     //     if ( ! document.getElementById('stepButton').disabled) {
-            //     //         stepButton();
-            //     //     }
-            //     // }
-            // }
-
-
-
-            document.onkeydown = function (e) {
-                e = e || window.event;
-                    // console.log(e)
-                // console.log(e.keyCode)
-
-                if (e.ctrlKey && e.keyCode == 120) {
-                    if (document.getElementById('stepButton').disabled) {
-                        startButton()
-                    }
-                }
-
-                if ( (e.ctrlKey && e.keyCode == 121) || (e.keyCode == 39)|| (e.keyCode == 40)) {
-                    // if (document.getElementById('stepButton').disabled) {
-                    //     startButton()
-                    // }
-                    if ( ! document.getElementById('stepButton').disabled) {
-                        stepButton();
-                    }
-                }
-
-            };        
-
-
-
+        function loadParameters() {
             var url_string = window.location.href;
             var url = new URL(url_string);
             var c = url.searchParams.get("code");
@@ -188,20 +111,98 @@ var d = add_sequence(random_array(), "d");
 
             if (c) {
                 document.getElementById('codeArea').value = c;
-            } else {
+                editButton();
+                return;
+            }
 
-                var snippet = url.searchParams.get("snippet");
-                // console.log(snippet)
-                if ( ! snippet) {
-                    snippet = "partition_semistable";
-                }
-                if (snippet) {
-                    document.getElementById('codeArea').value = getSnippet(snippet);
+            var functName = url.searchParams.get("function");
+            if (functName) {
+                // alert(getFunction(functName))
+                document.getElementById('codeArea').value = getFunction(functName);
+                // editButton();
+                showFunction()
+                return;
+            }
+
+            var snippet = url.searchParams.get("snippet");
+            // console.log(snippet)
+            if ( ! snippet) {
+                snippet = "partition_semistable";
+            }
+            if (snippet) {
+                document.getElementById('codeArea').value = getSnippet(snippet);
+            }
+            editButton();
+        }
+
+        var lines = [];
+        var prevLine = "";
+        var myInterpreter;
+
+        var iterators_colors = ['#99ff99', '#d80500', '#afafff', '#ffaff7', '#fdffaf'
+                                , '#affffb', '#ffe2af', '#d0afff', '#e1ffaf', '#ffafb9'];
+
+        var iterators_int = {};
+        var iterators_gui = {};
+        var predicates = [];
+        var sequences = {};
+        var variables = {};
+
+        // var skipped = ['skip_debug'];
+        var skipped = [];
+
+        var stats_it_moves = 0;
+        var stats_it_cmps = 0;
+        var stats_pred_appls = 0;
+        var stats_swaps = 0;
+        var stats_assigments = 0;
+
+        // console.log(document.getElementById('hg-right-a').offsetWidth)
+        // console.log(document.getElementById('hg-right-a').offsetHeight)
+
+        var twp_width = document.getElementById('hg-right-a').offsetWidth
+        var two_height = document.getElementById('hg-right-a').offsetHeight
+
+
+        // console.log(twp_width)
+        // console.log(two_height)
+
+
+        var two = new Two({
+                fullscreen: false,
+                // width: document.getElementById('sequence').offsetWidth,
+                // height: 600,
+                width: twp_width,
+                height: two_height,
+                autostart: true
+        }).appendTo(sequence);
+
+        setSizes();
+
+        document.onkeydown = function (e) {
+            e = e || window.event;
+                // console.log(e)
+            // console.log(e.keyCode)
+
+            if (e.ctrlKey && e.keyCode == 120) {
+                if (document.getElementById('stepButton').disabled) {
+                    startButton()
                 }
             }
 
-            editButton();
-        </script>      
+            if ( (e.ctrlKey && e.keyCode == 121) || (e.keyCode == 39)|| (e.keyCode == 40)) {
+                // if (document.getElementById('stepButton').disabled) {
+                //     startButton()
+                // }
+                if ( ! document.getElementById('stepButton').disabled) {
+                    stepButton();
+                }
+            }
+        };        
+
+        loadParameters();
+        // editButton();
+    </script>      
 </body>
 </html>
 
