@@ -2383,9 +2383,9 @@ function initFunctions(interpreter, scope) {
         addLog("-- end: " + pars[1]);
     }
 
-    var array_from_wrapper = function(str) {
-        return Array.from(str);
-    }
+    // var array_from_wrapper = function(str) {
+    //     return Array.from(str);
+    // }
 
 
 
@@ -2447,7 +2447,7 @@ function initFunctions(interpreter, scope) {
     interpreter.setProperty(scope, 'callable_get_name', interpreter.createNativeFunction(callable_get_name_wrapper));
     interpreter.setProperty(scope, 'callable_get_parameters', interpreter.createNativeFunction(callable_get_parameters_wrapper));
 
-    interpreter.setProperty(scope, 'array_from_internal', interpreter.createNativeFunction(array_from_internal_wrapper));
+    // interpreter.setProperty(scope, 'array_from_internal', interpreter.createNativeFunction(array_from_internal_wrapper));
 
     
 }
@@ -2622,11 +2622,10 @@ function add_utils_lib() {
         return res; 
     }
     function array_from(str) {
-        // var tmp = array_from_internal(str);
         var res = []; 
-        // for (var i = 0; i < tmp.lenght; ++i) {
-            // res.push(tmp[i]); 
-        // }
+        for (var i = 0; i < str.length; ++i) {
+            res.push(str[i]); 
+        }
         return res; 
     }
     `;
