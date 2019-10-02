@@ -2644,7 +2644,7 @@ function getFunction(name) {
     var libs = add_std_lib_dict();
     var res = libs[name];
     if (res) {
-        return res;
+        return "\n\n\n" + res;
     }
     return '';
 }
@@ -2732,19 +2732,6 @@ function add_std_lib() {
 
 function add_std_lib_array() {
     return [`
-function min_element_nonempty(f, l, r) {
-    var _f_ = start_f('min_element_nonempty', f, l, r);
-    var m = f;
-    f = successor(f);
-    while ( ! equal(f, l)) {
-        if (r(source(f), source(m))) {
-            m = f;
-        }
-        f = successor(f);
-    }
-    end_f(_f_);
-    return m;
-}`, `
 function min_element(f, l, r) {
     var _f_ = start_f('min_element', f, l, r);
     if (equal(f, l)) return l;
@@ -2758,7 +2745,32 @@ function min_element(f, l, r) {
         }
         f = successor(f);
     }
-
+    end_f(_f_);
+    return m;
+}`, `
+function min_element_nonempty(f, l, r) {
+    var _f_ = start_f('min_element_nonempty', f, l, r);
+    var m = f;
+    f = successor(f);
+    while ( ! equal(f, l)) {
+        if (r(source(f), source(m))) {
+            m = f;
+        }
+        f = successor(f);
+    }
+    end_f(_f_);
+    return m;
+}`, `
+function min_value_nonempty(f, l, r) {
+    var _f_ = start_f('min_value_nonempty', f, l, r);
+    var m = source(f);
+    f = successor(f);
+    while ( ! equal(f, l)) {
+        if (r(source(f), m)) {
+            m = source(f);
+        }
+        f = successor(f);
+    }
     end_f(_f_);
     return m;
 }`, `
@@ -2825,6 +2837,64 @@ var gte = relation(function gte(x, y) {return x >= y;});
     //     return start;
     // }`    
 }
+
+function std_lib_attributes() {
+
+    return {
+        min_element: {
+            category: ['Selection', 'Stable'],
+            complexity: 'n - 1 comparisons',
+            "type requirements": ['f, l: I: Iterator \u2227 Readable',
+                                  'r: R: StrictWeakOrdering relation',
+                                  'Domain(R) = ValueType(I)'],
+            precondition: 'readable_bounded_range(f, l)',
+            postcondition: 'source(m) = stable_sort_copy(f, l, r)[0]',
+        },
+        min_element_nonempty: {
+            category: ['Selection', 'Stable'],
+            complexity: 'n - 1 comparisons',
+            "type requirements": ['f, l: I: Iterator \u2227 Readable',
+                                  'r: R: StrictWeakOrdering relation',
+                                  'Domain(R) = ValueType(I)'],
+            precondition: 'f != l \u2227 readable_bounded_range(f, l)',
+            postcondition: 'source(m) = stable_sort_copy(f, l, r)[0]',
+        },
+        min_value_nonempty: {
+            category: ['Selection', 'Stable'],
+            complexity: 'n - 1 comparisons',
+            "type requirements": ['f, l: I: Iterator \u2227 Readable',
+                                  'r: R: StrictWeakOrdering relation',
+                                  'Domain(R) = ValueType(I)'],
+            precondition: 'f != l \u2227 readable_bounded_range(f, l)',
+            postcondition: 'm = stable_sort_copy(f, l, r)[0]',
+        },
+        is_sorted: {
+            category: 'Selection',
+            complexity: 'n - 1',
+            precondition: '',
+            postcondition: '',
+        },
+        move_backward: {
+            category: 'Selection',
+            complexity: 'n - 1',
+            precondition: '',
+            postcondition: '',
+        },
+        rotate_right_by_one_nonempty: {
+            category: 'Selection',
+            complexity: 'n - 1',
+            precondition: '',
+            postcondition: '',
+        },
+        shift_right_while_unguarded: {
+            category: 'selection',
+            complexity: 'n - 1',
+            precondition: '',
+            postcondition: '',
+        },
+    };
+}
+
 
 
 
@@ -2952,7 +3022,7 @@ function startButton() {
     // var output = document.getElementById('hg-right-y');
     // hljs.highlightBlock(output);
 
-    console.log(codeAll)
+    // console.log(codeAll)
 
     try {
         myInterpreter = new Interpreter(codeAll, initFunctions);    
@@ -2994,9 +3064,67 @@ function showFunction() {
     hljs.highlightBlock(codeHighlight);
     codeHighlight.style.fontSize = "20pt";
 
-    document.getElementById('hg-left').style.width = "60%";
-    document.getElementById('hg-left').style.maxWidth = "60%";
+    document.getElementById('hg-left').style.width = "50%";
+    document.getElementById('hg-left').style.maxWidth = "50%";
 }
+
+function pad_end_nbsp(targetLength, str) {
+    var n = targetLength - str.length
+    if (n <= 0) return str;
+
+    while (n != 0) {
+        str += "&nbsp;"
+        --n;
+    }
+    return str;
+}
+
+function array_to_str(key, arr, maxKeyLen) {
+    if (arr.length == 0) return '';
+    
+    var str = `<p id="Attribute"><b>${pad_end_nbsp(maxKeyLen, key + ":")}</b> <code>${arr[0]}</code></p>`;
+
+    for (let i = 1; i < arr.length; ++i) {
+        const e = arr[i];
+        console.log(e);
+        str += `<p id="Attribute"><b>${pad_end_nbsp(maxKeyLen, "")}</b> <code>${arr[i]}</code></p>`;
+        // // hg_right_a.innerHTML += `<p id="Attribute"><b>${pad_end_nbsp(maxKeyLen, key + ":")}</b><code>${value}</code></p>`;
+    }
+
+    return str;
+}
+
+function showFunctionAttributes(function_name) {
+    var hg_right_a = document.getElementById('hg-right-a');
+    // hg_right_a.innerHTML = '';
+    hg_right_a.innerHTML = `<p id="Attribute"><b>Algorithm attributes</b>:</p>`;
+    hg_right_a.innerHTML += `<p id="Attribute">&nbsp;</p>`;
+
+    var attrs = std_lib_attributes()[function_name];
+    var maxKeyLen = 0;
+    for (var key in attrs) {
+        if (key.length > maxKeyLen) maxKeyLen = key.length;
+    }    
+
+    ++maxKeyLen;
+    for (var key in attrs) {
+        // console.log(attrs[key]);
+
+        var value = attrs[key];
+
+        if (value && value instanceof Array) {
+            value = array_to_str(key, value, maxKeyLen);
+            hg_right_a.innerHTML += value;
+        } else {
+            hg_right_a.innerHTML += `<p id="Attribute"><b>${pad_end_nbsp(maxKeyLen, key + ":")}</b> <code>${value}</code></p>`;
+        }
+    }    
+
+    hg_right_a.innerHTML += `<p id="Attribute">&nbsp;</p>`;
+    hg_right_a.innerHTML += `<p id="Attribute">&nbsp;</p>`;
+    hg_right_a.innerHTML += `<p id="Attribute"><a href="/algorithms?snippet=${function_name}">Click here to see an example!</a></p>`;
+}
+
 
 
 function addVariable(name, value, seqn) {

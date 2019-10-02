@@ -48,7 +48,7 @@ code:before {
   right: -2px;
   top: 3px;
   bottom: 0px;
-  border: 1px solid #333340;
+  /* border: 1px solid #333340; */
   background: #10101a;
 }
 pre.wrap {
@@ -867,6 +867,16 @@ button:hover {
   color: #009900;
   /* text-align: center; */
 }
+
+#Attribute {
+    font-family: "FiraCode", "Source Code Pro", monospace;
+    font-size: 20pt;
+    margin:0; 
+    padding:0;
+    color: #009900;
+    /* text-align: center; */
+  }
+  
 
 #OutputMsg {
   font-family: "FiraCode", "Source Code Pro", monospace;
