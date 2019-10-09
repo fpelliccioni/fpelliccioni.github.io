@@ -292,9 +292,9 @@ var d = sequence(array_random(), "d", even, true);
 var f = begin(d);
 var l = end(d);
 
-var it = partition_semistable_1(f, l, even);
-if ( ! equal(it, l)) {
-    print('partition point: ' + source(it));
+var p = partition_semistable_1(f, l, even);
+if ( ! equal(p, l)) {
+    print('partition point: ' + source(p));
 }`
 
 ,partition_semistable:
