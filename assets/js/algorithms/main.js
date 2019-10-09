@@ -44,6 +44,9 @@ var snippets_cat = {
     , partition_stable_forward: 'rearrangements-predicate-based-partition'
     , partition_point_n: 'rearrangements-predicate-based-partition'
 
+    , make_heap_n_naive_0: 'rearrangements-predicate-based-make-heap'
+    , make_heap_n_naive_1: 'rearrangements-predicate-based-make-heap'
+    , make_heap_n: 'rearrangements-predicate-based-make-heap'
 
     , insertion_sort_classic_0: 'rearrangements-ordering-based-sort-insertion-sort'
     , insertion_sort_classic_1: 'rearrangements-ordering-based-sort-insertion-sort'
@@ -77,7 +80,8 @@ var categories = [
             , {id: 'rearrangements-position-based-rotate', name: 'Rotate', categories: []}      
         ]}
        ,{id: 'rearrangements-predicate-based', name: 'Predicate-based', categories: [
-            {id: 'rearrangements-predicate-based-partition', name: 'Partition', categories: []}
+            {id: 'rearrangements-predicate-based-partition', name: 'Partition', categories: []},
+            {id: 'rearrangements-predicate-based-make-heap', name: 'Heaps', categories: []}
         ]}
        ,{id: 'rearrangements-ordering-based', name: 'Ordering-based', categories: [
             {id: 'rearrangements-ordering-based-sort', name: 'Sorting', categories: [
@@ -509,7 +513,167 @@ var p = partition_point_n(begin(d), size(d), even);
 print('partition point: ' + source(p));`
 
 
+,make_heap_n_naive_0:
+`skip_debug('source_i');
+var r = range_counted("f", "n");
 
+function source_i(f, i) {
+    return source(successor(f, i));
+}
+
+function shift_down(f, i, n) {
+    while (i < n) {
+        var i_big = i;
+        var c1 = 2 * i + 1;
+        var c2 = c1 + 1;
+
+        if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {
+            i_big = c1;
+        }
+        
+        if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {
+            i_big = c2;
+        }
+        
+        if (i_big == i) {
+            return;
+        }
+
+        iter_swap(successor(f, i), successor(f, i_big));
+        i = i_big;
+    }
+}
+
+function make_heap_n_naive(f, n) {
+    var i = Math.floor(n / 2) - 1;
+    for (; i >= 0; --i) {
+        shift_down(f, i, n);
+    }
+}
+
+var s = sequence(array_random(), "s");
+// var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
+
+print(s);
+make_heap_n_naive(begin(s), size(s));
+print(s);`
+
+
+
+,make_heap_n_naive_1:
+`skip_debug('source_i');
+var r = range_counted("f", "n");
+
+function source_i(f, i) {
+    return source(successor(f, i));
+}
+
+function shift_down(f, i, n) {
+    while (i < n) {
+        var i_big = i;
+        var c1 = 2 * i + 1;
+        var c2 = c1 + 1;
+
+        if (c1 < n && source_i(f, c1) > source_i(f, i_big)) {
+            i_big = c1;
+        }
+        
+        if (c2 < n && source_i(f, c2) > source_i(f, i_big)) {
+            i_big = c2;
+        }
+        
+        if (i_big == i) {
+            return;
+        }
+
+        iter_swap(successor(f, i), successor(f, i_big));
+        i = i_big;
+    }
+}
+
+function make_heap_n_naive(f, n) {
+    var i = Math.floor(n / 2) - 1;
+    for (; i >= 0; --i) {
+        shift_down(f, i, n);
+    }
+}
+
+var s = sequence(array_random(), "s");
+// var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
+
+print(s);
+make_heap_n_naive(begin(s), size(s));
+print(s);`
+
+,make_heap_n:
+`var r = range_counted("f", "n");
+function parent(i) {
+    return Math.floor((i - 1) / 2);    
+}
+
+function push_heap_n(f, n) {
+    var ci = n - 1;
+    while (true) {
+        var pi = parent(ci);
+        var c = successor(f, ci);
+        var p = successor(f, pi);
+        var cv = source(c);
+        var pv = source(p);
+
+        if (pv <= cv) break;
+        sink(p, cv);
+        sink(c, pv);
+
+        if (pi == 0) break;
+        ci = pi;
+    }
+}
+
+function make_heap_n(f, n) {
+    // assert(n > 2); //other sizes handled outside
+    var fpi = Math.floor((n - 3) / 2);
+    var fp = successor(f, fpi);    //firstParent
+    var frk = successor(f, (fpi + 1) * 2);  //firstRightKid
+
+    for (;; fp = predecessor(fp), frk = predecessor(frk, 2)) {
+        var lucifer = source(fp);
+        var parent = fp;
+        var rk = frk; //rightKid
+        for (;;) {
+            var jr = predecessor(rk, (source(predecessor(rk)) <= source(rk)));
+            var crt = source(jr);
+            if (lucifer <= crt) break;
+            sink(parent, crt);
+            parent = jr;
+            // rk = (jr + 1) * 2;
+            var rki = (distance(f, jr) + 1) * 2;
+            // if (rki >= n) goto write;
+            if (rki >= n) {
+                sink(parent, lucifer);
+                break;
+            }
+            rk = successor(f, rki);
+        }
+
+        // if (parent != fp) {
+        if ( ! equal(parent, fp)) {
+                sink(parent, lucifer);
+        }
+
+        // if (fp == 0) break;
+        if (equal(fp, f)) break;
+    }
+
+    if (n & 1) return;
+    push_heap_n(f, n);
+}
+
+// var s = sequence(array_random(), "s");
+var s = sequence([24, 88, 59, 31, 91, 0, 87, 91, 40, 52], "s");
+
+print(s);
+make_heap_n(begin(s), size(s));
+print(s);`
 
 
 
@@ -1728,12 +1892,12 @@ function addLogEqual(a, b, res) {
     addLog('equal(' + serializeIterForLog(a) + ', ' + serializeIterForLog(b) + ') = ' + res);
 }
 
-function addLogSuccessor(it, res_it) {
-    addLog('successor(' + serializeIterForLog(it) + ') = ' + serializeIterForLog(res_it) + '');
+function addLogSuccessor(it, step, res_it) {
+    addLog('successor' + subscript(step) + '(' + serializeIterForLog(it) + ') = ' + serializeIterForLog(res_it) + '');
 }
 
-function addLogPredecessor(it, res_it) {
-    addLog('predecessor(' + it.data.name + subscript(it.index) + ') = ' + serializeIterForLog(res_it)+ '');
+function addLogPredecessor(it, step, res_it) {
+    addLog('predecessor' + subscript(step) + '(' + it.data.name + subscript(it.index) + ') = ' + serializeIterForLog(res_it)+ '');
 }
 
 function addLogSource(it, res) {
@@ -1821,7 +1985,8 @@ function initFunctions(interpreter, scope) {
     // };
 
 
-    var successor_wrapper = function(it_par, step = 1) {
+    var successor_wrapper = function(it_par, step_par = 1) {
+        step = 0 + step_par;
         var data = it_par.data.data;
         var max = data.length;
 
@@ -1842,12 +2007,14 @@ function initFunctions(interpreter, scope) {
         }
 
         updateStatus();
-        addLogSuccessor(it_par, it)
+        addLogSuccessor(it_par, step, it)
         return it;
     };
 
-    var predecessor_wrapper = function(it_par, step = 1) {
-        // console.log(it_par.index)
+    var predecessor_wrapper = function (it_par, step_par = 1) {
+        step = 0 + step_par;
+        // console.log(step_par)
+        // console.log(step)
         if (it_par.index - step < 0) {
             showError('out of range');
             disable('disabled');
@@ -1865,7 +2032,7 @@ function initFunctions(interpreter, scope) {
 
         updateStatus();
 
-        addLogPredecessor(it_par, it)
+        addLogPredecessor(it_par, step, it)
         return it;
     };
     
