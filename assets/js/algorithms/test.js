@@ -219,6 +219,41 @@ function rgb_to_str(color) {
         toPaddedHexString(color.b, 2);
 }
 
+// function str_to_rgba(hex, a = 1){
+//     var c;
+//     if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+//         c= hex.substring(1).split('');
+//         if(c.length== 3){
+//             c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+//         }
+//         c= '0x'+c.join('');
+//         return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',1)';
+//     }
+//     throw new Error('Bad Hex');
+// }
+
+function str_to_rgba_str(hex, alpha = 1) {
+    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+      return r + r + g + g + b + b;
+    });
+  
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if ( ! result) return null;
+
+    var r = parseInt(result[1], 16);
+    var g = parseInt(result[2], 16);
+    var b = parseInt(result[3], 16);
+    return 'rgba(' + [r, g, b, alpha].join(',') + ')';
+
+    // return result ? rgba
+    //   r: parseInt(result[1], 16),
+    //   g: parseInt(result[2], 16),
+    //   b: parseInt(result[3], 16)
+    // } : null;
+  }
+
 function darker(color) {
     color.r -= 10;
     color.r %= 256;
@@ -233,7 +268,9 @@ function clone_color(color) {
     return { r: color.r, g: color.g, b: color.b };
 }
 
-function drawArray(two, name, id, arr, colors, capacity, callable) {
+function drawArray(two, chart, name, id, arr, capacity, callable, drawChart) {
+
+    // console.log(arr)
 
     if (capacity == undefined) {
         capacity = arr.length
@@ -256,12 +293,13 @@ function drawArray(two, name, id, arr, colors, capacity, callable) {
     var red_def = { r: 0xd8, g: 0x98, b: 0xa7 };
     var green = clone_color(green_def);
     var red = clone_color(red_def);
+    var colors = [];
+    var borders = [];
 
     for (let index = 0; index < arr.length; ++index) {
         let value = arr[index];
         // let color = colors[index];
         let color = defaultElementColor;
-
         
         if (callable) {
             if (is_predicate(callable) && ! execute_callable(callable, value)) {
@@ -296,10 +334,39 @@ function drawArray(two, name, id, arr, colors, capacity, callable) {
             color = rgb_to_str(green);
         }
 
-        var e = drawElement(two,  leftMargin + rectWidth / 2 + index * rectWidth, topMargin, value, index, color);
+        if (drawChart) {
+            colors.push(str_to_rgba_str(color, 0.2));
+            borders.push(str_to_rgba_str(color, 1));
+        }
+        
+        var e = drawElement(two, leftMargin + rectWidth / 2 + index * rectWidth, topMargin, value, index, color);
         elements.push(e)
         // console.log(value);
     }
+
+    // -------------------------------------------------
+    // console.log(colors);
+    // console.log(borders);
+
+    if (drawChart) {
+        if (chart == null) {
+            chart = createChart();
+        }
+
+        chart.data = {
+            labels: arr,
+            datasets: [{
+                // label: 'asdasd',
+                data: arr,
+                backgroundColor: colors,
+                borderColor: borders,
+                borderWidth: 3
+            }]
+        };
+        chart.update();
+    }
+    // -------------------------------------------------
+
 
     var cap_len = capacity - arr.length;
 

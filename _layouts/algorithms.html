@@ -84,8 +84,7 @@ var d = add_sequence(random_array(), "d");
                     <div id="sequence"></div>                    
                 </div>
                 <div id="hg-right-pre-a" class="hg-right-pre-a">
-                    <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
-                    <canvas id="myChart"></canvas>
+                    <!-- <canvas id="myChart"></canvas> -->
                 </div>
                 <div class="hg-right-b">
                     <div id="hg-right-b-a">
@@ -141,11 +140,63 @@ var d = add_sequence(random_array(), "d");
             editButton();
         }
 
+        function createChart() {
+            var hg_right_pre_a = document.getElementById('hg-right-pre-a');
+            hg_right_pre_a.innerHTML = '<canvas id="myChart"></canvas>';
+
+            if ( ! document.getElementById('myChart')) return null;
+
+            chartCtx = document.getElementById('myChart').getContext('2d');
+
+            myChart = new Chart(chartCtx, {
+                type: 'bar',
+                options: {
+
+                    animation: {
+                        duration: 0, // general animation time
+                    },
+                    hover: {
+                        animationDuration: 0, // duration of animations when hovering an item
+                    },
+                    responsiveAnimationDuration: 0, // animation duration after a resize
+
+                    legend: {
+                    display: false
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem) {return tooltipItem.yLabel;}
+                        }
+                    },
+
+                    responsive: true,
+                    maintainAspectRatio: false,
+
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }],
+                        xAxes: [{
+                            categoryPercentage: 1.0,
+                            barPercentage: 1.0,
+                            categorySpacing: 0
+                        }]
+                    },
+                }
+            });                
+            return myChart;
+        }
+
         var lines = [];
         var prevLine = "";
         var myInterpreter;
 
-        var iterators_colors = ['#99ff99', '#d80500', '#afafff', '#ffaff7', '#fdffaf'
+        // var iterators_colors = ['#99ff99', '#d80500', '#afafff', '#ffaff7', '#fdffaf'
+        //                         , '#affffb', '#ffe2af', '#d0afff', '#e1ffaf', '#ffafb9'];
+
+        var iterators_colors = ['#afafff', '#ffaff7', '#fdffaf'
                                 , '#affffb', '#ffe2af', '#d0afff', '#e1ffaf', '#ffafb9'];
 
         var iterators_int = {};
@@ -165,50 +216,11 @@ var d = add_sequence(random_array(), "d");
 
 
         // -------------------------------------------------------
-
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });        
-
-        
-
+        var chartCtx = null;
+        if (document.getElementById('myChart')) {
+            chartCtx = document.getElementById('myChart').getContext('2d');
+        }
+        var myChart = null;
         // -------------------------------------------------------
 
 

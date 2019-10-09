@@ -594,27 +594,17 @@ form#settings input[type="checkbox"] ~ span {
   height: 30%;
   max-height: 30%;
   /* flex: auto; */
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
 }
 
 #myChart {
-  /* position:absolute; */
-  /* left:0; */
-  /* right:0; */
-  /* margin: 0% */
-  /* top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; */
-
-  position:sticky;
+  /* position:sticky; */
 
   margin:0; 
   padding:0;
   width: 100%;
   height:100%;
-
 }
 
 .hg-right-b {
@@ -701,6 +691,10 @@ form#settings input[type="checkbox"] ~ span {
 #hg-right-x-b { 
   /* background: pink; */
   flex: auto;
+
+  flex-grow: unset;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 

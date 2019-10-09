@@ -104,7 +104,7 @@ find_if:
     return f;
 }
 
-var even = predicate(function even(x) { return x & 1 == 0; });
+var even = predicate(function even(x) { return (x & 1) == 0; });
 var d = sequence(array_random(), "d");
 var f = begin(d);
 var l = end(d);
@@ -140,7 +140,7 @@ if ( ! equal(it, end(s))) {
     }    
 }
 
-var even = predicate(function even(x) { return x & 1 == 0; });
+var even = predicate(function even(x) { return (x & 1) == 0; });
 var d = sequence(array_random(), "d");
 var f = begin(d);
 var l = end(d);
@@ -167,7 +167,7 @@ if ( ! equal(it, f)) {
     return m;
 }
 
-var d = sequence(array_random(), "d", lt);
+var d = sequence(array_random(), "d", lt, true);
 
 var f = begin(d);
 var l = end(d);
@@ -193,7 +193,7 @@ if ( ! equal(f, l)) {
     return m;
 }
 
-var d = sequence(array_random(), "d");
+var d = sequence(array_random(), "d", true);
 
 var f = begin(d);
 var l = end(d);
@@ -220,7 +220,7 @@ if ( ! equal(f, l)) {
     return m;
 }
 
-var d = sequence(array_random(), "d");
+var d = sequence(array_random(), "d", true);
 
 var f = begin(d);
 var l = end(d);
@@ -287,8 +287,8 @@ function partition_semistable_1(f, l, p) {
     return f;
 }
 
-var even = predicate(function even(x) { return x & 1 == 0; });
-var d = sequence(array_random(), "d", even);
+var even = predicate(function even(x) { return (x & 1) == 0; });
+var d = sequence(array_random(), "d", even, true);
 var f = begin(d);
 var l = end(d);
 
@@ -325,8 +325,8 @@ function partition_semistable(f, l, p) {
     return f;
 }
 
-var even = predicate(function even(x) { return x & 1 == 0; });
-var d = sequence(array_random(), "d", even);
+var even = predicate(function even(x) { return (x & 1) == 0; });
+var d = sequence(array_random(), "d", even, true);
 var f = begin(d);
 var l = end(d);
 
@@ -363,8 +363,8 @@ function partition_semistable_nonempty(f, l, p) {
     iter_swap(f, j);
 }
 
-var even = predicate(function even(x) { return x & 1 == 0; });
-var d = sequence(array_random(), "d", even);
+var even = predicate(function even(x) { return (x & 1) == 0; });
+var d = sequence(array_random(), "d", even, true);
 var f = begin(d);
 var l = end(d);
 
@@ -387,8 +387,8 @@ partition_semistable_nonempty(f, l, even);`
 }
 
 
-var even = predicate(function even(x) { return x & 1 == 0; });
-var d = sequence(array_random(), "d", even);
+var even = predicate(function even(x) { return (x & 1) == 0; });
+var d = sequence(array_random(), "d", even, true);
 var bad = sequence(new Array(size(d)), "bad");
 var good = sequence(new Array(size(d)), "good");
 
@@ -432,7 +432,7 @@ function partition_stable_with_buffer_0(f, l, p, b) {
     return tf;
 }
 
-var even = predicate(function even(x) { return x & 1 == 0; });
+var even = predicate(function even(x) { return (x & 1) == 0; });
 var d = sequence(array_random(), "d", even);
 var buf = sequence(new Array(size(d)), "buf");
 
@@ -470,7 +470,7 @@ function partition_stable_forward(f, l, p) {
     return f;
 }
 
-var even = predicate(function even(x) { return x & 1 == 0; });
+var even = predicate(function even(x) { return (x & 1) == 0; });
 var d = sequence(array_random(), "d", even);
 var f = begin(d);
 var l = end(d);
@@ -505,7 +505,7 @@ function partition_point_n(f, n, p) {
     return f;
 }
 
-var even = predicate(function even(x) { return x & 1 == 0; });
+var even = predicate(function even(x) { return (x & 1) == 0; });
 
 var d = sequence([1, 5, 1, 1, 3, 3, 3, 7, 3, 2, 6, 4], "d", even);
 
@@ -1717,7 +1717,7 @@ function Iterator(data, index, name) {
     this.name = name;
 }
 
-function Sequence(name, data, elements, colors, capacity, pred) {
+function Sequence(name, data, elements, colors, capacity, pred, drawChart) {
     if (capacity == undefined) {
         capacity = data.length
     }
@@ -1727,6 +1727,7 @@ function Sequence(name, data, elements, colors, capacity, pred) {
     // this.colors = colors;
     this.capacity = capacity;
     this.pred = pred;
+    this.drawChart = drawChart;
 }
 
 function RangeBounded(fname, lname) {
@@ -1810,7 +1811,6 @@ function updateStats() {
     hg_right_x_b.innerHTML += '<p id="Status"><b>Moves</b>:                  ' + stats_moves + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Distance Rel</b>:           ' + stats_rel_distance + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Distance Moves</b>:           ' + stats_move_distance + '</p>';
-        
 
     for (var key in custom_stats) {
         // console.log(custom_stats[key]);
@@ -2101,7 +2101,7 @@ function initFunctions(interpreter, scope) {
     };
 
     var increase_capacity_wrapper = function(seq, n) {
-        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.pred);
+        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.pred, seq.drawChart);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -2124,7 +2124,7 @@ function initFunctions(interpreter, scope) {
         // console.log(data)
         // console.log(cap)
 
-        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.pred);
+        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.pred, seq.drawChart);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -2341,6 +2341,11 @@ function initFunctions(interpreter, scope) {
         var codeAll = getAllCode();
         var codeSelected = codeAll.substring(f.node.start, f.node.end);
 
+        // console.log(codeSelected)
+        // console.log(f.node)
+        // console.log(f.node.id)
+        // console.log(f.node.params.length)
+
         if (f.node.id) {
             var name = f.node.id.name;
         } else {
@@ -2372,8 +2377,8 @@ function initFunctions(interpreter, scope) {
         return c.parameters;
     }
 
-    var sequence_internal_wrapper = function(data_par, name, pred) {
-        console.log(data_par)
+    var sequence_internal_wrapper = function(data_par, name, pred, drawChart) {
+        // console.log(data_par)
         
         if (sequences[name] != undefined) {
             showError('sequence "' + name + '" already exists.');
@@ -2392,9 +2397,8 @@ function initFunctions(interpreter, scope) {
             // colors.push(defaultElementColor);
         }
 
-        // var elems = drawArray(two, data, name, Object.keys(sequences).length);
         var elems = null;
-        var retobj = new Sequence(name, data, elems, colors, undefined, pred);
+        var retobj = new Sequence(name, data, elems, colors, undefined, pred, drawChart);
         sequences[name] = retobj;
 
         updateStatus();
@@ -2662,8 +2666,8 @@ function callPredCode() {
 
 function addSequenceCode() {
     return `
-    function sequence(d, n, p) {
-        return sequence_internal(d, n, p);
+    function sequence(d, n, p, drawChart) {
+        return sequence_internal(d, n, p, drawChart);
     }`
 
     // return `
@@ -2708,7 +2712,7 @@ function add_utils_lib() {
         var c = callable_create(f);
         var fname = callable_get_name(c);
         var params = callable_get_parameters(c);
-    
+        
         if (params == 2) {
             var wrapped_func = function(x, y) {
                 var res = f(x, y); 
@@ -2717,7 +2721,7 @@ function add_utils_lib() {
             };        
         } else if (params == 1) {
             var wrapped_func = function(x) {
-                var res = f(x); 
+                var res = f(x);
                 log_predicate_call_internal(fname, x, res); 
                 return res;
             };
@@ -3151,7 +3155,18 @@ function restartButton() {
     resetStatus();
     two.clear();
 
+
+    if (myChart) {
+        // myChart.clear();
+        // myChart.data = {};
+        myChart.data.datasets.length = 0;
+        myChart.update();
+    }
+
     startButton();
+
+
+
 }
 
 
@@ -3183,13 +3198,6 @@ function startButton() {
     codeHighlight.innerHTML = codeView;
     hljs.highlightBlock(codeHighlight);
     codeHighlight.style.fontSize = "12pt";
-
-
-
-    // var output = document.getElementById('hg-right-y');
-    // hljs.highlightBlock(output);
-
-    // console.log(codeAll)
 
     try {
         myInterpreter = new Interpreter(codeAll, initFunctions);    
@@ -3586,7 +3594,7 @@ function drawScope(scope) {
         var key = seq_internal[i].key;
         var value = seq_internal[i].value;
         // console.log(value);
-        var elems = drawArray(two, key, seqn, value.data, value.colors, value.capacity, value.pred);
+        var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.pred, value.drawChart);
         sequences[value.name].elements = elems;
         ++seqn;
     }
@@ -3656,6 +3664,16 @@ function drawScope(scope) {
 
         var color = iterators_colors[itn];
         var it_gui = drawIterator(two, value.data.elements[value.index], key, color);
+
+        if (value.data.drawChart) {
+            var chart = myChart;
+            if (value.index < chart.data.datasets[0].backgroundColor.length) {
+                // chart.data.datasets[0].backgroundColor[value.index] = str_to_rgba_str(color, 0.2);
+                chart.data.datasets[0].borderColor[value.index] = str_to_rgba_str(color, 1);
+            }
+            chart.update();
+        }
+
         iterators_gui[value.name] = it_gui;
         ++itn;
     }
