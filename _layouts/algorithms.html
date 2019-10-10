@@ -129,6 +129,7 @@ var d = add_sequence(random_array(), "d");
                 return;
             }
 
+
             var snippet = url.searchParams.get("snippet");
             // console.log(snippet)
             if ( ! snippet) {
@@ -189,6 +190,20 @@ var d = add_sequence(random_array(), "d");
             return myChart;
         }
 
+        async function downloadStdCode() {
+            try {
+                // const response = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/algorithms/`);
+                var url = `https://raw.githubusercontent.com/${user}/${repo}/master/build/algorithms_debug.js`;
+                console.log(url);
+                const response = await fetch(url);
+                const code = await response.text();
+                // console.log(code);
+                global_std_code = code;
+                // console.log(global_std_code);
+                // return code;
+            } catch(e) {console.log(e);}
+        }
+
         var lines = [];
         var prevLine = "";
         var myInterpreter;
@@ -214,6 +229,30 @@ var d = add_sequence(random_array(), "d");
         var stats_swaps = 0;
         var stats_assigments = 0;
 
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var user = url.searchParams.get("user");
+        // console.log(user)
+        if ( ! user) {
+            user = "fpelliccioni";
+        }
+
+        var repo = url.searchParams.get("repo");
+        // console.log(repo)
+        if ( ! repo) {
+            repo = "tao-js";
+        }
+
+        var global_std_code = '';
+
+
+        (async () => {
+            try {
+                var text = await downloadStdCode();
+                // console.log(text);
+            } catch (e) { console.log(e); }
+        })();
+
 
         // -------------------------------------------------------
         var chartCtx = null;
@@ -222,16 +261,6 @@ var d = add_sequence(random_array(), "d");
         }
         var myChart = null;
         // -------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
 
         // console.log(document.getElementById('hg-right-a').offsetWidth)
         // console.log(document.getElementById('hg-right-a').offsetHeight)

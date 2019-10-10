@@ -2668,7 +2668,9 @@ function addSequenceCode() {
     return `
     function sequence(d, n, p, drawChart) {
         return sequence_internal(d, n, p, drawChart);
-    }`
+    }
+
+`
 
     // return `
     // function sequence(d, n, p) {
@@ -2897,117 +2899,146 @@ function add_std_lib_dict() {
     return res;
 }
 
+// --------------------------------------------------------------------
+
+// async function add_std_lib_async() {
+//     try {
+//         // const response = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/algorithms/`);
+//         var url = `https://raw.githubusercontent.com/${user}/${repo}/master/build/algorithms_debug.js`;
+//         console.log(url);
+//         const response = await fetch(url);
+//         const code = await response.text();
+//         return code;
+//     } catch(e) {console.log(e);}
+// }
+
 function add_std_lib() {
-    return add_std_lib_array().join('\n');
+    // console.log("calling add_std_lib()");
+    // console.log(global_std_code);
+    return global_std_code;
+
+    // var code = (async function(){
+    //     return await add_std_lib_async();
+    //     // alert(fetchData);
+    // })();
+    // console.log(code);
+    // return code;
 }
 
-function add_std_lib_array() {
-    return [`
-function min_element(f, l, r) {
-    var _f_ = start_f('min_element', f, l, r);
-    if (equal(f, l)) return l;
+// --------------------------------------------------------------------
 
-    var m = f;
-    f = successor(f);
 
-    while ( ! equal(f, l)) {
-        if (r(source(f), source(m))) {
-            m = f;
-        }
-        f = successor(f);
-    }
-    end_f(_f_);
-    return m;
-}`, `
-function min_element_nonempty(f, l, r) {
-    var _f_ = start_f('min_element_nonempty', f, l, r);
-    var m = f;
-    f = successor(f);
-    while ( ! equal(f, l)) {
-        if (r(source(f), source(m))) {
-            m = f;
-        }
-        f = successor(f);
-    }
-    end_f(_f_);
-    return m;
-}`, `
-function min_value_nonempty(f, l, r) {
-    var _f_ = start_f('min_value_nonempty', f, l, r);
-    var m = source(f);
-    f = successor(f);
-    while ( ! equal(f, l)) {
-        if (r(source(f), m)) {
-            m = source(f);
-        }
-        f = successor(f);
-    }
-    end_f(_f_);
-    return m;
-}`, `
-function is_sorted_internal(f, l, r) {
-    var _f_ = start_f('is_sorted', f, l, r);
-    if (equal(f, l)) return true;
-    var n = successor(f);
-    while ( ! equal(n, l)) {
-        if (r(source(n), source(f))) return false;
-        f = n;
-        n = successor(n);
-    }
-    return true;
-}`, `
-function is_sorted(f, l, r) {
-    var _f_ = start_f('is_sorted', f, l, r);
-    var res = is_sorted_internal(f, l, r);
-    end_f(_f_);
-    return res;
-}`, `
-function move_backward(f_i, l_i, l_o) {
-    var _f_ = start_f('move_backward', f_i, l_i, l_o);
-    while (! equal(f_i, l_i)) {
-        l_i = predecessor(l_i);
-        l_o = predecessor(l_o);
-        sink_move(l_o, source(l_i));
-    } 
-    end_f(_f_);
-    return l_o;
-}`, `
-function rotate_right_by_one_nonempty(f, l) {
-    var _f_ = start_f('rotate_right_by_one_nonempty', f, l, r);
-    var butlast = predecessor(l);
-    var x = source_move(butlast);
-    move_backward(f, butlast, l);
-    sink_move(f, x);
-    end_f(_f_);
-}`, `
-function shift_right_while_unguarded(l, p) {
-    var _f_ = start_f('shift_right_while_unguarded', l, r);
-    while (p(source(predecessor(l)))) {
-        sink_move(l, source_move(predecessor(l)));
-        l = predecessor(l);
-    }
-    end_f(_f_);
-    return l;
-}`, `
-var eq = relation(function eq(x, y) {return x == y;});
-var lt = relation(function lt(x, y) {return x < y;});
-var gt = relation(function gt(x, y) {return x < y;});
-var lte = relation(function lte(x, y) {return x <= y;});
-var gte = relation(function gte(x, y) {return x >= y;});
-`];
+// function add_std_lib() {
+//     return add_std_lib_array().join('\n');
+// }
 
-    // `function iota(f, l, start, step) {
-    //     if ( ! start) start = 0;
-    //     if ( ! step) step = 1;
+// function add_std_lib_array() {
+//     return [`
+// function min_element(f, l, r) {
+//     var _f_ = start_f('min_element', f, l, r);
+//     if (equal(f, l)) return l;
+
+//     var m = f;
+//     f = successor(f);
+
+//     while ( ! equal(f, l)) {
+//         if (r(source(f), source(m))) {
+//             m = f;
+//         }
+//         f = successor(f);
+//     }
+//     end_f(_f_);
+//     return m;
+// }`, `
+// function min_element_nonempty(f, l, r) {
+//     var _f_ = start_f('min_element_nonempty', f, l, r);
+//     var m = f;
+//     f = successor(f);
+//     while ( ! equal(f, l)) {
+//         if (r(source(f), source(m))) {
+//             m = f;
+//         }
+//         f = successor(f);
+//     }
+//     end_f(_f_);
+//     return m;
+// }`, `
+// function min_value_nonempty(f, l, r) {
+//     var _f_ = start_f('min_value_nonempty', f, l, r);
+//     var m = source(f);
+//     f = successor(f);
+//     while ( ! equal(f, l)) {
+//         if (r(source(f), m)) {
+//             m = source(f);
+//         }
+//         f = successor(f);
+//     }
+//     end_f(_f_);
+//     return m;
+// }`, `
+// function is_sorted_internal(f, l, r) {
+//     var _f_ = start_f('is_sorted', f, l, r);
+//     if (equal(f, l)) return true;
+//     var n = successor(f);
+//     while ( ! equal(n, l)) {
+//         if (r(source(n), source(f))) return false;
+//         f = n;
+//         n = successor(n);
+//     }
+//     return true;
+// }`, `
+// function is_sorted(f, l, r) {
+//     var _f_ = start_f('is_sorted', f, l, r);
+//     var res = is_sorted_internal(f, l, r);
+//     end_f(_f_);
+//     return res;
+// }`, `
+// function move_backward(f_i, l_i, l_o) {
+//     var _f_ = start_f('move_backward', f_i, l_i, l_o);
+//     while (! equal(f_i, l_i)) {
+//         l_i = predecessor(l_i);
+//         l_o = predecessor(l_o);
+//         sink_move(l_o, source(l_i));
+//     } 
+//     end_f(_f_);
+//     return l_o;
+// }`, `
+// function rotate_right_by_one_nonempty(f, l) {
+//     var _f_ = start_f('rotate_right_by_one_nonempty', f, l, r);
+//     var butlast = predecessor(l);
+//     var x = source_move(butlast);
+//     move_backward(f, butlast, l);
+//     sink_move(f, x);
+//     end_f(_f_);
+// }`, `
+// function shift_right_while_unguarded(l, p) {
+//     var _f_ = start_f('shift_right_while_unguarded', l, r);
+//     while (p(source(predecessor(l)))) {
+//         sink_move(l, source_move(predecessor(l)));
+//         l = predecessor(l);
+//     }
+//     end_f(_f_);
+//     return l;
+// }`, `
+// var eq = relation(function eq(x, y) {return x == y;});
+// var lt = relation(function lt(x, y) {return x < y;});
+// var gt = relation(function gt(x, y) {return x < y;});
+// var lte = relation(function lte(x, y) {return x <= y;});
+// var gte = relation(function gte(x, y) {return x >= y;});
+// `];
+
+//     // `function iota(f, l, start, step) {
+//     //     if ( ! start) start = 0;
+//     //     if ( ! step) step = 1;
     
-    //     while ( ! equal(f, l)) {
-    //         sink(f, start);
-    //         start += step;
-    //         f = successor(f);
-    //     }
-    //     return start;
-    // }`    
-}
+//     //     while ( ! equal(f, l)) {
+//     //         sink(f, start);
+//     //         start += step;
+//     //         f = successor(f);
+//     //     }
+//     //     return start;
+//     // }`    
+// }
 
 function std_lib_attributes() {
 
@@ -3172,6 +3203,7 @@ function restartButton() {
 
 function startButton() {
     var codeAll = getAllCode();
+    console.log(codeAll);
     var codeView = getViewCode();
     
     // document.getElementById('dataCodeArea').style.display = "none";
