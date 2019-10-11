@@ -14,6 +14,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
   <link rel="stylesheet" href="{{ site.url }}/assets/css/algorithms/style.css">
   <link href="/favicon.png" rel="icon">
   <script src="{{ site.url }}/assets/js/algorithms/main.js"></script>
+  <script src="{{ site.url }}/assets/js/algorithms/acorn.js"></script>
 </head>
 
 <body>
@@ -53,7 +54,61 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
     </div>
 
     <script>
-        fillCatalog();
+
+        function process_catalog() {
+            var code = global_std_code_extra;
+            var p = acorn.parse(code);
+
+            for (var n in p.body) {
+                const value = p.body[n];
+                if (value.type == 'FunctionDeclaration' && value.id.name == '__catalog') {
+                    var fcode = code.substring(value.start, value.end);
+                    fcode += '\n\nvar snippets_cat_temp = __catalog();';
+                    // console.log(fcode);
+                    // console.log(snippets_cat);
+                    eval(fcode);
+                    // console.log(snippets_cat);
+                    break;
+                }
+            }
+
+            for (var k in snippets_cat_temp) {
+                // console.log(k, snippets_cat_temp[k])
+                snippets_cat[k] = snippets_cat_temp[k][0];
+            }
+
+            console.log(snippets_cat);
+
+            // console.log('end of process_snippets');
+        }
+
+        var snippets_cat = {};
+
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var user = url.searchParams.get("user");
+        // console.log(user)
+        if ( ! user) {
+            user = "fpelliccioni";
+        }
+
+        var repo = url.searchParams.get("repo");
+        // console.log(repo)
+        if ( ! repo) {
+            repo = "tao-js";
+        }
+
+
+        (async () => {
+            try {
+                await downloadStdCodeExtra(user, repo);
+                process_catalog();
+                fillCatalog();
+            } catch (e) { console.log(e); }
+        })();
+
+
+        // fillCatalog();
     </script>
 
 </body>

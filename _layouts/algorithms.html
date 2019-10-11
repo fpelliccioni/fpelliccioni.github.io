@@ -130,78 +130,15 @@ var d = add_sequence(random_array(), "d");
             }
 
 
-            var snippet = url.searchParams.get("snippet");
-            // console.log(snippet)
-            if ( ! snippet) {
-                snippet = "partition_semistable";
-            }
-            if (snippet) {
-                document.getElementById('codeArea').value = getSnippet(snippet);
-            }
-            editButton();
-        }
-
-        function createChart() {
-            var hg_right_pre_a = document.getElementById('hg-right-pre-a');
-            hg_right_pre_a.innerHTML = '<canvas id="myChart"></canvas>';
-
-            if ( ! document.getElementById('myChart')) return null;
-
-            chartCtx = document.getElementById('myChart').getContext('2d');
-
-            myChart = new Chart(chartCtx, {
-                type: 'bar',
-                options: {
-
-                    animation: {
-                        duration: 0, // general animation time
-                    },
-                    hover: {
-                        animationDuration: 0, // duration of animations when hovering an item
-                    },
-                    responsiveAnimationDuration: 0, // animation duration after a resize
-
-                    legend: {
-                    display: false
-                    },
-                    tooltips: {
-                        callbacks: {
-                            label: function(tooltipItem) {return tooltipItem.yLabel;}
-                        }
-                    },
-
-                    responsive: true,
-                    maintainAspectRatio: false,
-
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }],
-                        xAxes: [{
-                            categoryPercentage: 1.0,
-                            barPercentage: 1.0,
-                            categorySpacing: 0
-                        }]
-                    },
-                }
-            });                
-            return myChart;
-        }
-
-        async function downloadStdCode() {
-            try {
-                // const response = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/algorithms/`);
-                var url = `https://raw.githubusercontent.com/${user}/${repo}/master/build/algorithms_debug.js`;
-                console.log(url);
-                const response = await fetch(url);
-                const code = await response.text();
-                // console.log(code);
-                global_std_code = code;
-                // console.log(global_std_code);
-                // return code;
-            } catch(e) {console.log(e);}
+            // var snippet = url.searchParams.get("snippet");
+            // // console.log(snippet)
+            // if ( ! snippet) {
+            //     snippet = "partition_semistable";
+            // }
+            // if (snippet) {
+            //     document.getElementById('codeArea').value = getSnippet(snippet);
+            // }
+            // editButton();
         }
 
         var lines = [];
@@ -243,13 +180,35 @@ var d = add_sequence(random_array(), "d");
             repo = "tao-js";
         }
 
+        var snippets = {};
+        var snippets_cat = {};
         var global_std_code = '';
-
+        var global_std_code_debug = '';
+        var global_std_code_extra = '';
 
         (async () => {
             try {
-                var text = await downloadStdCode();
-                // console.log(text);
+                await downloadStdCode(user, repo);
+                await downloadStdCodeDebug(user, repo);
+                await downloadStdCodeExtra(user, repo);
+
+                // console.log(snippets)
+                process_snippets();
+                // console.log(snippets)
+                process_snippets_usage();
+                // process_catalog();
+
+                var snippet = url.searchParams.get("snippet");
+                // console.log(snippet)
+                if ( ! snippet) {
+                    snippet = "partition_semistable";
+                }
+                if (snippet) {
+                    document.getElementById('codeArea').value = getSnippet(snippet);
+                }
+                editButton();
+
+
             } catch (e) { console.log(e); }
         })();
 
