@@ -97,7 +97,7 @@ Here is a sketch of the _median of 3_ algorithm, in `C++`:
 {% highlight cpp %}
 template <TotallyOrdered T>
 auto max(T const& a, U const& b) {
-    return b < a ? b : a;
+    return b < a ? a : b;
 }
 
 template <TotallyOrdered T>
@@ -156,7 +156,7 @@ We need a version of `median_3` that accepts a form of comparison specified by t
 {% highlight cpp %}
 template <Regular T, StrictWeakOrdering R>
 auto max(T const& a, U const& b, R r) {
-    return r(b, a) ? b : a;
+    return r(b, a) ? a : b;
 }
 
 template <Regular T, StrictWeakOrdering R>

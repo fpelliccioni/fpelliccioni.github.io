@@ -98,7 +98,7 @@ Aquí les dejo un boceto del algoritmo _mediana de 3_, en `C++`:
 {% highlight cpp %}
 template <TotallyOrdered T>
 auto max(T const& a, U const& b) {
-    return b < a ? b : a;
+    return b < a ? a : b;
 }
 
 template <TotallyOrdered T>
@@ -159,7 +159,7 @@ Necesitamos una versión de `median_3` que acepte una forma de comparar especifi
 {% highlight cpp %}
 template <Regular T, StrictWeakOrdering R>
 auto max(T const& a, U const& b, R r) {
-    return r(b, a) ? b : a;
+    return r(b, a) ? a : b;
 }
 
 template <Regular T, StrictWeakOrdering R>
