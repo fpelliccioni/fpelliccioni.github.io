@@ -129,64 +129,16 @@ var d = add_sequence(random_array(), "d");
                 return;
             }
 
-            var snippet = url.searchParams.get("snippet");
-            // console.log(snippet)
-            if ( ! snippet) {
-                snippet = "partition_semistable";
-            }
-            if (snippet) {
-                document.getElementById('codeArea').value = getSnippet(snippet);
-            }
-            editButton();
-        }
 
-        function createChart() {
-            var hg_right_pre_a = document.getElementById('hg-right-pre-a');
-            hg_right_pre_a.innerHTML = '<canvas id="myChart"></canvas>';
-
-            if ( ! document.getElementById('myChart')) return null;
-
-            chartCtx = document.getElementById('myChart').getContext('2d');
-
-            myChart = new Chart(chartCtx, {
-                type: 'bar',
-                options: {
-
-                    animation: {
-                        duration: 0, // general animation time
-                    },
-                    hover: {
-                        animationDuration: 0, // duration of animations when hovering an item
-                    },
-                    responsiveAnimationDuration: 0, // animation duration after a resize
-
-                    legend: {
-                    display: false
-                    },
-                    tooltips: {
-                        callbacks: {
-                            label: function(tooltipItem) {return tooltipItem.yLabel;}
-                        }
-                    },
-
-                    responsive: true,
-                    maintainAspectRatio: false,
-
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }],
-                        xAxes: [{
-                            categoryPercentage: 1.0,
-                            barPercentage: 1.0,
-                            categorySpacing: 0
-                        }]
-                    },
-                }
-            });                
-            return myChart;
+            // var snippet = url.searchParams.get("snippet");
+            // // console.log(snippet)
+            // if ( ! snippet) {
+            //     snippet = "partition_semistable";
+            // }
+            // if (snippet) {
+            //     document.getElementById('codeArea').value = getSnippet(snippet);
+            // }
+            // editButton();
         }
 
         var lines = [];
@@ -214,6 +166,52 @@ var d = add_sequence(random_array(), "d");
         var stats_swaps = 0;
         var stats_assigments = 0;
 
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var user = url.searchParams.get("user");
+        // console.log(user)
+        if ( ! user) {
+            user = "fpelliccioni";
+        }
+
+        var repo = url.searchParams.get("repo");
+        // console.log(repo)
+        if ( ! repo) {
+            repo = "tao-js";
+        }
+
+        var snippets = {};
+        var snippets_cat = {};
+        var global_std_code = '';
+        var global_std_code_debug = '';
+        var global_std_code_extra = '';
+
+        (async () => {
+            try {
+                await downloadStdCode(user, repo);
+                await downloadStdCodeDebug(user, repo);
+                await downloadStdCodeExtra(user, repo);
+
+                // console.log(snippets)
+                process_snippets();
+                // console.log(snippets)
+                process_snippets_usage();
+                // process_catalog();
+
+                var snippet = url.searchParams.get("snippet");
+                // console.log(snippet)
+                if ( ! snippet) {
+                    snippet = "partition_semistable";
+                }
+                if (snippet) {
+                    document.getElementById('codeArea').value = getSnippet(snippet);
+                }
+                editButton();
+
+
+            } catch (e) { console.log(e); }
+        })();
+
 
         // -------------------------------------------------------
         var chartCtx = null;
@@ -222,16 +220,6 @@ var d = add_sequence(random_array(), "d");
         }
         var myChart = null;
         // -------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
 
         // console.log(document.getElementById('hg-right-a').offsetWidth)
         // console.log(document.getElementById('hg-right-a').offsetHeight)
