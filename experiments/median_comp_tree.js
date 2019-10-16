@@ -131,6 +131,17 @@ function recursive(level, n, values, pairs, used_par, cmp_n, cmp_max) {
             console.log(__try);
             print_bool_arr(used);
         }
+
+        if (__try >= 574300000) {
+            // [7,[5,7]]
+            if (level == 7) {
+                if (selected_left[0] == 5 && selected_left[1] == 7) {
+                    console.log();
+                }
+            }
+        }
+
+
         
         if (all_median_equals(n, new_values_left) && all_median_equals(n, new_values_right)) {
             return [true, [[level, selected_left]]];
