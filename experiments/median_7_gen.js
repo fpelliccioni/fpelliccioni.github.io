@@ -69,11 +69,21 @@ function all_median_equals(n, values) {
     return m;
 }
 
+function get_variable_name(i) {
+    return String.fromCharCode(97 + i - 1);
+}
+
 function xxx(n, values, nodes, index, level, comps) {
     var indent_level = ' '.repeat((level + 1) * 4);
     var indent_1 = ' '.repeat(4);
     var pair_left = nodes[index][1];
     var pair_right = pair_left.slice().reverse();
+
+    var mtemp = all_median_equals(n, values);
+    if (mtemp != null) {
+        var code = `${indent_level}return ${get_variable_name(mtemp)};`
+        return code;
+    }
 
     var new_values_left = remove_values(values, pair_left);
     var new_values_right = remove_values(values, pair_right);
@@ -82,10 +92,10 @@ function xxx(n, values, nodes, index, level, comps) {
         var median_left = all_median_equals(n, new_values_left);
         var median_right = all_median_equals(n, new_values_right);
 
-        var code = `${indent_level}if (a${pair_left[0]} < a${pair_left[1]}) {
-${indent_level}${indent_1}return a${median_left};
+        var code = `${indent_level}if (${get_variable_name(pair_left[0])} < ${get_variable_name(pair_left[1])}) {
+${indent_level}${indent_1}return ${get_variable_name(median_left)};
 ${indent_level}} else {
-${indent_level}${indent_1}return a${median_right};
+${indent_level}${indent_1}return ${get_variable_name(median_right)};
 ${indent_level}}`
         return code;
     }
@@ -93,12 +103,13 @@ ${indent_level}}`
     var code_if = xxx(n, new_values_left, nodes, index + 1, level + 1, comps);
     var code_else = xxx(n, new_values_right, nodes, index + 1, level + 1, comps);
 
-    var code = `${indent_level}if (${node[1][0]} < ${node[1][1]}) {
+    var code = `${indent_level}if (${get_variable_name(pair_left[0])} < ${get_variable_name(pair_left[1])}) {
 ${code_if}
 ${indent_level}} else {
 ${code_else}
 ${indent_level}}`;
-
+    
+    return code;
 }
 
 
@@ -113,7 +124,8 @@ function main() {
 
     tests.reverse();
 
-    xxx(n, values, tests, 0, 0, comps);
+    var code = xxx(n, values, tests, 0, 0, comps);
+    console.log(code);
 
     // for (let i = 0; i < tests.length; ++i) {
     //     const e = tests[i];

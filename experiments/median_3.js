@@ -120,6 +120,59 @@ function median_3_unstable_inline(a, b, c, r) {
 
 // ------------------------------------------------------------
 
+// // unstable
+// function median_3_generated(a, b, c, r) {
+//     if (r(a, b)) {
+//         if (r(a, c)) {
+//             if (r(b, c)) {
+//                 return b;
+//             } else {
+//                 return c;
+//             }
+//         } else {
+//             return a;
+//         }
+//     } else {
+//         if (r(a, c)) {
+//             return a;
+//         } else {
+//             if (r(b, c)) {
+//                 return c;
+//             } else {
+//                 return b;
+//             }
+//         }
+//     }
+// }
+
+function median_3_generated(a, b, c, r) {
+    if (r(a, b)) {
+        if (r(b, c)) {
+            return b;
+        } else {    //a < b && b >= c:  [a|c]b
+            if (r(a, c)) {
+                return c;
+            } else {
+                return a;
+            }
+            return a;
+        }
+    } else {
+        if (r(b, c)) {
+            return a;
+        } else {
+            if (r(a, c)) {
+                return c;
+            } else {
+                return b;
+            }
+        }
+    }
+}
+
+
+// ------------------------------------------------------------
+
 function copy_array(arr) {
     var res = [];
     for (let i = 0; i < arr.length; ++i) {
@@ -138,7 +191,7 @@ function create_blocks(data) {
     return res;
 }
 
-function exec(data) {
+function exec_1(data) {
     for (let i = 0; i < data.length; i++) {
         const element = data[i];
         var blocks_orig = create_blocks(element[0]);
@@ -167,25 +220,32 @@ function exec(data) {
     }
 }
 
+function exec_2(data) {
+    for (let i = 0; i < data.length; i++) {
+        const element = data[i];
+        var blocks_orig = create_blocks(element[0]);
+        var expect = element[1];
+        // console.log(blocks_orig);
+
+        blocks = copy_array(blocks_orig);
+        var m1 = median_3(blocks[0], blocks[1], blocks[2], lt);
+
+        blocks = copy_array(blocks_orig);
+        var m2 = median_3_generated(blocks[0], blocks[1], blocks[2], lt);
+
+        // console.log(m3);
+
+        if (expect == m1.id && m1.id == m2.id) {
+            console.log("OK    ", i, expect, m1.id, m2.id);
+        } else {
+            console.log("ERROR ", i, expect, m1.id, m2.id);
+        }
+    }
+}
+
 function main() {
     
-    // var stable_data = [
-    //     [[1, 2, 3], 1],
-    //     [[1, 3, 2], 2],
-    //     [[3, 1, 2], 2],
-    //     [[3, 2, 1], 1],
-    //     [[2, 3, 1], 0],
-    //     [[2, 1, 3], 0],
-
-    //     [[1, 2, 2], 1],
-    //     [[2, 1, 2], 0],
-    //     [[2, 2, 1], 0],
-    //     [[1, 1, 2], 1],
-    //     [[2, 1, 1], 2],
-    //     [[1, 2, 1], 2],
-    // ];
-
-    var abc_data = [
+    var stable_data = [
         [[1, 2, 3], 1],
         [[1, 3, 2], 2],
         [[3, 1, 2], 2],
@@ -195,16 +255,35 @@ function main() {
 
         [[1, 2, 2], 1],
         [[2, 1, 2], 0],
-        [[2, 2, 1], 1], //* stable: 0
+        [[2, 2, 1], 0],
         [[1, 1, 2], 1],
-        [[2, 1, 1], 1], //* stable: 2
+        [[2, 1, 1], 2],
         [[1, 2, 1], 2],
 
         [[1, 1, 1], 1],
+];
 
-    ];
+    // var abc_data = [
+    //     [[1, 2, 3], 1],
+    //     [[1, 3, 2], 2],
+    //     [[3, 1, 2], 2],
+    //     [[3, 2, 1], 1],
+    //     [[2, 3, 1], 0],
+    //     [[2, 1, 3], 0],
 
-    exec(abc_data);
+    //     [[1, 2, 2], 1],
+    //     [[2, 1, 2], 0],
+    //     [[2, 2, 1], 1], //* stable: 0
+    //     [[1, 1, 2], 1],
+    //     [[2, 1, 1], 1], //* stable: 2
+    //     [[1, 2, 1], 2],
+
+    //     [[1, 1, 1], 1],
+
+    // ];
+
+    // exec_1(abc_data);
+    exec_2(stable_data);
 
 
     // var blocks0 = [
