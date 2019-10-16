@@ -49,6 +49,8 @@ function median_3(a, b, c, r) {
 
 // ------------------------------------------------------------
 
+// // Attempt to use stability indices 
+
 // function compare_strict_or_reflexive(strict) {
 
 //     if (strict) {
@@ -145,26 +147,49 @@ function median_3_unstable_inline(a, b, c, r) {
 //     }
 // }
 
-function median_3_generated(a, b, c, r) {
-    if (r(a, b)) {
-        if (r(b, c)) {
-            return b;
-        } else {    //a < b && b >= c:  [a|c]b
-            if (r(a, c)) {
-                return c;
+// function median_3_generated(a, b, c, r) {
+//     if (r(a, b)) {              // a < b
+//         if (r(b, c)) {          // a < b && b < c
+//             return b;
+//         } else {                //a < b && b >= c:  [a|c]b
+//             if (r(a, c)) {
+//                 return c;
+//             } else {
+//                 return a;
+//             }
+//         }
+//     } else {                    // b <= a
+//         if (r(b, c)) {          // b <= a && b < c: 
+//             if (r(a, c)) {      // b <= a && b < c && a < b: bac
+//                 return a;
+//             } else {
+//                 return c;
+//             }
+//         } else {                // b <= a && c <= b: cba
+//             return b;
+//         }
+//     }
+// }
+
+function median_3_generated_stable(a, b, c, r) {
+    if (r(b, a)) {              
+        if ( ! r(c, b)) {       // b < a          
+            if ( ! r(c, a)) {   // b < a && b <= c: 
+                return a;       // b < a && b <= c && a <= c: bac
             } else {
-                return a;
+                return c;       // b < a && b <= c && c < a:  bca
             }
-            return a;
+        } else {                
+            return b;           // c < b && b < a: cba
         }
-    } else {
-        if (r(b, c)) {
-            return a;
-        } else {
-            if (r(a, c)) {
-                return c;
+    } else {                    
+        if ( ! r(c, b)) {       // a <= b
+            return b;           // a <= b && b <= c
+        } else {                
+            if ( ! r(c, a)) {      // a <= b && c < b:  [a|c]b
+                return c;       // a <= b && c < b && a <= c:  acb
             } else {
-                return b;
+                return a;       // a <= b && c < b && c < a:  cab
             }
         }
     }
@@ -231,7 +256,8 @@ function exec_2(data) {
         var m1 = median_3(blocks[0], blocks[1], blocks[2], lt);
 
         blocks = copy_array(blocks_orig);
-        var m2 = median_3_generated(blocks[0], blocks[1], blocks[2], lt);
+        // var m2 = median_3_generated(blocks[0], blocks[1], blocks[2], lt);
+        var m2 = median_3_generated_stable(blocks[0], blocks[1], blocks[2], lt);
 
         // console.log(m3);
 
@@ -261,7 +287,7 @@ function main() {
         [[1, 2, 1], 2],
 
         [[1, 1, 1], 1],
-];
+    ];
 
     // var abc_data = [
     //     [[1, 2, 3], 1],

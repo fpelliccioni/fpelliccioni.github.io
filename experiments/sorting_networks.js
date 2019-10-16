@@ -62,7 +62,7 @@ function test_algoritm(n, name, code) {
     code += `\ndata = ${name}(data);console.log(data);`;
     console.log(code);
 
-    for (let i = 0; i < reps; i++) {
+    for (let i = 0; i < reps; ++i) {
         var data = array_random(n);
         // var data = [11, 94, 9];
         var sorted_data = copy_array(data);
@@ -83,7 +83,7 @@ function test_algoritm(n, name, code) {
 }
 
 function test_nets(nets) {
-    for (let i = 0; i < nets.length; i++) {
+    for (let i = 0; i < nets.length; ++i) {
         const e = nets[i];
         
         var code = generate_code(`sort${e.n}`, e.sn);

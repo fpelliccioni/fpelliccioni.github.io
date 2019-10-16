@@ -87,16 +87,16 @@ function all_median_equals(n, values) {
     return true;
 }
 
-function remove_level(nodes, level) {
-    var res = [];
-    for (let i = 0; i < nodes.length; i++) {
-        const element = nodes[i];
-        if (element[0] < level) {
-            res.push(element);
-        }
-    }
-    return res;
-}
+// function remove_level(nodes, level) {
+//     var res = [];
+//     for (let i = 0; i < nodes.length; i++) {
+//         const element = nodes[i];
+//         if (element[0] < level) {
+//             res.push(element);
+//         }
+//     }
+//     return res;
+// }
 
 function print_bool_arr(arr) {
     
@@ -127,42 +127,17 @@ function recursive(level, n, values, pairs, used_par, cmp_n, cmp_max) {
         ++cmp_n;
         ++__try;
 
-        // if (__try % 100 == 0) {
-            // console.log(__try);
-
-            if (__try % 100000 == 0) {
-                console.log(__try);
-                // console.log(used.join(', '));
-                print_bool_arr(used);
-            }
-        // }
+        if (__try % 100000 == 0) {
+            console.log(__try);
+            print_bool_arr(used);
+        }
         
         if (all_median_equals(n, new_values_left) && all_median_equals(n, new_values_right)) {
-            // if (level == 1) {
-            //     console.log()
-            // }
-            // nodes.push([level, selected_left]);
-
-            // if (level != 5) {
-            //     console.log()
-            // }
-
             return [true, [[level, selected_left]]];
-
             //TODO: que nivel tenemos siempre acá?
         }
 
         if (cmp_n == cmp_max) {
-
-            // if (nodes.length > 0 && level == 1) {
-            //      console.log()
-            // }
-
-            // if (nodes.length > 0) {
-            //      console.log()
-            // }
-            // nodes = remove_level(nodes, level);
-
             var first_not_used_new = used.indexOf(false, first_not_used);
             if (first_not_used_new == -1) {
                 return false, [];
@@ -176,12 +151,6 @@ function recursive(level, n, values, pairs, used_par, cmp_n, cmp_max) {
         var res_left = recursive(level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max);
 
         if ( ! res_left[0]) {
-
-            // if (nodes.length > 0) { //} && level == 1) {
-            //     console.log()
-            // }
-            // nodes = remove_level(nodes, level);
-
             var first_not_used_new = used.indexOf(false, first_not_used);
             if (first_not_used_new == -1) {
                 return false, [];
@@ -192,22 +161,9 @@ function recursive(level, n, values, pairs, used_par, cmp_n, cmp_max) {
             continue;
         } 
 
-
-        // if (nodes.length > 0) { //} && level == 1) {
-        //     console.log()
-        // }
-        nodes.push(...res_left[1]);
-
         var res_right = recursive(level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max);
-
         if (!res_right[0]) {
-            
-            // if (nodes.length > 0) { // && level == 1) {
-            //     console.log()
-            // }
-            nodes = remove_level(nodes, level);
-
-
+            // nodes = remove_level(nodes, level);
             var first_not_used_new = used.indexOf(false, first_not_used);
             if (first_not_used_new == -1) {
                 return false, [];
@@ -218,46 +174,39 @@ function recursive(level, n, values, pairs, used_par, cmp_n, cmp_max) {
             continue;
         }
 
+        nodes.push(...res_left[1]);
         nodes.push(...res_right[1]);
-
-        // if (level == 1) {
-        //     console.log()
-        // }
-
         nodes.push([level, selected_left]);
-        // return true;
-
         return [true, nodes];
-
     }
 }
 
 function tree(n, comps) {
 
-    var pairs = gen_pairs(n);
+    // var pairs = gen_pairs(n);
 
     // pairs for n=7
-    // var pairs =[ [ 1, 2 ],
-    //              [ 3, 4 ],
-    //              [ 2, 4 ],
-    //              [ 5, 6 ],
-    //              [ 2, 6 ],
-    //              [ 3, 5 ],
-    //              [ 2, 7 ],
-    //              [ 5, 7 ],
-    //              [ 4, 5 ],
-    //              [ 1, 3 ],
-    //              [ 1, 4 ],
-    //              [ 1, 5 ],
-    //              [ 1, 6 ],
-    //              [ 1, 7 ],
-    //              [ 2, 3 ],
-    //              [ 2, 5 ],
-    //              [ 3, 6 ],
-    //              [ 3, 7 ],
-    //              [ 4, 6 ],
-    //              [ 4, 7 ],
-    //              [ 6, 7 ] ];
+    var pairs =[ [ 1, 2 ],
+                 [ 3, 4 ],
+                 [ 2, 4 ],
+                 [ 5, 6 ],
+                 [ 2, 6 ],
+                 [ 3, 5 ],
+                 [ 2, 7 ],
+                 [ 5, 7 ],
+                 [ 4, 5 ],
+                 [ 1, 3 ],
+                 [ 1, 4 ],
+                 [ 1, 5 ],
+                 [ 1, 6 ],
+                 [ 1, 7 ],
+                 [ 2, 3 ],
+                 [ 2, 5 ],
+                 [ 3, 6 ],
+                 [ 3, 7 ],
+                 [ 4, 6 ],
+                 [ 4, 7 ],
+                 [ 6, 7 ] ];
 
     // console.log(JSON.stringify(pairs));
   
@@ -269,14 +218,13 @@ function tree(n, comps) {
     console.log(res[0]);
     console.log(res[1]);
     console.log(JSON.stringify(res[1]));
-
 }
 
 function main() {
     var tests = [
-        [3, 3],
+        // [3, 3],
         // [5, 6],
-        // [7, 10],
+        [7, 10],
         // [9, 14],
     ];
 
