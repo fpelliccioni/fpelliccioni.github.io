@@ -237,7 +237,7 @@ function complete_empty_levels(level, cmp_n, cmp_max) {
     return [true, nodes];
 }
 
-function recursive(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cmp_max) {
+function recursive_v3(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cmp_max) {
     var nodes = [];
 
     var used = used_par.slice();
@@ -250,6 +250,52 @@ function recursive(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cm
 
     if (medians_all.length <= 1) {
         console.log("Opaaaaaa 3");
+    }
+
+    //TODO: get an appropiate thresold to see when it is convinient to sort.
+    if (level >= 4) {
+        // console.log("Sorting possible_pairs");
+        possible_pairs.sort(function(ai, bi) {
+            // return a.sort1 - b.sort1  ||  a.sort2 - b.sort2;
+
+            var a_selected_left = pairs[ai];
+            var a_selected_right = a_selected_left.slice().reverse();
+            var a_new_values_left = remove_values(values, a_selected_left);
+            var a_new_values_right = remove_values(values, a_selected_right);
+            var a_medians_left = all_median(n, a_new_values_left);
+            var a_medians_right = all_median(n, a_new_values_right);
+            var a_medians_total_len = a_medians_left.length + a_medians_right.length;
+            var a_values_total_len = a_new_values_left.length + a_new_values_right.length;
+
+            var b_selected_left = pairs[bi];
+            var b_selected_right = b_selected_left.slice().reverse();
+            var b_new_values_left = remove_values(values, b_selected_left);
+            var b_new_values_right = remove_values(values, b_selected_right);
+            var b_medians_left = all_median(n, b_new_values_left);
+            var b_medians_right = all_median(n, b_new_values_right);
+            var b_medians_total_len = b_medians_left.length + b_medians_right.length;
+            var b_values_total_len = b_new_values_left.length + b_new_values_right.length;
+
+    //         console.log(`ai:                  ${ai}
+    // bi:                  ${bi}
+    // a_new_values_left:   ${a_new_values_left.length}
+    // a_new_values_right:  ${a_new_values_right.length}. 
+    // a_medians_left:      ${a_medians_left.length}. 
+    // a_medians_right:     ${a_medians_right.length}
+    // a_medians_total_len: ${a_medians_total_len}
+    // a_values_total_len:  ${a_values_total_len}
+    // ------------------------------------------------
+    // b_new_values_left:   ${b_new_values_left.length}
+    // b_new_values_right:  ${b_new_values_right.length}. 
+    // b_medians_left:      ${b_medians_left.length}. 
+    // b_medians_right:     ${b_medians_right.length}
+    // b_medians_total_len: ${b_medians_total_len}
+    // b_values_total_len:  ${b_values_total_len}
+    // ------------------------------------------------
+    // ------------------------------------------------`)
+
+            return a_medians_total_len - b_medians_total_len || a_values_total_len - b_values_total_len;
+        });
     }
 
     for (let i = 0; i < possible_pairs.length; ++i) {
@@ -289,6 +335,8 @@ function recursive(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cm
         var medians_left = all_median(n, new_values_left);
         var medians_right = all_median(n, new_values_right);
 
+        // console.log(`level: ${level}. new_values_left: ${new_values_left.length}. new_values_right: ${new_values_right.length}. medians_left: ${medians_left.length}. medians_right: ${medians_right.length}`)
+
         if (medians_left.length == 0 || medians_right.length == 0) {
             // console.log("Opaaaaaa 1")
             used[first_not_used] = false;
@@ -321,7 +369,7 @@ function recursive(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cm
         if (medians_left.length == 1) {
             var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
         } else {
-            var res_left = recursive(suggested_pairs, level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max);
+            var res_left = recursive_v3(suggested_pairs, level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max);
             if ( ! res_left[0]) {
                 used[first_not_used] = false;
                 --cmp_n;
@@ -332,7 +380,7 @@ function recursive(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cm
         if (medians_right.length == 1) {
             var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
         } else {
-            var res_right = recursive(suggested_pairs, level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max);
+            var res_right = recursive_v3(suggested_pairs, level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max);
             if (!res_right[0]) {
                 used[first_not_used] = false;
                 --cmp_n;
@@ -349,6 +397,121 @@ function recursive(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cm
     return false, [];
 
 }
+
+// function recursive(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cmp_max) {
+//     var nodes = [];
+
+//     var used = used_par.slice();
+
+//     // var first_not_used_min = used.indexOf(false);
+//     // var first_not_used = first_not_used_min;
+
+//     var medians_all = all_median(n, values);
+//     var possible_pairs = get_pairs(pairs, used, medians_all);
+
+//     if (medians_all.length <= 1) {
+//         console.log("Opaaaaaa 3");
+//     }
+
+//     for (let i = 0; i < possible_pairs.length; ++i) {
+//         const first_not_used = possible_pairs[i];
+            
+//         used[first_not_used] = true;
+//         var selected_left = pairs[first_not_used];
+//         var selected_right = selected_left.slice().reverse();
+        
+//         var new_values_left = remove_values(values, selected_left);
+//         var new_values_right = remove_values(values, selected_right);
+
+//         ++cmp_n;
+//         ++__try;
+
+//         if (__try % 100000 == 0) {
+//             console.log(__try);
+//             print_bool_arr(used);
+//         }
+
+//         // if (level == 7) {
+//         //     if (selected_left[0] == 5 && selected_left[1] == 7) {
+//         //         console.log();
+//         //     }
+//         // }
+
+//         // if (__try >= 574300000) {
+//         //     // [7,[5,7]]
+//         //     if (level == 7) {
+//         //         if (selected_left[0] == 5 && selected_left[1] == 7) {
+//         //             console.log();
+//         //         }
+//         //     }
+//         // }
+
+
+//         var medians_left = all_median(n, new_values_left);
+//         var medians_right = all_median(n, new_values_right);
+
+//         console.log(`level: ${level}. new_values_left: ${new_values_left.length}. new_values_right: ${new_values_right.length}. medians_left: ${medians_left.length}. medians_right: ${medians_right.length}`)
+
+//         if (medians_left.length == 0 || medians_right.length == 0) {
+//             // console.log("Opaaaaaa 1")
+//             used[first_not_used] = false;
+//             --cmp_n;
+//             continue;
+//         }
+//         // if (medians_right.length == 0) {
+//         //     console.log("Opaaaaaa 2")
+//         // }
+
+//         if (all_equal(medians_left) && all_equal(medians_right)) {
+//             if (cmp_n != cmp_max) {
+//                 var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
+//                 var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
+//                 nodes.push(...res_right[1]);
+//                 nodes.push(...res_left[1]);
+//                 nodes.push([level, selected_left]);
+//                 return [true, nodes];
+//             } else {
+//                 return [true, [[level, selected_left]]];
+//             }
+//         }
+
+//         if (cmp_n == cmp_max) {
+//             used[first_not_used] = false;
+//             --cmp_n;
+//             continue;
+//         }
+
+//         if (medians_left.length == 1) {
+//             var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
+//         } else {
+//             var res_left = recursive(suggested_pairs, level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max);
+//             if ( ! res_left[0]) {
+//                 used[first_not_used] = false;
+//                 --cmp_n;
+//                 continue;
+//             } 
+//         }
+
+//         if (medians_right.length == 1) {
+//             var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
+//         } else {
+//             var res_right = recursive(suggested_pairs, level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max);
+//             if (!res_right[0]) {
+//                 used[first_not_used] = false;
+//                 --cmp_n;
+//                 continue;
+//             }
+//         }
+
+//         nodes.push(...res_right[1]);
+//         nodes.push(...res_left[1]);
+//         nodes.push([level, selected_left]);
+//         return [true, nodes];
+//     }
+
+//     return false, [];
+
+// }
 
 function tree(n, comps) {
 
@@ -519,7 +682,7 @@ function tree(n, comps) {
     var possible_values = perm(iota(n));
     // console.log(pairs);
              
-    var res = recursive(suggested_pairs_9, 0, n, possible_values, pairs, used_pairs, 0, comps);
+    var res = recursive_v3(suggested_pairs_9, 0, n, possible_values, pairs, used_pairs, 0, comps);
     console.log(res[0]);
     console.log(res[1]);
     console.log(JSON.stringify(res[1]));
