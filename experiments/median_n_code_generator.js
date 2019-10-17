@@ -158,8 +158,8 @@ function main() {
     tests.reverse();
     console.log(JSON.stringify(tests));
 
-    var code = generate_code(n, values, tests, 0, 0, comps);
-    console.log(code);
+    // var code = generate_code(n, values, tests, 0, 0, comps);
+    // console.log(code);
 }
 
 main();

@@ -597,6 +597,3425 @@ function median_5_generated_stable(a, b, c, d, e, r) {
     }
 }
 
+function median_7_generated(a, b, c, d, e, f, g, r) {
+    if ( ! r(b, a)) {
+        if ( ! r(d, c)) {
+            if ( ! r(d, b)) {
+                if ( ! r(f, e)) {
+                    if ( ! r(f, b)) {
+                        if ( ! r(e, b)) {
+                            if ( ! r(g, e)) {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(e, d)) {
+                                        return d;
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, b)) {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, c)) {
+                                            return c;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, c)) {
+                                        if ( ! r(c, b)) {
+                                            return c;
+                                        } else {
+                                            return b;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, c)) {
+                                if ( ! r(g, b)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(c, b)) {
+                                            return c;
+                                        } else {
+                                            return b;
+                                        }
+                                    } else {
+                                        return f;
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(c, b)) {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                } else {
+                                    if ( ! r(e, c)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(c, a)) {
+                                            return c;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(c, a)) {
+                            if ( ! r(g, c)) {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(c, b)) {
+                                            return b;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(e, c)) {
+                                            return e;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(e, c)) {
+                                if ( ! r(g, a)) {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, e)) {
+                                            return g;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ( ! r(e, b)) {
+                        if ( ! r(f, b)) {
+                            if ( ! r(g, c)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(e, c)) {
+                                            return c;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(c, b)) {
+                                            return c;
+                                        } else {
+                                            return b;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, c)) {
+                                if ( ! r(g, b)) {
+                                    if ( ! r(e, c)) {
+                                        if ( ! r(c, b)) {
+                                            return c;
+                                        } else {
+                                            return b;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(c, b)) {
+                                    if ( ! r(g, e)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(g, b)) {
+                                            return g;
+                                        } else {
+                                            return b;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(e, c)) {
+                            if ( ! r(c, a)) {
+                                if ( ! r(g, e)) {
+                                    return e;
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, a)) {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, e)) {
+                                            return g;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, e)) {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(c, b)) {
+                                            return b;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(g, b)) {
+                                            return b;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(c, a)) {
+                                            return a;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(c, a)) {
+                                    if ( ! r(e, a)) {
+                                        return e;
+                                    } else {
+                                        return a;
+                                    }
+                                } else {
+                                    return c;
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if ( ! r(f, e)) {
+                    if ( ! r(g, a)) {
+                        if ( ! r(f, d)) {
+                            if ( ! r(e, d)) {
+                                if ( ! r(g, e)) {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(e, b)) {
+                                            return b;
+                                        } else {
+                                            return e;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, d)) {
+                                    if ( ! r(d, a)) {
+                                        return d;
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, c)) {
+                                        if ( ! r(g, e)) {
+                                            return g;
+                                        } else {
+                                            return e;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(c, a)) {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(g, e)) {
+                                            return g;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(e, c)) {
+                                            return e;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, e)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(d, a)) {
+                                            return a;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    return e;
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(e, c)) {
+                            if ( ! r(g, e)) {
+                                if ( ! r(f, d)) {
+                                    if ( ! r(g, d)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(d, a)) {
+                                            return a;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(d, a)) {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(e, d)) {
+                                            return d;
+                                        } else {
+                                            return e;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, d)) {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(d, a)) {
+                                if ( ! r(f, c)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(c, a)) {
+                                            return c;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, d)) {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ( ! r(e, d)) {
+                        if ( ! r(d, a)) {
+                            if ( ! r(g, f)) {
+                                if ( ! r(g, d)) {
+                                    if ( ! r(f, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(f, d)) {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, a)) {
+                                if ( ! r(f, b)) {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        return g;
+                                    }
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(f, d)) {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(g, e)) {
+                                            return e;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(e, c)) {
+                            if ( ! r(g, a)) {
+                                if ( ! r(g, e)) {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        return d;
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, a)) {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(c, a)) {
+                                if ( ! r(g, e)) {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return a;
+                                    }
+                                } else {
+                                    if ( ! r(e, a)) {
+                                        return e;
+                                    } else {
+                                        return a;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(d, a)) {
+                                    if ( ! r(g, a)) {
+                                        return a;
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return c;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            if ( ! r(f, e)) {
+                if ( ! r(f, b)) {
+                    if ( ! r(g, e)) {
+                        if ( ! r(g, b)) {
+                            if ( ! r(d, b)) {
+                                if ( ! r(e, d)) {
+                                    if ( ! r(e, c)) {
+                                        return c;
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(e, b)) {
+                                        if ( ! r(c, b)) {
+                                            return c;
+                                        } else {
+                                            return b;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, b)) {
+                                        if ( ! r(e, b)) {
+                                            return e;
+                                        } else {
+                                            return b;
+                                        }
+                                    } else {
+                                        if ( ! r(c, a)) {
+                                            return c;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(c, a)) {
+                                if ( ! r(g, d)) {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(e, c)) {
+                                            return e;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(d, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(d, a)) {
+                                            return d;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(e, a)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, a)) {
+                                        return a;
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(e, b)) {
+                            if ( ! r(d, b)) {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(g, c)) {
+                                        return c;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, d)) {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(c, b)) {
+                                            return c;
+                                        } else {
+                                            return b;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, b)) {
+                                        if ( ! r(g, b)) {
+                                            return g;
+                                        } else {
+                                            return b;
+                                        }
+                                    } else {
+                                        if ( ! r(c, a)) {
+                                            return c;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(e, c)) {
+                                if ( ! r(c, a)) {
+                                    if ( ! r(g, c)) {
+                                        return g;
+                                    } else {
+                                        return c;
+                                    }
+                                } else {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, d)) {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        return c;
+                                    }
+                                } else {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(d, b)) {
+                                            return b;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(c, a)) {
+                                            return a;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ( ! r(f, c)) {
+                        if ( ! r(e, c)) {
+                            if ( ! r(c, a)) {
+                                if ( ! r(g, e)) {
+                                    return e;
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        return g;
+                                    } else {
+                                        return c;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, a)) {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(g, e)) {
+                                            return e;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, a)) {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(c, a)) {
+                                        return c;
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(e, d)) {
+                                            return e;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(c, a)) {
+                                    if ( ! r(e, d)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(d, a)) {
+                                            return d;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return c;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(d, a)) {
+                            if ( ! r(g, d)) {
+                                if ( ! r(d, b)) {
+                                    return b;
+                                } else {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(g, e)) {
+                                            return g;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(e, d)) {
+                                            return e;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, a)) {
+                                if ( ! r(c, a)) {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, e)) {
+                                            return g;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    return c;
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, c)) {
+                                        return c;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if ( ! r(e, b)) {
+                    if ( ! r(c, b)) {
+                        if ( ! r(d, b)) {
+                            if ( ! r(g, d)) {
+                                if ( ! r(f, c)) {
+                                    if ( ! r(g, c)) {
+                                        return c;
+                                    } else {
+                                        return g;
+                                    }
+                                } else {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, d)) {
+                                            return d;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(f, b)) {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(g, e)) {
+                                            return e;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(g, b)) {
+                                            return g;
+                                        } else {
+                                            return b;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, f)) {
+                                if ( ! r(g, b)) {
+                                    if ( ! r(f, b)) {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                } else {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(f, b)) {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                } else {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(c, a)) {
+                            if ( ! r(g, f)) {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(f, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(f, c)) {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(f, b)) {
+                                if ( ! r(g, b)) {
+                                    return b;
+                                } else {
+                                    if ( ! r(g, a)) {
+                                        return g;
+                                    } else {
+                                        return a;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ( ! r(e, c)) {
+                        if ( ! r(c, a)) {
+                            if ( ! r(d, a)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, e)) {
+                                if ( ! r(e, a)) {
+                                    if ( ! r(f, a)) {
+                                        return f;
+                                    } else {
+                                        return a;
+                                    }
+                                } else {
+                                    return e;
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(g, e)) {
+                            if ( ! r(d, a)) {
+                                if ( ! r(d, b)) {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, d)) {
+                                        if ( ! r(e, d)) {
+                                            return e;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(c, a)) {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        return c;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(d, a)) {
+                                if ( ! r(e, d)) {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, a)) {
+                                        return e;
+                                    } else {
+                                        return a;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, a)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, d)) {
+                                        return e;
+                                    } else {
+                                        return d;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        if ( ! r(d, c)) {
+            if ( ! r(f, e)) {
+                if ( ! r(e, b)) {
+                    if ( ! r(e, c)) {
+                        if ( ! r(g, e)) {
+                            if ( ! r(d, a)) {
+                                if ( ! r(e, a)) {
+                                    if ( ! r(e, d)) {
+                                        return d;
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, d)) {
+                                    if ( ! r(e, a)) {
+                                        return a;
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(d, a)) {
+                                if ( ! r(c, a)) {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return c;
+                                    }
+                                } else {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(d, b)) {
+                                    if ( ! r(g, d)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, d)) {
+                                            return d;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(c, a)) {
+                            if ( ! r(g, e)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, a)) {
+                                    return e;
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        return a;
+                                    } else {
+                                        return f;
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(d, a)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ( ! r(c, b)) {
+                        if ( ! r(c, a)) {
+                            if ( ! r(f, b)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, b)) {
+                                    if ( ! r(g, a)) {
+                                        return a;
+                                    } else {
+                                        return g;
+                                    }
+                                } else {
+                                    return b;
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, f)) {
+                                if ( ! r(f, c)) {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, b)) {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(d, b)) {
+                            if ( ! r(g, f)) {
+                                if ( ! r(f, b)) {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, b)) {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return f;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, d)) {
+                                if ( ! r(f, b)) {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, b)) {
+                                            return b;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(g, e)) {
+                                            return g;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(f, c)) {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(e, d)) {
+                                            return e;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        return g;
+                                    } else {
+                                        return c;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if ( ! r(f, b)) {
+                    if ( ! r(f, c)) {
+                        if ( ! r(d, a)) {
+                            if ( ! r(g, a)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return c;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(c, a)) {
+                                    return c;
+                                } else {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(g, e)) {
+                                            return e;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, d)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(e, d)) {
+                                            return d;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(d, b)) {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(g, e)) {
+                                            return e;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    return b;
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(e, c)) {
+                            if ( ! r(g, a)) {
+                                if ( ! r(c, a)) {
+                                    if ( ! r(g, c)) {
+                                        return c;
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, d)) {
+                                        if ( ! r(d, a)) {
+                                            return a;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(e, d)) {
+                                            return d;
+                                        } else {
+                                            return e;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        return c;
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(c, a)) {
+                                if ( ! r(g, a)) {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, e)) {
+                                            return g;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, e)) {
+                                    if ( ! r(g, c)) {
+                                        return c;
+                                    } else {
+                                        return g;
+                                    }
+                                } else {
+                                    return e;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ( ! r(g, e)) {
+                        if ( ! r(e, b)) {
+                            if ( ! r(e, c)) {
+                                if ( ! r(e, d)) {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(c, a)) {
+                                            return c;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(d, b)) {
+                                            return d;
+                                        } else {
+                                            return b;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, a)) {
+                                        return c;
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(c, a)) {
+                                    if ( ! r(e, a)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        return c;
+                                    } else {
+                                        return g;
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(d, b)) {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(c, b)) {
+                                        if ( ! r(c, a)) {
+                                            return a;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(g, b)) {
+                                            return b;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(c, b)) {
+                                            return b;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(e, d)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return c;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(g, b)) {
+                            if ( ! r(c, a)) {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return a;
+                                    }
+                                } else {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, d)) {
+                                    if ( ! r(d, b)) {
+                                        if ( ! r(d, a)) {
+                                            return a;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, c)) {
+                                            return c;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(d, b)) {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(c, b)) {
+                                        if ( ! r(c, a)) {
+                                            return a;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(e, b)) {
+                                            return b;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, b)) {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    } else {
+                                        if ( ! r(c, b)) {
+                                            return b;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, d)) {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, c)) {
+                                        return e;
+                                    } else {
+                                        return c;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            if ( ! r(d, b)) {
+                if ( ! r(f, e)) {
+                    if ( ! r(e, d)) {
+                        if ( ! r(e, c)) {
+                            if ( ! r(c, a)) {
+                                if ( ! r(d, a)) {
+                                    if ( ! r(g, c)) {
+                                        return c;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return a;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, e)) {
+                                    if ( ! r(e, a)) {
+                                        return a;
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(g, a)) {
+                                        return a;
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, a)) {
+                                if ( ! r(e, a)) {
+                                    if ( ! r(g, e)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, e)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(d, a)) {
+                                        return d;
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(d, a)) {
+                            if ( ! r(g, a)) {
+                                if ( ! r(f, d)) {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, e)) {
+                                            return g;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(f, b)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        return g;
+                                    } else {
+                                        return b;
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, f)) {
+                                if ( ! r(f, d)) {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, d)) {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, b)) {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ( ! r(g, a)) {
+                        if ( ! r(e, c)) {
+                            if ( ! r(d, a)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, d)) {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, d)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return d;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(f, c)) {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(c, a)) {
+                                            return a;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, e)) {
+                                if ( ! r(d, a)) {
+                                    if ( ! r(e, d)) {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return e;
+                                        } else {
+                                            return a;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(e, d)) {
+                                            return e;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(f, d)) {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, d)) {
+                                        if ( ! r(d, a)) {
+                                            return d;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(f, d)) {
+                            if ( ! r(c, a)) {
+                                if ( ! r(g, e)) {
+                                    return e;
+                                } else {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(d, a)) {
+                                            return d;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, c)) {
+                                            return c;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(g, e)) {
+                                            return e;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(e, d)) {
+                                if ( ! r(g, d)) {
+                                    if ( ! r(e, c)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, e)) {
+                                            return e;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(d, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        return d;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, e)) {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, d)) {
+                                            return d;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                } else {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(f, a)) {
+                                            return f;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(e, b)) {
+                                            return e;
+                                        } else {
+                                            return b;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if ( ! r(f, e)) {
+                    if ( ! r(e, b)) {
+                        if ( ! r(e, c)) {
+                            if ( ! r(g, e)) {
+                                if ( ! r(c, a)) {
+                                    return c;
+                                } else {
+                                    if ( ! r(e, a)) {
+                                        return a;
+                                    } else {
+                                        return e;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, c)) {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(c, a)) {
+                                            return c;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(g, b)) {
+                                            return g;
+                                        } else {
+                                            return b;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(g, a)) {
+                                            return g;
+                                        } else {
+                                            return a;
+                                        }
+                                    } else {
+                                        if ( ! r(c, b)) {
+                                            return c;
+                                        } else {
+                                            return b;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(c, a)) {
+                                if ( ! r(g, a)) {
+                                    if ( ! r(e, a)) {
+                                        if ( ! r(g, e)) {
+                                            return e;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, e)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    return e;
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(f, b)) {
+                            if ( ! r(g, c)) {
+                                if ( ! r(c, b)) {
+                                    if ( ! r(c, a)) {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, b)) {
+                                            return b;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, b)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, c)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(c, b)) {
+                                            return b;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, c)) {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return e;
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(c, b)) {
+                                            return b;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(e, c)) {
+                                            return e;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(f, d)) {
+                                            return f;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ( ! r(f, b)) {
+                        if ( ! r(c, a)) {
+                            if ( ! r(e, c)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(f, c)) {
+                                            return c;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, a)) {
+                                        if ( ! r(g, c)) {
+                                            return c;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, a)) {
+                                    if ( ! r(f, a)) {
+                                        if ( ! r(g, f)) {
+                                            return f;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, f)) {
+                                        if ( ! r(g, e)) {
+                                            return e;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, c)) {
+                                if ( ! r(g, f)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(f, a)) {
+                                            return a;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(e, c)) {
+                                            return c;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    } else {
+                                        return b;
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(c, b)) {
+                                            return c;
+                                        } else {
+                                            return b;
+                                        }
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, e)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if ( ! r(e, b)) {
+                            if ( ! r(g, c)) {
+                                if ( ! r(c, b)) {
+                                    if ( ! r(e, c)) {
+                                        if ( ! r(c, a)) {
+                                            return a;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, b)) {
+                                        return b;
+                                    } else {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(g, b)) {
+                                    if ( ! r(g, e)) {
+                                        if ( ! r(e, a)) {
+                                            return a;
+                                        } else {
+                                            return e;
+                                        }
+                                    } else {
+                                        if ( ! r(g, a)) {
+                                            return a;
+                                        } else {
+                                            return g;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(f, c)) {
+                                        return f;
+                                    } else {
+                                        if ( ! r(c, b)) {
+                                            return b;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if ( ! r(g, e)) {
+                                if ( ! r(g, b)) {
+                                    if ( ! r(e, c)) {
+                                        return e;
+                                    } else {
+                                        if ( ! r(c, b)) {
+                                            return b;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(g, c)) {
+                                        if ( ! r(e, c)) {
+                                            return e;
+                                        } else {
+                                            return c;
+                                        }
+                                    } else {
+                                        if ( ! r(g, d)) {
+                                            return g;
+                                        } else {
+                                            return d;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if ( ! r(e, c)) {
+                                    if ( ! r(f, c)) {
+                                        if ( ! r(g, f)) {
+                                            return g;
+                                        } else {
+                                            return f;
+                                        }
+                                    } else {
+                                        if ( ! r(g, c)) {
+                                            return g;
+                                        } else {
+                                            return c;
+                                        }
+                                    }
+                                } else {
+                                    if ( ! r(e, d)) {
+                                        return e;
+                                    } else {
+                                        return d;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// function median_7_generated_stable(a, b, c, d, e, f, g, r) {
+// }
+
 // ------------------------------------------------------------
 
 function perm(xs) {
@@ -691,90 +4110,122 @@ function generate_data_random(n) {
 
 }
 
-
-
-
-// --------------------------------------------------
-
-function exec_n3(data) {
-    for (let i = 0; i < data.length; ++i) {
-        const element = data[i];
-        var blocks_orig = create_blocks(element);
-
-        blocks = copy_array(blocks_orig);
-        tao.stable_sort(blocks, lt)
-        var expect = blocks[1];
-
-        blocks = copy_array(blocks_orig);
-        // var m1 = median_3_generated(blocks[0], blocks[1], blocks[2], lt);
-        var m1 = median_3_generated_stable(blocks[0], blocks[1], blocks[2], lt);
-
-        if (expect.id == m1.id) {
-            // console.log("OK    ", element, expect.id, m1.id);
-        } else {
-            console.log("ERROR ", element, expect.id, m1.id);
-        }
-    }
+function half(n) {
+    return Math.floor(n / 2);    
 }
 
-function exec_n5(data) {
+function exec_n(median_f, n) {
+    var q = Math.pow(n, n + 1);
+    
+    for (let i = 0; i < q; ++i) {
+
+        if (i % 100 == 0) {
+            console.log(`${(i * 100 / q).toFixed(2)}% completed...`);
+        }
+
+        const element = array_random(n, 0, n);
+        var blocks_orig = create_blocks(element);
+
+        blocks = copy_array(blocks_orig);
+        tao.stable_sort(blocks, lt)
+        var expect = blocks[half(n)];
+
+        blocks = copy_array(blocks_orig);
+        var m1 = median_f(...blocks, lt);
+        
+        if (expect.id == m1.id) {
+            // console.log("OK    ", element, expect.id, m1.id);
+        } else {
+            console.log("ERROR ", element, expect.id, m1.id);
+            return;
+        }
+    }
+    console.log(`Execution completed OK with ${Number(q).toLocaleString()} elements`);
+    
+}
+
+function exec_n_with_data(median_f, n, data) {
     for (let i = 0; i < data.length; ++i) {
+
+        if (i % 100 == 0) {
+            console.log(`${(i * 100 / q).toFixed(2)}% completed...`);
+        }
+
         const element = data[i];
         var blocks_orig = create_blocks(element);
 
         blocks = copy_array(blocks_orig);
         tao.stable_sort(blocks, lt)
-        var expect = blocks[2];
+        var expect = blocks[half(n)];
 
         blocks = copy_array(blocks_orig);
-        // var m1 = median_5_generated(blocks[0], blocks[1], blocks[2], blocks[3], blocks[4], lt);
-        var m1 = median_5_generated_stable(blocks[0], blocks[1], blocks[2], blocks[3], blocks[4], lt);
+        var m1 = median_f(...blocks, lt);
 
         if (expect.id == m1.id) {
             // console.log("OK    ", element, expect.id, m1.id);
         } else {
             console.log("ERROR ", element, expect.id, m1.id);
+            return;
         }
     }
+    console.log(`Execution completed OK with ${Number(q).toLocaleString()} elements`);
 }
 
 
 
 function main() {
+    // ---------------------------------------------------------------
     // n=3
-    // var data = generate_data([1, 1, 1],
-    //                          [1, 2, 3],
-    //                          [1, 2, 2],
-    //                          [1, 1, 2]);
-    // exec_n3(data);
+    // // var data = generate_data([1, 1, 1],
+    // //                          [1, 2, 3],
+    // //                          [1, 2, 2],
+    // //                          [1, 1, 2]);
     // var data = generate_data_random(3);
-    // exec_n3(data);
+    // // exec_n3(data);
+    // // exec_n_with_data(median_3_generated, 3, data);
+    // exec_n_with_data(median_3_generated_stable, 3, data);
 
 
-    // n=5
-    // var data = generate_data(
-    //     [1, 2, 3, 4, 5],
 
-    //     [1, 1, 2, 3, 4],
-    //     [1, 1, 1, 2, 3],
-    //     [1, 1, 1, 1, 2],
-    //     [1, 1, 1, 1, 1],
+
+    // ---------------------------------------------------------------
+    // // n=5
+    // // var data = generate_data(
+    // //     [1, 2, 3, 4, 5],
+
+    // //     [1, 1, 2, 3, 4],
+    // //     [1, 1, 1, 2, 3],
+    // //     [1, 1, 1, 1, 2],
+    // //     [1, 1, 1, 1, 1],
         
-    //     [1, 2, 2, 3, 4],
-    //     [1, 2, 2, 2, 3],
-    //     [1, 2, 2, 2, 2],
+    // //     [1, 2, 2, 3, 4],
+    // //     [1, 2, 2, 2, 3],
+    // //     [1, 2, 2, 2, 2],
 
-    //     [1, 2, 3, 3, 4],
-    //     [1, 2, 3, 3, 3],
+    // //     [1, 2, 3, 3, 4],
+    // //     [1, 2, 3, 3, 3],
 
-    //     [1, 2, 3, 4, 4],
-    // );
+    // //     [1, 2, 3, 4, 4],
+    // // );
 
-    // var data = [
-    // ];
+    // // var data = [
+    // // ];
     
-    var data = generate_data_random(5);
-    exec_n5(data);
+    // var data = generate_data_random(5);
+    // // exec_n_with_data(median_5_generated, 5, data);
+    // exec_n_with_data(median_5_generated_stable, 5, data);
+
+
+
+    // ---------------------------------------------------------------
+    // var data = [
+    //     [1, 2, 3, 4, 5, 6, 7]
+    // ];
+
+    // // var data = generate_data_random(7);
+    // exec_n_with_data(median_7_generated, 7, data);
+    exec_n(median_7_generated, 7);
+
 }
 
 main();
