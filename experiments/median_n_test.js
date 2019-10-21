@@ -4013,6 +4013,63 @@ function median_7_generated(a, b, c, d, e, f, g, r) {
     }
 }
 
+
+function median_7_abd_cd_ef_fb(a, b, c, d, e, f, g, r) {
+    // if (b < f) {
+    //     return median_7_abd_cd_ef_bf(a, b, c, d, e, f, g, r);
+    // } else {
+    //     return median_7_abd_cd_ef_fb(a, b, c, d, f, e, g, r);
+    // }
+}
+
+function median_7_abd_cd_ef_bf(a, b, c, d, e, f, g, r) {
+    if (c < e) {
+        return median_7_abd_cd_ef_bf(a, b, c, d, e, f, g, r);
+    } else {
+        return median_7_abd_cd_ef_fb(a, b, c, d, f, e, g, r);
+    }
+}
+
+function median_7_abd_cd_ef(a, b, c, d, e, f, g, r) {
+    if (b < f) {
+        return median_7_abd_cd_ef_bf(a, b, c, d, e, f, g, r);
+    } else {
+        return median_7_abd_cd_ef_fb(a, b, c, d, f, e, g, r);
+    }
+}
+
+function median_7_abd_cd(a, b, c, d, e, f, g, r) {
+    if (e < f) {
+        return median_7_abd_cd_ef(a, b, c, d, e, f, g, r);
+    } else {
+        return median_7_abd_cd_ef(a, b, c, d, f, e, g, r);
+    }
+}
+
+function median_7_ab_cd(a, b, c, d, e, f, g, r) {
+    if (b < d) {
+        return median_7_abd_cd(a, b, c, d, e, f, g, r);
+    } else {
+        return median_7_ab_cd_db(a, b, c, d, e, f, g, r);
+    }
+}
+
+function median_7_ab(a, b, c, d, e, f, g, r) {
+    if (c < d) {
+        return median_7_ab_cd(a, b, c, d, e, f, g, r);
+    } else {
+        return median_7_ab_cd(a, b, d, c, e, f, g, r);
+    }
+}
+
+function median_7(a, b, c, d, e, f, g, r) {
+    if (a < b) {
+        return median_7_ab(a, b, c, d, e, f, g, r);
+    } else {
+        return median_7_ab(b, a, c, d, e, f, g, r);
+    }
+}
+
 // function median_7_generated_stable(a, b, c, d, e, f, g, r) {
 // }
 
