@@ -1,3 +1,6 @@
+// The Art of Computer Programming Vol.3 Sorting, p.212
+// Vt(n) <= n-t + (t+1) * ceil(lg(n+2-t))   
+
 var __try = 0;
 
 function perm(xs) {

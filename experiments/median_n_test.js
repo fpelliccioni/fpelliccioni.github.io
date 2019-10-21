@@ -4013,6 +4013,72 @@ function median_7_generated(a, b, c, d, e, f, g, r) {
     }
 }
 
+// -----------------------------------------------------------------------------------------------------------------------
+
+function select_1_2(a, b, r) {
+    return r(b, a) ? a : b;
+}
+
+function select_1_3_ab(a, b, c, r) {
+    // precondition: a <= b
+    return ! r(c, b) ?                      //!(c < b) -> c >= b
+                b :                         // a, b, c are sorted
+                select_1_2(a, c, r)         // b is not the median
+}
+
+function select_2_3(a, b, c, r) {
+    return select_1_2(select_1_2(a, b, r), 
+                      c, r);
+}
+
+function select_2_5_ac_ae_bc_bd(a, b, c, d, e, r) {
+    // precondition: a <= c && a <= e && b <= c && b <= d
+    if ( ! r(e, d)) {
+        return select_1_3_ab(a, c, d, r);
+    } else {
+        return select_1_3_ab(b, c, e, r);
+    }
+}
+
+// function select_3_5_ab_cd_eb(a, b, c, d, e, r) {
+//     // precondition: a <= b && b <= e && c <= d
+//     if ( ! r(d, b)) {
+//         return select_1_2(b, c, r);
+//     } else {
+//         return select_2_3(a, d, e, r);
+//     }
+// }
+
+//TODO: no es estable
+function select_3_5_ab_cd_eb(a, b, c, d, e, r) {
+    // precondition: a < b && b < e && c < d
+
+    if ( ! r(d, b)) {
+        if ( ! r(c, b)) {
+            return c;
+        } else {
+            return b;
+        }
+    } else {
+        if ( ! r(d, a)) {
+            if ( ! r(e, d)) {
+                return e;
+            } else {
+                return d;
+            }
+        } else {
+            if ( ! r(e, a)) {
+                return e;
+            } else {
+                return a;
+            }
+        }
+    }
+}
+
+
+
+
 
 function median_7_abd_cd_ef_fb(a, b, c, d, e, f, g, r) {
     // if (b < f) {
@@ -4142,6 +4208,49 @@ function generate_data() {
     return data;
 }
 
+function repeat(x, n) {
+    var res = [];
+    for (let i = 0; i < n; i++) {
+        res.push(x);
+    }
+    return res;
+}
+
+function generate_data_all(n) {
+    var res = [...perm(iota(n))];
+    for (let i = 1; i < n; i++) {
+        for (let j = 0; j < i; j++) {
+            res.push(
+                ...perm(iota(n-j-1).concat(repeat(n-i, j+1)))                
+            );
+        }
+    }
+    res = remove_duplicates(res);
+    return res;
+
+    // // n=5
+    // // var data = generate_data(
+    // //     [1, 2, 3, 4, 5],
+
+    // //     [1, 1, 2, 3, 4],
+    // //     [1, 1, 1, 2, 3],
+    // //     [1, 1, 1, 1, 2],
+    // //     [1, 1, 1, 1, 1],
+        
+    // //     [1, 2, 2, 3, 4],
+    // //     [1, 2, 2, 2, 3],
+    // //     [1, 2, 2, 2, 2],
+
+    // //     [1, 2, 3, 3, 4],
+    // //     [1, 2, 3, 3, 3],
+
+    // //     [1, 2, 3, 4, 4],
+    // // );    
+}
+
+
+
+
 
 function array_random(n, from, to) {
     if ( ! n) n = 10;
@@ -4171,7 +4280,11 @@ function half(n) {
     return Math.floor(n / 2);    
 }
 
-function exec_n(median_f, n) {
+function exec_n(median_f, n, k) {
+    if ( ! k) {
+        k = half(n);
+    }
+
     var q = Math.pow(n, n + 1);
     
     for (let i = 0; i < q; ++i) {
@@ -4185,7 +4298,7 @@ function exec_n(median_f, n) {
 
         blocks = copy_array(blocks_orig);
         tao.stable_sort(blocks, lt)
-        var expect = blocks[half(n)];
+        var expect = blocks[k];
 
         blocks = copy_array(blocks_orig);
         var m1 = median_f(...blocks, lt);
@@ -4201,7 +4314,12 @@ function exec_n(median_f, n) {
     
 }
 
-function exec_n_with_data(median_f, n, data) {
+function exec_n_with_data(median_f, n, data, k) {
+    if ( ! k) {
+        k = half(n);
+    }
+
+    var q = data.length;
     for (let i = 0; i < data.length; ++i) {
 
         if (i % 100 == 0) {
@@ -4213,7 +4331,7 @@ function exec_n_with_data(median_f, n, data) {
 
         blocks = copy_array(blocks_orig);
         tao.stable_sort(blocks, lt)
-        var expect = blocks[half(n)];
+        var expect = blocks[k];
 
         blocks = copy_array(blocks_orig);
         var m1 = median_f(...blocks, lt);
@@ -4228,7 +4346,17 @@ function exec_n_with_data(median_f, n, data) {
     console.log(`Execution completed OK with ${Number(q).toLocaleString()} elements`);
 }
 
-
+function copy_if(data, p) {
+    var res = [];
+    for (let i = 0; i < data.length; i++) {
+        const e = data[i];
+        const r = p(...e);
+        if (r) {
+            res.push(e);
+        }
+    }
+    return res;
+}
 
 function main() {
     // ---------------------------------------------------------------
@@ -4281,7 +4409,39 @@ function main() {
 
     // // var data = generate_data_random(7);
     // exec_n_with_data(median_7_generated, 7, data);
-    exec_n(median_7_generated, 7);
+    // exec_n(median_7_generated, 7);
+
+    // ---------------------------------------------------------------
+
+    // var data = generate_data_random(5);
+    // data = copy_if(data, function(a, b, c, d, e) {
+    //     return a <= c && 
+    //            a <= e && 
+    //            b <= c && 
+    //            b <= d;
+    // });
+    // exec_n_with_data(select_2_5_ac_ae_bc_bd, 5, data);
+
+    // ---------------------------------------------------------------
+
+    var data = generate_data_all(5);
+    // data = copy_if(data, function(a, b, c, d, e) {
+    //     return a <= b && 
+    //            e <= b && 
+    //            c <= d;
+    // });
+
+    data = copy_if(data, function(a, b, c, d, e) {
+        return a < b && 
+               e < b && 
+               c < d;
+    });
+    
+    // var data = [
+    //     [0, 3, 1, 2, 3]
+    // ];
+
+    exec_n_with_data(select_3_5_ab_cd_eb, 5, data, 3);
 
 }
 
