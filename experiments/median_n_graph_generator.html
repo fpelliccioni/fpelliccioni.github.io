@@ -54,7 +54,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             var leafs = Math.pow(2, comps);
             var values = perm(iota(n));
             // tests.reverse();
-            // console.log(JSON.stringify(tests));
+            console.log(JSON.stringify(tests));
 
             var totalWidth = leafs * rectWidth + (leafs - 1) * 10
             // console.log(totalWidth)
@@ -76,7 +76,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
             var sequence = document.getElementById("sequence");
             var text = sequence.innerHTML;
-            console.log(text);
+            // console.log(text);
             
             var file = new Blob([text], {type: type});
             download_svg.href = URL.createObjectURL(file);
