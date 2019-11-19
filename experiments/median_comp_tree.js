@@ -1,229 +1,9 @@
 // The Art of Computer Programming Vol.3 Sorting, p.212
 // Vt(n) <= n-t + (t+1) * ceil(lg(n+2-t))   
 
+const common = require('./common');
+
 var __try = 0;
-
-function perm(xs) {
-    let ret = [];
-  
-    for (let i = 0; i < xs.length; i = i + 1) {
-        let rest = perm(xs.slice(0, i).concat(xs.slice(i + 1)));
-
-        if ( ! rest.length) {
-            ret.push([xs[i]])
-        } else {
-            for (let j = 0; j < rest.length; j = j + 1) {
-                ret.push([xs[i]].concat(rest[j]))
-            }
-        }
-    }
-    return ret;
-}
-
-function iota(n) {
-    var res = [];
-    for (let i = 0; i < n; ++i) {
-        res.push(i + 1);
-    }
-    return res;
-}
-
-function gen_pairs(n) {
-    var pairs = []
-    for (let i = 0; i < n; ++i) {
-        for (let j = 0; j < n; ++j) {
-            if (i < j) {
-                pairs.push([i + 1, j + 1]);
-            }
-        }
-    }
-    return pairs;
-}
-
-function gen_empty_array(n) {
-    var res = [];
-    var pairs_n = (n * n - n) / 2;
-    for (let i = 0; i < pairs_n; i++) {
-        res.push(false);
-    }
-    return res;
-}
-
-function remove_values(values, node) {
-    // console.log(values);
-    // console.log(node);
-    var res = [];
-    for (let i = 0; i < values.length; i++) {
-        const element = values[i];
-        var ia = element.indexOf(node[0]);
-        var ib = element.indexOf(node[1]);
-        // console.log(ia);
-        // console.log(ib);
-        if (ia < ib) {
-            res.push(element);
-        }
-    }
-
-    return res;
-}
-
-function half(n) {
-    return Math.floor(n / 2);    
-}
-
-function all_median(n, values) {
-    var h = half(n);
-    var res = [];
-    for (let i = 0; i < values.length; i++) {
-        const element = values[i];
-        res.push(element[h]);
-    }
-
-    res = [...new Set(res)];
-    res.sort();
-    return res;
-}
-
-// function all_median_equals(n, values) {
-//     if (values.length <= 1) {
-//         return true;
-//     }
-
-//     var h = half(n);
-//     var m = values[0][h];
-
-//     for (let i = 1; i < values.length; i++) {
-//         const element = values[i];
-
-//         if (element[h] != m) {
-//             return false;
-//         }
-//     }
-
-//     return true;
-// }
-
-function all_equal(values) {
-    if (values.length <= 1) {
-        return true;
-    }
-
-    var m = values[0];
-
-    for (let i = 1; i < values.length; i++) {
-        const element = values[i];
-
-        if (element != m) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-
-// function remove_level(nodes, level) {
-//     var res = [];
-//     for (let i = 0; i < nodes.length; i++) {
-//         const element = nodes[i];
-//         if (element[0] < level) {
-//             res.push(element);
-//         }
-//     }
-//     return res;
-// }
-
-function print_bool_arr(arr) {
-    
-    var res = [];
-    for (let i = 0; i < arr.length; i++) {
-        const element = arr[i];
-        var x = element ? 1 : 0;    
-        res.push(x);
-    }
-    console.log(res.join(''));
-}
-
-// function filter_pairs()
-
-function pair_equal(p, m0, m1) {
-    if (p[0] == m0 && p[1] == m1) return true;
-    if (p[1] == m0 && p[0] == m1) return true;
-    return false;
-}
-
-// reemplazar esta funcion.
-// quiero los pares aun no usados que...
-// contengan los numeros que estan en medians
-function get_pairs(pairs, used, medians) {
-    var tmp = [];
-    for (let i = 0; i < used.length; i++) {
-        const u = used[i];
-        tmp.push([u, false, false]);
-    }
-
-    for (let i = 0; i < medians.length; i++) {
-        const m = medians[i];
-        
-        for (let j = 0; j < tmp.length; j++) {
-            const p = pairs[j];
-            
-            if (m == p[0]) {
-                tmp[j][1] = true;
-            }
-            if (m == p[1]) {
-                tmp[j][2] = true;
-            }
-
-        }
-    }
-
-    var res = [];
-    for (let i = 0; i < tmp.length; i++) {
-        const t = tmp[i];
-        if ( ! t[0] && t[1] && t[2]) {
-            res.push(i);
-        }
-    }
-    return res;
-}
-
-
-// function get_pairs(pairs, used, medians) {
-//     if (medians.length <= 1) {
-//         console.log();
-//         return [];
-//     }
-
-//     // medians.sort();
-
-//     var res = [];
-
-//     var i0 = 0;
-//     var i1 = 1;
-
-//     while (true) {
-//         if (i1 >= medians.length) {
-//             break;
-//         }
-
-//         var m0 = medians[i0];
-//         var m1 = medians[i1];
-    
-//         for (let i = 0; i < pairs.length; i++) {
-//             const p = pairs[i];
-//             const u = used[i];
-
-//             if ( ! u && pair_equal(p, m0, m1)) {
-//                 res.push(i);
-//                 break;
-//             }
-//         }
-//         ++i0;
-//         ++i1;
-//     }
-//     return res;
-// }
 
 function complete_empty_levels(level, cmp_n, cmp_max) {
     ++cmp_n;
@@ -248,8 +28,8 @@ function recursive_v3(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
     // var first_not_used_min = used.indexOf(false);
     // var first_not_used = first_not_used_min;
 
-    var medians_all = all_median(n, values);
-    var possible_pairs = get_pairs(pairs, used, medians_all);
+    var medians_all = common.all_median(n, values);
+    var possible_pairs = common.get_pairs(pairs, used, medians_all);
 
     if (medians_all.length <= 1) {
         console.log("Opaaaaaa 3");
@@ -263,19 +43,19 @@ function recursive_v3(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
 
             var a_selected_left = pairs[ai];
             var a_selected_right = a_selected_left.slice().reverse();
-            var a_new_values_left = remove_values(values, a_selected_left);
-            var a_new_values_right = remove_values(values, a_selected_right);
-            var a_medians_left = all_median(n, a_new_values_left);
-            var a_medians_right = all_median(n, a_new_values_right);
+            var a_new_values_left = common.remove_values(values, a_selected_left);
+            var a_new_values_right = common.remove_values(values, a_selected_right);
+            var a_medians_left = common.all_median(n, a_new_values_left);
+            var a_medians_right = common.all_median(n, a_new_values_right);
             var a_medians_total_len = a_medians_left.length + a_medians_right.length;
             var a_values_total_len = a_new_values_left.length + a_new_values_right.length;
 
             var b_selected_left = pairs[bi];
             var b_selected_right = b_selected_left.slice().reverse();
-            var b_new_values_left = remove_values(values, b_selected_left);
-            var b_new_values_right = remove_values(values, b_selected_right);
-            var b_medians_left = all_median(n, b_new_values_left);
-            var b_medians_right = all_median(n, b_new_values_right);
+            var b_new_values_left = common.remove_values(values, b_selected_left);
+            var b_new_values_right = common.remove_values(values, b_selected_right);
+            var b_medians_left = common.all_median(n, b_new_values_left);
+            var b_medians_right = common.all_median(n, b_new_values_right);
             var b_medians_total_len = b_medians_left.length + b_medians_right.length;
             var b_values_total_len = b_new_values_left.length + b_new_values_right.length;
 
@@ -308,15 +88,15 @@ function recursive_v3(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
         var selected_left = pairs[first_not_used];
         var selected_right = selected_left.slice().reverse();
         
-        var new_values_left = remove_values(values, selected_left);
-        var new_values_right = remove_values(values, selected_right);
+        var new_values_left = common.remove_values(values, selected_left);
+        var new_values_right = common.remove_values(values, selected_right);
 
         ++cmp_n;
         ++__try;
 
         if (__try % 100000 == 0) {
             console.log(__try);
-            print_bool_arr(used);
+            common.print_bool_arr(used);
         }
 
         // if (level == 7) {
@@ -335,8 +115,8 @@ function recursive_v3(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
         // }
 
 
-        var medians_left = all_median(n, new_values_left);
-        var medians_right = all_median(n, new_values_right);
+        var medians_left = common.all_median(n, new_values_left);
+        var medians_right = common.all_median(n, new_values_right);
 
         // console.log(`level: ${level}. new_values_left: ${new_values_left.length}. new_values_right: ${new_values_right.length}. medians_left: ${medians_left.length}. medians_right: ${medians_right.length}`)
 
@@ -350,7 +130,7 @@ function recursive_v3(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
         //     console.log("Opaaaaaa 2")
         // }
 
-        if (all_equal(medians_left) && all_equal(medians_right)) {
+        if (common.all_equal(medians_left) && common.all_equal(medians_right)) {
             if (cmp_n != cmp_max) {
                 var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
                 var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
@@ -401,124 +181,213 @@ function recursive_v3(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
 
 }
 
-// function recursive(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cmp_max) {
-//     var nodes = [];
+function recursive_v2(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cmp_max) {
+    var nodes = [];
 
-//     var used = used_par.slice();
+    var used = used_par.slice();
 
-//     // var first_not_used_min = used.indexOf(false);
-//     // var first_not_used = first_not_used_min;
+    // var first_not_used_min = used.indexOf(false);
+    // var first_not_used = first_not_used_min;
 
-//     var medians_all = all_median(n, values);
-//     var possible_pairs = get_pairs(pairs, used, medians_all);
+    var medians_all = common.all_median(n, values);
+    var possible_pairs = common.get_pairs(pairs, used, medians_all);
 
-//     if (medians_all.length <= 1) {
-//         console.log("Opaaaaaa 3");
-//     }
+    if (medians_all.length <= 1) {
+        console.log("Opaaaaaa 3");
+    }
 
-//     for (let i = 0; i < possible_pairs.length; ++i) {
-//         const first_not_used = possible_pairs[i];
+    for (let i = 0; i < possible_pairs.length; ++i) {
+        const first_not_used = possible_pairs[i];
             
-//         used[first_not_used] = true;
-//         var selected_left = pairs[first_not_used];
-//         var selected_right = selected_left.slice().reverse();
+        used[first_not_used] = true;
+        var selected_left = pairs[first_not_used];
+        var selected_right = selected_left.slice().reverse();
         
-//         var new_values_left = remove_values(values, selected_left);
-//         var new_values_right = remove_values(values, selected_right);
+        var new_values_left = common.remove_values(values, selected_left);
+        var new_values_right = common.remove_values(values, selected_right);
 
-//         ++cmp_n;
-//         ++__try;
+        ++cmp_n;
+        ++__try;
 
-//         if (__try % 100000 == 0) {
-//             console.log(__try);
-//             print_bool_arr(used);
-//         }
+        if (__try % 100000 == 0) {
+            console.log(__try);
+            common.print_bool_arr(used);
+        }
 
-//         // if (level == 7) {
-//         //     if (selected_left[0] == 5 && selected_left[1] == 7) {
-//         //         console.log();
-//         //     }
-//         // }
+        // if (level == 7) {
+        //     if (selected_left[0] == 5 && selected_left[1] == 7) {
+        //         console.log();
+        //     }
+        // }
 
-//         // if (__try >= 574300000) {
-//         //     // [7,[5,7]]
-//         //     if (level == 7) {
-//         //         if (selected_left[0] == 5 && selected_left[1] == 7) {
-//         //             console.log();
-//         //         }
-//         //     }
-//         // }
+        // if (__try >= 574300000) {
+        //     // [7,[5,7]]
+        //     if (level == 7) {
+        //         if (selected_left[0] == 5 && selected_left[1] == 7) {
+        //             console.log();
+        //         }
+        //     }
+        // }
 
 
-//         var medians_left = all_median(n, new_values_left);
-//         var medians_right = all_median(n, new_values_right);
+        var medians_left = common.all_median(n, new_values_left);
+        var medians_right = common.all_median(n, new_values_right);
 
-//         console.log(`level: ${level}. new_values_left: ${new_values_left.length}. new_values_right: ${new_values_right.length}. medians_left: ${medians_left.length}. medians_right: ${medians_right.length}`)
+        // console.log(`level: ${level}. new_values_left: ${new_values_left.length}. new_values_right: ${new_values_right.length}. medians_left: ${medians_left.length}. medians_right: ${medians_right.length}`)
 
-//         if (medians_left.length == 0 || medians_right.length == 0) {
-//             // console.log("Opaaaaaa 1")
-//             used[first_not_used] = false;
-//             --cmp_n;
-//             continue;
-//         }
-//         // if (medians_right.length == 0) {
-//         //     console.log("Opaaaaaa 2")
-//         // }
+        if (medians_left.length == 0 || medians_right.length == 0) {
+            // console.log("Opaaaaaa 1")
+            used[first_not_used] = false;
+            --cmp_n;
+            continue;
+        }
+        // if (medians_right.length == 0) {
+        //     console.log("Opaaaaaa 2")
+        // }
 
-//         if (all_equal(medians_left) && all_equal(medians_right)) {
-//             if (cmp_n != cmp_max) {
-//                 var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
-//                 var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
-//                 nodes.push(...res_right[1]);
-//                 nodes.push(...res_left[1]);
-//                 nodes.push([level, selected_left]);
-//                 return [true, nodes];
-//             } else {
-//                 return [true, [[level, selected_left]]];
-//             }
-//         }
+        if (common.all_equal(medians_left) && common.all_equal(medians_right)) {
+            if (cmp_n != cmp_max) {
+                var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
+                var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
+                nodes.push(...res_right[1]);
+                nodes.push(...res_left[1]);
+                nodes.push([level, selected_left]);
+                return [true, nodes];
+            } else {
+                return [true, [[level, selected_left]]];
+            }
+        }
 
-//         if (cmp_n == cmp_max) {
-//             used[first_not_used] = false;
-//             --cmp_n;
-//             continue;
-//         }
+        if (cmp_n == cmp_max) {
+            used[first_not_used] = false;
+            --cmp_n;
+            continue;
+        }
 
-//         if (medians_left.length == 1) {
-//             var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
-//         } else {
-//             var res_left = recursive(suggested_pairs, level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max);
-//             if ( ! res_left[0]) {
-//                 used[first_not_used] = false;
-//                 --cmp_n;
-//                 continue;
-//             } 
-//         }
+        if (medians_left.length == 1) {
+            var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
+        } else {
+            var res_left = recursive_v2(suggested_pairs, level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max);
+            if ( ! res_left[0]) {
+                used[first_not_used] = false;
+                --cmp_n;
+                continue;
+            } 
+        }
 
-//         if (medians_right.length == 1) {
-//             var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
-//         } else {
-//             var res_right = recursive(suggested_pairs, level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max);
-//             if (!res_right[0]) {
-//                 used[first_not_used] = false;
-//                 --cmp_n;
-//                 continue;
-//             }
-//         }
+        if (medians_right.length == 1) {
+            var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
+        } else {
+            var res_right = recursive_v2(suggested_pairs, level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max);
+            if (!res_right[0]) {
+                used[first_not_used] = false;
+                --cmp_n;
+                continue;
+            }
+        }
 
-//         nodes.push(...res_right[1]);
-//         nodes.push(...res_left[1]);
-//         nodes.push([level, selected_left]);
-//         return [true, nodes];
-//     }
+        nodes.push(...res_right[1]);
+        nodes.push(...res_left[1]);
+        nodes.push([level, selected_left]);
+        return [true, nodes];
+    }
 
-//     return false, [];
+    return false, [];
+}
 
-// }
+function recursive_v1(level, n, values, pairs, used_par, cmp_n, cmp_max) {
+    var nodes = [];
+    // var values = values_par.slice();
+    var used = used_par.slice();
+    var first_not_used_min = used.indexOf(false);
+    var first_not_used = first_not_used_min;
+
+    while (true) {
+        used[first_not_used] = true;
+        var selected_left = pairs[first_not_used];
+        var selected_right = selected_left.slice().reverse();
+        
+        var new_values_left = common.remove_values(values, selected_left);
+        var new_values_right = common.remove_values(values, selected_right);
+
+        ++cmp_n;
+        ++__try;
+
+        if (__try % 100000 == 0) {
+            console.log(__try);
+            common.print_bool_arr(used);
+        }
+
+        // if (level == 7) {
+        //     if (selected_left[0] == 5 && selected_left[1] == 7) {
+        //         console.log();
+        //     }
+        // }
+
+        // if (__try >= 574300000) {
+        //     // [7,[5,7]]
+        //     if (level == 7) {
+        //         if (selected_left[0] == 5 && selected_left[1] == 7) {
+        //             console.log();
+        //         }
+        //     }
+        // }
+
+
+        
+        if (common.all_median_equals(n, new_values_left) && common.all_median_equals(n, new_values_right)) {
+            return [true, [[level, selected_left]]];
+            //TODO: que nivel tenemos siempre acá?
+        }
+
+        if (cmp_n == cmp_max) {
+            var first_not_used_new = used.indexOf(false, first_not_used);
+            if (first_not_used_new == -1) {
+                return false, [];
+            }
+            used[first_not_used] = false;
+            first_not_used = first_not_used_new;
+            --cmp_n;
+            continue;
+        }
+
+        var res_left = recursive_v1(level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max);
+
+        if ( ! res_left[0]) {
+            var first_not_used_new = used.indexOf(false, first_not_used);
+            if (first_not_used_new == -1) {
+                return false, [];
+            }
+            used[first_not_used] = false;
+            first_not_used = first_not_used_new;
+            --cmp_n;
+            continue;
+        } 
+
+        var res_right = recursive_v1(level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max);
+        if (!res_right[0]) {
+            // nodes = remove_level(nodes, level);
+            var first_not_used_new = used.indexOf(false, first_not_used);
+            if (first_not_used_new == -1) {
+                return false, [];
+            }
+            used[first_not_used] = false;
+            first_not_used = first_not_used_new;
+            --cmp_n;
+            continue;
+        }
+
+        nodes.push(...res_left[1]);
+        nodes.push(...res_right[1]);
+        nodes.push([level, selected_left]);
+        return [true, nodes];
+    }
+}
+
 
 function tree(n, comps) {
 
-    var pairs = gen_pairs(n);
+    var pairs = common.gen_pairs(n);
     console.log(JSON.stringify(pairs));
 
     // ---------------------------------------------------------------------------------
@@ -680,21 +549,26 @@ function tree(n, comps) {
     var suggested_pairs_9 = [
     ];
 
-    var used_pairs = gen_empty_array(n);
-    var possible_values = perm(iota(n));
+    var used_pairs = common.gen_empty_array(n);
+    var possible_values = common.perm(common.iota(n));
     // console.log(pairs);
              
-    var res = recursive_v3(suggested_pairs_9, 0, n, possible_values, pairs, used_pairs, 0, comps);
+    // var res = recursive_v3(suggested_pairs_9, 0, n, possible_values, pairs, used_pairs, 0, comps);
+    // var res = recursive_v2(suggested_pairs_9, 0, n, possible_values, pairs, used_pairs, 0, comps);
+    var res = recursive_v1(0, n, possible_values, pairs, used_pairs, 0, comps);
+
     console.log(res[0]);
-    console.log(res[1]);
-    console.log(JSON.stringify(res[1]));
+
+    var rev = res[1].reverse();
+    console.log(rev);
+    console.log(JSON.stringify(rev));
 }
 
 function main() {
     var tests = [
         // [3, 3],
-        [5, 6],
-        // [7, 10],
+        // [5, 6],
+        [7, 10],
         // [9, 14],
     ];
 
@@ -708,11 +582,302 @@ main();
 
 
 
+// ------------------------------------------------------------------------
+// n=3
+
+// [[0,[1,2]],[1,[1,3]],[2,[2,3]],[2,[]],[1,[1,3]],[2,[]],[2,[2,3]]]
+
+
+// ------------------------------------------------------------------------
+// n=5
+
+// [[0,[1,2]],[1,[3,4]],[2,[1,3]],[3,[2,5]],[4,[2,3]],[5,[3,5]],[5,[2,4]],[4,[3,5]],[5,[4,5]],[5,[2,3]],[3,[4,5]],[4,[1,4]],[5,[2,4]],[5,[1,5]],[4,[1,5]],[5,[2,5]],[5,[1,4]],[2,[1,4]],[3,[2,5]],[4,[2,4]],[5,[4,5]],[5,[2,3]],[4,[4,5]],[5,[3,5]],[5,[2,4]],[3,[3,5]],[4,[1,3]],[5,[2,3]],[5,[1,5]],[4,[1,5]],[5,[2,5]],[5,[1,3]],[1,[3,4]],[2,[1,4]],[3,[3,5]],[4,[1,5]],[5,[1,3]],[5,[2,5]],[4,[1,3]],[5,[1,5]],[5,[2,3]],[3,[2,5]],[4,[4,5]],[5,[2,4]],[5,[3,5]],[4,[2,4]],[5,[2,3]],[5,[4,5]],[2,[1,3]],[3,[4,5]],[4,[1,5]],[5,[1,4]],[5,[2,5]],[4,[1,4]],[5,[1,5]],[5,[2,4]],[3,[2,5]],[4,[3,5]],[5,[2,3]],[5,[4,5]],[4,[2,3]],[5,[2,4]],[5,[3,5]]]
+
+// ------------------------------------------------------------------------
+// n=7
 
 // 99900000
 // 111100011000001101100
 // [[9,[]],[9,[]],[8,[4,5]],[9,[3,7]],[9,[6,7]],[8,[3,6]],[7,[3,5]],[9,[4,7]],[9,[3,5]],[8,[3,7]],[9,[2,3]],[9,[]],[8,[3,5]],[7,[2,7]],[6,[5,7]],[9,[2,3]],[9,[]],[8,[3,6]],[9,[1,7]],[9,[1,5]],[8,[5,7]],[7,[2,7]],[9,[6,7]],[9,[]],[8,[2,7]],[9,[1,5]],[9,[1,3]],[8,[3,5]],[7,[2,3]],[6,[3,7]],[5,[2,5]],[9,[6,7]],[9,[]],[8,[5,7]],[9,[6,7]],[9,[2,3]],[8,[3,6]],[7,[3,5]],[9,[]],[9,[1,7]],[8,[2,7]],[9,[3,5]],[9,[1,6]],[8,[3,6]],[7,[6,7]],[6,[3,7]],[9,[1,6]],[9,[5,7]],[8,[6,7]],[9,[1,5]],[9,[6,7]],[8,[1,6]],[7,[1,7]],[9,[1,6]],[9,[3,7]],[8,[1,7]],[9,[1,7]],[9,[3,6]],[8,[1,6]],[7,[6,7]],[6,[3,5]],[5,[1,3]],[4,[2,6]],[9,[4,6]],[9,[3,5]],[8,[3,6]],[9,[4,7]],[9,[]],[8,[2,7]],[7,[6,7]],[9,[2,3]],[9,[6,7]],[8,[3,6]],[9,[]],[9,[6,7]],[8,[5,7]],[7,[3,5]],[6,[3,7]],[9,[2,3]],[9,[]],[8,[3,5]],[9,[6,7]],[9,[1,7]],[8,[1,6]],[7,[2,7]],[9,[]],[9,[2,7]],[8,[5,7]],[9,[3,6]],[9,[1,6]],[8,[1,3]],[7,[2,3]],[6,[3,7]],[5,[2,6]],[9,[]],[9,[]],[8,[]],[9,[6,7]],[9,[3,7]],[8,[3,6]],[7,[5,7]],[9,[1,5]],[9,[6,7]],[8,[5,7]],[9,[1,6]],[9,[5,7]],[8,[1,5]],[7,[1,7]],[6,[1,3]],[9,[2,3]],[9,[1,7]],[8,[1,3]],[9,[2,7]],[9,[1,3]],[8,[1,7]],[7,[3,7]],[9,[]],[9,[]],[8,[1,5]],[9,[]],[9,[]],[8,[]],[7,[1,3]],[6,[5,7]],[5,[3,5]],[4,[2,5]],[3,[5,6]],[9,[2,5]],[9,[1,6]],[8,[1,5]],[9,[]],[9,[4,7]],[8,[2,7]],[7,[5,7]],[9,[]],[9,[1,6]],[8,[1,4]],[9,[5,7]],[9,[3,7]],[8,[3,5]],[7,[4,7]],[6,[4,5]],[9,[3,6]],[9,[5,7]],[8,[6,7]],[9,[3,5]],[9,[6,7]],[8,[3,6]],[7,[3,7]],[9,[6,7]],[9,[1,4]],[8,[1,6]],[9,[]],[9,[]],[8,[]],[7,[5,7]],[6,[1,3]],[5,[4,6]],[9,[6,7]],[9,[1,4]],[8,[4,7]],[9,[4,7]],[9,[1,6]],[8,[6,7]],[7,[4,6]],[9,[4,5]],[9,[1,6]],[8,[1,5]],[9,[1,5]],[9,[4,6]],[8,[4,5]],[7,[1,4]],[6,[5,7]],[9,[1,3]],[9,[6,7]],[8,[1,6]],[9,[1,6]],[9,[3,7]],[8,[1,3]],[7,[3,6]],[9,[4,6]],[9,[3,7]],[8,[4,7]],[9,[4,7]],[9,[3,6]],[8,[4,6]],[7,[6,7]],[6,[1,4]],[5,[3,5]],[4,[1,7]],[9,[]],[9,[4,6]],[8,[2,6]],[9,[3,7]],[9,[1,7]],[8,[1,3]],[7,[4,7]],[9,[]],[9,[4,7]],[8,[2,7]],[9,[3,6]],[9,[1,6]],[8,[1,3]],[7,[4,6]],[6,[6,7]],[9,[]],[9,[]],[8,[2,7]],[9,[6,7]],[9,[1,5]],[8,[1,6]],[7,[2,6]],[9,[5,7]],[9,[1,6]],[8,[6,7]],[9,[]],[9,[4,7]],[8,[5,7]],[7,[4,6]],[6,[1,7]],[5,[1,4]],[9,[1,5]],[9,[]],[8,[1,4]],[9,[6,7]],[9,[3,7]],[8,[3,6]],[7,[5,7]],[9,[3,6]],[9,[1,6]],[8,[1,3]],[9,[4,7]],[9,[]],[8,[5,7]],[7,[1,5]],[6,[1,7]],[9,[3,7]],[9,[]],[8,[1,7]],[9,[]],[9,[]],[8,[1,5]],[7,[5,7]],[9,[]],[9,[3,7]],[8,[1,7]],[9,[4,7]],[9,[]],[8,[3,7]],[7,[1,4]],[6,[1,3]],[5,[3,5]],[4,[4,5]],[3,[5,6]],[2,[2,4]],[9,[]],[9,[]],[8,[3,5]],[9,[4,7]],[9,[6,7]],[8,[4,6]],[7,[4,5]],[9,[2,3]],[9,[1,5]],[8,[2,5]],[9,[2,5]],[9,[1,3]],[8,[2,3]],[7,[3,5]],[6,[2,4]],[9,[3,5]],[9,[1,7]],[8,[3,7]],[9,[]],[9,[1,4]],[8,[2,4]],[7,[4,7]],[9,[]],[9,[1,7]],[8,[1,5]],[9,[]],[9,[3,7]],[8,[1,7]],[7,[3,5]],[6,[1,3]],[5,[2,7]],[9,[]],[9,[4,7]],[8,[3,7]],[9,[4,7]],[9,[]],[8,[4,5]],[7,[3,5]],[9,[2,3]],[9,[1,7]],[8,[2,7]],[9,[2,7]],[9,[1,3]],[8,[2,3]],[7,[3,7]],[6,[2,4]],[9,[]],[9,[]],[8,[3,7]],[9,[1,7]],[9,[]],[8,[1,5]],[7,[1,3]],[9,[1,5]],[9,[]],[8,[1,3]],[9,[2,4]],[9,[1,3]],[8,[1,4]],[7,[4,5]],[6,[3,5]],[5,[2,5]],[4,[5,7]],[9,[]],[9,[]],[8,[]],[9,[]],[9,[]],[8,[3,7]],[7,[5,7]],[9,[5,7]],[9,[1,6]],[8,[1,5]],[9,[6,7]],[9,[1,5]],[8,[5,7]],[7,[1,7]],[6,[1,3]],[9,[]],[9,[1,6]],[8,[1,3]],[9,[4,7]],[9,[4,5]],[8,[5,7]],[7,[3,7]],[9,[1,5]],[9,[1,4]],[8,[4,5]],[9,[6,7]],[9,[]],[8,[3,7]],[7,[1,3]],[6,[1,7]],[5,[3,5]],[9,[]],[9,[]],[8,[]],[9,[4,6]],[9,[5,7]],[8,[6,7]],[7,[2,4]],[9,[]],[9,[1,7]],[8,[2,7]],[9,[4,5]],[9,[1,6]],[8,[4,6]],[7,[6,7]],[6,[4,7]],[9,[1,6]],[9,[5,7]],[8,[6,7]],[9,[]],[9,[]],[8,[]],[7,[1,3]],[9,[]],[9,[4,7]],[8,[3,7]],[9,[1,5]],[9,[4,6]],[8,[1,6]],[7,[6,7]],[6,[1,7]],[5,[1,4]],[4,[3,6]],[3,[2,6]],[9,[]],[9,[]],[8,[3,7]],[9,[6,7]],[9,[4,5]],[8,[4,6]],[7,[3,6]],[9,[5,7]],[9,[4,6]],[8,[6,7]],[9,[]],[9,[2,7]],[8,[5,7]],[7,[2,6]],[6,[4,7]],[9,[3,6]],[9,[]],[8,[2,6]],[9,[4,7]],[9,[1,7]],[8,[1,4]],[7,[2,7]],[9,[3,7]],[9,[]],[8,[2,7]],[9,[4,6]],[9,[1,6]],[8,[1,4]],[7,[2,6]],[6,[6,7]],[5,[2,4]],[9,[]],[9,[3,6]],[8,[2,6]],[9,[4,7]],[9,[1,7]],[8,[1,4]],[7,[3,7]],[9,[]],[9,[3,7]],[8,[2,7]],[9,[4,6]],[9,[1,6]],[8,[1,4]],[7,[3,6]],[6,[6,7]],[9,[]],[9,[]],[8,[]],[9,[]],[9,[]],[8,[1,7]],[7,[2,7]],[9,[1,6]],[9,[3,7]],[8,[1,7]],[9,[1,7]],[9,[3,6]],[8,[1,6]],[7,[6,7]],[6,[2,6]],[5,[1,3]],[4,[2,3]],[9,[3,6]],[9,[4,7]],[8,[3,7]],[9,[3,7]],[9,[4,6]],[8,[3,6]],[7,[6,7]],[9,[3,6]],[9,[1,7]],[8,[3,7]],[9,[3,7]],[9,[1,6]],[8,[3,6]],[7,[6,7]],[6,[1,4]],[9,[]],[9,[]],[8,[1,6]],[9,[]],[9,[]],[8,[]],[7,[1,5]],[9,[1,6]],[9,[3,7]],[8,[1,7]],[9,[1,7]],[9,[3,6]],[8,[1,6]],[7,[6,7]],[6,[5,7]],[5,[1,3]],[9,[]],[9,[1,7]],[8,[2,7]],[9,[4,5]],[9,[1,7]],[8,[4,7]],[7,[2,4]],[9,[1,5]],[9,[4,7]],[8,[1,7]],[9,[]],[9,[4,7]],[8,[3,7]],[7,[1,3]],[6,[1,4]],[9,[6,7]],[9,[4,7]],[8,[4,6]],[9,[]],[9,[]],[8,[1,5]],[7,[4,5]],[9,[6,7]],[9,[1,7]],[8,[1,6]],[9,[]],[9,[]],[8,[4,5]],[7,[1,5]],[6,[1,4]],[5,[5,7]],[4,[3,5]],[3,[2,5]],[2,[5,6]],[1,[3,4]],[9,[]],[9,[]],[8,[4,5]],[9,[1,7]],[9,[6,7]],[8,[1,6]],[7,[1,5]],[9,[]],[9,[]],[8,[1,5]],[9,[4,7]],[9,[6,7]],[8,[4,6]],[7,[4,5]],[6,[1,4]],[9,[4,7]],[9,[]],[8,[3,7]],[9,[4,7]],[9,[1,5]],[8,[1,7]],[7,[1,3]],[9,[1,7]],[9,[4,5]],[8,[4,7]],[9,[1,7]],[9,[]],[8,[2,7]],[7,[2,4]],[6,[1,4]],[5,[5,7]],[9,[3,6]],[9,[1,7]],[8,[1,6]],[9,[3,7]],[9,[1,6]],[8,[1,7]],[7,[6,7]],[9,[]],[9,[]],[8,[]],[9,[]],[9,[]],[8,[1,6]],[7,[1,5]],[6,[5,7]],[9,[1,6]],[9,[3,7]],[8,[3,6]],[9,[1,7]],[9,[3,6]],[8,[3,7]],[7,[6,7]],[9,[4,6]],[9,[3,7]],[8,[3,6]],[9,[4,7]],[9,[3,6]],[8,[3,7]],[7,[6,7]],[6,[1,4]],[5,[1,3]],[4,[3,5]],[9,[3,6]],[9,[1,7]],[8,[1,6]],[9,[3,7]],[9,[1,6]],[8,[1,7]],[7,[6,7]],[9,[]],[9,[]],[8,[1,7]],[9,[]],[9,[]],[8,[]],[7,[2,7]],[6,[2,6]],[9,[1,6]],[9,[4,6]],[8,[1,4]],[9,[3,7]],[9,[]],[8,[2,7]],[7,[3,6]],[9,[1,7]],[9,[4,7]],[8,[1,4]],[9,[3,6]],[9,[]],[8,[2,6]],[7,[3,7]],[6,[6,7]],[5,[1,3]],[9,[1,6]],[9,[4,6]],[8,[1,4]],[9,[]],[9,[3,7]],[8,[2,7]],[7,[2,6]],[9,[1,7]],[9,[4,7]],[8,[1,4]],[9,[]],[9,[3,6]],[8,[2,6]],[7,[2,7]],[6,[6,7]],[9,[2,7]],[9,[]],[8,[5,7]],[9,[4,6]],[9,[5,7]],[8,[6,7]],[7,[2,6]],[9,[4,5]],[9,[6,7]],[8,[4,6]],[9,[]],[9,[]],[8,[3,7]],[7,[3,6]],[6,[4,7]],[5,[2,4]],[4,[2,3]],[3,[2,5]],[9,[4,6]],[9,[1,5]],[8,[1,6]],[9,[4,7]],[9,[]],[8,[3,7]],[7,[6,7]],[9,[]],[9,[]],[8,[]],[9,[5,7]],[9,[1,6]],[8,[6,7]],[7,[1,3]],[6,[1,7]],[9,[1,6]],[9,[4,5]],[8,[4,6]],[9,[1,7]],[9,[]],[8,[2,7]],[7,[6,7]],[9,[5,7]],[9,[4,6]],[8,[6,7]],[9,[]],[9,[]],[8,[]],[7,[2,4]],[6,[4,7]],[5,[1,4]],[9,[]],[9,[6,7]],[8,[3,7]],[9,[1,4]],[9,[1,5]],[8,[4,5]],[7,[1,3]],[9,[4,5]],[9,[4,7]],[8,[5,7]],[9,[1,6]],[9,[]],[8,[1,3]],[7,[3,7]],[6,[1,7]],[9,[1,5]],[9,[6,7]],[8,[5,7]],[9,[1,6]],[9,[5,7]],[8,[1,5]],[7,[1,7]],[9,[]],[9,[]],[8,[3,7]],[9,[]],[9,[]],[8,[]],[7,[5,7]],[6,[1,3]],[5,[3,5]],[4,[3,6]],[9,[1,3]],[9,[2,4]],[8,[1,4]],[9,[]],[9,[1,5]],[8,[1,3]],[7,[4,5]],[9,[]],[9,[1,7]],[8,[1,5]],[9,[]],[9,[]],[8,[3,7]],[7,[1,3]],[6,[3,5]],[9,[1,3]],[9,[2,7]],[8,[2,3]],[9,[1,7]],[9,[2,3]],[8,[2,7]],[7,[3,7]],[9,[]],[9,[4,7]],[8,[4,5]],[9,[4,7]],[9,[]],[8,[3,7]],[7,[3,5]],[6,[2,4]],[5,[2,5]],[9,[3,7]],[9,[]],[8,[1,7]],[9,[1,7]],[9,[]],[8,[1,5]],[7,[3,5]],[9,[1,4]],[9,[]],[8,[2,4]],[9,[1,7]],[9,[3,5]],[8,[3,7]],[7,[4,7]],[6,[1,3]],[9,[1,3]],[9,[2,5]],[8,[2,3]],[9,[1,5]],[9,[2,3]],[8,[2,5]],[7,[3,5]],[9,[6,7]],[9,[4,7]],[8,[4,6]],[9,[]],[9,[]],[8,[3,5]],[7,[4,5]],[6,[2,4]],[5,[2,7]],[4,[5,7]],[3,[2,6]],[2,[5,6]],[9,[]],[9,[4,7]],[8,[3,7]],[9,[3,7]],[9,[]],[8,[1,7]],[7,[1,4]],[9,[]],[9,[]],[8,[1,5]],[9,[]],[9,[3,7]],[8,[1,7]],[7,[5,7]],[6,[1,3]],[9,[]],[9,[4,7]],[8,[5,7]],[9,[1,6]],[9,[3,6]],[8,[1,3]],[7,[1,5]],[9,[3,7]],[9,[6,7]],[8,[3,6]],[9,[]],[9,[1,5]],[8,[1,4]],[7,[5,7]],[6,[1,7]],[5,[3,5]],[9,[4,7]],[9,[]],[8,[5,7]],[9,[1,6]],[9,[5,7]],[8,[6,7]],[7,[4,6]],[9,[1,5]],[9,[6,7]],[8,[1,6]],[9,[]],[9,[]],[8,[2,7]],[7,[2,6]],[6,[1,7]],[9,[1,6]],[9,[3,6]],[8,[1,3]],[9,[4,7]],[9,[]],[8,[2,7]],[7,[4,6]],[9,[1,7]],[9,[3,7]],[8,[1,3]],[9,[4,6]],[9,[]],[8,[2,6]],[7,[4,7]],[6,[6,7]],[5,[1,4]],[4,[4,5]],[9,[3,6]],[9,[4,7]],[8,[4,6]],[9,[3,7]],[9,[4,6]],[8,[4,7]],[7,[6,7]],[9,[3,7]],[9,[1,6]],[8,[1,3]],[9,[6,7]],[9,[1,3]],[8,[1,6]],[7,[3,6]],[6,[1,4]],[9,[4,6]],[9,[1,5]],[8,[4,5]],[9,[1,6]],[9,[4,5]],[8,[1,5]],[7,[1,4]],[9,[1,6]],[9,[4,7]],[8,[6,7]],[9,[1,4]],[9,[6,7]],[8,[4,7]],[7,[4,6]],[6,[5,7]],[5,[3,5]],[9,[]],[9,[]],[8,[]],[9,[1,4]],[9,[6,7]],[8,[1,6]],[7,[5,7]],[9,[6,7]],[9,[3,5]],[8,[3,6]],[9,[5,7]],[9,[3,6]],[8,[6,7]],[7,[3,7]],[6,[1,3]],[9,[3,7]],[9,[5,7]],[8,[3,5]],[9,[1,6]],[9,[]],[8,[1,4]],[7,[4,7]],[9,[4,7]],[9,[]],[8,[2,7]],[9,[1,6]],[9,[2,5]],[8,[1,5]],[7,[5,7]],[6,[4,5]],[5,[4,6]],[4,[1,7]],[3,[5,6]],[9,[]],[9,[]],[8,[]],[9,[]],[9,[]],[8,[1,5]],[7,[1,3]],[9,[1,3]],[9,[2,7]],[8,[1,7]],[9,[1,7]],[9,[2,3]],[8,[1,3]],[7,[3,7]],[6,[5,7]],[9,[5,7]],[9,[1,6]],[8,[1,5]],[9,[6,7]],[9,[1,5]],[8,[5,7]],[7,[1,7]],[9,[3,7]],[9,[6,7]],[8,[3,6]],[9,[]],[9,[]],[8,[]],[7,[5,7]],[6,[1,3]],[5,[3,5]],[9,[1,6]],[9,[3,6]],[8,[1,3]],[9,[2,7]],[9,[]],[8,[5,7]],[7,[2,3]],[9,[1,7]],[9,[6,7]],[8,[1,6]],[9,[]],[9,[2,3]],[8,[3,5]],[7,[2,7]],[6,[3,7]],[9,[6,7]],[9,[]],[8,[5,7]],[9,[6,7]],[9,[2,3]],[8,[3,6]],[7,[3,5]],[9,[]],[9,[4,7]],[8,[2,7]],[9,[3,5]],[9,[4,6]],[8,[3,6]],[7,[6,7]],[6,[3,7]],[5,[2,6]],[4,[2,5]],[9,[3,6]],[9,[1,7]],[8,[1,6]],[9,[3,7]],[9,[1,6]],[8,[1,7]],[7,[6,7]],[9,[6,7]],[9,[1,5]],[8,[1,6]],[9,[5,7]],[9,[1,6]],[8,[6,7]],[7,[1,7]],[6,[3,5]],[9,[1,6]],[9,[3,5]],[8,[3,6]],[9,[1,7]],[9,[]],[8,[2,7]],[7,[6,7]],[9,[2,3]],[9,[6,7]],[8,[3,6]],[9,[]],[9,[6,7]],[8,[5,7]],[7,[3,5]],[6,[3,7]],[5,[1,3]],[9,[1,3]],[9,[1,5]],[8,[3,5]],[9,[]],[9,[6,7]],[8,[2,7]],[7,[2,3]],[9,[1,5]],[9,[1,7]],[8,[5,7]],[9,[]],[9,[2,3]],[8,[3,6]],[7,[2,7]],[6,[3,7]],[9,[]],[9,[2,3]],[8,[3,5]],[9,[3,5]],[9,[4,7]],[8,[3,7]],[7,[2,7]],[9,[6,7]],[9,[3,7]],[8,[3,6]],[9,[]],[9,[]],[8,[4,5]],[7,[3,5]],[6,[5,7]],[5,[2,5]],[4,[2,6]],[3,[5,6]],[2,[2,4]],[1,[3,4]],[0,[1,2]]]
 
 
-
 // [[9,[1,3]],[9,[2,5]],[8,[4,5]],[9,[4,7]],[9,[4,5]],[8,[3,7]],[7,[5,7]],[9,[1,3]],[9,[1,7]],[8,[4,5]],[9,[2,3]],[9,[1,5]],[8,[2,5]],[7,[5,7]],[6,[2,7]],[9,[2,3]],[9,[5,7]],[8,[3,7]],[9,[6,7]],[9,[4,5]],[8,[5,7]],[7,[3,6]],[9,[2,5]],[9,[3,7]],[8,[2,3]],[9,[1,7]],[9,[4,5]],[8,[5,7]],[7,[1,3]],[6,[2,7]],[5,[3,5]],[9,[6,7]],[9,[2,7]],[8,[5,7]],[9,[6,7]],[9,[2,3]],[8,[3,6]],[7,[3,5]],[9,[3,5]],[9,[1,7]],[8,[2,7]],[9,[3,5]],[9,[1,6]],[8,[3,6]],[7,[6,7]],[6,[3,7]],[9,[1,6]],[9,[5,7]],[8,[6,7]],[9,[1,5]],[9,[6,7]],[8,[1,6]],[7,[1,7]],[9,[1,6]],[9,[3,7]],[8,[1,7]],[9,[1,7]],[9,[3,6]],[8,[1,6]],[7,[6,7]],[6,[3,5]],[5,[1,3]],[4,[2,6]],[9,[4,6]],[9,[3,5]],[8,[3,6]],[9,[4,7]],[9,[3,5]],[8,[2,7]],[7,[6,7]],[9,[2,3]],[9,[6,7]],[8,[3,6]],[9,[2,7]],[9,[6,7]],[8,[5,7]],[7,[3,5]],[6,[3,7]],[9,[2,3]],[9,[5,7]],[8,[3,5]],[9,[6,7]],[9,[1,7]],[8,[1,6]],[7,[2,7]],[9,[5,7]],[9,[3,5]],[8,[2,7]],[9,[3,6]],[9,[1,6]],[8,[1,3]],[7,[2,3]],[6,[3,7]],[5,[2,6]],[8,[2,6]],[9,[6,7]],[9,[3,7]],[8,[3,6]],[7,[5,7]],[9,[1,5]],[9,[6,7]],[8,[5,7]],[9,[1,6]],[9,[5,7]],[8,[1,5]],[7,[1,7]],[6,[1,3]],[8,[5,7]],[9,[2,3]],[9,[5,7]],[8,[1,3]],[7,[2,6]],[9,[1,3]],[9,[5,7]],[8,[3,7]],[9,[1,5]],[9,[3,7]],[8,[1,3]],[7,[1,7]],[6,[2,7]],[5,[3,5]],[4,[2,5]],[3,[5,6]],[9,[2,5]],[9,[1,6]],[8,[1,5]],[9,[2,6]],[9,[4,7]],[8,[2,7]],[7,[5,7]],[9,[2,6]],[9,[1,6]],[8,[1,4]],[9,[5,7]],[9,[3,7]],[8,[3,5]],[7,[4,7]],[6,[4,5]],[9,[3,6]],[9,[5,7]],[8,[6,7]],[9,[3,5]],[9,[6,7]],[8,[3,6]],[7,[3,7]],[9,[6,7]],[9,[1,4]],[8,[1,6]],[8,[2,6]],[7,[5,7]],[6,[1,3]],[5,[4,6]],[9,[6,7]],[9,[1,4]],[8,[4,7]],[9,[4,7]],[9,[1,6]],[8,[6,7]],[7,[4,6]],[9,[4,5]],[9,[1,6]],[8,[1,5]],[9,[1,5]],[9,[4,6]],[8,[4,5]],[7,[1,4]],[6,[5,7]],[9,[1,3]],[9,[6,7]],[8,[1,6]],[9,[1,6]],[9,[3,7]],[8,[1,3]],[7,[3,6]],[9,[4,6]],[9,[3,7]],[8,[4,7]],[9,[4,7]],[9,[3,6]],[8,[4,6]],[7,[6,7]],[6,[1,4]],[5,[3,5]],[4,[1,7]],[9,[3,5]],[9,[4,6]],[8,[2,6]],[9,[3,7]],[9,[1,7]],[8,[1,3]],[7,[4,7]],[9,[2,6]],[9,[4,7]],[8,[2,7]],[9,[3,6]],[9,[1,6]],[8,[1,3]],[7,[4,6]],[6,[6,7]],[9,[2,7]],[9,[2,7]],[8,[3,5]],[9,[6,7]],[9,[1,5]],[8,[1,6]],[7,[2,6]],[9,[5,7]],[9,[1,6]],[8,[6,7]],[9,[2,6]],[9,[4,7]],[8,[5,7]],[7,[4,6]],[6,[1,7]],[5,[1,4]],[9,[1,5]],[9,[2,6]],[8,[1,4]],[9,[6,7]],[9,[3,7]],[8,[3,6]],[7,[5,7]],[9,[3,6]],[9,[1,6]],[8,[1,3]],[9,[4,7]],[9,[2,6]],[8,[5,7]],[7,[1,5]],[6,[1,7]],[9,[3,7]],[9,[1,4]],[8,[1,3]],[9,[4,7]],[9,[1,3]],[8,[3,7]],[7,[1,7]],[8,[2,7]],[9,[1,5]],[9,[2,7]],[8,[1,3]],[7,[2,6]],[6,[5,7]],[5,[3,5]],[4,[4,5]],[3,[5,6]],[2,[2,4]],[8,[3,5]],[9,[4,7]],[9,[6,7]],[8,[4,6]],[7,[4,5]],[9,[2,3]],[9,[1,5]],[8,[2,5]],[9,[2,5]],[9,[1,3]],[8,[2,3]],[7,[3,5]],[6,[2,4]],[9,[3,5]],[9,[1,7]],[8,[3,7]],[9,[3,5]],[9,[1,4]],[8,[2,4]],[7,[4,7]],[8,[3,5]],[9,[1,5]],[9,[3,7]],[8,[1,7]],[7,[2,4]],[6,[1,3]],[5,[2,7]],[9,[4,5]],[9,[4,7]],[8,[3,7]],[9,[3,7]],[9,[4,5]],[8,[2,3]],[7,[2,4]],[9,[2,4]],[9,[3,7]],[8,[2,3]],[9,[1,7]],[9,[2,4]],[8,[1,5]],[7,[1,3]],[6,[2,7]],[9,[4,7]],[9,[1,3]],[8,[4,5]],[9,[1,3]],[9,[2,5]],[8,[4,5]],[7,[2,7]],[9,[2,7]],[9,[4,5]],[8,[2,5]],[9,[1,4]],[9,[2,7]],[8,[1,3]],[7,[1,5]],[6,[2,4]],[5,[3,5]],[4,[5,7]],[9,[2,4]],[9,[1,6]],[8,[1,5]],[9,[2,7]],[9,[3,7]],[8,[2,4]],[7,[5,7]],[9,[2,4]],[9,[1,6]],[8,[1,3]],[9,[4,7]],[9,[4,5]],[8,[5,7]],[7,[3,7]],[6,[3,5]],[9,[1,6]],[9,[2,4]],[8,[1,3]],[9,[4,7]],[9,[4,5]],[8,[5,7]],[7,[6,7]],[9,[2,4]],[9,[1,3]],[8,[1,4]],[9,[2,4]],[9,[6,7]],[8,[2,7]],[7,[4,7]],[6,[4,6]],[5,[3,6]],[9,[1,4]],[9,[6,7]],[8,[1,6]],[9,[1,6]],[9,[4,7]],[8,[1,4]],[7,[4,6]],[9,[3,6]],[9,[4,7]],[8,[3,7]],[9,[3,7]],[9,[4,6]],[8,[3,6]],[7,[6,7]],[6,[1,3]],[9,[3,5]],[9,[1,6]],[8,[1,5]],[9,[1,5]],[9,[3,6]],[8,[3,5]],[7,[1,3]],[9,[4,6]],[9,[1,3]],[8,[1,4]],[9,[3,6]],[9,[1,4]],[8,[4,6]],[7,[1,6]],[6,[4,5]],[5,[5,7]],[4,[1,7]],[3,[2,6]],[9,[3,6]],[9,[4,7]],[8,[4,6]],[9,[3,7]],[9,[4,6]],[8,[4,7]],[7,[6,7]],[9,[4,5]],[9,[4,7]],[8,[5,7]],[8,[5,7]],[7,[2,7]],[6,[2,6]],[9,[3,6]],[9,[5,7]],[8,[2,6]],[9,[4,7]],[9,[1,7]],[8,[1,4]],[7,[2,7]],[9,[3,7]],[9,[5,7]],[8,[2,7]],[9,[4,6]],[9,[1,6]],[8,[1,4]],[7,[2,6]],[6,[6,7]],[5,[2,4]],[9,[2,4]],[9,[3,6]],[8,[2,6]],[9,[4,7]],[9,[1,7]],[8,[1,4]],[7,[3,7]],[9,[2,4]],[9,[3,7]],[8,[2,7]],[9,[4,6]],[9,[1,6]],[8,[1,4]],[7,[3,6]],[6,[6,7]],[9,[2,7]],[9,[2,7]],[8,[2,4]],[9,[6,7]],[9,[1,5]],[8,[1,6]],[7,[2,6]],[9,[5,7]],[9,[1,6]],[8,[6,7]],[9,[2,4]],[9,[3,7]],[8,[5,7]],[7,[3,6]],[6,[1,7]],[5,[1,3]],[4,[2,3]],[9,[6,7]],[9,[4,5]],[8,[4,6]],[9,[5,7]],[9,[4,6]],[8,[6,7]],[7,[4,7]],[9,[4,5]],[9,[4,7]],[8,[5,7]],[8,[5,7]],[7,[2,7]],[6,[2,6]],[9,[2,6]],[9,[4,7]],[8,[2,7]],[9,[2,7]],[9,[4,6]],[8,[2,6]],[7,[6,7]],[9,[2,6]],[9,[1,7]],[8,[2,7]],[9,[2,7]],[9,[1,6]],[8,[2,6]],[7,[6,7]],[6,[1,4]],[5,[2,4]],[9,[2,6]],[9,[1,7]],[8,[2,7]],[9,[4,5]],[9,[1,7]],[8,[4,7]],[7,[2,4]],[9,[1,5]],[9,[4,7]],[8,[1,7]],[9,[2,4]],[9,[4,7]],[8,[3,7]],[7,[1,3]],[6,[1,4]],[9,[6,7]],[9,[4,7]],[8,[4,6]],[9,[1,5]],[9,[1,5]],[8,[2,4]],[7,[4,5]],[9,[6,7]],[9,[1,7]],[8,[1,6]],[9,[2,6]],[9,[4,5]],[8,[2,4]],[7,[1,5]],[6,[1,4]],[5,[5,7]],[4,[2,5]],[3,[3,5]],[2,[5,6]],[1,[3,4]],[9,[4,5]],[9,[2,6]],[8,[2,4]],[9,[1,7]],[9,[6,7]],[8,[1,6]],[7,[1,5]],[9,[1,5]],[9,[1,5]],[8,[2,4]],[9,[4,7]],[9,[6,7]],[8,[4,6]],[7,[4,5]],[6,[1,4]],[9,[4,7]],[9,[2,4]],[8,[3,7]],[9,[4,7]],[9,[1,5]],[8,[1,7]],[7,[1,3]],[9,[1,7]],[9,[4,5]],[8,[4,7]],[9,[1,7]],[9,[2,6]],[8,[2,7]],[7,[2,4]],[6,[1,4]],[5,[5,7]],[9,[1,6]],[9,[2,7]],[8,[2,6]],[9,[1,7]],[9,[2,6]],[8,[2,7]],[7,[6,7]],[9,[4,6]],[9,[2,7]],[8,[2,6]],[9,[4,7]],[9,[2,6]],[8,[2,7]],[7,[6,7]],[6,[1,4]],[8,[5,7]],[9,[4,7]],[9,[4,5]],[8,[5,7]],[7,[2,7]],[9,[4,6]],[9,[5,7]],[8,[6,7]],[9,[4,5]],[9,[6,7]],[8,[4,6]],[7,[4,7]],[6,[2,6]],[5,[2,4]],[4,[2,5]],[9,[3,7]],[9,[2,4]],[8,[5,7]],[9,[1,6]],[9,[5,7]],[8,[6,7]],[7,[3,6]],[9,[1,5]],[9,[6,7]],[8,[1,6]],[9,[2,7]],[9,[2,7]],[8,[2,4]],[7,[2,6]],[6,[1,7]],[9,[1,6]],[9,[4,6]],[8,[1,4]],[9,[3,7]],[9,[2,4]],[8,[2,7]],[7,[3,6]],[9,[1,7]],[9,[4,7]],[8,[1,4]],[9,[3,6]],[9,[2,4]],[8,[2,6]],[7,[3,7]],[6,[6,7]],[5,[1,3]],[9,[1,6]],[9,[4,6]],[8,[1,4]],[9,[5,7]],[9,[3,7]],[8,[2,7]],[7,[2,6]],[9,[1,7]],[9,[4,7]],[8,[1,4]],[9,[5,7]],[9,[3,6]],[8,[2,6]],[7,[2,7]],[6,[6,7]],[8,[5,7]],[9,[4,7]],[9,[4,5]],[8,[5,7]],[7,[2,7]],[9,[4,6]],[9,[3,7]],[8,[4,7]],[9,[4,7]],[9,[3,6]],[8,[4,6]],[7,[6,7]],[6,[2,6]],[5,[2,4]],[4,[2,3]],[3,[3,5]],[9,[1,4]],[9,[3,6]],[8,[4,6]],[9,[1,3]],[9,[4,6]],[8,[1,4]],[7,[1,6]],[9,[3,6]],[9,[1,5]],[8,[3,5]],[9,[1,6]],[9,[3,5]],[8,[1,5]],[7,[1,3]],[6,[4,5]],[9,[4,6]],[9,[3,7]],[8,[3,6]],[9,[4,7]],[9,[3,6]],[8,[3,7]],[7,[6,7]],[9,[4,7]],[9,[1,6]],[8,[1,4]],[9,[6,7]],[9,[1,4]],[8,[1,6]],[7,[4,6]],[6,[1,3]],[5,[5,7]],[9,[6,7]],[9,[2,4]],[8,[2,7]],[9,[1,3]],[9,[2,4]],[8,[1,4]],[7,[4,7]],[9,[4,5]],[9,[4,7]],[8,[5,7]],[9,[2,4]],[9,[1,6]],[8,[1,3]],[7,[6,7]],[6,[4,6]],[9,[4,5]],[9,[4,7]],[8,[5,7]],[9,[1,6]],[9,[2,4]],[8,[1,3]],[7,[3,7]],[9,[3,7]],[9,[2,7]],[8,[2,4]],[9,[1,6]],[9,[2,4]],[8,[1,5]],[7,[5,7]],[6,[3,5]],[5,[3,6]],[4,[1,7]],[9,[2,7]],[9,[1,4]],[8,[1,3]],[9,[4,5]],[9,[2,7]],[8,[2,5]],[7,[1,5]],[9,[2,5]],[9,[1,3]],[8,[4,5]],[9,[1,3]],[9,[4,7]],[8,[4,5]],[7,[2,7]],[6,[2,4]],[9,[2,4]],[9,[1,7]],[8,[1,5]],[9,[3,7]],[9,[2,4]],[8,[2,3]],[7,[1,3]],[9,[4,5]],[9,[3,7]],[8,[2,3]],[9,[4,7]],[9,[4,5]],[8,[3,7]],[7,[2,4]],[6,[2,7]],[5,[3,5]],[9,[3,7]],[9,[1,5]],[8,[1,7]],[8,[3,5]],[7,[2,4]],[9,[1,4]],[9,[3,5]],[8,[2,4]],[9,[1,7]],[9,[3,5]],[8,[3,7]],[7,[4,7]],[6,[1,3]],[9,[1,3]],[9,[2,5]],[8,[2,3]],[9,[1,5]],[9,[2,3]],[8,[2,5]],[7,[3,5]],[9,[6,7]],[9,[4,7]],[8,[4,6]],[8,[3,5]],[7,[4,5]],[6,[2,4]],[5,[2,7]],[4,[5,7]],[3,[2,6]],[2,[5,6]],[9,[2,7]],[9,[1,5]],[8,[1,3]],[8,[2,7]],[7,[2,6]],[9,[1,3]],[9,[4,7]],[8,[3,7]],[9,[1,4]],[9,[3,7]],[8,[1,3]],[7,[1,7]],[6,[5,7]],[9,[2,6]],[9,[4,7]],[8,[5,7]],[9,[1,6]],[9,[3,6]],[8,[1,3]],[7,[1,5]],[9,[3,7]],[9,[6,7]],[8,[3,6]],[9,[2,6]],[9,[1,5]],[8,[1,4]],[7,[5,7]],[6,[1,7]],[5,[3,5]],[9,[4,7]],[9,[2,6]],[8,[5,7]],[9,[1,6]],[9,[5,7]],[8,[6,7]],[7,[4,6]],[9,[1,5]],[9,[6,7]],[8,[1,6]],[9,[2,7]],[9,[2,7]],[8,[3,5]],[7,[2,6]],[6,[1,7]],[9,[1,6]],[9,[3,6]],[8,[1,3]],[9,[4,7]],[9,[2,6]],[8,[2,7]],[7,[4,6]],[9,[1,7]],[9,[3,7]],[8,[1,3]],[9,[4,6]],[9,[3,5]],[8,[2,6]],[7,[4,7]],[6,[6,7]],[5,[1,4]],[4,[4,5]],[9,[3,6]],[9,[4,7]],[8,[4,6]],[9,[3,7]],[9,[4,6]],[8,[4,7]],[7,[6,7]],[9,[3,7]],[9,[1,6]],[8,[1,3]],[9,[6,7]],[9,[1,3]],[8,[1,6]],[7,[3,6]],[6,[1,4]],[9,[4,6]],[9,[1,5]],[8,[4,5]],[9,[1,6]],[9,[4,5]],[8,[1,5]],[7,[1,4]],[9,[1,6]],[9,[4,7]],[8,[6,7]],[9,[1,4]],[9,[6,7]],[8,[4,7]],[7,[4,6]],[6,[5,7]],[5,[3,5]],[8,[2,6]],[9,[1,4]],[9,[6,7]],[8,[1,6]],[7,[5,7]],[9,[6,7]],[9,[3,5]],[8,[3,6]],[9,[5,7]],[9,[3,6]],[8,[6,7]],[7,[3,7]],[6,[1,3]],[9,[3,7]],[9,[5,7]],[8,[3,5]],[9,[1,6]],[9,[2,6]],[8,[1,4]],[7,[4,7]],[9,[4,7]],[9,[2,6]],[8,[2,7]],[9,[1,6]],[9,[2,5]],[8,[1,5]],[7,[5,7]],[6,[4,5]],[5,[4,6]],[4,[1,7]],[3,[5,6]],[9,[3,7]],[9,[1,5]],[8,[1,3]],[9,[5,7]],[9,[1,3]],[8,[3,7]],[7,[1,7]],[9,[5,7]],[9,[2,3]],[8,[1,3]],[8,[5,7]],[7,[2,6]],[6,[2,7]],[9,[5,7]],[9,[1,6]],[8,[1,5]],[9,[6,7]],[9,[1,5]],[8,[5,7]],[7,[1,7]],[9,[3,7]],[9,[6,7]],[8,[3,6]],[8,[2,6]],[7,[5,7]],[6,[1,3]],[5,[3,5]],[9,[1,6]],[9,[3,6]],[8,[1,3]],[9,[3,5]],[9,[5,7]],[8,[2,7]],[7,[2,3]],[9,[1,7]],[9,[6,7]],[8,[1,6]],[9,[5,7]],[9,[2,3]],[8,[3,5]],[7,[2,7]],[6,[3,7]],[9,[6,7]],[9,[2,7]],[8,[5,7]],[9,[6,7]],[9,[2,3]],[8,[3,6]],[7,[3,5]],[9,[3,5]],[9,[4,7]],[8,[2,7]],[9,[3,5]],[9,[4,6]],[8,[3,6]],[7,[6,7]],[6,[3,7]],[5,[2,6]],[4,[2,5]],[9,[3,6]],[9,[1,7]],[8,[1,6]],[9,[3,7]],[9,[1,6]],[8,[1,7]],[7,[6,7]],[9,[6,7]],[9,[1,5]],[8,[1,6]],[9,[5,7]],[9,[1,6]],[8,[6,7]],[7,[1,7]],[6,[3,5]],[9,[1,6]],[9,[3,5]],[8,[3,6]],[9,[1,7]],[9,[3,5]],[8,[2,7]],[7,[6,7]],[9,[2,3]],[9,[6,7]],[8,[3,6]],[9,[2,7]],[9,[6,7]],[8,[5,7]],[7,[3,5]],[6,[3,7]],[5,[1,3]],[9,[4,5]],[9,[1,7]],[8,[5,7]],[9,[3,7]],[9,[2,5]],[8,[2,3]],[7,[1,3]],[9,[4,5]],[9,[6,7]],[8,[5,7]],[9,[5,7]],[9,[2,3]],[8,[3,7]],[7,[3,6]],[6,[2,7]],[9,[1,5]],[9,[2,3]],[8,[2,5]],[9,[1,7]],[9,[1,3]],[8,[4,5]],[7,[5,7]],[9,[4,5]],[9,[4,7]],[8,[3,7]],[9,[2,5]],[9,[1,3]],[8,[4,5]],[7,[5,7]],[6,[2,7]],[5,[3,5]],[4,[2,6]],[3,[5,6]],[2,[2,4]],[1,[3,4]],[0,[1,2]]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function perm(xs) {
+//     let ret = [];
+  
+//     for (let i = 0; i < xs.length; i = i + 1) {
+//         let rest = perm(xs.slice(0, i).concat(xs.slice(i + 1)));
+
+//         if ( ! rest.length) {
+//             ret.push([xs[i]])
+//         } else {
+//             for (let j = 0; j < rest.length; j = j + 1) {
+//                 ret.push([xs[i]].concat(rest[j]))
+//             }
+//         }
+//     }
+//     return ret;
+// }
+
+// function iota(n) {
+//     var res = [];
+//     for (let i = 0; i < n; ++i) {
+//         res.push(i + 1);
+//     }
+//     return res;
+// }
+
+// function gen_pairs(n) {
+//     var pairs = []
+//     for (let i = 0; i < n; ++i) {
+//         for (let j = 0; j < n; ++j) {
+//             if (i < j) {
+//                 pairs.push([i + 1, j + 1]);
+//             }
+//         }
+//     }
+//     return pairs;
+// }
+
+// function gen_empty_array(n) {
+//     var res = [];
+//     var pairs_n = (n * n - n) / 2;
+//     for (let i = 0; i < pairs_n; i++) {
+//         res.push(false);
+//     }
+//     return res;
+// }
+
+// function remove_values(values, node) {
+//     // console.log(values);
+//     // console.log(node);
+//     var res = [];
+//     for (let i = 0; i < values.length; i++) {
+//         const element = values[i];
+//         var ia = element.indexOf(node[0]);
+//         var ib = element.indexOf(node[1]);
+//         // console.log(ia);
+//         // console.log(ib);
+//         if (ia < ib) {
+//             res.push(element);
+//         }
+//     }
+
+//     return res;
+// }
+
+// function half(n) {
+//     return Math.floor(n / 2);    
+// }
+
+// function all_median(n, values) {
+//     var h = half(n);
+//     var res = [];
+//     for (let i = 0; i < values.length; i++) {
+//         const element = values[i];
+//         res.push(element[h]);
+//     }
+
+//     res = [...new Set(res)];
+//     res.sort();
+//     return res;
+// }
+
+// function all_median_equals(n, values) {
+//     if (values.length <= 1) {
+//         return true;
+//     }
+
+//     var h = half(n);
+//     var m = values[0][h];
+
+//     for (let i = 1; i < values.length; i++) {
+//         const element = values[i];
+
+//         if (element[h] != m) {
+//             return false;
+//         }
+//     }
+
+//     return true;
+// }
+
+// function all_equal(values) {
+//     if (values.length <= 1) {
+//         return true;
+//     }
+
+//     var m = values[0];
+
+//     for (let i = 1; i < values.length; i++) {
+//         const element = values[i];
+
+//         if (element != m) {
+//             return false;
+//         }
+//     }
+
+//     return true;
+// }
+
+
+// function remove_level(nodes, level) {
+//     var res = [];
+//     for (let i = 0; i < nodes.length; i++) {
+//         const element = nodes[i];
+//         if (element[0] < level) {
+//             res.push(element);
+//         }
+//     }
+//     return res;
+// }
+
+// function print_bool_arr(arr) {
+//     var res = [];
+//     for (let i = 0; i < arr.length; i++) {
+//         const element = arr[i];
+//         var x = element ? 1 : 0;    
+//         res.push(x);
+//     }
+//     console.log(res.join(''));
+// }
+
+// function pair_equal(p, m0, m1) {
+//     if (p[0] == m0 && p[1] == m1) return true;
+//     if (p[1] == m0 && p[0] == m1) return true;
+//     return false;
+// }
+
+// // reemplazar esta funcion.
+// // quiero los pares aun no usados que...
+// // contengan los numeros que estan en medians
+// function get_pairs(pairs, used, medians) {
+//     var tmp = [];
+//     for (let i = 0; i < used.length; i++) {
+//         const u = used[i];
+//         tmp.push([u, false, false]);
+//     }
+
+//     for (let i = 0; i < medians.length; i++) {
+//         const m = medians[i];
+        
+//         for (let j = 0; j < tmp.length; j++) {
+//             const p = pairs[j];
+            
+//             if (m == p[0]) {
+//                 tmp[j][1] = true;
+//             }
+//             if (m == p[1]) {
+//                 tmp[j][2] = true;
+//             }
+
+//         }
+//     }
+
+//     var res = [];
+//     for (let i = 0; i < tmp.length; i++) {
+//         const t = tmp[i];
+//         if ( ! t[0] && t[1] && t[2]) {
+//             res.push(i);
+//         }
+//     }
+//     return res;
+// }
+
+
+// function get_pairs(pairs, used, medians) {
+//     if (medians.length <= 1) {
+//         console.log();
+//         return [];
+//     }
+
+//     // medians.sort();
+
+//     var res = [];
+
+//     var i0 = 0;
+//     var i1 = 1;
+
+//     while (true) {
+//         if (i1 >= medians.length) {
+//             break;
+//         }
+
+//         var m0 = medians[i0];
+//         var m1 = medians[i1];
+    
+//         for (let i = 0; i < pairs.length; i++) {
+//             const p = pairs[i];
+//             const u = used[i];
+
+//             if ( ! u && pair_equal(p, m0, m1)) {
+//                 res.push(i);
+//                 break;
+//             }
+//         }
+//         ++i0;
+//         ++i1;
+//     }
+//     return res;
+// }

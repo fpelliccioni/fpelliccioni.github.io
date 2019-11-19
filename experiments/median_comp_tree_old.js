@@ -1,113 +1,6 @@
+const common = require('./common');
+
 var __try = 0;
-
-function perm(xs) {
-    let ret = [];
-  
-    for (let i = 0; i < xs.length; i = i + 1) {
-        let rest = perm(xs.slice(0, i).concat(xs.slice(i + 1)));
-
-        if ( ! rest.length) {
-            ret.push([xs[i]])
-        } else {
-            for (let j = 0; j < rest.length; j = j + 1) {
-                ret.push([xs[i]].concat(rest[j]))
-            }
-        }
-    }
-    return ret;
-}
-
-function iota(n) {
-    var res = [];
-    for (let i = 0; i < n; ++i) {
-        res.push(i + 1);
-    }
-    return res;
-}
-
-function gen_pairs(n) {
-    var pairs = []
-    for (let i = 0; i < n; ++i) {
-        for (let j = 0; j < n; ++j) {
-            if (i < j) {
-                pairs.push([i + 1, j + 1]);
-            }
-        }
-    }
-    return pairs;
-}
-
-function gen_empty_array(n) {
-    var res = [];
-    var pairs_n = (n * n - n) / 2;
-    for (let i = 0; i < pairs_n; i++) {
-        res.push(false);
-    }
-    return res;
-}
-
-function remove_values(values, node) {
-    // console.log(values);
-    // console.log(node);
-    var res = [];
-    for (let i = 0; i < values.length; i++) {
-        const element = values[i];
-        var ia = element.indexOf(node[0]);
-        var ib = element.indexOf(node[1]);
-        // console.log(ia);
-        // console.log(ib);
-        if (ia < ib) {
-            res.push(element);
-        }
-    }
-
-    return res;
-}
-
-function half(n) {
-    return Math.floor(n / 2);    
-}
-
-function all_median_equals(n, values) {
-    if (values.length <= 1) {
-        return true;
-    }
-
-    var h = half(n);
-    var m = values[0][h];
-
-    for (let i = 1; i < values.length; i++) {
-        const element = values[i];
-
-        if (element[h] != m) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-// function remove_level(nodes, level) {
-//     var res = [];
-//     for (let i = 0; i < nodes.length; i++) {
-//         const element = nodes[i];
-//         if (element[0] < level) {
-//             res.push(element);
-//         }
-//     }
-//     return res;
-// }
-
-function print_bool_arr(arr) {
-    
-    var res = [];
-    for (let i = 0; i < arr.length; i++) {
-        const element = arr[i];
-        var x = element ? 1 : 0;    
-        res.push(x);
-    }
-    console.log(res.join(''));
-}
 
 function recursive(level, n, values, pairs, used_par, cmp_n, cmp_max) {
     var nodes = [];
@@ -121,35 +14,35 @@ function recursive(level, n, values, pairs, used_par, cmp_n, cmp_max) {
         var selected_left = pairs[first_not_used];
         var selected_right = selected_left.slice().reverse();
         
-        var new_values_left = remove_values(values, selected_left);
-        var new_values_right = remove_values(values, selected_right);
+        var new_values_left = common.remove_values(values, selected_left);
+        var new_values_right = common.remove_values(values, selected_right);
 
         ++cmp_n;
         ++__try;
 
         if (__try % 100000 == 0) {
             console.log(__try);
-            print_bool_arr(used);
+            common.print_bool_arr(used);
         }
 
-        if (level == 7) {
-            if (selected_left[0] == 5 && selected_left[1] == 7) {
-                console.log();
-            }
-        }
+        // if (level == 7) {
+        //     if (selected_left[0] == 5 && selected_left[1] == 7) {
+        //         console.log();
+        //     }
+        // }
 
-        if (__try >= 574300000) {
-            // [7,[5,7]]
-            if (level == 7) {
-                if (selected_left[0] == 5 && selected_left[1] == 7) {
-                    console.log();
-                }
-            }
-        }
+        // if (__try >= 574300000) {
+        //     // [7,[5,7]]
+        //     if (level == 7) {
+        //         if (selected_left[0] == 5 && selected_left[1] == 7) {
+        //             console.log();
+        //         }
+        //     }
+        // }
 
 
         
-        if (all_median_equals(n, new_values_left) && all_median_equals(n, new_values_right)) {
+        if (common.all_median_equals(n, new_values_left) && common.all_median_equals(n, new_values_right)) {
             return [true, [[level, selected_left]]];
             //TODO: que nivel tenemos siempre acá?
         }
@@ -203,57 +96,60 @@ function tree(n, comps) {
     // var pairs = gen_pairs(n);
 
     // pairs for n=7
-    // var pairs =[ [ 1, 2 ],
-    //              [ 3, 4 ],
-    //              [ 2, 4 ],
-    //              [ 5, 6 ],
-    //              [ 2, 6 ],
-    //              [ 3, 5 ],
-    //              [ 2, 7 ],
-    //              [ 5, 7 ],
-    //              [ 4, 5 ],
-    //              [ 1, 3 ],
-    //              [ 1, 4 ],
-    //              [ 1, 5 ],
-    //              [ 1, 6 ],
-    //              [ 1, 7 ],
-    //              [ 2, 3 ],
-    //              [ 2, 5 ],
-    //              [ 3, 6 ],
-    //              [ 3, 7 ],
-    //              [ 4, 6 ],
-    //              [ 4, 7 ],
-    //              [ 6, 7 ] ];
+    // var pairs = [
+    //     [1, 2],
+    //     [3, 4],
+    //     [2, 4],
+    //     [5, 6],
+    //     [2, 6],
+    //     [3, 5],
+    //     [2, 7],
+    //     [5, 7],
+    //     [4, 5],
+    //     [1, 3],
+    //     [1, 4],
+    //     [1, 5],
+    //     [1, 6],
+    //     [1, 7],
+    //     [2, 3],
+    //     [2, 5],
+    //     [3, 6],
+    //     [3, 7],
+    //     [4, 6],
+    //     [4, 7],
+    //     [6, 7]
+    // ];
 
     var pairs = [
-                [ 1, 2],
-                [ 3, 4],
-                [ 2, 4],
-                [ 5, 6],
-                [ 2, 5],
-                [ 3, 5],
-                [ 1, 3],
-                [ 5, 7],
-                [ 2, 6],
-                [ 3, 6],
-                [ 2, 7 ],
-                [ 4, 5 ],
-                [ 1, 4 ],
-                [ 1, 5 ],
-                [ 1, 6 ],
-                [ 1, 7 ],
-                 [ 2, 3 ],
-                 [ 3, 7 ],
-                 [ 4, 6 ],
-                 [ 4, 7 ],
-                 [ 6, 7 ] ];
+        [1, 2],
+        [3, 4],
+        [2, 4],
+        [5, 6],
+        [2, 5],
+        [3, 5],
+        [1, 3],
+        [5, 7],
+        [2, 6],
+        [3, 6],
+        [2, 7],
+        [4, 5],
+        [1, 4],
+        [1, 5],
+        [1, 6],
+        [1, 7],
+        [2, 3],
+        [3, 7],
+        [4, 6],
+        [4, 7],
+        [6, 7]
+    ];
 
              
     
     // console.log(JSON.stringify(pairs));
   
-    var used_pairs = gen_empty_array(n);
-    var possible_values = perm(iota(n));
+    var used_pairs = common.gen_empty_array(n);
+    var possible_values = common.perm(common.iota(n));
     // console.log(pairs);
              
     var res = recursive(0, n, possible_values, pairs, used_pairs, 0, comps);
