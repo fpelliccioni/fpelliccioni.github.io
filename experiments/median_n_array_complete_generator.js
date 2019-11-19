@@ -1,5 +1,25 @@
 const common = require('./common');
 
+function complete_levels(level, comps) {
+    if (level == comps) {
+        return [
+            [level, []],
+            [level, []]
+        ];
+    }
+
+    var arr_if = complete_levels(level + 1, comps);
+    var arr_else = complete_levels(level + 1, comps);
+    
+    var arr = [
+        [level, []],
+        ...arr_if,
+        [level, []],
+        ...arr_else
+    ];
+
+    return arr;
+}
 
 function generate_code(n, values, nodes, index, level, comps) {
     const indent_level = ' '.repeat((level + 1) * 4);
@@ -9,7 +29,14 @@ function generate_code(n, values, nodes, index, level, comps) {
     if (mtemp != null) {
         // var code = `${indent_level}return ${common.get_variable_name(mtemp)};`
         // return code;
-        return [[level, mtemp]];
+
+        if (level < 8) {
+            console.log()
+        }
+
+        var remainder = complete_levels(level + 1, comps);
+
+        return [[level, mtemp],...remainder];
     }
 
     var pair_left = nodes[index][1];
