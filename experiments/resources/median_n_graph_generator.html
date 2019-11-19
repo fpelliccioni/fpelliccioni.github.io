@@ -15,7 +15,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 </head>
 
 <body>
-    n: <input type="text" id="n_text" value="3" onkeyup="generate_event()"> 
+    n: <input type="text" id="n_text" value="7" onkeyup="generate_event()"> 
     <a href="" id="download_svg" download>Download SVG</a>
     <!-- <button id="create_svg" onclick="download('median.svg', 'image/svg+xml')">Create SVG</button> -->
 
@@ -69,10 +69,12 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             download_svg.href = URL.createObjectURL(file);
             download_svg.download = name;
         }
+        
         const rectWidth = 40;
         const rectHeight = 60;
         const fontSize = 32;
         const defaultElementColor = '#bfffb3'
+
         function perm(xs) {
             let ret = [];
         
@@ -131,9 +133,11 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             }
             return m;
         }
+
         function get_variable_name(i) {
             return String.fromCharCode(97 + i - 1);
         }
+
         function generate_graph(parent, left, n, values, nodes, index, level, comps) {
             var mtemp = all_median_equals(n, values);
             if (mtemp != null) {
@@ -141,9 +145,9 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
                 // return graph;
                 // console.log("epaaaa!");
                 if (left) {
-                    draw_left_leaf(parent, get_variable_name(mtemp), level, comps);
+                    draw_left_leaf(index, parent, get_variable_name(mtemp), level, comps);
                 } else {
-                    draw_right_leaf(parent, get_variable_name(mtemp), level, comps);
+                    draw_right_leaf(index, parent, get_variable_name(mtemp), level, comps);
                 }
                 return;
             }
@@ -160,12 +164,12 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
                 var text = `${get_variable_name(pair_left[0])}:${get_variable_name(pair_left[1])}`;
                 
                 if (left) {
-                    var node = draw_left_non_leaf(parent, text, level, comps);
+                    var node = draw_left_non_leaf(index, parent, text, level, comps);
                 } else {
-                    var node = draw_right_non_leaf(parent, text, level, comps);
+                    var node = draw_right_non_leaf(index, parent, text, level, comps);
                 }
-                draw_left_leaf(node, get_variable_name(median_left), level + 1, comps);
-                draw_right_leaf(node, get_variable_name(median_right), level + 1, comps);
+                draw_left_leaf(null, node, get_variable_name(median_left), level + 1, comps);
+                draw_right_leaf(null, node, get_variable_name(median_right), level + 1, comps);
                 return;
             }
             if (nodes[index + 1][0] != level + 1){
@@ -173,12 +177,12 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             }
             var text = `${get_variable_name(pair_left[0])}:${get_variable_name(pair_left[1])}`;
             if (parent == null) {
-                var node = draw_non_leaf(two.width / 2, rectWidth, text);
+                var node = draw_non_leaf(index, two.width / 2, rectWidth, text);
             } else {
                 if (left) {
-                    var node = draw_left_non_leaf(parent, text, level, comps);
+                    var node = draw_left_non_leaf(index, parent, text, level, comps);
                 } else {
-                    var node = draw_right_non_leaf(parent, text, level, comps);
+                    var node = draw_right_non_leaf(index, parent, text, level, comps);
                 }
             }
             var level_inverse = comps - level - 1;
@@ -189,24 +193,40 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             var node_left = generate_graph(node, true, n, new_values_left, nodes, index + 1, level + 1, comps);
             var node_right = generate_graph(node, false, n, new_values_right, nodes, index + else_inc, level + 1, comps);
         }
-        function draw_non_leaf(x, y, text, radius = rectWidth, color = defaultElementColor) {
+
+        function draw_non_leaf(index, x, y, text, radius = rectWidth, color = defaultElementColor) {
             var circ = two.makeCircle(x, y /*+ 45*/, radius);
             circ.fill = color;
             circ.stroke = 'black'
             circ.linewidth = 1;
             foreground.add(circ);
+
+            var textI = two.makeText(index, x, y - 25);
+            textI.family = "FiraCode"; //"Source Code Pro";
+            textI.size = fontSize / 2.5;
+            foreground.add(textI);
+
             var textE = two.makeText(text, x, y /*+ 45*/ + 1.5);
             textE.family = "FiraCode"; //"Source Code Pro";
             textE.size = fontSize
             foreground.add(textE);
             return circ;
         }
-        function draw_leaf(x, y, text, w = rectWidth, h = rectHeight, color = defaultElementColor) {
+
+        function draw_leaf(index, x, y, text, w = rectWidth, h = rectHeight, color = defaultElementColor) {
             var rect = two.makeRectangle(x, y /*+ 45*/, w, h);
             rect.fill = color;
             rect.stroke = 'black'
             rect.linewidth = 1;
             foreground.add(rect);
+
+            if (index != null) {
+                var textI = two.makeText(index, x, y - 22);
+                textI.family = "FiraCode"; //"Source Code Pro";
+                textI.size = fontSize / 2.5;
+                foreground.add(textI);
+            }
+
             var textE = two.makeText(text, x, y /*+ 45*/ + 1.5);
             textE.family = "FiraCode"; //"Source Code Pro";
             textE.size = fontSize
@@ -214,6 +234,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             // console.log(rect.translation.x)
             return rect;
         }
+
         function draw_line(a, b, color = defaultElementColor) {
             // console.log(a)
             // console.log(a.x)
@@ -224,7 +245,8 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             background.add(line);
             return line;
         }
-        function draw_left_leaf(p, text, level, max_levels, color = defaultElementColor) {
+
+        function draw_left_leaf(index, p, text, level, max_levels, color = defaultElementColor) {
             var xxx = (max_levels - level) * 50
             if (xxx == 0) {
                 xxx = 25;
@@ -234,36 +256,40 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             // console.log(level)
             // console.log(xxx)
             // var c = draw_leaf(p.translation.x - 25, p.translation.y + 80, text, undefined, undefined, color);
-            var c = draw_leaf(p.translation.x - xxx, p.translation.y + 90, text, undefined, undefined, color);
+            var c = draw_leaf(index, p.translation.x - xxx, p.translation.y + 90, text, undefined, undefined, color);
             draw_line(p, c);
             return c;
         }
-        function draw_right_leaf(p, text, level, max_levels, color = defaultElementColor) {
+
+        function draw_right_leaf(index, p, text, level, max_levels, color = defaultElementColor) {
             var xxx = (max_levels - level) * 50
             if (xxx == 0) {
                 xxx = 25;
             }
             // var c = draw_leaf(p.translation.x + 25, p.translation.y + 80, text, undefined, undefined, color);
-            var c = draw_leaf(p.translation.x + xxx, p.translation.y + 90, text, undefined, undefined, color);
+            var c = draw_leaf(index, p.translation.x + xxx, p.translation.y + 90, text, undefined, undefined, color);
             draw_line(p, c);
             return c;
         }
-        function draw_left_non_leaf(p, text, level, max_levels, color = defaultElementColor) {
+
+        function draw_left_non_leaf(index, p, text, level, max_levels, color = defaultElementColor) {
             // var xxx = (max_levels - level) * 50
             var xxx = Math.pow(2, max_levels - level) * 25
             // console.log(text, max_levels, level, xxx)
-            var c = draw_non_leaf(p.translation.x - xxx, p.translation.y + 90, text);
+            var c = draw_non_leaf(index, p.translation.x - xxx, p.translation.y + 90, text);
             draw_line(p, c);
             return c;
         }
-        function draw_right_non_leaf(p, text, level, max_levels, color = defaultElementColor) {
+
+        function draw_right_non_leaf(index, p, text, level, max_levels, color = defaultElementColor) {
             // var xxx = (max_levels - level) * 50
             var xxx = Math.pow(2, max_levels - level) * 25
             // console.log(text, max_levels, level, xxx)
-            var c = draw_non_leaf(p.translation.x + xxx, p.translation.y + 90, text);
+            var c = draw_non_leaf(index, p.translation.x + xxx, p.translation.y + 90, text);
             draw_line(p, c);
             return c;
         }
+
         var twp_width = document.getElementById('main-container').offsetWidth
         var two_height = document.getElementById('main-container').offsetHeight
         var two = new Two({
@@ -303,6 +329,9 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             // },
         };
         generate_event();
+
+        // console.log(data[7].tests[1004])
+
         // var n = 3;
         // var comps = 3;
         // var tests = [[2,[2,3]],[2,[2,3]],[1,[1,3]],[2,[2,3]],[2,[2,3]],[1,[1,3]],[0,[1,2]]];
