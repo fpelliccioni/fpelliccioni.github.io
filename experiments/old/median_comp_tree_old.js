@@ -1,4 +1,6 @@
-const common = require('./common');
+// Este algoritmo retorna un arbol que al tratar de generarlo da error!
+
+const common = require('../common');
 
 var __try = 0;
 
@@ -179,7 +181,7 @@ main();
 
 
 // --------------------------------------------------------------------
-
+// Corrida 2019-Nov-19
 // 633700000
 // 111100101001001010010
 // true
