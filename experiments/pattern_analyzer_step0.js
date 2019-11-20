@@ -68,8 +68,10 @@ function replaces(str, pattern) {
 // var raw_pattern = "[9,[3,7]],[10,3],[10,7]";
 
 // var raw_pattern = "[8,[4,5]],[9,4],[],[],[9,5],[],[]";
-var raw_pattern = "[8,[4,5]],[9,5],[],[],[9,4],[],[]";
-
+// var raw_pattern = "[8,[4,5]],[9,5],[],[],[9,4],[],[]";
+// var raw_pattern = "[8,[3,6]],[9,[3,7]],[10,3],[10,7],[9,[6,7]],[10,6],[10,7]"
+// var raw_pattern = "[8,[3,7]],[9,[4,7]],[10,4],[10,7],[9,[3,5]],[10,3],[10,5]"
+var raw_pattern = "[8,[3,5]],[9,[2,3]],[10,3],[10,2],[9,5],[],[]"
 
 var pattern = raw_pattern.replaceAll("[", '\\[');
     pattern = pattern.replaceAll("]", '\\]');
