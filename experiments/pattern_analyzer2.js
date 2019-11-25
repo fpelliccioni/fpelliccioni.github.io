@@ -1,4 +1,5 @@
 const common = require('./common');
+const tao = require('./stable_sort');
 
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;
@@ -76,7 +77,7 @@ function add_to_dic(dic, x) {
     }
 }
 
-function get_variables(pattern_arr) {
+function get_variables_old(pattern_arr) {
     var dic = {};
     for (let i = 0; i < pattern_arr.length; i++) {
         const element = pattern_arr[i];
@@ -88,21 +89,35 @@ function get_variables(pattern_arr) {
             } else {
                 add_to_dic(dic, element[1]);
             }
-
-
-            // if (element[1].length == 1) {
-            //     add_to_dic(dic, element[1][0]);
-            // } else if (element[1].length == 2) {
-            //     add_to_dic(dic, element[1][0]);
-            //     add_to_dic(dic, element[1][1]);
-            // } else {
-            //     console.log()
-            // }
-
         }
     }
     return dic;
 }
+
+function get_variables(precons, pattern_arr) {
+    var dic = {};
+
+    for (let i = 0; i < precons.length; i++) {
+        const element = precons[i];
+        add_to_dic(dic, element[0]);
+        add_to_dic(dic, element[1]);
+    }
+
+    for (let i = 0; i < pattern_arr.length; i++) {
+        const element = pattern_arr[i];
+        if (element.length > 1) {
+
+            if (Array.isArray(element[1])) {
+                add_to_dic(dic, element[1][0]);
+                add_to_dic(dic, element[1][1]);
+            } else {
+                add_to_dic(dic, element[1]);
+            }
+        }
+    }
+    return dic;
+}
+
 
 function analyze_pattern(pattern_arr) {
     // get_variables(pattern_arr);
@@ -154,20 +169,6 @@ ${indent_level}}`;
     
     return code;
 }
-
-
-// function get_ancestor(index, level, data) {
-//     var even = index % 2 == 0;
-//     while (index >= 0) {
-//         const element = data[index];
-//         if (element.length > 0) {
-//             if (element[0] == level - 1) {
-//                 return index;
-//             }
-//         }
-//         --index;
-//     }
-// }
 
 class Node  { 
     constructor(data) { 
@@ -244,14 +245,6 @@ function get_level_nodes(root, level, data) {
 function exists_vars(elem, vars) {
     if (elem.length <= 1) return false;
 
-    // if (elem[1].length == 1) {
-    //     var ret = elem[1][0] in vars;
-    //     return ret
-    // } else if (elem[1].length == 2) {
-    //     var ret = (elem[1][0] in vars) && (elem[1][1] in vars);
-    //     return ret
-    // }
-
     if (Array.isArray(elem[1])) {
         var ret = (elem[1][0] in vars) && (elem[1][1] in vars);
         return ret
@@ -294,12 +287,16 @@ function get_preconditions(node, vars, data) {
         }
         res.push(pair);
     }
+
+    tao.stable_sort(res, function(a, b){return a[1] < b[1];});
+    tao.stable_sort(res, function(a, b){return a[0] < b[0];});
+
     return res;
 }
 
 function get_precondition_str(preconds, vars) {
     var res = "";
-    
+
     for (let i = 0; i < precons.length; i++) {
         const p = precons[i];
         const left = get_variable_name_translate(p[0], vars);
@@ -402,7 +399,6 @@ function unlink_tree(node, x) {
     }
 }
 
-
 function where_is_final_backwards(roots, node, final, count, branch) {
     for (let i = 0; i < node.less.length; i++) {
         const n = node.less[i];
@@ -484,14 +480,14 @@ var data = JSON.parse(data_s);
 // console.log(data)
 // console.log(data.length)
 
-var level = 7;
+var level = 5;
 var comps = 10;
 var len = Math.pow(2, comps - level + 1) - 1;
 
 var root = generate_tree(data, 0, 0, comps);
 var level_nodes = get_level_nodes(root, level, data);
 
-for (let i = 0; i < level_nodes.length; i++) {
+for (let i = 5; i < level_nodes.length; i++) {
     const node = level_nodes[i];
     const index = node.data;
 
@@ -503,8 +499,10 @@ for (let i = 0; i < level_nodes.length; i++) {
 
     // console.log(JSON.stringify(pattern_arr));
 
-    var vars = get_variables(pattern_arr);
-    var precons = get_preconditions(node, vars, data);
+    var vars_old = get_variables_old(pattern_arr);
+    var precons = get_preconditions(node, vars_old, data);
+   
+    var vars = get_variables(precons, pattern_arr);
     var preconds_str = get_precondition_str(precons, vars);
     var params = get_parameter_list(vars);
     var p = analyze_pattern(pattern_arr);
