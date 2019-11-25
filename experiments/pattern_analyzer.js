@@ -34,6 +34,11 @@ var pattern_select_1_4_ab_cd__4 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(
 
 var pattern_select_1_4_ab_cd__5 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[\k<n1>\,(?<n2>[0-9]+)\]\]\,\[(?<l2>[0-9]+)\,\k<n1>\]\,\[\k<l2>\,\k<n2>\]\,\[\k<l1>\,\[(?<n3>[0-9]+)\,\k<n0>\]\]\,\[\k<l2>\,\k<n3>\]\,\[\k<l2>\,\k<n0>\]`
 
+var pattern_select_1_4_ab_cd__6 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[(?<n2>[0-9]+)\,\k<n0>\]\]\,\[(?<l2>[0-9]+)\,\k<n0>\]\,\[\k<l2>\,\k<n2>\]\,\[\k<l1>\,\[\k<n1>\,(?<n3>[0-9]+)\]\]\,\[\k<l2>\,\k<n3>\]\,\[\k<l2>\,\k<n1>\]`
+
+
+
+
 
 
 
@@ -55,14 +60,38 @@ var pattern_select_2_4_ab_cd__3 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(
 
 
 
-var pattern_select_0_3 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[\k<n0>\,(?<n2>[0-9]+)\]\]\,\[(?<l2>[0-9]+)\,\k<n0>\]\,\[\k<l2>\,\k<n2>\]\,\[\k<l1>\,\[\k<n1>\,\k<n2>\]\]\,\[\k<l2>\,\k<n1>\]\,\[\k<l2>\,\k<n2>\]`
+var pattern_select_0_3__1 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[\k<n0>\,(?<n2>[0-9]+)\]\]\,\[(?<l2>[0-9]+)\,\k<n0>\]\,\[\k<l2>\,\k<n2>\]\,\[\k<l1>\,\[\k<n1>\,\k<n2>\]\]\,\[\k<l2>\,\k<n1>\]\,\[\k<l2>\,\k<n2>\]`
 
-var pattern_select_2_3 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[(?<n2>[0-9]+)\,\k<n1>\]\]\,\[(?<l2>[0-9]+)\,\k<n1>\]\,\[\k<l2>\,\k<n2>\]\,\[\k<l1>\,\[\k<n2>\,\k<n0>\]\]\,\[\k<l2>\,\k<n0>\]\,\[\k<l2>\,\k<n2>\]`
+var pattern_select_0_3__2 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[(?<n2>[0-9]+)\,\k<n0>\]\]\,\[(?<l2>[0-9]+)\,\k<n2>\]\,\[\k<l2>\,\k<n0>\]\,\[\k<l1>\,\[\k<n2>\,\k<n1>\]\]\,\[\k<l2>\,\k<n2>\]\,\[\k<l2>\,\k<n1>\]`
+
+var pattern_select_2_3__1 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[(?<n2>[0-9]+)\,\k<n1>\]\]\,\[(?<l2>[0-9]+)\,\k<n1>\]\,\[\k<l2>\,\k<n2>\]\,\[\k<l1>\,\[\k<n2>\,\k<n0>\]\]\,\[\k<l2>\,\k<n0>\]\,\[\k<l2>\,\k<n2>\]`
+
+var pattern_select_2_3__2 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[\k<n1>\,(?<n2>[0-9]+)\]\]\,\[(?<l2>[0-9]+)\,\k<n2>\]\,\[\k<l2>\,\k<n1>\]\,\[\k<l1>\,\[\k<n0>\,\k<n2>\]\]\,\[\k<l2>\,\k<n2>\]\,\[\k<l2>\,\k<n0>\]`
+
 
 var pattern_select_1_3_ab__1 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[(?<n2>[0-9]+)\,\k<n0>\]\]\,\[(?<l2>[0-9]+)\,\k<n0>\]\,\[\k<l2>\,\k<n2>\]\,\[\k<l1>\,\k<n1>\]\,\[\]\,\[\]`
     
 var pattern_select_1_3_ab__2 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[(?<n2>[0-9]+)\,\k<n1>\]\]\,\[(?<l2>[0-9]+)\,\k<n2>\]\,\[\k<l2>\,\k<n1>\]\,\[\k<l1>\,\k<n0>\]\,\[\]\,\[\]`
 
+var pattern_select_1_3_ab__3 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\k<n0>\]\,\[\]\,\[\]\,\[\k<l1>\,\[(?<n2>[0-9]+)\,\k<n1>\]\]\,\[(?<l2>[0-9]+)\,\k<n1>\]\,\[\k<l2>\,\k<n2>\]`
+
+var pattern_select_1_3_ab__4 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[\k<n0>\,(?<n2>[0-9]+)\]\]\,\[(?<l2>[0-9]+)\,\k<n2>\]\,\[\]\,\[\]\,\[\k<l2>\,\k<n0>\]\,\[\]\,\[\]\,\[\k<l1>\,\k<n1>\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\]`
+
+var pattern_select_1_3_ab__5 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\k<n1>\]\,\[\]\,\[\]\,\[\k<l1>\,\[\k<n0>\,(?<n2>[0-9]+)\]\]\,\[(?<l2>[0-9]+)\,\k<n0>\]\,\[\k<l2>\,\k<n2>\]`
+
+var pattern_select_1_3_ab__6 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[\k<n0>\,(?<n2>[0-9]+)\]\]\,\[(?<l2>[0-9]+)\,\k<n2>\]\,\[\k<l2>\,\k<n0>\]\,\[\k<l1>\,\k<n1>\]\,\[\]\,\[\]`
+
+var pattern_select_1_3_ab__7 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\k<n0>\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\k<l1>\,\[(?<n2>[0-9]+)\,\k<n1>\]\]\,\[(?<l2>[0-9]+)\,\k<n1>\]\,\[\]\,\[\]\,\[\k<l2>\,\k<n2>\]\,\[\]\,\[\]`
+
+var pattern_select_1_3_ab__8 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\k<n1>\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\k<l1>\,\[\k<n0>\,(?<n2>[0-9]+)\]\]\,\[(?<l2>[0-9]+)\,\k<n0>\]\,\[\]\,\[\]\,\[\k<l2>\,\k<n2>\]\,\[\]\,\[\]`
+
+var pattern_select_1_3_ab__9 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[(?<n2>[0-9]+)\,\k<n1>\]\]\,\[(?<l2>[0-9]+)\,\k<n2>\]\,\[\]\,\[\]\,\[\k<l2>\,\k<n1>\]\,\[\]\,\[\]\,\[\k<l1>\,\k<n0>\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\]\,\[\]`
+
+var pattern_select_1_3_ab__10 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\k<n1>\]\,\[\]\,\[\]\,\[\k<l1>\,\[(?<n2>[0-9]+)\,\k<n0>\]\]\,\[(?<l2>[0-9]+)\,\k<n2>\]\,\[\k<l2>\,\k<n0>\]`
+
+var pattern_select_1_5_ab_cd_ce__1 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[(?<n2>[0-9]+)\,\k<n1>\]\]\,\[(?<l2>[0-9]+)\,\k<n2>\]\,\[\]\,\[\]\,\[\k<l2>\,\k<n1>\]\,\[\]\,\[\]\,\[\k<l1>\,\[\k<n0>\,(?<n3>[0-9]+)\]\]\,\[\k<l2>\,\[\k<n0>\,(?<n4>[0-9]+)\]\]\,\[(?<l3>[0-9]+)\,\k<n0>\]\,\[\k<l3>\,\k<n4>\]\,\[\k<l2>\,\[\k<n3>\,\k<n4>\]\]\,\[\k<l3>\,\k<n3>\]\,\[\k<l3>\,\k<n4>\]`
+
+var pattern_select_2_5_ab_ac_db_ec__1 = String.raw`\[(?<l0>[0-9]+)\,\[(?<n0>[0-9]+)\,(?<n1>[0-9]+)\]\]\,\[(?<l1>[0-9]+)\,\[(?<n2>[0-9]+)\,\k<n1>\]\]\,\[(?<l2>[0-9]+)\,\[(?<n3>[0-9]+)\,\k<n1>\]\]\,\[(?<l3>[0-9]+)\,\k<n3>\]\,\[\k<l3>\,\k<n1>\]\,\[\k<l2>\,\[\k<n2>\,(?<n4>[0-9]+)\]\]\,\[\k<l3>\,\k<n2>\]\,\[\k<l3>\,\k<n4>\]\,\[\k<l1>\,\[\k<n2>\,\k<n4>\]\]\,\[\k<l2>\,\[\k<n0>\,\k<n2>\]\]\,\[\k<l3>\,\k<n2>\]\,\[\k<l3>\,\k<n0>\]\,\[\k<l2>\,\k<n4>\]\,\[\]\,\[\]`
 
 
 
@@ -110,6 +139,34 @@ function replace_2(str, pattern, len, newvalue, i0, i1) {
 
     return str;
 }
+
+function replace_5(str, pattern, len, newvalue, i0, i1, i2, i3, i4) {
+    
+    var m;
+    do {
+        var re = new RegExp(pattern, "g");
+        m = re.exec(str);
+		if (m) {
+            var complete = m[0];
+
+            var n0 = m.groups["n0"];
+            var n1 = m.groups["n1"];
+            var n2 = m.groups["n2"];
+            var n3 = m.groups["n3"];
+            var n4 = m.groups["n4"];
+
+            var vars = [n0, n1, n2, n3, n4];
+
+			var dummy = ",[]".repeat(len - 1);
+
+            tmp = `['x',${len},'${newvalue}(${get_variable_name(vars[i0])},${get_variable_name(vars[i1])},${get_variable_name(vars[i2])},${get_variable_name(vars[i3])},${get_variable_name(vars[i4])})']${dummy}`
+            str = str.replace(complete, tmp)
+        }
+    } while (m);
+
+    return str;
+}
+
 
 function replace_4(str, pattern, len, newvalue, i0, i1, i2, i3) {
     // var re = new RegExp(pattern, "g");
@@ -191,31 +248,41 @@ s = data_n7;
 // console.log(xxx.length)
 
 
-s = replace_4(s, pattern1n2, 15, 'select_1_4_ab', 2, 3, 0, 1);
-s = replace_4(s, pattern3n3, 15, 'select_1_4_ab', 2, 3, 0, 1);
-s = replace_4(s, pattern4n4, 15, 'select_2_4_ab', 3, 2, 0, 1);
-s = replace_4(s, pattern5n6, 15, 'select_2_4_ab', 3, 2, 0, 1);
+// s = replace_5(s, pattern_select_1_5_ab_cd_ce__1, 15, 'select_1_5_ab_cd_ce', 2, 3, 0, 1, 4);
+s = replace_5(s, pattern_select_2_5_ab_ac_db_ec__1, 15, 'select_2_5_ab_ac_db_ec', 0, 4, 3, 2, 1);
 
-s = replace_4(s, pattern_select_1_4_ab_cd__1, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
-s = replace_4(s, pattern_select_1_4_ab_cd__2, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
-s = replace_4(s, pattern_select_1_4_ab_cd__3, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
-s = replace_4(s, pattern_select_1_4_ab_cd__4, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
-s = replace_4(s, pattern_select_1_4_ab_cd__5, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
+// s = replace_4(s, pattern1n2, 15, 'select_1_4_ab', 2, 3, 0, 1);
+// s = replace_4(s, pattern3n3, 15, 'select_1_4_ab', 2, 3, 0, 1);
+// s = replace_4(s, pattern4n4, 15, 'select_2_4_ab', 3, 2, 0, 1);
+// s = replace_4(s, pattern5n6, 15, 'select_2_4_ab', 3, 2, 0, 1);
 
-s = replace_4(s, pattern_select_2_4_ab_cd__1, 7, 'select_2_4_ab_cd', 3, 0, 2, 1);
-s = replace_4(s, pattern_select_2_4_ab_cd__2, 7, 'select_2_4_ab_cd', 3, 0, 2, 1);
-s = replace_4(s, pattern_select_2_4_ab_cd__3, 7, 'select_2_4_ab_cd', 3, 0, 2, 1);
+// s = replace_4(s, pattern_select_1_4_ab_cd__1, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
+// s = replace_4(s, pattern_select_1_4_ab_cd__2, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
+// s = replace_4(s, pattern_select_1_4_ab_cd__3, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
+// s = replace_4(s, pattern_select_1_4_ab_cd__4, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
+// s = replace_4(s, pattern_select_1_4_ab_cd__5, 7, 'select_1_4_ab_cd', 0, 2, 1, 3);
+// s = replace_4(s, pattern_select_1_4_ab_cd__6, 7, 'select_1_4_ab_cd', 3, 0, 2, 1);
 
-s = replace_3(s, pattern_select_0_3, 7, 'select_0_3', 0, 1, 2);
-s = replace_3(s, pattern_select_2_3, 7, 'select_0_3', 0, 1, 2);
-s = replace_3(s, pattern_select_1_3_ab__1, 7, 'select_1_3_ab', 2, 1, 0);
-s = replace_3(s, pattern_select_1_3_ab__2, 7, 'select_1_3_ab', 0, 2, 1);
+// s = replace_4(s, pattern_select_2_4_ab_cd__1, 7, 'select_2_4_ab_cd', 3, 0, 2, 1);
+// s = replace_4(s, pattern_select_2_4_ab_cd__2, 7, 'select_2_4_ab_cd', 3, 0, 2, 1);
+// s = replace_4(s, pattern_select_2_4_ab_cd__3, 7, 'select_2_4_ab_cd', 3, 0, 2, 1);
 
+// s = replace_3(s, pattern_select_0_3__1, 7, 'select_0_3', 0, 1, 2);
+// s = replace_3(s, pattern_select_0_3__2, 7, 'select_0_3', 0, 1, 2);
 
+// s = replace_3(s, pattern_select_2_3__1, 7, 'select_2_3', 0, 1, 2);
+// s = replace_3(s, pattern_select_2_3__2, 7, 'select_2_3', 0, 1, 2);
 
-
-
-
+// s = replace_3(s, pattern_select_1_3_ab__1,  7,  'select_1_3_ab', 2, 1, 0);
+// s = replace_3(s, pattern_select_1_3_ab__2,  7,  'select_1_3_ab', 0, 2, 1);
+// s = replace_3(s, pattern_select_1_3_ab__3,  7,  'select_1_3_ab', 2, 0, 1);
+// s = replace_3(s, pattern_select_1_3_ab__4,  15, 'select_1_3_ab', 2, 1, 0);
+// s = replace_3(s, pattern_select_1_3_ab__5,  7,  'select_1_3_ab', 2, 1, 0);
+// s = replace_3(s, pattern_select_1_3_ab__6,  7,  'select_1_3_ab', 2, 1, 0);
+// s = replace_3(s, pattern_select_1_3_ab__7,  15, 'select_1_3_ab', 2, 0, 1);
+// s = replace_3(s, pattern_select_1_3_ab__8,  15, 'select_1_3_ab', 2, 0, 1);
+// s = replace_3(s, pattern_select_1_3_ab__9,  15, 'select_1_3_ab', 2, 0, 1);
+// s = replace_3(s, pattern_select_1_3_ab__10, 7,  'select_1_3_ab', 1, 2, 0);
 
 
 
