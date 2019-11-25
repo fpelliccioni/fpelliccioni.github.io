@@ -484,33 +484,12 @@ var data = JSON.parse(data_s);
 // console.log(data)
 // console.log(data.length)
 
-var level = 0;
+var level = 7;
 var comps = 10;
-
-// var indexes = [];
-
-// for (let i = 0; i < data.length; i++) {
-//     const element = data[i];
-//     if (element.length > 0) {
-//         if (element[0] == level) {
-//             // console.log(i);
-//             indexes.push(i);
-//         }
-//     }
-// }
-// console.log(indexes.length);
-
-var prev_index = 0;
 var len = Math.pow(2, comps - level + 1) - 1;
 
 var root = generate_tree(data, 0, 0, comps);
-// console.log(root);
-
 var level_nodes = get_level_nodes(root, level, data);
-// console.log(level_nodes)
-// console.log(level_nodes.length)
-// console.log(level_nodes[0])
-
 
 for (let i = 0; i < level_nodes.length; i++) {
     const node = level_nodes[i];
@@ -519,28 +498,16 @@ for (let i = 0; i < level_nodes.length; i++) {
     const pattern_arr = []    
     for (let j = 0; j < len; j++) {
         const element = data[index + j];
-        // console.log(element);
         pattern_arr.push(element);
     }
 
-    // console.log(pattern_arr)
-    console.log(JSON.stringify(pattern_arr));
+    // console.log(JSON.stringify(pattern_arr));
 
     var vars = get_variables(pattern_arr);
-    // console.log(vars);
-
     var precons = get_preconditions(node, vars, data);
-    // console.log(precons)
-
     var preconds_str = get_precondition_str(precons, vars);
-    // console.log(preconds_str)
-
     var params = get_parameter_list(vars);
-    // console.log(params)
-
     var p = analyze_pattern(pattern_arr);
-    // console.log(p);
-
 
     var n = Object.keys(vars).length;
     var comps2 = comps - level;
@@ -549,8 +516,6 @@ for (let i = 0; i < level_nodes.length; i++) {
     // tests.reverse();
     // console.log(JSON.stringify(tests));
 
-    // var code = generate_code(n, pattern_arr, 0, 0, comps2, vars);
-    // console.log(code);
 
     var constraints_res = get_constraints(precons, pattern_arr, comps2);
     var pos = analysis(n, vars, constraints_res.c, constraints_res.final);
@@ -558,7 +523,10 @@ for (let i = 0; i < level_nodes.length; i++) {
     var function_name = `select_${pos}_${n}_${preconds_str}(${params});`.replace("_(", "(");
     console.log(function_name);
 
-    // break;
+    var code = generate_code(n, pattern_arr, 0, 0, comps2, vars);
+    console.log(code);
+
+    break;
 }
 
 
