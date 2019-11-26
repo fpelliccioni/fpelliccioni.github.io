@@ -1,3 +1,15 @@
+function equal_array(a, b) {
+    if (a.length != b.length) return false;
+
+    for (let i = 0; i < a.length; ++i) {
+        if (a[i] != b[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 function perm(xs) {
     let ret = [];
   
@@ -34,6 +46,19 @@ function remove_values(values, node) {
         // console.log(ia);
         // console.log(ib);
         if (ia < ib) {
+            res.push(element);
+        }
+    }
+
+    return res;
+}
+
+function ensure_values(values, node) {
+    var res = [];
+    for (let i = 0; i < values.length; i++) {
+        const element = values[i];
+
+        if (element[node[0] - 1] <= element[node[1] - 1]) {
             res.push(element);
         }
     }
@@ -244,6 +269,7 @@ module.exports = {
     all_median: all_median,
     get_variable_name: get_variable_name,
     remove_values: remove_values,
+    ensure_values: ensure_values,
     gen_pairs: gen_pairs,
     gen_empty_array: gen_empty_array,
     all_equal: all_equal,
@@ -255,6 +281,7 @@ module.exports = {
     array_random: array_random,
     generate_data_random: generate_data_random,
     copy_if: copy_if,
+    equal_array: equal_array,
 
 }
 

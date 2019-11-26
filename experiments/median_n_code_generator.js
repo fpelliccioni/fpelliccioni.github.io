@@ -97,6 +97,30 @@ function main() {
     // tests.reverse();
     // console.log(JSON.stringify(tests));
 
+
+    // --------------------------------------------------------------------------
+    // n=7 ESPECIAL
+
+    var tests = [[0,[3,6]],[1,[3,7]],[2,[3,4]],[3,[4,6]],[4,[4,7]],[4,[6,7]],[3,[3,5]],[4,[]],[4,[]],[2,[1,4]],[3,[4,7]],[4,[5,7]],[4,[3,4]],[3,[1,7]],[4,[5,7]],[4,[]],[1,[4,7]],[2,[6,7]],[3,[4,6]],[4,[5,6]],[4,[3,4]],[3,[1,7]],[4,[5,7]],[4,[]],[2,[6,7]],[3,[2,7]],[4,[3,7]],[4,[]],[3,[4,6]],[4,[1,4]],[4,[2,6]]]
+
+    var n = 7;
+    // var comps = 10;
+    var comps = 5;
+
+    // --------------------------------------------------------------------------
+
+    var values = common.perm(common.iota(n));
+    values = common.remove_values(values, [1,3]);
+    values = common.remove_values(values, [1,5]);
+    values = common.remove_values(values, [1,6]);
+    values = common.remove_values(values, [2,3]);
+    values = common.remove_values(values, [2,4]);
+    values = common.remove_values(values, [4,5]);
+
+
+    
+
+
     var code = generate_code(n, values, tests, 0, 0, comps);
     console.log(code);
 }
