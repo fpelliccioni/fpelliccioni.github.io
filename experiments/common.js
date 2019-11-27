@@ -70,13 +70,12 @@ function half(n) {
     return Math.floor(n / 2);    
 }
 
-function all_median_equals(n, values) {
+function all_selection_equals(n, values, s) {
     if (values.length == 0) {
         return null;
     }
 
-    var h = half(n);
-    var m = values[0][h];
+    var m = values[0][s];
 
     if (values.length == 1) {
         return m;
@@ -85,12 +84,36 @@ function all_median_equals(n, values) {
     for (let i = 1; i < values.length; i++) {
         const element = values[i];
 
-        if (element[h] != m) {
+        if (element[s] != m) {
             return null;
         }
     }
 
     return m;
+}
+
+function all_median_equals(n, values) {
+    return all_selection_equals(n, values, half(n));
+    // if (values.length == 0) {
+    //     return null;
+    // }
+
+    // var h = half(n);
+    // var m = values[0][h];
+
+    // if (values.length == 1) {
+    //     return m;
+    // }
+
+    // for (let i = 1; i < values.length; i++) {
+    //     const element = values[i];
+
+    //     if (element[h] != m) {
+    //         return null;
+    //     }
+    // }
+
+    // return m;
 }
 
 function get_variable_name(i) {
@@ -118,17 +141,32 @@ function gen_empty_array(n) {
     return res;
 }
 
-function all_median(n, values) {
+function all_selection(n, values, s) {
     var h = half(n);
     var res = [];
     for (let i = 0; i < values.length; i++) {
         const element = values[i];
-        res.push(element[h]);
+        res.push(element[s]);
     }
 
     res = [...new Set(res)];
     res.sort();
     return res;
+}
+
+function all_median(n, values) {
+    return all_selection(n, values, half(n));
+
+    // var h = half(n);
+    // var res = [];
+    // for (let i = 0; i < values.length; i++) {
+    //     const element = values[i];
+    //     res.push(element[h]);
+    // }
+
+    // res = [...new Set(res)];
+    // res.sort();
+    // return res;
 }
 
 function all_equal(values) {
@@ -266,7 +304,9 @@ module.exports = {
     iota: iota,
     half: half,
     all_median_equals: all_median_equals,
+    all_selection_equals: all_selection_equals,
     all_median: all_median,
+    all_selection: all_selection,
     get_variable_name: get_variable_name,
     remove_values: remove_values,
     ensure_values: ensure_values,

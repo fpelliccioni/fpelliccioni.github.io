@@ -182,7 +182,7 @@ function recursive_v3(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
 
 }
 
-function recursive_v2(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cmp_max) {
+function recursive_v2(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cmp_max, s) {
     var nodes = [];
 
     var used = used_par.slice();
@@ -190,7 +190,9 @@ function recursive_v2(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
     // var first_not_used_min = used.indexOf(false);
     // var first_not_used = first_not_used_min;
 
-    var medians_all = common.all_median(n, values);
+    // var medians_all = common.all_median(n, values);
+    var medians_all = common.all_selection(n, values, s);
+
     var possible_pairs = common.get_pairs(pairs, used, medians_all);
 
     if (medians_all.length <= 1) {
@@ -230,9 +232,8 @@ function recursive_v2(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
         //     }
         // }
 
-
-        var medians_left = common.all_median(n, new_values_left);
-        var medians_right = common.all_median(n, new_values_right);
+        var medians_left = common.all_selection(n, new_values_left, s);
+        var medians_right = common.all_selection(n, new_values_right, s);
 
         // console.log(`level: ${level}. new_values_left: ${new_values_left.length}. new_values_right: ${new_values_right.length}. medians_left: ${medians_left.length}. medians_right: ${medians_right.length}`)
 
@@ -268,7 +269,7 @@ function recursive_v2(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
         if (medians_left.length == 1) {
             var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
         } else {
-            var res_left = recursive_v2(suggested_pairs, level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max);
+            var res_left = recursive_v2(suggested_pairs, level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max, s);
             if ( ! res_left[0]) {
                 used[first_not_used] = false;
                 --cmp_n;
@@ -279,7 +280,7 @@ function recursive_v2(suggested_pairs, level, n, values, pairs, used_par, cmp_n,
         if (medians_right.length == 1) {
             var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
         } else {
-            var res_right = recursive_v2(suggested_pairs, level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max);
+            var res_right = recursive_v2(suggested_pairs, level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max, s);
             if (!res_right[0]) {
                 used[first_not_used] = false;
                 --cmp_n;
@@ -482,60 +483,109 @@ function tree(n, comps) {
 
 
 
+    // // ---------------------------------------------------------------------------------
+    // // pairs for n=7 CASO ESPECIAL... necesito select_3_7_ac_bc_de_ae_bd_af()
+    // // filtros: ac ae af bc bd  de
+
+    // // var pairs = common.gen_pairs(n);
+    // var pairs = [[1,2],[1,4],[1,7],[2,5],[2,6],[2,7],[3,4],[3,5],[3,6],[3,7],[4,6],[4,7],[5,6],[5,7],[6,7],
+    //                 [1,3],
+    //                 [1,5],
+    //                 [1,6],
+    //                 [2,3],
+    //                 [2,4],
+    //                 [4,5],   
+    //                 ];
+
+    // var suggested_pairs_7 = [];
+
+    // var used_pairs = common.gen_empty_array(n);
+    // var possible_values = common.perm(common.iota(n));
+
+    // possible_values = common.remove_values(possible_values, [1,3]);
+    // possible_values = common.remove_values(possible_values, [1,5]);
+    // possible_values = common.remove_values(possible_values, [1,6]);
+    // possible_values = common.remove_values(possible_values, [2,3]);
+    // possible_values = common.remove_values(possible_values, [2,4]);
+    // possible_values = common.remove_values(possible_values, [4,5]);
+
+    // // var zzz = common.equal_array(possible_values2, possible_values);
+    // comps = 5;
+
+    // var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
+
+    // // ---------------------------------------------------------------------------------
+    // // pairs for n=7 CASO ESPECIAL... necesito select_4_7_abd_cd_ce_fb()
+    // // filtros: ab bd cd ce fb
+
+    // // var pairs = common.gen_pairs(n);
+    // // console.log(JSON.stringify(pairs));
+    
+    
+    // var pairs = [[1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 3], [2, 5], [2, 7], [3, 6], [3, 7], [4, 5], [4, 6], [4, 7], [5, 6], [5, 7], [6, 7],
+    //                 [1,2],
+    //                 [2,4],
+    //                 [3,4],
+    //                 [3,5],
+    //                 [6,2],   
+    // ];
+    
+    // var suggested_pairs_7 = [];
+
+    // var used_pairs = common.gen_empty_array(n);
+    // var possible_values = common.perm(common.iota(n));
+
+    // possible_values = common.remove_values(possible_values, [1,2]);
+    // possible_values = common.remove_values(possible_values, [2,4]);
+    // possible_values = common.remove_values(possible_values, [3,4]);
+    // possible_values = common.remove_values(possible_values, [3,5]);
+    // possible_values = common.remove_values(possible_values, [6,2]);
+
+    // comps = 5;
+    // var s = common.half(n);
+    // var s = 4;
+
+    // var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps, s);
+    // // var res = recursive_v3(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
+
+    // // --------------------------------------------------------------------------
+
+
     // ---------------------------------------------------------------------------------
-    // pairs for n=7 CASO ESPECIAL... necesito select_3_7_ac_bc_de_ae_bd_af()
-    // filtros: ac ae af bc bd  de
-
-    // var pairs = [
-    //     [1, 2],
-    //     [3, 4],
-    //     [2, 4],
-    //     [5, 6],
-    //     [2, 6],
-    //     [2, 5],
-    //     [5, 7],
-    //     [3, 5],
-    //     [4, 5],
-    //     [3, 6],
-    //     [3, 7],
-    //     [6, 7],
-    //     [2, 7],
-    //     [4, 7],
-    //     [2, 3],
-    //     [1, 7],
-    //     [1, 5],
-    //     [1, 3],
-    //     [1, 6],
-    //     [4, 6],
-    //     [1, 4]];
-
-    // var pairs = common.gen_pairs(n);
-    var pairs = [[1,2],[1,4],[1,7],[2,5],[2,6],[2,7],[3,4],[3,5],[3,6],[3,7],[4,6],[4,7],[5,6],[5,7],[6,7],
-                    [1,3],
-                    [1,5],
-                    [1,6],
-                    [2,3],
+    // pairs for n=7 CASO ESPECIAL... necesito select_4_7_abd_cd_ec_fb()
+    // filtros: ab bd cd ec fb
+    
+    var pairs = [[1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 3], [2, 5], [2, 7], [3, 6], [3, 7], [4, 5], [4, 6], [4, 7], [5, 6], [5, 7], [6, 7],
+                    [1,2],
                     [2,4],
-                    [4,5],   
-                    ];
-
+                    [3,4],
+                    [5,3],
+                    [6,2],   
+    ];
+    
     var suggested_pairs_7 = [];
 
     var used_pairs = common.gen_empty_array(n);
     var possible_values = common.perm(common.iota(n));
 
-    possible_values = common.remove_values(possible_values, [1,3]);
-    possible_values = common.remove_values(possible_values, [1,5]);
-    possible_values = common.remove_values(possible_values, [1,6]);
-    possible_values = common.remove_values(possible_values, [2,3]);
+    possible_values = common.remove_values(possible_values, [1,2]);
     possible_values = common.remove_values(possible_values, [2,4]);
-    possible_values = common.remove_values(possible_values, [4,5]);
+    possible_values = common.remove_values(possible_values, [3,4]);
+    possible_values = common.remove_values(possible_values, [5,3]);
+    possible_values = common.remove_values(possible_values, [6,2]);
 
-    // var zzz = common.equal_array(possible_values2, possible_values);
     comps = 5;
+    var s = common.half(n);
+    var s = 4;
 
-    var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
+    var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps, s);
     // var res = recursive_v3(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
+
+    // --------------------------------------------------------------------------
+
+
+
+
 
     // --------------------------------------------------------------------------
 
