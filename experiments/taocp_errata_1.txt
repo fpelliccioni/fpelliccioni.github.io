@@ -1,0 +1,69 @@
+to:  taocp@cs.stanford.edu
+subject: Possible errata in TAoCP Volume 3 Second Edition
+
+
+
+Dear Professor Knuth,
+
+First of all I want to thank you for your immense work. I really enjoy reading your books.
+
+I think I found an error in TAoCP Volume 3 Second Edition.
+On page 212 you describe the Doren's method for V4(8).
+After seven steps we have the following:
+
+        5 --- 6 --- 8
+              |     |
+             |     |
+            |      7
+           |
+     1 --- 2 --- 4
+                 |
+                |
+                3
+
+Then you say that X1 and X8 are out of contention.
+
+I think X8 is effectively out of the question, but not X1.
+ 
+If I draw it this way:
+
+          3 --- 4
+                |
+               |
+              |
+        1 --- 2 --- 6 --- 8
+                    |     |
+                   |     |
+                  |     |
+                  5     7
+
+It is obvious that X1, X2 and X6 are smaller than X8 and so are X5 and X7, therefore, there are 5 elements that are effectively smaller than X8, so at most X8 may be in a sixth position.
+
+But in the case of X1, we cannot ensure that X3, X5 and X7 are greater than X1.
+
+Given the following example:
+    X1=1, X2=2, X3=0, X4=3, X5=0, X6=3, X7=0, X8=4
+
+We can verify that the conditions of the 7 steps are true:
+    X1 < X2 and 
+    X3 < X4 and 
+    X2 < X4 and 
+    X5 < X6 and 
+    X7 < X8 and 
+    X6 < X8 and 
+    X2 < X6 
+
+If we sort the data, they would be as follows:
+    X3,X5,X7,X1,X2,X4,X6,X8
+             ^^
+Having been X1 in the fourth position.
+Which means that it is not correct to leave X1 out of the discussion.        
+If I am right I have found a mistake, otherwise I apologize for having wasted your time.
+
+Thank you very much!
+Yours sincerely,
+
+Fernando Pelliccioni.
+1721 San Pedro St.
+Castelar, Provincia de Buenos Aires, Argentina.
+Zip Code: 1712
