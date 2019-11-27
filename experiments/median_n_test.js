@@ -9,6 +9,8 @@ const median9 = require('./median_9_in_progress');
 
 g_comparissons = 0
 
+var factorial=(n)=>Array.from({length: n},(v, k) => k+1).reduce((a, b) => a*b, 1)
+
 class Block {
     constructor(id, time) {
       this.id = id;
@@ -232,7 +234,8 @@ function test_all(n, max_comps) {
         var str2 = `exec_n_with_data(median${n}.median_${n}_generated_stable, ${n}, data2, undefined, max_comps);`;
         eval(str2);
     } else {
-        var q = Math.pow(n, n + 1);
+        // var q = Math.pow(n, n + 1);
+        var q = factorial(n) * 10;
         console.log(`Starting tests with random data of lenght: ${q}`);
         var str2 = `exec_n(median${n}.median_${n}_generated_stable, ${n}, ${q}, undefined, max_comps);`;
         eval(str2);
@@ -383,3 +386,11 @@ main();
 // 
 // n = 9
 //
+// Starting tests with random data of lenght: 3628800
+// Execution completed OK with 3,628,800 elements
+// Selection comparissons total:   49677572
+// Selection comparissons average: 13.689807098765431
+// Sort comparissons total:        124408539
+// Sort comparissons average:      34.28365823412698
+
+
