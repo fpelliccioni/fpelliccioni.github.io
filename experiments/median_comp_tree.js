@@ -475,9 +475,10 @@ function tree(n, comps) {
     // var used_pairs = common.gen_empty_array(n);
     // var possible_values = common.perm(common.iota(n));
     // // console.log(pairs);
-             
+    // var s = common.half(n);         
+
     // // var res = recursive_v3(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
-    // var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
+    // var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps,s);
     // // var res = recursive_v1(0, n, possible_values, pairs, used_pairs, 0, comps);
 
 
@@ -511,8 +512,9 @@ function tree(n, comps) {
 
     // // var zzz = common.equal_array(possible_values2, possible_values);
     // comps = 5;
+    // var s = common.half(n);
 
-    // var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
+    // var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps,s);
 
     // // ---------------------------------------------------------------------------------
     // // pairs for n=7 CASO ESPECIAL... necesito select_4_7_abd_cd_ce_fb()
@@ -522,12 +524,12 @@ function tree(n, comps) {
     // // console.log(JSON.stringify(pairs));
     
     
-    // var pairs = [[1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 3], [2, 5], [2, 7], [3, 6], [3, 7], [4, 5], [4, 6], [4, 7], [5, 6], [5, 7], [6, 7],
+    // var pairs = [[1,3],[1,4],[1,5],[1,6],[1,7],[2,3],[2,5],[2,7],[3,6],[3,7],[4,5],[4,6],[4,7],[5,6],[5,7],[6,7],
     //                 [1,2],
     //                 [2,4],
     //                 [3,4],
     //                 [3,5],
-    //                 [6,2],   
+    //                 [6,2],
     // ];
     
     // var suggested_pairs_7 = [];
@@ -542,8 +544,37 @@ function tree(n, comps) {
     // possible_values = common.remove_values(possible_values, [6,2]);
 
     // comps = 5;
-    // var s = common.half(n);
-    // var s = 4;
+    // var s = 4;           //common.half(n);
+
+    // var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps, s);
+    // // var res = recursive_v3(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
+
+    // // --------------------------------------------------------------------------
+
+
+    // // ---------------------------------------------------------------------------------
+    // // pairs for n=7 CASO ESPECIAL... necesito select_4_7_ab_de_be_dc_fb()
+    // // filtros: ab be dc de fb
+
+    // var pairs_str = `[[1,3],[1,4],[1,5],[1,6],[1,7],[2,3],[2,4],[2,7],[3,5],[3,6],[3,7],[4,6],[4,7],[5,6],[5,7],[6,7],
+    //                   [1,2],[2,5],[4,3],[4,5],[6,2]
+    //                  ]`
+
+    // var pairs = JSON.parse(pairs_str);
+    
+    // var suggested_pairs_7 = [];
+
+    // var used_pairs = common.gen_empty_array(n);
+    // var possible_values = common.perm(common.iota(n));
+
+    // possible_values = common.remove_values(possible_values, [1,2]);
+    // possible_values = common.remove_values(possible_values, [2,5]);
+    // possible_values = common.remove_values(possible_values, [4,3]);
+    // possible_values = common.remove_values(possible_values, [4,5]);
+    // possible_values = common.remove_values(possible_values, [6,2]);
+
+    // comps = 5;
+    // var s = 4;           //common.half(n);
 
     // var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps, s);
     // // var res = recursive_v3(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
@@ -552,36 +583,42 @@ function tree(n, comps) {
 
 
     // ---------------------------------------------------------------------------------
-    // pairs for n=7 CASO ESPECIAL... necesito select_4_7_abd_cd_ec_fb()
-    // filtros: ab bd cd ec fb
-    
-    var pairs = [[1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 3], [2, 5], [2, 7], [3, 6], [3, 7], [4, 5], [4, 6], [4, 7], [5, 6], [5, 7], [6, 7],
-                    [1,2],
-                    [2,4],
-                    [3,4],
-                    [5,3],
-                    [6,2],   
-    ];
-    
+    // pairs for n=7 CASO ESPECIAL... necesito select_3_7_ac_bc_de_ae_db_af()
+                                                
+    // filtros: ac ae af bc db de
+
+    // var pairs = common.gen_pairs(n);
+    var pairs = [[1,2],[1,4],[1,7],[2,5],[2,6],[2,7],[3,4],[3,5],[3,6],[3,7],[4,6],[4,7],[5,6],[5,7],[6,7],
+                    [1,3],
+                    [1,5],
+                    [1,6],
+                    [2,3],
+                    [4,2],
+                    [4,5],   
+                    ];
+
     var suggested_pairs_7 = [];
 
     var used_pairs = common.gen_empty_array(n);
     var possible_values = common.perm(common.iota(n));
 
-    possible_values = common.remove_values(possible_values, [1,2]);
-    possible_values = common.remove_values(possible_values, [2,4]);
-    possible_values = common.remove_values(possible_values, [3,4]);
-    possible_values = common.remove_values(possible_values, [5,3]);
-    possible_values = common.remove_values(possible_values, [6,2]);
+    possible_values = common.remove_values(possible_values, [1,3]);
+    possible_values = common.remove_values(possible_values, [1,5]);
+    possible_values = common.remove_values(possible_values, [1,6]);
+    possible_values = common.remove_values(possible_values, [2,3]);
+    possible_values = common.remove_values(possible_values, [4,2]);
+    possible_values = common.remove_values(possible_values, [4,5]);
 
     comps = 5;
     var s = common.half(n);
-    var s = 4;
+
 
     var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps, s);
-    // var res = recursive_v3(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps);
 
     // --------------------------------------------------------------------------
+
+
+    
 
 
 
@@ -702,9 +739,10 @@ function tree(n, comps) {
     // var used_pairs = common.gen_empty_array(n);
     // var possible_values = common.perm(common.iota(n));
     // // console.log(pairs);
-             
+
+    // var s = common.half(n);
     // // var res = recursive_v3(suggested_pairs_9, 0, n, possible_values, pairs, used_pairs, 0, comps);
-    // var res = recursive_v2(suggested_pairs_9, 0, n, possible_values, pairs, used_pairs, 0, comps);
+    // var res = recursive_v2(suggested_pairs_9, 0, n, possible_values, pairs, used_pairs, 0, comps, s);
     // // var res = recursive_v1(0, n, possible_values, pairs, used_pairs, 0, comps);
 
 

@@ -275,6 +275,18 @@ function array_random(n, from, to) {
     } return res; 
 }
 
+function array_random_non_equals(n, from, to) {
+    if ( ! n) n = 10;
+    if ( ! from) from = 0;
+    if ( ! to) to = 99;
+    var res = new Set(res)
+    while (res.size != n) {
+        var rand = Math.floor(Math.random() * to) + from; 
+        res.add(rand); 
+    } 
+    return [...res]; 
+}
+
 function generate_data_random(n) {
     var res = [];
     var q = Math.pow(n, n + 1);
@@ -319,6 +331,7 @@ module.exports = {
     remove_duplicates: remove_duplicates,
     repeat: repeat,
     array_random: array_random,
+    array_random_non_equals: array_random_non_equals,
     generate_data_random: generate_data_random,
     copy_if: copy_if,
     equal_array: equal_array,

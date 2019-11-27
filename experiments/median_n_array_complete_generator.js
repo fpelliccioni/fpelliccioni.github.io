@@ -174,21 +174,44 @@ function main() {
     // values = common.remove_values(values, [6,2]);
 
 
+    // // ------------------------------------------------------
+    // // n=7 special select_4_7_ab_de_be_dc_fb
+    // var tests_str = "[[0,[1,3]],[1,[2,7]],[2,[3,5]],[3,[3,7]],[4,[2,3]],[4,[4,7]],[3,[4,7]],[4,[5,7]],[4,[]],[2,[2,3]],[3,[2,4]],[4,[]],[4,[]],[3,[3,6]],[4,[6,7]],[4,[3,7]],[1,[1,6]],[2,[2,7]],[3,[]],[4,[]],[4,[]],[3,[6,7]],[4,[]],[4,[]],[2,[1,7]],[3,[2,7]],[4,[]],[4,[]],[3,[]],[4,[]],[4,[]]]"
+    // var tests = JSON.parse(tests_str);
+
+    // var n = 7;
+    // var s = 4;
+    // var comps = 5;
+
+    // var values = common.perm(common.iota(n));
+    // // console.log(JSON.stringify(tests));
+
+    // values = common.remove_values(values, [1,2]);
+    // values = common.remove_values(values, [2,5]);
+    // values = common.remove_values(values, [4,3]);
+    // values = common.remove_values(values, [4,5]);
+    // values = common.remove_values(values, [6,2]);
+
+
     // ------------------------------------------------------
-    // n=7 special select_4_7_abd_cd_ec_fb
-    var tests = [[0,[1,3]],[1,[2,3]],[2,[2,5]],[3,[3,7]],[4,[]],[4,[5,7]],[3,[2,7]],[4,[3,7]],[4,[]],[2,[2,7]],[3,[]],[4,[]],[4,[]],[3,[3,6]],[4,[6,7]],[4,[3,7]],[1,[1,6]],[2,[2,7]],[3,[]],[4,[]],[4,[]],[3,[6,7]],[4,[]],[4,[]],[2,[1,7]],[3,[2,7]],[4,[]],[4,[]],[3,[]],[4,[]],[4,[]]]
+    // n=7 special select_3_7_ac_bc_de_ae_db_af
+    var tests_str = "[[0,[2,7]],[1,[5,6]],[2,[5,7]],[3,[2,5]],[4,[3,5]],[4,[2,6]],[3,[1,7]],[4,[3,7]],[4,[]],[2,[6,7]],[3,[2,6]],[4,[3,6]],[4,[2,5]],[3,[1,7]],[4,[3,7]],[4,[]],[1,[2,5]],[2,[2,6]],[3,[1,2]],[4,[]],[4,[]],[3,[4,6]],[4,[6,7]],[4,[4,7]],[2,[6,7]],[3,[5,7]],[4,[5,6]],[4,[4,7]],[3,[5,6]],[4,[5,7]],[4,[4,6]]]"
+    var tests = JSON.parse(tests_str);
     var n = 7;
-    var s = 4;
+    var s = common.half(n);
     var comps = 5;
 
     var values = common.perm(common.iota(n));
     // console.log(JSON.stringify(tests));
 
-    values = common.remove_values(values, [1,2]);
-    values = common.remove_values(values, [2,4]);
-    values = common.remove_values(values, [3,4]);
-    values = common.remove_values(values, [5,3]);
-    values = common.remove_values(values, [6,2]);
+    values = common.remove_values(values, [1,3]);
+    values = common.remove_values(values, [1,5]);
+    values = common.remove_values(values, [1,6]);
+    values = common.remove_values(values, [2,3]);
+    values = common.remove_values(values, [4,2]);
+    values = common.remove_values(values, [4,5]);
+
+
 
 
     
