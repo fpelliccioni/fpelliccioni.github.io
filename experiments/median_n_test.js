@@ -5,6 +5,7 @@ const median3 = require('./median_3_generated');
 const median5 = require('./median_5_generated');
 const median7 = require('./median_7_generated');
 const median9 = require('./median_9_in_progress');
+const median11 = require('./median_11_in_progress');
 // const medians_gen = require('./medians_general');
 
 g_comparissons = 0
@@ -140,12 +141,16 @@ function exec_n(median_f, n, q, k, max_comps) {
         var m1 = median_f(...blocks, lt);
         total_select_comparissons += g_comparissons;
 
-        if (expect.id == m1.id) {
+        if (m1 !=null && expect.id == m1.id) {
             // console.log("OK    ", element, expect.id, m1.id);
         } else {
             const element_sorted = copy_array(element);
             tao.stable_sort(element_sorted, lt_simple);
-            console.log(`ERROR ${element} - ${element_sorted} - ${expect.id} - ${m1.id} - ${expect.time} - ${m1.time}`);
+            if (m1 == null) {
+                console.log(`ERROR ${element} - ${element_sorted} - ${expect.id} - ${null} - ${expect.time} - ${null}`);
+            } else {
+                console.log(`ERROR ${element} - ${element_sorted} - ${expect.id} - ${m1.id} - ${expect.time} - ${m1.time}`);
+            }
             // return;
         }
 
@@ -246,7 +251,8 @@ function main() {
     // test_all(3);
     // test_all(5, 6);
     // test_all(7, 10);
-    test_all(9, 14);
+    // test_all(9, 14);
+    test_all(11, 16);
 
 
 
@@ -392,5 +398,6 @@ main();
 // Selection comparissons average: 13.689807098765431
 // Sort comparissons total:        124408539
 // Sort comparissons average:      34.28365823412698
-
-
+// 
+// n = 11
+//

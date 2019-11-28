@@ -1,0 +1,741 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.20 of 2017/10/04
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage{amsmath}
+\usepackage{booktabs} % For pretty tables
+\usepackage{caption} % For caption spacing
+\usepackage{subcaption} % For sub-figures
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage[all]{nowidow}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{er,positioning,bayesnet}
+\usepackage{multicol}
+\usepackage{algpseudocode,algorithm,algorithmicx}
+\usepackage{mathtools}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage[inline]{enumitem} % Horizontal lists
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\newcommand{\card}[1]{\left\vert{#1}\right\vert}
+\newcommand*\Let[2]{\State #1 $\gets$ #2}
+\definecolor{blue}{HTML}{1F77B4}
+\definecolor{orange}{HTML}{FF7F0E}
+\definecolor{green}{HTML}{2CA02C}
+
+\pgfplotsset{compat=1.14}
+
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\setlength{\floatsep}{3pt plus 1pt minus 1pt}
+\setlength{\textfloatsep}{3pt plus 1pt minus 1pt}
+\setlength{\intextsep}{3pt plus 1pt minus 1pt}
+\setlength{\abovecaptionskip}{2pt plus 1pt minus 1pt}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+% $\mathcal{mathcal ABC 123}$
+% $\mathbfcal{mathbfcal ABC 123}$ \\
+% $\xmcal{ABC abc 123}$
+
+
+%
+\title{Median Selection of 11 Elements in 17 Comparisons}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Fernando Pelliccioni}
+%
+%\authorrunning{F. Author et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{\email{fpelliccioni@gmail.com}}
+%
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+This paper shows a way to get the median of 11 elements, $V\textsubscript{6}(11)$, using 17 comparisons, in a similar way to the one made in on page 212 on Knuth's book \cite{Knuth:1998:ACP:280635} and in the Noshita paper \cite{noshita1974}.
+
+\keywords{sorting \and median selection \and minimum-comparison.}
+\end{abstract}
+%
+%
+%
+%
+\section{Introduction}
+%
+According to the following formula published by A. Hadian and M. Sobel \cite{hadian1969}:
+
+\begin{equation}
+    V_t(n) \leq n - t + (t - 1) \ceil[\Big]{lg(n + 2 - t)}, n \geq t
+\end{equation}
+
+we can achieve the median of 11 elements in $V\textsubscript{6}(11) \leq 20$ comparisons. In this paper we shall specify an algorithm for selecting the median of elevel elements by using a graphical representation as in \cite{Knuth:1998:ACP:280635,noshita1974}.
+
+\section{Algorithm}
+
+\subsection{Steps 1 to 5} \label{sec:step-a}
+
+\begin{figure}[H]
+\centering
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,183); %set diagram left start at 0, and has height of 183
+
+%Straight Lines [id:da2652992530094713] 
+\draw    (190.83,66.5) -- (260.33,66.17) ;
+\draw [shift={(260.33,66.17)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(190.83,66.5)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da08625722675127134] 
+\draw    (190.83,129.25) -- (260.33,128.92) ;
+\draw [shift={(260.33,128.92)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(190.83,129.25)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da8837535268314904] 
+\draw    (298.16,66.5) -- (367.66,66.17) ;
+\draw [shift={(367.66,66.17)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(298.16,66.5)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da7098397638863692] 
+\draw    (298.16,129.25) -- (367.66,128.92) ;
+\draw [shift={(367.66,128.92)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(298.16,129.25)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da25224988206572396] 
+\draw    (404,66.17) -- (473.5,65.83) ;
+\draw [shift={(473.5,65.83)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(404,66.17)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da2762227525068459] 
+\draw    (441.5,129) ;
+\draw [shift={(441.5,129)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(441.5,129)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+
+% Text Node
+\draw (209,14) node  [align=left] {[5, 5]};
+% Text Node
+\draw (191.83,51.38) node  [align=left] {1};
+% Text Node
+\draw (261.83,51.38) node  [align=left] {2};
+% Text Node
+\draw (191.83,114.13) node  [align=left] {3};
+% Text Node
+\draw (261.83,114.13) node  [align=left] {4};
+% Text Node
+\draw (299.16,51.38) node  [align=left] {5};
+% Text Node
+\draw (369.16,51.38) node  [align=left] {6};
+% Text Node
+\draw (299.16,114.13) node  [align=left] {7};
+% Text Node
+\draw (369.16,114.13) node  [align=left] {8};
+% Text Node
+\draw (405,51.38) node  [align=left] {9};
+% Text Node
+\draw (474,51.38) node  [align=left] {10};
+% Text Node
+\draw (441.5,114.38) node  [align=left] {11};
+
+\end{tikzpicture}
+\end{figure}
+
+% \vspace{1.5cm}
+
+\subsection{Steps 6 to 7}
+
+% \begin{figure}[!h]
+\begin{figure}[H]
+\centering
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,263); %set diagram left start at 0, and has height of 263
+
+%Straight Lines [id:da05260081613229439] 
+\draw    (192,82) -- (261.5,81.67) ;
+\draw [shift={(261.5,81.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(192,82)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da3710106667787314] 
+\draw    (261.66,82) -- (331.17,81.67) ;
+\draw [shift={(331.17,81.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(261.66,82)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da6352239863080071] 
+\draw    (331.17,81.67) -- (307.5,138.17) ;
+\draw [shift={(307.5,138.17)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(331.17,81.67)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da4371252463451465] 
+\draw    (391,134.75) -- (460.5,134.42) ;
+\draw [shift={(460.5,134.42)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(391,134.75)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da20854822677874507] 
+\draw    (428.5,187.67) ;
+\draw [shift={(428.5,187.67)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(428.5,187.67)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da9817839335131353] 
+\draw    (192,185) -- (261.5,184.67) ;
+\draw [shift={(261.5,184.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(192,185)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da7321923216574462] 
+\draw    (261.66,185) -- (331.17,184.67) ;
+\draw [shift={(331.17,184.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(261.66,185)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da9717071041497101] 
+\draw    (331.17,184.67) -- (307.5,241.17) ;
+\draw [shift={(307.5,241.17)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(331.17,184.67)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+
+% Text Node
+\draw (193,66.5) node  [align=left] {1};
+% Text Node
+\draw (263,66.5) node  [align=left] {2};
+% Text Node
+\draw (392,119.25) node  [align=left] {9};
+% Text Node
+\draw (461,119.25) node  [align=left] {10};
+% Text Node
+\draw (331.67,66.5) node  [align=left] {4};
+% Text Node
+\draw (321.66,138.5) node  [align=left] {3};
+% Text Node
+\draw (321.66,241.5) node  [align=left] {7};
+% Text Node
+\draw (331.67,169.5) node  [align=left] {8};
+% Text Node
+\draw (263,169.5) node  [align=left] {6};
+% Text Node
+\draw (193,169.5) node  [align=left] {5};
+% Text Node
+\draw (428.5,172.33) node  [align=left] {11};
+% Text Node
+\draw (209,18) node  [align=left] {[5, 5]};
+
+
+\end{tikzpicture}
+\end{figure}
+
+\subsection{Step 8}
+
+\begin{figure}[H]
+\centering
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da5817677216840493] 
+\draw    (190,168) -- (259.5,167.67) ;
+\draw [shift={(259.5,167.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(190,168)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da03942636951364431] 
+\draw    (259.66,168) -- (329.17,167.67) ;
+\draw [shift={(329.17,167.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(259.66,168)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da2036206325744141] 
+\draw    (329.17,167.67) -- (305.5,224.17) ;
+\draw [shift={(305.5,224.17)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(329.17,167.67)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da9817839335131353] 
+\draw    (229,80) -- (298.5,79.67) ;
+\draw [shift={(298.5,79.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(229,80)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da7321923216574462] 
+\draw    (298.66,80) -- (368.17,79.67) ;
+\draw [shift={(368.17,79.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(298.66,80)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da9717071041497101] 
+\draw    (368.17,79.67) -- (344.5,136.17) ;
+\draw [shift={(344.5,136.17)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(368.17,79.67)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da11908815809656215] 
+\draw    (298.66,80) -- (259.5,166.67) ;
+\draw [shift={(259.5,166.67)}, rotate = 114.32] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(298.66,80)}, rotate = 114.32] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da8582425271802305] 
+\draw    (412,129.75) -- (481.5,129.42) ;
+\draw [shift={(481.5,129.42)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(412,129.75)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da20854822677874507] 
+\draw    (449.5,188.67) ;
+\draw [shift={(449.5,188.67)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(449.5,188.67)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+
+% Text Node
+\draw (358.67,136.5) node  [align=left] {7};
+% Text Node
+\draw (368.67,64.5) node  [align=left] {8};
+% Text Node
+\draw (300,64.5) node  [align=left] {6};
+% Text Node
+\draw (230,64.5) node  [align=left] {5};
+% Text Node
+\draw (449.5,173.33) node  [align=left] {11};
+% Text Node
+\draw (191,152.5) node  [align=left] {1};
+% Text Node
+\draw (256,153.5) node  [align=left] {2};
+% Text Node
+\draw (329.67,152.5) node  [align=left] {4};
+% Text Node
+\draw (319.66,224.5) node  [align=left] {3};
+% Text Node
+\draw (413,114.25) node  [align=left] {9};
+% Text Node
+\draw (482,114.25) node  [align=left] {10};
+% Text Node
+\draw (211,19) node  [align=left] {[5, 5]};
+
+
+\end{tikzpicture}
+\end{figure}
+
+
+\subsection{Step 9}
+
+\begin{figure}[H]
+\centering
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da13358590323218467] 
+\draw    (183,166) -- (252.5,165.67) ;
+\draw [shift={(252.5,165.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(183,166)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da7720934049289174] 
+\draw    (252.67,166) -- (322.16,165.67) ;
+\draw [shift={(322.16,165.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(252.67,166)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da3170318262378571] 
+\draw    (322.16,165.67) -- (298.5,222.17) ;
+\draw [shift={(298.5,222.17)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(322.16,165.67)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da9817839335131353] 
+\draw    (222,76.88) -- (291.5,76.54) ;
+\draw [shift={(291.5,76.54)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(222,76.88)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da6780354536935083] 
+\draw    (291.66,78) -- (361.17,77.67) ;
+\draw [shift={(361.17,77.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(291.66,78)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da7159033156926864] 
+\draw    (361.17,77.67) -- (337.5,134.17) ;
+\draw [shift={(337.5,134.17)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(361.17,77.67)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da8582989878191045] 
+\draw    (291.66,78) -- (252.5,164.67) ;
+\draw [shift={(252.5,164.67)}, rotate = 114.32] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(291.66,78)}, rotate = 114.32] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da3621825204677629] 
+\draw    (361.17,77.67) -- (430.67,77.33) ;
+\draw [shift={(430.67,77.33)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(361.17,77.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da0555931968658383] 
+\draw    (430.67,77.33) -- (407,133.83) ;
+\draw [shift={(407,133.83)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(430.67,77.33)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Shape: Arc [id:dp23026233268743712] 
+\draw  [draw opacity=0] (456.25,93.01) .. controls (454.47,95.92) and (452.16,98.57) .. (449.34,100.81) .. controls (436.37,111.13) and (417.5,108.98) .. (407.19,96.01) .. controls (396.87,83.04) and (399.02,64.17) .. (411.99,53.86) .. controls (414.81,51.61) and (417.91,49.96) .. (421.14,48.88) -- (430.67,77.33) -- cycle ; \draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (456.25,93.01) .. controls (454.47,95.92) and (452.16,98.57) .. (449.34,100.81) .. controls (436.37,111.13) and (417.5,108.98) .. (407.19,96.01) .. controls (396.87,83.04) and (399.02,64.17) .. (411.99,53.86) .. controls (414.81,51.61) and (417.91,49.96) .. (421.14,48.88) ;
+
+%Straight Lines [id:da20854822677874507] 
+\draw    (398,216.51) ;
+\draw [shift={(398,216.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(398,216.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+
+% Text Node
+\draw (293,61.38) node  [align=left] {6};
+% Text Node
+\draw (223,61.38) node  [align=left] {5};
+% Text Node
+\draw (398,201.17) node  [align=left] {11};
+% Text Node
+\draw (351.67,133.88) node  [align=left] {7};
+% Text Node
+\draw (361.67,64.63) node  [align=left] {8};
+% Text Node
+\draw (184,150.5) node  [align=left] {1};
+% Text Node
+\draw (249,151.5) node  [align=left] {2};
+% Text Node
+\draw (322.66,150.5) node  [align=left] {4};
+% Text Node
+\draw (312.66,222.5) node  [align=left] {3};
+% Text Node
+\draw (421,133.88) node  [align=left] {9};
+% Text Node
+\draw (432,64.63) node  [align=left] {10};
+% Text Node
+\draw (196,24) node  [align=left] {[5, 5]};
+
+
+\end{tikzpicture}
+\end{figure}
+
+
+
+\subsection{Step 9 after removal of element 10}
+
+\begin{figure}[H]
+\centering
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Straight Lines [id:da13358590323218467] 
+\draw    (215,165) -- (284.5,164.67) ;
+\draw [shift={(284.5,164.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(215,165)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da7720934049289174] 
+\draw    (284.66,165) -- (354.17,164.67) ;
+\draw [shift={(354.17,164.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(284.66,165)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da3170318262378571] 
+\draw    (354.17,164.67) -- (330.5,221.17) ;
+\draw [shift={(330.5,221.17)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(354.17,164.67)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da9817839335131353] 
+\draw    (254,75.88) -- (323.5,75.54) ;
+\draw [shift={(323.5,75.54)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(254,75.88)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da6780354536935083] 
+\draw    (323.66,77) -- (393.17,76.67) ;
+\draw [shift={(393.17,76.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(323.66,77)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da7159033156926864] 
+\draw    (393.17,76.67) -- (369.5,133.17) ;
+\draw [shift={(369.5,133.17)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(393.17,76.67)}, rotate = 112.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da8582989878191045] 
+\draw    (323.66,77) -- (284.5,163.67) ;
+\draw [shift={(284.5,163.67)}, rotate = 114.32] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(323.66,77)}, rotate = 114.32] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da20854822677874507] 
+\draw    (434,195.51) ;
+\draw [shift={(434,195.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(434,195.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da3273522415496761] 
+\draw    (434,135.51) ;
+\draw [shift={(434,135.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(434,135.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+
+% Text Node
+\draw (325,60.38) node  [align=left] {6};
+% Text Node
+\draw (255,60.38) node  [align=left] {5};
+% Text Node
+\draw (434,180.17) node  [align=left] {11};
+% Text Node
+\draw (383.67,132.88) node  [align=left] {7};
+% Text Node
+\draw (393.67,63.63) node  [align=left] {8};
+% Text Node
+\draw (216,149.5) node  [align=left] {1};
+% Text Node
+\draw (281,150.5) node  [align=left] {2};
+% Text Node
+\draw (354.67,149.5) node  [align=left] {4};
+% Text Node
+\draw (344.67,221.5) node  [align=left] {3};
+% Text Node
+\draw (434,120.17) node  [align=left] {9};
+% Text Node
+\draw (227,22) node  [align=left] {[5, 4]};
+
+\end{tikzpicture}
+\end{figure}
+
+
+\subsection{Step 9 after rearrangement}
+\begin{figure}[H]
+\centering
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,236); %set diagram left start at 0, and has height of 236
+
+%Straight Lines [id:da2360455617253432] 
+\draw    (207,147.83) -- (276.5,147.5) ;
+\draw [shift={(276.5,147.5)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(207,147.83)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da27055199682856856] 
+\draw    (276.5,147.5) -- (324.5,197.67) ;
+\draw [shift={(324.5,197.67)}, rotate = 46.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(276.5,147.5)}, rotate = 46.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da08184712280544404] 
+\draw    (255,98) -- (324.5,97.67) ;
+\draw [shift={(324.5,97.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(255,98)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da04869095877462781] 
+\draw    (276.5,147.5) -- (324.5,97.67) ;
+\draw [shift={(324.5,97.67)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(276.5,147.5)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da840292312018432] 
+\draw    (255,198) -- (324.5,197.67) ;
+\draw [shift={(324.5,197.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(255,198)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da4840342553864181] 
+\draw    (324.5,97.67) -- (372.5,47.83) ;
+\draw [shift={(372.5,47.83)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(324.5,97.67)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da22024769549670653] 
+\draw    (303,48.17) -- (372.5,47.83) ;
+\draw [shift={(372.5,47.83)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(303,48.17)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da20854822677874507] 
+\draw    (464,171.51) ;
+\draw [shift={(464,171.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(464,171.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da3273522415496761] 
+\draw    (415,113.51) ;
+\draw [shift={(415,113.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(415,113.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Curve Lines [id:da19268078924492804] 
+\draw  [dash pattern={on 4.5pt off 4.5pt}]  (276.5,147.5) .. controls (352.5,89) and (365.5,216) .. (415,113.51) ;
+
+
+
+% Text Node
+\draw (464,156.17) node  [align=left] {11};
+% Text Node
+\draw (415,98.17) node  [align=left] {9};
+% Text Node
+\draw (239,15) node  [align=left] {[5, 4]};
+% Text Node
+\draw (326,83.38) node  [align=left] {6};
+% Text Node
+\draw (256,83.38) node  [align=left] {5};
+% Text Node
+\draw (304.66,33.25) node  [align=left] {7};
+% Text Node
+\draw (374.67,33.25) node  [align=left] {8};
+% Text Node
+\draw (208,134.5) node  [align=left] {1};
+% Text Node
+\draw (273,135.5) node  [align=left] {2};
+% Text Node
+\draw (324.66,213.5) node  [align=left] {4};
+% Text Node
+\draw (254.66,213.5) node  [align=left] {3};
+
+\end{tikzpicture}
+\end{figure}
+
+\subsection{Step 10}
+\begin{figure}[H]
+\centering
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,231); %set diagram left start at 0, and has height of 231
+
+%Straight Lines [id:da7413656973135152] 
+\draw    (243,152.83) -- (312.5,152.5) ;
+\draw [shift={(312.5,152.5)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(243,152.83)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da918755884995869] 
+\draw    (312.5,152.5) -- (360.5,202.67) ;
+\draw [shift={(360.5,202.67)}, rotate = 46.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(312.5,152.5)}, rotate = 46.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da9109674393197595] 
+\draw    (291,103) -- (360.5,102.67) ;
+\draw [shift={(360.5,102.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(291,103)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da23219361597096966] 
+\draw    (312.5,152.5) -- (360.5,102.67) ;
+\draw [shift={(360.5,102.67)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(312.5,152.5)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da4163193371344769] 
+\draw    (291,203) -- (360.5,202.67) ;
+\draw [shift={(360.5,202.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(291,203)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da5306182905121393] 
+\draw    (360.5,102.67) -- (408.5,52.83) ;
+\draw [shift={(408.5,52.83)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(360.5,102.67)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da01737581622675699] 
+\draw    (339,53.17) -- (408.5,52.83) ;
+\draw [shift={(408.5,52.83)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(339,53.17)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da786025082046004] 
+\draw    (312.5,152.5) -- (382,152.17) ;
+\draw [shift={(382,152.17)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(312.5,152.5)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Straight Lines [id:da20854822677874507] 
+\draw    (434,193.51) ;
+\draw [shift={(434,193.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(434,193.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+%Shape: Arc [id:dp1723359076092541] 
+\draw  [draw opacity=0] (232.97,124.55) .. controls (236.18,123.41) and (239.64,122.8) .. (243.25,122.83) .. controls (259.81,122.97) and (273.13,136.51) .. (273,153.08) .. controls (272.86,169.65) and (259.32,182.97) .. (242.75,182.83) .. controls (239.15,182.8) and (235.7,182.14) .. (232.51,180.95) -- (243,152.83) -- cycle ; \draw  [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ] (232.97,124.55) .. controls (236.18,123.41) and (239.64,122.8) .. (243.25,122.83) .. controls (259.81,122.97) and (273.13,136.51) .. (273,153.08) .. controls (272.86,169.65) and (259.32,182.97) .. (242.75,182.83) .. controls (239.15,182.8) and (235.7,182.14) .. (232.51,180.95) ;
+
+% Text Node
+\draw (434,178.17) node  [align=left] {11};
+% Text Node
+\draw (272,16) node  [align=left] {[5, 4]};
+% Text Node
+\draw (362,88.38) node  [align=left] {6};
+% Text Node
+\draw (292,88.38) node  [align=left] {5};
+% Text Node
+\draw (340.67,38.25) node  [align=left] {7};
+% Text Node
+\draw (410.67,38.25) node  [align=left] {8};
+% Text Node
+\draw (244,140.84) node  [align=left] {1};
+% Text Node
+\draw (309,140.84) node  [align=left] {2};
+% Text Node
+\draw (360.67,218.5) node  [align=left] {4};
+% Text Node
+\draw (290.66,218.5) node  [align=left] {3};
+% Text Node
+\draw (382,140.84) node  [align=left] {9};
+
+
+\end{tikzpicture}
+\end{figure}
+
+
+\subsection{Steps 11 to 17}
+
+We must find the fifth largest element of
+
+\begin{figure}[H]
+\centering
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,231); %set diagram left start at 0, and has height of 231
+
+%Straight Lines [id:da918755884995869] 
+\draw    (312.5,150.5) -- (360.5,200.67) ;
+\draw [shift={(360.5,200.67)}, rotate = 46.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(312.5,150.5)}, rotate = 46.26] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da9109674393197595] 
+\draw    (291,101) -- (360.5,100.67) ;
+\draw [shift={(360.5,100.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(291,101)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da23219361597096966] 
+\draw    (312.5,150.5) -- (360.5,100.67) ;
+\draw [shift={(360.5,100.67)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(312.5,150.5)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da4163193371344769] 
+\draw    (291,201) -- (360.5,200.67) ;
+\draw [shift={(360.5,200.67)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(291,201)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da5306182905121393] 
+\draw    (360.5,100.67) -- (408.5,50.83) ;
+\draw [shift={(408.5,50.83)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(360.5,100.67)}, rotate = 313.93] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da01737581622675699] 
+\draw    (339,51.17) -- (408.5,50.83) ;
+\draw [shift={(408.5,50.83)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(339,51.17)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da786025082046004] 
+\draw    (312.5,150.5) -- (382,150.17) ;
+\draw [shift={(382,150.17)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(312.5,150.5)}, rotate = 359.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+%Straight Lines [id:da20854822677874507] 
+\draw    (434,191.51) ;
+\draw [shift={(434,191.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+\draw [shift={(434,191.51)}, rotate = 0] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]      (0, 0) circle [x radius= 3.35, y radius= 3.35]   ;
+
+
+% Text Node
+\draw (434,176.17) node  [align=left] {11};
+% Text Node
+\draw (272,16) node  [align=left] {[4, 4]};
+% Text Node
+\draw (362,86.38) node  [align=left] {6};
+% Text Node
+\draw (292,86.38) node  [align=left] {5};
+% Text Node
+\draw (340.67,36.25) node  [align=left] {7};
+% Text Node
+\draw (410.67,36.25) node  [align=left] {8};
+% Text Node
+\draw (309,138.84) node  [align=left] {2};
+% Text Node
+\draw (360.67,216.5) node  [align=left] {4};
+% Text Node
+\draw (290.66,216.5) node  [align=left] {3};
+% Text Node
+\draw (382,138.84) node  [align=left] {9};
+
+\end{tikzpicture}
+\end{figure}
+
+This can be done in $V\textsubscript{5}(9) - 7 = 7$ more comparisons, since the algorithm described in \cite{noshita1974} achieves $V\textsubscript{5}(9) = 14$.
+
+
+
+
+
+\section{Conclusion}
+
+We have achieved an algorithm to obtain the median of 11 elements with a maximum of 17 comparisons, of which the first 10 are plotted here and the next 7 are those made by $V\textsubscript{5}(9)$.
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+\bibliographystyle{splncs04}
+\bibliography{biblio}
+%
+\end{document}

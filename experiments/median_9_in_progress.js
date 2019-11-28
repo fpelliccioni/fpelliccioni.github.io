@@ -947,7 +947,7 @@ function select_4_8_abd_cd_ef_bf_ec(a,b,c,d,e,f,g,h,r) {
     }
 }
 
-// step 8
+// step 8 (TODO: creo que esta mal el nombre del algoritmo)
 function select_4_8_abd_cd_ef_bf(a,b,c,d,e,f,g,h,r) {
     var tmp = g_comparissons;
     assert(!r(b,a));
@@ -977,9 +977,9 @@ function select_4_9_abd_cd_efh_gh(a,b,c,d,e,f,g,h,i,r) {
 
 
     if ( ! r(f, b)) {
-        return select_4_8_abd_cd_ef_bf(a,b,c,d,e,f,g,i,r);
+        return select_4_8_abd_cd_ef_bf(a,b,c,d,e,f,g,i,r);      // (TODO: creo que esta mal el nombre del algoritmo)
     } else {
-        return select_4_8_abd_cd_ef_bf(e,f,g,h,a,b,c,i,r);
+        return select_4_8_abd_cd_ef_bf(e,f,g,h,a,b,c,i,r);      // (TODO: creo que esta mal el nombre del algoritmo)
     }
 }
 

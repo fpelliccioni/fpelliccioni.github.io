@@ -582,57 +582,38 @@ function tree(n, comps) {
     // // --------------------------------------------------------------------------
 
 
-    // ---------------------------------------------------------------------------------
-    // pairs for n=7 CASO ESPECIAL... necesito select_3_7_ac_bc_de_ae_db_af()
+    // // ---------------------------------------------------------------------------------
+    // // pairs for n=7 CASO ESPECIAL... necesito select_3_7_ac_bc_de_ae_db_af()
                                                 
-    // filtros: ac ae af bc db de
+    // // filtros: ac ae af bc db de
 
-    // var pairs = common.gen_pairs(n);
-    var pairs = [[1,2],[1,4],[1,7],[2,5],[2,6],[2,7],[3,4],[3,5],[3,6],[3,7],[4,6],[4,7],[5,6],[5,7],[6,7],
-                    [1,3],
-                    [1,5],
-                    [1,6],
-                    [2,3],
-                    [4,2],
-                    [4,5],   
-                    ];
+    // // var pairs = common.gen_pairs(n);
+    // var pairs = [[1,2],[1,4],[1,7],[2,5],[2,6],[2,7],[3,4],[3,5],[3,6],[3,7],[4,6],[4,7],[5,6],[5,7],[6,7],
+    //                 [1,3],
+    //                 [1,5],
+    //                 [1,6],
+    //                 [2,3],
+    //                 [4,2],
+    //                 [4,5],   
+    //                 ];
 
-    var suggested_pairs_7 = [];
+    // var suggested_pairs_7 = [];
 
-    var used_pairs = common.gen_empty_array(n);
-    var possible_values = common.perm(common.iota(n));
+    // var used_pairs = common.gen_empty_array(n);
+    // var possible_values = common.perm(common.iota(n));
 
-    possible_values = common.remove_values(possible_values, [1,3]);
-    possible_values = common.remove_values(possible_values, [1,5]);
-    possible_values = common.remove_values(possible_values, [1,6]);
-    possible_values = common.remove_values(possible_values, [2,3]);
-    possible_values = common.remove_values(possible_values, [4,2]);
-    possible_values = common.remove_values(possible_values, [4,5]);
+    // possible_values = common.remove_values(possible_values, [1,3]);
+    // possible_values = common.remove_values(possible_values, [1,5]);
+    // possible_values = common.remove_values(possible_values, [1,6]);
+    // possible_values = common.remove_values(possible_values, [2,3]);
+    // possible_values = common.remove_values(possible_values, [4,2]);
+    // possible_values = common.remove_values(possible_values, [4,5]);
 
-    comps = 5;
-    var s = common.half(n);
-
-
-    var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps, s);
-
-    // --------------------------------------------------------------------------
+    // comps = 5;
+    // var s = common.half(n);
 
 
-    
-
-
-
-
-
-    // --------------------------------------------------------------------------
-
-
-
-
-
-
-
-
+    // var res = recursive_v2(suggested_pairs_7, 0, n, possible_values, pairs, used_pairs, 0, comps, s);
 
 
     // ---------------------------------------------------------------------------------
@@ -746,6 +727,65 @@ function tree(n, comps) {
     // // var res = recursive_v1(0, n, possible_values, pairs, used_pairs, 0, comps);
 
 
+
+    // ---------------------------------------------------------------------------------
+    // pairs for n=7 CASO ESPECIAL... necesito select_4_9_ab_bd_be_bi_cd_ef_fh_gh()
+                                                
+    // filtros: ac ae af bc db de
+
+    // var pairs = common.gen_pairs(n);
+    // var pairs_str = "[[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9],[2,3],[2,4],[2,5],[2,6],[2,7],[2,8],[2,9],[3,4],[3,5],[3,6],[3,7],[3,8],[3,9],[4,5],[4,6],[4,7],[4,8],[4,9],[5,6],[5,7],[5,8],[5,9],[6,7],[6,8],[6,9],[7,8],[7,9],[8,9]]";
+    var pairs_str = `[[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9],[2,3],[2,5],[2,7],[2,8],[3,5],[3,6],
+                      [3,7],[3,8],[3,9],[4,5],[4,6],[4,7],[4,8],[4,9],[5,7],[5,8],[5,9],[6,7],[6,9],
+                      [7,9],[8,9],
+                      [1,2],
+                      [2,4],
+                      [2,6],
+                      [2,9],
+                      [3,4],
+                      [5,6],
+                      [6,8],
+                      [7,8]
+                    ]`;
+    var pairs = JSON.parse(pairs_str);
+    
+    /*
+    [1,2],  
+    [2,4],
+    [2,6],
+    [2,9],
+    [3,4],
+    [5,6],
+    [6,8],
+    [7,8],
+    */
+
+
+    var used_pairs = common.gen_empty_array(n);
+    var possible_values = common.perm(common.iota(n));
+    console.log(possible_values.length)
+
+    possible_values = common.remove_values(possible_values, [1,2]);
+    possible_values = common.remove_values(possible_values, [2,4]);
+    possible_values = common.remove_values(possible_values, [2,6]);
+    possible_values = common.remove_values(possible_values, [2,9]);
+    possible_values = common.remove_values(possible_values, [3,4]);
+    possible_values = common.remove_values(possible_values, [5,6]);
+    possible_values = common.remove_values(possible_values, [6,8]);
+    possible_values = common.remove_values(possible_values, [7,8]);
+    console.log(possible_values.length)
+
+    comps = 6;
+    var s = common.half(n);
+
+    var res = recursive_v2([], 0, n, possible_values, pairs, used_pairs, 0, comps, s);
+
+
+
+    // --------------------------------------------------------------------------
+
+
+
     // --------------------------------------------------------------------------
     console.log(res[0]);
 
@@ -758,8 +798,8 @@ function main() {
     var tests = [
         // [3, 3],
         // [5, 6],
-        [7, 10],
-        // [9, 14],
+        // [7, 10],
+        [9, 14],
     ];
 
     for (let i = 0; i < tests.length; i++) {
