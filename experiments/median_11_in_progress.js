@@ -1,18 +1,11 @@
-var assert = require('assert');
+const common = require('./common');
 
 g_comparissons = 0
 
-// step 11
+// step 11.1.1
 // 6 comparisons
 function select_4_9_ac_bc_deg_fg_ae_ah(a,b,c,d,e,f,g,h,i,r) {
-    var tmp = g_comparissons;
-    assert(!r(c,b));
-    assert(!r(e,d));
-    assert(!r(g,f));
-    assert(!r(c,a));
-    assert(!r(g,e));
-    assert(!r(e,a));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(e, c)) {
         if ( ! r(i, d)) {
@@ -237,17 +230,19 @@ function select_4_9_ac_bc_deg_fg_ae_ah(a,b,c,d,e,f,g,h,i,r) {
     }
 }
 
-// step 10
+// step 11.1.2 TODO
+
+// step 11.2.1 TODO
+function select_4_9_ac_bc_de_gh_ae_ah(a,b,c,d,e,f,g,h,i,r) {
+    common.check_precondition(...arguments);
+    
+}
+
+// step 11.2.2 TODO
+
+// step 10.1
 function select_5_10_abd_cd_efh_gh_bf(a,b,c,d,e,f,g,h,i,j,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(h,g));
-    assert(!r(d,b));
-    assert(!r(h,f));
-    assert(!r(f,b));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(i, b)) {
         //select_5_10_abd_cd_efh_gh_bf_bi(a,b,c,d,e,f,g,h,i,j,r); //remuevo a
@@ -259,41 +254,36 @@ function select_5_10_abd_cd_efh_gh_bf(a,b,c,d,e,f,g,h,i,j,r) {
     }
 }
 
+
+// step 10.2
+function select_5_10_abd_cd_ef_hi_bf(a,b,c,d,e,f,g,h,i,j,r) {
+    common.check_precondition(...arguments);
+
+    if ( ! r(i, b)) {
+        //select_5_10_abd_cd_ef_hi_bf_bi(a,b,c,d,e,f,g,h,i,j,r); //remuevo a
+        return select_4_9_ac_bc_de_gh_ae_ah(b,c,d,e,f,g,h,i,j,r);
+    } else {
+        //TODO
+        return null;
+    }
+}
+
 // step 9
 function select_5_11_abd_cd_efh_gh_ij_bf(a,b,c,d,e,f,g,h,i,j,k,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(h,g));
-    assert(!r(j,i));
-    assert(!r(d,b));
-    assert(!r(h,f));
-    assert(!r(f,b));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(j, h)) {
         //select_5_11_abd_cd_efh_gh_ij_bf_hj(a,b,c,d,e,f,g,h,i,j,k,r);  //remuevo j
         return select_5_10_abd_cd_efh_gh_bf(a,b,c,d,e,f,g,h,i,k,r);
     } else {
-        return null;
-        // select_5_11_abd_cd_efh_gh_ij_bf_jh(a,b,c,d,e,f,g,h,i,j,k,r);        //remuevo j //TODO
-        // return select_5_11_abd_cd_efh_gh_ij_bf_jh(a,b,c,d,e,f,g,h,i,j,k,r);        //TODO
+        //select_5_11_abd_cd_efh_gh_ij_bf_hj(a,b,c,d,e,f,g,h,i,j,k,r);  //remuevo h
+        return select_5_10_abd_cd_ef_hi_bf(a,b,c,d,e,f,g,i,j,k,r);
     }
 }
 
 // step 8
 function select_5_11_abd_cd_efh_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(h,g));
-    assert(!r(j,i));
-    assert(!r(d,b));
-    assert(!r(h,f));
-    g_comparissons = tmp;
-
+    common.check_precondition(...arguments);
 
     if ( ! r(f, b)) {
         return select_5_11_abd_cd_efh_gh_ij_bf(a,b,c,d,e,f,g,h,i,j,k,r);
@@ -304,14 +294,7 @@ function select_5_11_abd_cd_efh_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
 
 // step 7
 function select_5_11_abd_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(h,g));
-    assert(!r(j,i));
-    assert(!r(d,b));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(h, f)) {
         return select_5_11_abd_cd_efh_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r);
@@ -323,13 +306,7 @@ function select_5_11_abd_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
 
 // step 6
 function select_5_11_ab_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(h,g));
-    assert(!r(j,i));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(d, b)) {
         return select_5_11_abd_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r);
@@ -340,12 +317,7 @@ function select_5_11_ab_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
 
 // step 5
 function select_5_11_ab_cd_ef_gh(a,b,c,d,e,f,g,h,i,j,k,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(h,g));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(j, i)) {
         return select_5_11_ab_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r);
@@ -356,11 +328,7 @@ function select_5_11_ab_cd_ef_gh(a,b,c,d,e,f,g,h,i,j,k,r) {
 
 // step 4
 function select_5_11_ab_cd_ef(a,b,c,d,e,f,g,h,i,j,k,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(h, g)) {
         return select_5_11_ab_cd_ef_gh(a,b,c,d,e,f,g,h,i,j,k,r);
@@ -372,10 +340,7 @@ function select_5_11_ab_cd_ef(a,b,c,d,e,f,g,h,i,j,k,r) {
 
 // step 3
 function select_5_11_ab_cd(a,b,c,d,e,f,g,h,i,j,k,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,c));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(f, e)) {
         return select_5_11_ab_cd_ef(a,b,c,d,e,f,g,h,i,j,k,r);
@@ -386,9 +351,7 @@ function select_5_11_ab_cd(a,b,c,d,e,f,g,h,i,j,k,r) {
 
 // step 2
 function select_5_11_ab(a,b,c,d,e,f,g,h,i,j,k,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(d, c)) {
         return select_5_11_ab_cd(a,b,c,d,e,f,g,h,i,j,k,r);
@@ -399,6 +362,8 @@ function select_5_11_ab(a,b,c,d,e,f,g,h,i,j,k,r) {
 
 // step 1
 function select_5_11(a,b,c,d,e,f,g,h,i,j,k,r) {
+    common.check_precondition(...arguments);
+
     if ( ! r(b, a)) {
         return select_5_11_ab(a,b,c,d,e,f,g,h,i,j,k,r);
     } else {

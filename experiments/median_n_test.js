@@ -114,7 +114,7 @@ function exec_n(median_f, n, q, k, max_comps) {
         }
 
         // const element = common.array_random(n, 0, n);
-        const element = common.array_random_non_equals(n, 0, n);
+        // const element = common.array_random_non_equals(n, 0, n);
 
         // const element = [6,2,6,1,3,0,7,8,3];
         // const element = [5,1,3,2,7,0,4,6,8];
@@ -122,6 +122,8 @@ function exec_n(median_f, n, q, k, max_comps) {
         // const element = [1,7,4,0,3,8,5,6,2];            //falla en select_4_7_abd_cd_ce_fb, FIXED
         // const element = [2,7,0,6,3,1,4,8,5];            //falla en select_4_7_ab_de_be_dc_fb, FIXED
         // const element = [3,1,4,5,8,7,6,0,2];            //falla en select_3_7_ac_bc_de_ae_db_af, FIXED
+
+        const element = [2, 9, 6, 0, 5, 1, 10, 4, 3, 7, 8];
 
         var blocks_orig = create_blocks(element);
 

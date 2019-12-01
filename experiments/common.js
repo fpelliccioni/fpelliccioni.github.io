@@ -1,3 +1,58 @@
+var assert_internal = require('assert');
+
+function _get_function_name(stack_str) {
+    // var re = new RegExp("at (\\w+)", "g");
+    // var re = new RegExp("at (\\w+)");
+
+    var m = stack_str.match(/at (\w+) /);
+    // console.log(m)
+
+    if (m && m.length > 1) {
+        return m[1];
+    } else {
+        return undefined;
+    }
+}
+
+function _get_precondition(fname) {
+    // select_[0-9]+_[0-9]+_(\w+)
+
+    var m = fname.match(/select_[0-9]+_[0-9]+_(\w+)/);
+    // console.log(m)
+
+    if (m && m.length > 1) {
+        return m[1];
+    } else {
+        return undefined;
+    }
+
+}
+
+function check_precondition() {
+    var fname = _get_function_name(new Error().stack);
+    var precond = _get_precondition(fname);
+    if (!precond) return;
+    var tmp = g_comparissons;
+    var r = arguments[arguments.length - 1];
+    var seq = precond.split("_");
+
+    for (let i = 0; i < seq.length; i++) {
+        const element = seq[i];
+
+        for (let j = 0; j < element.length - 1; j++) {
+            var i0 = variable_to_index(element[j]);
+            var i1 = variable_to_index(element[j + 1]);
+            var v0 = arguments[i0];
+            var v1 = arguments[i1];
+
+            assert_internal( ! r(v1, v0));
+
+        }
+        
+    }
+    g_comparissons = tmp;
+}
+
 function equal_array(a, b) {
     if (a.length != b.length) return false;
 
@@ -27,6 +82,38 @@ function perm(xs) {
     return ret;
 }
 
+
+function apply_precons(values, preconds) {
+    // var values_copy = values.slice();
+
+    if (values.length < 2) return values;
+
+    for (let i = 0; i < preconds.length; i++) {
+        const p = preconds[i];
+        values = remove_values2(values, p);
+        if (values.length == 0) break;
+    }
+    return values;
+}
+
+function perm_with_preconds(xs, preconds) {
+    let ret = [];
+  
+    for (let i = 0; i < xs.length; i = i + 1) {
+        let rest = perm_with_preconds(xs.slice(0, i).concat(xs.slice(i + 1)), preconds);
+
+        if ( ! rest.length) {
+            ret.push([xs[i]])
+        } else {
+            for (let j = 0; j < rest.length; j = j + 1) {
+                ret.push([xs[i]].concat(rest[j]))
+            }
+        }
+    }
+    ret = apply_precons(ret, preconds);
+    return ret;
+}
+
 function iota(n) {
     var res = [];
     for (let i = 0; i < n; ++i) {
@@ -47,6 +134,30 @@ function remove_values(values, node) {
         // console.log(ib);
         if (ia < ib) {
             res.push(element);
+        }
+    }
+
+    return res;
+}
+
+function remove_values2(values, node) {
+    // console.log(values);
+    // console.log(node);
+    var res = [];
+    for (let i = 0; i < values.length; i++) {
+        const element = values[i];
+        if (element.length < 2) {
+            res.push(element);
+            continue;
+        }
+        var ia = element.indexOf(node[0]);
+        var ib = element.indexOf(node[1]);
+        // console.log(ia);
+        // console.log(ib);
+        if (ia < ib || ia == -1 || ib == -1) {
+            res.push(element);
+        } else {
+            1 == 1;
         }
     }
 
@@ -116,6 +227,12 @@ function all_median_equals(n, values) {
     // return m;
 }
 
+function variable_to_index(s) {
+    var ret = s.charCodeAt(0);
+    ret -= 97;
+    return ret;
+}
+
 function get_variable_name(i) {
     return String.fromCharCode(97 + i - 1);
 }
@@ -140,6 +257,16 @@ function gen_empty_array(n) {
     }
     return res;
 }
+
+function gen_empty_array_with_len(len) {
+    var res = [];
+    for (let i = 0; i < len; i++) {
+        res.push(false);
+    }
+    return res;
+}
+
+
 
 function all_selection(n, values, s) {
     var h = half(n);
@@ -299,6 +426,10 @@ function generate_data_random(n) {
 
 }
 
+function deep_copy(o) {
+    return JSON.parse(JSON.stringify(o));
+}
+
 function copy_if(data, p) {
     var res = [];
     for (let i = 0; i < data.length; i++) {
@@ -313,6 +444,8 @@ function copy_if(data, p) {
 
 module.exports = {
     perm: perm,
+    perm_with_preconds: perm_with_preconds,
+    apply_precons: apply_precons,
     iota: iota,
     half: half,
     all_median_equals: all_median_equals,
@@ -324,6 +457,7 @@ module.exports = {
     ensure_values: ensure_values,
     gen_pairs: gen_pairs,
     gen_empty_array: gen_empty_array,
+    gen_empty_array_with_len: gen_empty_array_with_len,
     all_equal: all_equal,
     print_bool_arr: print_bool_arr,
     pair_equal: pair_equal,
@@ -335,7 +469,8 @@ module.exports = {
     generate_data_random: generate_data_random,
     copy_if: copy_if,
     equal_array: equal_array,
-
+    check_precondition: check_precondition,
+    deep_copy: deep_copy,
 }
 
 

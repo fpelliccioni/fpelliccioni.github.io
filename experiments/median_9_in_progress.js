@@ -1,7 +1,7 @@
-var assert = require('assert');
+// var assert = require('assert');
+const common = require('./common');
 
-g_total_comparissons = 0
-
+g_comparissons = 0
 
 // -----------------------------------------------------------------
 // // step 10.1.1
@@ -129,16 +129,6 @@ g_total_comparissons = 0
 // function select_4_7_ab_bc_dc_de_fb(a,b,c,d,e,f,g,r) {
 //     console.log('select_4_7_ab_bc_dc_de_fb **')
 
-//     var tmp = g_comparissons;
-//     assert(!r(b,a));
-//     assert(!r(c,b));
-//     assert(!r(c,d));
-//     assert(!r(e,d));
-//     assert(!r(b,f));
-//     g_comparissons = tmp;
-
-
-
 
 //     if ( ! r(d, a)) {
 //         if ( ! r(g, b)) {
@@ -249,16 +239,7 @@ g_total_comparissons = 0
 
 // step 10.1.1 (traductor)
 function select_3_7_ac_bc_de_ae_bd_af(a,b,c,d,e,f,g,r) {
-    // check_preconditions("ac_bc_de_ae_bd_af", a,b,c,d,e,f,g,r);
-    var tmp = g_comparissons;
-    assert(!r(c,a));
-    assert(!r(c,b));
-    assert(!r(d,d));
-    assert(!r(e,a));
-    assert(!r(d,b));
-    assert(!r(f,a));
-    g_comparissons = tmp;
-
+    common.check_precondition(...arguments);
     // return select_3_7_ab_ac_ad_eb_ef_fc(a,c,e,f,b,d,g,r);
 
 
@@ -371,14 +352,7 @@ function select_3_7_ac_bc_de_ae_bd_af(a,b,c,d,e,f,g,r) {
 
 // step 10.1.2 (traductor)
 function select_4_7_abd_cd_ce_fb(a,b,c,d,e,f,g,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,b));
-    assert(!r(d,c));
-    assert(!r(e,c));
-    assert(!r(b,f));
-    g_comparissons = tmp;
-    // return select_4_7_ab_bc_dc_de_fb(a,c,b,g,d,e,f,r);
+    common.check_precondition(...arguments);
 
     if ( ! r(c, a)) {
         if ( ! r(g, b)) {
@@ -607,14 +581,6 @@ function select_4_7_abd_cd_ce_fb(a,b,c,d,e,f,g,r) {
 // function select_4_7_ab_bc_de_dc_fb(a,b,c,d,e,f,g,r) {
 //     console.log('select_4_7_ab_bc_de_dc_fb')
 
-//     var tmp = g_comparissons;
-//     assert(!r(b,a));
-//     assert(!r(c,b));
-//     assert(!r(e,d));
-//     assert(!r(c,d));
-//     assert(!r(b,f));
-//     g_comparissons = tmp;
-
 //     if ( ! r(e, a)) {
 //         if ( ! r(g, b)) {
 //             if ( ! r(c, e)) {
@@ -692,15 +658,7 @@ function select_4_7_abd_cd_ce_fb(a,b,c,d,e,f,g,r) {
 
 // step 10.2.1 (traductor)
 function select_3_7_ac_bc_de_ae_db_af(a,b,c,d,e,f,g,r) {
-    var tmp = g_comparissons;
-    assert(!r(c,a));
-    assert(!r(c,b));
-    assert(!r(e,d));
-    assert(!r(e,a));
-    assert(!r(b,d));
-    assert(!r(f,a));
-    g_comparissons = tmp;
-    // return select_3_7_ab_ac_ad_eb_fe_fc(b,g,e,f,c,a,d,r);
+    common.check_precondition(...arguments);
 
     if ( ! r(g, b)) {
         if ( ! r(f, e)) {
@@ -815,14 +773,7 @@ function select_3_7_ac_bc_de_ae_db_af(a,b,c,d,e,f,g,r) {
 
 // step 10.2.2 (traductor)
 function select_4_7_ab_de_be_dc_fb(a,b,c,d,e,f,g,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(e,d));
-    assert(!r(e,b));
-    assert(!r(c,d));
-    assert(!r(b,f));
-    g_comparissons = tmp;
-    // return select_4_7_ab_bc_de_dc_fb(a,c,b,g,e,d,f,r);
+    common.check_precondition(...arguments);
 
     if ( ! r(c, a)) {
         if ( ! r(g, b)) {
@@ -904,15 +855,7 @@ function select_4_7_ab_de_be_dc_fb(a,b,c,d,e,f,g,r) {
 
 // step 9.1
 function select_4_8_abd_cd_ef_bf_ce(a,b,c,d,e,f,g,h,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,b));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(f,b));
-    assert(!r(e,c));
-    g_comparissons = tmp;
-
+    common.check_precondition(...arguments);
 
     if ( ! r(g, b)) {
         // select_4_8_abd_cd_ef_bf_ce_bg(a,b,c,d,e,f,g,h,r)     //elimino el primer elemento
@@ -927,14 +870,7 @@ function select_4_8_abd_cd_ef_bf_ce(a,b,c,d,e,f,g,h,r) {
 
 // step 9.2, ver si puedo usar select_4_8_abd_cd_ef_bf_ce() reordenando los parámetros
 function select_4_8_abd_cd_ef_bf_ec(a,b,c,d,e,f,g,h,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,b));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(f,b));
-    assert(!r(c,e));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(g, b)) {
         // select_4_8_abd_cd_ef_bf_ec_bg(a,b,c,d,e,f,g,h,r)     //elimino el primer elemento
@@ -949,13 +885,7 @@ function select_4_8_abd_cd_ef_bf_ec(a,b,c,d,e,f,g,h,r) {
 
 // step 8 (TODO: creo que esta mal el nombre del algoritmo)
 function select_4_8_abd_cd_ef_bf(a,b,c,d,e,f,g,h,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,b));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(f,b));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(e, c)) {
         return select_4_8_abd_cd_ef_bf_ce(a,b,c,d,e,f,g,h,r);
@@ -966,15 +896,7 @@ function select_4_8_abd_cd_ef_bf(a,b,c,d,e,f,g,h,r) {
 
 // step 7
 function select_4_9_abd_cd_efh_gh(a,b,c,d,e,f,g,h,i,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,b));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(h,f));
-    assert(!r(h,g));
-    g_comparissons = tmp;
-
+    common.check_precondition(...arguments);
 
     if ( ! r(f, b)) {
         return select_4_8_abd_cd_ef_bf(a,b,c,d,e,f,g,i,r);      // (TODO: creo que esta mal el nombre del algoritmo)
@@ -985,14 +907,7 @@ function select_4_9_abd_cd_efh_gh(a,b,c,d,e,f,g,h,i,r) {
 
 // step 6, like step 3, but using e, f, g and h
 function select_4_9_abd_cd_ef_gh(a,b,c,d,e,f,g,h,i,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,b));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    assert(!r(h,g));
-    g_comparissons = tmp;
-
+    common.check_precondition(...arguments);
 
     if ( ! r(h, f)) {
         return select_4_9_abd_cd_efh_gh(a,b,c,d,e,f,g,h,i,r);
@@ -1003,13 +918,7 @@ function select_4_9_abd_cd_ef_gh(a,b,c,d,e,f,g,h,i,r) {
 
 // step 5, like step 2, but using e, f, g and h
 function select_4_9_abd_cd_ef(a,b,c,d,e,f,g,h,i,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,b));
-    assert(!r(d,c));
-    assert(!r(f,e));
-    g_comparissons = tmp;
-
+    common.check_precondition(...arguments);
 
     if ( ! r(h, g)) {
         return select_4_9_abd_cd_ef_gh(a,b,c,d,e,f,g,h,i,r);
@@ -1020,11 +929,7 @@ function select_4_9_abd_cd_ef(a,b,c,d,e,f,g,h,i,r) {
 
 // step 4, like step 1, but using e, f, g and h
 function select_4_9_abd_cd(a,b,c,d,e,f,g,h,i,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,b));
-    assert(!r(d,c));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(f, e)) {
         return select_4_9_abd_cd_ef(a,b,c,d,e,f,g,h,i,r);
@@ -1035,12 +940,9 @@ function select_4_9_abd_cd(a,b,c,d,e,f,g,h,i,r) {
 
 // step 3
 function select_4_9_ab_cd(a,b,c,d,e,f,g,h,i,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    assert(!r(d,c));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
-    if ( ! r(d, b)) {
+    if (!r(d, b)) {
         return select_4_9_abd_cd(a,b,c,d,e,f,g,h,i,r);
     } else {
         return select_4_9_abd_cd(c,d,a,b,e,f,g,h,i,r);        
@@ -1049,9 +951,7 @@ function select_4_9_ab_cd(a,b,c,d,e,f,g,h,i,r) {
 
 // step 2
 function select_4_9_ab(a,b,c,d,e,f,g,h,i,r) {
-    var tmp = g_comparissons;
-    assert(!r(b,a));
-    g_comparissons = tmp;
+    common.check_precondition(...arguments);
 
     if ( ! r(d, c)) {
         return select_4_9_ab_cd(a,b,c,d,e,f,g,h,i,r);
@@ -1062,6 +962,8 @@ function select_4_9_ab(a,b,c,d,e,f,g,h,i,r) {
 
 // step 1
 function select_4_9(a,b,c,d,e,f,g,h,i,r) {
+    common.check_precondition(...arguments);
+    
     if ( ! r(b, a)) {
         return select_4_9_ab(a,b,c,d,e,f,g,h,i,r);
     } else {
@@ -1079,7 +981,7 @@ class Block {
 
 
 function lt(a, b) {
-    ++g_total_comparissons;
+    ++g_comparissons;
     console.log(`${b.time} < ${a.time} = ${!(a.time < b.time)}`);
     return a.time < b.time;
 }
@@ -1110,7 +1012,7 @@ module.exports = {
 //         lt);
 
 //     console.log(`median of 9: ${JSON.stringify(m)}`);
-//     console.log(`g_total_comparissons: ${g_total_comparissons}`);
+//     console.log(`g_comparissons: ${g_comparissons}`);
 // }
 
 // main();
