@@ -82,6 +82,26 @@ function perm(xs) {
     return ret;
 }
 
+function remove_pairs(pairs, to_remove) {
+    var res = [];
+
+    for (let i = 0; i < pairs.length; i++) {
+        var pair_l = pairs[i];
+        var pair_r = pair_l.slice().reverse();
+
+        var index_l = to_remove.findIndex(e => e[0] === pair_l[0] && e[1] === pair_l[1]);
+        var index_r = to_remove.findIndex(e => e[0] === pair_r[0] && e[1] === pair_r[1]);
+
+        if (index_l == -1 && index_r == -1) {
+            res.push(pair_l);
+        }
+    }
+
+    // res = remove_duplicates(res);
+    return res;
+}
+
+
 
 function apply_precons(values, preconds) {
     // var values_copy = values.slice();
@@ -442,10 +462,22 @@ function copy_if(data, p) {
     return res;
 }
 
+function get_max_comps(vtn, n, s) {
+    if (n in vtn) {
+        var max_comps = vtn[n][s];
+        return max_comps;
+    }
+    var t = s + 1;
+    var max_comps = n - t + (t - 1) * Math.ceil(Math.log2(n + 2 - t));
+    return max_comps;
+}
+
+
 module.exports = {
     perm: perm,
     perm_with_preconds: perm_with_preconds,
     apply_precons: apply_precons,
+    remove_pairs: remove_pairs,
     iota: iota,
     half: half,
     all_median_equals: all_median_equals,
@@ -471,6 +503,7 @@ module.exports = {
     equal_array: equal_array,
     check_precondition: check_precondition,
     deep_copy: deep_copy,
+    get_max_comps: get_max_comps,
 }
 
 

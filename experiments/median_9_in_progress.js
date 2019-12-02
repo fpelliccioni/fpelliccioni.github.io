@@ -854,6 +854,7 @@ function select_4_7_ab_de_be_dc_fb(a,b,c,d,e,f,g,r) {
 // -----------------------------------------------------------------
 
 // step 9.1
+// [2, 7]
 function select_4_8_abd_cd_ef_bf_ce(a,b,c,d,e,f,g,h,r) {
     common.check_precondition(...arguments);
 
@@ -869,7 +870,8 @@ function select_4_8_abd_cd_ef_bf_ce(a,b,c,d,e,f,g,h,r) {
 }
 
 // step 9.2, ver si puedo usar select_4_8_abd_cd_ef_bf_ce() reordenando los parámetros
-function select_4_8_abd_cd_ef_bf_ec(a,b,c,d,e,f,g,h,r) {
+// [2, 7]
+function select_4_8_abd_cd_ef_bf_ec(a, b, c, d, e, f, g, h, r) {
     common.check_precondition(...arguments);
 
     if ( ! r(g, b)) {
@@ -884,6 +886,7 @@ function select_4_8_abd_cd_ef_bf_ec(a,b,c,d,e,f,g,h,r) {
 }
 
 // step 8 (TODO: creo que esta mal el nombre del algoritmo)
+// [3, 5]
 function select_4_8_abd_cd_ef_bf(a,b,c,d,e,f,g,h,r) {
     common.check_precondition(...arguments);
 
@@ -894,7 +897,11 @@ function select_4_8_abd_cd_ef_bf(a,b,c,d,e,f,g,h,r) {
     }
 }
 
+// 2,6 => V5(8)_[[1,2],[3,4],[2,4],[5,6],[2,6]] - 5 = 12 - 5 = 7      to remove: [8] done comps = 7  total comps = 14
+// 6,2 => V5(8)_[[1,2],[4,5],[6,7],[5,7],[5,2]] - 5 = 12 - 5 = 7      to remove: [4] done comps = 7  total comps = 14
+
 // step 7
+// [2, 6]
 function select_4_9_abd_cd_efh_gh(a,b,c,d,e,f,g,h,i,r) {
     common.check_precondition(...arguments);
 
@@ -906,7 +913,8 @@ function select_4_9_abd_cd_efh_gh(a,b,c,d,e,f,g,h,i,r) {
 }
 
 // step 6, like step 3, but using e, f, g and h
-function select_4_9_abd_cd_ef_gh(a,b,c,d,e,f,g,h,i,r) {
+// [6, 8]
+function select_4_9_abd_cd_ef_gh(a, b, c, d, e, f, g, h, i, r) {
     common.check_precondition(...arguments);
 
     if ( ! r(h, f)) {
@@ -917,7 +925,8 @@ function select_4_9_abd_cd_ef_gh(a,b,c,d,e,f,g,h,i,r) {
 }
 
 // step 5, like step 2, but using e, f, g and h
-function select_4_9_abd_cd_ef(a,b,c,d,e,f,g,h,i,r) {
+// [7, 8]
+function select_4_9_abd_cd_ef(a, b, c, d, e, f, g, h, i, r) {
     common.check_precondition(...arguments);
 
     if ( ! r(h, g)) {
@@ -928,6 +937,7 @@ function select_4_9_abd_cd_ef(a,b,c,d,e,f,g,h,i,r) {
 }
 
 // step 4, like step 1, but using e, f, g and h
+// [5, 6]
 function select_4_9_abd_cd(a,b,c,d,e,f,g,h,i,r) {
     common.check_precondition(...arguments);
 
@@ -938,7 +948,7 @@ function select_4_9_abd_cd(a,b,c,d,e,f,g,h,i,r) {
     }
 }
 
-// step 3
+// step 3 [2, 4]
 function select_4_9_ab_cd(a,b,c,d,e,f,g,h,i,r) {
     common.check_precondition(...arguments);
 
@@ -949,7 +959,7 @@ function select_4_9_ab_cd(a,b,c,d,e,f,g,h,i,r) {
     }
 }
 
-// step 2
+// step 2 [3, 4]
 function select_4_9_ab(a,b,c,d,e,f,g,h,i,r) {
     common.check_precondition(...arguments);
 
@@ -960,7 +970,7 @@ function select_4_9_ab(a,b,c,d,e,f,g,h,i,r) {
     }
 }
 
-// step 1
+// step 1 [1, 2]
 function select_4_9(a,b,c,d,e,f,g,h,i,r) {
     common.check_precondition(...arguments);
     

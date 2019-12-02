@@ -1,298 +1,112 @@
 const common = require('./common');
+const median9 = require('./median_9_in_progress');
+const median3 = require('./median_3_generated');
 
 g_comparissons = 0
 
-// step 11.1.1
-// 6 comparisons
-function select_4_9_ac_bc_deg_fg_ae_ah(a,b,c,d,e,f,g,h,i,r) {
-    common.check_precondition(...arguments);
-
-    if ( ! r(e, c)) {
-        if ( ! r(i, d)) {
-            if ( ! r(g, d)) {
-                if ( ! r(e, d)) {
-                    if ( ! r(g, e)) {
-                        if ( ! r(i, e)) {
-                            return e;
-                        } else {
-                            return i;
-                        }
-                    } else {
-                        if ( ! r(i, g)) {
-                            return g;
-                        } else {
-                            return i;
-                        }
-                    }
-                } else {
-                    if ( ! r(f, d)) {
-                        return d;
-                    } else {
-                        return f;
-                    }
-                }
-            } else {
-                if ( ! r(e, b)) {
-                    if ( ! r(g, e)) {
-                        if ( ! r(g, f)) {
-                            return f;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        if ( ! r(e, d)) {
-                            return d;
-                        } else {
-                            return e;
-                        }
-                    }
-                } else {
-                    if ( ! r(g, b)) {
-                        if ( ! r(g, f)) {
-                            return f;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        return b;
-                    }
-                }
-            }
-        } else {
-            if ( ! r(g, e)) {
-                if ( ! r(i, g)) {
-                    if ( ! r(g, b)) {
-                        if ( ! r(g, f)) {
-                            return f;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        return b;
-                    }
-                } else {
-                    if ( ! r(i, e)) {
-                        if ( ! r(i, f)) {
-                            return f;
-                        } else {
-                            return i;
-                        }
-                    } else {
-                        if ( ! r(e, d)) {
-                            return d;
-                        } else {
-                            return e;
-                        }
-                    }
-                }
-            } else {
-                if ( ! r(i, g)) {
-                    if ( ! r(i, e)) {
-                        if ( ! r(e, b)) {
-                            return e;
-                        } else {
-                            return b;
-                        }
-                    } else {
-                        if ( ! r(i, c)) {
-                            return i;
-                        } else {
-                            return c;
-                        }
-                    }
-                } else {
-                    if ( ! r(g, c)) {
-                        if ( ! r(g, d)) {
-                            return d;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        return c;
-                    }
-                }
-            }
-        }
-    } else {
-        if ( ! r(g, c)) {
-            if ( ! r(g, f)) {
-                if ( ! r(i, f)) {
-                    if ( ! r(f, c)) {
-                        if ( ! r(f, d)) {
-                            return d;
-                        } else {
-                            return f;
-                        }
-                    } else {
-                        if ( ! r(i, c)) {
-                            return c;
-                        } else {
-                            return i;
-                        }
-                    }
-                } else {
-                    if ( ! r(i, c)) {
-                        if ( ! r(i, d)) {
-                            return d;
-                        } else {
-                            return i;
-                        }
-                    } else {
-                        if ( ! r(f, c)) {
-                            return c;
-                        } else {
-                            return f;
-                        }
-                    }
-                }
-            } else {
-                if ( ! r(g, d)) {
-                    if ( ! r(i, c)) {
-                        if ( ! r(i, d)) {
-                            return d;
-                        } else {
-                            return i;
-                        }
-                    } else {
-                        return c;
-                    }
-                } else {
-                    if ( ! r(i, g)) {
-                        if ( ! r(g, b)) {
-                            return g;
-                        } else {
-                            return b;
-                        }
-                    } else {
-                        if ( ! r(i, c)) {
-                            return i;
-                        } else {
-                            return c;
-                        }
-                    }
-                }
-            }
-        } else {
-            if ( ! r(f, c)) {
-                if ( ! r(i, c)) {
-                    if ( ! r(c, b)) {
-                        return c;
-                    } else {
-                        return b;
-                    }
-                } else {
-                    if ( ! r(g, e)) {
-                        if ( ! r(i, g)) {
-                            return i;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        if ( ! r(i, e)) {
-                            return i;
-                        } else {
-                            return e;
-                        }
-                    }
-                }
-            } else {
-                if ( ! r(i, g)) {
-                    if ( ! r(i, f)) {
-                        if ( ! r(g, f)) {
-                            return g;
-                        } else {
-                            return f;
-                        }
-                    } else {
-                        if ( ! r(i, e)) {
-                            return i;
-                        } else {
-                            return e;
-                        }
-                    }
-                } else {
-                    if ( ! r(g, f)) {
-                        if ( ! r(i, f)) {
-                            return i;
-                        } else {
-                            return f;
-                        }
-                    } else {
-                        if ( ! r(g, e)) {
-                            return g;
-                        } else {
-                            return e;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-// step 11.1.2 TODO
-
-// step 11.2.1 TODO
-function select_4_9_ac_bc_de_gh_ae_ah(a,b,c,d,e,f,g,h,i,r) {
+// step 13.1.1
+function select_4_7_ac_bc_de_cf_df(a, b, c, d, e, f, g, r) {
     common.check_precondition(...arguments);
     
 }
 
-// step 11.2.2 TODO
+// step 12.1.1
+// [2,3],[1,3],[4,5],[6,7],[7,8],[3,6],
+// [4,6]
 
-// step 10.1
-function select_5_10_abd_cd_efh_gh_bf(a,b,c,d,e,f,g,h,i,j,r) {
+// 4,6 => V5(7)_[[2,3],[1,3],[4,5],[3,6],[4,6]] - 5 = 10 - 5 = 5      to remove: [7,8] done comps = 7  total comps = 12
+// 6,4 => V2(4)_[[3,4],[3,2]] - 2 = 4 - 2 = 2      to remove: [1,2,3,5,8] done comps = 7  total comps = 9
+//TODO: chequear en papel por 6,4 a ver si está bien que elimine tantos...
+function select_4_9_ac_bc_de_gh_fg_cf(a,b,c,d,e,f,g,h,i,r) {
     common.check_precondition(...arguments);
-
-    if ( ! r(i, b)) {
-        //select_5_10_abd_cd_efh_gh_bf_bi(a,b,c,d,e,f,g,h,i,j,r); //remuevo a
-        //select_4_9_bd_cd_efh_gh_bf_bi(b,c,d,e,f,g,h,i,j,r);
-        return select_4_9_ac_bc_deg_fg_ae_ah(b,c,d,e,f,g,h,i,j,r);
+    
+    if (!r(f, d)) {
+        // select_4_9_ac_bc_de_gh_fg_cf_df(a,b,c,d,e,f,g,h,i,r); // to remove: [7,8]->[g,h]
+        // select_4_7_ac_bc_de_cf_df(a,b,c,d,e,f,i,r);
+        return select_4_7_ac_bc_de_cf_df(a,b,c,d,e,f,i,r);
     } else {
-        //TODO
-        return null;
+        // select_4_9_ac_bc_de_gh_fg_cf_fd(a,b,c,d,e,f,g,h,i,r);   //to remove: [1,2,3,5,8]
+        // select_1_4_ab_cd_ca(d,f,g,i,r);
+        return median3.select_1_3_ab(f,g,i,r);
     }
 }
 
-
-// step 10.2
-function select_5_10_abd_cd_ef_hi_bf(a,b,c,d,e,f,g,h,i,j,r) {
+// step 12.1.2
+function select_4_9_ac_bc_de_gh_fg_fc(a,b,c,d,e,f,g,h,i,r) {
     common.check_precondition(...arguments);
-
-    if ( ! r(i, b)) {
-        //select_5_10_abd_cd_ef_hi_bf_bi(a,b,c,d,e,f,g,h,i,j,r); //remuevo a
-        return select_4_9_ac_bc_de_gh_ae_ah(b,c,d,e,f,g,h,i,j,r);
+    
+    if (!r(e, c)) {
     } else {
-        //TODO
-        return null;
+    }
+}
+
+// step 11.1
+// [2,3],[1,3],[4,5],[6,7],[7,8],
+// [3, 6],
+function select_4_9_ac_bc_de_gh_fg(a,b,c,d,e,f,g,h,i,r) {
+    common.check_precondition(...arguments);
+    
+    if (!r(f, c)) {
+        return select_4_9_ac_bc_de_gh_fg_cf(a,b,c,d,e,f,g,h,i,r);
+    } else {
+        return select_4_9_ac_bc_de_gh_fg_fc(a,b,c,d,e,f,g,h,i,r);
+    }
+}
+
+// step 10
+// V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4], [7, 8]]
+// [7, 1], 
+// 1,7 => V5(9)_[[2,3],[4,5],[7,8],[1,3],[6,7]] - 5 = 14 - 5 = 9      to remove: [1] done comps = 7  total comps = 16
+// 7,1 => V5(9)_[[1,2],[3,4],[5,6],[7,8],[2,4]] - 5 = 14 - 5 = 9      to remove: [7] done comps = 7  total comps = 16
+
+function select_5_10_abd_cd_ef_hi_gh(a, b, c, d, e, f, g, h, i, j, r) {
+    common.check_precondition(...arguments);
+    
+    if (!r(g, a)) {
+        // return select_5_10_abd_cd_ef_hi_gh_ag(a,b,c,d,e,f,g,h,i,j,r);   //remuevo 1->a
+        // return select_4_9_bd_cd_ef_hi_gh(b,c,d,e,f,g,h,i,j,r);           // corrimiento
+        return select_4_9_ac_bc_de_gh_fg(b,c,d,e,f,g,h,i,j,r);
+    } else {
+        // return select_5_10_abd_cd_ef_hi_gh_ga(a,b,c,d,e,f,h,g,i,j,r);   //remuevo 7->g
+        // return select_4_9_abd_cd_ef_hi(a,b,c,d,e,f,h,i,j,r);             //corrimiento
+        return median9.select_4_9_abd_cd_ef_gh(a,b,c,d,e,f,h,i,j,r);
     }
 }
 
 // step 9
-function select_5_11_abd_cd_efh_gh_ij_bf(a,b,c,d,e,f,g,h,i,j,k,r) {
+// V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4]]
+// [7, 8], 
+function select_5_10_abd_cd_ef_hi(a, b, c, d, e, f, g, h, i, j, r) {
     common.check_precondition(...arguments);
-
-    if ( ! r(j, h)) {
-        //select_5_11_abd_cd_efh_gh_ij_bf_hj(a,b,c,d,e,f,g,h,i,j,k,r);  //remuevo j
-        return select_5_10_abd_cd_efh_gh_bf(a,b,c,d,e,f,g,h,i,k,r);
+    
+    if (!r(h, g)) {
+        return select_5_10_abd_cd_ef_hi_gh(a,b,c,d,e,f,g,h,i,j,r);
     } else {
-        //select_5_11_abd_cd_efh_gh_ij_bf_hj(a,b,c,d,e,f,g,h,i,j,k,r);  //remuevo h
-        return select_5_10_abd_cd_ef_hi_bf(a,b,c,d,e,f,g,i,j,k,r);
+        return select_5_10_abd_cd_ef_hi_gh(a,b,c,d,e,f,h,g,i,j,r);
     }
 }
 
 // step 8
-function select_5_11_abd_cd_efh_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
+// 4,8 => V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4]] - 5 = 16 - 5 = 11      to remove: [8] done comps = 8  total comps = 19
+// 8,4 => V6(10)_[[1,2],[4,5],[6,7],[8,9],[5,7]] - 5 = 16 - 5 = 11      to remove: [4] done comps = 8  total comps = 19
+
+// [4, 8]
+
+function select_5_11_abd_cd_efh_gh_ij(a, b, c, d, e, f, g, h, i, j, k, r) {
     common.check_precondition(...arguments);
 
-    if ( ! r(f, b)) {
-        return select_5_11_abd_cd_efh_gh_ij_bf(a,b,c,d,e,f,g,h,i,j,k,r);
+    if ( ! r(h, d)) {
+        // return select_5_11_abd_cd_efh_gh_ij_dh(a,b,c,d,e,f,g,h,i,j,k,r); //remuevo 8->h
+        return select_5_10_abd_cd_ef_hi(a,b,c,d,e,f,g,i,j,k,r);
     } else {
-        return select_5_11_abd_cd_efh_gh_ij_bf(e,f,g,h,a,b,c,d,i,j,k,r);        
+        //TODO: comprobar si es correcto.
+        // return select_5_11_abd_cd_efh_gh_ij_dh(e,f,g,h,a,b,c,d,i,j,k,r); //remuevo 4->d
+        return select_5_10_abd_cd_ef_hi(e,f,g,h,a,b,c,i,j,k,r);
     }
 }
 
 // step 7
+// [6, 8]
 function select_5_11_abd_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
     common.check_precondition(...arguments);
 
@@ -305,6 +119,7 @@ function select_5_11_abd_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
 
 
 // step 6
+// [2, 4]
 function select_5_11_ab_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
     common.check_precondition(...arguments);
 
@@ -316,6 +131,7 @@ function select_5_11_ab_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
 }
 
 // step 5
+// [9, 10]
 function select_5_11_ab_cd_ef_gh(a,b,c,d,e,f,g,h,i,j,k,r) {
     common.check_precondition(...arguments);
 
@@ -327,6 +143,7 @@ function select_5_11_ab_cd_ef_gh(a,b,c,d,e,f,g,h,i,j,k,r) {
 }
 
 // step 4
+// [7, 8]
 function select_5_11_ab_cd_ef(a,b,c,d,e,f,g,h,i,j,k,r) {
     common.check_precondition(...arguments);
 
@@ -339,6 +156,7 @@ function select_5_11_ab_cd_ef(a,b,c,d,e,f,g,h,i,j,k,r) {
 
 
 // step 3
+// [5, 6]
 function select_5_11_ab_cd(a,b,c,d,e,f,g,h,i,j,k,r) {
     common.check_precondition(...arguments);
 
@@ -350,6 +168,7 @@ function select_5_11_ab_cd(a,b,c,d,e,f,g,h,i,j,k,r) {
 }
 
 // step 2
+// [3, 4]
 function select_5_11_ab(a,b,c,d,e,f,g,h,i,j,k,r) {
     common.check_precondition(...arguments);
 
@@ -361,6 +180,7 @@ function select_5_11_ab(a,b,c,d,e,f,g,h,i,j,k,r) {
 }
 
 // step 1
+// [1, 2]
 function select_5_11(a,b,c,d,e,f,g,h,i,j,k,r) {
     common.check_precondition(...arguments);
 

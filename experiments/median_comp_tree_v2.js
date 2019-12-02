@@ -205,22 +205,6 @@ function remove_preconds(preconds, x) {
     return res;
 }
 
-function remove_pairs(pairs, to_remove) {
-    var res = [];
-
-    for (let i = 0; i < pairs.length; i++) {
-        var pair_l = pairs[i];
-        var pair_r = pair_l.slice().reverse();
-
-        var index_l = to_remove.findIndex(e => e[0] === pair_l[0] && e[1] === pair_l[1]);
-        var index_r = to_remove.findIndex(e => e[0] === pair_r[0] && e[1] === pair_r[1]);
-
-        if (index_l == -1 && index_r == -1) {
-            res.push(pair_l);
-        }
-    }
-    return res;
-}
 
 function manage_preconditions(preconds, rn) {
 
@@ -228,6 +212,9 @@ function manage_preconditions(preconds, rn) {
         const e = Number(rn[j]);
         preconds = remove_preconds(preconds, e);
     }
+
+    //sort descending order
+    rn.sort((a, b) => (a > b ? -1 : 1))
 
     for (let j = 0; j < rn.length; j++) {
         const x = Number(rn[j]);
@@ -242,18 +229,10 @@ function manage_preconditions(preconds, rn) {
         }
     }
 
+    preconds = common.remove_duplicates(preconds);
     return preconds;
 }
 
-function get_max_comps(vtn, n, s) {
-    if (n in vtn) {
-        var max_comps = vtn[n][s];
-        return max_comps;
-    }
-    var t = s + 1;
-    var max_comps = n - t + (t - 1) * Math.ceil(Math.log2(n + 2 - t));
-    return max_comps;
-}
 
 function temporal_analysis_pair(values, pair, counted_nums_orig, n, s, preconds, vtn) {
     // console.log(JSON.stringify(pair));
@@ -263,9 +242,9 @@ function temporal_analysis_pair(values, pair, counted_nums_orig, n, s, preconds,
 
     values_copy = common.remove_values(values_copy, pair);
 
-    // if (pair[0] == 3 && pair[1] == 4) {
-    //     console.log();
-    // }
+    if (pair[0] == 6 && pair[1] == 4) {
+        console.log();
+    }
 
     // if (pair[0] == 3 && pair[1] == 4) {
     //     console.log();
@@ -276,7 +255,7 @@ function temporal_analysis_pair(values, pair, counted_nums_orig, n, s, preconds,
         return [null, `${pair} => incompatible pair`];
     }
 
-    var max_comps = get_max_comps(vtn, n, s); //vtn[n][s];
+    var max_comps = common.get_max_comps(vtn, n, s); //vtn[n][s];
 
     var counted_nums = count_numbers_at(values_copy, s);
     // var rn = removed_numbers(counted_nums_orig, counted_nums);
@@ -291,7 +270,6 @@ function temporal_analysis_pair(values, pair, counted_nums_orig, n, s, preconds,
     for (let j = 0; j < rn.length; j++) {
         const e = Number(rn[j]);
         const mp = minimum_pos(values_copy, e);
-        // preconds_copy = manage_preconditions(preconds_copy, e);
         n_new--;
         if (mp < s) {
             s_new--;
@@ -302,7 +280,7 @@ function temporal_analysis_pair(values, pair, counted_nums_orig, n, s, preconds,
 
 
     // var comps_new = vtn[n_new][s_new]
-    var comps_new = get_max_comps(vtn, n_new, s_new); //vtn[n][s];
+    var comps_new = common.get_max_comps(vtn, n_new, s_new); //vtn[n][s];
 
 
     var ret = comps_new - useful_comps;
@@ -442,62 +420,114 @@ function tree(n, comps, s) {
     // ];
 
 
-    // ---------------------------------------------------------------------------------
-    // n=11
+    // // ---------------------------------------------------------------------------------
+    // // n=11
 
-    var preconds = [
-        [1, 2], [3, 4], [5, 6], [7, 8], [9, 10],
-        [2, 4],
-        [6, 8],
-        ];
+    // var preconds = [
+    //     [1, 2], [3, 4], [5, 6], [7, 8], [9, 10],
+    //     [2, 4],
+    //     [6, 8],
+    //     ];
 
-    // 4,8 => V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4]] - 5 = 16 - 5 = 11      to remove: [8] done comps = 8  total comps = 19
-    // 8,4 => V6(10)_[[1,2],[4,5],[6,7],[8,9],[5,7]] - 5 = 16 - 5 = 11      to remove: [4] done comps = 8  total comps = 19
-        
+    // // 4,8 => V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4]] - 5 = 16 - 5 = 11      to remove: [8] done comps = 8  total comps = 19
+    // // 8,4 => V6(10)_[[1,2],[4,5],[6,7],[8,9],[5,7]] - 5 = 16 - 5 = 11      to remove: [4] done comps = 8  total comps = 19
+         
+    // console.log(preconds.length);
 
-    console.log(preconds.length);
+    // pairs = common.remove_pairs(pairs, preconds);
+    // console.log(JSON.stringify(pairs));
+    // console.log("-----------------------------------------");
 
-    pairs = remove_pairs(pairs, preconds);
-    console.log(JSON.stringify(pairs));
-    console.log("-----------------------------------------");
+    // // var values = common.perm_with_preconds(common.iota(n), preconds);
+    // // console.log(values.length);
+    // // values = common.apply_precons(values, preconds);
+    // // console.log(values.length);
+    // // console.log(JSON.stringify(values));
+
+ 
+    // var contents = fs.readFileSync('values11.txt', 'utf8');
+    // var values = JSON.parse(contents);
+    // console.log(values.length);
+    // values = common.apply_precons(values, preconds);
+    // console.log(values.length);
+    
+
+    // // ---------------------------------------------------------------------------------
+    // // n=10
+
+    // var preconds = [
+    //     [1,2],[3,4],[5,6],[8,9],[2,4],
+    //     [7,8],   // Lo elijo porque es una comparación típica, ver paper Nosita
+    // ];
+
+    // // var preconds = [
+    // //     [1,2],[4,5],[6,7],[8,9],[5,7],
+    // // ];
+
+    // console.log(preconds.length);
+
+    // pairs = common.remove_pairs(pairs, preconds);
+    // console.log(JSON.stringify(pairs));
+    // console.log("-----------------------------------------");
 
     // var values = common.perm_with_preconds(common.iota(n), preconds);
     // console.log(values.length);
     // values = common.apply_precons(values, preconds);
     // console.log(values.length);
-    // console.log(JSON.stringify(values));
+    // // console.log(JSON.stringify(values));
 
  
-    var contents = fs.readFileSync('values11.txt', 'utf8');
-    var values = JSON.parse(contents);
+    // // var contents = fs.readFileSync('values11.txt', 'utf8');
+    // // var values = JSON.parse(contents);
+    // // console.log(values.length);
+    // // values = common.apply_precons(values, preconds);
+    // // console.log(values.length);
+
+    
+    // // Según el script [4, 7] es mejor, pero elijo [1, 7] porque da resultados más parejos
+    // // 1,7 => V5(9)_[[2,3],[4,5],[7,8],[1,3],[6,7]] - 5 = 14 - 5 = 9      to remove: [1] done comps = 7  total comps = 16
+    // // 7,1 => V5(9)_[[1,2],[3,4],[5,6],[7,8],[2,4]] - 5 = 14 - 5 = 9      to remove: [7] done comps = 7  total comps = 16
+
+
+
+    
+    // ---------------------------------------------------------------------------------
+    // n=9
+
+    // 1,7
+    var preconds = [
+        [2,3],[4,5],[7,8],[1,3],[6,7]
+        [3, 6],
+        // [6, 3],
+    ];
+
+
+    // 7,1
+    // var preconds = [
+    //     [1,2],[3,4],[5,6],[7,8],[2,4]
+    //     // [6, 8],
+    // ];
+
+    console.log(preconds.length);
+
+    pairs = common.remove_pairs(pairs, preconds);
+    console.log(JSON.stringify(pairs));
+    console.log("-----------------------------------------");
+
+    var values = common.perm_with_preconds(common.iota(n), preconds);
     console.log(values.length);
     values = common.apply_precons(values, preconds);
     console.log(values.length);
-    
+    // console.log(JSON.stringify(values));
+
+        
+    //----------------------------------------------------------
+
+
+
+
 
     temporal_analysis(0, n, values, pairs, 0, comps, s, preconds, vtn);    
-
-
-    // n=7   [[1,2],[3,4],[2,4],[4,5]]
-            // 4,5 => V4(6) - 4 = 8 - 4 = 4
-            // 5,4 => V4(6) - 2 = 8 - 2 = 6
-    
-    // n=9   [[1,2],[3,4],[2,4],[5,6],[7,8],[6,8],[1,5]]
-            // 1,5 => V4(8) - 6 = 12 - 6 = 6
-            // 5,1 => V4(8) - 6 = 12 - 6 = 6
-
-    // n=8   [[1,2],[3,4],[2,4],[5,6],[7,8],[6,8],[1,5]]
-            // 1,5 => V4(8) - 6 = 12 - 6 = 6
-            // 5,1 => V4(8) - 6 = 12 - 6 = 6
-            
-
-
-    // --------------------------------------------------------------------------
-    // console.log(res[0]);
-
-    // var rev = res[1].reverse();
-    // console.log(rev);
-    // console.log(JSON.stringify(rev));
 }
 
 function main() {
@@ -506,14 +536,14 @@ function main() {
         // [5, 6, undefined],
         // [7, 10, undefined],
         // [8, 12, 4],
-        // [9, 14, undefined],
-        // [10, 16],
-        [11, 20, undefined],
+        [9, 14, undefined],
+        // [10, 16, 5],
+        // [11, 20, undefined],
     ];
 
     for (let i = 0; i < tests.length; i++) {
         const e = tests[i];
-        tree(e[0], e[1]);
+        tree(e[0], e[1], e[2]);
     }
 }
 
