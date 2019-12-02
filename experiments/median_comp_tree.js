@@ -410,7 +410,7 @@ function count_numbers_at(values, s) {
 
 }
 
-// function tree(n, comps, s) {
+// function tree_exportable(n, comps, s) {
 
 //     if (s == undefined) {
 //         s = common.half(n);         
@@ -1065,7 +1065,7 @@ function count_numbers_at(values, s) {
 
 
 
-function tree(n, s, preconds) {
+function tree_exportable(n, s, preconds) {
     const vtn = {
         1: [0],
         2: [1,1],
@@ -1268,7 +1268,7 @@ function main() {
         var s = e[0] - 1;
         var n = e[1];
         var preconds = e[2];
-        var res = tree(n, s, preconds);
+        var res = tree_exportable(n, s, preconds);
 
         if (res.length == 0) {
             console.log(`index: ${i} invalid: ${s+1}, ${n}, ${JSON.stringify(preconds)}`)
@@ -1468,12 +1468,17 @@ function main() {
 //     ];
 //     for (let i = 0; i < tests.length; i++) {
 //         const e = tests[i];
-//         tree(e[0], e[1], e[2]);
+//         tree_exportable(e[0], e[1], e[2]);
 //     }
 // }
 
-main();
+// main();
 
+
+module.exports = {
+    recursive_v2: recursive_v2,
+    tree_exportable: tree_exportable,
+}
 
 
 // ------------------------------------------------------------------------

@@ -22,122 +22,6 @@ function complete_empty_levels(level, cmp_n, cmp_max) {
     return [true, nodes];
 }
 
-function recursive_v2(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cmp_max, s) {
-    var nodes = [];
-
-    // var used = used_par.slice();
-    var used = common.deep_copy(used_par);
-
-    // var first_not_used_min = used.indexOf(false);
-    // var first_not_used = first_not_used_min;
-
-    // var medians_all = common.all_median(n, values);
-    var medians_all = common.all_selection(n, values, s);
-
-    var possible_pairs = common.get_pairs(pairs, used, medians_all);
-
-    if (medians_all.length <= 1) {
-        console.log("Opaaaaaa 3");
-    }
-
-    for (let i = 0; i < possible_pairs.length; ++i) {
-        const first_not_used = possible_pairs[i];
-            
-        used[first_not_used] = true;
-        var selected_left = pairs[first_not_used];
-        var selected_right = selected_left.slice().reverse();
-        
-        var new_values_left = common.remove_values(values, selected_left);
-        var new_values_right = common.remove_values(values, selected_right);
-
-        ++cmp_n;
-        ++__try;
-
-        if (__try % 100000 == 0) {
-            console.log(__try);
-            common.print_bool_arr(used);
-        }
-
-        // if (level == 7) {
-        //     if (selected_left[0] == 5 && selected_left[1] == 7) {
-        //         console.log();
-        //     }
-        // }
-
-        // if (__try >= 574300000) {
-        //     // [7,[5,7]]
-        //     if (level == 7) {
-        //         if (selected_left[0] == 5 && selected_left[1] == 7) {
-        //             console.log();
-        //         }
-        //     }
-        // }
-
-        var medians_left = common.all_selection(n, new_values_left, s);
-        var medians_right = common.all_selection(n, new_values_right, s);
-
-        // console.log(`level: ${level}. new_values_left: ${new_values_left.length}. new_values_right: ${new_values_right.length}. medians_left: ${medians_left.length}. medians_right: ${medians_right.length}`)
-
-        if (medians_left.length == 0 || medians_right.length == 0) {
-            // console.log("Opaaaaaa 1")
-            used[first_not_used] = false;
-            --cmp_n;
-            continue;
-        }
-        // if (medians_right.length == 0) {
-        //     console.log("Opaaaaaa 2")
-        // }
-
-        if (common.all_equal(medians_left) && common.all_equal(medians_right)) {
-            if (cmp_n != cmp_max) {
-                var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
-                var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
-                nodes.push(...res_right[1]);
-                nodes.push(...res_left[1]);
-                nodes.push([level, selected_left]);
-                return [true, nodes];
-            } else {
-                return [true, [[level, selected_left]]];
-            }
-        }
-
-        if (cmp_n == cmp_max) {
-            used[first_not_used] = false;
-            --cmp_n;
-            continue;
-        }
-
-        if (medians_left.length == 1) {
-            var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
-        } else {
-            var res_left = recursive_v2(suggested_pairs, level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max, s);
-            if ( ! res_left[0]) {
-                used[first_not_used] = false;
-                --cmp_n;
-                continue;
-            } 
-        }
-
-        if (medians_right.length == 1) {
-            var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
-        } else {
-            var res_right = recursive_v2(suggested_pairs, level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max, s);
-            if (!res_right[0]) {
-                used[first_not_used] = false;
-                --cmp_n;
-                continue;
-            }
-        }
-
-        nodes.push(...res_right[1]);
-        nodes.push(...res_left[1]);
-        nodes.push([level, selected_left]);
-        return [true, nodes];
-    }
-
-    return false, [];
-}
-
 function count_numbers_at(values, s) {
     var d = {};
     for (let i = 0; i < values.length; i++) {
@@ -420,74 +304,74 @@ function tree(n, comps, s) {
     // ];
 
 
-    // // ---------------------------------------------------------------------------------
-    // // n=11
-
-    // var preconds = [
-    //     [1, 2], [3, 4], [5, 6], [7, 8], [9, 10],
-    //     [2, 4],
-    //     [6, 8],
-    //     ];
-
-    // // 4,8 => V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4]] - 5 = 16 - 5 = 11      to remove: [8] done comps = 8  total comps = 19
-    // // 8,4 => V6(10)_[[1,2],[4,5],[6,7],[8,9],[5,7]] - 5 = 16 - 5 = 11      to remove: [4] done comps = 8  total comps = 19
-         
-    // console.log(preconds.length);
-
-    // pairs = common.remove_pairs(pairs, preconds);
-    // console.log(JSON.stringify(pairs));
-    // console.log("-----------------------------------------");
-
-    // // var values = common.perm_with_preconds(common.iota(n), preconds);
-    // // console.log(values.length);
-    // // values = common.apply_precons(values, preconds);
-    // // console.log(values.length);
-    // // console.log(JSON.stringify(values));
-
- 
-    // var contents = fs.readFileSync('values11.txt', 'utf8');
-    // var values = JSON.parse(contents);
-    // console.log(values.length);
-    // values = common.apply_precons(values, preconds);
-    // console.log(values.length);
-    
-
     // ---------------------------------------------------------------------------------
-    // n=10
+    // n=11
 
     var preconds = [
-        [1,2],[3,4],[5,6],[8,9],[2,4],
-        [7,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
-        [6,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
-    ];
+        [1, 2], [3, 4], [5, 6], [7, 8], [9, 10],
+        [2, 4],
+        [6, 8],
+        ];
 
-    // var preconds = [
-    //     [1,2],[4,5],[6,7],[8,9],[5,7],
-    // ];
-
+    // 4,8 => V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4]] - 5 = 16 - 5 = 11      to remove: [8] done comps = 8  total comps = 19
+    // 8,4 => V6(10)_[[1,2],[4,5],[6,7],[8,9],[5,7]] - 5 = 16 - 5 = 11      to remove: [4] done comps = 8  total comps = 19
+         
     console.log(preconds.length);
 
     pairs = common.remove_pairs(pairs, preconds);
     console.log(JSON.stringify(pairs));
     console.log("-----------------------------------------");
 
-    var values = common.perm_with_preconds(common.iota(n), preconds);
-    console.log(values.length);
-    values = common.apply_precons(values, preconds);
-    console.log(values.length);
-    // console.log(JSON.stringify(values));
-
- 
-    // var contents = fs.readFileSync('values11.txt', 'utf8');
-    // var values = JSON.parse(contents);
+    // var values = common.perm_with_preconds(common.iota(n), preconds);
     // console.log(values.length);
     // values = common.apply_precons(values, preconds);
     // console.log(values.length);
+    // console.log(JSON.stringify(values));
+
+ 
+    var contents = fs.readFileSync('values11.txt', 'utf8');
+    var values = JSON.parse(contents);
+    console.log(values.length);
+    values = common.apply_precons(values, preconds);
+    console.log(values.length);
+    
+
+    // // ---------------------------------------------------------------------------------
+    // // n=10
+
+    // var preconds = [
+    //     [1,2],[3,4],[5,6],[8,9],[2,4],
+    //     [7,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
+    //     [6,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
+    // ];
+
+    // // var preconds = [
+    // //     [1,2],[4,5],[6,7],[8,9],[5,7],
+    // // ];
+
+    // console.log(preconds.length);
+
+    // pairs = common.remove_pairs(pairs, preconds);
+    // console.log(JSON.stringify(pairs));
+    // console.log("-----------------------------------------");
+
+    // var values = common.perm_with_preconds(common.iota(n), preconds);
+    // console.log(values.length);
+    // values = common.apply_precons(values, preconds);
+    // console.log(values.length);
+    // // console.log(JSON.stringify(values));
+
+ 
+    // // var contents = fs.readFileSync('values11.txt', 'utf8');
+    // // var values = JSON.parse(contents);
+    // // console.log(values.length);
+    // // values = common.apply_precons(values, preconds);
+    // // console.log(values.length);
 
     
-    // Según el script [4, 7] es mejor, pero elijo [1, 7] porque da resultados más parejos
-    // 1,7 => V5(9)_[[2,3],[4,5],[7,8],[1,3],[6,7]] - 5 = 14 - 5 = 9      to remove: [1] done comps = 7  total comps = 16
-    // 7,1 => V5(9)_[[1,2],[3,4],[5,6],[7,8],[2,4]] - 5 = 14 - 5 = 9      to remove: [7] done comps = 7  total comps = 16
+    // // Según el script [4, 7] es mejor, pero elijo [1, 7] porque da resultados más parejos
+    // // 1,7 => V5(9)_[[2,3],[4,5],[7,8],[1,3],[6,7]] - 5 = 14 - 5 = 9      to remove: [1] done comps = 7  total comps = 16
+    // // 7,1 => V5(9)_[[1,2],[3,4],[5,6],[7,8],[2,4]] - 5 = 14 - 5 = 9      to remove: [7] done comps = 7  total comps = 16
 
 
 
@@ -561,8 +445,8 @@ function main() {
         // [7, 10, undefined],
         // [8, 12, 4],
         // [9, 14, undefined],
-        [10, 16, 5],
-        // [11, 20, undefined],
+        // [10, 16, 5],
+        [11, 20, undefined],
     ];
 
     for (let i = 0; i < tests.length; i++) {
