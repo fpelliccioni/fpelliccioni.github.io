@@ -4,7 +4,7 @@
 
 var fs = require('fs');
 const common = require('./common');
-const tree_exportable = require('./median_comp_tree');
+const tree_exportable = require('./median_comp_tree_reuse');
 
 
 var __try = 0;
@@ -181,12 +181,68 @@ function temporal_analysis_pair(values, pair, n, s, preconds, vtn) {
     return [n_new, s_new, preconds_copy, rn, ret, done_comps, ret + done_comps];
 }
 
-function temporal_analysis(level, n, values, pairs, s, preconds, vtn) {
-    console.log(`${'    '.repeat(level)} Level ${level} - Processing V${s + 1}(${n})_${JSON.stringify(preconds)}`);
+function process_part(level, pair, values, n, s, preconds, vtn) {
+    console.log(`${'    '.repeat(level)} Level ${level} - Pair ${JSON.stringify(pair)} ???`);
 
     if (n <= 7) {
-        return;
+        // console.log(`${'    '.repeat(level)} Level ${level} - Pair ${JSON.stringify(pair)} OK ***************`);
+        // return true;        //assume is Ok, for the moment
+
+        // console.log(`Skiping Level ${level + 1} - Pair: ${JSON.stringify(pair)} -- V${s + 1}(${n})_${JSON.stringify(preconds)}`);
+
+        var res = tree_exportable.tree_exportable(n, s, preconds);
+
+        if (res.length == 0) {
+            // console.log(`${'    '.repeat(level + 1)} INVALID -- Level ${level + 1} - Pair: ${JSON.stringify(pair)} -- V${s + 1}(${n})_${JSON.stringify(preconds)}`);
+            // console.log(`index: ${i} invalid: ${s+1}, ${n}, ${JSON.stringify(preconds)}`)
+            return false;
+        } else {
+            var rev = res[1].reverse();
+            // console.log(`${'    '.repeat(level)} Level ${level} - Pair ${JSON.stringify(pair)} OK ***************`);
+            console.log(`${'    '.repeat(level + 1)} OK      -- Level ${level + 1} - Pair: ${JSON.stringify(pair)} -- V${s + 1}(${n})_${JSON.stringify(preconds)} ... ${JSON.stringify(rev)}`);
+            // console.log(JSON.stringify(rev));
+            return true;
+        }
     }
+    
+    var values_copy = common.deep_copy(values);
+    values_copy = common.remove_values(values_copy, pair);
+    // console.log(values.length);
+    // console.log(values_copy.length);
+
+    var pairs = common.gen_pairs(n);
+    pairs = common.remove_pairs(pairs, preconds);
+
+
+    // if (pair[0] == 5 && pair[1] == 7) {
+    //     console.log()
+    // }
+
+    var res = temporal_analysis(level + 1, n, values_copy, pairs, s, preconds, vtn);
+
+    if (res) {
+        console.log(`${'    '.repeat(level)} Level ${level} - Pair ${JSON.stringify(pair)} OK ***************`);
+        // console.log(`${'    '.repeat(level)} Level ${level} - Processing V${s + 1}(${n})_${JSON.stringify(preconds)}`);
+    }
+
+
+    return res;
+
+}
+
+function temporal_analysis(level, n, values, pairs, s, preconds, vtn) {
+    if (n <= 7) {
+        return false;
+    }
+
+    if (level >= 6) {
+        return false;
+    }
+
+    console.log(`${'    '.repeat(level)} Level ${level} - Processing V${s + 1}(${n})_${JSON.stringify(preconds)}`);
+    // if (level == 0) {
+    //     console.log(`${'    '.repeat(level)} Level ${level} - Processing V${s + 1}(${n})_${JSON.stringify(preconds)}`);
+    // }
 
     var to_sort = [];
 
@@ -194,6 +250,10 @@ function temporal_analysis(level, n, values, pairs, s, preconds, vtn) {
         // console.log(`done ${i} of ${pairs.length}`);
         const pair_left = pairs[i];
         const pair_right = pair_left.slice().reverse();
+
+        if (pair_left[0] == 1 && pair_left[1] == 9) {
+            console.log()
+        }
 
         var l_res = temporal_analysis_pair(values, pair_left, n, s, preconds, vtn);
         if (l_res == null) continue;
@@ -213,48 +273,34 @@ function temporal_analysis(level, n, values, pairs, s, preconds, vtn) {
 
     to_sort.sort((a, b) => (a[1] - b[1]))
 
+    // if (to_sort.length == 0) {
+    //     console.log("****************** to_sort.length == 0");
+    // }
 
+    var ok_elements = 0;
     for (let i = 0; i < to_sort.length; i++) {
         const e = to_sort[i];
         const pair_left = e[0];
         const pair_right = pair_left.slice().reverse();
 
-        var n_internal = e[2][0];
-        var s_internal = e[2][1];
-        var preconds_internal = e[2][2];
 
-        if (n_internal <= 7) {
-            // console.log(`Skiping Level ${level + 1} - Pair: ${JSON.stringify(pair_left)} -- V${s_internal + 1}(${n_internal})_${JSON.stringify(preconds_internal)}`);
+        // Left ----------------------------------------------------------------------------
+        var res_left = process_part(level, pair_left, values, e[2][0], e[2][1], e[2][2], vtn);
 
-            var res = tree_exportable.tree_exportable(n_internal, s_internal, preconds_internal);
-
-            if (res.length == 0) {
-                console.log(`${'    '.repeat(level + 1)} INVALID -- Level ${level + 1} - Pair: ${JSON.stringify(pair_left)} -- V${s_internal + 1}(${n_internal})_${JSON.stringify(preconds_internal)}`);
-                // console.log(`index: ${i} invalid: ${s+1}, ${n}, ${JSON.stringify(preconds_internal)}`)
-            } else {
-                var rev = res[1].reverse();
-                // console.log(JSON.stringify(rev));
-                console.log(`${'    '.repeat(level + 1)} OK      -- Level ${level + 1} - Pair: ${JSON.stringify(pair_left)} -- V${s_internal + 1}(${n_internal})_${JSON.stringify(preconds_internal)}`); //... ${JSON.stringify(rev)}
-            }
+        if (! res_left) {
             continue;
         }
-    
-        var values_left = common.deep_copy(values);
-        values_left = common.remove_values(values_left, pair_left);
-        // console.log(values.length);
-        // console.log(values_left.length);
 
-        var pairs_internal = common.gen_pairs(n);
-        pairs_internal = common.remove_pairs(pairs_internal, preconds_internal);
+        // Right ----------------------------------------------------------------------------
+        var res_right = process_part(level, pair_right, values, e[3][0], e[3][1], e[3][2], vtn);
 
-        console.log(`${'    '.repeat(level)} Level ${level} - Pair ${JSON.stringify(pair_left)}`);
-        temporal_analysis(level + 1, n_internal, values_left, pairs_internal, s_internal, preconds_internal, vtn);
-
-
-        // var values_right = common.deep_copy(values);
-        // values_right = common.remove_values(values_right, pair_right);
+        if (res_right) {
+            ok_elements++;
+            return true;
+        }
     }
 
+    return ok_elements > 0;
 }
 
 function data_to_file_name(n, preconds) {
@@ -265,7 +311,6 @@ function data_to_file_name(n, preconds) {
     preconds_str = preconds_str.replaceAll(',', '');
     return `values_${n}___${preconds_str}.txt`;
 }
-
 
 function tree(n, comps, s) {
 
@@ -330,15 +375,22 @@ function tree(n, comps, s) {
     // 8,4 => V6(10)_[[1,2],[4,5],[6,7],[8,9],[5,7]] - 5 = 16 - 5 = 11      to remove: [4] done comps = 8  total comps = 19
 
 
-    var preconds = [
-        [1,2],[3,4],[5,6],[8,9],[2,4],
-        [7,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
-        // [6,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
-    ];
+    // var preconds = [
+    //     [1,2],[3,4],[5,6],[8,9],[2,4],
+    //     [7,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
+    //     // [6,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
+    // ];
 
     // var preconds = [
     //     [1,2],[4,5],[6,7],[8,9],[5,7],
     // ];
+
+    var preconds = [
+        [1,2],[3,4],[5,6],[8,9],[2,4],
+        [6,9],
+        [6,2],
+        [7,10],
+    ];
 
     var fname = data_to_file_name(n, preconds);
 

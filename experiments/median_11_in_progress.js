@@ -4,405 +4,89 @@ const median3 = require('./median_3_generated');
 
 g_comparissons = 0
 
-// ------------------------------------------------------------------
-// step 13.1.1.1
-function select_4_6_ac_bc_de(a, b, c, d, e, f, r) {
-    common.check_precondition(...arguments);
 
-    if ( ! r(f, e)) {
-        if ( ! r(b, a)) {
-            if ( ! r(f, c)) {
-                if ( ! r(e, c)) {
-                    return e;
-                } else {
-                    return c;
-                }
-            } else {
-                if ( ! r(f, b)) {
-                    return f;
-                } else {
-                    return b;
-                }
-            }
-        } else {
-            if ( ! r(f, c)) {
-                if ( ! r(e, c)) {
-                    return e;
-                } else {
-                    return c;
-                }
-            } else {
-                if ( ! r(f, a)) {
-                    return f;
-                } else {
-                    return a;
-                }
-            }
-        }
-    } else {
-        if ( ! r(e, c)) {
-            if ( ! r(d, c)) {
-                if ( ! r(f, d)) {
-                    return f;
-                } else {
-                    return d;
-                }
-            } else {
-                if ( ! r(f, c)) {
-                    return f;
-                } else {
-                    return c;
-                }
-            }
-        } else {
-            if ( ! r(b, a)) {
-                if ( ! r(e, b)) {
-                    return e;
-                } else {
-                    return b;
-                }
-            } else {
-                if ( ! r(e, a)) {
-                    return e;
-                } else {
-                    return a;
-                }
-            }
-        }
-    }
+// --------------------------------------------------------------------------------------------------------------------
+
+// steps 13 ... TODO
+function select_2_7_ab_de_fg_eg_eb(a,b,c,d,e,f,g,r) {
+    common.check_precondition(...arguments);
+    //TODO    
 }
 
-// step 13.1.1.2
-function select_2_5_cd_ac(a, b, c, d, e, r) {
+// step 13
+// [1, 9]
+function select_4_9_abd_cd_gh_eh_eb_fi(a,b,c,d,e,f,g,h,i,r) {
     common.check_precondition(...arguments);
- 
-    if ( ! r(b, a)) {
-        if ( ! r(e, b)) {
-            if ( ! r(c, b)) {
-                if ( ! r(e, c)) {
-                    return c;
-                } else {
-                    return e;
-                }
-            } else {
-                if ( ! r(d, b)) {
-                    return b;
-                } else {
-                    return d;
-                }
-            }
-        } else {
-            if ( ! r(e, c)) {
-                if ( ! r(e, d)) {
-                    return d;
-                } else {
-                    return e;
-                }
-            } else {
-                if ( ! r(c, b)) {
-                    return b;
-                } else {
-                    return c;
-                }
-            }
-        }
+
+    if (!r(i, a)) {
+        return select_4_9_abd_cd_gh_eh_eb_fi_ai(a,b,c,d,e,f,g,h,i,r);
     } else {
-        if ( ! r(e, a)) {
-            if ( ! r(e, c)) {
-                return c;
-            } else {
-                return e;
-            }
-        } else {
-            return a;
-        }
+        //return select_5_10_abd_cd_ef_hi_fi_fb_gj_je(a,b,c,d,e,f,g,h,i,j,r);       //to remove: [10,7,4]
+        return select_2_7_ab_de_fg_eg_eb(a,b,c,e,f,h,i,r);
     }
-    
+
 }
 
-// ------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
-// step 12.1.1
-// [2,3],[4,5],[7,8],[1,3],[6,7],[3,6],
-// [5,6]
-
-// 5,6 => V5(6)_[[2,3],[4,5],[1,3]] - 3 = 7 - 3 = 4      to remove: [8,7,6] done comps = 7  total comps = 11
-//      [[0,[5,6]],[1,[1,2]],[2,[3,6]],[3,[3,5]],[3,[2,6]],[2,[3,6]],[3,[3,5]],[3,[1,6]],[1,[3,5]],[2,[3,4]],[3,[4,6]],[3,[3,6]],[2,[1,2]],[3,[2,5]],[3,[1,5]]]
-// 6,5 => V3(5)_[[3,4],[1,3]] - 2 = 6 - 2 = 4      to remove: [8,5,2,1] done comps = 7  total comps = 11
-//      [[0,[1,2]],[1,[2,5]],[2,[2,3]],[3,[3,5]],[3,[2,4]],[2,[3,5]],[3,[4,5]],[3,[2,3]],[1,[1,5]],[2,[3,5]],[3,[]],[3,[]],[2,[]],[3,[]],[3,[]]]
-function select_4_9_ac_bc_de_gh_fg_cf(a,b,c,d,e,f,g,h,i,r) {
+// step 12
+// [5, 10]
+// 5,10 => V5(9)_[[1,2],[3,4],[7,8],[2,4],[5,8],[5,2],[6,9]] - 7 = 14 - 7 = 7      to remove: [5] done comps = 9  total comps = 16
+// 10,5 => V4(7)_[[1,2],[4,5],[6,7],[5,7],[5,2]] - 5 = 10 - 5 = 5      to remove: [10,7,4] done comps = 9  total comps = 14
+function select_5_10_abd_cd_ef_hi_fi_fb_gj(a,b,c,d,e,f,g,h,i,j,r) {
     common.check_precondition(...arguments);
     
-    if (!r(f, e)) {
-        // select_4_9_ac_bc_de_gh_fg_cf_ef(a,b,c,d,e,f,g,h,i,r);       //to remove: [8,7,6]
-        return select_4_6_ac_bc_de(a,b,c,d,e,i,r);
+    if (!r(j, e)) {
+        //return select_5_10_abd_cd_ef_hi_fi_fb_gj_ej(a,b,c,d,e,f,g,h,i,j,r);       //to remove: [5]
+        return select_4_9_abd_cd_gh_eh_eb_fi(a,b,c,d,f,g,h,i,j,r);
     } else {
-        // select_4_9_ac_bc_de_gh_fg_cf_fe(a,b,c,d,e,f,g,h,i,r);       //to remove: [8,5,2,1]
-        return select_2_5_cd_ac(c,d,f,g,i,r);
+        //return select_5_10_abd_cd_ef_hi_fi_fb_gj_je(a,b,c,d,e,f,g,h,i,j,r);       //to remove: [10,7,4]
+        return select_2_7_ab_de_fg_eg_eb(a,b,c,e,f,h,i,r);
     }
 }
 
-
-// ------------------------------------------------------------------
-
-// step 13.1.2.1
-// [2,3],[5,6],[1,3],[3,4]
-function select_3_7_ac_bc_ef_cd(a,b,c,d,e,f,g,r) {
+// step 11
+// [7, 10], 
+function select_5_10_abd_cd_ef_hi_fi_fb(a,b,c,d,e,f,g,h,i,j,r) {
     common.check_precondition(...arguments);
     
-    if ( ! r(b, a)) {
-        if ( ! r(e, b)) {
-            if ( ! r(e, c)) {
-                if ( ! r(g, c)) {
-                    if ( ! r(e, d)) {
-                        if ( ! r(g, d)) {
-                            return d;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        if ( ! r(g, e)) {
-                            return e;
-                        } else {
-                            return g;
-                        }
-                    }
-                } else {
-                    return c;
-                }
-            } else {
-                if ( ! r(f, c)) {
-                    if ( ! r(g, c)) {
-                        return c;
-                    } else {
-                        if ( ! r(g, e)) {
-                            return g;
-                        } else {
-                            return e;
-                        }
-                    }
-                } else {
-                    if ( ! r(g, e)) {
-                        if ( ! r(g, f)) {
-                            return f;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        return e;
-                    }
-                }
-            }
-        } else {
-            if ( ! r(f, a)) {
-                if ( ! r(g, f)) {
-                    if ( ! r(f, b)) {
-                        if ( ! r(f, c)) {
-                            return c;
-                        } else {
-                            return f;
-                        }
-                    } else {
-                        if ( ! r(g, b)) {
-                            return b;
-                        } else {
-                            return g;
-                        }
-                    }
-                } else {
-                    if ( ! r(g, b)) {
-                        if ( ! r(g, c)) {
-                            return c;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        if ( ! r(f, b)) {
-                            return b;
-                        } else {
-                            return f;
-                        }
-                    }
-                }
-            } else {
-                if ( ! r(g, a)) {
-                    if ( ! r(g, b)) {
-                        return b;
-                    } else {
-                        return g;
-                    }
-                } else {
-                    return a;
-                }
-            }
-        }
+    if (!r(j, g)) {
+        return select_5_10_abd_cd_ef_hi_fi_fb_gj(a,b,c,d,e,f,g,h,i,j,r);
     } else {
-        if ( ! r(e, a)) {
-            if ( ! r(e, c)) {
-                if ( ! r(g, c)) {
-                    if ( ! r(e, d)) {
-                        if ( ! r(g, d)) {
-                            return d;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        if ( ! r(g, e)) {
-                            return e;
-                        } else {
-                            return g;
-                        }
-                    }
-                } else {
-                    return c;
-                }
-            } else {
-                if ( ! r(f, c)) {
-                    if ( ! r(g, c)) {
-                        return c;
-                    } else {
-                        if ( ! r(g, e)) {
-                            return g;
-                        } else {
-                            return e;
-                        }
-                    }
-                } else {
-                    if ( ! r(g, e)) {
-                        if ( ! r(g, f)) {
-                            return f;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        return e;
-                    }
-                }
-            }
-        } else {
-            if ( ! r(f, a)) {
-                if ( ! r(g, a)) {
-                    if ( ! r(f, c)) {
-                        if ( ! r(g, c)) {
-                            return c;
-                        } else {
-                            return g;
-                        }
-                    } else {
-                        if ( ! r(g, f)) {
-                            return f;
-                        } else {
-                            return g;
-                        }
-                    }
-                } else {
-                    return a;
-                }
-            } else {
-                if ( ! r(g, a)) {
-                    return a;
-                } else {
-                    if ( ! r(f, b)) {
-                        if ( ! r(g, f)) {
-                            return g;
-                        } else {
-                            return f;
-                        }
-                    } else {
-                        if ( ! r(g, b)) {
-                            return g;
-                        } else {
-                            return b;
-                        }
-                    }
-                }
-            }
-        }
+        return select_5_10_abd_cd_ef_hi_fi_fb_gj(a,b,c,d,e,f,j,h,i,g,r);
     }
 }
-
-// step 13.1.2.2
-// [2,3],[4,5],[7,8],[1,3],[6,7],[6,3],[4,3]
-function select_4_9_ac_bc_de_gh_fg_fc_dc(a,b,c,d,e,f,g,h,i,r) {
-    common.check_precondition(...arguments);
-    //TODO
-}
-
-// ------------------------------------------------------------------
-// step 12.1.2
-// [2,3],[4,5],[7,8],[1,3],[6,7],[6,3],
-// [3,4]
-// 3,4 => V4(7)_[[2,3],[5,6],[1,3],[3,4]] - 4 = 10 - 4 = 6      to remove: [6,5] done comps = 7  total comps = 13
-// 4,3 => V5(9)_[[2,3],[4,5],[7,8],[1,3],[6,7],[6,3],[4,3]] - 7 = 14 - 7 = 7      to remove: [] done comps = 7  total comps = 14
-function select_4_9_ac_bc_de_gh_fg_fc(a,b,c,d,e,f,g,h,i,r) {
-    common.check_precondition(...arguments);
-    
-    if (!r(d, c)) {
-        // return select_4_9_ac_bc_de_gh_fg_fc_cd(a,b,c,d,e,f,g,h,i,r);    //to remove: [6,5]
-        return select_3_7_ac_bc_ef_cd(a,b,c,d,g,h,i,r);
-    } else {
-        return select_4_9_ac_bc_de_gh_fg_fc_dc(a,b,c,d,e,f,g,h,i,r);
-    }
-}
-
-// ------------------------------------------------------------------
-
-// step 11.1
-// [2,3],[4,5],[7,8],[1,3],[6,7],
-// [3,6],
-function select_4_9_ac_bc_de_gh_fg(a,b,c,d,e,f,g,h,i,r) {
-    common.check_precondition(...arguments);
-    
-    if (!r(f, c)) {
-        return select_4_9_ac_bc_de_gh_fg_cf(a,b,c,d,e,f,g,h,i,r);
-    } else {
-        return select_4_9_ac_bc_de_gh_fg_fc(a,b,c,d,e,f,g,h,i,r);
-    }
-}
-
-
-// ------------------------------------------------------------------
-
 
 // step 10
-// V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4], [7, 8]]
-// [7, 1], 
-// 1,7 => V5(9)_[[2,3],[4,5],[7,8],[1,3],[6,7]] - 5 = 14 - 5 = 9      to remove: [1] done comps = 7  total comps = 16
-// 7,1 => V5(9)_[[1,2],[3,4],[5,6],[7,8],[2,4]] - 5 = 14 - 5 = 9      to remove: [7] done comps = 7  total comps = 16
-
-function select_5_10_abd_cd_ef_hi_gh(a, b, c, d, e, f, g, h, i, j, r) {
+// [6, 2], 
+function select_5_10_abd_cd_ef_hi_fi(a,b,c,d,e,f,g,h,i,j,r) {
     common.check_precondition(...arguments);
     
-    if (!r(g, a)) {
-        // return select_5_10_abd_cd_ef_hi_gh_ag(a,b,c,d,e,f,g,h,i,j,r);   //remuevo 1->a
-        // return select_4_9_bd_cd_ef_hi_gh(b,c,d,e,f,g,h,i,j,r);           // corrimiento
-        return select_4_9_ac_bc_de_gh_fg(b,c,d,e,f,g,h,i,j,r);
+    if (!r(b, f)) {
+        return select_5_10_abd_cd_ef_hi_fi_fb(a,b,c,d,e,f,g,h,i,j,r);
     } else {
-        // return select_5_10_abd_cd_ef_hi_gh_ga(a,b,c,d,e,f,h,g,i,j,r);   //remuevo 7->g
-        // return select_4_9_abd_cd_ef_hi(a,b,c,d,e,f,h,i,j,r);             //corrimiento
-        return median9.select_4_9_abd_cd_ef_gh(a,b,c,d,e,f,h,i,j,r);
+        //TODO: comprobar si es correcto.
+        return select_5_10_abd_cd_ef_hi_fi_fb(e,f,h,i,a,b,g,c,d,j,r);
     }
 }
 
 // step 9
-// V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4]]
-// [7, 8], 
-function select_5_10_abd_cd_ef_hi(a, b, c, d, e, f, g, h, i, j, r) {
+// [6, 9], 
+function select_5_10_abd_cd_ef_hi(a,b,c,d,e,f,g,h,i,j,r) {
     common.check_precondition(...arguments);
     
-    if (!r(h, g)) {
-        return select_5_10_abd_cd_ef_hi_gh(a,b,c,d,e,f,g,h,i,j,r);
+    if (!r(i, f)) {
+        return select_5_10_abd_cd_ef_hi_fi(a,b,c,d,e,f,g,h,i,j,r);
     } else {
-        return select_5_10_abd_cd_ef_hi_gh(a,b,c,d,e,f,h,g,i,j,r);
+        //TODO: comprobar si es correcto.
+        return select_5_10_abd_cd_ef_hi_fi(a,b,c,d,h,i,g,e,f,j,r);
     }
 }
 
 // step 8
 // 4,8 => V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4]] - 5 = 16 - 5 = 11      to remove: [8] done comps = 8  total comps = 19
 // 8,4 => V6(10)_[[1,2],[4,5],[6,7],[8,9],[5,7]] - 5 = 16 - 5 = 11      to remove: [4] done comps = 8  total comps = 19
-
 // [4, 8]
-
 function select_5_11_abd_cd_efh_gh_ij(a, b, c, d, e, f, g, h, i, j, k, r) {
     common.check_precondition(...arguments);
 
@@ -427,7 +111,6 @@ function select_5_11_abd_cd_ef_gh_ij(a,b,c,d,e,f,g,h,i,j,k,r) {
         return select_5_11_abd_cd_efh_gh_ij(a,b,c,d,g,h,e,f,i,j,k,r);        
     }
 }
-
 
 // step 6
 // [2, 4]
@@ -464,7 +147,6 @@ function select_5_11_ab_cd_ef(a,b,c,d,e,f,g,h,i,j,k,r) {
         return select_5_11_ab_cd_ef_gh(a,b,c,d,e,f,h,g,i,j,k,r);
     }
 }
-
 
 // step 3
 // [5, 6]
