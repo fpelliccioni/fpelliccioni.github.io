@@ -179,34 +179,41 @@ function process_part(level, pair, values_old, n, s, preconds, vtn) {
         }
     }
     
-    // var values_copy_old = common.deep_copy(values_old);
-    // values_copy_old = common.remove_values(values_copy_old, pair);
-    // console.log(values_old.length);
-    // console.log(values_copy_old.length);
+    var values_copy_old = common.deep_copy(values_old);
+    values_copy_old = common.remove_values(values_copy_old, pair);
+    console.log(values_old.length);
+    console.log(values_copy_old.length);
 
-    // var values_copy = get_values(n, preconds);
-    // values_copy = common.remove_values(values_copy, pair);
-    // console.log(values_copy.length);
+    var values_copy = get_values(n, preconds);
+    values_copy = common.remove_values(values_copy, pair);
+    console.log(values_copy.length);
 
-    // if (values_copy_old.length != values_copy.length) {
+    if (values_copy_old.length != values_copy.length) {
+        console.log()
+    }
+
+
+    var pairs = common.gen_pairs(n);
+    pairs = common.remove_pairs(pairs, preconds);
+
+
+    // if (pair[0] == 5 && pair[1] == 7) {
     //     console.log()
     // }
 
-
-    // var pairs = common.gen_pairs(n);
-    // pairs = common.remove_pairs(pairs, preconds);
-
-
-    var res = temporal_analysis(level + 1, n, s, preconds, vtn);
+    var res = temporal_analysis(level + 1, n, values_copy, pairs, s, preconds, vtn);
 
     if (res) {
         console.log(`${'    '.repeat(level)} Level ${level} - Pair ${JSON.stringify(pair)} OK ***************`);
         // console.log(`${'    '.repeat(level)} Level ${level} - Processing V${s + 1}(${n})_${JSON.stringify(preconds)}`);
     }
+
+
     return res;
+
 }
 
-function temporal_analysis(level, n, s, preconds, vtn) {
+function temporal_analysis(level, n, values_old, pairs, s, preconds, vtn) {
     if (n <= 7) {
         return false;
     }
@@ -214,13 +221,6 @@ function temporal_analysis(level, n, s, preconds, vtn) {
     if (level >= 6) {
         return false;
     }
-
-    var values = get_values(n, preconds);
-    // values = common.remove_values(values, pair);
-    // console.log(values.length);
-    var pairs = common.gen_pairs(n);
-    pairs = common.remove_pairs(pairs, preconds);
-
 
     console.log(`${'    '.repeat(level)} Level ${level} - Processing V${s + 1}(${n})_${JSON.stringify(preconds)}`);
     // if (level == 0) {
@@ -234,13 +234,13 @@ function temporal_analysis(level, n, s, preconds, vtn) {
         const pair_left = pairs[i];
         const pair_right = pair_left.slice().reverse();
 
-        // if (pair_left[0] == 5 && pair_left[1] == 10) {
-        //     console.log(values.length)
-        // }
+        if (pair_left[0] == 5 && pair_left[1] == 10) {
+            console.log(values_old.length)
+        }
 
-        var l_res = temporal_analysis_pair(values, pair_left, n, s, preconds, vtn);
+        var l_res = temporal_analysis_pair(values_old, pair_left, n, s, preconds, vtn);
         if (l_res == null) continue;
-        var r_res = temporal_analysis_pair(values, pair_right, n, s, preconds, vtn);
+        var r_res = temporal_analysis_pair(values_old, pair_right, n, s, preconds, vtn);
         if (r_res == null) continue;
 
         var total_comps_l = l_res[6];
@@ -268,14 +268,14 @@ function temporal_analysis(level, n, s, preconds, vtn) {
 
 
         // Left ----------------------------------------------------------------------------
-        var res_left = process_part(level, pair_left, values, e[2][0], e[2][1], e[2][2], vtn);
+        var res_left = process_part(level, pair_left, values_old, e[2][0], e[2][1], e[2][2], vtn);
 
         if (! res_left) {
             continue;
         }
 
         // Right ----------------------------------------------------------------------------
-        var res_right = process_part(level, pair_right, values, e[3][0], e[3][1], e[3][2], vtn);
+        var res_right = process_part(level, pair_right, values_old, e[3][0], e[3][1], e[3][2], vtn);
 
         if (res_right) {
             ok_elements++;
@@ -304,18 +304,18 @@ function get_values(n, preconds) {
     if (n == 10) {
         var contents = fs.readFileSync('values_10___12_34_56_89_24.txt', 'utf8');
         var values = JSON.parse(contents);
-        // console.log(values.length);
+        console.log(values.length);
         values = common.apply_precons(values, preconds);
-        // console.log(values.length);
+        console.log(values.length);
         return values;
     }
 
     var values = common.perm_with_preconds(common.iota(n), preconds);
-    // console.log(values.length);
+    console.log(values.length);
     values = common.apply_precons(values, preconds);
-    // console.log(values.length);
+    console.log(values.length);
     // console.log(JSON.stringify(values));
-    return values;
+    return; values
 }
 
 function tree(n, comps, s) {
@@ -338,8 +338,8 @@ function tree(n, comps, s) {
         10: [9,12,14,15,16,16,15,14,12,9],
     };
 
-    // var pairs = common.gen_pairs(n);
-    // console.log(JSON.stringify(pairs));
+    var pairs = common.gen_pairs(n);
+    console.log(JSON.stringify(pairs));
 
 
     // // ---------------------------------------------------------------------------------
@@ -402,19 +402,35 @@ function tree(n, comps, s) {
 
     // console.log(preconds.length);
 
-    // pairs = common.remove_pairs(pairs, preconds);
-    // console.log(JSON.stringify(pairs));
-    // console.log("-----------------------------------------");
+    pairs = common.remove_pairs(pairs, preconds);
+    console.log(JSON.stringify(pairs));
+    console.log("-----------------------------------------");
 
-    // var values = get_values(n, preconds);
+    var values = get_values(n, preconds);
+
+    // // var values = common.perm_with_preconds(common.iota(n), preconds);
+    // // console.log(values.length);
+    // // values = common.apply_precons(values, preconds);
+    // // console.log(values.length);
+    // // console.log(JSON.stringify(values));
+    // // return;
+ 
+    // var contents = fs.readFileSync('values_10___12_34_56_89_24.txt', 'utf8');
+    // var values = JSON.parse(contents);
+    // console.log(values.length);
+    // values = common.apply_precons(values, preconds);
+    // console.log(values.length);
+
+    
+    // Según el script [4, 7] es mejor, pero elijo [1, 7] porque da resultados más parejos
+    // 1,7 => V5(9)_[[2,3],[4,5],[7,8],[1,3],[6,7]] - 5 = 14 - 5 = 9      to remove: [1] done comps = 7  total comps = 16
+    // 7,1 => V5(9)_[[1,2],[3,4],[5,6],[7,8],[2,4]] - 5 = 14 - 5 = 9      to remove: [7] done comps = 7  total comps = 16
 
     // ---------------------------------------------------------------------------------
 
-    // temporal_analysis(0, n, values, pairs, s, preconds, vtn);    
 
-    // ---------------------------------------------------------------------------------
 
-    temporal_analysis(0, n, s, preconds, vtn);
+    temporal_analysis(0, n, values, pairs, s, preconds, vtn);    
 }
 
 function main() {
