@@ -396,6 +396,7 @@ function tree(n, comps, s) {
         [6,9],
         [6,2],
         [7,10],
+        [7,1],
     ];
 
     var fname = data_to_file_name(n, preconds);
