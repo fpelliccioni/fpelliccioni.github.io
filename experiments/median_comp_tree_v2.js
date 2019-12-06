@@ -126,7 +126,7 @@ function temporal_analysis_pair(values, pair, counted_nums_orig, n, s, preconds,
 
     values_copy = common.remove_values(values_copy, pair);
 
-    if (pair[0] == 2 && pair[1] == 4) {
+    if (pair[0] == 1 && pair[1] == 8) {
         console.log();
     }
 
@@ -195,7 +195,7 @@ function temporal_analysis(level, n, values, pairs, cmp_n, cmp_max, s, preconds,
         const pair_left = pairs[i];
         const pair_right = pair_left.slice().reverse();
 
-        if (pair_left[0] == 1 && pair_left[1] == 9) {
+        if (pair_left[0] == 1 && pair_left[1] == 8) {
             console.log()
         }
 
@@ -234,10 +234,32 @@ function temporal_analysis(level, n, values, pairs, cmp_n, cmp_max, s, preconds,
 
 }
 
+function get_values(n, preconds) {
+    if (n == 11) {
+        console.log("IMPLEMENT!!!")
+        return [];
+    }
+
+    if (n == 10) {
+        var contents = fs.readFileSync('values_10___12_34_56_89_24.txt', 'utf8');
+        var values = JSON.parse(contents);
+        console.log(values.length);
+        values = common.apply_precons(values, preconds);
+        console.log(values.length);
+        return values;
+    }
+
+    var values = common.perm_with_preconds(common.iota(n), preconds);
+    console.log(values.length);
+    values = common.apply_precons(values, preconds);
+    console.log(values.length);
+    // console.log(JSON.stringify(values));
+    return values;
+}
 
 
 
-function tree(n, comps, s) {
+function tree(n, comps, s, preconds) {
 
     if (s == undefined) {
         s = common.half(n);         
@@ -260,140 +282,8 @@ function tree(n, comps, s) {
     var pairs = common.gen_pairs(n);
     console.log(JSON.stringify(pairs));
 
-    // // ---------------------------------------------------------------------------------
-    // // n=7
-
-    // var preconds = [
-    //     [1, 2],
-    //     [3, 4],
-    //     [2, 4],
-    //     // [4, 5],
-    // ];
-
-
-    // // ---------------------------------------------------------------------------------
-    // // n=9
-
-    // var preconds = [
-    //     [1, 2],
-    //     [3, 4],
-    //     [2, 4],
-
-    //     [5, 6],
-    //     [7, 8],
-    //     [6, 8],
-
-    //     // // [4, 5],
-    // ];
-
-    // // 2,6 => V5(8)_[[1,2],[3,4],[2,4],[5,6],[2,6]] - 5 = 12 - 5 = 7      to remove: [8] done comps = 7  total comps = 14
-    // // 6,2 => V5(8)_[[1,2],[4,5],[6,7],[5,7],[5,2]] - 5 = 12 - 5 = 7      to remove: [4] done comps = 7  total comps = 14
-    
-
-    // // ---------------------------------------------------------------------------------
-    // // n=8
-
-    // var preconds = [
-    //     [1, 2], [3, 4], [2, 4], [5, 6], [2, 6],
-    //     // // [4, 5],
-    // ];
-
-    // // 1,7 => V4(7)_[[2,3],[1,3],[4,5],[1,5]] - 4 = 10 - 4 = 6      to remove: [1] done comps = 6  total comps = 12
-    // // 7,1 => V4(7)_[[1,2],[3,4],[2,4],[5,6],[2,6]] - 5 = 10 - 5 = 5      to remove: [7] done comps = 6  total comps = 11
-        
-
-    // // ---------------------------------------------------------------------------------
-    // // n=7
-    // var preconds = [
-    //     [1, 2], [3, 4], [2, 4], [5, 6], [2, 6]
-    // ];
-
-
-    // // ---------------------------------------------------------------------------------
-    // // n=11
-
-    // var preconds = [
-    //     [1, 2], [3, 4], [5, 6], [7, 8], [9, 10],
-    //     [2, 4],
-    //     [6, 8],
-    //     ];
-
-    // // 4,8 => V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4]] - 5 = 16 - 5 = 11      to remove: [8] done comps = 8  total comps = 19
-    // // 8,4 => V6(10)_[[1,2],[4,5],[6,7],[8,9],[5,7]] - 5 = 16 - 5 = 11      to remove: [4] done comps = 8  total comps = 19
-         
-    // console.log(preconds.length);
-
-    // pairs = common.remove_pairs(pairs, preconds);
-    // console.log(JSON.stringify(pairs));
-    // console.log("-----------------------------------------");
-
-    // // var values = common.perm_with_preconds(common.iota(n), preconds);
-    // // console.log(values.length);
-    // // values = common.apply_precons(values, preconds);
-    // // console.log(values.length);
-    // // console.log(JSON.stringify(values));
-
- 
-    // var contents = fs.readFileSync('values11.txt', 'utf8');
-    // var values = JSON.parse(contents);
-    // console.log(values.length);
-    // values = common.apply_precons(values, preconds);
-    // console.log(values.length);
-    
-
-    // // ---------------------------------------------------------------------------------
-    // // n=10
-
-    // // var preconds = [
-    // //     [1,2],[3,4],[5,6],[8,9],[2,4],
-    // //     [7,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
-    // //     [6,8],   // Lo elijo porque es una comparación típica, ver paper Noshita
-    // // ];
-
-    // // var preconds = [
-    // //     [1,2],[4,5],[6,7],[8,9],[5,7],
-    // // ];
-
-    // var preconds = [
-    //     [1,2],[3,4],[5,6],[8,9],[2,4],
-    //     [6,9],
-    //     [6,2],
-    //     [7,10],
-    // ];
-    // // 1,5 => V5(9)_[[2,3],[4,5],[7,8],[1,3],[5,8]] - 5 = 14 - 5 = 9      to remove: [1] done comps = 7  total comps = 16
-    // // 5,1 => V5(9)_[[1,2],[3,4],[7,8],[2,4],[5,8]] - 5 = 14 - 5 = 9      to remove: [5] done comps = 7  total comps = 16
-    
-
-
-    // console.log(preconds.length);
-
-    // pairs = common.remove_pairs(pairs, preconds);
-    // console.log(JSON.stringify(pairs));
-    // console.log("-----------------------------------------");
-
-    // // var values = common.perm_with_preconds(common.iota(n), preconds);
-    // // console.log(values.length);
-    // // values = common.apply_precons(values, preconds);
-    // // console.log(values.length);
-    // // // console.log(JSON.stringify(values));
-    // // return;
- 
-    // var contents = fs.readFileSync('values_10___12_34_56_89_24.txt', 'utf8');
-    // var values = JSON.parse(contents);
-    // console.log(values.length);
-    // values = common.apply_precons(values, preconds);
-    // console.log(values.length);
-
-    
-
-
     
     // ---------------------------------------------------------------------------------
-    // n=9
-
-    var preconds = [
-        [1,2],[3,4],[7,8],[2,4],[5,8],[5,2],[6,9]
-    ];
 
     console.log(preconds.length);
 
@@ -401,12 +291,13 @@ function tree(n, comps, s) {
     console.log(JSON.stringify(pairs));
     console.log("-----------------------------------------");
 
-    var values = common.perm_with_preconds(common.iota(n), preconds);
-    console.log(values.length);
-    values = common.apply_precons(values, preconds);
-    console.log(values.length);
-    // console.log(JSON.stringify(values));
-
+    // var values = common.perm_with_preconds(common.iota(n), preconds);
+    // console.log(values.length);
+    // values = common.apply_precons(values, preconds);
+    // console.log(values.length);
+    // // console.log(JSON.stringify(values));
+    
+    var values = get_values(n, preconds);
         
     //----------------------------------------------------------
 
@@ -422,15 +313,15 @@ function main() {
         // [3, 3, undefined],
         // [5, 6, undefined],
         // [7, 10, undefined],
-        // [8, 12, 4],
-        [9, 14, undefined],
-        // [10, 16, 5],
+        // [8, 12, 4, [[1,2],[4,5],[6,7],[5,7],[5,2],[6,1],[8,3]]],                      // V5(8)_[[1,2],[4,5],[6,7],[5,7],[5,2],[6,1],[8,3]]
+        // [9, 14, 6-1, [[1,2],[4,5],[7,8],[5,8],[5,2],[6,9],[6,1],[7,1]]],           //V6(9)_[[1,2],[4,5],[7,8],[5,8],[5,2],[6,9],[6,1],[7,1]]
+        [10, 16, 5, [[1,2],[3,4],[5,6],[8,9],[2,4],[6,9],[6,2],[7,10],[7,1]]],     //V6(10)_[[1,2],[3,4],[5,6],[8,9],[2,4],[6,9],[6,2],[7,10],[7,1]]
         // [11, 20, undefined],
     ];
 
     for (let i = 0; i < tests.length; i++) {
         const e = tests[i];
-        tree(e[0], e[1], e[2]);
+        tree(e[0], e[1], e[2], e[3]);
     }
 }
 

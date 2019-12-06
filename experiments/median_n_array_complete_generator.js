@@ -353,7 +353,12 @@ function main() {
     console.log(JSON.stringify(arr));
 }
 
-main();
+// main();
+
+
+module.exports = {
+    generate_code: generate_code,
+}
 
 
 

@@ -298,7 +298,13 @@ function main() {
     console.log(code);
 }
 
-main();
+// main();
+
+
+module.exports = {
+    generate_code: generate_code,
+}
+
 
 
 
@@ -339,109 +345,3 @@ main();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function perm(xs) {
-//     let ret = [];
-  
-//     for (let i = 0; i < xs.length; i = i + 1) {
-//         let rest = perm(xs.slice(0, i).concat(xs.slice(i + 1)));
-
-//         if ( ! rest.length) {
-//             ret.push([xs[i]])
-//         } else {
-//             for (let j = 0; j < rest.length; j = j + 1) {
-//                 ret.push([xs[i]].concat(rest[j]))
-//             }
-//         }
-//     }
-//     return ret;
-// }
-
-// function iota(n) {
-//     var res = [];
-//     for (let i = 0; i < n; ++i) {
-//         res.push(i + 1);
-//     }
-//     return res;
-// }
-
-// function remove_values(values, node) {
-//     // console.log(values);
-//     // console.log(node);
-//     var res = [];
-//     for (let i = 0; i < values.length; i++) {
-//         const element = values[i];
-//         var ia = element.indexOf(node[0]);
-//         var ib = element.indexOf(node[1]);
-//         // console.log(ia);
-//         // console.log(ib);
-//         if (ia < ib) {
-//             res.push(element);
-//         }
-//     }
-
-//     return res;
-// }
-
-// function half(n) {
-//     return Math.floor(n / 2);    
-// }
-
-// function all_median_equals(n, values) {
-//     if (values.length == 0) {
-//         return null;
-//     }
-
-//     var h = half(n);
-//     var m = values[0][h];
-
-//     if (values.length == 1) {
-//         return m;
-//     }
-
-//     for (let i = 1; i < values.length; i++) {
-//         const element = values[i];
-
-//         if (element[h] != m) {
-//             return null;
-//         }
-//     }
-
-//     return m;
-// }
-
-// function get_variable_name(i) {
-//     return String.fromCharCode(97 + i - 1);
-// }

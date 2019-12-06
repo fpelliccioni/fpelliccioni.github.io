@@ -315,7 +315,7 @@ function get_values(n, preconds) {
     values = common.apply_precons(values, preconds);
     console.log(values.length);
     // console.log(JSON.stringify(values));
-    return; values
+    return values;
 }
 
 function tree(n, comps, s) {
