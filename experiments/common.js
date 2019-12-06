@@ -29,8 +29,28 @@ function _get_precondition(fname) {
 }
 
 function check_precondition() {
-    var fname = _get_function_name(new Error().stack);
+
+    // console.log(arguments.length)
+
+    var stack = new Error().stack;
+    // var stack_str = JSON.parse(JSON.stringify(stack));
+    // var args = JSON.parse(JSON.stringify(arguments));
+    var args = arguments;
+    var fname = _get_function_name(stack);
+
+    // if (fname == undefined) {
+    //     console.log("fname == undefined")
+    // }
+
+    // console.log(arguments.length)
+
+
     var precond = _get_precondition(fname);
+
+    // if (fname == 'select_5_9_ab_de_gh_eh_eb_fi_af_cf_gb') {
+    //     console.log()
+    // }
+
     if (!precond) return;
     var tmp = g_comparissons;
     var r = arguments[arguments.length - 1];
@@ -42,8 +62,8 @@ function check_precondition() {
         for (let j = 0; j < element.length - 1; j++) {
             var i0 = variable_to_index(element[j]);
             var i1 = variable_to_index(element[j + 1]);
-            var v0 = arguments[i0];
-            var v1 = arguments[i1];
+            var v0 = args[i0];
+            var v1 = args[i1];
 
             assert_internal( ! r(v1, v0));
 
@@ -81,6 +101,62 @@ function perm(xs) {
     }
     return ret;
 }
+
+function perm_exec(xs, n, f) {
+    let ret = [];
+  
+    for (let i = 0; i < xs.length; i = i + 1) {
+        let rest = perm_exec(xs.slice(0, i).concat(xs.slice(i + 1)), n, f);
+
+        if ( ! rest.length) {
+            ret.push([xs[i]])
+        } else {
+            for (let j = 0; j < rest.length; j = j + 1) {
+                var final = [xs[i]].concat(rest[j]);
+                if (final.length == n) {
+                    f(final);
+                } else {
+                    ret.push(final)
+                }
+            }
+        }
+    }
+    return ret;
+}
+
+function iter_swap(data, a, b) {
+    [data[a], data[b]] = [data[b], data[a]];
+}
+
+function reverse(data, f, l) {
+    while ((f != l) && (f != --l)) {
+        iter_swap(data, f++, l);
+    }
+}
+
+function next_permutation(data, f, l) {
+    if (f == l) return false;
+    var i = l;
+    if (f == --i) return false;
+ 
+    while (true) {
+        var i1, i2;
+ 
+        i1 = i;
+        if (data[--i] < data[i1]) {
+            i2 = l;
+            while (!(data[i] < data[--i2]));
+            iter_swap(data, i, i2);
+            reverse(data, i1, l);
+            return true;
+        }
+        if (i == f) {
+            reverse(data, f, l);
+            return false;
+        }
+    }
+}
+
 
 function remove_pairs(pairs, to_remove) {
     var res = [];
@@ -476,6 +552,7 @@ function get_max_comps(vtn, n, s) {
 module.exports = {
     perm: perm,
     perm_with_preconds: perm_with_preconds,
+    perm_exec: perm_exec,
     apply_precons: apply_precons,
     remove_pairs: remove_pairs,
     iota: iota,
@@ -504,6 +581,10 @@ module.exports = {
     check_precondition: check_precondition,
     deep_copy: deep_copy,
     get_max_comps: get_max_comps,
+
+    iter_swap: iter_swap,
+    reverse: reverse,
+    next_permutation: next_permutation,
 }
 
 

@@ -109,12 +109,15 @@ function exec_n(median_f, n, q, k, max_comps) {
     }
     
     for (let i = 0; i < q; ++i) {
-        if (i % 1000000 == 0) {
+        // if (i % 1000000 == 0) {
+        //     console.log(`${(i * 100 / q).toFixed(2)}% completed...`);
+        // }
+        if (i % 10000 == 0) {
             console.log(`${(i * 100 / q).toFixed(2)}% completed...`);
         }
 
         // const element = common.array_random(n, 0, n);
-        // const element = common.array_random_non_equals(n, 0, n);
+        const element = common.array_random_non_equals(n, 0, n);
 
         // const element = [6,2,6,1,3,0,7,8,3];
         // const element = [5,1,3,2,7,0,4,6,8];
@@ -122,8 +125,7 @@ function exec_n(median_f, n, q, k, max_comps) {
         // const element = [1,7,4,0,3,8,5,6,2];            //falla en select_4_7_abd_cd_ce_fb, FIXED
         // const element = [2,7,0,6,3,1,4,8,5];            //falla en select_4_7_ab_de_be_dc_fb, FIXED
         // const element = [3,1,4,5,8,7,6,0,2];            //falla en select_3_7_ac_bc_de_ae_db_af, FIXED
-
-        const element = [2, 9, 6, 0, 5, 1, 10, 4, 3, 7, 8];
+        // const element = [2, 9, 6, 0, 5, 1, 10, 4, 3, 7, 8];
 
         var blocks_orig = create_blocks(element);
 
@@ -140,7 +142,15 @@ function exec_n(median_f, n, q, k, max_comps) {
         // console.log(`Before execute the median algo ${element}`);
 
         g_comparissons = 0;
-        var m1 = median_f(...blocks, lt);
+
+        try {
+            // blocks = JSON.parse('[{"id":0,"time":2},{"id":1,"time":9},{"id":2,"time":6},{"id":3,"time":0},{"id":4,"time":5},{"id":5,"time":1},{"id":6,"time":10},{"id":7,"time":4},{"id":8,"time":3},{"id":9,"time":7},{"id":10,"time":8}]');
+            var m1 = median_f(...blocks, lt);
+        } catch (error) {
+            console.log(JSON.stringify(blocks));
+            throw error;
+        }
+
         total_select_comparissons += g_comparissons;
 
         if (m1 !=null && expect.id == m1.id) {
@@ -225,6 +235,79 @@ function exec_n_with_data(median_f, n, data, k, max_comps) {
 }
 
 
+function exec_n_with_permutations(median_f, n, k, max_comps) {
+    var total_select_comparissons = 0;
+    var total_sort_comparissons = 0;
+    if ( ! k) {
+        k = common.half(n);
+    }
+
+
+    var element = common.iota(n);
+    
+    var q = factorial(n);
+    var i = 0;
+    do {
+        // console.log(data);
+        // if (i % 1000000 == 0) {
+        //     console.log(`${(i * 100 / q).toFixed(2)}% completed...`);
+        // }
+        if (i % 10000 == 0) {
+            // console.log(`${(i * 100 / q).toFixed(2)}% completed...`);
+            console.log(`${i} of ${q}...`);
+        }
+        ++i;
+
+
+        var blocks_orig = create_blocks(element);
+
+        blocks = copy_block_array(blocks_orig);
+
+        g_comparissons = 0;
+        tao.stable_sort(blocks, lt)
+        total_sort_comparissons += g_comparissons;
+
+        var expect = blocks[k];
+
+        blocks = copy_block_array(blocks_orig);
+
+        // console.log(`Before execute the median algo ${element}`);
+
+        g_comparissons = 0;
+        var m1 = median_f(...blocks, lt);
+        total_select_comparissons += g_comparissons;
+
+        if (m1 !=null && expect.id == m1.id) {
+            // console.log("OK    ", element, expect.id, m1.id);
+        } else {
+            const element_sorted = copy_array(element);
+            tao.stable_sort(element_sorted, lt_simple);
+            if (m1 == null) {
+                console.log(`ERROR ${element} - ${element_sorted} - ${expect.id} - ${null} - ${expect.time} - ${null}`);
+            } else {
+                console.log(`ERROR ${element} - ${element_sorted} - ${expect.id} - ${m1.id} - ${expect.time} - ${m1.time}`);
+            }
+            // return;
+        }
+
+        if (g_comparissons <= max_comps) {
+            // console.log("OK comparissons", element, expect.id, m1.id);
+        } else {
+            console.log(`ERROR, exceeds the number of comparisons. element: ${element}. expected <= ${max_comps}. got: ${g_comparissons}`);
+            return;
+        }        
+    } while(common.next_permutation(element, 0, element.length));
+
+    console.log(`i vs q: ${i} vs ${q}`)
+
+    console.log(`Execution completed OK with ${Number(q).toLocaleString()} elements`);
+    console.log(`Selection comparissons total:   ${total_select_comparissons}`);
+    console.log(`Selection comparissons average: ${total_select_comparissons / q}`);
+    console.log(`Sort comparissons total:        ${total_sort_comparissons}`);
+    console.log(`Sort comparissons average:      ${total_sort_comparissons / q}`);
+}
+
+
 function test_all(n, max_comps) {
 
     if (n <= 7) {   // To avoid exceeding the call stack size
@@ -241,20 +324,29 @@ function test_all(n, max_comps) {
         var str2 = `exec_n_with_data(median${n}.median_${n}_generated_stable, ${n}, data2, undefined, max_comps);`;
         eval(str2);
     } else {
-        // var q = Math.pow(n, n + 1);
-        var q = factorial(n) * 10;
-        console.log(`Starting tests with random data of lenght: ${q}`);
-        var str2 = `exec_n(median${n}.median_${n}_generated_stable, ${n}, ${q}, undefined, max_comps);`;
+
+
+        // // var q = Math.pow(n, n + 1);
+        // var q = factorial(n) * 10;
+        // console.log(`Starting tests with random data of lenght: ${q}`);
+        // var str2 = `exec_n(median${n}.median_${n}_generated_stable, ${n}, ${q}, undefined, max_comps);`;
+        // eval(str2);
+
+        console.log(`Starting tests with random data of lenght: unknown`);
+        var str2 = `exec_n_with_permutations(median${n}.median_${n}_generated_stable, ${n}, undefined, max_comps);`;
         eval(str2);
+
     }
 }
 
 function main() {
+
+
     // test_all(3);
     // test_all(5, 6);
     // test_all(7, 10);
     // test_all(9, 14);
-    test_all(11, 16);
+    test_all(11, 19);
 
 
 
