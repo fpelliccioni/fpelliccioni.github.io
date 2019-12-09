@@ -1,0 +1,208 @@
+Statistical profiling result from isolate-0x561cdab04f80-732452-v8.log, (291930 ticks, 160 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+  224987   77.1%          /usr/lib64/libnode.so.72
+   3641    1.2%          /usr/lib64/libc-2.30.so
+     19    0.0%          [vdso]
+     15    0.0%          /usr/lib64/libstdc++.so.6.0.27
+      5    0.0%          /usr/lib64/libuv.so.1.0.0
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+  60613   20.8%   95.8%  LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+    144    0.0%    0.2%  LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+     97    0.0%    0.2%  LazyCompile: *apply_precons /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:183:23
+     62    0.0%    0.1%  LazyCompile: *remove_pairs /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:162:22
+     47    0.0%    0.1%  LazyCompile: *equal_pair /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:553:20
+     37    0.0%    0.1%  LazyCompile: *<anonymous> /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:569:41
+     36    0.0%    0.1%  LazyCompile: *Array.find_if /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:15:35
+     15    0.0%    0.0%  LazyCompile: *gen_pairs /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:337:19
+     13    0.0%    0.0%  LazyCompile: *count_numbers_at_pairs_sorted /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:66:39
+      9    0.0%    0.0%  LazyCompile: *remove_pairs_transitive /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:557:33
+      7    0.0%    0.0%  LazyCompile: *deep_copy /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:526:19
+      6    0.0%    0.0%  LazyCompile: *iota /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:214:14
+      3    0.0%    0.0%  LazyCompile: *linear_insert_unguarded /home/fernando/dev/fpelliccioni.github.io/experiments/stable_sort.js:136:33
+      2    0.0%    0.0%  LazyCompile: *min_element_nonempty /home/fernando/dev/fpelliccioni.github.io/experiments/stable_sort.js:115:30
+      2    0.0%    0.0%  LazyCompile: *<anonymous> /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:120:40
+      1    0.0%    0.0%  LazyCompile: *source_move /home/fernando/dev/fpelliccioni.github.io/experiments/stable_sort.js:72:21
+      1    0.0%    0.0%  LazyCompile: *source /home/fernando/dev/fpelliccioni.github.io/experiments/stable_sort.js:60:16
+      1    0.0%    0.0%  LazyCompile: *predecessor /home/fernando/dev/fpelliccioni.github.io/experiments/stable_sort.js:40:21
+      1    0.0%    0.0%  LazyCompile: *<anonymous> /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:169:43
+
+ [C++]:
+   ticks  total  nonlib   name
+    523    0.2%    0.8%  __pthread_cond_signal
+    157    0.1%    0.2%  __pthread_mutex_unlock_usercnt
+    142    0.0%    0.2%  __GI___libc_malloc
+    138    0.0%    0.2%  do_futex_wait.constprop.0
+    115    0.0%    0.2%  _int_malloc
+    111    0.0%    0.2%  __pthread_cond_broadcast
+    105    0.0%    0.2%  __lll_lock_wait
+     94    0.0%    0.1%  _int_free
+     69    0.0%    0.1%  __GI___printf_fp_l
+     62    0.0%    0.1%  malloc_consolidate
+     55    0.0%    0.1%  __GI___pthread_mutex_lock
+     43    0.0%    0.1%  void node::StreamBase::JSMethod<&(int node::StreamBase::WriteString<(node::encoding)1>(v8::FunctionCallbackInfo<v8::Value> const&))>(v8::FunctionCallbackInfo<v8::Value> const&)
+     38    0.0%    0.1%  __vfprintf_internal
+     29    0.0%    0.0%  cfree@GLIBC_2.2.5
+     28    0.0%    0.0%  node::native_module::NativeModuleEnv::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+     27    0.0%    0.0%  __pthread_cond_timedwait
+     25    0.0%    0.0%  unlink_chunk.isra.0
+     13    0.0%    0.0%  __mpn_divrem
+     13    0.0%    0.0%  __getpid
+     12    0.0%    0.0%  operator new(unsigned long)
+     11    0.0%    0.0%  node::NodePlatform::IdleTasksEnabled(v8::Isolate*)
+      9    0.0%    0.0%  std::__detail::_Prime_rehash_policy::_M_next_bkt(unsigned long) const
+      9    0.0%    0.0%  node::NodePlatform::MonotonicallyIncreasingTime()
+      9    0.0%    0.0%  __clock_gettime
+      8    0.0%    0.0%  uv__hrtime
+      8    0.0%    0.0%  operator delete[](void*)
+      8    0.0%    0.0%  operator delete(void*)
+      8    0.0%    0.0%  hack_digit
+      8    0.0%    0.0%  __tls_get_addr
+      8    0.0%    0.0%  __GI___pthread_mutex_destroy
+      7    0.0%    0.0%  _itoa_word
+      7    0.0%    0.0%  ___vsnprintf_chk
+      7    0.0%    0.0%  __GI__IO_default_xsputn
+      5    0.0%    0.0%  node::WorkerThreadsTaskRunner::PostTask(std::unique_ptr<v8::Task, std::default_delete<v8::Task> >)
+      5    0.0%    0.0%  fwrite
+      5    0.0%    0.0%  __pthread_condattr_destroy
+      5    0.0%    0.0%  __GI___pthread_mutex_init
+      4    0.0%    0.0%  uv_mutex_lock
+      4    0.0%    0.0%  uv_hrtime
+      4    0.0%    0.0%  read_int
+      4    0.0%    0.0%  __GI___pthread_mutex_unlock
+      4    0.0%    0.0%  __GI___libc_write
+      3    0.0%    0.0%  uv_cond_signal
+      3    0.0%    0.0%  std::__detail::_Prime_rehash_policy::_M_need_rehash(unsigned long, unsigned long, unsigned long) const
+      3    0.0%    0.0%  node::binding::GetInternalBinding(v8::FunctionCallbackInfo<v8::Value> const&)
+      3    0.0%    0.0%  node::TaskQueue<v8::Task>::Push(std::unique_ptr<v8::Task, std::default_delete<v8::Task> >)
+      3    0.0%    0.0%  __pthread_cond_destroy
+      3    0.0%    0.0%  __new_sem_wait_slow.constprop.0
+      3    0.0%    0.0%  __mpn_lshift
+      3    0.0%    0.0%  _IO_old_init
+      2    0.0%    0.0%  operator new[](unsigned long, std::nothrow_t const&)
+      2    0.0%    0.0%  operator new[](unsigned long)
+      2    0.0%    0.0%  node::inspector::Agent::IsActive()
+      2    0.0%    0.0%  __pthread_cond_init
+      2    0.0%    0.0%  __mpn_mul_1
+      2    0.0%    0.0%  __mpn_mul
+      2    0.0%    0.0%  __mpn_cmp
+      2    0.0%    0.0%  __GI___mprotect
+      1    0.0%    0.0%  systrim.isra.0.constprop.0
+      1    0.0%    0.0%  std::ostream::sentry::~sentry()
+      1    0.0%    0.0%  std::ostream::sentry::sentry(std::ostream&)
+      1    0.0%    0.0%  std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)
+      1    0.0%    0.0%  pthread_condattr_setclock
+      1    0.0%    0.0%  operator delete(void*, unsigned long)
+      1    0.0%    0.0%  node::dtrace_gc_start(v8::Isolate*, v8::GCType, v8::GCCallbackFlags, void*)
+      1    0.0%    0.0%  node::contextify::ContextifyContext::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  node::NodePlatform::CallOnWorkerThread(std::unique_ptr<v8::Task, std::default_delete<v8::Task> >)
+      1    0.0%    0.0%  __pthread_enable_asynccancel
+      1    0.0%    0.0%  __pthread_disable_asynccancel
+      1    0.0%    0.0%  __pthread_condattr_init
+      1    0.0%    0.0%  __mpn_rshift
+      1    0.0%    0.0%  __brk
+      1    0.0%    0.0%  __GI___pthread_testcancel
+      1    0.0%    0.0%  __GI___printf_fp
+      1    0.0%    0.0%  __GI__IO_setb
+      1    0.0%    0.0%  __GI__IO_padn
+      1    0.0%    0.0%  __GI__IO_file_sync
+      1    0.0%    0.0%  _IO_str_init_static_internal
+
+ [Summary]:
+   ticks  total  nonlib   name
+  61097   20.9%   96.6%  JavaScript
+   2006    0.7%    3.2%  C++
+   6162    2.1%    9.7%  GC
+  228667   78.3%          Shared libraries
+    160    0.1%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+     43   29.9%    0.0%  void node::StreamBase::JSMethod<&(int node::StreamBase::WriteString<(node::encoding)1>(v8::FunctionCallbackInfo<v8::Value> const&))>(v8::FunctionCallbackInfo<v8::Value> const&)
+     28   19.4%    0.0%  node::native_module::NativeModuleEnv::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+     26   18.1%    0.0%  __GI___libc_malloc
+     11    7.6%    0.0%  node::NodePlatform::IdleTasksEnabled(v8::Isolate*)
+      9    6.3%    0.0%  cfree@GLIBC_2.2.5
+      6    4.2%    0.0%  _int_free
+      5    3.5%    0.0%  operator new(unsigned long)
+      3    2.1%    0.0%  operator delete(void*)
+      3    2.1%    0.0%  node::binding::GetInternalBinding(v8::FunctionCallbackInfo<v8::Value> const&)
+      2    1.4%    0.0%  node::inspector::Agent::IsActive()
+      1    0.7%    0.0%  std::ostream::sentry::~sentry()
+      1    0.7%    0.0%  node::dtrace_gc_start(v8::Isolate*, v8::GCType, v8::GCCallbackFlags, void*)
+      1    0.7%    0.0%  node::contextify::ContextifyContext::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.7%    0.0%  fwrite
+      1    0.7%    0.0%  __brk
+      1    0.7%    0.0%  __GI___mprotect
+      1    0.7%    0.0%  __GI___libc_write
+      1    0.7%    0.0%  __GI__IO_file_sync
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+  224987   77.1%  /usr/lib64/libnode.so.72
+  142897   63.5%    /usr/lib64/libnode.so.72
+  141572   99.1%      LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  140922   99.5%        LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  138610   98.4%          LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  131288   94.7%            LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+   6805    4.9%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   2132    1.5%          LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   2129   99.9%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+  77236   34.3%    LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  76734   99.4%      LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  74749   97.4%        LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  69164   92.5%          LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  55438   80.2%            LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  12741   18.4%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+    985    1.4%            LazyCompile: ~get_values /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:589:20
+   5183    6.9%          LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   5174   99.8%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   1862    2.4%        LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   1860   99.9%          LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   1838   98.8%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+     22    1.2%            LazyCompile: ~tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+
+  60613   20.8%  LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  60337   99.5%    LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  59313   98.3%      LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  55971   94.4%        LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  47985   85.7%          LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  31912   66.5%            LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+  14961   31.2%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   1112    2.3%            LazyCompile: ~get_values /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:589:20
+   7442   13.3%          LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   7433   99.9%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   3060    5.2%        LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   3056   99.9%          LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+   3014   98.6%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+     42    1.4%            LazyCompile: ~tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+    949    1.6%      LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+    949  100.0%        LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+    935   98.5%          LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+    857   91.7%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+     78    8.3%            LazyCompile: ~tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+     14    1.5%          LazyCompile: ~tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+     14  100.0%            LazyCompile: ~tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+
+   3641    1.2%  /usr/lib64/libc-2.30.so
+   3582   98.4%    /usr/lib64/libnode.so.72
+   2929   81.8%      LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+   2913   99.5%        LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+   2855   98.0%          LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+   2590   90.7%            LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+    248    8.7%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+     55    1.9%          LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+     55  100.0%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+    649   18.1%      /usr/lib64/libnode.so.72
+    649  100.0%        LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+    645   99.4%          LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+    634   98.3%            LazyCompile: *perm_with_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:196:28
+     10    1.6%            LazyCompile: *tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25
+

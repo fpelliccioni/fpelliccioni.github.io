@@ -1,0 +1,2057 @@
+v8-version,7,7,299,13,-node.16,0
+shared-library,/usr/bin/node,0x55ce35210000,0x55ce35222000,0
+shared-library,/usr/lib64/librt-2.30.so,0x7efd55d3d000,0x7efd55d44000,0
+shared-library,/usr/lib64/libm-2.30.so,0x7efd55d4a000,0x7efd55df5000,0
+shared-library,/usr/lib64/libdl-2.30.so,0x7efd55e90000,0x7efd55e94000,0
+shared-library,/usr/lib64/libssl.so.1.1.1d,0x7efd55e97000,0x7efd55f04000,0
+shared-library,/usr/lib64/libcrypto.so.1.1.1d,0x7efd55f2d000,0x7efd56148000,0
+shared-library,/usr/lib64/libnghttp2.so.14.18.0,0x7efd5620d000,0x7efd56226000,0
+shared-library,/usr/lib64/libuv.so.1.0.0,0x7efd56236000,0x7efd5625c000,0
+shared-library,/usr/lib64/libz.so.1.2.11,0x7efd5626b000,0x7efd5627c000,0
+shared-library,/usr/lib64/libc-2.30.so,0x7efd56285000,0x7efd563f9000,0
+shared-library,/usr/lib64/libpthread-2.30.so,0x7efd5644e000,0x7efd56465000,0
+shared-library,/usr/lib64/libgcc_s-9-20190827.so.1,0x7efd56470000,0x7efd56484000,0
+shared-library,/usr/lib64/libstdc++.so.6.0.27,0x7efd5648a000,0x7efd56623000,0
+shared-library,/usr/lib64/libnode.so.72,0x7efd56684000,0x7efd5862b000,0
+shared-library,/usr/lib64/ld-2.30.so,0x7efd5a99f000,0x7efd5a9c1000,0
+shared-library,[vdso],0x7fff70f59000,0x7fff70f5a000,0
+shared-library,[vsyscall],0xffffffffff600000,0xffffffffff601000,0
+tick,0x7efd5a9aa2d0,723,0,0x0,6
+profiler,begin,1000
+tick,0x7efd5630f842,1783,0,0x0,6
+code-creation,Builtin,3,2238,0x7efd57ed0fa0,1634,RecordWrite
+code-creation,Builtin,3,2254,0x7efd57ed1620,457,EphemeronKeyBarrier
+code-creation,Builtin,3,2258,0x7efd57ed1800,44,AdaptorWithBuiltinExitFrame
+code-creation,Builtin,3,2262,0x7efd57ed1840,294,ArgumentsAdaptorTrampoline
+code-creation,Builtin,3,2266,0x7efd57ed1980,203,CallFunction_ReceiverIsNullOrUndefined
+code-creation,Builtin,3,2271,0x7efd57ed1a60,260,CallFunction_ReceiverIsNotNullOrUndefined
+code-creation,Builtin,3,2276,0x7efd57ed1b80,285,CallFunction_ReceiverIsAny
+code-creation,Builtin,3,2280,0x7efd57ed1ca0,130,CallBoundFunction
+code-creation,Builtin,3,2284,0x7efd57ed1d40,105,Call_ReceiverIsNullOrUndefined
+code-creation,Builtin,3,2291,0x7efd57ed1dc0,105,Call_ReceiverIsNotNullOrUndefined
+code-creation,Builtin,3,2296,0x7efd57ed1e40,105,Call_ReceiverIsAny
+code-creation,Builtin,3,2301,0x7efd57ed1ec0,890,CallProxy
+code-creation,Builtin,3,2305,0x7efd57ed2240,78,CallVarargs
+code-creation,Builtin,3,2309,0x7efd57ed22a0,1000,CallWithSpread
+code-creation,Builtin,3,2318,0x7efd57ed26a0,990,CallWithArrayLike
+code-creation,Builtin,3,2322,0x7efd57ed2a80,103,CallForwardVarargs
+code-creation,Builtin,3,2326,0x7efd57ed2b00,103,CallFunctionForwardVarargs
+code-creation,Builtin,3,2330,0x7efd57ed2b80,157,CallFunctionTemplate_CheckAccess
+code-creation,Builtin,3,2336,0x7efd57ed2c20,273,CallFunctionTemplate_CheckCompatibleReceiver
+code-creation,Builtin,3,2343,0x7efd57ed2d40,382,CallFunctionTemplate_CheckAccessAndCompatibleReceiver
+code-creation,Builtin,3,2349,0x7efd57ed2ec0,26,ConstructFunction
+code-creation,Builtin,3,2353,0x7efd57ed2ee0,130,ConstructBoundFunction
+code-creation,Builtin,3,2358,0x7efd57ed2f80,28,ConstructedNonConstructable
+code-creation,Builtin,3,2363,0x7efd57ed2fa0,86,Construct
+code-creation,Builtin,3,2367,0x7efd57ed3000,78,ConstructVarargs
+code-creation,Builtin,3,2371,0x7efd57ed3060,1024,ConstructWithSpread
+code-creation,Builtin,3,2377,0x7efd57ed3480,1072,ConstructWithArrayLike
+code-creation,Builtin,3,2382,0x7efd57ed38c0,142,ConstructForwardVarargs
+code-creation,Builtin,3,2388,0x7efd57ed3960,142,ConstructFunctionForwardVarargs
+code-creation,Builtin,3,2393,0x7efd57ed3a00,328,JSConstructStubGeneric
+code-creation,Builtin,3,2399,0x7efd57ed3b60,244,JSBuiltinsConstructStub
+code-creation,Builtin,3,2404,0x7efd57ed3c60,947,FastNewObject
+code-creation,Builtin,3,2410,0x7efd57ed4020,301,FastNewClosure
+code-creation,Builtin,3,2416,0x7efd57ed4160,213,FastNewFunctionContextEval
+code-creation,Builtin,3,2421,0x7efd57ed4240,213,FastNewFunctionContextFunction
+code-creation,Builtin,3,2427,0x7efd57ed4320,258,CreateRegExpLiteral
+code-creation,Builtin,3,2432,0x7efd57ed4440,586,CreateEmptyArrayLiteral
+code-creation,Builtin,3,2438,0x7efd57ed46a0,1188,CreateShallowArrayLiteral
+code-creation,Builtin,3,2443,0x7efd57ed4b60,1730,CreateShallowObjectLiteral
+code-creation,Builtin,3,2455,0x7efd57ed5240,866,ConstructProxy
+code-creation,Builtin,3,2461,0x7efd57ed55c0,188,JSEntry
+code-creation,Builtin,3,2464,0x7efd57ed5680,188,JSConstructEntry
+code-creation,Builtin,3,2469,0x7efd57ed5740,188,JSRunMicrotasksEntry
+code-creation,Builtin,3,2481,0x7efd57ed5800,98,JSEntryTrampoline
+code-creation,Builtin,3,2487,0x7efd57ed5880,98,JSConstructEntryTrampoline
+code-creation,Builtin,3,2492,0x7efd57ed5900,310,ResumeGeneratorTrampoline
+code-creation,Builtin,3,2498,0x7efd57ed5a40,721,StringCharAt
+code-creation,Builtin,3,2503,0x7efd57ed5d20,890,StringCodePointAt
+code-creation,Builtin,3,2509,0x7efd57ed60a0,1433,StringFromCodePointAt
+code-creation,Builtin,3,2514,0x7efd57ed6640,580,StringEqual
+code-creation,Builtin,3,2520,0x7efd57ed68a0,284,StringGreaterThan
+code-creation,Builtin,3,2525,0x7efd57ed69c0,284,StringGreaterThanOrEqual
+code-creation,Builtin,3,2531,0x7efd57ed6ae0,1234,StringIndexOf
+code-creation,Builtin,3,2537,0x7efd57ed6fc0,284,StringLessThan
+code-creation,Builtin,3,2541,0x7efd57ed70e0,284,StringLessThanOrEqual
+code-creation,Builtin,3,2546,0x7efd57ed7200,3376,StringSubstring
+code-creation,Builtin,3,2552,0x7efd57ed7f40,120,OrderedHashTableHealIndex
+code-creation,Builtin,3,2558,0x7efd57ed7fc0,851,InterpreterEntryTrampoline
+code-creation,Builtin,3,2563,0x7efd57ed8320,82,InterpreterPushArgsThenCall
+code-creation,Builtin,3,2569,0x7efd57ed8380,88,InterpreterPushUndefinedAndArgsThenCall
+code-creation,Builtin,3,2575,0x7efd57ed83e0,85,InterpreterPushArgsThenCallWithFinalSpread
+code-creation,Builtin,3,2581,0x7efd57ed8440,81,InterpreterPushArgsThenConstruct
+code-creation,Builtin,3,2586,0x7efd57ed84a0,81,InterpreterPushArgsThenConstructArrayFunction
+code-creation,Builtin,3,2593,0x7efd57ed8500,84,InterpreterPushArgsThenConstructWithFinalSpread
+code-creation,Builtin,3,2599,0x7efd57ed8560,197,InterpreterEnterBytecodeAdvance
+code-creation,Builtin,3,2605,0x7efd57ed8640,82,InterpreterEnterBytecodeDispatch
+code-creation,Builtin,3,2610,0x7efd57ed86a0,63,InterpreterOnStackReplacement
+code-creation,Builtin,3,2616,0x7efd57ed86e0,1101,CompileLazy
+code-creation,Builtin,3,2621,0x7efd57ed8b40,92,CompileLazyDeoptimizedCode
+code-creation,Builtin,3,2628,0x7efd57ed8ba0,177,InstantiateAsmJs
+code-creation,Builtin,3,2636,0x7efd57ed8c60,32,NotifyDeoptimized
+code-creation,Builtin,3,2644,0x7efd57ed8ca0,52,ContinueToCodeStubBuiltin
+code-creation,Builtin,3,2649,0x7efd57ed8ce0,60,ContinueToCodeStubBuiltinWithResult
+code-creation,Builtin,3,2655,0x7efd57ed8d20,56,ContinueToJavaScriptBuiltin
+code-creation,Builtin,3,2661,0x7efd57ed8d60,64,ContinueToJavaScriptBuiltinWithResult
+code-creation,Builtin,3,2669,0x7efd57ed8dc0,287,CallApiCallback
+code-creation,Builtin,3,2678,0x7efd57ed8ee0,269,CallApiGetter
+code-creation,Builtin,3,2683,0x7efd57ed9000,12,HandleApiCall
+code-creation,Builtin,3,2687,0x7efd57ed9020,12,HandleApiCallAsFunction
+code-creation,Builtin,3,2692,0x7efd57ed9040,12,HandleApiCallAsConstructor
+code-creation,Builtin,3,2700,0x7efd57ed9060,92,AllocateInYoungGeneration
+code-creation,Builtin,3,2706,0x7efd57ed90c0,80,AllocateRegularInYoungGeneration
+code-creation,Builtin,3,2711,0x7efd57ed9120,92,AllocateInOldGeneration
+code-creation,Builtin,3,2715,0x7efd57ed9180,80,AllocateRegularInOldGeneration
+code-creation,Builtin,3,2721,0x7efd57ed91e0,498,CopyFastSmiOrObjectElements
+code-creation,Builtin,3,2727,0x7efd57ed93e0,583,GrowFastDoubleElements
+code-creation,Builtin,3,2732,0x7efd57ed9640,478,GrowFastSmiOrObjectElements
+code-creation,Builtin,3,2738,0x7efd57ed9820,453,NewArgumentsElements
+code-creation,Builtin,3,2743,0x7efd57ed9a00,496,DebugBreakTrampoline
+code-creation,Builtin,3,2749,0x7efd57ed9c00,141,FrameDropperTrampoline
+code-creation,Builtin,3,2754,0x7efd57ed9ca0,45,HandleDebuggerStatement
+code-creation,Builtin,3,2760,0x7efd57ed9ce0,282,ToObject
+code-creation,Builtin,3,2766,0x7efd57ed9e00,104,ToBoolean
+code-creation,Builtin,3,2774,0x7efd57ed9e80,273,OrdinaryToPrimitive_Number
+code-creation,Builtin,3,2783,0x7efd57ed9fa0,273,OrdinaryToPrimitive_String
+code-creation,Builtin,3,2789,0x7efd57eda0c0,219,NonPrimitiveToPrimitive_Default
+code-creation,Builtin,3,2797,0x7efd57eda1a0,219,NonPrimitiveToPrimitive_Number
+code-creation,Builtin,3,2806,0x7efd57eda280,219,NonPrimitiveToPrimitive_String
+code-creation,Builtin,3,2815,0x7efd57eda360,85,StringToNumber
+code-creation,Builtin,3,2819,0x7efd57eda3c0,129,ToName
+code-creation,Builtin,3,2825,0x7efd57eda460,271,NonNumberToNumber
+code-creation,Builtin,3,2840,0x7efd57eda580,267,NonNumberToNumeric
+code-creation,Builtin,3,2849,0x7efd57eda6a0,255,ToNumber
+code-creation,Builtin,3,2856,0x7efd57eda7a0,300,ToNumberConvertBigInt
+code-creation,Builtin,3,2863,0x7efd57eda8e0,303,ToNumeric
+code-creation,Builtin,3,2870,0x7efd57edaa20,265,NumberToString
+code-creation,Builtin,3,2878,0x7efd57edab40,474,ToInteger
+code-creation,Builtin,3,2886,0x7efd57edad20,486,ToInteger_TruncateMinusZero
+code-creation,Builtin,3,2893,0x7efd57edaf20,394,ToLength
+code-creation,Builtin,3,2901,0x7efd57edb0c0,140,Typeof
+code-creation,Builtin,3,2908,0x7efd57edb160,69,GetSuperConstructor
+code-creation,Builtin,3,2916,0x7efd57edb1c0,133,BigIntToI64
+code-creation,Builtin,3,2923,0x7efd57edb260,285,I64ToBigInt
+code-creation,Builtin,3,2931,0x7efd57edb380,112,ToBooleanLazyDeoptContinuation
+code-creation,Builtin,3,2938,0x7efd57edb400,2601,KeyedLoadIC_PolymorphicName
+code-creation,Builtin,3,2947,0x7efd57edbe40,36,KeyedLoadIC_Slow
+code-creation,Builtin,3,2955,0x7efd57edbe80,16430,KeyedStoreIC_Megamorphic
+code-creation,Builtin,3,2966,0x7efd57edfec0,40,KeyedStoreIC_Slow
+code-creation,Builtin,3,2974,0x7efd57edff00,40,LoadGlobalIC_Slow
+code-creation,Builtin,3,2983,0x7efd57edff40,68,LoadIC_FunctionPrototype
+code-creation,Builtin,3,2992,0x7efd57edffa0,36,LoadIC_Slow
+code-creation,Builtin,3,3000,0x7efd57edffe0,20,LoadIC_StringLength
+code-creation,Builtin,3,3008,0x7efd57ee0000,24,LoadIC_StringWrapperLength
+code-creation,Builtin,3,3017,0x7efd57ee0020,3100,LoadIC_Uninitialized
+code-creation,Builtin,3,3025,0x7efd57ee0c40,40,StoreGlobalIC_Slow
+code-creation,Builtin,3,3032,0x7efd57ee0c80,6876,StoreIC_Uninitialized
+code-creation,Builtin,3,3040,0x7efd57ee2760,40,StoreInArrayLiteralIC_Slow
+code-creation,Builtin,3,3048,0x7efd57ee27a0,368,KeyedLoadIC_SloppyArguments
+code-creation,Builtin,3,3056,0x7efd57ee2920,80,LoadIndexedInterceptorIC
+code-creation,Builtin,3,3066,0x7efd57ee2980,40,StoreInterceptorIC
+code-creation,Builtin,3,3074,0x7efd57ee29c0,536,KeyedStoreIC_SloppyArguments_Standard
+code-creation,Builtin,3,3082,0x7efd57ee2be0,536,KeyedStoreIC_SloppyArguments_GrowNoTransitionHandleCOW
+code-creation,Builtin,3,3092,0x7efd57ee2e00,536,KeyedStoreIC_SloppyArguments_NoTransitionIgnoreOOB
+code-creation,Builtin,3,3101,0x7efd57ee3020,536,KeyedStoreIC_SloppyArguments_NoTransitionHandleCOW
+code-creation,Builtin,3,3110,0x7efd57ee3240,40,StoreInArrayLiteralIC_Slow_Standard
+code-creation,Builtin,3,3120,0x7efd57ee3280,5688,StoreFastElementIC_Standard
+code-creation,Builtin,3,3129,0x7efd57ee48c0,6692,StoreFastElementIC_GrowNoTransitionHandleCOW
+code-creation,Builtin,3,3138,0x7efd57ee6300,5680,StoreFastElementIC_NoTransitionIgnoreOOB
+code-creation,Builtin,3,3148,0x7efd57ee7940,3196,StoreFastElementIC_NoTransitionHandleCOW
+code-creation,Builtin,3,3157,0x7efd57ee85c0,40,StoreInArrayLiteralIC_Slow_GrowNoTransitionHandleCOW
+code-creation,Builtin,3,3166,0x7efd57ee8600,40,StoreInArrayLiteralIC_Slow_NoTransitionIgnoreOOB
+code-creation,Builtin,3,3176,0x7efd57ee8640,40,StoreInArrayLiteralIC_Slow_NoTransitionHandleCOW
+code-creation,Builtin,3,3184,0x7efd57ee8680,40,KeyedStoreIC_Slow_Standard
+code-creation,Builtin,3,3192,0x7efd57ee86c0,40,KeyedStoreIC_Slow_GrowNoTransitionHandleCOW
+code-creation,Builtin,3,3201,0x7efd57ee8700,40,KeyedStoreIC_Slow_NoTransitionIgnoreOOB
+code-creation,Builtin,3,3209,0x7efd57ee8740,40,KeyedStoreIC_Slow_NoTransitionHandleCOW
+code-creation,Builtin,3,3218,0x7efd57ee8780,8704,ElementsTransitionAndStore_Standard
+code-creation,Builtin,3,3227,0x7efd57eea9a0,18284,ElementsTransitionAndStore_GrowNoTransitionHandleCOW
+code-creation,Builtin,3,3236,0x7efd57eef120,8704,ElementsTransitionAndStore_NoTransitionIgnoreOOB
+code-creation,Builtin,3,3246,0x7efd57ef1340,11552,ElementsTransitionAndStore_NoTransitionHandleCOW
+code-creation,Builtin,3,3261,0x7efd57ef4080,748,KeyedHasIC_PolymorphicName
+code-creation,Builtin,3,3271,0x7efd57ef4380,328,KeyedHasIC_SloppyArguments
+code-creation,Builtin,3,3283,0x7efd57ef44e0,80,HasIndexedInterceptorIC
+code-creation,Builtin,3,3294,0x7efd57ef4540,36,HasIC_Slow
+code-creation,Builtin,3,3300,0x7efd57ef4580,181,EnqueueMicrotask
+code-creation,Builtin,3,3312,0x7efd57ef4640,8,RunMicrotasksTrampoline
+code-creation,Builtin,3,3321,0x7efd57ef4660,2408,RunMicrotasks
+code-creation,Builtin,3,3329,0x7efd57ef4fe0,2170,HasProperty
+code-creation,Builtin,3,3337,0x7efd57ef5860,1270,DeleteProperty
+code-creation,Builtin,3,3344,0x7efd57ef5d60,1908,CopyDataProperties
+code-creation,Builtin,3,3352,0x7efd57ef64e0,8571,SetDataProperties
+code-creation,Builtin,3,3360,0x7efd57ef8660,36,Abort
+code-creation,Builtin,3,3368,0x7efd57ef86a0,36,AbortCSAAssert
+code-creation,Builtin,3,3375,0x7efd57ef86e0,12,EmptyFunction
+code-creation,Builtin,3,3383,0x7efd57ef8700,12,Illegal
+code-creation,Builtin,3,3390,0x7efd57ef8720,12,StrictPoisonPillThrower
+code-creation,Builtin,3,3399,0x7efd57ef8740,12,UnsupportedThrower
+code-creation,Builtin,3,3407,0x7efd57ef8760,65,ReturnReceiver
+code-creation,Builtin,3,3416,0x7efd57ef87c0,36,ArrayConstructor
+code-creation,Builtin,3,3424,0x7efd57ef8800,413,ArrayConstructorImpl
+code-creation,Builtin,3,3432,0x7efd57ef89a0,233,ArrayNoArgumentConstructor_PackedSmi_DontOverride
+code-creation,Builtin,3,3442,0x7efd57ef8aa0,233,ArrayNoArgumentConstructor_HoleySmi_DontOverride
+code-creation,Builtin,3,3452,0x7efd57ef8ba0,197,ArrayNoArgumentConstructor_PackedSmi_DisableAllocationSites
+code-creation,Builtin,3,3462,0x7efd57ef8c80,197,ArrayNoArgumentConstructor_HoleySmi_DisableAllocationSites
+code-creation,Builtin,3,3475,0x7efd57ef8d60,197,ArrayNoArgumentConstructor_Packed_DisableAllocationSites
+code-creation,Builtin,3,3485,0x7efd57ef8e40,197,ArrayNoArgumentConstructor_Holey_DisableAllocationSites
+code-creation,Builtin,3,3496,0x7efd57ef8f20,209,ArrayNoArgumentConstructor_PackedDouble_DisableAllocationSites
+code-creation,Builtin,3,3505,0x7efd57ef9000,209,ArrayNoArgumentConstructor_HoleyDouble_DisableAllocationSites
+code-creation,Builtin,3,3515,0x7efd57ef90e0,313,ArraySingleArgumentConstructor_PackedSmi_DontOverride
+code-creation,Builtin,3,3525,0x7efd57ef9220,545,ArraySingleArgumentConstructor_HoleySmi_DontOverride
+code-creation,Builtin,3,3533,0x7efd57ef9460,249,ArraySingleArgumentConstructor_PackedSmi_DisableAllocationSites
+code-creation,Builtin,3,3545,0x7efd57ef9560,433,ArraySingleArgumentConstructor_HoleySmi_DisableAllocationSites
+code-creation,Builtin,3,3555,0x7efd57ef9720,249,ArraySingleArgumentConstructor_Packed_DisableAllocationSites
+code-creation,Builtin,3,3564,0x7efd57ef9820,433,ArraySingleArgumentConstructor_Holey_DisableAllocationSites
+code-creation,Builtin,3,3573,0x7efd57ef99e0,249,ArraySingleArgumentConstructor_PackedDouble_DisableAllocationSites
+code-creation,Builtin,3,3583,0x7efd57ef9ae0,445,ArraySingleArgumentConstructor_HoleyDouble_DisableAllocationSites
+code-creation,Builtin,3,3593,0x7efd57ef9ca0,68,ArrayNArgumentsConstructor
+code-creation,Builtin,3,3602,0x7efd57ef9d00,5,InternalArrayConstructor
+code-creation,Builtin,3,3610,0x7efd57ef9d20,5,InternalArrayConstructorImpl
+code-creation,Builtin,3,3619,0x7efd57ef9d40,189,InternalArrayNoArgumentConstructor_Packed
+code-creation,Builtin,3,3628,0x7efd57ef9e00,12,ArrayConcat
+code-creation,Builtin,3,3635,0x7efd57ef9e20,150,ArrayIsArray
+code-creation,Builtin,3,3642,0x7efd57ef9ec0,12,ArrayPrototypeFill
+code-creation,Builtin,3,3651,0x7efd57ef9ee0,3956,ArrayFrom
+code-creation,Builtin,3,3659,0x7efd57efae60,978,ArrayIncludesSmiOrObject
+code-creation,Builtin,3,3667,0x7efd57efb240,136,ArrayIncludesPackedDoubles
+code-creation,Builtin,3,3676,0x7efd57efb2e0,204,ArrayIncludesHoleyDoubles
+code-creation,Builtin,3,3684,0x7efd57efb3c0,557,ArrayIncludes
+code-creation,Builtin,3,3692,0x7efd57efb600,898,ArrayIndexOfSmiOrObject
+code-creation,Builtin,3,3699,0x7efd57efb9a0,108,ArrayIndexOfPackedDoubles
+code-creation,Builtin,3,3708,0x7efd57efba20,108,ArrayIndexOfHoleyDoubles
+code-creation,Builtin,3,3718,0x7efd57efbaa0,565,ArrayIndexOf
+code-creation,Builtin,3,3725,0x7efd57efbce0,12,ArrayPop
+code-creation,Builtin,3,3733,0x7efd57efbd00,704,ArrayPrototypePop
+code-creation,Builtin,3,3741,0x7efd57efbfe0,12,ArrayPush
+code-creation,Builtin,3,3749,0x7efd57efc000,2706,ArrayPrototypePush
+code-creation,Builtin,3,3757,0x7efd57efcaa0,12,ArrayShift
+code-creation,Builtin,3,3766,0x7efd57efcac0,12,ArrayUnshift
+code-creation,Builtin,3,3774,0x7efd57efcae0,1106,CloneFastJSArray
+code-creation,Builtin,3,3782,0x7efd57efcf40,2534,CloneFastJSArrayFillingHoles
+code-creation,Builtin,3,3791,0x7efd57efd940,1146,ExtractFastJSArray
+code-creation,Builtin,3,3799,0x7efd57efddc0,299,ArrayPrototypeEntries
+code-creation,Builtin,3,3808,0x7efd57efdf00,279,ArrayPrototypeKeys
+code-creation,Builtin,3,3815,0x7efd57efe020,299,ArrayPrototypeValues
+code-creation,Builtin,3,3823,0x7efd57efe160,4272,ArrayIteratorPrototypeNext
+code-creation,Builtin,3,3831,0x7efd57eff220,3832,FlattenIntoArray
+code-creation,Builtin,3,3839,0x7efd57f00120,3788,FlatMapIntoArray
+code-creation,Builtin,3,3847,0x7efd57f01000,528,ArrayPrototypeFlat
+code-creation,Builtin,3,3856,0x7efd57f01220,576,ArrayPrototypeFlatMap
+code-creation,Builtin,3,3863,0x7efd57f01480,12,ArrayBufferConstructor
+code-creation,Builtin,3,3872,0x7efd57f014a0,12,ArrayBufferConstructor_DoNotInitialize
+code-creation,Builtin,3,3880,0x7efd57f014c0,12,ArrayBufferPrototypeGetByteLength
+code-creation,Builtin,3,3894,0x7efd57f014e0,12,ArrayBufferIsView
+code-creation,Builtin,3,3902,0x7efd57f01500,12,ArrayBufferPrototypeSlice
+code-creation,Builtin,3,3911,0x7efd57f01520,628,AsyncFunctionEnter
+code-creation,Builtin,3,3919,0x7efd57f017a0,161,AsyncFunctionReject
+code-creation,Builtin,3,3927,0x7efd57f01860,153,AsyncFunctionResolve
+code-creation,Builtin,3,3936,0x7efd57f01900,20,AsyncFunctionLazyDeoptContinuation
+code-creation,Builtin,3,3945,0x7efd57f01920,1298,AsyncFunctionAwaitCaught
+code-creation,Builtin,3,3953,0x7efd57f01e40,1298,AsyncFunctionAwaitUncaught
+code-creation,Builtin,3,3962,0x7efd57f02360,187,AsyncFunctionAwaitRejectClosure
+code-creation,Builtin,3,3971,0x7efd57f02420,179,AsyncFunctionAwaitResolveClosure
+code-creation,Builtin,3,3979,0x7efd57f024e0,12,BigIntConstructor
+code-creation,Builtin,3,3987,0x7efd57f02500,12,BigIntAsUintN
+code-creation,Builtin,3,3994,0x7efd57f02520,12,BigIntAsIntN
+code-creation,Builtin,3,4002,0x7efd57f02540,12,BigIntPrototypeToLocaleString
+code-creation,Builtin,3,4010,0x7efd57f02560,12,BigIntPrototypeToString
+code-creation,Builtin,3,4017,0x7efd57f02580,12,BigIntPrototypeValueOf
+code-creation,Builtin,3,4026,0x7efd57f025a0,186,BooleanPrototypeToString
+code-creation,Builtin,3,4033,0x7efd57f02660,178,BooleanPrototypeValueOf
+code-creation,Builtin,3,4041,0x7efd57f02720,12,CallSitePrototypeGetColumnNumber
+code-creation,Builtin,3,4050,0x7efd57f02740,12,CallSitePrototypeGetEvalOrigin
+code-creation,Builtin,3,4057,0x7efd57f02760,12,CallSitePrototypeGetFileName
+code-creation,Builtin,3,4065,0x7efd57f02780,12,CallSitePrototypeGetFunction
+code-creation,Builtin,3,4073,0x7efd57f027a0,12,CallSitePrototypeGetFunctionName
+code-creation,Builtin,3,4083,0x7efd57f027c0,12,CallSitePrototypeGetLineNumber
+code-creation,Builtin,3,4092,0x7efd57f027e0,12,CallSitePrototypeGetMethodName
+code-creation,Builtin,3,4101,0x7efd57f02800,12,CallSitePrototypeGetPosition
+code-creation,Builtin,3,4109,0x7efd57f02820,12,CallSitePrototypeGetPromiseIndex
+code-creation,Builtin,3,4117,0x7efd57f02840,12,CallSitePrototypeGetScriptNameOrSourceURL
+code-creation,Builtin,3,4126,0x7efd57f02860,12,CallSitePrototypeGetThis
+code-creation,Builtin,3,4135,0x7efd57f02880,12,CallSitePrototypeGetTypeName
+code-creation,Builtin,3,4143,0x7efd57f028a0,12,CallSitePrototypeIsAsync
+code-creation,Builtin,3,4152,0x7efd57f028c0,12,CallSitePrototypeIsConstructor
+code-creation,Builtin,3,4160,0x7efd57f028e0,12,CallSitePrototypeIsEval
+code-creation,Builtin,3,4169,0x7efd57f02900,12,CallSitePrototypeIsNative
+code-creation,Builtin,3,4178,0x7efd57f02920,12,CallSitePrototypeIsPromiseAll
+code-creation,Builtin,3,4186,0x7efd57f02940,12,CallSitePrototypeIsToplevel
+code-creation,Builtin,3,4203,0x7efd57f02960,12,CallSitePrototypeToString
+code-creation,Builtin,3,4212,0x7efd57f02980,12,ConsoleDebug
+code-creation,Builtin,3,4225,0x7efd57f029a0,12,ConsoleError
+code-creation,Builtin,3,4232,0x7efd57f029c0,12,ConsoleInfo
+code-creation,Builtin,3,4241,0x7efd57f029e0,12,ConsoleLog
+code-creation,Builtin,3,4250,0x7efd57f02a00,12,ConsoleWarn
+code-creation,Builtin,3,4257,0x7efd57f02a20,12,ConsoleDir
+code-creation,Builtin,3,4264,0x7efd57f02a40,12,ConsoleDirXml
+code-creation,Builtin,3,4272,0x7efd57f02a60,12,ConsoleTable
+code-creation,Builtin,3,4279,0x7efd57f02a80,12,ConsoleTrace
+code-creation,Builtin,3,4286,0x7efd57f02aa0,12,ConsoleGroup
+code-creation,Builtin,3,4294,0x7efd57f02ac0,12,ConsoleGroupCollapsed
+code-creation,Builtin,3,4301,0x7efd57f02ae0,12,ConsoleGroupEnd
+code-creation,Builtin,3,4308,0x7efd57f02b00,12,ConsoleClear
+code-creation,Builtin,3,4317,0x7efd57f02b20,12,ConsoleCount
+code-creation,Builtin,3,4325,0x7efd57f02b40,12,ConsoleCountReset
+code-creation,Builtin,3,4333,0x7efd57f02b60,12,ConsoleAssert
+code-creation,Builtin,3,4341,0x7efd57f02b80,402,FastConsoleAssert
+code-creation,Builtin,3,4349,0x7efd57f02d20,12,ConsoleProfile
+code-creation,Builtin,3,4357,0x7efd57f02d40,12,ConsoleProfileEnd
+code-creation,Builtin,3,4365,0x7efd57f02d60,12,ConsoleTime
+code-creation,Builtin,3,4373,0x7efd57f02d80,12,ConsoleTimeLog
+code-creation,Builtin,3,4382,0x7efd57f02da0,12,ConsoleTimeEnd
+code-creation,Builtin,3,4390,0x7efd57f02dc0,12,ConsoleTimeStamp
+code-creation,Builtin,3,4398,0x7efd57f02de0,12,ConsoleContext
+code-creation,Builtin,3,4406,0x7efd57f02e00,12,DataViewConstructor
+code-creation,Builtin,3,4413,0x7efd57f02e20,12,DateConstructor
+code-creation,Builtin,3,4421,0x7efd57f02e40,259,DatePrototypeGetDate
+code-creation,Builtin,3,4428,0x7efd57f02f60,259,DatePrototypeGetDay
+code-creation,Builtin,3,4436,0x7efd57f03080,259,DatePrototypeGetFullYear
+code-creation,Builtin,3,4444,0x7efd57f031a0,259,DatePrototypeGetHours
+code-creation,Builtin,3,4453,0x7efd57f032c0,227,DatePrototypeGetMilliseconds
+code-creation,Builtin,3,4462,0x7efd57f033c0,259,DatePrototypeGetMinutes
+code-creation,Builtin,3,4469,0x7efd57f034e0,259,DatePrototypeGetMonth
+code-creation,Builtin,3,4483,0x7efd57f03600,259,DatePrototypeGetSeconds
+code-creation,Builtin,3,4491,0x7efd57f03720,146,DatePrototypeGetTime
+code-creation,Builtin,3,4499,0x7efd57f037c0,227,DatePrototypeGetTimezoneOffset
+code-creation,Builtin,3,4506,0x7efd57f038c0,227,DatePrototypeGetUTCDate
+code-creation,Builtin,3,4515,0x7efd57f039c0,227,DatePrototypeGetUTCDay
+code-creation,Builtin,3,4524,0x7efd57f03ac0,227,DatePrototypeGetUTCFullYear
+code-creation,Builtin,3,4534,0x7efd57f03bc0,227,DatePrototypeGetUTCHours
+code-creation,Builtin,3,4544,0x7efd57f03cc0,227,DatePrototypeGetUTCMilliseconds
+code-creation,Builtin,3,4554,0x7efd57f03dc0,227,DatePrototypeGetUTCMinutes
+code-creation,Builtin,3,4563,0x7efd57f03ec0,227,DatePrototypeGetUTCMonth
+code-creation,Builtin,3,4572,0x7efd57f03fc0,227,DatePrototypeGetUTCSeconds
+code-creation,Builtin,3,4581,0x7efd57f040c0,146,DatePrototypeValueOf
+code-creation,Builtin,3,4590,0x7efd57f04160,464,DatePrototypeToPrimitive
+code-creation,Builtin,3,4598,0x7efd57f04340,12,DatePrototypeGetYear
+code-creation,Builtin,3,4606,0x7efd57f04360,12,DatePrototypeSetYear
+code-creation,Builtin,3,4615,0x7efd57f04380,12,DateNow
+code-creation,Builtin,3,4622,0x7efd57f043a0,12,DateParse
+code-creation,Builtin,3,4630,0x7efd57f043c0,12,DatePrototypeSetDate
+code-creation,Builtin,3,4639,0x7efd57f043e0,12,DatePrototypeSetFullYear
+code-creation,Builtin,3,4646,0x7efd57f04400,12,DatePrototypeSetHours
+code-creation,Builtin,3,4654,0x7efd57f04420,12,DatePrototypeSetMilliseconds
+code-creation,Builtin,3,4662,0x7efd57f04440,12,DatePrototypeSetMinutes
+code-creation,Builtin,3,4670,0x7efd57f04460,12,DatePrototypeSetMonth
+code-creation,Builtin,3,4677,0x7efd57f04480,12,DatePrototypeSetSeconds
+code-creation,Builtin,3,4685,0x7efd57f044a0,12,DatePrototypeSetTime
+code-creation,Builtin,3,4693,0x7efd57f044c0,12,DatePrototypeSetUTCDate
+code-creation,Builtin,3,4700,0x7efd57f044e0,12,DatePrototypeSetUTCFullYear
+code-creation,Builtin,3,4716,0x7efd57f04500,12,DatePrototypeSetUTCHours
+code-creation,Builtin,3,4723,0x7efd57f04520,12,DatePrototypeSetUTCMilliseconds
+code-creation,Builtin,3,4731,0x7efd57f04540,12,DatePrototypeSetUTCMinutes
+code-creation,Builtin,3,4739,0x7efd57f04560,12,DatePrototypeSetUTCMonth
+code-creation,Builtin,3,4746,0x7efd57f04580,12,DatePrototypeSetUTCSeconds
+code-creation,Builtin,3,4756,0x7efd57f045a0,12,DatePrototypeToDateString
+code-creation,Builtin,3,4765,0x7efd57f045c0,12,DatePrototypeToISOString
+code-creation,Builtin,3,4773,0x7efd57f045e0,12,DatePrototypeToUTCString
+code-creation,Builtin,3,4782,0x7efd57f04600,12,DatePrototypeToString
+code-creation,Builtin,3,4790,0x7efd57f04620,12,DatePrototypeToTimeString
+code-creation,Builtin,3,4799,0x7efd57f04640,12,DatePrototypeToJson
+code-creation,Builtin,3,4807,0x7efd57f04660,12,DateUTC
+code-creation,Builtin,3,4815,0x7efd57f04680,12,ErrorConstructor
+code-creation,Builtin,3,4823,0x7efd57f046a0,12,ErrorCaptureStackTrace
+code-creation,Builtin,3,4832,0x7efd57f046c0,12,ErrorPrototypeToString
+code-creation,Builtin,3,4840,0x7efd57f046e0,12,MakeError
+code-creation,Builtin,3,4848,0x7efd57f04700,12,MakeRangeError
+code-creation,Builtin,3,4857,0x7efd57f04720,12,MakeSyntaxError
+code-creation,Builtin,3,4865,0x7efd57f04740,12,MakeTypeError
+code-creation,Builtin,3,4873,0x7efd57f04760,12,MakeURIError
+code-creation,Builtin,3,4880,0x7efd57f04780,12,ExtrasUtilsUncurryThis
+code-creation,Builtin,3,4889,0x7efd57f047a0,12,ExtrasUtilsCallReflectApply
+code-creation,Builtin,3,4898,0x7efd57f047c0,12,FunctionConstructor
+code-creation,Builtin,3,4905,0x7efd57f047e0,64,FunctionPrototypeApply
+code-creation,Builtin,3,4912,0x7efd57f04840,12,FunctionPrototypeBind
+code-creation,Builtin,3,4921,0x7efd57f04860,916,FastFunctionPrototypeBind
+code-creation,Builtin,3,4928,0x7efd57f04c00,47,FunctionPrototypeCall
+code-creation,Builtin,3,4936,0x7efd57f04c40,427,FunctionPrototypeHasInstance
+code-creation,Builtin,3,4944,0x7efd57f04e00,12,FunctionPrototypeToString
+code-creation,Builtin,3,4956,0x7efd57f04e20,193,CreateIterResultObject
+code-creation,Builtin,3,4964,0x7efd57f04f00,818,CreateGeneratorObject
+code-creation,Builtin,3,4972,0x7efd57f05240,12,GeneratorFunctionConstructor
+code-creation,Builtin,3,4980,0x7efd57f05260,532,GeneratorPrototypeNext
+code-creation,Builtin,3,4989,0x7efd57f05480,540,GeneratorPrototypeReturn
+code-creation,Builtin,3,4998,0x7efd57f056a0,548,GeneratorPrototypeThrow
+code-creation,Builtin,3,5006,0x7efd57f058e0,12,AsyncFunctionConstructor
+code-creation,Builtin,3,5015,0x7efd57f05900,12,GlobalDecodeURI
+code-creation,Builtin,3,5023,0x7efd57f05920,12,GlobalDecodeURIComponent
+code-creation,Builtin,3,5031,0x7efd57f05940,12,GlobalEncodeURI
+code-creation,Builtin,3,5040,0x7efd57f05960,12,GlobalEncodeURIComponent
+code-creation,Builtin,3,5048,0x7efd57f05980,12,GlobalEscape
+code-creation,Builtin,3,5056,0x7efd57f059a0,12,GlobalUnescape
+code-creation,Builtin,3,5063,0x7efd57f059c0,12,GlobalEval
+code-creation,Builtin,3,5070,0x7efd57f059e0,149,GlobalIsFinite
+code-creation,Builtin,3,5079,0x7efd57f05a80,141,GlobalIsNaN
+code-creation,Builtin,3,5086,0x7efd57f05b20,12,JsonParse
+code-creation,Builtin,3,5093,0x7efd57f05b40,12,JsonStringify
+code-creation,Builtin,3,5101,0x7efd57f05b60,2913,LoadIC
+code-creation,Builtin,3,5107,0x7efd57f066e0,2693,LoadIC_Megamorphic
+code-creation,Builtin,3,5115,0x7efd57f07180,2765,LoadIC_Noninlined
+code-creation,Builtin,3,5123,0x7efd57f07c60,52,LoadICTrampoline
+code-creation,Builtin,3,5130,0x7efd57f07ca0,52,LoadICTrampoline_Megamorphic
+code-creation,Builtin,3,5138,0x7efd57f07ce0,6392,KeyedLoadIC
+code-creation,Builtin,3,5146,0x7efd57f095e0,11662,KeyedLoadIC_Megamorphic
+code-creation,Builtin,3,5154,0x7efd57f0c380,52,KeyedLoadICTrampoline
+code-creation,Builtin,3,5164,0x7efd57f0c3c0,52,KeyedLoadICTrampoline_Megamorphic
+code-creation,Builtin,3,5173,0x7efd57f0c400,5844,StoreGlobalIC
+code-creation,Builtin,3,5180,0x7efd57f0dae0,52,StoreGlobalICTrampoline
+code-creation,Builtin,3,5187,0x7efd57f0db20,6736,StoreIC
+code-creation,Builtin,3,5195,0x7efd57f0f580,52,StoreICTrampoline
+code-creation,Builtin,3,5206,0x7efd57f0f5c0,7248,KeyedStoreIC
+code-creation,Builtin,3,5214,0x7efd57f11220,52,KeyedStoreICTrampoline
+code-creation,Builtin,3,5224,0x7efd57f11260,348,StoreInArrayLiteralIC
+code-creation,Builtin,3,5232,0x7efd57f113c0,1997,LoadGlobalIC
+code-creation,Builtin,3,5240,0x7efd57f11ba0,1981,LoadGlobalICInsideTypeof
+code-creation,Builtin,3,5249,0x7efd57f12360,52,LoadGlobalICTrampoline
+code-creation,Builtin,3,5257,0x7efd57f123a0,52,LoadGlobalICInsideTypeofTrampoline
+code-creation,Builtin,3,5266,0x7efd57f123e0,2016,CloneObjectIC
+code-creation,Builtin,3,5274,0x7efd57f12be0,2012,CloneObjectIC_Slow
+code-creation,Builtin,3,5282,0x7efd57f133c0,2352,KeyedHasIC
+code-creation,Builtin,3,5290,0x7efd57f13d00,2174,KeyedHasIC_Megamorphic
+code-creation,Builtin,3,5298,0x7efd57f14580,1678,IterableToList
+code-creation,Builtin,3,5305,0x7efd57f14c20,649,IterableToListWithSymbolLookup
+code-creation,Builtin,3,5313,0x7efd57f14ec0,112,IterableToListMayPreserveHoles
+code-creation,Builtin,3,5321,0x7efd57f14f40,1380,FindOrderedHashMapEntry
+code-creation,Builtin,3,5328,0x7efd57f154c0,6456,MapConstructor
+code-creation,Builtin,3,5336,0x7efd57f16e00,2228,MapPrototypeSet
+code-creation,Builtin,3,5344,0x7efd57f176c0,1750,MapPrototypeDelete
+code-creation,Builtin,3,5351,0x7efd57f17da0,243,MapPrototypeGet
+code-creation,Builtin,3,5359,0x7efd57f17ea0,203,MapPrototypeHas
+code-creation,Builtin,3,5366,0x7efd57f17f80,12,MapPrototypeClear
+code-creation,Builtin,3,5373,0x7efd57f17fa0,307,MapPrototypeEntries
+code-creation,Builtin,3,5381,0x7efd57f180e0,166,MapPrototypeGetSize
+code-creation,Builtin,3,5389,0x7efd57f181a0,630,MapPrototypeForEach
+code-creation,Builtin,3,5396,0x7efd57f18420,307,MapPrototypeKeys
+code-creation,Builtin,3,5404,0x7efd57f18560,307,MapPrototypeValues
+code-creation,Builtin,3,5412,0x7efd57f186a0,1038,MapIteratorPrototypeNext
+code-creation,Builtin,3,5421,0x7efd57f18ac0,1366,MapIteratorToList
+code-creation,Builtin,3,5429,0x7efd57f19020,291,MathAbs
+code-creation,Builtin,3,5437,0x7efd57f19160,491,MathCeil
+code-creation,Builtin,3,5445,0x7efd57f19360,491,MathFloor
+code-creation,Builtin,3,5453,0x7efd57f19560,12,MathHypot
+code-creation,Builtin,3,5462,0x7efd57f19580,317,MathImul
+code-creation,Builtin,3,5470,0x7efd57f196c0,486,MathMax
+code-creation,Builtin,3,5482,0x7efd57f198c0,498,MathMin
+code-creation,Builtin,3,5491,0x7efd57f19ac0,456,MathPow
+code-creation,Builtin,3,5497,0x7efd57f19ca0,331,MathRandom
+code-creation,Builtin,3,5505,0x7efd57f19e00,555,MathRound
+code-creation,Builtin,3,5512,0x7efd57f1a040,491,MathTrunc
+code-creation,Builtin,3,5519,0x7efd57f1a240,109,AllocateHeapNumber
+code-creation,Builtin,3,5528,0x7efd57f1a2c0,620,NumberConstructor
+code-creation,Builtin,3,5535,0x7efd57f1a540,117,NumberIsFinite
+code-creation,Builtin,3,5542,0x7efd57f1a5c0,373,NumberIsInteger
+code-creation,Builtin,3,5552,0x7efd57f1a740,109,NumberIsNaN
+code-creation,Builtin,3,5559,0x7efd57f1a7c0,405,NumberIsSafeInteger
+code-creation,Builtin,3,5566,0x7efd57f1a960,223,NumberParseFloat
+code-creation,Builtin,3,5574,0x7efd57f1aa40,102,NumberParseInt
+code-creation,Builtin,3,5581,0x7efd57f1aac0,317,ParseInt
+code-creation,Builtin,3,5588,0x7efd57f1ac00,12,NumberPrototypeToExponential
+code-creation,Builtin,3,5597,0x7efd57f1ac20,12,NumberPrototypeToFixed
+code-creation,Builtin,3,5605,0x7efd57f1ac40,12,NumberPrototypeToLocaleString
+code-creation,Builtin,3,5614,0x7efd57f1ac60,12,NumberPrototypeToPrecision
+code-creation,Builtin,3,5622,0x7efd57f1ac80,12,NumberPrototypeToString
+code-creation,Builtin,3,5630,0x7efd57f1aca0,186,NumberPrototypeValueOf
+code-creation,Builtin,3,5639,0x7efd57f1ad60,1092,Add
+code-creation,Builtin,3,5647,0x7efd57f1b1c0,545,Subtract
+code-creation,Builtin,3,5655,0x7efd57f1b400,722,Multiply
+code-creation,Builtin,3,5663,0x7efd57f1b6e0,601,Divide
+code-creation,Builtin,3,5672,0x7efd57f1b940,657,Modulus
+code-creation,Builtin,3,5680,0x7efd57f1bbe0,679,Exponentiate
+code-creation,Builtin,3,5688,0x7efd57f1bea0,500,BitwiseAnd
+code-creation,Builtin,3,5696,0x7efd57f1c0a0,500,BitwiseOr
+code-creation,Builtin,3,5703,0x7efd57f1c2a0,500,BitwiseXor
+code-creation,Builtin,3,5712,0x7efd57f1c4a0,512,ShiftLeft
+code-creation,Builtin,3,5720,0x7efd57f1c6c0,512,ShiftRight
+code-creation,Builtin,3,5727,0x7efd57f1c8e0,641,ShiftRightLogical
+code-creation,Builtin,3,5735,0x7efd57f1cb80,1158,LessThan
+code-creation,Builtin,3,5743,0x7efd57f1d020,1158,LessThanOrEqual
+code-creation,Builtin,3,5750,0x7efd57f1d4c0,1158,GreaterThan
+code-creation,Builtin,3,5757,0x7efd57f1d960,1158,GreaterThanOrEqual
+code-creation,Builtin,3,5766,0x7efd57f1de00,996,Equal
+code-creation,Builtin,3,5774,0x7efd57f1e200,337,SameValue
+code-creation,Builtin,3,5782,0x7efd57f1e360,204,SameValueNumbersOnly
+code-creation,Builtin,3,5790,0x7efd57f1e440,333,StrictEqual
+code-creation,Builtin,3,5798,0x7efd57f1e5a0,158,BitwiseNot
+code-creation,Builtin,3,5806,0x7efd57f1e640,158,Decrement
+code-creation,Builtin,3,5814,0x7efd57f1e6e0,158,Increment
+code-creation,Builtin,3,5822,0x7efd57f1e780,440,Negate
+code-creation,Builtin,3,5830,0x7efd57f1e940,412,ObjectConstructor
+code-creation,Builtin,3,5838,0x7efd57f1eae0,326,ObjectAssign
+code-creation,Builtin,3,5846,0x7efd57f1ec40,1008,ObjectCreate
+code-creation,Builtin,3,5855,0x7efd57f1f040,895,CreateObjectWithoutProperties
+code-creation,Builtin,3,5863,0x7efd57f1f3c0,12,ObjectDefineGetter
+code-creation,Builtin,3,5871,0x7efd57f1f3e0,12,ObjectDefineProperties
+code-creation,Builtin,3,5880,0x7efd57f1f400,12,ObjectDefineProperty
+code-creation,Builtin,3,5888,0x7efd57f1f420,12,ObjectDefineSetter
+code-creation,Builtin,3,5895,0x7efd57f1f440,1874,ObjectEntries
+code-creation,Builtin,3,5902,0x7efd57f1fba0,12,ObjectFreeze
+code-creation,Builtin,3,5910,0x7efd57f1fbc0,6204,ObjectGetOwnPropertyDescriptor
+code-creation,Builtin,3,5918,0x7efd57f21400,12,ObjectGetOwnPropertyDescriptors
+code-creation,Builtin,3,5926,0x7efd57f21420,812,ObjectGetOwnPropertyNames
+code-creation,Builtin,3,5934,0x7efd57f21760,12,ObjectGetOwnPropertySymbols
+code-creation,Builtin,3,5942,0x7efd57f21780,381,ObjectIs
+code-creation,Builtin,3,5949,0x7efd57f21900,12,ObjectIsFrozen
+code-creation,Builtin,3,5957,0x7efd57f21920,12,ObjectIsSealed
+code-creation,Builtin,3,5965,0x7efd57f21940,730,ObjectKeys
+code-creation,Builtin,3,5973,0x7efd57f21c20,12,ObjectLookupGetter
+code-creation,Builtin,3,5981,0x7efd57f21c40,12,ObjectLookupSetter
+code-creation,Builtin,3,5989,0x7efd57f21c60,98,ObjectPrototypeToString
+code-creation,Builtin,3,5998,0x7efd57f21ce0,122,ObjectPrototypeValueOf
+code-creation,Builtin,3,6009,0x7efd57f21d60,1868,ObjectPrototypeHasOwnProperty
+code-creation,Builtin,3,6018,0x7efd57f224c0,291,ObjectPrototypeIsPrototypeOf
+code-creation,Builtin,3,6026,0x7efd57f22600,12,ObjectPrototypePropertyIsEnumerable
+code-creation,Builtin,3,6035,0x7efd57f22620,12,ObjectPrototypeGetProto
+code-creation,Builtin,3,6043,0x7efd57f22640,12,ObjectPrototypeSetProto
+code-creation,Builtin,3,6050,0x7efd57f22660,236,ObjectPrototypeToLocaleString
+code-creation,Builtin,3,6059,0x7efd57f22760,12,ObjectSeal
+code-creation,Builtin,3,6066,0x7efd57f22780,1380,ObjectToString
+code-creation,Builtin,3,6073,0x7efd57f22d00,1506,ObjectValues
+code-creation,Builtin,3,6081,0x7efd57f23300,353,OrdinaryHasInstance
+code-creation,Builtin,3,6088,0x7efd57f23480,430,InstanceOf
+code-creation,Builtin,3,6095,0x7efd57f23640,268,ForInEnumerate
+code-creation,Builtin,3,6103,0x7efd57f23760,2112,ForInFilter
+code-creation,Builtin,3,6111,0x7efd57f23fc0,825,FulfillPromise
+code-creation,Builtin,3,6118,0x7efd57f24300,1033,RejectPromise
+code-creation,Builtin,3,6125,0x7efd57f24720,580,ResolvePromise
+code-creation,Builtin,3,6133,0x7efd57f24980,163,PromiseCapabilityDefaultReject
+code-creation,Builtin,3,6141,0x7efd57f24a40,159,PromiseCapabilityDefaultResolve
+code-creation,Builtin,3,6148,0x7efd57f24ae0,330,PromiseGetCapabilitiesExecutor
+code-creation,Builtin,3,6157,0x7efd57f24c40,2092,NewPromiseCapability
+code-creation,Builtin,3,6165,0x7efd57f25480,122,PromiseConstructorLazyDeoptContinuation
+code-creation,Builtin,3,6174,0x7efd57f25500,2552,PromiseConstructor
+code-creation,Builtin,3,6184,0x7efd57f25f00,12,IsPromise
+code-creation,Builtin,3,6192,0x7efd57f25f20,1806,PromisePrototypeThen
+code-creation,Builtin,3,6201,0x7efd57f26640,1064,PerformPromiseThen
+code-creation,Builtin,3,6212,0x7efd57f26a80,244,PromisePrototypeCatch
+code-creation,Builtin,3,6221,0x7efd57f26b80,344,PromiseRejectReactionJob
+code-creation,Builtin,3,6229,0x7efd57f26ce0,200,PromiseFulfillReactionJob
+code-creation,Builtin,3,6238,0x7efd57f26dc0,1048,PromiseResolveThenableJob
+code-creation,Builtin,3,6247,0x7efd57f271e0,179,PromiseResolveTrampoline
+code-creation,Builtin,3,6254,0x7efd57f272a0,542,PromiseResolve
+code-creation,Builtin,3,6261,0x7efd57f274c0,543,PromiseReject
+code-creation,Builtin,3,6270,0x7efd57f276e0,1572,PromisePrototypeFinally
+code-creation,Builtin,3,6277,0x7efd57f27d20,848,PromiseThenFinally
+code-creation,Builtin,3,6284,0x7efd57f28080,848,PromiseCatchFinally
+code-creation,Builtin,3,6292,0x7efd57f283e0,77,PromiseValueThunkFinally
+code-creation,Builtin,3,6300,0x7efd57f28440,106,PromiseThrowerFinally
+code-creation,Builtin,3,6307,0x7efd57f284c0,4472,PromiseAll
+code-creation,Builtin,3,6315,0x7efd57f29640,1148,PromiseAllResolveElementClosure
+code-creation,Builtin,3,6323,0x7efd57f29ac0,1808,PromiseRace
+code-creation,Builtin,3,6331,0x7efd57f2a1e0,4848,PromiseAllSettled
+code-creation,Builtin,3,6341,0x7efd57f2b4e0,1442,PromiseAllSettledResolveElementClosure
+code-creation,Builtin,3,6348,0x7efd57f2baa0,1450,PromiseAllSettledRejectElementClosure
+code-creation,Builtin,3,6359,0x7efd57f2c060,275,PromiseInternalConstructor
+code-creation,Builtin,3,6369,0x7efd57f2c180,163,PromiseInternalReject
+code-creation,Builtin,3,6378,0x7efd57f2c240,159,PromiseInternalResolve
+code-creation,Builtin,3,6388,0x7efd57f2c2e0,51,ReflectApply
+code-creation,Builtin,3,6397,0x7efd57f2c320,57,ReflectConstruct
+code-creation,Builtin,3,6407,0x7efd57f2c360,12,ReflectDefineProperty
+code-creation,Builtin,3,6418,0x7efd57f2c380,12,ReflectGetOwnPropertyDescriptor
+code-creation,Builtin,3,6429,0x7efd57f2c3a0,171,ReflectHas
+code-creation,Builtin,3,6439,0x7efd57f2c460,12,ReflectOwnKeys
+code-creation,Builtin,3,6449,0x7efd57f2c480,12,ReflectSet
+code-creation,Builtin,3,6455,0x7efd57f2c4a0,12,RegExpCapture1Getter
+code-creation,Builtin,3,6461,0x7efd57f2c4c0,12,RegExpCapture2Getter
+code-creation,Builtin,3,6468,0x7efd57f2c4e0,12,RegExpCapture3Getter
+code-creation,Builtin,3,6483,0x7efd57f2c500,12,RegExpCapture4Getter
+code-creation,Builtin,3,6494,0x7efd57f2c520,12,RegExpCapture5Getter
+code-creation,Builtin,3,6503,0x7efd57f2c540,12,RegExpCapture6Getter
+code-creation,Builtin,3,6514,0x7efd57f2c560,12,RegExpCapture7Getter
+code-creation,Builtin,3,6520,0x7efd57f2c580,12,RegExpCapture8Getter
+code-creation,Builtin,3,6526,0x7efd57f2c5a0,12,RegExpCapture9Getter
+code-creation,Builtin,3,6532,0x7efd57f2c5c0,2528,RegExpConstructor
+code-creation,Builtin,3,6538,0x7efd57f2cfc0,12,RegExpInputGetter
+code-creation,Builtin,3,6543,0x7efd57f2cfe0,12,RegExpInputSetter
+code-creation,Builtin,3,6550,0x7efd57f2d000,12,RegExpLastMatchGetter
+code-creation,Builtin,3,6560,0x7efd57f2d020,12,RegExpLastParenGetter
+code-creation,Builtin,3,6567,0x7efd57f2d040,12,RegExpLeftContextGetter
+code-creation,Builtin,3,6573,0x7efd57f2d060,1134,RegExpPrototypeCompile
+code-creation,Builtin,3,6579,0x7efd57f2d4e0,5134,RegExpPrototypeExec
+code-creation,Builtin,3,6586,0x7efd57f2e900,242,RegExpPrototypeDotAllGetter
+code-creation,Builtin,3,6593,0x7efd57f2ea00,2338,RegExpPrototypeFlagsGetter
+code-creation,Builtin,3,6598,0x7efd57f2f340,279,RegExpPrototypeGlobalGetter
+code-creation,Builtin,3,6605,0x7efd57f2f460,283,RegExpPrototypeIgnoreCaseGetter
+code-creation,Builtin,3,6613,0x7efd57f2f580,3996,RegExpPrototypeMatch
+code-creation,Builtin,3,6619,0x7efd57f30520,2454,RegExpPrototypeMatchAll
+code-creation,Builtin,3,6626,0x7efd57f30ec0,283,RegExpPrototypeMultilineGetter
+code-creation,Builtin,3,6633,0x7efd57f30fe0,1780,RegExpPrototypeSearch
+code-creation,Builtin,3,6640,0x7efd57f316e0,247,RegExpPrototypeSourceGetter
+code-creation,Builtin,3,6646,0x7efd57f317e0,283,RegExpPrototypeStickyGetter
+code-creation,Builtin,3,6652,0x7efd57f31900,2224,RegExpPrototypeTest
+code-creation,Builtin,3,6659,0x7efd57f321c0,1528,RegExpPrototypeTestFast
+code-creation,Builtin,3,6666,0x7efd57f327c0,12,RegExpPrototypeToString
+code-creation,Builtin,3,6676,0x7efd57f327e0,283,RegExpPrototypeUnicodeGetter
+code-creation,Builtin,3,6683,0x7efd57f32900,12,RegExpRightContextGetter
+code-creation,Builtin,3,6690,0x7efd57f32920,568,RegExpPrototypeSplit
+code-creation,Builtin,3,6698,0x7efd57f32b60,309,RegExpExecAtom
+code-creation,Builtin,3,6704,0x7efd57f32ca0,1176,RegExpExecInternal
+code-creation,Builtin,3,6711,0x7efd57f33140,9214,RegExpMatchFast
+code-creation,Builtin,3,6718,0x7efd57f35540,5028,RegExpPrototypeExecSlow
+code-creation,Builtin,3,6724,0x7efd57f36900,1700,RegExpSearchFast
+code-creation,Builtin,3,6731,0x7efd57f36fc0,5055,RegExpSplit
+code-creation,Builtin,3,6736,0x7efd57f38380,8915,RegExpStringIteratorPrototypeNext
+code-creation,Builtin,3,6743,0x7efd57f3a660,4280,SetConstructor
+code-creation,Builtin,3,6747,0x7efd57f3b720,1464,SetPrototypeHas
+code-creation,Builtin,3,6755,0x7efd57f3bce0,1936,SetPrototypeAdd
+code-creation,Builtin,3,6761,0x7efd57f3c480,1678,SetPrototypeDelete
+code-creation,Builtin,3,6768,0x7efd57f3cb20,12,SetPrototypeClear
+code-creation,Builtin,3,6775,0x7efd57f3cb40,307,SetPrototypeEntries
+code-creation,Builtin,3,6781,0x7efd57f3cc80,166,SetPrototypeGetSize
+code-creation,Builtin,3,6788,0x7efd57f3cd40,558,SetPrototypeForEach
+code-creation,Builtin,3,6795,0x7efd57f3cf80,307,SetPrototypeValues
+code-creation,Builtin,3,6802,0x7efd57f3d0c0,937,SetIteratorPrototypeNext
+code-creation,Builtin,3,6809,0x7efd57f3d480,1282,SetOrSetIteratorToList
+code-creation,Builtin,3,6815,0x7efd57f3d9a0,12,SharedArrayBufferPrototypeGetByteLength
+code-creation,Builtin,3,6823,0x7efd57f3d9c0,12,SharedArrayBufferPrototypeSlice
+code-creation,Builtin,3,6830,0x7efd57f3d9e0,1352,AtomicsLoad
+code-creation,Builtin,3,6836,0x7efd57f3df40,914,AtomicsStore
+code-creation,Builtin,3,6843,0x7efd57f3e2e0,1716,AtomicsExchange
+code-creation,Builtin,3,6848,0x7efd57f3e9a0,2148,AtomicsCompareExchange
+code-creation,Builtin,3,6855,0x7efd57f3f220,1848,AtomicsAdd
+code-creation,Builtin,3,6861,0x7efd57f3f960,1848,AtomicsSub
+code-creation,Builtin,3,6868,0x7efd57f400a0,1848,AtomicsAnd
+code-creation,Builtin,3,6874,0x7efd57f407e0,1848,AtomicsOr
+code-creation,Builtin,3,6881,0x7efd57f40f20,1848,AtomicsXor
+code-creation,Builtin,3,6887,0x7efd57f41660,12,AtomicsNotify
+code-creation,Builtin,3,6894,0x7efd57f41680,12,AtomicsIsLockFree
+code-creation,Builtin,3,6899,0x7efd57f416a0,12,AtomicsWait
+code-creation,Builtin,3,6906,0x7efd57f416c0,12,AtomicsWake
+code-creation,Builtin,3,6912,0x7efd57f416e0,412,StringConstructor
+code-creation,Builtin,3,6919,0x7efd57f41880,12,StringFromCodePoint
+code-creation,Builtin,3,6926,0x7efd57f418a0,2028,StringFromCharCode
+code-creation,Builtin,3,6933,0x7efd57f420a0,1896,StringPrototypeIncludes
+code-creation,Builtin,3,6939,0x7efd57f42820,1648,StringPrototypeIndexOf
+code-creation,Builtin,3,6945,0x7efd57f42ea0,12,StringPrototypeLastIndexOf
+code-creation,Builtin,3,6952,0x7efd57f42ec0,1088,StringPrototypeMatch
+code-creation,Builtin,3,6958,0x7efd57f43320,3304,StringPrototypeMatchAll
+code-creation,Builtin,3,6965,0x7efd57f44020,12,StringPrototypeLocaleCompare
+code-creation,Builtin,3,6972,0x7efd57f44040,900,StringPrototypePadEnd
+code-creation,Builtin,3,6978,0x7efd57f443e0,896,StringPrototypePadStart
+code-creation,Builtin,3,6985,0x7efd57f44780,1500,StringPrototypeReplace
+code-creation,Builtin,3,6991,0x7efd57f44d60,1088,StringPrototypeSearch
+code-creation,Builtin,3,6998,0x7efd57f451c0,3422,StringPrototypeSplit
+code-creation,Builtin,3,7005,0x7efd57f45f20,4136,StringPrototypeSubstr
+code-creation,Builtin,3,7012,0x7efd57f46f60,4630,StringPrototypeTrim
+code-creation,Builtin,3,7019,0x7efd57f48180,4282,StringPrototypeTrimEnd
+code-creation,Builtin,3,7025,0x7efd57f49240,4298,StringPrototypeTrimStart
+code-creation,Builtin,3,7032,0x7efd57f4a320,12,StringRaw
+code-creation,Builtin,3,7039,0x7efd57f4a340,12,SymbolConstructor
+code-creation,Builtin,3,7046,0x7efd57f4a360,12,SymbolFor
+code-creation,Builtin,3,7052,0x7efd57f4a380,12,SymbolKeyFor
+code-creation,Builtin,3,7059,0x7efd57f4a3a0,186,SymbolPrototypeDescriptionGetter
+code-creation,Builtin,3,7070,0x7efd57f4a460,178,SymbolPrototypeToPrimitive
+code-creation,Builtin,3,7079,0x7efd57f4a520,211,SymbolPrototypeToString
+code-creation,Builtin,3,7085,0x7efd57f4a600,178,SymbolPrototypeValueOf
+code-creation,Builtin,3,7091,0x7efd57f4a6c0,126,TypedArrayBaseConstructor
+code-creation,Builtin,3,7098,0x7efd57f4a740,65,GenericLazyDeoptContinuation
+code-creation,Builtin,3,7104,0x7efd57f4a7a0,332,TypedArrayConstructor
+code-creation,Builtin,3,7111,0x7efd57f4a900,12,TypedArrayPrototypeBuffer
+code-creation,Builtin,3,7117,0x7efd57f4a920,339,TypedArrayPrototypeByteLength
+code-creation,Builtin,3,7124,0x7efd57f4aa80,339,TypedArrayPrototypeByteOffset
+code-creation,Builtin,3,7130,0x7efd57f4abe0,339,TypedArrayPrototypeLength
+code-creation,Builtin,3,7137,0x7efd57f4ad40,388,TypedArrayPrototypeEntries
+code-creation,Builtin,3,7143,0x7efd57f4aee0,380,TypedArrayPrototypeKeys
+code-creation,Builtin,3,7149,0x7efd57f4b060,388,TypedArrayPrototypeValues
+code-creation,Builtin,3,7153,0x7efd57f4b200,12,TypedArrayPrototypeCopyWithin
+code-creation,Builtin,3,7161,0x7efd57f4b220,12,TypedArrayPrototypeFill
+code-creation,Builtin,3,7168,0x7efd57f4b240,12,TypedArrayPrototypeIncludes
+code-creation,Builtin,3,7173,0x7efd57f4b260,12,TypedArrayPrototypeIndexOf
+code-creation,Builtin,3,7180,0x7efd57f4b280,12,TypedArrayPrototypeLastIndexOf
+code-creation,Builtin,3,7187,0x7efd57f4b2a0,12,TypedArrayPrototypeReverse
+code-creation,Builtin,3,7194,0x7efd57f4b2c0,1960,TypedArrayPrototypeSet
+code-creation,Builtin,3,7201,0x7efd57f4ba80,317,TypedArrayPrototypeToStringTag
+code-creation,Builtin,3,7208,0x7efd57f4bbc0,10276,TypedArrayPrototypeMap
+code-creation,Builtin,3,7215,0x7efd57f4e400,3728,TypedArrayOf
+code-creation,Builtin,3,7221,0x7efd57f4f2a0,3960,TypedArrayFrom
+code-creation,Builtin,3,7228,0x7efd57f50220,185,WasmCompileLazy
+code-creation,Builtin,3,7234,0x7efd57f502e0,56,WasmAllocateHeapNumber
+code-creation,Builtin,3,7241,0x7efd57f50320,290,WasmAtomicNotify
+code-creation,Builtin,3,7248,0x7efd57f50460,352,WasmI32AtomicWait
+code-creation,Builtin,3,7255,0x7efd57f505e0,442,WasmI64AtomicWait
+code-creation,Builtin,3,7260,0x7efd57f507a0,56,WasmCallJavaScript
+code-creation,Builtin,3,7267,0x7efd57f507e0,125,WasmMemoryGrow
+code-creation,Builtin,3,7273,0x7efd57f50860,156,WasmTableGet
+code-creation,Builtin,3,7280,0x7efd57f50900,164,WasmTableSet
+code-creation,Builtin,3,7287,0x7efd57f509c0,56,WasmRecordWrite
+code-creation,Builtin,3,7293,0x7efd57f50a00,68,WasmStackGuard
+code-creation,Builtin,3,7300,0x7efd57f50a60,68,WasmStackOverflow
+code-creation,Builtin,3,7306,0x7efd57f50ac0,56,WasmToNumber
+code-creation,Builtin,3,7313,0x7efd57f50b00,80,WasmThrow
+code-creation,Builtin,3,7318,0x7efd57f50b60,80,WasmRethrow
+code-creation,Builtin,3,7325,0x7efd57f50bc0,88,ThrowWasmTrapUnreachable
+code-creation,Builtin,3,7332,0x7efd57f50c20,88,ThrowWasmTrapMemOutOfBounds
+code-creation,Builtin,3,7339,0x7efd57f50c80,88,ThrowWasmTrapUnalignedAccess
+code-creation,Builtin,3,7346,0x7efd57f50ce0,88,ThrowWasmTrapDivByZero
+code-creation,Builtin,3,7353,0x7efd57f50d40,88,ThrowWasmTrapDivUnrepresentable
+code-creation,Builtin,3,7360,0x7efd57f50da0,88,ThrowWasmTrapRemByZero
+code-creation,Builtin,3,7366,0x7efd57f50e00,88,ThrowWasmTrapFloatUnrepresentable
+code-creation,Builtin,3,7373,0x7efd57f50e60,88,ThrowWasmTrapFuncInvalid
+code-creation,Builtin,3,7381,0x7efd57f50ec0,88,ThrowWasmTrapFuncSigMismatch
+code-creation,Builtin,3,7387,0x7efd57f50f20,88,ThrowWasmTrapDataSegmentDropped
+code-creation,Builtin,3,7394,0x7efd57f50f80,88,ThrowWasmTrapElemSegmentDropped
+code-creation,Builtin,3,7401,0x7efd57f50fe0,88,ThrowWasmTrapTableOutOfBounds
+code-creation,Builtin,3,7408,0x7efd57f51040,56,WasmI64ToBigInt
+code-creation,Builtin,3,7414,0x7efd57f51080,56,WasmBigIntToI64
+code-creation,Builtin,3,7421,0x7efd57f510c0,5172,WeakMapConstructor
+code-creation,Builtin,3,7428,0x7efd57f52500,244,WeakMapLookupHashIndex
+code-creation,Builtin,3,7435,0x7efd57f52600,251,WeakMapGet
+code-creation,Builtin,3,7441,0x7efd57f52700,211,WeakMapPrototypeHas
+code-creation,Builtin,3,7448,0x7efd57f527e0,244,WeakMapPrototypeSet
+code-creation,Builtin,3,7454,0x7efd57f528e0,179,WeakMapPrototypeDelete
+code-creation,Builtin,3,7461,0x7efd57f529a0,3700,WeakSetConstructor
+code-creation,Builtin,3,7470,0x7efd57f53820,211,WeakSetPrototypeHas
+code-creation,Builtin,3,7482,0x7efd57f53900,244,WeakSetPrototypeAdd
+code-creation,Builtin,3,7489,0x7efd57f53a00,179,WeakSetPrototypeDelete
+code-creation,Builtin,3,7496,0x7efd57f53ac0,578,WeakCollectionDelete
+code-creation,Builtin,3,7502,0x7efd57f53d20,956,WeakCollectionSet
+code-creation,Builtin,3,7509,0x7efd57f540e0,371,AsyncGeneratorResolve
+code-creation,Builtin,3,7515,0x7efd57f54260,137,AsyncGeneratorReject
+code-creation,Builtin,3,7522,0x7efd57f54300,1248,AsyncGeneratorYield
+code-creation,Builtin,3,7529,0x7efd57f54800,1320,AsyncGeneratorReturn
+code-creation,Builtin,3,7536,0x7efd57f54d40,400,AsyncGeneratorResumeNext
+code-creation,Builtin,3,7542,0x7efd57f54ee0,12,AsyncGeneratorFunctionConstructor
+code-creation,Builtin,3,7548,0x7efd57f54f00,982,AsyncGeneratorPrototypeNext
+code-creation,Builtin,3,7557,0x7efd57f552e0,986,AsyncGeneratorPrototypeReturn
+code-creation,Builtin,3,7564,0x7efd57f556c0,990,AsyncGeneratorPrototypeThrow
+code-creation,Builtin,3,7571,0x7efd57f55aa0,1244,AsyncGeneratorAwaitCaught
+code-creation,Builtin,3,7578,0x7efd57f55f80,1244,AsyncGeneratorAwaitUncaught
+code-creation,Builtin,3,7585,0x7efd57f56460,214,AsyncGeneratorAwaitResolveClosure
+code-creation,Builtin,3,7592,0x7efd57f56540,230,AsyncGeneratorAwaitRejectClosure
+code-creation,Builtin,3,7599,0x7efd57f56640,214,AsyncGeneratorYieldResolveClosure
+code-creation,Builtin,3,7608,0x7efd57f56720,214,AsyncGeneratorReturnClosedResolveClosure
+code-creation,Builtin,3,7618,0x7efd57f56800,210,AsyncGeneratorReturnClosedRejectClosure
+code-creation,Builtin,3,7624,0x7efd57f568e0,230,AsyncGeneratorReturnResolveClosure
+code-creation,Builtin,3,7630,0x7efd57f569e0,1408,AsyncFromSyncIteratorPrototypeNext
+code-creation,Builtin,3,7637,0x7efd57f56f80,1492,AsyncFromSyncIteratorPrototypeThrow
+code-creation,Builtin,3,7643,0x7efd57f57560,1524,AsyncFromSyncIteratorPrototypeReturn
+code-creation,Builtin,3,7651,0x7efd57f57b60,102,AsyncIteratorValueUnwrap
+code-creation,Builtin,3,7657,0x7efd57f57be0,226,CEntry_Return1_DontSaveFPRegs_ArgvOnStack_NoBuiltinExit
+code-creation,Builtin,3,7665,0x7efd57f57ce0,226,CEntry_Return1_DontSaveFPRegs_ArgvOnStack_BuiltinExit
+code-creation,Builtin,3,7673,0x7efd57f57de0,209,CEntry_Return1_DontSaveFPRegs_ArgvInRegister_NoBuiltinExit
+code-creation,Builtin,3,7681,0x7efd57f57ec0,403,CEntry_Return1_SaveFPRegs_ArgvOnStack_NoBuiltinExit
+code-creation,Builtin,3,7688,0x7efd57f58060,403,CEntry_Return1_SaveFPRegs_ArgvOnStack_BuiltinExit
+code-creation,Builtin,3,7696,0x7efd57f58200,226,CEntry_Return2_DontSaveFPRegs_ArgvOnStack_NoBuiltinExit
+code-creation,Builtin,3,7703,0x7efd57f58300,226,CEntry_Return2_DontSaveFPRegs_ArgvOnStack_BuiltinExit
+code-creation,Builtin,3,7712,0x7efd57f58400,209,CEntry_Return2_DontSaveFPRegs_ArgvInRegister_NoBuiltinExit
+code-creation,Builtin,3,7721,0x7efd57f584e0,403,CEntry_Return2_SaveFPRegs_ArgvOnStack_NoBuiltinExit
+code-creation,Builtin,3,7729,0x7efd57f58680,403,CEntry_Return2_SaveFPRegs_ArgvOnStack_BuiltinExit
+code-creation,Builtin,3,7737,0x7efd57f58820,1,DirectCEntry
+code-creation,Builtin,3,7743,0x7efd57f58840,1660,StringAdd_CheckNone
+code-creation,Builtin,3,7750,0x7efd57f58ec0,573,StringAdd_ConvertLeft
+code-creation,Builtin,3,7756,0x7efd57f59100,589,StringAdd_ConvertRight
+code-creation,Builtin,3,7764,0x7efd57f59360,3384,SubString
+code-creation,Builtin,3,7769,0x7efd57f5a0a0,14,StackCheck
+code-creation,Builtin,3,7777,0x7efd57f5a0c0,82,DoubleToI
+code-creation,Builtin,3,7782,0x7efd57f5a120,2216,GetProperty
+code-creation,Builtin,3,7789,0x7efd57f5a9e0,2330,GetPropertyWithReceiver
+code-creation,Builtin,3,7795,0x7efd57f5b300,16488,SetProperty
+code-creation,Builtin,3,7802,0x7efd57f5f380,14652,SetPropertyInLiteral
+code-creation,Builtin,3,7810,0x7efd57f62cc0,5,MemCopyUint8Uint8
+code-creation,Builtin,3,7816,0x7efd57f62ce0,5,MemCopyUint16Uint8
+code-creation,Builtin,3,7823,0x7efd57f62d00,5,MemMove
+code-creation,Builtin,3,7828,0x7efd57f62d20,12,IsTraceCategoryEnabled
+code-creation,Builtin,3,7835,0x7efd57f62d40,12,Trace
+code-creation,Builtin,3,7841,0x7efd57f62d60,12,FinalizationGroupCleanupIteratorNext
+code-creation,Builtin,3,7850,0x7efd57f62d80,12,FinalizationGroupCleanupSome
+code-creation,Builtin,3,7858,0x7efd57f62da0,12,FinalizationGroupConstructor
+code-creation,Builtin,3,7866,0x7efd57f62dc0,12,FinalizationGroupRegister
+code-creation,Builtin,3,7874,0x7efd57f62de0,12,FinalizationGroupUnregister
+code-creation,Builtin,3,7881,0x7efd57f62e00,12,WeakRefConstructor
+code-creation,Builtin,3,7887,0x7efd57f62e20,12,WeakRefDeref
+code-creation,Builtin,3,7894,0x7efd57f62e40,6368,ArrayPrototypeCopyWithin
+code-creation,Builtin,3,7902,0x7efd57f64740,266,ArrayEveryLoopEagerDeoptContinuation
+code-creation,Builtin,3,7910,0x7efd57f64860,795,ArrayEveryLoopLazyDeoptContinuation
+code-creation,Builtin,3,7919,0x7efd57f64b80,2816,ArrayEveryLoopContinuation
+code-creation,Builtin,3,7927,0x7efd57f656a0,1534,ArrayEvery
+code-creation,Builtin,3,7933,0x7efd57f65ca0,338,ArrayFilterLoopEagerDeoptContinuation
+code-creation,Builtin,3,7940,0x7efd57f65e00,1201,ArrayFilterLoopLazyDeoptContinuation
+code-creation,Builtin,3,7948,0x7efd57f662c0,3228,ArrayFilterLoopContinuation
+code-creation,Builtin,3,7956,0x7efd57f66f60,4617,ArrayFilter
+code-creation,Builtin,3,7962,0x7efd57f68180,258,ArrayFindLoopEagerDeoptContinuation
+code-creation,Builtin,3,7970,0x7efd57f682a0,57,ArrayFindLoopLazyDeoptContinuation
+code-creation,Builtin,3,7978,0x7efd57f682e0,486,ArrayFindLoopAfterCallbackLazyDeoptContinuation
+code-creation,Builtin,3,7986,0x7efd57f684e0,622,ArrayFindLoopContinuation
+code-creation,Builtin,3,7994,0x7efd57f68760,1534,ArrayPrototypeFind
+code-creation,Builtin,3,8000,0x7efd57f68d60,258,ArrayFindIndexLoopEagerDeoptContinuation
+code-creation,Builtin,3,8007,0x7efd57f68e80,57,ArrayFindIndexLoopLazyDeoptContinuation
+code-creation,Builtin,3,8015,0x7efd57f68ec0,486,ArrayFindIndexLoopAfterCallbackLazyDeoptContinuation
+code-creation,Builtin,3,8024,0x7efd57f690c0,615,ArrayFindIndexLoopContinuation
+code-creation,Builtin,3,8032,0x7efd57f69340,1530,ArrayPrototypeFindIndex
+code-creation,Builtin,3,8038,0x7efd57f69940,266,ArrayForEachLoopEagerDeoptContinuation
+code-creation,Builtin,3,8045,0x7efd57f69a60,266,ArrayForEachLoopLazyDeoptContinuation
+code-creation,Builtin,3,8053,0x7efd57f69b80,2676,ArrayForEachLoopContinuation
+code-creation,Builtin,3,8061,0x7efd57f6a600,1386,ArrayForEach
+code-creation,Builtin,3,8066,0x7efd57f6ab80,404,LoadJoinElement20ATDictionaryElements
+code-creation,Builtin,3,8074,0x7efd57f6ad20,68,LoadJoinElement25ATFastSmiOrObjectElements
+code-creation,Builtin,3,8082,0x7efd57f6ad80,165,LoadJoinElement20ATFastDoubleElements
+code-creation,Builtin,3,8090,0x7efd57f6ae40,410,ConvertToLocaleString
+code-creation,Builtin,3,8096,0x7efd57f6afe0,1078,JoinStackPush
+code-creation,Builtin,3,8102,0x7efd57f6b420,414,JoinStackPop
+code-creation,Builtin,3,8108,0x7efd57f6b5c0,7416,ArrayPrototypeJoin
+code-creation,Builtin,3,8116,0x7efd57f6d2c0,7108,ArrayPrototypeToLocaleString
+code-creation,Builtin,3,8123,0x7efd57f6eea0,337,ArrayPrototypeToString
+code-creation,Builtin,3,8133,0x7efd57f6f000,6620,TypedArrayPrototypeJoin
+code-creation,Builtin,3,8139,0x7efd57f709e0,6356,TypedArrayPrototypeToLocaleString
+code-creation,Builtin,3,8148,0x7efd57f722c0,3992,ArrayPrototypeLastIndexOf
+code-creation,Builtin,3,8153,0x7efd57f73260,290,ArrayMapLoopEagerDeoptContinuation
+code-creation,Builtin,3,8161,0x7efd57f733a0,612,ArrayMapLoopLazyDeoptContinuation
+code-creation,Builtin,3,8167,0x7efd57f73620,2746,ArrayMapLoopContinuation
+code-creation,Builtin,3,8173,0x7efd57f740e0,4139,ArrayMap
+code-creation,Builtin,3,8178,0x7efd57f75120,1058,ArrayOf
+code-creation,Builtin,3,8183,0x7efd57f75560,198,ArrayReduceRightPreLoopEagerDeoptContinuation
+code-creation,Builtin,3,8189,0x7efd57f75640,258,ArrayReduceRightLoopEagerDeoptContinuation
+code-creation,Builtin,3,8197,0x7efd57f75760,258,ArrayReduceRightLoopLazyDeoptContinuation
+code-creation,Builtin,3,8202,0x7efd57f75880,2786,ArrayReduceRightLoopContinuation
+code-creation,Builtin,3,8208,0x7efd57f76380,2120,ArrayReduceRight
+code-creation,Builtin,3,8215,0x7efd57f76be0,198,ArrayReducePreLoopEagerDeoptContinuation
+code-creation,Builtin,3,8225,0x7efd57f76cc0,258,ArrayReduceLoopEagerDeoptContinuation
+code-creation,Builtin,3,8231,0x7efd57f76de0,258,ArrayReduceLoopLazyDeoptContinuation
+code-creation,Builtin,3,8237,0x7efd57f76f00,2778,ArrayReduceLoopContinuation
+code-creation,Builtin,3,8244,0x7efd57f779e0,1636,ArrayReduce
+code-creation,Builtin,3,8250,0x7efd57f78060,4018,ArrayPrototypeReverse
+code-creation,Builtin,3,8259,0x7efd57f79020,4470,ArrayPrototypeShift
+code-creation,Builtin,3,8264,0x7efd57f7a1a0,5894,ArrayPrototypeSlice
+code-creation,Builtin,3,8270,0x7efd57f7b8c0,266,ArraySomeLoopEagerDeoptContinuation
+code-creation,Builtin,3,8277,0x7efd57f7b9e0,795,ArraySomeLoopLazyDeoptContinuation
+code-creation,Builtin,3,8285,0x7efd57f7bd00,2820,ArraySomeLoopContinuation
+code-creation,Builtin,3,8292,0x7efd57f7c820,1534,ArraySome
+code-creation,Builtin,3,8298,0x7efd57f7ce20,17353,ArrayPrototypeSplice
+code-creation,Builtin,3,8305,0x7efd57f81200,3552,ArrayPrototypeUnshift
+code-creation,Builtin,3,8310,0x7efd57f82000,480,ToString
+code-creation,Builtin,3,8316,0x7efd57f82200,2926,FastCreateDataProperty
+code-creation,Builtin,3,8322,0x7efd57f82d80,728,CheckNumberInRange
+code-creation,Builtin,3,8328,0x7efd57f83060,1460,BigIntAddNoThrow
+code-creation,Builtin,3,8335,0x7efd57f83620,1596,BigIntAdd
+code-creation,Builtin,3,8341,0x7efd57f83c60,338,BigIntUnaryMinus
+code-creation,Builtin,3,8348,0x7efd57f83dc0,1270,BooleanConstructor
+code-creation,Builtin,3,8354,0x7efd57f842c0,190,DataViewPrototypeGetBuffer
+code-creation,Builtin,3,8361,0x7efd57f84380,391,DataViewPrototypeGetByteLength
+code-creation,Builtin,3,8368,0x7efd57f84520,391,DataViewPrototypeGetByteOffset
+code-creation,Builtin,3,8375,0x7efd57f846c0,918,DataViewPrototypeGetUint8
+code-creation,Builtin,3,8382,0x7efd57f84a60,918,DataViewPrototypeGetInt8
+code-creation,Builtin,3,8389,0x7efd57f84e00,1012,DataViewPrototypeGetUint16
+code-creation,Builtin,3,8396,0x7efd57f85200,1008,DataViewPrototypeGetInt16
+code-creation,Builtin,3,8403,0x7efd57f85600,1190,DataViewPrototypeGetUint32
+code-creation,Builtin,3,8410,0x7efd57f85ac0,1048,DataViewPrototypeGetInt32
+code-creation,Builtin,3,8416,0x7efd57f85ee0,1162,DataViewPrototypeGetFloat32
+code-creation,Builtin,3,8423,0x7efd57f86380,1238,DataViewPrototypeGetFloat64
+code-creation,Builtin,3,8430,0x7efd57f86860,1498,DataViewPrototypeGetBigUint64
+code-creation,Builtin,3,8435,0x7efd57f86e40,1522,DataViewPrototypeGetBigInt64
+code-creation,Builtin,3,8442,0x7efd57f87440,1378,DataViewPrototypeSetUint8
+code-creation,Builtin,3,8449,0x7efd57f879c0,1378,DataViewPrototypeSetInt8
+code-creation,Builtin,3,8458,0x7efd57f87f40,1462,DataViewPrototypeSetUint16
+code-creation,Builtin,3,8465,0x7efd57f88500,1462,DataViewPrototypeSetInt16
+code-creation,Builtin,3,8477,0x7efd57f88ac0,1498,DataViewPrototypeSetUint32
+code-creation,Builtin,3,8487,0x7efd57f890a0,1498,DataViewPrototypeSetInt32
+code-creation,Builtin,3,8494,0x7efd57f89680,1462,DataViewPrototypeSetFloat32
+code-creation,Builtin,3,8501,0x7efd57f89c40,1526,DataViewPrototypeSetFloat64
+code-creation,Builtin,3,8508,0x7efd57f8a240,1356,DataViewPrototypeSetBigUint64
+code-creation,Builtin,3,8515,0x7efd57f8a7a0,1356,DataViewPrototypeSetBigInt64
+code-creation,Builtin,3,8522,0x7efd57f8ad00,154,ExtrasUtilsCreatePrivateSymbol
+code-creation,Builtin,3,8529,0x7efd57f8ada0,154,ExtrasUtilsMarkPromiseAsHandled
+code-creation,Builtin,3,8536,0x7efd57f8ae40,154,ExtrasUtilsPromiseState
+code-creation,Builtin,3,8545,0x7efd57f8aee0,188,IncBlockCounter
+code-creation,Builtin,3,8551,0x7efd57f8afa0,351,MathAcos
+code-creation,Builtin,3,8558,0x7efd57f8b100,351,MathAcosh
+code-creation,Builtin,3,8564,0x7efd57f8b260,351,MathAsin
+code-creation,Builtin,3,8570,0x7efd57f8b3c0,351,MathAsinh
+code-creation,Builtin,3,8577,0x7efd57f8b520,351,MathAtan
+code-creation,Builtin,3,8583,0x7efd57f8b680,472,MathAtan2
+code-creation,Builtin,3,8589,0x7efd57f8b860,351,MathAtanh
+code-creation,Builtin,3,8596,0x7efd57f8b9c0,351,MathCbrt
+code-creation,Builtin,3,8602,0x7efd57f8bb20,206,MathClz32
+code-creation,Builtin,3,8608,0x7efd57f8bc00,351,MathCos
+code-creation,Builtin,3,8615,0x7efd57f8bd60,351,MathCosh
+code-creation,Builtin,3,8625,0x7efd57f8bec0,351,MathExp
+code-creation,Builtin,3,8632,0x7efd57f8c020,351,MathExpm1
+code-creation,Builtin,3,8638,0x7efd57f8c180,283,MathFround
+code-creation,Builtin,3,8644,0x7efd57f8c2a0,351,MathLog
+code-creation,Builtin,3,8651,0x7efd57f8c400,351,MathLog1p
+code-creation,Builtin,3,8657,0x7efd57f8c560,351,MathLog10
+code-creation,Builtin,3,8663,0x7efd57f8c6c0,351,MathLog2
+code-creation,Builtin,3,8669,0x7efd57f8c820,351,MathSin
+code-creation,Builtin,3,8676,0x7efd57f8c980,210,MathSign
+code-creation,Builtin,3,8682,0x7efd57f8ca60,351,MathSinh
+code-creation,Builtin,3,8688,0x7efd57f8cbc0,275,MathSqrt
+code-creation,Builtin,3,8695,0x7efd57f8cce0,351,MathTan
+code-creation,Builtin,3,8701,0x7efd57f8ce40,351,MathTanh
+code-creation,Builtin,3,8706,0x7efd57f8cfa0,3520,ObjectFromEntries
+code-creation,Builtin,3,8713,0x7efd57f8dd80,163,ObjectIsExtensible
+code-creation,Builtin,3,8719,0x7efd57f8de40,171,ObjectPreventExtensions
+code-creation,Builtin,3,8725,0x7efd57f8df00,196,ObjectGetPrototypeOf
+code-creation,Builtin,3,8732,0x7efd57f8dfe0,353,ObjectSetPrototypeOf
+code-creation,Builtin,3,8739,0x7efd57f8e160,577,ProxyConstructor
+code-creation,Builtin,3,8746,0x7efd57f8e3c0,1964,ProxyDeleteProperty
+code-creation,Builtin,3,8752,0x7efd57f8eb80,2452,ProxyGetProperty
+code-creation,Builtin,3,8759,0x7efd57f8f520,1253,ProxyGetPrototypeOf
+code-creation,Builtin,3,8766,0x7efd57f8fa20,1910,ProxyHasProperty
+code-creation,Builtin,3,8772,0x7efd57f901a0,886,ProxyIsExtensible
+code-creation,Builtin,3,8778,0x7efd57f90520,961,ProxyPreventExtensions
+code-creation,Builtin,3,8784,0x7efd57f90900,1206,ProxyRevocable
+code-creation,Builtin,3,8791,0x7efd57f90dc0,109,ProxyRevoke
+code-creation,Builtin,3,8798,0x7efd57f90e40,2638,ProxySetProperty
+code-creation,Builtin,3,8804,0x7efd57f918a0,1482,ProxySetPrototypeOf
+code-creation,Builtin,3,8812,0x7efd57f91e80,228,ReflectIsExtensible
+code-creation,Builtin,3,8818,0x7efd57f91f80,232,ReflectPreventExtensions
+code-creation,Builtin,3,8825,0x7efd57f92080,216,ReflectGetPrototypeOf
+code-creation,Builtin,3,8832,0x7efd57f92160,325,ReflectSetPrototypeOf
+code-creation,Builtin,3,8838,0x7efd57f922c0,388,ReflectGet
+code-creation,Builtin,3,8845,0x7efd57f92460,350,ReflectDeleteProperty
+code-creation,Builtin,3,8850,0x7efd57f925c0,5092,RegExpReplace
+code-creation,Builtin,3,8857,0x7efd57f939c0,538,RegExpPrototypeReplace
+code-creation,Builtin,3,8864,0x7efd57f93be0,182,StringPrototypeToString
+code-creation,Builtin,3,8871,0x7efd57f93ca0,182,StringPrototypeValueOf
+code-creation,Builtin,3,8877,0x7efd57f93d60,2502,StringToList
+code-creation,Builtin,3,8884,0x7efd57f94740,1028,StringPrototypeCharAt
+code-creation,Builtin,3,8892,0x7efd57f94b60,642,StringPrototypeCharCodeAt
+code-creation,Builtin,3,8899,0x7efd57f94e00,1126,StringPrototypeCodePointAt
+code-creation,Builtin,3,8906,0x7efd57f95280,516,StringPrototypeConcat
+code-creation,Builtin,3,8911,0x7efd57f954a0,2998,StringPrototypeEndsWith
+code-creation,Builtin,3,8918,0x7efd57f96060,740,CreateHTML
+code-creation,Builtin,3,8925,0x7efd57f96360,190,StringPrototypeAnchor
+code-creation,Builtin,3,8931,0x7efd57f96420,174,StringPrototypeBig
+code-creation,Builtin,3,8938,0x7efd57f964e0,174,StringPrototypeBlink
+code-creation,Builtin,3,8945,0x7efd57f965a0,174,StringPrototypeBold
+code-creation,Builtin,3,8952,0x7efd57f96660,198,StringPrototypeFontcolor
+code-creation,Builtin,3,8959,0x7efd57f96740,198,StringPrototypeFontsize
+code-creation,Builtin,3,8964,0x7efd57f96820,174,StringPrototypeFixed
+code-creation,Builtin,3,8971,0x7efd57f968e0,174,StringPrototypeItalics
+code-creation,Builtin,3,8978,0x7efd57f969a0,198,StringPrototypeLink
+code-creation,Builtin,3,8984,0x7efd57f96a80,174,StringPrototypeSmall
+code-creation,Builtin,3,8991,0x7efd57f96b40,174,StringPrototypeStrike
+code-creation,Builtin,3,8996,0x7efd57f96c00,174,StringPrototypeSub
+code-creation,Builtin,3,9003,0x7efd57f96cc0,174,StringPrototypeSup
+code-creation,Builtin,3,9010,0x7efd57f96d80,413,StringPrototypeIterator
+code-creation,Builtin,3,9017,0x7efd57f96f20,1954,StringIteratorPrototypeNext
+code-creation,Builtin,3,9024,0x7efd57f976e0,182,StringRepeat
+code-creation,Builtin,3,9032,0x7efd57f977a0,544,StringPrototypeRepeat
+code-creation,Builtin,3,9039,0x7efd57f979e0,4060,StringPrototypeSlice
+code-creation,Builtin,3,9046,0x7efd57f989c0,3030,StringPrototypeStartsWith
+code-creation,Builtin,3,9053,0x7efd57f995a0,4072,StringPrototypeSubstring
+code-creation,Builtin,3,9060,0x7efd57f9a5a0,9272,CreateTypedArray
+code-creation,Builtin,3,9066,0x7efd57f9c9e0,1202,TypedArrayPrototypeEvery
+code-creation,Builtin,3,9073,0x7efd57f9cea0,3404,TypedArrayPrototypeFilter
+code-creation,Builtin,3,9080,0x7efd57f9dc00,1210,TypedArrayPrototypeFind
+code-creation,Builtin,3,9087,0x7efd57f9e0c0,1210,TypedArrayPrototypeFindIndex
+code-creation,Builtin,3,9094,0x7efd57f9e580,1050,TypedArrayPrototypeForEach
+code-creation,Builtin,3,9101,0x7efd57f9e9a0,1148,TypedArrayPrototypeReduce
+code-creation,Builtin,3,9108,0x7efd57f9ee20,1156,TypedArrayPrototypeReduceRight
+code-creation,Builtin,3,9115,0x7efd57f9f2c0,2308,TypedArrayPrototypeSlice
+code-creation,Builtin,3,9122,0x7efd57f9fbe0,1202,TypedArrayPrototypeSome
+code-creation,Builtin,3,9129,0x7efd57fa00a0,2002,TypedArrayPrototypeSubArray
+code-creation,Builtin,3,9136,0x7efd57fa0880,1658,TypedArrayMergeSort
+code-creation,Builtin,3,9143,0x7efd57fa0f00,2214,TypedArrayPrototypeSort
+code-creation,Builtin,3,9149,0x7efd57fa17c0,64,Load17ATFastSmiElements
+code-creation,Builtin,3,9156,0x7efd57fa1820,64,Load20ATFastObjectElements
+code-creation,Builtin,3,9163,0x7efd57fa1880,169,Load20ATFastDoubleElements
+code-creation,Builtin,3,9170,0x7efd57fa1940,68,Store17ATFastSmiElements
+code-creation,Builtin,3,9177,0x7efd57fa19a0,140,Store20ATFastObjectElements
+code-creation,Builtin,3,9185,0x7efd57fa1a40,84,Store20ATFastDoubleElements
+code-creation,Builtin,3,9194,0x7efd57fa1aa0,68,Delete17ATFastSmiElements
+code-creation,Builtin,3,9200,0x7efd57fa1b00,68,Delete20ATFastObjectElements
+code-creation,Builtin,3,9207,0x7efd57fa1b60,40,Delete20ATFastDoubleElements
+code-creation,Builtin,3,9214,0x7efd57fa1ba0,373,SortCompareDefault
+code-creation,Builtin,3,9221,0x7efd57fa1d20,154,SortCompareUserFn
+code-creation,Builtin,3,9228,0x7efd57fa1dc0,16,CanUseSameAccessor25ATGenericElementsAccessor
+code-creation,Builtin,3,9235,0x7efd57fa1de0,508,Copy
+code-creation,Builtin,3,9240,0x7efd57fa1fe0,8216,MergeAt
+code-creation,Builtin,3,9247,0x7efd57fa4000,1204,GallopLeft
+code-creation,Builtin,3,9253,0x7efd57fa44c0,1192,GallopRight
+code-creation,Builtin,3,9260,0x7efd57fa4980,5470,ArrayTimSort
+code-creation,Builtin,3,9266,0x7efd57fa5ee0,2512,ArrayPrototypeSort
+code-creation,Builtin,3,9273,0x7efd57fa68c0,12,GenericBuiltinTest20UT5ATSmi10HeapObject
+code-creation,Builtin,3,9279,0x7efd57fa68e0,28,TestHelperPlus1
+code-creation,Builtin,3,9286,0x7efd57fa6900,28,TestHelperPlus2
+code-creation,Builtin,3,9292,0x7efd57fa6920,129,NewSmiBox
+code-creation,Builtin,3,9299,0x7efd57fa69c0,41,LoadJoinElement25ATGenericElementsAccessor
+code-creation,Builtin,3,9307,0x7efd57fa6a00,36,LoadJoinTypedElement15ATInt32Elements
+code-creation,Builtin,3,9314,0x7efd57fa6a40,153,LoadJoinTypedElement17ATFloat32Elements
+code-creation,Builtin,3,9320,0x7efd57fa6ae0,149,LoadJoinTypedElement17ATFloat64Elements
+code-creation,Builtin,3,9329,0x7efd57fa6b80,36,LoadJoinTypedElement22ATUint8ClampedElements
+code-creation,Builtin,3,9336,0x7efd57fa6bc0,277,LoadJoinTypedElement19ATBigUint64Elements
+code-creation,Builtin,3,9344,0x7efd57fa6ce0,305,LoadJoinTypedElement18ATBigInt64Elements
+code-creation,Builtin,3,9351,0x7efd57fa6e20,36,LoadJoinTypedElement15ATUint8Elements
+code-creation,Builtin,3,9359,0x7efd57fa6e60,36,LoadJoinTypedElement14ATInt8Elements
+code-creation,Builtin,3,9366,0x7efd57fa6ea0,36,LoadJoinTypedElement16ATUint16Elements
+code-creation,Builtin,3,9375,0x7efd57fa6ee0,36,LoadJoinTypedElement15ATInt16Elements
+code-creation,Builtin,3,9382,0x7efd57fa6f20,165,LoadJoinTypedElement16ATUint32Elements
+code-creation,Builtin,3,9390,0x7efd57fa6fe0,36,LoadFixedElement15ATInt32Elements
+code-creation,Builtin,3,9397,0x7efd57fa7020,153,LoadFixedElement17ATFloat32Elements
+code-creation,Builtin,3,9404,0x7efd57fa70c0,149,LoadFixedElement17ATFloat64Elements
+code-creation,Builtin,3,9411,0x7efd57fa7160,36,LoadFixedElement22ATUint8ClampedElements
+code-creation,Builtin,3,9420,0x7efd57fa71a0,277,LoadFixedElement19ATBigUint64Elements
+code-creation,Builtin,3,9428,0x7efd57fa72c0,305,LoadFixedElement18ATBigInt64Elements
+code-creation,Builtin,3,9435,0x7efd57fa7400,36,LoadFixedElement15ATUint8Elements
+code-creation,Builtin,3,9442,0x7efd57fa7440,36,LoadFixedElement14ATInt8Elements
+code-creation,Builtin,3,9449,0x7efd57fa7480,36,LoadFixedElement16ATUint16Elements
+code-creation,Builtin,3,9456,0x7efd57fa74c0,36,LoadFixedElement15ATInt16Elements
+code-creation,Builtin,3,9464,0x7efd57fa7500,165,LoadFixedElement16ATUint32Elements
+code-creation,Builtin,3,9477,0x7efd57fa75c0,205,StoreFixedElement15ATInt32Elements
+code-creation,Builtin,3,9486,0x7efd57fa76a0,44,StoreFixedElement17ATFloat32Elements
+code-creation,Builtin,3,9494,0x7efd57fa76e0,40,StoreFixedElement17ATFloat64Elements
+code-creation,Builtin,3,9501,0x7efd57fa7720,36,StoreFixedElement22ATUint8ClampedElements
+code-creation,Builtin,3,9508,0x7efd57fa7760,68,StoreFixedElement19ATBigUint64Elements
+code-creation,Builtin,3,9516,0x7efd57fa77c0,68,StoreFixedElement18ATBigInt64Elements
+code-creation,Builtin,3,9523,0x7efd57fa7820,36,StoreFixedElement15ATUint8Elements
+code-creation,Builtin,3,9530,0x7efd57fa7860,36,StoreFixedElement14ATInt8Elements
+code-creation,Builtin,3,9537,0x7efd57fa78a0,40,StoreFixedElement16ATUint16Elements
+code-creation,Builtin,3,9545,0x7efd57fa78e0,40,StoreFixedElement15ATInt16Elements
+code-creation,Builtin,3,9552,0x7efd57fa7920,205,StoreFixedElement16ATUint32Elements
+code-creation,Builtin,3,9559,0x7efd57fa7a00,40,CanUseSameAccessor20ATFastDoubleElements
+code-creation,Builtin,3,9567,0x7efd57fa7a40,40,CanUseSameAccessor17ATFastSmiElements
+code-creation,Builtin,3,9574,0x7efd57fa7a80,40,CanUseSameAccessor20ATFastObjectElements
+code-creation,Builtin,3,9581,0x7efd57fa7ac0,2216,Load25ATGenericElementsAccessor
+code-creation,Builtin,3,9588,0x7efd57fa8380,45,Store25ATGenericElementsAccessor
+code-creation,Builtin,3,9596,0x7efd57fa83c0,2224,Delete25ATGenericElementsAccessor
+code-creation,Builtin,3,9603,0x7efd57fa8c80,16,GenericBuiltinTest5ATSmi
+code-creation,Builtin,3,9610,0x7efd57fa8ca0,12,CollatorConstructor
+code-creation,Builtin,3,9616,0x7efd57fa8cc0,12,CollatorInternalCompare
+code-creation,Builtin,3,9623,0x7efd57fa8ce0,12,CollatorPrototypeCompare
+code-creation,Builtin,3,9630,0x7efd57fa8d00,12,CollatorSupportedLocalesOf
+code-creation,Builtin,3,9637,0x7efd57fa8d20,12,CollatorPrototypeResolvedOptions
+code-creation,Builtin,3,9644,0x7efd57fa8d40,12,DatePrototypeToLocaleDateString
+code-creation,Builtin,3,9651,0x7efd57fa8d60,12,DatePrototypeToLocaleString
+code-creation,Builtin,3,9658,0x7efd57fa8d80,12,DatePrototypeToLocaleTimeString
+code-creation,Builtin,3,9666,0x7efd57fa8da0,12,DateTimeFormatConstructor
+code-creation,Builtin,3,9673,0x7efd57fa8dc0,12,DateTimeFormatInternalFormat
+code-creation,Builtin,3,9681,0x7efd57fa8de0,12,DateTimeFormatPrototypeFormat
+code-creation,Builtin,3,9688,0x7efd57fa8e00,12,DateTimeFormatPrototypeFormatRange
+code-creation,Builtin,3,9695,0x7efd57fa8e20,12,DateTimeFormatPrototypeFormatRangeToParts
+code-creation,Builtin,3,9703,0x7efd57fa8e40,12,DateTimeFormatPrototypeFormatToParts
+code-creation,Builtin,3,9710,0x7efd57fa8e60,12,DateTimeFormatPrototypeResolvedOptions
+code-creation,Builtin,3,9717,0x7efd57fa8e80,12,DateTimeFormatSupportedLocalesOf
+code-creation,Builtin,3,9725,0x7efd57fa8ea0,12,IntlGetCanonicalLocales
+code-creation,Builtin,3,9731,0x7efd57fa8ec0,12,ListFormatConstructor
+code-creation,Builtin,3,9738,0x7efd57fa8ee0,324,ListFormatPrototypeFormat
+code-creation,Builtin,3,9745,0x7efd57fa9040,449,ListFormatPrototypeFormatToParts
+code-creation,Builtin,3,9752,0x7efd57fa9220,12,ListFormatPrototypeResolvedOptions
+code-creation,Builtin,3,9759,0x7efd57fa9240,12,ListFormatSupportedLocalesOf
+code-creation,Builtin,3,9766,0x7efd57fa9260,12,LocaleConstructor
+code-creation,Builtin,3,9773,0x7efd57fa9280,12,LocalePrototypeBaseName
+code-creation,Builtin,3,9780,0x7efd57fa92a0,12,LocalePrototypeCalendar
+code-creation,Builtin,3,9787,0x7efd57fa92c0,12,LocalePrototypeCaseFirst
+code-creation,Builtin,3,9796,0x7efd57fa92e0,12,LocalePrototypeCollation
+code-creation,Builtin,3,9805,0x7efd57fa9300,12,LocalePrototypeHourCycle
+code-creation,Builtin,3,9811,0x7efd57fa9320,12,LocalePrototypeLanguage
+code-creation,Builtin,3,9818,0x7efd57fa9340,12,LocalePrototypeMaximize
+code-creation,Builtin,3,9825,0x7efd57fa9360,12,LocalePrototypeMinimize
+code-creation,Builtin,3,9832,0x7efd57fa9380,12,LocalePrototypeNumeric
+code-creation,Builtin,3,9839,0x7efd57fa93a0,12,LocalePrototypeNumberingSystem
+code-creation,Builtin,3,9846,0x7efd57fa93c0,12,LocalePrototypeRegion
+code-creation,Builtin,3,9853,0x7efd57fa93e0,12,LocalePrototypeScript
+code-creation,Builtin,3,9859,0x7efd57fa9400,12,LocalePrototypeToString
+code-creation,Builtin,3,9866,0x7efd57fa9420,12,NumberFormatConstructor
+code-creation,Builtin,3,9873,0x7efd57fa9440,12,NumberFormatInternalFormatNumber
+code-creation,Builtin,3,9880,0x7efd57fa9460,12,NumberFormatPrototypeFormatNumber
+code-creation,Builtin,3,9887,0x7efd57fa9480,12,NumberFormatPrototypeFormatToParts
+code-creation,Builtin,3,9895,0x7efd57fa94a0,12,NumberFormatPrototypeResolvedOptions
+code-creation,Builtin,3,9902,0x7efd57fa94c0,12,NumberFormatSupportedLocalesOf
+code-creation,Builtin,3,9909,0x7efd57fa94e0,12,PluralRulesConstructor
+code-creation,Builtin,3,9916,0x7efd57fa9500,12,PluralRulesPrototypeResolvedOptions
+code-creation,Builtin,3,9923,0x7efd57fa9520,12,PluralRulesPrototypeSelect
+code-creation,Builtin,3,9931,0x7efd57fa9540,12,PluralRulesSupportedLocalesOf
+code-creation,Builtin,3,9938,0x7efd57fa9560,12,RelativeTimeFormatConstructor
+code-creation,Builtin,3,9945,0x7efd57fa9580,12,RelativeTimeFormatPrototypeFormat
+code-creation,Builtin,3,9952,0x7efd57fa95a0,12,RelativeTimeFormatPrototypeFormatToParts
+code-creation,Builtin,3,9960,0x7efd57fa95c0,12,RelativeTimeFormatPrototypeResolvedOptions
+code-creation,Builtin,3,9968,0x7efd57fa95e0,12,RelativeTimeFormatSupportedLocalesOf
+code-creation,Builtin,3,9976,0x7efd57fa9600,12,SegmenterConstructor
+code-creation,Builtin,3,9983,0x7efd57fa9620,12,SegmenterPrototypeResolvedOptions
+code-creation,Builtin,3,9990,0x7efd57fa9640,12,SegmenterPrototypeSegment
+code-creation,Builtin,3,9997,0x7efd57fa9660,12,SegmenterSupportedLocalesOf
+code-creation,Builtin,3,10004,0x7efd57fa9680,12,SegmentIteratorPrototypeBreakType
+code-creation,Builtin,3,10011,0x7efd57fa96a0,12,SegmentIteratorPrototypeFollowing
+code-creation,Builtin,3,10018,0x7efd57fa96c0,12,SegmentIteratorPrototypePreceding
+code-creation,Builtin,3,10026,0x7efd57fa96e0,12,SegmentIteratorPrototypeIndex
+code-creation,Builtin,3,10033,0x7efd57fa9700,12,SegmentIteratorPrototypeNext
+code-creation,Builtin,3,10040,0x7efd57fa9720,12,StringPrototypeNormalizeIntl
+code-creation,Builtin,3,10047,0x7efd57fa9740,12,StringPrototypeToLocaleLowerCase
+code-creation,Builtin,3,10054,0x7efd57fa9760,12,StringPrototypeToLocaleUpperCase
+code-creation,Builtin,3,10061,0x7efd57fa9780,285,StringPrototypeToLowerCaseIntl
+code-creation,Builtin,3,10068,0x7efd57fa98a0,12,StringPrototypeToUpperCaseIntl
+code-creation,Builtin,3,10075,0x7efd57fa98c0,954,StringToLowerCaseIntl
+code-creation,Builtin,3,10082,0x7efd57fa9c80,12,V8BreakIteratorConstructor
+code-creation,Builtin,3,10089,0x7efd57fa9ca0,12,V8BreakIteratorInternalAdoptText
+code-creation,Builtin,3,10097,0x7efd57fa9cc0,12,V8BreakIteratorInternalBreakType
+code-creation,Builtin,3,10104,0x7efd57fa9ce0,12,V8BreakIteratorInternalCurrent
+code-creation,Builtin,3,10111,0x7efd57fa9d00,12,V8BreakIteratorInternalFirst
+code-creation,Builtin,3,10118,0x7efd57fa9d20,12,V8BreakIteratorInternalNext
+code-creation,Builtin,3,10125,0x7efd57fa9d40,12,V8BreakIteratorPrototypeAdoptText
+code-creation,Builtin,3,10133,0x7efd57fa9d60,12,V8BreakIteratorPrototypeBreakType
+code-creation,Builtin,3,10140,0x7efd57fa9d80,12,V8BreakIteratorPrototypeCurrent
+code-creation,Builtin,3,10147,0x7efd57fa9da0,12,V8BreakIteratorPrototypeFirst
+code-creation,Builtin,3,10154,0x7efd57fa9dc0,12,V8BreakIteratorPrototypeNext
+code-creation,Builtin,3,10161,0x7efd57fa9de0,12,V8BreakIteratorPrototypeResolvedOptions
+code-creation,Builtin,3,10169,0x7efd57fa9e00,12,V8BreakIteratorSupportedLocalesOf
+tick,0x7efd563774ef,10181,0,0x0,6
+tick,0x7efd56307b18,10198,0,0x0,6
+tick,0x7efd562fc39c,10205,0,0x0,6
+tick,0x7efd563774ef,10212,0,0x0,6
+tick,0x7efd565bff45,10218,0,0x0,6
+tick,0x7efd562fc373,10224,0,0x0,6
+tick,0x7efd563774ef,10230,0,0x0,6
+code-creation,BytecodeHandler,1,10239,0x7efd57fa9e20,32,Wide
+code-creation,BytecodeHandler,1,10250,0x7efd57fa9e60,32,ExtraWide
+code-creation,BytecodeHandler,1,10257,0x7efd57fa9ea0,282,DebugBreakWide
+tick,0x7efd562fc39c,10263,0,0x0,6
+code-creation,BytecodeHandler,1,10272,0x7efd57fa9fc0,282,DebugBreakExtraWide
+code-creation,BytecodeHandler,1,10280,0x7efd57faa0e0,282,DebugBreak0
+code-creation,BytecodeHandler,1,10285,0x7efd57faa200,282,DebugBreak1
+code-creation,BytecodeHandler,1,10291,0x7efd57faa320,282,DebugBreak2
+code-creation,BytecodeHandler,1,10296,0x7efd57faa440,282,DebugBreak3
+code-creation,BytecodeHandler,1,10302,0x7efd57faa560,282,DebugBreak4
+code-creation,BytecodeHandler,1,10308,0x7efd57faa680,282,DebugBreak5
+code-creation,BytecodeHandler,1,10313,0x7efd57faa7a0,282,DebugBreak6
+code-creation,BytecodeHandler,1,10319,0x7efd57faa8c0,64,LdaZero
+code-creation,BytecodeHandler,1,10325,0x7efd57faa920,68,LdaSmi
+code-creation,BytecodeHandler,1,10332,0x7efd57faa980,68,LdaUndefined
+code-creation,BytecodeHandler,1,10337,0x7efd57faa9e0,68,LdaNull
+code-creation,BytecodeHandler,1,10343,0x7efd57faaa40,68,LdaTheHole
+code-creation,BytecodeHandler,1,10348,0x7efd57faaaa0,28,LdaTrue
+code-creation,BytecodeHandler,1,10354,0x7efd57faaac0,28,LdaFalse
+code-creation,BytecodeHandler,1,10359,0x7efd57faaae0,72,LdaConstant
+code-creation,BytecodeHandler,1,10365,0x7efd57faab40,4028,LdaGlobal
+code-creation,BytecodeHandler,1,10369,0x7efd57fabb00,3226,LdaGlobalInsideTypeof
+code-creation,BytecodeHandler,1,10375,0x7efd57fac7a0,241,StaGlobal
+code-creation,BytecodeHandler,1,10380,0x7efd57fac8a0,48,PushContext
+code-creation,BytecodeHandler,1,10386,0x7efd57fac8e0,44,PopContext
+code-creation,BytecodeHandler,1,10391,0x7efd57fac920,100,LdaContextSlot
+code-creation,BytecodeHandler,1,10397,0x7efd57fac9a0,72,LdaImmutableContextSlot
+code-creation,BytecodeHandler,1,10403,0x7efd57faca00,72,LdaCurrentContextSlot
+code-creation,BytecodeHandler,1,10408,0x7efd57faca60,44,LdaImmutableCurrentContextSlot
+code-creation,BytecodeHandler,1,10414,0x7efd57facaa0,148,StaContextSlot
+code-creation,BytecodeHandler,1,10420,0x7efd57facb40,120,StaCurrentContextSlot
+code-creation,BytecodeHandler,1,10425,0x7efd57facbc0,145,LdaLookupSlot
+code-creation,BytecodeHandler,1,10431,0x7efd57facc60,225,LdaLookupContextSlot
+code-creation,BytecodeHandler,1,10437,0x7efd57facd60,3598,LdaLookupGlobalSlot
+code-creation,BytecodeHandler,1,10442,0x7efd57fadb80,145,LdaLookupSlotInsideTypeof
+code-creation,BytecodeHandler,1,10448,0x7efd57fadc20,225,LdaLookupContextSlotInsideTypeof
+code-creation,BytecodeHandler,1,10454,0x7efd57fadd20,3572,LdaLookupGlobalSlotInsideTypeof
+code-creation,BytecodeHandler,1,10460,0x7efd57faeb20,249,StaLookupSlot
+code-creation,BytecodeHandler,1,10466,0x7efd57faec20,40,Ldar
+code-creation,BytecodeHandler,1,10478,0x7efd57faec60,40,Star
+code-creation,BytecodeHandler,1,10488,0x7efd57faeca0,48,Mov
+code-creation,BytecodeHandler,1,10497,0x7efd57faece0,3609,LdaNamedProperty
+code-creation,BytecodeHandler,1,10503,0x7efd57fafb00,141,LdaNamedPropertyNoFeedback
+code-creation,BytecodeHandler,1,10509,0x7efd57fafba0,205,LdaKeyedProperty
+code-creation,BytecodeHandler,1,10514,0x7efd57fafc80,212,LdaModuleVariable
+code-creation,BytecodeHandler,1,10520,0x7efd57fafd60,322,StaModuleVariable
+code-creation,BytecodeHandler,1,10525,0x7efd57fafec0,193,StaNamedProperty
+code-creation,BytecodeHandler,1,10531,0x7efd57faffa0,157,StaNamedPropertyNoFeedback
+code-creation,BytecodeHandler,1,10536,0x7efd57fb0040,193,StaNamedOwnProperty
+code-creation,BytecodeHandler,1,10542,0x7efd57fb0120,185,StaKeyedProperty
+code-creation,BytecodeHandler,1,10548,0x7efd57fb01e0,185,StaInArrayLiteral
+code-creation,BytecodeHandler,1,10553,0x7efd57fb02a0,217,StaDataPropertyInLiteral
+code-creation,BytecodeHandler,1,10559,0x7efd57fb0380,181,CollectTypeProfile
+code-creation,BytecodeHandler,1,10570,0x7efd57fb0440,1234,Add
+code-creation,BytecodeHandler,1,10578,0x7efd57fb0920,1090,Sub
+code-creation,BytecodeHandler,1,10588,0x7efd57fb0d80,1146,Mul
+code-creation,BytecodeHandler,1,10596,0x7efd57fb1200,1122,Div
+code-creation,BytecodeHandler,1,10602,0x7efd57fb1680,1138,Mod
+code-creation,BytecodeHandler,1,10613,0x7efd57fb1b00,205,Exp
+code-creation,BytecodeHandler,1,10627,0x7efd57fb1be0,1144,BitwiseOr
+code-creation,BytecodeHandler,1,10635,0x7efd57fb2060,1136,BitwiseXor
+code-creation,BytecodeHandler,1,10644,0x7efd57fb24e0,1136,BitwiseAnd
+code-creation,BytecodeHandler,1,10652,0x7efd57fb2960,1140,ShiftLeft
+code-creation,BytecodeHandler,1,10661,0x7efd57fb2de0,1140,ShiftRight
+code-creation,BytecodeHandler,1,10674,0x7efd57fb3260,1314,ShiftRightLogical
+code-creation,BytecodeHandler,1,10686,0x7efd57fb37a0,1046,AddSmi
+code-creation,BytecodeHandler,1,10695,0x7efd57fb3bc0,904,SubSmi
+code-creation,BytecodeHandler,1,10707,0x7efd57fb3f60,898,MulSmi
+code-creation,BytecodeHandler,1,10717,0x7efd57fb4300,942,DivSmi
+code-creation,BytecodeHandler,1,10727,0x7efd57fb46c0,906,ModSmi
+code-creation,BytecodeHandler,1,10737,0x7efd57fb4a60,205,ExpSmi
+code-creation,BytecodeHandler,1,10747,0x7efd57fb4b40,580,BitwiseOrSmi
+code-creation,BytecodeHandler,1,10756,0x7efd57fb4da0,580,BitwiseXorSmi
+code-creation,BytecodeHandler,1,10766,0x7efd57fb5000,580,BitwiseAndSmi
+code-creation,BytecodeHandler,1,10776,0x7efd57fb5260,584,ShiftLeftSmi
+code-creation,BytecodeHandler,1,10786,0x7efd57fb54c0,584,ShiftRightSmi
+code-creation,BytecodeHandler,1,10797,0x7efd57fb5720,746,ShiftRightLogicalSmi
+code-creation,BytecodeHandler,1,10811,0x7efd57fb5a20,629,Inc
+code-creation,BytecodeHandler,1,10822,0x7efd57fb5ca0,629,Dec
+code-creation,BytecodeHandler,1,10830,0x7efd57fb5f20,633,Negate
+code-creation,BytecodeHandler,1,10837,0x7efd57fb61a0,584,BitwiseNot
+code-creation,BytecodeHandler,1,10844,0x7efd57fb6400,244,ToBooleanLogicalNot
+code-creation,BytecodeHandler,1,10856,0x7efd57fb6500,44,LogicalNot
+code-creation,BytecodeHandler,1,10865,0x7efd57fb6540,240,TypeOf
+code-creation,BytecodeHandler,1,10875,0x7efd57fb6640,141,DeletePropertyStrict
+code-creation,BytecodeHandler,1,10885,0x7efd57fb66e0,133,DeletePropertySloppy
+code-creation,BytecodeHandler,1,10895,0x7efd57fb6780,121,GetSuperConstructor
+code-creation,BytecodeHandler,1,10906,0x7efd57fb6800,424,CallAnyReceiver
+code-creation,BytecodeHandler,1,10915,0x7efd57fb69c0,424,CallProperty
+code-creation,BytecodeHandler,1,10924,0x7efd57fb6b80,420,CallProperty0
+code-creation,BytecodeHandler,1,10933,0x7efd57fb6d40,436,CallProperty1
+code-creation,BytecodeHandler,1,10942,0x7efd57fb6f00,448,CallProperty2
+code-creation,BytecodeHandler,1,10950,0x7efd57fb70e0,420,CallUndefinedReceiver
+code-creation,BytecodeHandler,1,10961,0x7efd57fb72a0,364,CallUndefinedReceiver0
+code-creation,BytecodeHandler,1,10972,0x7efd57fb7420,440,CallUndefinedReceiver1
+code-creation,BytecodeHandler,1,10983,0x7efd57fb75e0,452,CallUndefinedReceiver2
+code-creation,BytecodeHandler,1,10997,0x7efd57fb77c0,68,CallNoFeedback
+code-creation,BytecodeHandler,1,11005,0x7efd57fb7820,424,CallWithSpread
+code-creation,BytecodeHandler,1,11015,0x7efd57fb79e0,145,CallRuntime
+code-creation,BytecodeHandler,1,11025,0x7efd57fb7a80,181,CallRuntimeForPair
+code-creation,BytecodeHandler,1,11034,0x7efd57fb7b40,68,CallJSRuntime
+code-creation,BytecodeHandler,1,11043,0x7efd57fb7ba0,1874,InvokeIntrinsic
+code-creation,BytecodeHandler,1,11052,0x7efd57fb8300,1154,Construct
+code-creation,BytecodeHandler,1,11060,0x7efd57fb87a0,597,ConstructWithSpread
+code-creation,BytecodeHandler,1,11069,0x7efd57fb8a00,1968,TestEqual
+code-creation,BytecodeHandler,1,11079,0x7efd57fb91c0,1089,TestEqualStrict
+code-creation,BytecodeHandler,1,11090,0x7efd57fb9620,2040,TestLessThan
+code-creation,BytecodeHandler,1,11100,0x7efd57fb9e20,2040,TestGreaterThan
+code-creation,BytecodeHandler,1,11110,0x7efd57fba620,2040,TestLessThanOrEqual
+code-creation,BytecodeHandler,1,11120,0x7efd57fbae20,2040,TestGreaterThanOrEqual
+code-creation,BytecodeHandler,1,11130,0x7efd57fbb620,56,TestReferenceEqual
+code-creation,BytecodeHandler,1,11139,0x7efd57fbb660,972,TestInstanceOf
+code-creation,BytecodeHandler,1,11152,0x7efd57fbba40,177,TestIn
+code-creation,BytecodeHandler,1,11163,0x7efd57fbbb00,60,TestUndetectable
+code-creation,BytecodeHandler,1,11173,0x7efd57fbbb40,44,TestNull
+code-creation,BytecodeHandler,1,11179,0x7efd57fbbb80,44,TestUndefined
+code-creation,BytecodeHandler,1,11190,0x7efd57fbbbc0,344,TestTypeOf
+code-creation,BytecodeHandler,1,11198,0x7efd57fbbd20,137,ToName
+code-creation,BytecodeHandler,1,11208,0x7efd57fbbdc0,229,ToNumber
+code-creation,BytecodeHandler,1,11216,0x7efd57fbbec0,277,ToNumeric
+code-creation,BytecodeHandler,1,11225,0x7efd57fbbfe0,137,ToObject
+code-creation,BytecodeHandler,1,11234,0x7efd57fbc080,137,ToString
+code-creation,BytecodeHandler,1,11242,0x7efd57fbc120,394,CreateRegExpLiteral
+code-creation,BytecodeHandler,1,11251,0x7efd57fbc2c0,1556,CreateArrayLiteral
+code-creation,BytecodeHandler,1,11268,0x7efd57fbc8e0,113,CreateArrayFromIterable
+code-creation,BytecodeHandler,1,11278,0x7efd57fbc960,890,CreateEmptyArrayLiteral
+code-creation,BytecodeHandler,1,11292,0x7efd57fbcce0,2028,CreateObjectLiteral
+code-creation,BytecodeHandler,1,11303,0x7efd57fbd4e0,221,CreateEmptyObjectLiteral
+code-creation,BytecodeHandler,1,11317,0x7efd57fbd5c0,189,CloneObject
+code-creation,BytecodeHandler,1,11330,0x7efd57fbd680,370,GetTemplateObject
+code-creation,BytecodeHandler,1,11341,0x7efd57fbd800,373,CreateClosure
+code-creation,BytecodeHandler,1,11357,0x7efd57fbd980,141,CreateBlockContext
+code-creation,BytecodeHandler,1,11371,0x7efd57fbda20,153,CreateCatchContext
+code-creation,BytecodeHandler,1,11388,0x7efd57fbdac0,278,CreateFunctionContext
+code-creation,BytecodeHandler,1,11404,0x7efd57fbdbe0,278,CreateEvalContext
+code-creation,BytecodeHandler,1,11420,0x7efd57fbdd00,153,CreateWithContext
+code-creation,BytecodeHandler,1,11438,0x7efd57fbdda0,1222,CreateMappedArguments
+code-creation,BytecodeHandler,1,11452,0x7efd57fbe280,626,CreateUnmappedArguments
+code-creation,BytecodeHandler,1,11469,0x7efd57fbe500,602,CreateRestParameter
+code-creation,BytecodeHandler,1,11488,0x7efd57fbe760,374,JumpLoop
+code-creation,BytecodeHandler,1,11498,0x7efd57fbe8e0,52,Jump
+code-creation,BytecodeHandler,1,11517,0x7efd57fbe920,68,JumpConstant
+code-creation,BytecodeHandler,1,11534,0x7efd57fbe980,88,JumpIfNullConstant
+code-creation,BytecodeHandler,1,11550,0x7efd57fbe9e0,88,JumpIfNotNullConstant
+code-creation,BytecodeHandler,1,11564,0x7efd57fbea40,88,JumpIfUndefinedConstant
+code-creation,BytecodeHandler,1,11583,0x7efd57fbeaa0,88,JumpIfNotUndefinedConstant
+code-creation,BytecodeHandler,1,11598,0x7efd57fbeb00,88,JumpIfTrueConstant
+code-creation,BytecodeHandler,1,11613,0x7efd57fbeb60,88,JumpIfFalseConstant
+code-creation,BytecodeHandler,1,11626,0x7efd57fbebc0,96,JumpIfJSReceiverConstant
+code-creation,BytecodeHandler,1,11643,0x7efd57fbec40,300,JumpIfToBooleanTrueConstant
+code-creation,BytecodeHandler,1,11660,0x7efd57fbed80,300,JumpIfToBooleanFalseConstant
+code-creation,BytecodeHandler,1,11674,0x7efd57fbeec0,288,JumpIfToBooleanTrue
+code-creation,BytecodeHandler,1,11690,0x7efd57fbf000,288,JumpIfToBooleanFalse
+code-creation,BytecodeHandler,1,11704,0x7efd57fbf140,76,JumpIfTrue
+code-creation,BytecodeHandler,1,11719,0x7efd57fbf1a0,76,JumpIfFalse
+code-creation,BytecodeHandler,1,11733,0x7efd57fbf200,76,JumpIfNull
+code-creation,BytecodeHandler,1,11744,0x7efd57fbf260,76,JumpIfNotNull
+code-creation,BytecodeHandler,1,11761,0x7efd57fbf2c0,76,JumpIfUndefined
+code-creation,BytecodeHandler,1,11773,0x7efd57fbf320,76,JumpIfNotUndefined
+code-creation,BytecodeHandler,1,11791,0x7efd57fbf380,84,JumpIfJSReceiver
+code-creation,BytecodeHandler,1,11805,0x7efd57fbf3e0,120,SwitchOnSmiNoFeedback
+code-creation,BytecodeHandler,1,11820,0x7efd57fbf460,529,ForInEnumerate
+code-creation,BytecodeHandler,1,11832,0x7efd57fbf680,292,ForInPrepare
+code-creation,BytecodeHandler,1,11847,0x7efd57fbf7c0,68,ForInContinue
+code-creation,BytecodeHandler,1,11861,0x7efd57fbf820,326,ForInNext
+code-creation,BytecodeHandler,1,11871,0x7efd57fbf980,56,ForInStep
+code-creation,BytecodeHandler,1,11886,0x7efd57fbf9c0,137,StackCheck
+code-creation,BytecodeHandler,1,11899,0x7efd57fbfa60,40,SetPendingMessage
+code-creation,BytecodeHandler,1,11920,0x7efd57fbfaa0,141,Throw
+code-creation,BytecodeHandler,1,11935,0x7efd57fbfb40,141,ReThrow
+code-creation,BytecodeHandler,1,11948,0x7efd57fbfbe0,133,Return
+code-creation,BytecodeHandler,1,11960,0x7efd57fbfc80,181,ThrowReferenceErrorIfHole
+code-creation,BytecodeHandler,1,11977,0x7efd57fbfd40,157,ThrowSuperNotCalledIfHole
+code-creation,BytecodeHandler,1,11992,0x7efd57fbfde0,157,ThrowSuperAlreadyCalledIfNotHole
+code-creation,BytecodeHandler,1,12006,0x7efd57fbfe80,132,SwitchOnGeneratorState
+code-creation,BytecodeHandler,1,12019,0x7efd57fbff20,686,SuspendGenerator
+code-creation,BytecodeHandler,1,12031,0x7efd57fc01e0,244,ResumeGenerator
+code-creation,BytecodeHandler,1,12043,0x7efd57fc02e0,125,Debugger
+code-creation,BytecodeHandler,1,12058,0x7efd57fc0360,145,IncBlockCounter
+code-creation,BytecodeHandler,1,12071,0x7efd57fc0400,77,Abort
+code-creation,BytecodeHandler,1,12087,0x7efd57fc0460,81,Illegal
+code-creation,BytecodeHandler,1,12100,0x7efd57fc04c0,286,DebugBreak1.Wide
+code-creation,BytecodeHandler,1,12117,0x7efd57fc05e0,286,DebugBreak2.Wide
+code-creation,BytecodeHandler,1,12132,0x7efd57fc0700,286,DebugBreak3.Wide
+code-creation,BytecodeHandler,1,12145,0x7efd57fc0820,286,DebugBreak4.Wide
+code-creation,BytecodeHandler,1,12157,0x7efd57fc0940,286,DebugBreak5.Wide
+code-creation,BytecodeHandler,1,12170,0x7efd57fc0a60,286,DebugBreak6.Wide
+code-creation,BytecodeHandler,1,12183,0x7efd57fc0b80,40,LdaSmi.Wide
+code-creation,BytecodeHandler,1,12195,0x7efd57fc0bc0,40,LdaConstant.Wide
+code-creation,BytecodeHandler,1,12209,0x7efd57fc0c00,3336,LdaGlobal.Wide
+code-creation,BytecodeHandler,1,12223,0x7efd57fc1920,3258,LdaGlobalInsideTypeof.Wide
+code-creation,BytecodeHandler,1,12239,0x7efd57fc25e0,245,StaGlobal.Wide
+code-creation,BytecodeHandler,1,12253,0x7efd57fc26e0,48,PushContext.Wide
+code-creation,BytecodeHandler,1,12269,0x7efd57fc2720,44,PopContext.Wide
+code-creation,BytecodeHandler,1,12282,0x7efd57fc2760,72,LdaContextSlot.Wide
+code-creation,BytecodeHandler,1,12298,0x7efd57fc27c0,72,LdaImmutableContextSlot.Wide
+code-creation,BytecodeHandler,1,12315,0x7efd57fc2820,44,LdaCurrentContextSlot.Wide
+code-creation,BytecodeHandler,1,12333,0x7efd57fc2860,44,LdaImmutableCurrentContextSlot.Wide
+code-creation,BytecodeHandler,1,12348,0x7efd57fc28a0,148,StaContextSlot.Wide
+code-creation,BytecodeHandler,1,12361,0x7efd57fc2940,120,StaCurrentContextSlot.Wide
+code-creation,BytecodeHandler,1,12378,0x7efd57fc29c0,149,LdaLookupSlot.Wide
+code-creation,BytecodeHandler,1,12396,0x7efd57fc2a60,229,LdaLookupContextSlot.Wide
+code-creation,BytecodeHandler,1,12412,0x7efd57fc2b60,3602,LdaLookupGlobalSlot.Wide
+code-creation,BytecodeHandler,1,12427,0x7efd57fc3980,149,LdaLookupSlotInsideTypeof.Wide
+code-creation,BytecodeHandler,1,12444,0x7efd57fc3a20,229,LdaLookupContextSlotInsideTypeof.Wide
+code-creation,BytecodeHandler,1,12461,0x7efd57fc3b20,3576,LdaLookupGlobalSlotInsideTypeof.Wide
+tick,0x7efd563774ef,12477,0,0x0,6
+tick,0x7efd563774ef,12491,0,0x0,6
+code-creation,BytecodeHandler,1,12505,0x7efd57fc4920,257,StaLookupSlot.Wide
+code-creation,BytecodeHandler,1,12517,0x7efd57fc4a40,40,Ldar.Wide
+code-creation,BytecodeHandler,1,12525,0x7efd57fc4a80,40,Star.Wide
+code-creation,BytecodeHandler,1,12538,0x7efd57fc4ac0,48,Mov.Wide
+code-creation,BytecodeHandler,1,12548,0x7efd57fc4b00,3609,LdaNamedProperty.Wide
+code-creation,BytecodeHandler,1,12561,0x7efd57fc5920,145,LdaNamedPropertyNoFeedback.Wide
+code-creation,BytecodeHandler,1,12573,0x7efd57fc59c0,177,LdaKeyedProperty.Wide
+code-creation,BytecodeHandler,1,12585,0x7efd57fc5a80,212,LdaModuleVariable.Wide
+code-creation,BytecodeHandler,1,12596,0x7efd57fc5b60,326,StaModuleVariable.Wide
+code-creation,BytecodeHandler,1,12610,0x7efd57fc5cc0,197,StaNamedProperty.Wide
+code-creation,BytecodeHandler,1,12622,0x7efd57fc5da0,161,StaNamedPropertyNoFeedback.Wide
+code-creation,BytecodeHandler,1,12635,0x7efd57fc5e60,197,StaNamedOwnProperty.Wide
+code-creation,BytecodeHandler,1,12644,0x7efd57fc5f40,189,StaKeyedProperty.Wide
+code-creation,BytecodeHandler,1,12656,0x7efd57fc6000,189,StaInArrayLiteral.Wide
+code-creation,BytecodeHandler,1,12672,0x7efd57fc60c0,221,StaDataPropertyInLiteral.Wide
+code-creation,BytecodeHandler,1,12685,0x7efd57fc61a0,185,CollectTypeProfile.Wide
+code-creation,BytecodeHandler,1,12697,0x7efd57fc6260,1214,Add.Wide
+code-creation,BytecodeHandler,1,12708,0x7efd57fc6720,1074,Sub.Wide
+code-creation,BytecodeHandler,1,12717,0x7efd57fc6b60,1126,Mul.Wide
+code-creation,BytecodeHandler,1,12728,0x7efd57fc6fe0,1130,Div.Wide
+code-creation,BytecodeHandler,1,12740,0x7efd57fc7460,1146,Mod.Wide
+code-creation,BytecodeHandler,1,12749,0x7efd57fc78e0,205,Exp.Wide
+code-creation,BytecodeHandler,1,12759,0x7efd57fc79c0,1144,BitwiseOr.Wide
+code-creation,BytecodeHandler,1,12769,0x7efd57fc7e40,1140,BitwiseXor.Wide
+code-creation,BytecodeHandler,1,12779,0x7efd57fc82c0,1140,BitwiseAnd.Wide
+code-creation,BytecodeHandler,1,12789,0x7efd57fc8740,1144,ShiftLeft.Wide
+code-creation,BytecodeHandler,1,12800,0x7efd57fc8bc0,1144,ShiftRight.Wide
+code-creation,BytecodeHandler,1,12812,0x7efd57fc9040,1318,ShiftRightLogical.Wide
+code-creation,BytecodeHandler,1,12822,0x7efd57fc9580,1022,AddSmi.Wide
+code-creation,BytecodeHandler,1,12831,0x7efd57fc9980,884,SubSmi.Wide
+code-creation,BytecodeHandler,1,12839,0x7efd57fc9d00,902,MulSmi.Wide
+code-creation,BytecodeHandler,1,12850,0x7efd57fca0a0,950,DivSmi.Wide
+code-creation,BytecodeHandler,1,12859,0x7efd57fca460,914,ModSmi.Wide
+code-creation,BytecodeHandler,1,12868,0x7efd57fca800,209,ExpSmi.Wide
+code-creation,BytecodeHandler,1,12877,0x7efd57fca8e0,600,BitwiseOrSmi.Wide
+code-creation,BytecodeHandler,1,12886,0x7efd57fcab40,600,BitwiseXorSmi.Wide
+code-creation,BytecodeHandler,1,12897,0x7efd57fcada0,600,BitwiseAndSmi.Wide
+code-creation,BytecodeHandler,1,12908,0x7efd57fcb000,616,ShiftLeftSmi.Wide
+code-creation,BytecodeHandler,1,12921,0x7efd57fcb280,616,ShiftRightSmi.Wide
+code-creation,BytecodeHandler,1,12934,0x7efd57fcb500,774,ShiftRightLogicalSmi.Wide
+code-creation,BytecodeHandler,1,12946,0x7efd57fcb820,621,Inc.Wide
+code-creation,BytecodeHandler,1,12955,0x7efd57fcbaa0,617,Dec.Wide
+code-creation,BytecodeHandler,1,12964,0x7efd57fcbd20,653,Negate.Wide
+code-creation,BytecodeHandler,1,12974,0x7efd57fcbfc0,592,BitwiseNot.Wide
+code-creation,BytecodeHandler,1,12984,0x7efd57fcc220,145,DeletePropertyStrict.Wide
+code-creation,BytecodeHandler,1,12998,0x7efd57fcc2c0,137,DeletePropertySloppy.Wide
+code-creation,BytecodeHandler,1,13008,0x7efd57fcc360,125,GetSuperConstructor.Wide
+code-creation,BytecodeHandler,1,13019,0x7efd57fcc3e0,428,CallAnyReceiver.Wide
+code-creation,BytecodeHandler,1,13028,0x7efd57fcc5a0,428,CallProperty.Wide
+code-creation,BytecodeHandler,1,13036,0x7efd57fcc760,424,CallProperty0.Wide
+code-creation,BytecodeHandler,1,13048,0x7efd57fcc920,436,CallProperty1.Wide
+code-creation,BytecodeHandler,1,13059,0x7efd57fccae0,448,CallProperty2.Wide
+code-creation,BytecodeHandler,1,13071,0x7efd57fcccc0,424,CallUndefinedReceiver.Wide
+code-creation,BytecodeHandler,1,13083,0x7efd57fcce80,368,CallUndefinedReceiver0.Wide
+code-creation,BytecodeHandler,1,13099,0x7efd57fcd000,444,CallUndefinedReceiver1.Wide
+code-creation,BytecodeHandler,1,13110,0x7efd57fcd1c0,452,CallUndefinedReceiver2.Wide
+code-creation,BytecodeHandler,1,13121,0x7efd57fcd3a0,72,CallNoFeedback.Wide
+code-creation,BytecodeHandler,1,13131,0x7efd57fcd400,428,CallWithSpread.Wide
+code-creation,BytecodeHandler,1,13141,0x7efd57fcd5c0,149,CallRuntime.Wide
+code-creation,BytecodeHandler,1,13152,0x7efd57fcd660,193,CallRuntimeForPair.Wide
+code-creation,BytecodeHandler,1,13163,0x7efd57fcd740,72,CallJSRuntime.Wide
+code-creation,BytecodeHandler,1,13173,0x7efd57fcd7a0,1878,InvokeIntrinsic.Wide
+code-creation,BytecodeHandler,1,13184,0x7efd57fcdf00,1130,Construct.Wide
+code-creation,BytecodeHandler,1,13205,0x7efd57fce380,573,ConstructWithSpread.Wide
+code-creation,BytecodeHandler,1,13216,0x7efd57fce5c0,2024,TestEqual.Wide
+code-creation,BytecodeHandler,1,13227,0x7efd57fcedc0,1097,TestEqualStrict.Wide
+code-creation,BytecodeHandler,1,13236,0x7efd57fcf220,2036,TestLessThan.Wide
+code-creation,BytecodeHandler,1,13245,0x7efd57fcfa20,2036,TestGreaterThan.Wide
+code-creation,BytecodeHandler,1,13259,0x7efd57fd0220,2036,TestLessThanOrEqual.Wide
+code-creation,BytecodeHandler,1,13271,0x7efd57fd0a20,2036,TestGreaterThanOrEqual.Wide
+code-creation,BytecodeHandler,1,13281,0x7efd57fd1220,56,TestReferenceEqual.Wide
+code-creation,BytecodeHandler,1,13291,0x7efd57fd1260,976,TestInstanceOf.Wide
+code-creation,BytecodeHandler,1,13299,0x7efd57fd1640,177,TestIn.Wide
+code-creation,BytecodeHandler,1,13308,0x7efd57fd1700,141,ToName.Wide
+code-creation,BytecodeHandler,1,13319,0x7efd57fd17a0,237,ToNumber.Wide
+code-creation,BytecodeHandler,1,13330,0x7efd57fd18a0,277,ToNumeric.Wide
+code-creation,BytecodeHandler,1,13338,0x7efd57fd19c0,141,ToObject.Wide
+code-creation,BytecodeHandler,1,13346,0x7efd57fd1a60,398,CreateRegExpLiteral.Wide
+code-creation,BytecodeHandler,1,13357,0x7efd57fd1c00,1576,CreateArrayLiteral.Wide
+code-creation,BytecodeHandler,1,13369,0x7efd57fd2240,890,CreateEmptyArrayLiteral.Wide
+code-creation,BytecodeHandler,1,13389,0x7efd57fd25c0,2052,CreateObjectLiteral.Wide
+code-creation,BytecodeHandler,1,13408,0x7efd57fd2de0,193,CloneObject.Wide
+code-creation,BytecodeHandler,1,13425,0x7efd57fd2ec0,374,GetTemplateObject.Wide
+code-creation,BytecodeHandler,1,13440,0x7efd57fd3040,373,CreateClosure.Wide
+code-creation,BytecodeHandler,1,13452,0x7efd57fd31c0,145,CreateBlockContext.Wide
+code-creation,BytecodeHandler,1,13464,0x7efd57fd3260,157,CreateCatchContext.Wide
+code-creation,BytecodeHandler,1,13484,0x7efd57fd3300,278,CreateFunctionContext.Wide
+code-creation,BytecodeHandler,1,13501,0x7efd57fd3420,278,CreateEvalContext.Wide
+code-creation,BytecodeHandler,1,13521,0x7efd57fd3540,157,CreateWithContext.Wide
+code-creation,BytecodeHandler,1,13534,0x7efd57fd35e0,394,JumpLoop.Wide
+code-creation,BytecodeHandler,1,13549,0x7efd57fd3780,52,Jump.Wide
+code-creation,BytecodeHandler,1,13563,0x7efd57fd37c0,68,JumpConstant.Wide
+code-creation,BytecodeHandler,1,13579,0x7efd57fd3820,88,JumpIfNullConstant.Wide
+code-creation,BytecodeHandler,1,13593,0x7efd57fd3880,88,JumpIfNotNullConstant.Wide
+code-creation,BytecodeHandler,1,13610,0x7efd57fd38e0,88,JumpIfUndefinedConstant.Wide
+code-creation,BytecodeHandler,1,13630,0x7efd57fd3940,88,JumpIfNotUndefinedConstant.Wide
+code-creation,BytecodeHandler,1,13649,0x7efd57fd39a0,88,JumpIfTrueConstant.Wide
+code-creation,BytecodeHandler,1,13662,0x7efd57fd3a00,88,JumpIfFalseConstant.Wide
+code-creation,BytecodeHandler,1,13677,0x7efd57fd3a60,96,JumpIfJSReceiverConstant.Wide
+code-creation,BytecodeHandler,1,13694,0x7efd57fd3ae0,300,JumpIfToBooleanTrueConstant.Wide
+code-creation,BytecodeHandler,1,13709,0x7efd57fd3c20,300,JumpIfToBooleanFalseConstant.Wide
+code-creation,BytecodeHandler,1,13727,0x7efd57fd3d60,288,JumpIfToBooleanTrue.Wide
+code-creation,BytecodeHandler,1,13741,0x7efd57fd3ea0,288,JumpIfToBooleanFalse.Wide
+code-creation,BytecodeHandler,1,13757,0x7efd57fd3fe0,76,JumpIfTrue.Wide
+code-creation,BytecodeHandler,1,13770,0x7efd57fd4040,76,JumpIfFalse.Wide
+code-creation,BytecodeHandler,1,13787,0x7efd57fd40a0,76,JumpIfNull.Wide
+code-creation,BytecodeHandler,1,13801,0x7efd57fd4100,76,JumpIfNotNull.Wide
+code-creation,BytecodeHandler,1,13817,0x7efd57fd4160,76,JumpIfUndefined.Wide
+code-creation,BytecodeHandler,1,13833,0x7efd57fd41c0,76,JumpIfNotUndefined.Wide
+code-creation,BytecodeHandler,1,13848,0x7efd57fd4220,84,JumpIfJSReceiver.Wide
+code-creation,BytecodeHandler,1,13865,0x7efd57fd4280,120,SwitchOnSmiNoFeedback.Wide
+code-creation,BytecodeHandler,1,13878,0x7efd57fd4300,533,ForInEnumerate.Wide
+code-creation,BytecodeHandler,1,13896,0x7efd57fd4520,292,ForInPrepare.Wide
+code-creation,BytecodeHandler,1,13908,0x7efd57fd4660,68,ForInContinue.Wide
+code-creation,BytecodeHandler,1,13925,0x7efd57fd46c0,330,ForInNext.Wide
+code-creation,BytecodeHandler,1,13938,0x7efd57fd4820,56,ForInStep.Wide
+code-creation,BytecodeHandler,1,13954,0x7efd57fd4860,185,ThrowReferenceErrorIfHole.Wide
+code-creation,BytecodeHandler,1,13969,0x7efd57fd4920,132,SwitchOnGeneratorState.Wide
+code-creation,BytecodeHandler,1,13985,0x7efd57fd49c0,690,SuspendGenerator.Wide
+code-creation,BytecodeHandler,1,14002,0x7efd57fd4c80,244,ResumeGenerator.Wide
+code-creation,BytecodeHandler,1,14025,0x7efd57fd4d80,149,IncBlockCounter.Wide
+code-creation,BytecodeHandler,1,14043,0x7efd57fd4e20,77,Abort.Wide
+code-creation,BytecodeHandler,1,14059,0x7efd57fd4e80,286,DebugBreak1.ExtraWide
+code-creation,BytecodeHandler,1,14073,0x7efd57fd4fa0,286,DebugBreak2.ExtraWide
+code-creation,BytecodeHandler,1,14089,0x7efd57fd50c0,286,DebugBreak3.ExtraWide
+code-creation,BytecodeHandler,1,14103,0x7efd57fd51e0,286,DebugBreak4.ExtraWide
+code-creation,BytecodeHandler,1,14119,0x7efd57fd5300,286,DebugBreak5.ExtraWide
+code-creation,BytecodeHandler,1,14133,0x7efd57fd5420,286,DebugBreak6.ExtraWide
+code-creation,BytecodeHandler,1,14146,0x7efd57fd5540,36,LdaSmi.ExtraWide
+code-creation,BytecodeHandler,1,14158,0x7efd57fd5580,40,LdaConstant.ExtraWide
+code-creation,BytecodeHandler,1,14170,0x7efd57fd55c0,3328,LdaGlobal.ExtraWide
+code-creation,BytecodeHandler,1,14183,0x7efd57fd62e0,3250,LdaGlobalInsideTypeof.ExtraWide
+code-creation,BytecodeHandler,1,14198,0x7efd57fd6fa0,241,StaGlobal.ExtraWide
+code-creation,BytecodeHandler,1,14219,0x7efd57fd70a0,44,PushContext.ExtraWide
+code-creation,BytecodeHandler,1,14231,0x7efd57fd70e0,40,PopContext.ExtraWide
+tick,0x7efd563e9d6f,14245,0,0x0,6
+code-creation,BytecodeHandler,1,14261,0x7efd57fd7120,68,LdaContextSlot.ExtraWide
+code-creation,BytecodeHandler,1,14272,0x7efd57fd7180,68,LdaImmutableContextSlot.ExtraWide
+code-creation,BytecodeHandler,1,14284,0x7efd57fd71e0,44,LdaCurrentContextSlot.ExtraWide
+code-creation,BytecodeHandler,1,14296,0x7efd57fd7220,44,LdaImmutableCurrentContextSlot.ExtraWide
+code-creation,BytecodeHandler,1,14309,0x7efd57fd7260,144,StaContextSlot.ExtraWide
+code-creation,BytecodeHandler,1,14321,0x7efd57fd7300,116,StaCurrentContextSlot.ExtraWide
+code-creation,BytecodeHandler,1,14331,0x7efd57fd7380,145,LdaLookupSlot.ExtraWide
+code-creation,BytecodeHandler,1,14341,0x7efd57fd7420,225,LdaLookupContextSlot.ExtraWide
+code-creation,BytecodeHandler,1,14350,0x7efd57fd7520,3590,LdaLookupGlobalSlot.ExtraWide
+code-creation,BytecodeHandler,1,14360,0x7efd57fd8340,145,LdaLookupSlotInsideTypeof.ExtraWide
+code-creation,BytecodeHandler,1,14373,0x7efd57fd83e0,225,LdaLookupContextSlotInsideTypeof.ExtraWide
+code-creation,BytecodeHandler,1,14388,0x7efd57fd84e0,3568,LdaLookupGlobalSlotInsideTypeof.ExtraWide
+code-creation,BytecodeHandler,1,14399,0x7efd57fd92e0,257,StaLookupSlot.ExtraWide
+code-creation,BytecodeHandler,1,14413,0x7efd57fd9400,40,Ldar.ExtraWide
+code-creation,BytecodeHandler,1,14423,0x7efd57fd9440,36,Star.ExtraWide
+code-creation,BytecodeHandler,1,14434,0x7efd57fd9480,48,Mov.ExtraWide
+tick,0x7efd563774ef,14450,0,0x0,6
+code-creation,BytecodeHandler,1,14462,0x7efd57fd94c0,3597,LdaNamedProperty.ExtraWide
+code-creation,BytecodeHandler,1,14484,0x7efd57fda2e0,145,LdaNamedPropertyNoFeedback.ExtraWide
+code-creation,BytecodeHandler,1,14497,0x7efd57fda380,177,LdaKeyedProperty.ExtraWide
+code-creation,BytecodeHandler,1,14510,0x7efd57fda440,208,LdaModuleVariable.ExtraWide
+code-creation,BytecodeHandler,1,14523,0x7efd57fda520,322,StaModuleVariable.ExtraWide
+code-creation,BytecodeHandler,1,14533,0x7efd57fda680,193,StaNamedProperty.ExtraWide
+code-creation,BytecodeHandler,1,14543,0x7efd57fda760,157,StaNamedPropertyNoFeedback.ExtraWide
+code-creation,BytecodeHandler,1,14553,0x7efd57fda800,193,StaNamedOwnProperty.ExtraWide
+code-creation,BytecodeHandler,1,14566,0x7efd57fda8e0,189,StaKeyedProperty.ExtraWide
+code-creation,BytecodeHandler,1,14576,0x7efd57fda9a0,189,StaInArrayLiteral.ExtraWide
+code-creation,BytecodeHandler,1,14587,0x7efd57fdaa60,217,StaDataPropertyInLiteral.ExtraWide
+code-creation,BytecodeHandler,1,14598,0x7efd57fdab40,185,CollectTypeProfile.ExtraWide
+code-creation,BytecodeHandler,1,14608,0x7efd57fdac00,1210,Add.ExtraWide
+code-creation,BytecodeHandler,1,14617,0x7efd57fdb0c0,1070,Sub.ExtraWide
+code-creation,BytecodeHandler,1,14626,0x7efd57fdb500,1126,Mul.ExtraWide
+code-creation,BytecodeHandler,1,14634,0x7efd57fdb980,1130,Div.ExtraWide
+code-creation,BytecodeHandler,1,14644,0x7efd57fdbe00,1146,Mod.ExtraWide
+code-creation,BytecodeHandler,1,14654,0x7efd57fdc280,205,Exp.ExtraWide
+code-creation,BytecodeHandler,1,14662,0x7efd57fdc360,1144,BitwiseOr.ExtraWide
+code-creation,BytecodeHandler,1,14681,0x7efd57fdc7e0,1136,BitwiseXor.ExtraWide
+code-creation,BytecodeHandler,1,14691,0x7efd57fdcc60,1136,BitwiseAnd.ExtraWide
+code-creation,BytecodeHandler,1,14703,0x7efd57fdd0e0,1144,ShiftLeft.ExtraWide
+code-creation,BytecodeHandler,1,14714,0x7efd57fdd560,1144,ShiftRight.ExtraWide
+code-creation,BytecodeHandler,1,14726,0x7efd57fdd9e0,1314,ShiftRightLogical.ExtraWide
+code-creation,BytecodeHandler,1,14738,0x7efd57fddf20,1022,AddSmi.ExtraWide
+code-creation,BytecodeHandler,1,14747,0x7efd57fde320,884,SubSmi.ExtraWide
+code-creation,BytecodeHandler,1,14757,0x7efd57fde6a0,902,MulSmi.ExtraWide
+code-creation,BytecodeHandler,1,14768,0x7efd57fdea40,946,DivSmi.ExtraWide
+code-creation,BytecodeHandler,1,14778,0x7efd57fdee00,914,ModSmi.ExtraWide
+code-creation,BytecodeHandler,1,14789,0x7efd57fdf1a0,209,ExpSmi.ExtraWide
+code-creation,BytecodeHandler,1,14799,0x7efd57fdf280,596,BitwiseOrSmi.ExtraWide
+code-creation,BytecodeHandler,1,14809,0x7efd57fdf4e0,596,BitwiseXorSmi.ExtraWide
+code-creation,BytecodeHandler,1,14819,0x7efd57fdf740,596,BitwiseAndSmi.ExtraWide
+code-creation,BytecodeHandler,1,14829,0x7efd57fdf9a0,616,ShiftLeftSmi.ExtraWide
+code-creation,BytecodeHandler,1,14838,0x7efd57fdfc20,616,ShiftRightSmi.ExtraWide
+code-creation,BytecodeHandler,1,14848,0x7efd57fdfea0,774,ShiftRightLogicalSmi.ExtraWide
+code-creation,BytecodeHandler,1,14861,0x7efd57fe01c0,617,Inc.ExtraWide
+code-creation,BytecodeHandler,1,14873,0x7efd57fe0440,617,Dec.ExtraWide
+code-creation,BytecodeHandler,1,14882,0x7efd57fe06c0,649,Negate.ExtraWide
+code-creation,BytecodeHandler,1,14892,0x7efd57fe0960,592,BitwiseNot.ExtraWide
+code-creation,BytecodeHandler,1,14907,0x7efd57fe0bc0,145,DeletePropertyStrict.ExtraWide
+code-creation,BytecodeHandler,1,14919,0x7efd57fe0c60,137,DeletePropertySloppy.ExtraWide
+code-creation,BytecodeHandler,1,14930,0x7efd57fe0d00,125,GetSuperConstructor.ExtraWide
+code-creation,BytecodeHandler,1,14940,0x7efd57fe0d80,424,CallAnyReceiver.ExtraWide
+code-creation,BytecodeHandler,1,14960,0x7efd57fe0f40,424,CallProperty.ExtraWide
+code-creation,BytecodeHandler,1,14971,0x7efd57fe1100,420,CallProperty0.ExtraWide
+code-creation,BytecodeHandler,1,14983,0x7efd57fe12c0,432,CallProperty1.ExtraWide
+code-creation,BytecodeHandler,1,14994,0x7efd57fe1480,444,CallProperty2.ExtraWide
+code-creation,BytecodeHandler,1,15007,0x7efd57fe1640,420,CallUndefinedReceiver.ExtraWide
+code-creation,BytecodeHandler,1,15019,0x7efd57fe1800,368,CallUndefinedReceiver0.ExtraWide
+code-creation,BytecodeHandler,1,15029,0x7efd57fe1980,440,CallUndefinedReceiver1.ExtraWide
+code-creation,BytecodeHandler,1,15039,0x7efd57fe1b40,448,CallUndefinedReceiver2.ExtraWide
+code-creation,BytecodeHandler,1,15052,0x7efd57fe1d20,68,CallNoFeedback.ExtraWide
+code-creation,BytecodeHandler,1,15063,0x7efd57fe1d80,424,CallWithSpread.ExtraWide
+code-creation,BytecodeHandler,1,15073,0x7efd57fe1f40,149,CallRuntime.ExtraWide
+code-creation,BytecodeHandler,1,15085,0x7efd57fe1fe0,189,CallRuntimeForPair.ExtraWide
+code-creation,BytecodeHandler,1,15096,0x7efd57fe20a0,68,CallJSRuntime.ExtraWide
+code-creation,BytecodeHandler,1,15106,0x7efd57fe2100,1874,InvokeIntrinsic.ExtraWide
+code-creation,BytecodeHandler,1,15117,0x7efd57fe2860,1126,Construct.ExtraWide
+code-creation,BytecodeHandler,1,15126,0x7efd57fe2ce0,569,ConstructWithSpread.ExtraWide
+code-creation,BytecodeHandler,1,15135,0x7efd57fe2f20,2024,TestEqual.ExtraWide
+code-creation,BytecodeHandler,1,15145,0x7efd57fe3720,1097,TestEqualStrict.ExtraWide
+code-creation,BytecodeHandler,1,15158,0x7efd57fe3b80,2036,TestLessThan.ExtraWide
+code-creation,BytecodeHandler,1,15168,0x7efd57fe4380,2036,TestGreaterThan.ExtraWide
+code-creation,BytecodeHandler,1,15179,0x7efd57fe4b80,2036,TestLessThanOrEqual.ExtraWide
+code-creation,BytecodeHandler,1,15189,0x7efd57fe5380,2036,TestGreaterThanOrEqual.ExtraWide
+code-creation,BytecodeHandler,1,15202,0x7efd57fe5b80,56,TestReferenceEqual.ExtraWide
+code-creation,BytecodeHandler,1,15216,0x7efd57fe5bc0,972,TestInstanceOf.ExtraWide
+code-creation,BytecodeHandler,1,15226,0x7efd57fe5fa0,177,TestIn.ExtraWide
+code-creation,BytecodeHandler,1,15246,0x7efd57fe6060,137,ToName.ExtraWide
+code-creation,BytecodeHandler,1,15258,0x7efd57fe6100,237,ToNumber.ExtraWide
+code-creation,BytecodeHandler,1,15268,0x7efd57fe6200,277,ToNumeric.ExtraWide
+code-creation,BytecodeHandler,1,15277,0x7efd57fe6320,137,ToObject.ExtraWide
+code-creation,BytecodeHandler,1,15287,0x7efd57fe63c0,398,CreateRegExpLiteral.ExtraWide
+code-creation,BytecodeHandler,1,15299,0x7efd57fe6560,1576,CreateArrayLiteral.ExtraWide
+code-creation,BytecodeHandler,1,15310,0x7efd57fe6ba0,890,CreateEmptyArrayLiteral.ExtraWide
+code-creation,BytecodeHandler,1,15323,0x7efd57fe6f20,2048,CreateObjectLiteral.ExtraWide
+code-creation,BytecodeHandler,1,15334,0x7efd57fe7740,189,CloneObject.ExtraWide
+code-creation,BytecodeHandler,1,15344,0x7efd57fe7800,370,GetTemplateObject.ExtraWide
+code-creation,BytecodeHandler,1,15357,0x7efd57fe7980,373,CreateClosure.ExtraWide
+code-creation,BytecodeHandler,1,15366,0x7efd57fe7b00,145,CreateBlockContext.ExtraWide
+code-creation,BytecodeHandler,1,15377,0x7efd57fe7ba0,153,CreateCatchContext.ExtraWide
+code-creation,BytecodeHandler,1,15388,0x7efd57fe7c40,274,CreateFunctionContext.ExtraWide
+code-creation,BytecodeHandler,1,15398,0x7efd57fe7d60,278,CreateEvalContext.ExtraWide
+code-creation,BytecodeHandler,1,15409,0x7efd57fe7e80,153,CreateWithContext.ExtraWide
+code-creation,BytecodeHandler,1,15420,0x7efd57fe7f20,382,JumpLoop.ExtraWide
+code-creation,BytecodeHandler,1,15436,0x7efd57fe80a0,52,Jump.ExtraWide
+code-creation,BytecodeHandler,1,15449,0x7efd57fe80e0,64,JumpConstant.ExtraWide
+code-creation,BytecodeHandler,1,15459,0x7efd57fe8140,88,JumpIfNullConstant.ExtraWide
+code-creation,BytecodeHandler,1,15469,0x7efd57fe81a0,88,JumpIfNotNullConstant.ExtraWide
+code-creation,BytecodeHandler,1,15491,0x7efd57fe8200,88,JumpIfUndefinedConstant.ExtraWide
+code-creation,BytecodeHandler,1,15505,0x7efd57fe8260,88,JumpIfNotUndefinedConstant.ExtraWide
+code-creation,BytecodeHandler,1,15519,0x7efd57fe82c0,88,JumpIfTrueConstant.ExtraWide
+code-creation,BytecodeHandler,1,15535,0x7efd57fe8320,88,JumpIfFalseConstant.ExtraWide
+code-creation,BytecodeHandler,1,15547,0x7efd57fe8380,96,JumpIfJSReceiverConstant.ExtraWide
+code-creation,BytecodeHandler,1,15566,0x7efd57fe8400,300,JumpIfToBooleanTrueConstant.ExtraWide
+code-creation,BytecodeHandler,1,15582,0x7efd57fe8540,300,JumpIfToBooleanFalseConstant.ExtraWide
+code-creation,BytecodeHandler,1,15598,0x7efd57fe8680,288,JumpIfToBooleanTrue.ExtraWide
+code-creation,BytecodeHandler,1,15612,0x7efd57fe87c0,288,JumpIfToBooleanFalse.ExtraWide
+code-creation,BytecodeHandler,1,15625,0x7efd57fe8900,72,JumpIfTrue.ExtraWide
+code-creation,BytecodeHandler,1,15639,0x7efd57fe8960,72,JumpIfFalse.ExtraWide
+code-creation,BytecodeHandler,1,15653,0x7efd57fe89c0,72,JumpIfNull.ExtraWide
+code-creation,BytecodeHandler,1,15667,0x7efd57fe8a20,72,JumpIfNotNull.ExtraWide
+code-creation,BytecodeHandler,1,15681,0x7efd57fe8a80,72,JumpIfUndefined.ExtraWide
+code-creation,BytecodeHandler,1,15700,0x7efd57fe8ae0,72,JumpIfNotUndefined.ExtraWide
+code-creation,BytecodeHandler,1,15718,0x7efd57fe8b40,84,JumpIfJSReceiver.ExtraWide
+code-creation,BytecodeHandler,1,15737,0x7efd57fe8ba0,116,SwitchOnSmiNoFeedback.ExtraWide
+code-creation,BytecodeHandler,1,15753,0x7efd57fe8c20,533,ForInEnumerate.ExtraWide
+code-creation,BytecodeHandler,1,15767,0x7efd57fe8e40,288,ForInPrepare.ExtraWide
+code-creation,BytecodeHandler,1,15782,0x7efd57fe8f80,64,ForInContinue.ExtraWide
+code-creation,BytecodeHandler,1,15796,0x7efd57fe8fe0,326,ForInNext.ExtraWide
+code-creation,BytecodeHandler,1,15815,0x7efd57fe9140,52,ForInStep.ExtraWide
+code-creation,BytecodeHandler,1,15833,0x7efd57fe9180,181,ThrowReferenceErrorIfHole.ExtraWide
+code-creation,BytecodeHandler,1,15848,0x7efd57fe9240,128,SwitchOnGeneratorState.ExtraWide
+code-creation,BytecodeHandler,1,15864,0x7efd57fe92e0,686,SuspendGenerator.ExtraWide
+code-creation,BytecodeHandler,1,15881,0x7efd57fe95a0,244,ResumeGenerator.ExtraWide
+code-creation,BytecodeHandler,1,15895,0x7efd57fe96a0,149,IncBlockCounter.ExtraWide
+code-creation,BytecodeHandler,1,15908,0x7efd57fe9740,77,Abort.ExtraWide
+tick,0x7efd563774ef,15928,0,0x0,6
+tick,0x7efd56eee700,16552,0,0x0,5
+tick,0x7efd57aa1530,17618,0,0x0,6
+code-creation,Eval,11,18145,0x25e98662b386,6, internal/bootstrap/loaders.js:1:1,0x25e98662b2b8,~
+code-creation,Eval,11,18257,0x25e98662bb36,546, internal/bootstrap/loaders.js:1:1,0x25e98662b2f0,~
+code-creation,LazyCompile,11,18585,0x25e98662c09e,19,SafeSet internal/per_context/primordials.js:73:3,0x29f627d85020,~
+tick,0x7efd57a48e30,18685,0,0x0,0,0x7efd57658270,0x25e98662bc4a
+code-creation,LazyCompile,11,18772,0x25e98662c2f6,77,internalBinding internal/bootstrap/loaders.js:128:45,0x25e98662b548,~
+code-creation,LazyCompile,11,18939,0x25e98662c946,68,NativeModule internal/bootstrap/loaders.js:149:22,0x25e98662b3b8,~
+code-creation,Eval,11,19580,0x25e9866365f6,6, internal/bootstrap/node.js:1:1,0x25e986636528,~
+tick,0x7efd576970a0,19734,0,0x0,3
+code-creation,Eval,11,19822,0x25e98663706e,2407, internal/bootstrap/node.js:1:1,0x25e986636560,~
+code-creation,LazyCompile,11,20060,0x25e9866380be,103,setupPrepareStackTrace internal/bootstrap/node.js:300:32,0x25e986636628,~
+code-creation,LazyCompile,11,20160,0x25e98663870e,83,nativeModuleRequire internal/bootstrap/loaders.js:183:29,0x25e98662b408,~
+code-creation,LazyCompile,11,20252,0x25e986638926,178,NativeModule.compile internal/bootstrap/loaders.js:272:42,0x25e98662b840,~
+tick,0x7efd5630ff47,20801,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x25e9866380ea,0x25e9866370c5
+code-creation,Eval,11,21320,0x25e98663f246,6, internal/errors.js:1:1,0x25e98663f178,~
+code-creation,Eval,11,21710,0xb15d5681516,5695, internal/errors.js:1:1,0x25e98663f1b0,~
+tick,0x7efd56f0e800,21907,1,0x7efd57136740,6,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x25e9866380ea,0x25e9866370c5
+code-creation,LazyCompile,11,22352,0xb15d5685a4e,156,E internal/errors.js:286:11,0x25e98663f528,~
+code-creation,LazyCompile,11,22420,0xb15d5685cfe,45,makeNodeErrorWithCode internal/errors.js:212:31,0x25e98663f3e0,~
+code-creation,LazyCompile,11,22712,0xb15d5685f86,36, internal/errors.js:297:26,0xb15d5685968,~
+tick,0x7efd57890114,22984,0,0x0,0,0x7efd57891e60,0xb15d5685d1e,0xb15d5685ab2,0xb15d5682303,0x25e98663898b,0x25e98663875c,0x25e9866380ea,0x25e9866370c5
+code-creation,LazyCompile,11,23069,0xb15d56861d6,44,makeSystemErrorWithCode internal/errors.js:204:33,0x25e98663f368,~
+code-creation,Eval,11,23662,0xb15d5687ff6,6, internal/util.js:1:1,0xb15d5687f28,~
+code-creation,Eval,11,23765,0xb15d5688b26,673, internal/util.js:1:1,0xb15d5687f60,~
+tick,0x7efd57788944,24025,1,0x7efd570ad5f0,5,0x7efd57492ee0,0x25e98662c314,0xb15d5688c4f,0x25e98663898b,0x25e98663875c,0x25e9866370fd
+code-creation,LazyCompile,11,24966,0xb15d568fc76,156,setupProcessObject internal/bootstrap/node.js:319:28,0x25e986636678,~
+tick,0x7efd57593803,25081,1,0x7efd57136740,5,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0xb15d568fc7f,0x25e986637112
+code-creation,Eval,11,25437,0xb15d56907b6,6, events.js:1:1,0xb15d56906e8,~
+code-creation,Eval,11,25546,0xb15d56913c6,698, events.js:1:1,0xb15d5690720,~
+tick,0x7efd57833664,26165,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0xb15d56914ae,0x25e98663898b,0x25e98663875c,0xb15d568fc7f,0x25e986637112
+code-creation,Eval,11,26981,0xb15d56a3f7e,6, internal/util/inspect.js:1:1,0xb15d56a3eb0,~
+code-creation,Eval,11,27131,0xb15d56a595e,1516, internal/util/inspect.js:1:1,0xb15d56a3ee8,~
+tick,0x7efd57938042,27225,1,0x7efd57136740,6,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0xb15d56914ae,0x25e98663898b,0x25e98663875c,0xb15d568fc7f,0x25e986637112
+code-creation,Eval,11,27430,0xb15d56a6906,6, internal/util/types.js:1:1,0xb15d56a6838,~
+code-creation,Eval,11,27519,0xb15d56a6e86,280, internal/util/types.js:1:1,0xb15d56a6870,~
+code-creation,LazyCompile,11,27620,0xb15d56a725e,15,uncurryThis internal/per_context/primordials.js:23:21,0x29f627d84b78,~
+code-creation,Eval,11,27775,0xb15d56a751e,6, internal/assert.js:1:1,0xb15d56a7450,~
+code-creation,Eval,11,27812,0xb15d56a76c6,48, internal/assert.js:1:1,0xb15d56a7488,~
+code-creation,LazyCompile,11,28037,0xb15d56a78b6,19, internal/util/inspect.js:97:45,0xb15d56a4e38,~
+code-creation,RegExp,4,28179,0x262093102040,1263,^([A-Z][a-z]+)+$
+tick,0x7efd57788ae0,28287,0,0x0,0,0x7efd578bfc90,0xb15d56a5e1a,0x25e98663898b,0x25e98663875c,0xb15d56914ae,0x25e98663898b,0x25e98663875c,0xb15d568fc7f,0x25e986637112
+code-creation,LazyCompile,11,28515,0xb15d56a8636,24,EventEmitter events.js:43:22,0xb15d56907e8,~
+code-creation,LazyCompile,11,28595,0xb15d56a876e,86,EventEmitter.init events.js:83:29,0xb15d5690c98,~
+code-creation,LazyCompile,11,28708,0xb15d56a8c2e,156,setupGlobalProxy internal/bootstrap/node.js:364:26,0x25e986636740,~
+code-creation,LazyCompile,11,28793,0xb15d56a902e,42,makeGetter internal/bootstrap/node.js:372:22,0xb15d56a8988,~
+code-creation,LazyCompile,11,28907,0xb15d56a925e,146,deprecate internal/util.js:46:19,0xb15d56880c8,~
+code-creation,LazyCompile,11,28984,0xb15d56a956e,53,makeSetter internal/bootstrap/node.js:378:22,0xb15d56a89e0,~
+code-creation,LazyCompile,11,29102,0xb15d56a99de,109,setupBuffer internal/bootstrap/node.js:403:21,0x25e986636808,~
+tick,0x7efd57800942,29347,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0xb15d56a99e7,0x25e986637118
+code-creation,Eval,11,30023,0xb15d56aad76,6, buffer.js:1:1,0xb15d56aaca8,~
+code-creation,Eval,11,30253,0xb15d56ad3f6,2519, buffer.js:1:1,0xb15d56aace0,~
+tick,0x7efd577ba4d1,30391,1,0x7efd57136740,6,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0xb15d56a99e7,0x25e986637118
+code-creation,Eval,11,30731,0xb15d56af2c6,6, internal/validators.js:1:1,0xb15d56af1f8,~
+code-creation,Eval,11,30799,0xb15d56af866,353, internal/validators.js:1:1,0xb15d56af230,~
+code-creation,LazyCompile,11,30909,0xb15d56afcb6,15,hideStackFrames internal/errors.js:242:25,0x25e98663f460,~
+tick,0x7efd5747cc97,31454,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0xb15d56ad70b,0x25e98663898b,0x25e98663875c,0xb15d56a99e7,0x25e986637118
+code-creation,Eval,11,31682,0xb15d56b0f96,6, internal/buffer.js:1:1,0xb15d56b0ec8,~
+code-creation,Eval,11,31801,0xb15d56b2ace,859, internal/buffer.js:1:1,0xb15d56b0f00,~
+code-creation,LazyCompile,11,32189,0xb15d56b39a6,467,addBufferPrototypeMethods internal/buffer.js:942:35,0xb15d56b2648,~
+code-creation,LazyCompile,11,32391,0xb15d56b3ffe,62,createPool buffer.js:139:20,0xb15d56aadf8,~
+code-creation,LazyCompile,11,32456,0xb15d56b4166,82,createUnsafeBuffer buffer.js:130:28,0xb15d56aada8,~
+tick,0x7efd577ecba0,32502,0,0x0,2,0x7efd57895ff0,0xb15d56b4180,0xb15d56b401b,0xb15d56ad7df,0x25e98663898b,0x25e98663875c,0xb15d56a99e7,0x25e986637118
+code-creation,LazyCompile,11,32521,0xb15d56b4296,19,FastBuffer internal/buffer.js:940:1,0xb15d56b2698,~
+code-creation,Eval,11,33120,0xb15d56b6fae,6, internal/process/per_thread.js:1:1,0xb15d56b6ee0,~
+code-creation,Eval,11,33186,0xb15d56b737e,315, internal/process/per_thread.js:1:1,0xb15d56b6f18,~
+code-creation,Eval,11,33436,0xb15d56b7c36,6, internal/process/main_thread_only.js:1:1,0xb15d56b7b68,~
+code-creation,Eval,11,33501,0xb15d56b7fbe,221, internal/process/main_thread_only.js:1:1,0xb15d56b7ba0,~
+tick,0x7efd57937e32,33574,1,0x7efd57136740,6,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x25e98663714d
+code-creation,LazyCompile,11,33846,0xb15d56ba526,62,wrapProcessMethods internal/process/main_thread_only.js:22:28,0xb15d56b7c68,~
+code-creation,LazyCompile,11,34009,0xb15d56bab76,284,wrapProcessMethods internal/process/per_thread.js:33:28,0xb15d56b7030,~
+code-creation,LazyCompile,11,34197,0xb15d56bbde6,158,wrapPosixCredentialSetters internal/process/main_thread_only.js:53:36,0xb15d56b7ce8,~
+code-creation,LazyCompile,11,34272,0xb15d56bc0be,19,wrapIdSetter internal/process/main_thread_only.js:90:24,0xb15d56bbc00,~
+code-creation,Eval,11,34476,0xb15d56bc4f6,6, internal/process/stdio.js:1:1,0xb15d56bc428,~
+code-creation,Eval,11,34523,0xb15d56bc736,76, internal/process/stdio.js:1:1,0xb15d56bc460,~
+tick,0x7efd57481bc0,34617,0,0x0,2,0x7efd57895ff0,0x25e98663746a
+code-creation,LazyCompile,11,34667,0xb15d56bcc7e,65,getMainThreadStdio internal/process/stdio.js:21:28,0xb15d56bc578,~
+code-creation,LazyCompile,11,34764,0xb15d56bd08e,126,setupProcessStdio internal/bootstrap/node.js:339:27,0x25e9866366c8,~
+code-creation,Eval,11,35130,0xb15d56be226,6, internal/async_hooks.js:1:1,0xb15d56be158,~
+code-creation,Eval,11,35237,0xb15d56bf2d6,1015, internal/async_hooks.js:1:1,0xb15d56be190,~
+tick,0x7efd577d8c70,35670,0,0x0,3,0x7efd57895ff0,0xb15d56bf586,0x25e98663898b,0x25e98663875c,0x25e9866374d8
+code-creation,LazyCompile,11,35686,0x123c0ef013f6,69,emitHookFactory internal/async_hooks.js:182:25,0xb15d56be398,~
+code-creation,LazyCompile,11,35755,0x123c0ef0153e,34, internal/per_context/primordials.js:24:10,0x29f627d84da8,~
+code-creation,Eval,11,36063,0x123c0ef01f0e,6, internal/process/task_queues.js:1:1,0x123c0ef01e40,~
+code-creation,Eval,11,36136,0x123c0ef0242e,476, internal/process/task_queues.js:1:1,0x123c0ef01e78,~
+code-creation,Eval,11,36407,0x123c0ef0301e,6, internal/process/promises.js:1:1,0x123c0ef02f50,~
+code-creation,Eval,11,36481,0x123c0ef0361e,365, internal/process/promises.js:1:1,0x123c0ef02f88,~
+code-creation,Eval,11,36705,0x123c0ef03d16,6, internal/fixed_queue.js:1:1,0x123c0ef03c48,~
+tick,0x7efd563774ef,36733,1,0x7efd57136740,3,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef025d3,0x25e98663898b,0x25e98663875c,0x25e98663750e
+code-creation,Eval,11,36776,0x123c0ef04106,134, internal/fixed_queue.js:1:1,0x123c0ef03c80,~
+code-creation,LazyCompile,11,36890,0x123c0ef043ae,26,FixedQueue internal/fixed_queue.js:87:14,0x123c0ef03ed8,~
+code-creation,LazyCompile,11,36947,0x123c0ef04516,40,FixedCircularBuffer internal/fixed_queue.js:56:14,0x123c0ef03d48,~
+code-creation,LazyCompile,11,37067,0x123c0ef049ce,101,createGlobalConsole internal/bootstrap/node.js:420:29,0x25e986636858,~
+code-creation,Eval,11,37168,0x123c0ef04d4e,6, internal/console/global.js:1:1,0x123c0ef04c80,~
+code-creation,Eval,11,37251,0x123c0ef04e9e,387, internal/console/global.js:1:1,0x123c0ef04cb8,~
+tick,0x7efd5783a542,37781,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef04ebc,0x25e98663898b,0x25e98663875c,0x123c0ef049d7,0x25e98663755d
+code-creation,Eval,11,37870,0x123c0ef05d9e,6, internal/console/constructor.js:1:1,0x123c0ef05cd0,~
+code-creation,Eval,11,38021,0x123c0ef06c6e,1498, internal/console/constructor.js:1:1,0x123c0ef05d08,~
+code-creation,LazyCompile,11,38437,0x123c0ef09006,106,Console.<computed> internal/console/constructor.js:141:47,0x123c0ef05fb0,~
+code-creation,LazyCompile,11,38575,0x123c0ef09446,295,Console.<computed> internal/console/constructor.js:166:46,0x123c0ef06038,~
+code-creation,LazyCompile,11,38660,0x123c0ef097de,19,createWriteErrorHandler internal/console/constructor.js:190:33,0x123c0ef05e20,~
+code-creation,Eval,11,38840,0x123c0ef09bc6,6, internal/util/inspector.js:1:1,0x123c0ef09af8,~
+tick,0x7efd57c876ef,38857,1,0x7efd57136740,3,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef049f1,0x25e98663755d
+code-creation,Eval,11,38894,0x123c0ef09efe,125, internal/util/inspector.js:1:1,0x123c0ef09b30,~
+code-creation,LazyCompile,11,39010,0x123c0ef0a14e,11,set consoleFromVM internal/util/inspector.js:63:20,0x123c0ef09d88,~
+code-creation,LazyCompile,11,39101,0x123c0ef0a2ae,275,wrapConsole internal/util/inspector.js:37:21,0x123c0ef09c98,~
+code-creation,LazyCompile,11,39363,0x123c0ef0bd46,38,exposeNamespace internal/bootstrap/node.js:438:25,0x25e9866368a8,~
+tick,0x7efd5747cb02,39933,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x25e986637579
+code-creation,Eval,11,40453,0x123c0ef0d796,6, internal/url.js:1:1,0x123c0ef0d6c8,~
+code-creation,Eval,11,40674,0x123c0ef0fdde,2299, internal/url.js:1:1,0x123c0ef0d700,~
+tick,0x7efd5783280a,40958,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef0ff9a,0x25e98663898b,0x25e98663875c,0x25e986637579
+code-creation,Eval,11,41023,0x123c0ef113a6,6, internal/querystring.js:1:1,0x123c0ef112d8,~
+code-creation,Eval,11,41096,0x123c0ef11566,188, internal/querystring.js:1:1,0x123c0ef11310,~
+code-creation,Eval,11,41376,0x123c0ef12066,6, internal/constants.js:1:1,0x123c0ef11f98,~
+code-creation,Eval,11,41419,0x123c0ef123be,45, internal/constants.js:1:1,0x123c0ef11fd0,~
+tick,0x7efd5782af19,42034,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef10086,0x25e98663898b,0x25e98663875c,0x25e986637579
+code-creation,Eval,11,42282,0x123c0ef12d76,6, path.js:1:1,0x123c0ef12ca8,~
+code-creation,Eval,11,42367,0x123c0ef139ce,542, path.js:1:1,0x123c0ef12ce0,~
+code-creation,LazyCompile,11,42935,0x123c0ef14c86,490,defineIDLClass internal/url.js:847:24,0x123c0ef0dc78,~
+tick,0x7efd57599962,43085,0,0x0,0,0x7efd578bfc90,0x123c0ef1064c,0x25e98663898b,0x25e98663875c,0x25e986637579
+code-creation,LazyCompile,11,43166,0x123c0ef15f56,38,exposeInterface internal/bootstrap/node.js:448:25,0x25e9866368f8,~
+code-creation,Eval,11,43666,0x123c0ef17f16,6, internal/encoding.js:1:1,0x123c0ef17e48,~
+code-creation,Eval,11,43827,0x123c0ef19e06,866, internal/encoding.js:1:1,0x123c0ef17e80,~
+tick,0x7efd57f1532e,44153,0,0x0,0,0x7efd57f17ddd,0x25e98663872d,0x123c0ef19f7c,0x25e98663898b,0x25e98663875c,0x25e9866375da
+code-creation,LazyCompile,11,44332,0x123c0ef1a7b6,87,makeTextDecoderICU internal/encoding.js:366:28,0x123c0ef18128,~
+code-creation,Eval,11,44674,0x123c0ef1b5c6,6, timers.js:1:1,0x123c0ef1b4f8,~
+code-creation,Eval,11,44765,0x123c0ef1be0e,645, timers.js:1:1,0x123c0ef1b530,~
+code-creation,Eval,11,44954,0x123c0ef1cad6,6, internal/linkedlist.js:1:1,0x123c0ef1ca08,~
+code-creation,Eval,11,44995,0x123c0ef1cdbe,80, internal/linkedlist.js:1:1,0x123c0ef1ca40,~
+tick,0x7efd5781d5ed,45209,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef1bec3,0x25e98663898b,0x25e98663875c,0x25e98663763b
+code-creation,Eval,11,45432,0x123c0ef1d71e,6, internal/timers.js:1:1,0x123c0ef1d650,~
+code-creation,Eval,11,45542,0x123c0ef1e326,905, internal/timers.js:1:1,0x123c0ef1d688,~
+code-creation,Eval,11,45766,0x123c0ef1edfe,6, internal/priority_queue.js:1:1,0x123c0ef1ed30,~
+code-creation,Eval,11,45825,0x123c0ef1f1f6,164, internal/priority_queue.js:1:1,0x123c0ef1ed68,~
+code-creation,Eval,11,45994,0x123c0ef1f786,6, internal/util/debuglog.js:1:1,0x123c0ef1f6b8,~
+code-creation,Eval,11,46041,0x123c0ef1fa36,103, internal/util/debuglog.js:1:1,0x123c0ef1f6f0,~
+code-creation,LazyCompile,11,46153,0x123c0ef1fc8e,21,debuglog internal/util/debuglog.js:55:18,0x123c0ef1f8d0,~
+code-creation,LazyCompile,11,46249,0x123c0ef1fdce,13,ImmediateList internal/timers.js:242:23,0x123c0ef1d840,~
+tick,0x7efd563774ef,46282,0,0x0,3,0x7efd578cf150,0x123c0ef1e540,0x25e98663898b,0x25e98663875c,0x123c0ef1bec3,0x25e98663898b,0x25e98663875c,0x25e98663763b
+code-creation,LazyCompile,11,46371,0x123c0ef1ff6e,72,PriorityQueue internal/priority_queue.js:15:14,0x123c0ef1ee30,~
+code-creation,LazyCompile,11,46614,0x123c0ef20806,38,defineOperation internal/bootstrap/node.js:458:25,0x25e986636948,~
+code-creation,Eval,11,46893,0x123c0ef20f96,6, internal/process/execution.js:1:1,0x123c0ef20ec8,~
+code-creation,Eval,11,46948,0x123c0ef2145e,336, internal/process/execution.js:1:1,0x123c0ef20f00,~
+code-creation,LazyCompile,11,47106,0x123c0ef2198e,6,createOnGlobalUncaughtException internal/process/execution.js:122:41,0x123c0ef211a8,~
+code-creation,Eval,11,47274,0x123c0ef21da6,6, internal/process/warning.js:1:1,0x123c0ef21cd8,~
+tick,0x7efd575ae564,47334,1,0x7efd57136740,3,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x25e9866378ec
+code-creation,Eval,11,47354,0x123c0ef220b6,138, internal/process/warning.js:1:1,0x123c0ef21d10,~
+tick,0x7efd57626de0,48399,0,0x0,1
+code-creation,LazyCompile,11,48579,0x123c0ef22356,45,setupTaskQueue internal/process/task_queues.js:172:17,0x123c0ef021c0,~
+code-creation,LazyCompile,11,48669,0x123c0ef2247e,17,listenForRejections internal/process/promises.js:247:29,0x123c0ef03410,~
+code-creation,LazyCompile,11,48777,0x123c0ef22706,65,getTimerCallbacks internal/timers.js:390:27,0x123c0ef1db60,~
+code-creation,Eval,11,48910,0x123c0ef23c2e,6, internal/main/run_main_module.js:1:1,0x123c0ef23b60,~
+code-creation,Eval,11,48948,0x123c0ef23cd6,58, internal/main/run_main_module.js:1:1,0x123c0ef23b98,~
+code-creation,Eval,11,49307,0x123c0ef2484e,6, internal/bootstrap/pre_execution.js:1:1,0x123c0ef24780,~
+code-creation,Eval,11,49374,0x123c0ef251ce,363, internal/bootstrap/pre_execution.js:1:1,0x123c0ef247b8,~
+tick,0x7efd5793bd30,49457,1,0x7efd57136740,6,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef23cdb
+code-creation,Eval,11,49538,0x123c0ef257fe,6, internal/options.js:1:1,0x123c0ef25730,~
+code-creation,Eval,11,49583,0x123c0ef2595e,98, internal/options.js:1:1,0x123c0ef25768,~
+code-creation,LazyCompile,11,50041,0x123c0ef260fe,266,prepareMainThreadExecution internal/bootstrap/pre_execution.js:9:36,0x123c0ef24880,~
+code-creation,LazyCompile,11,50158,0x123c0ef2686e,456,patchProcessObject internal/bootstrap/pre_execution.js:66:28,0x123c0ef248d0,~
+code-creation,LazyCompile,11,50442,0x123c0ef2733e,207,resolve path.js:974:10,0x123c0ef13258,~
+tick,0x7efd578003c0,50497,0,0x0,2,0x7efd57895ff0,0x123c0ef27387,0x123c0ef26948,0x123c0ef2610e,0x123c0ef23cf3
+code-creation,LazyCompile,11,50535,0x123c0ef2755e,33,validateString internal/validators.js:110:24,0xb15d56af3e8,~
+code-creation,LazyCompile,11,50592,0x123c0ef27676,30,cwd internal/process/main_thread_only.js:41:15,0xb15d56ba3f0,~
+code-creation,LazyCompile,11,50745,0x123c0ef277f6,478,normalizeString path.js:52:25,0x123c0ef12e98,~
+code-creation,LazyCompile,11,50797,0x123c0ef27bae,9,isPosixPathSeparator path.js:42:30,0x123c0ef12df8,~
+code-creation,LazyCompile,11,50905,0x123c0ef27f7e,76,addReadOnlyProcessAlias internal/bootstrap/pre_execution.js:103:33,0x123c0ef24920,~
+code-creation,LazyCompile,11,50963,0x123c0ef280de,29,getOptionValue internal/options.js:6:24,0x123c0ef25830,~
+code-creation,LazyCompile,11,51043,0x123c0ef28276,75,setupTraceCategoryState internal/bootstrap/pre_execution.js:207:33,0x123c0ef24bc8,~
+code-creation,LazyCompile,11,51109,0x123c0ef2843e,87,toggleTraceCategoryState internal/process/per_thread.js:337:34,0xb15d56b7180,~
+code-creation,LazyCompile,11,51169,0x123c0ef28606,84,setupInspectorHooks internal/bootstrap/pre_execution.js:213:29,0x123c0ef24c18,~
+code-creation,Eval,11,51289,0x123c0ef28976,6, internal/inspector_async_hook.js:1:1,0x123c0ef288a8,~
+code-creation,Eval,11,51329,0x123c0ef28b9e,74, internal/inspector_async_hook.js:1:1,0x123c0ef288e0,~
+code-creation,LazyCompile,11,51443,0x123c0ef28d9e,91,setupWarningHandler internal/bootstrap/pre_execution.js:115:29,0x123c0ef24970,~
+code-creation,LazyCompile,11,51514,0x123c0ef28f5e,23,addListener events.js:283:58,0xb15d5690dd8,~
+tick,0x7efd57489028,51550,0,0x0,2,0x7efd57895ff0,0x123c0ef28f6f,0x123c0ef28df1,0x123c0ef26124,0x123c0ef23cf3
+code-creation,LazyCompile,11,51683,0x123c0ef292ce,429,_addListener events.js:221:22,0xb15d5690978,~
+code-creation,LazyCompile,11,51737,0x123c0ef29646,34,checkListener events.js:62:23,0xb15d5690838,~
+code-creation,LazyCompile,11,51801,0x123c0ef297de,90,setupDebugEnv internal/bootstrap/pre_execution.js:162:23,0x123c0ef24a88,~
+code-creation,LazyCompile,11,51876,0x123c0ef29a4e,147,initializeDebugEnv internal/util/debuglog.js:12:28,0x123c0ef1f7b8,~
+code-creation,LazyCompile,11,51938,0x123c0ef29c26,98,setupSignalHandlers internal/bootstrap/pre_execution.js:169:29,0x123c0ef24ad8,~
+code-creation,LazyCompile,11,51999,0x123c0ef29eb6,54,createSignalHandlers internal/process/main_thread_only.js:125:30,0xb15d56b7df0,~
+code-creation,LazyCompile,11,52167,0x123c0ef2a0fe,361,emit events.js:160:44,0xb15d5690d88,~
+code-creation,LazyCompile,11,52255,0x123c0ef2a48e,216,startListeningIfSignal internal/process/main_thread_only.js:129:34,0x123c0ef29d50,~
+code-creation,LazyCompile,11,52305,0x123c0ef2a6ae,21,isSignal internal/process/main_thread_only.js:120:18,0xb15d56b7da0,~
+code-creation,LazyCompile,11,52381,0x123c0ef2a916,139,initializeReport internal/bootstrap/pre_execution.js:146:26,0x123c0ef24a10,~
+code-creation,LazyCompile,11,52439,0x123c0ef2aaee,53,initializeReportSignalHandlers internal/bootstrap/pre_execution.js:183:40,0x123c0ef24b28,~
+code-creation,LazyCompile,11,52515,0x123c0ef2acee,115,initializeHeapSnapshotSignalHandlers internal/bootstrap/pre_execution.js:193:46,0x123c0ef24b78,~
+code-creation,LazyCompile,11,52589,0x123c0ef2af3e,128,setupChildProcessIpcChannel internal/bootstrap/pre_execution.js:318:37,0x123c0ef24cf8,~
+tick,0x7efd563774ef,52615,0,0x0,3,0x7efd57895ff0,0x123c0ef261d2,0x123c0ef23cf3
+code-creation,LazyCompile,11,52754,0x123c0ef2b34e,503,initializePolicy internal/bootstrap/pre_execution.js:342:26,0x123c0ef24d98,~
+code-creation,LazyCompile,11,52823,0x123c0ef2b78e,74,initializeClusterIPC internal/bootstrap/pre_execution.js:333:30,0x123c0ef24d48,~
+code-creation,LazyCompile,11,52990,0x123c0ef2befe,605,initializeDeprecations internal/bootstrap/pre_execution.js:231:32,0x123c0ef24c68,~
+code-creation,LazyCompile,11,53073,0x123c0ef2c6b6,27,initializeCJSLoader internal/bootstrap/pre_execution.js:391:29,0x123c0ef24de8,~
+tick,0x7efd5747cc5d,53669,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef2c6bf,0x123c0ef261ee,0x123c0ef23cf3
+code-creation,Eval,11,53999,0x123c0ef2e07e,6, internal/modules/cjs/loader.js:1:1,0x123c0ef2dfb0,~
+code-creation,Eval,11,54211,0x123c0ef2f45e,2151, internal/modules/cjs/loader.js:1:1,0x123c0ef2dfe8,~
+code-creation,Eval,11,54667,0x123c0ef30a7e,6, internal/source_map/source_map_cache.js:1:1,0x123c0ef309b0,~
+tick,0x7efd57697142,54737,1,0x7efd57136740,3,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef2f5d4,0x25e98663898b,0x25e98663875c,0x123c0ef2c6bf,0x123c0ef261ee,0x123c0ef23cf3
+code-creation,Eval,11,54759,0x123c0ef30fa6,408, internal/source_map/source_map_cache.js:1:1,0x123c0ef309e8,~
+tick,0x7efd5783a51c,55789,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef31081,0x25e98663898b,0x25e98663875c,0x123c0ef2f5d4,0x25e98663898b,0x25e98663875c,0x123c0ef2c6bf,0x123c0ef261ee,0x123c0ef23cf3
+code-creation,Eval,11,56108,0x123c0ef32e8e,6, fs.js:1:1,0x123c0ef32dc0,~
+code-creation,Eval,11,56344,0x123c0ef364ee,2763, fs.js:1:1,0x123c0ef32df8,~
+tick,0x7efd577d8c95,56853,1,0x7efd57136740,5,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef36948,0x25e98663898b,0x25e98663875c,0x123c0ef31081,0x25e98663898b,0x25e98663875c,0x123c0ef2f5d4,0x25e98663898b,0x25e98663875c,0x123c0ef2c6bf,0x123c0ef261ee,0x123c0ef23cf3
+code-creation,Eval,11,57384,0x123c0ef3cc4e,6, internal/fs/utils.js:1:1,0x123c0ef3cb80,~
+code-creation,Eval,11,57596,0x123c0ef3e256,1765, internal/fs/utils.js:1:1,0x123c0ef3cbb8,~
+tick,0x7efd5778c280,57943,0,0x0,0,0x7efd57658270,0x123c0ef3e905,0x25e98663898b,0x25e98663875c,0x123c0ef36948,0x25e98663898b,0x25e98663875c,0x123c0ef31081,0x25e98663898b,0x25e98663875c,0x123c0ef2f5d4,0x25e98663898b,0x25e98663875c,0x123c0ef2c6bf,0x123c0ef261ee,0x123c0ef23cf3
+code-creation,Eval,11,58186,0x20fde2c0456,6, internal/fs/dir.js:1:1,0x20fde2c0388,~
+code-creation,Eval,11,58273,0x20fde2c0a76,542, internal/fs/dir.js:1:1,0x20fde2c03c0,~
+code-creation,Eval,11,58916,0x20fde2c27be,6, internal/modules/cjs/helpers.js:1:1,0x20fde2c26f0,~
+tick,0x7efd5769ebf0,58967,1,0x7efd57136740,3,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x123c0ef310ac,0x25e98663898b,0x25e98663875c,0x123c0ef2f5d4,0x25e98663898b,0x25e98663875c,0x123c0ef2c6bf,0x123c0ef261ee,0x123c0ef23cf3
+code-creation,Eval,11,59021,0x20fde2c2c5e,483, internal/modules/cjs/helpers.js:1:1,0x20fde2c2728,~
+code-creation,Eval,11,59733,0x20fde2c3fae,6, url.js:1:1,0x20fde2c3ee0,~
+code-creation,Eval,11,59838,0x20fde2c47fe,954, url.js:1:1,0x20fde2c3f18,~
+code-creation,Eval,11,59998,0x20fde2c50ae,6, internal/idna.js:1:1,0x20fde2c4fe0,~
+tick,0x7efd563774ef,60041,1,0x7efd57136740,3,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x20fde2c48f5,0x25e98663898b,0x25e98663875c,0x20fde2c2d93,0x25e98663898b,0x25e98663875c,0x123c0ef310ac,0x25e98663898b,0x25e98663875c,0x123c0ef2f5d4,0x25e98663898b,0x25e98663875c,0x123c0ef2c6bf,0x123c0ef261ee,0x123c0ef23cf3
+code-creation,Eval,11,60064,0x20fde2c51ee,131, internal/idna.js:1:1,0x20fde2c5018,~
+code-creation,LazyCompile,11,60231,0x20fde2c551e,19,SafeMap internal/per_context/primordials.js:65:3,0x29f627d84f48,~
+code-creation,Eval,11,60614,0x20fde2c5fae,6, vm.js:1:1,0x20fde2c5ee0,~
+code-creation,Eval,11,60699,0x20fde2c67d6,545, vm.js:1:1,0x20fde2c5f18,~
+tick,0x7efd56f0a820,61080,0,0x0,3,0x7efd57895ff0,0x123c0ef2c6cb,0x123c0ef261ee,0x123c0ef23cf3
+code-creation,LazyCompile,11,61274,0x20fde2c8d9e,363,Module._initPaths internal/modules/cjs/loader.js:1092:29,0x123c0ef2ecb8,~
+code-creation,LazyCompile,11,61484,0x20fde2c93fe,254,initializeESMLoader internal/bootstrap/pre_execution.js:395:29,0x123c0ef24e38,~
+code-creation,LazyCompile,11,61604,0x20fde2ca58e,19,SafeWeakMap internal/per_context/primordials.js:69:3,0x29f627d84fb0,~
+code-creation,LazyCompile,11,61685,0x20fde2ca6b6,66,loadPreloadModules internal/bootstrap/pre_execution.js:436:28,0x123c0ef24ed8,~
+code-creation,LazyCompile,11,61741,0x20fde2ca8b6,60,initializeFrozenIntrinsics internal/bootstrap/pre_execution.js:428:36,0x123c0ef24e88,~
+code-creation,LazyCompile,11,61818,0x20fde2cab0e,97,Module.runMain internal/modules/cjs/loader.js:1033:26,0x123c0ef2ec68,~
+code-creation,LazyCompile,11,61972,0x20fde2cae06,459,Module._load internal/modules/cjs/loader.js:671:24,0x123c0ef2e970,~
+tick,0x7efd576851b4,62136,0,0x0,3,0x7efd57895ff0,0x20fde2cae92,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,62160,0x20fde2cb39e,542,Module._resolveFilename internal/modules/cjs/loader.js:742:35,0x123c0ef2e9c0,~
+code-creation,LazyCompile,11,62216,0x20fde2cb7c6,31,NativeModule.canBeRequiredByUsers internal/bootstrap/loaders.js:199:45,0x25e98662b638,~
+code-creation,LazyCompile,11,62335,0x20fde2cba66,402,Module._resolveLookupPaths internal/modules/cjs/loader.js:625:38,0x123c0ef2e920,~
+code-creation,LazyCompile,11,62402,0x20fde2cbd86,61, internal/util/debuglog.js:57:18,0x123c0ef1fbd8,~
+code-creation,LazyCompile,11,62496,0x20fde2cbf96,158,debuglogImpl internal/util/debuglog.js:34:22,0x123c0ef1f858,~
+code-creation,RegExp,4,62577,0x262093102580,775,^$
+code-creation,LazyCompile,11,62744,0x20fde2cc286,502,Module._findPath internal/modules/cjs/loader.js:463:28,0x123c0ef2e830,~
+code-creation,LazyCompile,11,62803,0x20fde2cc67e,52,isAbsolute path.js:1029:13,0x123c0ef132f8,~
+code-creation,RegExp,4,62894,0x2620931028e0,1506,(?:^|\\/)\\.?\\.$
+code-creation,LazyCompile,11,63077,0x20fde2cca96,901,resolveExports internal/modules/cjs/loader.js:374:24,0x123c0ef2e4c0,~
+code-creation,LazyCompile,11,63178,0x20fde2cd066,89,stat internal/modules/cjs/loader.js:115:14,0x123c0ef2e100,~
+tick,0x7efd576bf514,63204,0,0x0,3,0x7efd57895ff0,0x20fde2cc37b,0x20fde2cb528,0x20fde2cae92,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,63235,0x20fde2cd1be,4,toNamespacedPath path.js:1123:19,0x123c0ef133e8,~
+code-creation,LazyCompile,11,63299,0x20fde2cd2c6,47,toRealPath internal/modules/cjs/loader.js:336:20,0x123c0ef2e3d0,~
+code-creation,LazyCompile,11,63697,0x20fde2cd5be,1043,realpathSync fs.js:1448:22,0x123c0ef349a8,~
+code-creation,LazyCompile,11,63825,0x20fde2cdcee,106,getOptions internal/fs/utils.js:196:20,0x123c0ef3ce10,~
+code-creation,LazyCompile,11,63882,0x20fde2cde76,40,assertEncoding internal/fs/utils.js:73:24,0x123c0ef3ccd0,~
+code-creation,LazyCompile,11,63939,0x20fde2cdf96,45,toPathIfFileURL internal/url.js:1385:25,0x123c0ef0df98,~
+code-creation,LazyCompile,11,64015,0x20fde2ce0e6,111,hidden internal/errors.js:243:25,0xb15d56afc00,~
+code-creation,LazyCompile,11,64086,0x20fde2ce296,89, internal/fs/utils.js:523:38,0x123c0ef3d950,~
+code-creation,LazyCompile,11,64163,0x20fde2ce416,122, internal/fs/utils.js:234:35,0x123c0ef3d540,~
+code-creation,LazyCompile,11,64217,0x20fde2ce5a6,19,isUint8Array internal/util/types.js:19:22,0xb15d56a6988,~
+tick,0x7efd57754340,64252,0,0x0,0,0x7efd5765a4d0,0x20fde2ce446,0x20fde2ce117,0x20fde2ce2e1,0x20fde2ce117,0x20fde2cd5fe,0x20fde2cd2ee,0x20fde2cc3d5,0x20fde2cb528,0x20fde2cae92,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,64322,0x20fde2ce6c6,64,splitRoot fs.js:1410:33,0x123c0ef34d60,~
+code-creation,LazyCompile,11,64375,0x20fde2ce81e,18,nextPart fs.js:1444:31,0x123c0ef34e00,~
+code-creation,LazyCompile,11,64477,0x20fde2ce956,83,handleErrorFromBinding internal/fs/utils.js:215:32,0x123c0ef3ce60,~
+code-creation,LazyCompile,11,64529,0x20fde2ceac6,23,isFileType fs.js:165:20,0x123c0ef33000,~
+code-creation,LazyCompile,11,64677,0x20fde2cf266,80,encodeRealpathResult fs.js:1419:30,0x123c0ef34958,~
+code-creation,LazyCompile,11,64761,0x20fde2cf40e,59,loadNativeModule internal/modules/cjs/helpers.js:19:26,0x20fde2c27f0,~
+code-creation,LazyCompile,11,64830,0x20fde2cf596,90,Module internal/modules/cjs/loader.js:132:16,0x123c0ef2e1a0,~
+code-creation,LazyCompile,11,64939,0x20fde2cf81e,175,dirname path.js:1128:10,0x123c0ef13438,~
+code-creation,LazyCompile,11,65025,0x20fde2cfafe,43,updateChildren internal/modules/cjs/loader.js:126:24,0x123c0ef2e150,~
+code-creation,LazyCompile,11,65157,0x20fde2cfde6,321,Module.load internal/modules/cjs/loader.js:807:33,0x123c0ef2ea10,~
+code-creation,LazyCompile,11,65220,0x20fde2d009e,24,assert internal/assert.js:10:16,0xb15d56a75a0,~
+tick,0x7efd56ed4290,65307,0,0x0,3,0x7efd57895ff0,0x20fde2cfe33,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,65352,0x20fde2d0266,201,Module._nodeModulePaths internal/modules/cjs/loader.js:588:37,0x123c0ef2e8d0,~
+code-creation,LazyCompile,11,65481,0x20fde2d068e,109,findLongestRegisteredExtension internal/modules/cjs/loader.js:356:40,0x123c0ef2e470,~
+code-creation,LazyCompile,11,65613,0x20fde2d0856,371,basename path.js:1154:11,0x123c0ef13488,~
+code-creation,LazyCompile,11,65749,0x20fde2d104e,383,Module._extensions..js internal/modules/cjs/loader.js:968:37,0x123c0ef2eb28,~
+code-creation,LazyCompile,11,65836,0x20fde2d13f6,151,readPackageScope internal/modules/cjs/loader.js:254:26,0x123c0ef2e240,~
+code-creation,LazyCompile,11,65948,0x20fde2d1756,280,readPackage internal/modules/cjs/loader.js:221:21,0x123c0ef2e1f0,~
+code-creation,LazyCompile,11,66158,0x20fde2d1a76,428,readFileSync fs.js:339:22,0x123c0ef333c0,~
+code-creation,LazyCompile,11,66232,0x20fde2d1e7e,33,isEncoding buffer.js:517:40,0xb15d56ab708,~
+code-creation,LazyCompile,11,66288,0x20fde2d1f9e,32,normalizeEncoding internal/util.js:106:27,0xb15d56881e0,~
+code-creation,LazyCompile,11,66336,0x20fde2d209e,10,isUint32 internal/validators.js:22:18,0xb15d56af348,~
+tick,0x7efd5783a748,66385,0,0x0,2,0x7efd57895ff0,0x20fde2d1ab7,0x20fde2d11ab,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,66430,0x20fde2d2216,137,openSync fs.js:431:18,0x123c0ef33500,~
+code-creation,LazyCompile,11,66496,0x20fde2d23c6,42, internal/fs/utils.js:535:42,0x123c0ef3d9a0,~
+code-creation,LazyCompile,11,66603,0x20fde2d27be,512,stringToFlags internal/fs/utils.js:422:23,0x123c0ef3d130,~
+code-creation,LazyCompile,11,66682,0x20fde2d2bb6,148,parseMode internal/validators.js:41:19,0xb15d56af398,~
+code-creation,LazyCompile,11,66767,0x20fde2d2d9e,76,tryStatSync fs.js:302:21,0x123c0ef332d0,~
+code-creation,LazyCompile,11,66847,0x20fde2d2f2e,111,tryCreateBuffer fs.js:312:25,0x123c0ef33320,~
+code-creation,LazyCompile,11,66897,0x20fde2d30ae,20,allocUnsafe buffer.js:357:42,0xb15d56ab5c8,~
+code-creation,LazyCompile,11,66955,0x20fde2d31de,76, buffer.js:331:36,0xb15d56ab528,~
+code-creation,LazyCompile,11,67024,0x20fde2d334e,130,allocate buffer.js:382:18,0xb15d56ab028,~
+code-creation,LazyCompile,11,67103,0x20fde2d351e,100,tryReadSync fs.js:327:21,0x123c0ef33370,~
+code-creation,LazyCompile,11,67187,0x20fde2d371e,192,readSync fs.js:482:18,0x123c0ef335d0,~
+code-creation,LazyCompile,11,67269,0x20fde2d394e,231, internal/validators.js:76:3,0xb15d56af528,~
+code-creation,LazyCompile,11,67313,0x20fde2d3b4e,10,isInt32 internal/validators.js:18:17,0xb15d56af2f8,~
+code-creation,LazyCompile,11,67370,0x20fde2d3c76,56, internal/validators.js:134:40,0xb15d56af5c8,~
+tick,0x7fff70f59913,67433,0,0x0,3,0x7efd57895ff0,0x20fde2ce117,0x20fde2d378b,0x20fde2d3540,0x20fde2d1b2e,0x20fde2d11ab,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,67462,0x20fde2d3dbe,105, internal/fs/utils.js:498:3,0x123c0ef3d8b0,~
+code-creation,LazyCompile,11,67538,0x20fde2d3f56,63,closeSync fs.js:397:19,0x123c0ef33460,~
+code-creation,LazyCompile,11,67637,0x20fde2d40b6,174,toString buffer.js:753:46,0xb15d56ac108,~
+code-creation,LazyCompile,11,67752,0x20fde2d436e,488,getEncodingOps buffer.js:656:24,0xb15d56ab258,~
+code-creation,LazyCompile,11,67800,0x20fde2d473e,14,slice buffer.js:585:12,0xb15d56ab7f8,~
+code-creation,LazyCompile,11,67862,0x20fde2d4846,48,stripBOM internal/modules/cjs/helpers.js:107:18,0x20fde2c28d0,~
+code-creation,LazyCompile,11,68072,0x20fde2d4cbe,740,Module._compile internal/modules/cjs/loader.js:868:37,0x123c0ef2ead8,~
+code-creation,LazyCompile,11,68155,0x20fde2d5236,129,stripShebang internal/modules/cjs/helpers.js:117:22,0x20fde2c2920,~
+code-creation,LazyCompile,11,68291,0x20fde2d55be,307,maybeCacheSourceMap internal/source_map/source_map_cache.js:22:29,0x123c0ef30ab0,~
+tick,0x7efd5783a6aa,68510,1,0x7efd570cc610,2,0x7efd57492ee0,0x20fde2d4dbc,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,68569,0x20fde2d5e16,6, /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:1:1,0x20fde2d5d48,~
+code-creation,Eval,11,68630,0x20fde2d638e,130, /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:1:1,0x20fde2d5d80,~
+code-creation,LazyCompile,11,68765,0x20fde2d6906,173,makeRequireFunction internal/modules/cjs/helpers.js:32:29,0x20fde2c2840,~
+code-creation,LazyCompile,11,68837,0x20fde2d6b4e,17,require internal/modules/cjs/helpers.js:73:31,0x20fde2d67d0,~
+code-creation,LazyCompile,11,68911,0x20fde2d6cd6,143,Module.require internal/modules/cjs/loader.js:844:36,0x123c0ef2ea88,~
+code-creation,LazyCompile,11,69000,0x20fde2d6f5e,113,NativeModule.compileForPublicLoader internal/bootstrap/loaders.js:214:57,0x25e98662b688,~
+code-creation,LazyCompile,11,69137,0x20fde2d7196,51,tryExtensions internal/modules/cjs/loader.js:343:23,0x123c0ef2e420,~
+code-creation,LazyCompile,11,69202,0x20fde2d72e6,60,tryFile internal/modules/cjs/loader.js:328:17,0x123c0ef2e380,~
+tick,0x7efd577fd0c0,69552,1,0x7efd570cc610,2,0x7efd57492ee0,0x20fde2d4dbc,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2d6d2c,0x20fde2d6b59,0x20fde2d63cc,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,69939,0x20fde2d820e,6, /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:1:1,0x20fde2d8140,~
+code-creation,Eval,11,70054,0x20fde2d94be,514, /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:1:1,0x20fde2d8178,~
+tick,0x7efd5783aa6b,70620,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x20fde2d6f8d,0x20fde2cf43f,0x20fde2caed5,0x20fde2d6d2c,0x20fde2d6b59,0x20fde2d95c4,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2d6d2c,0x20fde2d6b59,0x20fde2d63cc,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,70700,0x20fde2da8fe,6, assert.js:1:1,0x20fde2da830,~
+code-creation,Eval,11,70811,0x20fde2db6f6,806, assert.js:1:1,0x20fde2da868,~
+code-creation,Eval,11,71298,0x20fde2dc80e,6, internal/assert/assertion_error.js:1:1,0x20fde2dc740,~
+code-creation,Eval,11,71361,0x20fde2dcbe6,235, internal/assert/assertion_error.js:1:1,0x20fde2dc778,~
+tick,0x7efd577d5060,71678,1,0x7efd570dc710,5,0x7efd57492ee0,0x20fde2cd09e,0x20fde2cc37b,0x20fde2cb528,0x20fde2cae92,0x20fde2d6d2c,0x20fde2d6b59,0x20fde2d63d6,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,72076,0x20fde2dd90e,6, /home/fernando/dev/fpelliccioni.github.io/experiments/stable_sort.js:1:1,0x20fde2dd840,~
+code-creation,Eval,11,72138,0x20fde2de0b6,169, /home/fernando/dev/fpelliccioni.github.io/experiments/stable_sort.js:1:1,0x20fde2dd878,~
+code-creation,LazyCompile,11,72304,0x20fde2de63e,248,main /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:186:14,0x20fde2d6008,~
+code-creation,LazyCompile,11,72449,0x20fde2de986,448,tree_exportable /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:126:25,0x20fde2d5fb8,~
+code-creation,LazyCompile,11,72529,0x20fde2ded36,97,gen_pairs /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:337:19,0x20fde2d88d0,~
+code-creation,LazyCompile,11,72692,0x20fde2df18e,387,remove_pairs_transitive /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:557:33,0x20fde2d8e70,~
+tick,0x7efd5747be4e,72742,0,0x0,2,0x7efd57895ff0,0x20fde2df19a,0x20fde2de9be,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,72767,0x20fde2df4ee,36,deep_copy /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:526:19,0x20fde2d8d30,~
+code-creation,LazyCompile,11,72854,0x20fde2df5fe,39,Array.find_if /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:15:35,0x20fde2d60a8,~
+code-creation,LazyCompile,11,72905,0x20fde2df71e,22, /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:569:41,0x20fde2defb8,~
+code-creation,LazyCompile,11,72955,0x20fde2df80e,19, /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:572:50,0x20fde2df008,~
+code-creation,LazyCompile,11,73003,0x20fde2df8fe,32,equal_pair /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:553:20,0x20fde2d8e20,~
+code-creation,LazyCompile,11,73062,0x20fde2dfa16,22, /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:578:45,0x20fde2df058,~
+code-creation,LazyCompile,11,73187,0x20fde2dfe5e,194,remove_pairs /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:162:22,0x20fde2d8510,~
+tick,0x7efd576239a3,73800,0,0x0,1
+code-creation,LazyCompile,11,74439,0x20fde2e006e,40, /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:169:43,0x20fde2dfd28,~
+code-creation,LazyCompile,11,74504,0x20fde2e0176,40, /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:170:43,0x20fde2dfd78,~
+code-creation,LazyCompile,11,74660,0x20fde2e05e6,215,get_values /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:613:20,0x20fde2d8f10,~
+code-creation,LazyCompile,11,74726,0x20fde2e0816,46,iota /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:214:14,0x20fde2d8600,~
+code-creation,LazyCompile,11,74809,0x20fde2e095e,109,satisfy_all_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:590:30,0x20fde2d8ec0,~
+tick,0x7efd5747cc45,74859,0,0x0,2,0x7efd57895ff0,0x20fde2e069a,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,74917,0x20fde2e0ae6,151,next_permutation /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:138:26,0x20fde2d84c0,~
+code-creation,LazyCompile,11,74994,0x20fde2e0d1e,261,iter_swap /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:128:19,0x20fde2d8420,~
+code-creation,LazyCompile,11,75059,0x20fde2e0f16,50,reverse /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:132:17,0x20fde2d8470,~
+tick,0x7efd57efbb95,75911,0,0x0,0,0x20fde2e0993,0x20fde2e0678,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+tick,0x7efd57faec2d,76966,0,0x0,0,0x20fde2e0b11,0x20fde2e069a,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+tick,0x7efd57ed7fff,78040,0,0x0,0,0x20fde2e0b56,0x20fde2e069a,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+tick,0x7efd57faee3a,79095,0,0x0,0,0x20fde2e0d3a,0x20fde2e0f3e,0x20fde2e0b56,0x20fde2e069a,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,0,79682,0x262093103d00,593,iter_swap /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:128:19,0x20fde2d8420,*
+tick,0x7efd57d87104,80174,0,0x0,4,0x7efd57896460,0x20fde2e0678,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+tick,0x7efd57d2e7d9,81223,0,0x0,4,0x7efd57896460,0x20fde2e069a,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,0,81590,0x262093103fa0,882,satisfy_all_preconds /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:590:30,0x20fde2d8ec0,*
+tick,0x7efd57d8a11d,82290,0,0x0,4,0x7efd57896460,0x20fde2e0b56,0x20fde2e069a,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,83081,0x20fde2e24de,45,log internal/console/constructor.js:281:6,0x123c0ef061c8,~
+code-creation,LazyCompile,11,83159,0x20fde2e261e,44,Console.<computed> internal/console/constructor.js:270:47,0x123c0ef06128,~
+code-creation,LazyCompile,11,83213,0x20fde2e2746,30,get internal/console/constructor.js:148:10,0x123c0ef08d18,~
+code-creation,LazyCompile,11,83287,0x20fde2e2946,93,getStdout internal/process/stdio.js:26:21,0xb15d56bca48,~
+tick,0x7efd577f4150,83353,0,0x0,2,0x7efd57895ff0,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,83453,0x20fde2e2dc6,316,createWritableStdioStream internal/process/stdio.js:149:35,0xb15d56bc630,~
+code-creation,Eval,11,83680,0x20fde2e345e,6, tty.js:1:1,0x20fde2e3390,~
+code-creation,Eval,11,83760,0x20fde2e397e,529, tty.js:1:1,0x20fde2e33c8,~
+tick,0x7efd578172c0,84416,1,0x7efd57136740,2,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x20fde2e39ca,0x25e98663898b,0x25e98663875c,0x20fde2e2e02,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,85019,0x20fde2e55d6,6, net.js:1:1,0x20fde2e5508,~
+code-creation,Eval,11,85242,0x20fde2e7a66,2788, net.js:1:1,0x20fde2e5540,~
+tick,0x7efd57faeed0,85488,0,0x0,0,0x25e986638926,0x25e98663875c,0x20fde2e7c08,0x25e98663898b,0x25e98663875c,0x20fde2e39ca,0x25e98663898b,0x25e98663875c,0x20fde2e2e02,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,85577,0x20fde2e954e,6, stream.js:1:1,0x20fde2e9480,~
+code-creation,Eval,11,85627,0x20fde2e96e6,162, stream.js:1:1,0x20fde2e94b8,~
+code-creation,Eval,11,85795,0x20fde2e9bde,6, internal/streams/pipeline.js:1:1,0x20fde2e9b10,~
+code-creation,Eval,11,85843,0x20fde2e9f0e,148, internal/streams/pipeline.js:1:1,0x20fde2e9b48,~
+code-creation,Eval,11,86048,0x20fde2ea3d6,6, internal/streams/end-of-stream.js:1:1,0x20fde2ea308,~
+code-creation,Eval,11,86092,0x20fde2ea57e,97, internal/streams/end-of-stream.js:1:1,0x20fde2ea340,~
+code-creation,Eval,11,86243,0x20fde2ea906,6, internal/streams/legacy.js:1:1,0x20fde2ea838,~
+code-creation,Eval,11,86289,0x20fde2eaabe,110, internal/streams/legacy.js:1:1,0x20fde2ea870,~
+code-creation,LazyCompile,0,86373,0x262093104360,886,reverse /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:132:17,0x20fde2d8470,*
+tick,0x7efd57ed1e54,86504,0,0x0,0,0x25e98663898b,0x25e98663875c,0x20fde2e9711,0x25e98663898b,0x25e98663875c,0x20fde2e7c08,0x25e98663898b,0x25e98663875c,0x20fde2e39ca,0x25e98663898b,0x25e98663875c,0x20fde2e2e02,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,87427,0x20fde2ec3fe,6, _stream_readable.js:1:1,0x20fde2ec330,~
+tick,0x7efd57685a21,87565,1,0x7efd57136740,3,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x20fde2e9722,0x25e98663898b,0x25e98663875c,0x20fde2e7c08,0x25e98663898b,0x25e98663875c,0x20fde2e39ca,0x25e98663898b,0x25e98663875c,0x20fde2e2e02,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,87612,0x20fde2eda5e,1297, _stream_readable.js:1:1,0x20fde2ec368,~
+code-creation,LazyCompile,0,87784,0x262093104720,1596,next_permutation /home/fernando/dev/fpelliccioni.github.io/experiments/common.js:138:26,0x20fde2d84c0,*
+code-creation,Eval,11,88054,0x20fde2efa16,6, internal/streams/buffer_list.js:1:1,0x20fde2ef948,~
+code-creation,Eval,11,88121,0x20fde2eff7e,189, internal/streams/buffer_list.js:1:1,0x20fde2ef980,~
+code-creation,Eval,11,88319,0x20fde2f04be,6, internal/streams/destroy.js:1:1,0x20fde2f03f0,~
+code-creation,Eval,11,88361,0x20fde2f07ce,78, internal/streams/destroy.js:1:1,0x20fde2f0428,~
+code-creation,Eval,11,88508,0x20fde2f0bc6,6, internal/streams/state.js:1:1,0x20fde2f0af8,~
+code-creation,Eval,11,88553,0x20fde2f0dd6,106, internal/streams/state.js:1:1,0x20fde2f0b30,~
+tick,0x7efd5777ba84,88629,0,0x0,0,0x7efd578bfc90,0x20fde2f0e26,0x25e98663898b,0x25e98663875c,0x20fde2edbc2,0x25e98663898b,0x25e98663875c,0x20fde2e9722,0x25e98663898b,0x25e98663875c,0x20fde2e7c08,0x25e98663898b,0x25e98663875c,0x20fde2e39ca,0x25e98663898b,0x25e98663875c,0x20fde2e2e02,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,89143,0x20fde2f25f6,6, _stream_writable.js:1:1,0x20fde2f2528,~
+code-creation,Eval,11,89270,0x20fde2f377e,1106, _stream_writable.js:1:1,0x20fde2f2560,~
+code-creation,Eval,11,89611,0x20fde2f4d7e,6, _stream_duplex.js:1:1,0x20fde2f4cb0,~
+tick,0x7efd5767f154,89693,1,0x7efd57136740,3,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x20fde2e973a,0x25e98663898b,0x25e98663875c,0x20fde2e7c08,0x25e98663898b,0x25e98663875c,0x20fde2e39ca,0x25e98663898b,0x25e98663875c,0x20fde2e2e02,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,89726,0x20fde2f5396,491, _stream_duplex.js:1:1,0x20fde2f4ce8,~
+code-creation,Eval,11,90012,0x20fde2f5e76,6, _stream_transform.js:1:1,0x20fde2f5da8,~
+code-creation,Eval,11,90077,0x20fde2f629e,273, _stream_transform.js:1:1,0x20fde2f5de0,~
+code-creation,Eval,11,90254,0x20fde2f68a6,6, _stream_passthrough.js:1:1,0x20fde2f67d8,~
+code-creation,Eval,11,90314,0x20fde2f6a16,122, _stream_passthrough.js:1:1,0x20fde2f6810,~
+code-creation,Eval,11,90539,0x20fde2f7276,6, internal/net.js:1:1,0x20fde2f71a8,~
+code-creation,Eval,11,90609,0x20fde2f76de,717, internal/net.js:1:1,0x20fde2f71e0,~
+tick,0x7efd5787dcda,90765,0,0x0,0,0x7efd578e1470,0x7efd57f2ca1e,0x20fde2f7967,0x25e98663898b,0x25e98663875c,0x20fde2e7c6f,0x25e98663898b,0x25e98663875c,0x20fde2e39ca,0x25e98663898b,0x25e98663875c,0x20fde2e2e02,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,91492,0x20fde2fbb26,6, internal/stream_base_commons.js:1:1,0x20fde2fba58,~
+code-creation,Eval,11,91598,0x20fde2fc0d6,665, internal/stream_base_commons.js:1:1,0x20fde2fba90,~
+tick,0x7efd576a5225,91823,1,0x7efd57136740,3,0x7efd57492ee0,0x25e98663896b,0x25e98663875c,0x20fde2e7eca,0x25e98663898b,0x25e98663875c,0x20fde2e39ca,0x25e98663898b,0x25e98663875c,0x20fde2e2e02,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,Eval,11,91857,0x20fde2fc9a6,6, internal/dtrace.js:1:1,0x20fde2fc8d8,~
+code-creation,Eval,11,91911,0x20fde2fcd0e,161, internal/dtrace.js:1:1,0x20fde2fc910,~
+code-creation,LazyCompile,11,92223,0x20fde2fda4e,45,protoGetter net.js:692:21,0x20fde2e5a68,~
+code-creation,Eval,11,92528,0x20fde2ff636,6, internal/tty.js:1:1,0x20fde2ff568,~
+code-creation,Eval,11,92584,0x20fde2ffa46,356, internal/tty.js:1:1,0x20fde2ff5a0,~
+code-creation,LazyCompile,11,92840,0x3e4524733ae,215,WriteStream tty.js:80:21,0x20fde2e3530,~
+tick,0x7efd5783ac24,92885,0,0x0,2,0x7efd578cf150,0x20fde2e2e10,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,93078,0x3e452473956,795,Socket net.js:253:16,0x20fde2e58d8,~
+code-creation,LazyCompile,11,93162,0x3e452473f86,138,Duplex _stream_duplex.js:49:16,0x20fde2f4db0,~
+code-creation,LazyCompile,11,93321,0x3e4524741a6,119,Readable _stream_readable.js:155:18,0x20fde2ec4d0,~
+code-creation,LazyCompile,11,93363,0x3e452474356,20,Stream internal/streams/legacy.js:7:16,0x20fde2ea938,~
+code-creation,LazyCompile,11,93628,0x3e452475356,357,ReadableState _stream_readable.js:76:23,0x20fde2ec480,~
+code-creation,LazyCompile,11,93723,0x3e452475746,113,getHighWaterMark internal/streams/state.js:16:26,0x20fde2f0c98,~
+code-creation,LazyCompile,11,93767,0x3e4524758ce,27,highWaterMarkFrom internal/streams/state.js:7:27,0x20fde2f0bf8,~
+code-creation,LazyCompile,11,93801,0x3e4524759c6,14,getDefaultHighWaterMark internal/streams/state.js:12:33,0x20fde2f0c48,~
+code-creation,LazyCompile,11,93853,0x3e452475abe,18,BufferList internal/streams/buffer_list.js:7:14,0x20fde2efa48,~
+tick,0x7efd57836b7f,93949,0,0x0,2,0x7efd57895ff0,0x3e452473fb8,0x3e452473a3b,0x3e452473431,0x20fde2e2e10,0x20fde2e2958,0x20fde2e2751,0x20fde2e2628,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,94068,0x3e452475dc6,168,Writable _stream_writable.js:208:18,0x20fde2f26c8,~
+code-creation,LazyCompile,11,94201,0x3e452476296,368,WritableState _stream_writable.js:59:23,0x20fde2f2678,~
+code-creation,LazyCompile,11,94322,0x3e4524766ae,16,set net.js:1658:6,0x20fde2e6e70,~
+code-creation,LazyCompile,11,94364,0x3e4524767b6,9,get net.js:1657:6,0x20fde2e6e20,~
+code-creation,LazyCompile,11,94408,0x3e4524768b6,35,getNewAsyncId net.js:136:23,0x20fde2e56f8,~
+code-creation,LazyCompile,11,94512,0x3e452476a8e,217,Readable.on _stream_readable.js:867:33,0x20fde2ecf60,~
+code-creation,LazyCompile,11,94600,0x3e452476d2e,150,initSocketHandle net.js:224:26,0x20fde2e5888,~
+code-creation,LazyCompile,11,94666,0x3e452476f66,136,undestroy internal/streams/destroy.js:72:19,0x20fde2f05e0,~
+code-creation,LazyCompile,11,94865,0x3e452477a2e,104,Console.<computed> internal/console/constructor.js:251:49,0x123c0ef060d8,~
+tick,0x7efd576822f4,95012,0,0x0,3,0x7efd57895ff0,0x3e452477a53,0x20fde2e262e,0x20fde2e24fc,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,95108,0x3e45247807e,836,getColorDepth internal/tty.js:94:23,0x20fde2ff6b8,~
+code-creation,RegExp,4,95207,0x262093104da0,872,^xterm-256
+code-creation,LazyCompile,11,95452,0x3e45247877e,1009,formatWithOptions internal/util/inspect.js:1569:27,0xb15d56a4de8,~
+code-creation,LazyCompile,11,95608,0x3e4524790ce,528,inspect internal/util/inspect.js:172:17,0xb15d56a4000,~
+code-creation,LazyCompile,11,95801,0x3e45247962e,479,formatValue internal/util/inspect.js:530:21,0xb15d56a4488,~
+code-creation,LazyCompile,11,95900,0x3e452479b0e,310,formatPrimitive internal/util/inspect.js:1110:25,0xb15d56a47a8,~
+code-creation,LazyCompile,11,95950,0x3e452479e1e,47,formatNumber internal/util/inspect.js:1101:22,0xb15d56a4708,~
+code-creation,LazyCompile,11,96011,0x3e452479fa6,93,stylizeWithColor internal/util/inspect.js:336:26,0xb15d56a40f0,~
+tick,0x7efd57836b50,96075,0,0x0,2,0x7efd57895ff0,0x20fde2e2503,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,96152,0x3e45247a23e,300,Console.<computed> internal/console/constructor.js:210:46,0x123c0ef06088,~
+code-creation,LazyCompile,11,96217,0x3e45247a4e6,34,listenerCount events.js:464:23,0xb15d5690ab8,~
+code-creation,LazyCompile,11,96261,0x3e45247a60e,44,once events.js:312:44,0xb15d5690e78,~
+code-creation,LazyCompile,11,96314,0x3e45247a7f6,65,_onceWrap events.js:304:19,0xb15d5690a18,~
+code-creation,LazyCompile,11,96424,0x3e45247aa16,194,Writable.write _stream_writable.js:278:36,0x20fde2f2d58,~
+code-creation,LazyCompile,11,96503,0x3e45247ac5e,95,validChunk _stream_writable.js:262:20,0x20fde2f2768,~
+code-creation,LazyCompile,11,96610,0x3e45247aeb6,219,writeOrBuffer _stream_writable.js:381:23,0x20fde2f2808,~
+code-creation,LazyCompile,11,96670,0x3e45247b106,48,decodeChunk _stream_writable.js:349:21,0x20fde2f27b8,~
+code-creation,LazyCompile,11,96740,0x3e45247b276,118,doWrite _stream_writable.js:421:17,0x20fde2f2858,~
+code-creation,LazyCompile,11,96791,0x3e45247b416,29,Socket._write net.js:782:35,0x20fde2e6940,~
+code-creation,LazyCompile,11,96872,0x3e45247b636,205,Socket._writeGeneric net.js:745:42,0x20fde2e6878,~
+code-creation,LazyCompile,11,96926,0x3e45247b876,50,_unrefTimer net.js:379:52,0x20fde2e6008,~
+code-creation,LazyCompile,11,96990,0x3e45247b9ae,64,writeGeneric internal/stream_base_commons.js:137:22,0x20fde2fbc98,~
+code-creation,LazyCompile,11,97035,0x3e45247bb16,44,createWriteWrap internal/stream_base_commons.js:99:25,0x20fde2fbbf8,~
+tick,0x7efd5747fd04,97141,0,0x0,3,0x7efd57895ff0,0x3e45247b9cf,0x3e45247b6e4,0x3e45247b42c,0x3e45247b2e0,0x3e45247af89,0x3e45247aace,0x3e45247a30c,0x20fde2e2503,0x7efd571c8800,0x20fde2e06b5,0x20fde2de9d2,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,97171,0x3e45247bd56,243,handleWriteReq internal/stream_base_commons.js:40:24,0x20fde2fbb58,~
+code-creation,LazyCompile,11,97255,0x3e45247bfde,101,afterWriteDispatched internal/stream_base_commons.js:145:30,0x20fde2fbce8,~
+code-creation,LazyCompile,11,97349,0x3e45247c1be,196,onwrite _stream_writable.js:459:17,0x20fde2f28f8,~
+code-creation,LazyCompile,11,97398,0x3e45247c3f6,39,needFinish _stream_writable.js:619:20,0x20fde2f29e8,~
+code-creation,LazyCompile,11,97440,0x3e45247c52e,38,get _stream_duplex.js:141:6,0x20fde2f5030,~
+code-creation,LazyCompile,11,97562,0x3e45247c74e,412,nextTick internal/process/task_queues.js:101:18,0x123c0ef02080,~
+code-creation,LazyCompile,11,97611,0x3e45247ca8e,18,isEmpty internal/fixed_queue.js:91:10,0x123c0ef03f28,~
+code-creation,LazyCompile,11,97643,0x3e45247cb9e,15,isEmpty internal/fixed_queue.js:63:10,0x123c0ef03d98,~
+code-creation,LazyCompile,11,97680,0x3e45247cca6,28,setHasTickScheduled internal/process/task_queues.js:49:29,0x123c0ef01f90,~
+code-creation,LazyCompile,11,97716,0x3e45247cdbe,27,newAsyncId internal/async_hooks.js:262:20,0xb15d56be618,~
+code-creation,LazyCompile,11,97763,0x3e45247cede,39,getDefaultTriggerAsyncId internal/async_hooks.js:278:34,0xb15d56be6b8,~
+code-creation,LazyCompile,11,97813,0x3e45247d00e,21,initHooksExist internal/async_hooks.js:308:24,0xb15d56be7a8,~
+code-creation,LazyCompile,11,97860,0x3e45247d13e,67,push internal/fixed_queue.js:95:7,0x123c0ef03f78,~
+code-creation,LazyCompile,11,97896,0x3e45247d2a6,27,isFull internal/fixed_queue.js:67:9,0x123c0ef03de8,~
+code-creation,LazyCompile,11,97935,0x3e45247d3d6,41,push internal/fixed_queue.js:71:7,0x123c0ef03e38,~
+code-creation,LazyCompile,11,97999,0x3e45247d526,71,Readable.removeListener _stream_readable.js:897:45,0x20fde2ecfb0,~
+code-creation,LazyCompile,11,98116,0x3e45247d6ce,350,removeListener events.js:329:28,0xb15d5690f18,~
+tick,0x7efd575931c4,98203,0,0x0,3,0x7efd57895ff0,0x20fde2de9de,0x20fde2de687,0x20fde2d640b,0x20fde2d4f7b,0x20fde2d11c5,0x20fde2cfe57,0x20fde2caf88,0x20fde2cab68,0x123c0ef23d0a
+code-creation,LazyCompile,11,98222,0x3e45247d9e6,70,count_numbers_at /home/fernando/dev/fpelliccioni.github.io/experiments/median_comp_tree_v5.js:26:26,0x20fde2d5e48,~
+code-creation,LazyCompile,11,98586,0x3e45247de86,356,processTicksAndRejections internal/process/task_queues.js:65:35,0x123c0ef02030,~
+code-creation,LazyCompile,11,98645,0x3e45247e19e,48,shift internal/fixed_queue.js:104:8,0x123c0ef03fc8,~
+code-creation,LazyCompile,11,98696,0x3e45247e2e6,60,shift internal/fixed_queue.js:76:8,0x123c0ef03e88,~
+code-creation,LazyCompile,11,98753,0x3e45247e456,69,emitBeforeScript internal/async_hooks.js:345:26,0xb15d56be8e8,~
+code-creation,LazyCompile,11,98804,0x3e45247e5c6,80,validateAsyncId internal/async_hooks.js:114:25,0xb15d56be2a8,~
+code-creation,LazyCompile,11,98870,0x3e45247e766,188,pushAsyncIds internal/async_hooks.js:394:22,0xb15d56bea78,~
+code-creation,LazyCompile,11,98940,0x3e45247e9b6,79,afterWrite _stream_writable.js:493:20,0x20fde2f2948,~
+code-creation,LazyCompile,11,99009,0x3e45247eb4e,99, internal/console/constructor.js:191:10,0x123c0ef09728,~
+code-creation,LazyCompile,11,99079,0x3e45247ecfe,93,finishMaybe _stream_writable.js:650:21,0x20fde2f2ad8,~
+code-creation,LazyCompile,11,99116,0x3e45247ee86,21,destroyHooksExist internal/async_hooks.js:316:27,0xb15d56be848,~
+code-creation,LazyCompile,11,99159,0x3e45247efa6,55,emitAfterScript internal/async_hooks.js:359:25,0xb15d56be938,~
+code-creation,LazyCompile,11,99227,0x3e45247f11e,183,popAsyncIds internal/async_hooks.js:407:21,0xb15d56beac8,~
+tick,0x7efd57fb96f9,99265,0,0x0,0,0x3e45247e5e9,0x3e45247e45f,0x3e45247deb8
+code-creation,LazyCompile,11,99414,0x3e45247f406,493,processPromiseRejections internal/process/promises.js:163:34,0x123c0ef03320,~
+code-creation,LazyCompile,11,99463,0x3e45247f7d6,28,setHasRejectionToWarn internal/process/promises.js:48:31,0x123c0ef03050,~
+profiler,end

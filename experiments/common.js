@@ -586,6 +586,30 @@ function remove_pairs_transitive(pairs, to_remove_par) {
     return pairs;
 }
 
+
+function satisfy_all_preconds(element, preconds) {
+    // console.log(element);
+    // console.log(preconds);
+    for (let i = 0; i < preconds.length; i++) {
+        const precond = preconds[i];
+        var ia = element.indexOf(precond[0]);
+        var ib = element.indexOf(precond[1]);
+        // console.log(ia);
+        // console.log(ib);
+        
+        if (ia == -1 || ib == -1) {
+            console.log()
+        }
+
+        if (ia >= ib) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 function get_values(n, preconds) {
     if (n == 11) {
         var contents = fs.readFileSync('median_11___12_34_56_78_910_24_68.txt', 'utf8');
@@ -605,11 +629,23 @@ function get_values(n, preconds) {
         return values;
     }
 
-    var values = perm_with_preconds(iota(n), preconds);
+
+
+    // var values = perm_with_preconds(iota(n), preconds);
+    // // console.log(values.length);
+    // values = apply_precons(values, preconds);
     // console.log(values.length);
-    values = apply_precons(values, preconds);
-    // console.log(values.length);
-    // console.log(JSON.stringify(values));
+    // // console.log(JSON.stringify(values));
+    // // return values;
+
+    var values = [];
+    var element = iota(n);
+    do {
+        if (satisfy_all_preconds(element, preconds)) {
+            values.push(deep_copy(element));
+        }
+    } while(next_permutation(element, 0, element.length));
+
     return values;
 }
 
