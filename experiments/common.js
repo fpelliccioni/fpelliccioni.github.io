@@ -1,4 +1,5 @@
 var assert_internal = require('assert');
+var fs = require('fs');
 
 function _get_function_name(stack_str) {
     // var re = new RegExp("at (\\w+)", "g");
@@ -549,7 +550,75 @@ function get_max_comps(vtn, n, s) {
 }
 
 
+function equal_pair(a, b) {
+    return a[0] == b[0] && a[1] == b[1]; 
+}
+
+function remove_pairs_transitive(pairs, to_remove_par) {
+    var to_remove = deep_copy(to_remove_par);
+
+    var cont = true;
+    while (cont) {
+        cont = false;
+        var trans = [];
+        for (let i = 0; i < to_remove.length; i++) {
+            const pair = to_remove[i];
+            
+            var f = 0;
+            const l = to_remove.length;
+            f = to_remove.find_if(f, l, e => e[0] === pair[1]);
+            while (f != l) {
+                var to_insert_pair = [pair[0], to_remove[f][1]];
+                var f2 = to_remove.find_if(0, l, e => equal_pair(e, to_insert_pair));
+                if (f2 == l) {
+                    trans.push([pair[0], to_remove[f][1]]);
+                    cont = true;
+                }
+                ++f;
+                f = to_remove.find_if(f, l, e => e[0] === pair[1]);
+            }
+        }
+        to_remove.push(...trans);
+    }
+
+    pairs = remove_pairs(pairs, to_remove);
+    // pairs = remove_pairs(pairs, trans);
+    return pairs;
+}
+
+function get_values(n, preconds) {
+    if (n == 11) {
+        var contents = fs.readFileSync('median_11___12_34_56_78_910_24_68.txt', 'utf8');
+        var values = JSON.parse(contents);
+        // console.log(values.length);
+        values = apply_precons(values, preconds);
+        // console.log(values.length);
+        return values;
+    }
+
+    if (n == 10) {
+        var contents = fs.readFileSync('values_10___12_34_56_89_24.txt', 'utf8');
+        var values = JSON.parse(contents);
+        // console.log(values.length);
+        values = apply_precons(values, preconds);
+        // console.log(values.length);
+        return values;
+    }
+
+    var values = perm_with_preconds(iota(n), preconds);
+    // console.log(values.length);
+    values = apply_precons(values, preconds);
+    // console.log(values.length);
+    // console.log(JSON.stringify(values));
+    return values;
+}
+
+
 module.exports = {
+    equal_pair: equal_pair,
+    remove_pairs_transitive: remove_pairs_transitive,
+    get_values: get_values,
+
     perm: perm,
     perm_with_preconds: perm_with_preconds,
     perm_exec: perm_exec,

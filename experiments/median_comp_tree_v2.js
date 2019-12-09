@@ -234,29 +234,6 @@ function temporal_analysis(level, n, values, pairs, cmp_n, cmp_max, s, preconds,
 
 }
 
-function get_values(n, preconds) {
-    if (n == 11) {
-        console.log("IMPLEMENT!!!")
-        return [];
-    }
-
-    if (n == 10) {
-        var contents = fs.readFileSync('values_10___12_34_56_89_24.txt', 'utf8');
-        var values = JSON.parse(contents);
-        console.log(values.length);
-        values = common.apply_precons(values, preconds);
-        console.log(values.length);
-        return values;
-    }
-
-    var values = common.perm_with_preconds(common.iota(n), preconds);
-    console.log(values.length);
-    values = common.apply_precons(values, preconds);
-    console.log(values.length);
-    // console.log(JSON.stringify(values));
-    return values;
-}
-
 
 
 function tree(n, comps, s, preconds) {
@@ -297,7 +274,7 @@ function tree(n, comps, s, preconds) {
     // console.log(values.length);
     // // console.log(JSON.stringify(values));
     
-    var values = get_values(n, preconds);
+    var values = common.get_values(n, preconds);
         
     //----------------------------------------------------------
 

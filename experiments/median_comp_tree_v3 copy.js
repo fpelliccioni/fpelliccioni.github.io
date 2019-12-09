@@ -184,7 +184,7 @@ function process_part(level, pair, values_old, n, s, preconds, vtn) {
     console.log(values_old.length);
     console.log(values_copy_old.length);
 
-    var values_copy = get_values(n, preconds);
+    var values_copy = common.get_values(n, preconds);
     values_copy = common.remove_values(values_copy, pair);
     console.log(values_copy.length);
 
@@ -295,29 +295,6 @@ function data_to_file_name(n, preconds) {
     return `values_${n}___${preconds_str}.txt`;
 }
 
-function get_values(n, preconds) {
-    if (n == 11) {
-        console.log("IMPLEMENT!!!")
-        return [];
-    }
-
-    if (n == 10) {
-        var contents = fs.readFileSync('values_10___12_34_56_89_24.txt', 'utf8');
-        var values = JSON.parse(contents);
-        console.log(values.length);
-        values = common.apply_precons(values, preconds);
-        console.log(values.length);
-        return values;
-    }
-
-    var values = common.perm_with_preconds(common.iota(n), preconds);
-    console.log(values.length);
-    values = common.apply_precons(values, preconds);
-    console.log(values.length);
-    // console.log(JSON.stringify(values));
-    return values;
-}
-
 function tree(n, comps, s) {
 
     if (s == undefined) {
@@ -406,7 +383,7 @@ function tree(n, comps, s) {
     console.log(JSON.stringify(pairs));
     console.log("-----------------------------------------");
 
-    var values = get_values(n, preconds);
+    var values = common.get_values(n, preconds);
 
     // // var values = common.perm_with_preconds(common.iota(n), preconds);
     // // console.log(values.length);

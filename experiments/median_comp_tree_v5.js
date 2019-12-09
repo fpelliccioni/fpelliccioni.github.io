@@ -1,0 +1,398 @@
+// The Art of Computer Programming Vol.3 Sorting, p.212
+// Vt(n) <= n-t + (t+1) * ceil(lg(n+2-t))   
+
+var fs = require('fs');
+const common = require('./common');
+const tao = require('./stable_sort');
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};
+
+Array.prototype.find_if = function(f, l, p) {
+    var data = this;
+    while (f != l && ! p(data[f])) ++f;
+    return f;
+};
+
+
+var __try = 0;
+
+function complete_empty_levels(level, cmp_n, cmp_max) {
+    ++cmp_n;
+    if (cmp_n == cmp_max) {
+        return [true, [[level, []]]];
+    }
+
+    var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
+    var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
+    var nodes = [];
+    nodes.push(...res_right[1]);
+    nodes.push(...res_left[1]);
+    nodes.push([level, []]);
+    return [true, nodes];
+}
+
+function recursive_v2(suggested_pairs, level, n, values, pairs, used_par, cmp_n, cmp_max, s) {
+    var nodes = [];
+
+    var used = used_par.slice();
+
+    // var first_not_used_min = used.indexOf(false);
+    // var first_not_used = first_not_used_min;
+
+    // var medians_all = common.all_median(n, values);
+    var medians_all = common.all_selection(n, values, s);
+
+    var possible_pairs = common.get_pairs(pairs, used, medians_all);
+
+    if (medians_all.length <= 1) {
+        console.log("Opaaaaaa 3");
+    }
+
+    for (let i = 0; i < possible_pairs.length; ++i) {
+        const first_not_used = possible_pairs[i];
+            
+        used[first_not_used] = true;
+        var selected_left = pairs[first_not_used];
+        var selected_right = selected_left.slice().reverse();
+        
+        var new_values_left = common.remove_values(values, selected_left);
+        var new_values_right = common.remove_values(values, selected_right);
+
+        ++cmp_n;
+        ++__try;
+
+        if (__try % 100000 == 0) {
+            console.log(__try);
+            common.print_bool_arr(used);
+        }
+
+        // if (level == 7) {
+        //     if (selected_left[0] == 5 && selected_left[1] == 7) {
+        //         console.log();
+        //     }
+        // }
+
+        // if (__try >= 574300000) {
+        //     // [7,[5,7]]
+        //     if (level == 7) {
+        //         if (selected_left[0] == 5 && selected_left[1] == 7) {
+        //             console.log();
+        //         }
+        //     }
+        // }
+
+        var medians_left = common.all_selection(n, new_values_left, s);
+        var medians_right = common.all_selection(n, new_values_right, s);
+
+        // console.log(`level: ${level}. new_values_left: ${new_values_left.length}. new_values_right: ${new_values_right.length}. medians_left: ${medians_left.length}. medians_right: ${medians_right.length}`)
+
+        if (medians_left.length == 0 || medians_right.length == 0) {
+            // console.log("Opaaaaaa 1")
+            used[first_not_used] = false;
+            --cmp_n;
+            continue;
+        }
+        // if (medians_right.length == 0) {
+        //     console.log("Opaaaaaa 2")
+        // }
+
+        if (common.all_equal(medians_left) && common.all_equal(medians_right)) {
+            if (cmp_n != cmp_max) {
+                var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
+                var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
+                nodes.push(...res_right[1]);
+                nodes.push(...res_left[1]);
+                nodes.push([level, selected_left]);
+                return [true, nodes];
+            } else {
+                return [true, [[level, selected_left]]];
+            }
+        }
+        
+        if (cmp_n >= cmp_max) {
+            used[first_not_used] = false;
+            --cmp_n;
+            continue;
+        }
+
+        if (medians_left.length == 1) {
+            var res_left = complete_empty_levels(level + 1, cmp_n, cmp_max);
+        } else {
+            var res_left = recursive_v2(suggested_pairs, level + 1, n, new_values_left, pairs, used, cmp_n, cmp_max, s);
+            if ( ! res_left[0]) {
+                used[first_not_used] = false;
+                --cmp_n;
+                continue;
+            } 
+        }
+
+        if (medians_right.length == 1) {
+            var res_right = complete_empty_levels(level + 1, cmp_n, cmp_max);
+        } else {
+            var res_right = recursive_v2(suggested_pairs, level + 1, n, new_values_right, pairs, used, cmp_n, cmp_max, s);
+            if (!res_right[0]) {
+                used[first_not_used] = false;
+                --cmp_n;
+                continue;
+            }
+        }
+
+        nodes.push(...res_right[1]);
+        nodes.push(...res_left[1]);
+        nodes.push([level, selected_left]);
+        return [true, nodes];
+    }
+
+    return false, [];
+}
+
+
+function count_numbers_at(values, s) {
+
+    var d = {};
+    for (let i = 0; i < values.length; i++) {
+        const element = values[i];
+        const num = element[s];
+
+        if (num in d) {
+            d[num] = d[num] + 1;
+        } else {
+            d[num] = 1;
+        }
+
+        
+        
+    }
+
+
+    // console.log(d);
+    return d;
+
+}
+
+// function count_numbers_at_sorted(values, s) {
+//     var counted_nums = count_numbers_at(values, s);
+//     console.log(JSON.stringify(counted_nums));
+
+//     var counted_nums_arr = [];
+//     for (const k in counted_nums) {
+//         const v = counted_nums[k];
+//         counted_nums_arr.push([Number(k), Number(v)]);
+//     }
+//     tao.stable_sort(counted_nums_arr, function (a, b) { return a[1] > b[1]; });
+//     return counted_nums_arr;
+// }
+
+// function count_numbers_at_pairs_sorted(values, s) {
+//     var counted_nums = count_numbers_at(values, s);
+//     console.log(JSON.stringify(counted_nums));
+
+//     var counted_nums_arr = [];
+//     for (const k0 in counted_nums) {
+//         for (const k1 in counted_nums) {
+//             if (k0 != k1) {
+//                 const v0 = counted_nums[k0];
+//                 const v1 = counted_nums[k1];
+//                 counted_nums_arr.push([Number(k0), Number(k1), Number(v0) + Number(v1)]);
+//             }
+//         }
+//     }
+//     tao.stable_sort(counted_nums_arr, function (a, b) { return a[2] > b[2]; });
+
+
+//     var res = [];
+//     for (let i = 0; i < counted_nums_arr.length; i++) {
+//         const e = counted_nums_arr[i];
+//         res.push([e[0], e[1]]);
+//     }
+
+
+//     return res;
+// }
+
+function remove_reflexive_duplicates(array_of_pairs) {
+    var res = [];
+    for (let i = 0; i < array_of_pairs.length; i++) {
+        const elem = array_of_pairs[i];
+        const pair = [elem[0], elem[1]];
+        const reflex = pair.slice().reverse();
+
+        var f = res.find_if(0, res.length, e => common.equal_pair(e, reflex));
+        if (f == res.length) {
+            res.push(elem);
+        } else {
+            // console.log()
+        }
+    }
+    return res;
+}
+
+function count_numbers_at_pairs_sorted(counted_nums) {
+
+    var counted_nums_arr = [];
+    for (const k0 in counted_nums) {
+        for (const k1 in counted_nums) {
+            if (k0 != k1) {
+                const v0 = counted_nums[k0];
+                const v1 = counted_nums[k1];
+                counted_nums_arr.push([Number(k0), Number(k1), Number(v0) + Number(v1)]);
+            }
+        }
+    }
+    var old_len = counted_nums_arr.length;
+    counted_nums_arr = common.remove_duplicates(counted_nums_arr);
+
+    if (counted_nums_arr.length != old_len) {
+        console.log("ALGO ESTA MAL 1");
+    }
+
+    counted_nums_arr = remove_reflexive_duplicates(counted_nums_arr);
+
+    tao.stable_sort(counted_nums_arr, function (a, b) { return a[2] < b[2]; });
+    // tao.stable_sort(counted_nums_arr, function (a, b) { return a[2] > b[2]; });
+
+    var res = [];
+    for (let i = 0; i < counted_nums_arr.length; i++) {
+        const e = counted_nums_arr[i];
+        res.push([e[0], e[1]]);
+    }
+
+
+    return res;
+}
+
+
+
+const vtn = {
+    1: [0],
+    2: [1,1],
+    3: [2,3,2],
+    4: [3,4,4,3],
+    5: [4,6,6,6,4],
+    6: [5,7,8,8,7,5],
+    7: [6,8,10,10,10,8,6],
+    8: [7,9,11,12,12,11,9,7],
+    9: [8,11,12,14,14,14,12,11,8],
+    10: [9,12,14,15,16,16,15,14,12,9],
+};
+
+function get_real_pair(pairs, potential_pair) {
+    var f = pairs.find_if(0, pairs.length, e => common.equal_pair(e, potential_pair));
+    if (f != pairs.length) return potential_pair.slice();
+
+    const potential_pair_r = potential_pair.slice().reverse();
+    f = pairs.find_if(0, pairs.length, e => common.equal_pair(e, potential_pair_r));
+    if (f != pairs.length) return potential_pair_r.slice();
+
+    return null;
+}
+
+function tree_exportable(n, s, preconds, max_comps) {
+
+    if (s == undefined) {
+        s = common.half(n);         
+    }
+    // console.log(JSON.stringify(preconds));
+    // console.log(preconds.length);
+
+    var pairs = common.gen_pairs(n);
+    pairs = common.remove_pairs_transitive(pairs, preconds);
+    // console.log(JSON.stringify(pairs));
+    // console.log(pairs.length);
+
+    var values = common.get_values(n, preconds);
+    // console.log(values.length);
+    
+    var counted_nums = count_numbers_at(values, s);
+    // console.log(JSON.stringify(counted_nums));
+    // console.log(Object.keys(counted_nums).length);
+
+    if (Object.keys(counted_nums).length == 1) {
+        console.log(JSON.stringify(preconds));
+        return [true, preconds];
+    }
+
+    if (preconds.length >= max_comps) {
+        return [false, preconds];
+    }
+
+    var counted_nums_pairs = count_numbers_at_pairs_sorted(counted_nums);
+    for (let i = 0; i < counted_nums_pairs.length; i++) {
+        const potential_pair = counted_nums_pairs[i];
+        var pair = get_real_pair(pairs, potential_pair);
+
+        if (pair != null) {
+            var preconds_l = common.deep_copy(preconds);
+            preconds_l.push(pair);
+            // preconds = common.deep_copy(preconds);
+
+            var res_l = tree_exportable(n, s, preconds_l, max_comps);
+            if (!res_l[0]) {
+                continue;
+            }
+
+            const pair_r = pair.slice().reverse();
+            var preconds_r = common.deep_copy(preconds);
+            preconds_r.push(pair_r);
+            var res_r = tree_exportable(n, s, preconds_r, max_comps);
+            if (!res_r[0]) {
+                continue;
+            }
+
+            return [true, preconds];
+
+        }
+    }
+
+    return [false, preconds];
+}
+
+function main() {
+
+    var tests = [
+        // [5, 9, [[2,3],[4,5],[7,8],[1,3],[5,8],[2,6]]],
+        // [5, 8, [[2,3],[4,5],[1,3],[2,6],[3,6],[3,5]]],
+        // [5, 8, [[2,3],[4,5],[6,7],[1,3],[5,7],[5,3]]],
+
+        // [6, 11, 18, [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10],[2, 4],[6, 8]]],
+        [5, 9, 14, [[1, 2], [3, 4], [5, 6], [7, 8], [2, 4],[6, 8]]],
+
+    ];
+
+
+
+    for (let i = 0; i < tests.length; i++) {
+        const e = tests[i];
+        var s = e[0] - 1;
+        var n = e[1];
+        var max_comps = e[2];
+        var preconds = e[3];
+        var res = tree_exportable(n, s, preconds, max_comps);
+
+        if (res.length == 0) {
+            console.log(`index: ${i} invalid: ${s+1}, ${n}, ${JSON.stringify(preconds)}`)
+        } else {
+            var rev = res[1].reverse();
+            console.log(JSON.stringify(rev));
+        }
+        
+
+        // // --------------------------------------------------------------------------
+        // console.log(res[0]);
+
+        // var rev = res[1].reverse();
+        // // console.log(rev);
+        // console.log(JSON.stringify(rev));
+
+    }
+
+    
+
+
+}
+
+
+main();
