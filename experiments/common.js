@@ -527,6 +527,23 @@ function deep_copy(o) {
     return JSON.parse(JSON.stringify(o));
 }
 
+function deep_copy_partial_list(list, f, l) {
+    var str = "[";
+
+    for (let i = f; i < l; i++) {
+        const o = list[i];
+        str += JSON.stringify(o) + ",";
+    }
+
+    str = str.slice(0, -1); 
+    str += "]";
+
+    // return JSON.parse(JSON.stringify(o));
+    var res = JSON.parse(str);
+    return res;
+}
+
+
 function copy_if(data, p) {
     var res = [];
     for (let i = 0; i < data.length; i++) {
@@ -685,6 +702,7 @@ module.exports = {
     equal_array: equal_array,
     check_precondition: check_precondition,
     deep_copy: deep_copy,
+    deep_copy_partial_list: deep_copy_partial_list,
     get_max_comps: get_max_comps,
 
     iter_swap: iter_swap,
