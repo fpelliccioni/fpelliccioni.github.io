@@ -11,12 +11,8 @@ function median_silent(data_par, f, l, r) {
     var tmp_swaps = measure.g_swaps
     var data = common.deep_copy_partial_list(data_par, f , l);
 
-    var len1 = l - f;
-    var len2 = data.length;
-
-    sort1.quicksort(data, f, l, r);
-    // var middle = f + common.half(l - f)
-    var middle =  common.half(data.length)
+    sort1.quicksort(data, 0, data.length, r);
+    var middle = common.half(data.length)
 
     measure.g_comparissons = tmp_cmp
     measure.g_swaps = tmp_swaps

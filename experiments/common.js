@@ -667,10 +667,25 @@ function get_values(n, preconds) {
 }
 
 
+
+function get_values_no_optimized(n, preconds) {
+    var values = [];
+    var element = iota(n);
+    do {
+        if (satisfy_all_preconds(element, preconds)) {
+            values.push(deep_copy(element));
+        }
+    } while(next_permutation(element, 0, element.length));
+
+    return values;
+}
+
+
 module.exports = {
     equal_pair: equal_pair,
     remove_pairs_transitive: remove_pairs_transitive,
     get_values: get_values,
+    get_values_no_optimized: get_values_no_optimized,
 
     perm: perm,
     perm_with_preconds: perm_with_preconds,
