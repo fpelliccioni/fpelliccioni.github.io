@@ -36,6 +36,7 @@ function select_2_5(a, b, c, d, e, r) {
 
 module.exports = {
     select_2_5_ab_cd: select_2_5_ab_cd,
+    select_2_5: select_2_5,
 }
 
 
