@@ -147,7 +147,7 @@ function tree_exportable(n, s, preconds, max_comps, pairs_par, values_par) {
     // console.log(Object.keys(counted_nums).length);
 
     if (Object.keys(counted_nums).length == 1) {
-        // console.log(JSON.stringify(preconds));
+        console.log(`Ok: ${JSON.stringify(preconds)}`);
         return [true, [preconds]];
     }
 
@@ -187,19 +187,27 @@ function tree_exportable(n, s, preconds, max_comps, pairs_par, values_par) {
 
 function main() {
 
+    // if (process.argv.values >= 3) {
+        console.log(process.argv)
+        var preconds_arg = JSON.parse(process.argv[2]);
+        console.log(JSON.stringify(preconds_arg));
+    // }
+
     var tests = [
         // [5, 9, [[2,3],[4,5],[7,8],[1,3],[5,8],[2,6]]],
         // [5, 8, [[2,3],[4,5],[1,3],[2,6],[3,6],[3,5]]],
         // [5, 8, [[2,3],[4,5],[6,7],[1,3],[5,7],[5,3]]],
 
-        [6, 11, 18, [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10],[2, 4],[6, 8]]],
+        // [6, 11, 18, [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10],[2, 4],[6, 8]]],
         // [5, 9, 14, [[1, 2], [3, 4], [5, 6], [7, 8], [2, 4],[6, 8]]],
         // [4, 7, 10, [[1, 2], [3, 4], [5, 6], [2, 4]]],
-    
 
+        [6, 11, 18, preconds_arg],
+        // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[3,5]]],
+        // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[5,3]]],
+        // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[9,10],[2,4],[6,8]]],
+        // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[5,3],[3,6],[3,7],[3,9],[6,9],[6,7],[4,7],[4,11],[4,6],[6,11]]],
     ];
-
-
 
     for (let i = 0; i < tests.length; i++) {
         const e = tests[i];
@@ -222,6 +230,10 @@ function main() {
             console.log(`index: ${i} invalid: ${s+1}, ${n}, ${JSON.stringify(preconds)}`)
         } else {
             // var rev = res[1].reverse();
+            console.log("-------------------------------------------------------");
+            console.log("-------------------------------------------------------");
+            console.log("-------------------------------------------------------");
+            console.log("-------------------------------------------------------");
             console.log(JSON.stringify( res[1]));
         }
         

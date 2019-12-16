@@ -611,14 +611,14 @@ function satisfy_all_preconds(element, preconds) {
 
 
 function get_values(n, preconds) {
-    if (n == 11) {
-        var contents = fs.readFileSync('median_11___12_34_56_78_910_24_68.txt', 'utf8');
-        var values = JSON.parse(contents);
-        // console.log(values.length);
-        values = apply_precons(values, preconds);
-        // console.log(values.length);
-        return values;
-    }
+    // if (n == 11) {
+    //     var contents = fs.readFileSync('median_11___12_34_56_78_910_24_68.txt', 'utf8');
+    //     var values = JSON.parse(contents);
+    //     // console.log(values.length);
+    //     values = apply_precons(values, preconds);
+    //     // console.log(values.length);
+    //     return values;
+    // }
 
     if (n == 10) {
         var contents = fs.readFileSync('values_10___12_34_56_89_24.txt', 'utf8');
