@@ -21,10 +21,16 @@ function generate_branch(node, f, l, start_else, n) {
     var first = true;
     const indent_1 = ' '.repeat(4);
 
+    var last_level = f + 1 == l;
+
     var values = common.get_values_no_optimized(n, node)
     console.log(values.length);
     var median = common.all_median_equals(n, values);
     console.log(median);
+
+    if (median == null) {
+        console.log("**************************** error!");
+    }
 
     while (f != l) {
         const indent_level = ' '.repeat((f + 1) * 4);
@@ -42,16 +48,22 @@ function generate_branch(node, f, l, start_else, n) {
         } else {
             code += `${indent_level}if ( ! r(${common.get_variable_name(pair[1])}, ${common.get_variable_name(pair[0])})) {\n`
         }
-        code += `${indent_level}${indent_1}return ${common.get_variable_name(median)};\n`
         ++f;
     }
+    const indent_level = ' '.repeat(f * 4);
+    code += `${indent_level}${indent_1}return ${common.get_variable_name(median)};\n`
+
+    if (start_else && last_level) {
+        code += `${indent_level}}\n`
+    }
+
     return code;
 }
 
 function generate_code(n, values, nodes, index, level, comps, s) {
 
     var code = generate_branch(nodes[0], 0, nodes[0].length, false, n);
-    console.log(code);
+    // console.log(code);
 
     var node_ant = nodes[0];
     for (let i = 1; i < nodes.length; i++) {
@@ -59,11 +71,13 @@ function generate_code(n, values, nodes, index, level, comps, s) {
         var level = get_level(node_ant, node);
         var start_else = common.equal_pair(node[level], [node_ant[level][1], node_ant[level][0]]);
         code += generate_branch(node, level, node.length, start_else, n);
-        console.log(code);
-
+        // console.log(code);
         node_ant = node;
     }
 
+    // console.log(code);
+
+    return code;
 
 
 
@@ -128,7 +142,7 @@ function generate_code(n, values, nodes, index, level, comps, s) {
 
 
 function get_tests() {
-    var contents = fs.readFileSync('temp/result7.txt', 'utf8');
+    var contents = fs.readFileSync('temp/result4e.txt', 'utf8');
     var values = JSON.parse(contents);
     return values;
 }

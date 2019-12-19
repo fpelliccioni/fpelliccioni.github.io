@@ -1,0 +1,1079 @@
+    // [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[5,3],[7,9]]
+
+    if ( ! r(b, a)) {
+        if ( ! r(d, c)) {
+            if ( ! r(f, e)) {
+                if ( ! r(h, g)) {
+                    if ( ! r(d, b)) {
+                        if ( ! r(h, f)) {
+                            if ( ! r(f, b)) {
+                                if ( ! r(e, b)) {
+                                    if ( ! r(c, e)) {
+                                        if ( ! r(i, g)) {
+                                            if ( ! r(f, c)) {
+                                                if ( ! r(g, c)) {
+                                                    if ( ! r(j, g)) {
+                                                        if ( ! r(f, d)) {
+                                                            if ( ! r(k, d)) {
+                                                                if ( ! r(g, d)) {
+                                                                    if ( ! r(g, f)) {
+                                                                        if ( ! r(k, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(i, d)) {
+                                                                        if ( ! r(j, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(k, g)) {
+                                                                    if ( ! r(k, i)) {
+                                                                        if ( ! r(j, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, j)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(g, d)) {
+                                                                        return d;
+                                                                    } else {
+                                                                        return g;
+                                                                    }
+                                                        } else {
+                                                            if ( ! r(k, f)) {
+                                                                if ( ! r(g, f)) {
+                                                                    if ( ! r(g, d)) {
+                                                                        if ( ! r(k, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(i, f)) {
+                                                                        if ( ! r(j, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(k, g)) {
+                                                                    if ( ! r(k, i)) {
+                                                                        if ( ! r(j, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, j)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(g, f)) {
+                                                                        return f;
+                                                                    } else {
+                                                                        return g;
+                                                                    }
+                                                    } else {
+                                                        if ( ! r(f, d)) {
+                                                            if ( ! r(k, d)) {
+                                                                if ( ! r(j, d)) {
+                                                                    if ( ! r(j, f)) {
+                                                                        if ( ! r(k, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, j)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(g, d)) {
+                                                                        return d;
+                                                                    } else {
+                                                                        return g;
+                                                                    }
+                                                            } else {
+                                                                if ( ! r(j, c)) {
+                                                                    if ( ! r(k, j)) {
+                                                                        if ( ! r(k, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(k, c)) {
+                                                                        if ( ! r(k, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        return c;
+                                                                    }
+                                                        } else {
+                                                            if ( ! r(k, f)) {
+                                                                if ( ! r(j, f)) {
+                                                                    if ( ! r(j, d)) {
+                                                                        if ( ! r(k, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, j)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(g, f)) {
+                                                                        return f;
+                                                                    } else {
+                                                                        return g;
+                                                                    }
+                                                            } else {
+                                                                if ( ! r(j, c)) {
+                                                                    if ( ! r(k, j)) {
+                                                                        if ( ! r(k, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(k, c)) {
+                                                                        if ( ! r(k, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        return c;
+                                                                    }
+                                                } else {
+                                                    if ( ! r(i, c)) {
+                                                        if ( ! r(k, j)) {
+                                                            if ( ! r(j, c)) {
+                                                                if ( ! r(j, f)) {
+                                                                    if ( ! r(f, d)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(i, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(j, d)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(k, c)) {
+                                                                    return c;
+                                                                } else {
+                                                                    if ( ! r(k, e)) {
+                                                                        if ( ! r(k, g)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(g, e)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return e;
+                                                                        }
+                                                        } else {
+                                                            if ( ! r(k, c)) {
+                                                                if ( ! r(k, f)) {
+                                                                    if ( ! r(f, d)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(i, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(k, d)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(j, c)) {
+                                                                    return c;
+                                                                } else {
+                                                                    if ( ! r(j, e)) {
+                                                                        if ( ! r(j, g)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(g, e)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return e;
+                                                                        }
+                                                    } else {
+                                                        if ( ! r(i, e)) {
+                                                            if ( ! r(k, j)) {
+                                                                if ( ! r(k, i)) {
+                                                                    if ( ! r(j, i)) {
+                                                                        if ( ! r(j, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        return i;
+                                                                    }
+                                                                } else {
+                                                                    if ( ! r(k, e)) {
+                                                                        if ( ! r(k, g)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(g, e)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return e;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(j, i)) {
+                                                                    if ( ! r(k, i)) {
+                                                                        if ( ! r(k, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        return i;
+                                                                    }
+                                                                } else {
+                                                                    if ( ! r(j, e)) {
+                                                                        if ( ! r(j, g)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(g, e)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return e;
+                                                                        }
+                                                        } else {
+                                                            if ( ! r(k, j)) {
+                                                                if ( ! r(k, e)) {
+                                                                    if ( ! r(j, e)) {
+                                                                        if ( ! r(j, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        return e;
+                                                                    }
+                                                                } else {
+                                                                    if ( ! r(i, b)) {
+                                                                        if ( ! r(k, i)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, b)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return b;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(j, e)) {
+                                                                    if ( ! r(k, e)) {
+                                                                        if ( ! r(k, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        return e;
+                                                                    }
+                                                                } else {
+                                                                    if ( ! r(i, b)) {
+                                                                        if ( ! r(j, i)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, b)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return b;
+                                                                        }
+                                            } else {
+                                                if ( ! r(i, f)) {
+                                                    if ( ! r(k, j)) {
+                                                        if ( ! r(j, f)) {
+                                                            if ( ! r(j, c)) {
+                                                                if ( ! r(g, c)) {
+                                                                    if ( ! r(j, g)) {
+                                                                        if ( ! r(g, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(h, c)) {
+                                                                        if ( ! r(i, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(i, h)) {
+                                                                            return h;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(j, g)) {
+                                                                    if ( ! r(j, h)) {
+                                                                        if ( ! r(i, h)) {
+                                                                            return h;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(g, c)) {
+                                                                        if ( ! r(k, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                        } else {
+                                                            if ( ! r(g, f)) {
+                                                                if ( ! r(g, c)) {
+                                                                    if ( ! r(k, c)) {
+                                                                        return c;
+                                                                    } else {
+                                                                        if ( ! r(k, f)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(k, g)) {
+                                                                        return g;
+                                                                    } else {
+                                                                        if ( ! r(k, f)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(k, f)) {
+                                                                    return f;
+                                                                } else {
+                                                                    if ( ! r(k, e)) {
+                                                                        if ( ! r(k, g)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(g, e)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return e;
+                                                                        }
+                                                    } else {
+                                                        if ( ! r(k, f)) {
+                                                            if ( ! r(k, c)) {
+                                                                if ( ! r(g, c)) {
+                                                                    if ( ! r(k, g)) {
+                                                                        if ( ! r(g, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(h, c)) {
+                                                                        if ( ! r(i, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(i, h)) {
+                                                                            return h;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(k, g)) {
+                                                                    if ( ! r(k, h)) {
+                                                                        if ( ! r(i, h)) {
+                                                                            return h;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(g, c)) {
+                                                                        if ( ! r(j, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                        } else {
+                                                            if ( ! r(g, f)) {
+                                                                if ( ! r(g, c)) {
+                                                                    if ( ! r(j, c)) {
+                                                                        return c;
+                                                                    } else {
+                                                                        if ( ! r(j, f)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(j, g)) {
+                                                                        return g;
+                                                                    } else {
+                                                                        if ( ! r(j, f)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(j, f)) {
+                                                                    return f;
+                                                                } else {
+                                                                    if ( ! r(j, e)) {
+                                                                        if ( ! r(j, g)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(g, e)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return e;
+                                                                        }
+                                                } else {
+                                                    if ( ! r(i, e)) {
+                                                        if ( ! r(j, i)) {
+                                                            if ( ! r(k, i)) {
+                                                                if ( ! r(j, f)) {
+                                                                    if ( ! r(k, f)) {
+                                                                        return f;
+                                                                    } else {
+                                                                        return k;
+                                                                    }
+                                                                } else {
+                                                                    if ( ! r(k, j)) {
+                                                                        return j;
+                                                                    } else {
+                                                                        return k;
+                                                                    }
+                                                            } else {
+                                                                return i;
+                                                            }
+                                                        } else {
+                                                            if ( ! r(k, i)) {
+                                                                return i;
+                                                            } else {
+                                                                if ( ! r(g, e)) {
+                                                                    if ( ! r(j, g)) {
+                                                                        if ( ! r(k, j)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, g)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(j, e)) {
+                                                                        if ( ! r(k, j)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, e)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return e;
+                                                                        }
+                                                    } else {
+                                                        if ( ! r(j, e)) {
+                                                            if ( ! r(k, e)) {
+                                                                if ( ! r(j, f)) {
+                                                                    if ( ! r(k, f)) {
+                                                                        return f;
+                                                                    } else {
+                                                                        return k;
+                                                                    }
+                                                                } else {
+                                                                    if ( ! r(k, j)) {
+                                                                        return j;
+                                                                    } else {
+                                                                        return k;
+                                                                    }
+                                                            } else {
+                                                                return e;
+                                                            }
+                                                        } else {
+                                                            if ( ! r(k, e)) {
+                                                                return e;
+                                                            } else {
+                                                                if ( ! r(i, b)) {
+                                                                    if ( ! r(j, i)) {
+                                                                        if ( ! r(k, j)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, i)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(j, b)) {
+                                                                        if ( ! r(k, j)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, b)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return b;
+                                                                        }
+
+
+
+
+
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+    //[[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[5,3],[9,7],[6,7]]
+
+    if ( ! r(b, a)) {
+        if ( ! r(d, c)) {
+            if ( ! r(f, e)) {
+                if ( ! r(h, g)) {
+                    if ( ! r(d, b)) {
+                        if ( ! r(h, f)) {
+                            if ( ! r(f, b)) {
+                                if ( ! r(e, b)) {
+                                    if ( ! r(c, e)) {
+                                        if ( ! r(g, i)) {
+                                            if ( ! r(g, f)) {
+                                                if ( ! r(i, f)) {
+                                                    if ( ! r(f, c)) {
+                                                        if ( ! r(f, d)) {
+                                                            if ( ! r(j, d)) {
+                                                                if ( ! r(k, d)) {
+                                                                    if ( ! r(j, f)) {
+                                                                        if ( ! r(k, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, j)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    return d;
+                                                                }
+                                                            } else {
+                                                                if ( ! r(k, d)) {
+                                                                    return d;
+                                                                } else {
+                                                                    if ( ! r(j, c)) {
+                                                                        if ( ! r(k, j)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, c)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return c;
+                                                                        }
+                                                        } else {
+                                                            if ( ! r(k, j)) {
+                                                                if ( ! r(j, f)) {
+                                                                    if ( ! r(j, i)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(k, f)) {
+                                                                        return f;
+                                                                    } else {
+                                                                        if ( ! r(k, c)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return c;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(k, f)) {
+                                                                    if ( ! r(k, i)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(j, f)) {
+                                                                        return f;
+                                                                    } else {
+                                                                        if ( ! r(j, c)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return c;
+                                                                        }
+                                                    } else {
+                                                        if ( ! r(i, c)) {
+                                                            if ( ! r(k, j)) {
+                                                                if ( ! r(j, c)) {
+                                                                    if ( ! r(j, i)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(k, c)) {
+                                                                        return c;
+                                                                    } else {
+                                                                        if ( ! r(k, f)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(k, c)) {
+                                                                    if ( ! r(k, i)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(j, c)) {
+                                                                        return c;
+                                                                    } else {
+                                                                        if ( ! r(j, f)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                        } else {
+                                                            if ( ! r(k, j)) {
+                                                                if ( ! r(j, i)) {
+                                                                    if ( ! r(g, c)) {
+                                                                        if ( ! r(j, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(j, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(k, i)) {
+                                                                        return i;
+                                                                    } else {
+                                                                        if ( ! r(k, f)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(k, i)) {
+                                                                    if ( ! r(g, c)) {
+                                                                        if ( ! r(k, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(k, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(j, i)) {
+                                                                        return i;
+                                                                    } else {
+                                                                        if ( ! r(j, f)) {
+                                                                            return j;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                } else {
+                                                    if ( ! r(k, j)) {
+                                                        if ( ! r(j, i)) {
+                                                            if ( ! r(j, c)) {
+                                                                if ( ! r(f, d)) {
+                                                                    if ( ! r(j, d)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return d;
+                                                                        }
+                                                                    } else {
+                                                                        return j;
+                                                                    }
+                                                                } else {
+                                                                    if ( ! r(f, c)) {
+                                                                        if ( ! r(j, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(g, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(k, f)) {
+                                                                    if ( ! r(j, f)) {
+                                                                        if ( ! r(j, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(f, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(k, e)) {
+                                                                        if ( ! r(k, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        return e;
+                                                                    }
+                                                        } else {
+                                                            if ( ! r(k, c)) {
+                                                                if ( ! r(i, d)) {
+                                                                    if ( ! r(j, d)) {
+                                                                        return j;
+                                                                    } else {
+                                                                        if ( ! r(k, d)) {
+                                                                            return d;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(i, c)) {
+                                                                        if ( ! r(k, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(f, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(i, e)) {
+                                                                    if ( ! r(k, i)) {
+                                                                        if ( ! r(k, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(i, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(k, e)) {
+                                                                        if ( ! r(k, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        return e;
+                                                                    }
+                                                    } else {
+                                                        if ( ! r(k, i)) {
+                                                            if ( ! r(k, c)) {
+                                                                if ( ! r(f, d)) {
+                                                                    if ( ! r(k, d)) {
+                                                                        if ( ! r(i, d)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return d;
+                                                                        }
+                                                                    } else {
+                                                                        return k;
+                                                                    }
+                                                                } else {
+                                                                    if ( ! r(f, c)) {
+                                                                        if ( ! r(k, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(g, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return g;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(j, f)) {
+                                                                    if ( ! r(k, f)) {
+                                                                        if ( ! r(k, g)) {
+                                                                            return g;
+                                                                        } else {
+                                                                            return k;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(f, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(j, e)) {
+                                                                        if ( ! r(j, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        return e;
+                                                                    }
+                                                        } else {
+                                                            if ( ! r(j, c)) {
+                                                                if ( ! r(i, d)) {
+                                                                    if ( ! r(j, d)) {
+                                                                        if ( ! r(k, d)) {
+                                                                            return k;
+                                                                        } else {
+                                                                            return d;
+                                                                        }
+                                                                    } else {
+                                                                        return j;
+                                                                    }
+                                                                } else {
+                                                                    if ( ! r(i, c)) {
+                                                                        if ( ! r(j, i)) {
+                                                                            return i;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(f, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return f;
+                                                                        }
+                                                            } else {
+                                                                if ( ! r(i, e)) {
+                                                                    if ( ! r(j, i)) {
+                                                                        if ( ! r(j, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        if ( ! r(i, c)) {
+                                                                            return c;
+                                                                        } else {
+                                                                            return i;
+                                                                        }
+                                                                } else {
+                                                                    if ( ! r(j, e)) {
+                                                                        if ( ! r(j, f)) {
+                                                                            return f;
+                                                                        } else {
+                                                                            return j;
+                                                                        }
+                                                                    } else {
+                                                                        return e;
+                                                                    }

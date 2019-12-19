@@ -187,11 +187,13 @@ function tree_exportable(n, s, preconds, max_comps, pairs_par, values_par) {
 
 function main() {
 
-    // if (process.argv.values >= 3) {
+    // console.log(process.argv.length)
+    if (process.argv.length >= 3) {
+        // console.log("fer")
         console.log(process.argv)
         var preconds_arg = JSON.parse(process.argv[2]);
         console.log(JSON.stringify(preconds_arg));
-    // }
+    }
 
     var tests = [
         // [5, 9, [[2,3],[4,5],[7,8],[1,3],[5,8],[2,6]]],
@@ -201,7 +203,9 @@ function main() {
         // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[9,10],[2,4],[6,8],[2,6]]],
         // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[3,5]]],
         // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[5,2]]],
-        [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[5,2],[2,3],[3,6]]],
+        // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[5,2],[2,3],[3,6]]],
+        // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[5,3],[9,7]]],
+        
         
         
 
