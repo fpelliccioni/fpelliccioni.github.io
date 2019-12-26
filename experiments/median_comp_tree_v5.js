@@ -123,7 +123,7 @@ function get_real_pair(pairs, potential_pair) {
     return null;
 }
 
-function tree_exportable(n, s, preconds, max_comps, pairs_par, values_par) {
+function tree_exportable(n, s, preconds, max_comps, pairs_par, values_par, excluded) {
 
     if (s == undefined) {
         s = common.half(n);         
@@ -158,28 +158,35 @@ function tree_exportable(n, s, preconds, max_comps, pairs_par, values_par) {
     var counted_nums_pairs = count_numbers_at_pairs_sorted(counted_nums);
     for (let i = 0; i < counted_nums_pairs.length; i++) {
         const potential_pair = counted_nums_pairs[i];
+
+        var f = excluded.find_if(0, excluded.length, e => common.equal_pair(e, potential_pair));
+        if (f != excluded.length) continue;
+        const potential_pair_inv = potential_pair.slice().reverse();
+        f = excluded.find_if(0, excluded.length, e => common.equal_pair(e, potential_pair_inv));
+        if (f != excluded.length) continue;
+
+
         var pair = get_real_pair(pairs, potential_pair);
+        if (pair == null) continue;
 
-        if (pair != null) {
-            var preconds_l = common.deep_copy(preconds);
-            preconds_l.push(pair);
-            // preconds = common.deep_copy(preconds);
+        var preconds_l = common.deep_copy(preconds);
+        preconds_l.push(pair);
+        // preconds = common.deep_copy(preconds);
 
-            var res_l = tree_exportable(n, s, preconds_l, max_comps, pairs_par, values_par);
-            if (!res_l[0]) {
-                continue;
-            }
-
-            const pair_r = pair.slice().reverse();
-            var preconds_r = common.deep_copy(preconds);
-            preconds_r.push(pair_r);
-            var res_r = tree_exportable(n, s, preconds_r, max_comps, pairs_par, values_par);
-            if (!res_r[0]) {
-                continue;
-            }
-
-            return [true, [...res_l[1], ...res_r[1]]];
+        var res_l = tree_exportable(n, s, preconds_l, max_comps, pairs_par, values_par, excluded);
+        if (!res_l[0]) {
+            continue;
         }
+
+        const pair_r = pair.slice().reverse();
+        var preconds_r = common.deep_copy(preconds);
+        preconds_r.push(pair_r);
+        var res_r = tree_exportable(n, s, preconds_r, max_comps, pairs_par, values_par, excluded);
+        if (!res_r[0]) {
+            continue;
+        }
+
+        return [true, [...res_l[1], ...res_r[1]]];
     }
 
     return [false, null];
@@ -201,8 +208,8 @@ function main() {
         // [5, 8, [[2,3],[4,5],[6,7],[1,3],[5,7],[5,3]]],
 
         // [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[3,5],[7,9]]],
-        [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[3,5],[9,7]]],
-
+        [6, 11, 18, [[1,2],[3,4],[5,6],[7,8],[2,4],[6,8],[2,6],[2,5],[3,5],[9,7]], [[5,7]]],
+        
         // [6, 11, 18, preconds_arg],
     ];
 
@@ -212,6 +219,7 @@ function main() {
         var n = e[1];
         var max_comps = e[2];
         var preconds = e[3];
+        var excluded = e[4];
         
         
         var pairs = common.gen_pairs(n);
@@ -221,7 +229,7 @@ function main() {
 
         var values = common.get_values(n, preconds);
 
-        var res = tree_exportable(n, s, preconds, max_comps, pairs, values);
+        var res = tree_exportable(n, s, preconds, max_comps, pairs, values, excluded);
 
         if (! res[0]) {
             console.log(`index: ${i} invalid: ${s+1}, ${n}, ${JSON.stringify(preconds)}`)
