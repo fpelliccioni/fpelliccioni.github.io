@@ -154,27 +154,27 @@ values_t get_values(size_t n, pairs_t const& preconds) {
     return values;
 }
 
-//TODO: refactor, use partition
-values_t remove_values2_old(values_t const& values, pair_t const& node) {
-    values_t res;
+// //TODO: refactor, use partition
+// values_t remove_values2_old(values_t const& values, pair_t const& node) {
+//     values_t res;
 
-    for (auto&& element : values) {
-        if (element.size() < 2) {
-            res.push_back(element);
-            continue;
-        }
-        auto ia = find(begin(element), end(element), node.first);
-        auto ib = find(begin(element), end(element), node.second);
+//     for (auto&& element : values) {
+//         if (element.size() < 2) {
+//             res.push_back(element);
+//             continue;
+//         }
+//         auto ia = find(begin(element), end(element), node.first);
+//         auto ib = find(begin(element), end(element), node.second);
 
-        if (ia < ib || ia == end(element) || ib == end(element)) {
-            res.push_back(element);
-        } else {
-            1 == 1;
-        }
-    }
+//         if (ia < ib || ia == end(element) || ib == end(element)) {
+//             res.push_back(element);
+//         } else {
+//             1 == 1;
+//         }
+//     }
 
-    return res;
-}
+//     return res;
+// }
 
 // void remove_values2(values_t& values, pair_t const& node) {
 //     auto tmp = values.size();
@@ -196,17 +196,17 @@ values_t remove_values2_old(values_t const& values, pair_t const& node) {
 
 // }
 
-//TODO: refactor, use partition
-values_t apply_precons_old(values_t values, pairs_t const& preconds) {
+// //TODO: refactor, use partition
+// values_t apply_precons_old(values_t values, pairs_t const& preconds) {
 
-    if (values.size() < 2) return values;
+//     if (values.size() < 2) return values;
 
-    for (auto&& p : preconds) {
-        values = remove_values2_old(values, p);
-        if (values.size() == 0) break;
-    }
-    return values;
-}
+//     for (auto&& p : preconds) {
+//         values = remove_values2_old(values, p);
+//         if (values.size() == 0) break;
+//     }
+//     return values;
+// }
 
 
 // //TODO: invert the loop, first loop values
@@ -220,7 +220,7 @@ values_t apply_precons_old(values_t values, pairs_t const& preconds) {
 //     }
 // }
 
-bool first_less_than_second(vector<int> const element, pair_t const& node) {
+bool first_less_than_second(vector<int> const& element, pair_t const& node) {
     auto ia = find(begin(element), end(element), node.first);
     if (ia == end(element)) return true;
     auto ib = find(begin(element), end(element), node.second);
@@ -228,18 +228,39 @@ bool first_less_than_second(vector<int> const element, pair_t const& node) {
     return ia < ib;
 }
 
+// void apply_precons_with_partition(values_t& values, pairs_t const& preconds) {
+//     // if (values.size() < 2) return;
+
+//     // auto tmp = values.size();
+
+//     auto m = partition(begin(values), end(values), [&preconds](auto const& element) {
+//         if (element.size() < 2) return true;
+
+//         for (auto&& p : preconds) {
+//             if (!first_less_than_second(element, p)) return false;
+//         }
+//         return true;
+//     });
+
+//     values.erase(m, end(values));
+
+//     // auto tmp2 = values.size();
+//     // cout << tmp << endl;
+//     // cout << tmp2 << endl;
+// }
+
 void apply_precons(values_t& values, pairs_t const& preconds) {
     // if (values.size() < 2) return;
 
     // auto tmp = values.size();
 
-    auto m = partition(begin(values), end(values), [&preconds](auto const& element) {
-        if (element.size() < 2) return true;
+    auto m = remove_if(begin(values), end(values), [&preconds](auto const& element) {
+        if (element.size() < 2) return false;
 
         for (auto&& p : preconds) {
-            if (!first_less_than_second(element, p)) return false;
+            if (!first_less_than_second(element, p)) return true;
         }
-        return true;
+        return false;
     });
 
     values.erase(m, end(values));
@@ -249,28 +270,43 @@ void apply_precons(values_t& values, pairs_t const& preconds) {
     // cout << tmp2 << endl;
 }
 
-vector<tuple<int, int, int>> remove_duplicates_slow(vector<tuple<int, int, int>> const& arr) {
-    vector<string> arr_str;
-    for (auto&& e : arr) {
-        arr_str.push_back(json(e).dump());
-    }
+// vector<tuple<int, int, int>> remove_duplicates_slow(vector<tuple<int, int, int>> const& arr) {
+//     vector<string> arr_str;
+//     for (auto&& e : arr) {
+//         arr_str.push_back(json(e).dump());
+//     }
 
-    // arr_str = [... new Set(arr_str)];
-    {
-    set<string> s;
-    s.insert(begin(arr_str), end(arr_str));
-    arr_str.clear();
-    arr_str.insert(end(arr_str), begin(s), end(s));
-    }
+//     // arr_str = [... new Set(arr_str)];
+//     {
+//     set<string> s;
+//     s.insert(begin(arr_str), end(arr_str));
+//     arr_str.clear();
+//     arr_str.insert(end(arr_str), begin(s), end(s));
+//     }
     
-    vector<tuple<int, int, int>> res;
-    res.reserve(arr_str.size());
+//     vector<tuple<int, int, int>> res;
+//     res.reserve(arr_str.size());
 
-    for (auto&& e : arr_str) {
-        auto obj = json::parse(e).get<tuple<int, int, int>>();
-        res.push_back(obj);
-    }
-    return res;
+//     for (auto&& e : arr_str) {
+//         auto obj = json::parse(e).get<tuple<int, int, int>>();
+//         res.push_back(obj);
+//     }
+//     return res;
+// }
+
+void remove_duplicates(vector<tuple<int, int, int>>& arr) {
+    sort(begin(arr), end(arr));
+    arr.erase(unique( begin(arr), end(arr)), end(arr));
+
+    // // Convert to set (manually)
+    // set<int> s;
+    // unsigned size = vec.size();
+    // for( unsigned i = 0; i < size; ++i ) s.insert( vec[i] );
+    // vec.assign( s.begin(), s.end() );
+
+    // // Convert to set (using a constructor)
+    // set<int> s( vec.begin(), vec.end() );
+    // vec.assign( s.begin(), s.end() );
 }
 
 
@@ -338,7 +374,8 @@ vector<pair<int, int>> count_numbers_at_pairs_sorted(unordered_map<int, int> con
         }
     }
     auto old_len = counted_nums_arr.size();
-    counted_nums_arr = common::remove_duplicates_slow(counted_nums_arr);
+    // counted_nums_arr = common::remove_duplicates_slow(counted_nums_arr);
+    common::remove_duplicates(counted_nums_arr);
 
     if (counted_nums_arr.size() != old_len) {
         cout << "ALGO ESTA MAL 1\n";
@@ -373,27 +410,27 @@ pair<bool, vector<pairs_t>> tree_exportable(size_t n, size_t s, pairs_t const& p
 
     auto size1 = values.size();
 
-    auto values_2 = values;
+    // auto values_2 = values;
     common::apply_precons(values, preconds);
-    values_2 = common::apply_precons_old(values_2, preconds);
+    // values_2 = common::apply_precons_old(values_2, preconds);
 
 
-    auto size2 = values.size();
-    auto size3 = values_2.size();
-    cout << size1 << endl;
-    cout << size2 << endl;
-    cout << size3 << endl;
+    // auto size2 = values.size();
+    // auto size3 = values_2.size();
+    // cout << size1 << endl;
+    // cout << size2 << endl;
+    // cout << size3 << endl;
 
-    if (values != values_2) {
-        cout << "error\n";
-    }
+    // if (values != values_2) {
+    //     cout << "error\n";
+    // }
 
     auto counted_nums = count_numbers_at(values, s);
     // console.log(JSON.stringify(counted_nums));
     // console.log(Object.keys(counted_nums).length);
 
     if (counted_nums.size() == 1) {
-        cout << "Ok: " << json(preconds).dump() << '\n';
+        // cout << "Ok: " << json(preconds).dump() << '\n';
         return {true, {preconds}};
         // return true;
     }
@@ -437,21 +474,21 @@ pair<bool, vector<pairs_t>> tree_exportable(size_t n, size_t s, pairs_t const& p
 }
 
 int main(int argc, char** argv) {
-    // pairs_t preconds_arg;
-    // if (argc >= 2) {
-    //     cout << argv[1] << '\n';
-    //     json::parse(argv[1]).get_to(preconds_arg);
-    //     // var preconds_arg = JSON.parse(process.argv[2]);
-    //     cout << json(preconds_arg).dump() << '\n';
-    // }
-    // vector<tuple<int, int, int, pairs_t>> tests = {
-    //     {6, 11, 18, preconds_arg}
-    // };
+    pairs_t preconds_arg;
+    if (argc >= 2) {
+        cout << argv[1] << '\n';
+        json::parse(argv[1]).get_to(preconds_arg);
+        // var preconds_arg = JSON.parse(process.argv[2]);
+        cout << json(preconds_arg).dump() << '\n';
+    }
+    vector<tuple<int, int, int, pairs_t>> tests = {
+        {6, 11, 18, preconds_arg}
+    };
 
     
-    vector<tuple<int, int, int, pairs_t>> tests = {
-        {6, 11, 18, {{1,2},{3,4},{5,6},{7,8},{2,4},{6,8},{2,6},{2,5},{5,3},{9,7}}}
-    };
+    // vector<tuple<int, int, int, pairs_t>> tests = {
+    //     {6, 11, 18, {{1,2},{3,4},{5,6},{7,8},{2,4},{6,8},{2,6},{2,5},{5,3},{9,7}}}
+    // };
 
 
     for (auto&& e : tests) {

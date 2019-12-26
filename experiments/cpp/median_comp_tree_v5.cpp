@@ -329,7 +329,7 @@ pair<bool, vector<pairs_t>> tree_exportable(size_t n, size_t s, pairs_t const& p
     // console.log(Object.keys(counted_nums).length);
 
     if (counted_nums.size() == 1) {
-        cout << "Ok: " << json(preconds).dump() << '\n';
+        // cout << "Ok: " << json(preconds).dump() << '\n';
         return {true, {preconds}};
         // return true;
     }
