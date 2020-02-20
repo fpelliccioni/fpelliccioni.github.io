@@ -13,7 +13,7 @@ En este artículo quiero hablar sobre 2 temas en los que creo que la mayoría de
 Voy a usar una experiencia real para ... ***
 
 Desde hace ya 3 años mantengo un nodo multimoneda (Bitcoin, Bitcoin Cash y Litecoin) llamado [Bitprim](https://github.com/bitprim/bitprim).   
-En Noviembre de 2017 [Bitcoin Cash](https://www.bitcoincash.org/) hizo su primer cambio de protocolo luego de su nacimiento en Agosto del mismo año. Mi trabajo en ese momento era actualizar el código de nuestro nodo para que soporte los cambios de protocolo. Desde aquel momento que quiero escribir este artículo, pero... por alguna o varias razones no lo hice en ese momento, lo estoy haciendo ahora.
+En Noviembre de 2017 [Bitcoin Cash](http://bitcoincashnode.org/) hizo su primer cambio de protocolo luego de su nacimiento en Agosto del mismo año. Mi trabajo en ese momento era actualizar el código de nuestro nodo para que soporte los cambios de protocolo. Desde aquel momento que quiero escribir este artículo, pero... por alguna o varias razones no lo hice en ese momento, lo estoy haciendo ahora.
 
 El cambio más importante de fue en el _Algoritmo de Ajuste de Dificultad_, en adelante _DAA_ (del inglés _Difficulty Adjustment Algorithm_).   
 Aquí la descripción del algoritmo: https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/nov-13-hardfork-spec.md#difficulty-adjustment-algorithm-description.

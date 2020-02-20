@@ -13,7 +13,7 @@ In this article I want to talk about 2 topics in which I think that most program
 I'm going to use a real experience, which happened some time ago:
 
 For 4 years now I have maintained a multi-currency node (Bitcoin, Bitcoin Cash and Litecoin) called [Knuth](https://github.com/k-nuth/kth) (a.k.a. Bitprim).   
-In November 2017 [Bitcoin Cash](https://www.bitcoincash.org/) made its first protocol change after its birth in August of the same year. My job at that time was to update the code of our node to support the protocol changes. From that moment I want to write this article, but ... for one or several reasons I did not do it at that moment, I am doing it now.
+In November 2017 [Bitcoin Cash](http://bitcoincashnode.org/) made its first protocol change after its birth in August of the same year. My job at that time was to update the code of our node to support the protocol changes. From that moment I want to write this article, but ... for one or several reasons I did not do it at that moment, I am doing it now.
 
 The most important change was in the _Difficulty Adjustment Algorithm_, from now _DAA_.
 
