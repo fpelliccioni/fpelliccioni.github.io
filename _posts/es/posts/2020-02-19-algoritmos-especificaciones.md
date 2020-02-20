@@ -263,7 +263,3 @@ Es más, quizás lo peor de todo esto es que la especificación hace referencia 
 ¡Saludos!
 
 ---
-
-## Agradecimientos
-
-Quiero agradecer a Dario Ramos y Nubis Bruno por revisar el artículo y sugerir correcciones.  

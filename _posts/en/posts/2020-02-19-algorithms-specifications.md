@@ -257,7 +257,3 @@ And perhaps the worst of all is that the specification refers to the code. **The
 Bye!
 
 ---
-
-## Acknowledgments
-
-Thanks in particular to the following for their feedback to improve this article: Dario Ramos and Nubis Bruno.
