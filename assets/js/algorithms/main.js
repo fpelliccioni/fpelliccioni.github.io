@@ -33,6 +33,10 @@ var categories = [
         ]}
     ]}
   , {id: 'selection', name: 'Selection', categories: []}
+  , {id: 'search', name: 'Seach', categories: [
+        {id: 'search/binary', name: 'Binary', categories: []},
+        {id: 'search/linear', name: 'Linear', categories: []}
+  ]}
   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
 ];
 
