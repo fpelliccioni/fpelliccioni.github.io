@@ -272,8 +272,33 @@ function fillCatalog() {
     list.innerHTML = str;
 }
 
+function fillCatalogRecursiveFull(str, categories) {
+
+    if (categories == undefined) return;
+    if (categories == null) return;
+
+    for(var i in categories) {
+        var cat = categories[i];
+       
+        str += '<li class="linested"><span class="caret">' + cat.name + '</span><ul class="nested">';
+        if (catHasChilds(cat)) {
+            str = fillCatalogRecursiveFull(str, cat.categories);
+        } else {
+            snippets = getSnippets(cat);
+            for(var si in snippets) {
+                var s = snippets[si]
+                str += '<li><a href="/algorithms?repo=tao-js&snippet=' + s + '">[' + s + ']</a></li>';
+            }
+        }
+        
+        str +=  '</ul></li>';
+    }
+
+    return str;
+}
+
 function fillCatalogFull() {
-    var str = fillCatalogRecursive('', categories_full);
+    var str = fillCatalogRecursiveFull('', categories_full);
     var list = document.getElementById('list');
     list.innerHTML = str;
 }
