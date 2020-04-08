@@ -15,30 +15,30 @@ TODO list:
 var log_stats_enabled = true;
 var g_disable_function_printing = false;
 
-// var categories = [
-//     {id: 'rearrangements', name: 'Rearrangements', categories: [
-//         {id: 'rearrangements/position-based', name: 'Position-based', categories: [
-//               {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
-//             , {id: 'rearrangements/position-based/rotate', name: 'Rotate', categories: []}      
-//         ]}
-//        ,{id: 'rearrangements/predicate-based', name: 'Predicate-based', categories: [
-//             {id: 'rearrangements/predicate-based/partition', name: 'Partition', categories: []},
-//             {id: 'rearrangements/predicate-based/make-heap', name: 'Heaps', categories: []}
-//         ]}
-//        ,{id: 'rearrangements/ordering-based', name: 'Ordering-based', categories: [
-//             {id: 'rearrangements/ordering-based/sorting', name: 'Sorting', categories: [
-//                 {id: 'rearrangements/ordering-based/sorting/insertion-sort', name: 'Insertion Sort', categories: []},
-//                 {id: 'rearrangements/ordering-based/sorting/selection-sort', name: 'Selection Sort', categories: []}
-//             ]}
-//         ]}
-//     ]}
-//   , {id: 'selection', name: 'Selection', categories: []}
-//   , {id: 'search', name: 'Seach', categories: [
-//         {id: 'search/binary', name: 'Binary', categories: []},
-//         {id: 'search/linear', name: 'Linear', categories: []}
-//   ]}
-//   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
-// ];
+var categories_full = [
+    {id: 'rearrangements', name: 'Rearrangements', categories: [
+        {id: 'rearrangements/position-based', name: 'Position-based', categories: [
+              {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
+            , {id: 'rearrangements/position-based/rotate', name: 'Rotate', categories: []}      
+        ]}
+       ,{id: 'rearrangements/predicate-based', name: 'Predicate-based', categories: [
+            {id: 'rearrangements/predicate-based/partition', name: 'Partition', categories: []},
+            {id: 'rearrangements/predicate-based/make-heap', name: 'Heaps', categories: []}
+        ]}
+       ,{id: 'rearrangements/ordering-based', name: 'Ordering-based', categories: [
+            {id: 'rearrangements/ordering-based/sorting', name: 'Sorting', categories: [
+                {id: 'rearrangements/ordering-based/sorting/insertion-sort', name: 'Insertion Sort', categories: []},
+                {id: 'rearrangements/ordering-based/sorting/selection-sort', name: 'Selection Sort', categories: []}
+            ]}
+        ]}
+    ]}
+  , {id: 'selection', name: 'Selection', categories: []}
+  , {id: 'search', name: 'Seach', categories: [
+        {id: 'search/binary', name: 'Binary', categories: []},
+        {id: 'search/linear', name: 'Linear', categories: []}
+  ]}
+  , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
+];
 
 var categories = [
   , {id: 'selection', name: 'Selection', categories: []}
@@ -268,6 +268,12 @@ function fillCatalog() {
     // }
     // str +=  '</ul></li>';
 
+    var list = document.getElementById('list');
+    list.innerHTML = str;
+}
+
+function fillCatalogFull() {
+    var str = fillCatalogRecursive('', categories_full);
     var list = document.getElementById('list');
     list.innerHTML = str;
 }
