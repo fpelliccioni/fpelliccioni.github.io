@@ -95,12 +95,9 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
             repo = "algorithm_course";
         }
 
-        extra_code_repo = "tao-js";
-
-
         (async () => {
             try {
-                await downloadStdCodeExtra(user, extra_code_repo);
+                await downloadStdCodeExtra(user, repo);
                 process_catalog();
                 fillCatalog();
             } catch (e) { console.log(e); }
