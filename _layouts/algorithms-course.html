@@ -91,13 +91,16 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
         var repo = url.searchParams.get("repo");
         // console.log(repo)
         if ( ! repo) {
-            repo = "tao-js";
+            // repo = "tao-js";
+            repo = "algorithm_course";
         }
+
+        extra_code_repo = "tao-js";
 
 
         (async () => {
             try {
-                await downloadStdCodeExtra(user, repo);
+                await downloadStdCodeExtra(user, extra_code_repo);
                 process_catalog();
                 fillCatalog();
             } catch (e) { console.log(e); }

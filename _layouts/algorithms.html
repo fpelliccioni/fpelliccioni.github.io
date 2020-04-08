@@ -178,7 +178,8 @@ var d = add_sequence(random_array(), "d");
         var repo = url.searchParams.get("repo");
         // console.log(repo)
         if ( ! repo) {
-            repo = "tao-js";
+            // repo = "tao-js";
+            repo = "algorithm_course";
         }
 
         var snippets = {};
@@ -202,7 +203,7 @@ var d = add_sequence(random_array(), "d");
                 var snippet = url.searchParams.get("snippet");
                 // console.log(snippet)
                 if ( ! snippet) {
-                    snippet = "partition_semistable";
+                    snippet = "find";
                 }
                 if (snippet) {
                     document.getElementById('codeArea').value = getSnippet(snippet);
