@@ -349,6 +349,7 @@ function resetState() {
     iterators_int = {};
     iterators_gui = {};
     predicates = [];
+    operations = [];
     sequences = {};
     variables = {};
 
@@ -356,6 +357,7 @@ function resetState() {
     stats_it_moves = 0;
     stats_it_cmps = 0;
     stats_pred_appls = 0;
+    stats_operation_calls = 0;
     stats_swaps = 0;
     stats_assigments = 0;
     stats_moves = 0;
@@ -398,6 +400,7 @@ function updateStats() {
     hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator displacements</b>: ' + stats_it_moves + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator comparisons</b>:   ' + stats_it_cmps + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Pred/Rel applications</b>:  ' + stats_pred_appls + '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Op. calls</b>:              ' + stats_operation_calls + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Swaps</b>:                  ' + stats_swaps + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Assignments</b>:            ' + stats_assigments + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Moves</b>:                  ' + stats_moves + '</p>';
@@ -513,6 +516,10 @@ function addLogPredicate(name, x, res) {
 }
 
 function addLogRelation(name, x, y, res) {
+    addLog(name + '(' + x + ', ' + y + ') = ' + res);
+}
+
+function addLogOperation(name, x, y, res) {
     addLog(name + '(' + x + ', ' + y + ') = ' + res);
 }
 
@@ -999,16 +1006,16 @@ function initFunctions(interpreter, scope) {
     };    
 
 
-    var set_predicate_wrapper = function(p) {
+    // var set_predicate_wrapper = function(p) {
        
-        // console.log(p.node.id.name);
-        // interpreter.appendCode(p.node.id.name+'();');
+    //     // console.log(p.node.id.name);
+    //     // interpreter.appendCode(p.node.id.name+'();');
 
-        predicates.push(p);
+    //     predicates.push(p);
         
-        updateStatus();
-        two.update();
-    };    
+    //     updateStatus();
+    //     two.update();
+    // };    
 
     var log_predicate_call_internal_wrapper = function(name, x, res) {
         if (log_stats_enabled) {
@@ -1040,6 +1047,22 @@ function initFunctions(interpreter, scope) {
         updateStatus();
 
         addLogRelation(name, x, y, res);
+
+        if (log_stats_enabled) {
+            //TODO
+            var hg_right_x_a = document.getElementById('hg-right-x-a');
+            var text = '<p id="Status">' + name + '(' + x + ', ' + y + ') = ' + res + '</p>';
+            hg_right_x_a.innerHTML += text;
+        }
+    };    
+
+    var log_operation_call_internal_wrapper = function(name, x, y, res) {
+        if (log_stats_enabled) {
+            ++stats_operation_calls;
+        }
+        updateStatus();
+
+        addLogOperation(name, x, y, res);
 
         if (log_stats_enabled) {
             //TODO
@@ -1192,6 +1215,7 @@ function initFunctions(interpreter, scope) {
     // interpreter.setProperty(scope, 'fill_elem',      interpreter.createNativeFunction(fill_elem_wrapper));
     interpreter.setProperty(scope, 'log_predicate_call_internal', interpreter.createNativeFunction(log_predicate_call_internal_wrapper));
     interpreter.setProperty(scope, 'log_relation_call_internal', interpreter.createNativeFunction(log_relation_call_internal_wrapper));
+    interpreter.setProperty(scope, 'log_operation_call_internal', interpreter.createNativeFunction(log_operation_call_internal_wrapper));
 
     interpreter.setProperty(scope, 'enable_log_stats', interpreter.createNativeFunction(enable_log_stats_wrapper));
     interpreter.setProperty(scope, 'disable_log_stats', interpreter.createNativeFunction(disable_log_stats_wrapper));
@@ -1302,24 +1326,44 @@ function add_utils_lib() {
     
     
     return `
-    function callable(f) {
+    function callable(f, type) {
         var c = callable_create(f);
         var fname = callable_get_name(c);
         var params = callable_get_parameters(c);
-        
-        if (params == 2) {
+
+        if (type == "relation") {
             var wrapped_func = function(x, y) {
                 var res = f(x, y); 
                 log_relation_call_internal(fname, x, y, res); 
                 return res;
             };        
-        } else if (params == 1) {
+        else if (type == "operation") {
+            var wrapped_func = function(x, y) {
+                var res = f(x, y); 
+                log_operation_call_internal(fname, x, y, res); 
+                return res;
+            };        
+        else if (type == "predicate") {
             var wrapped_func = function(x) {
                 var res = f(x);
                 log_predicate_call_internal(fname, x, res); 
                 return res;
             };
         }
+        
+        // if (params == 2) {
+        //     var wrapped_func = function(x, y) {
+        //         var res = f(x, y); 
+        //         log_relation_call_internal(fname, x, y, res); 
+        //         return res;
+        //     };        
+        // } else if (params == 1) {
+        //     var wrapped_func = function(x) {
+        //         var res = f(x);
+        //         log_predicate_call_internal(fname, x, res); 
+        //         return res;
+        //     };
+        // }
         wrapped_func.inner_callable = c;
         wrapped_func.inner_function = f;
         wrapped_func.inner_name = fname;
@@ -1328,10 +1372,13 @@ function add_utils_lib() {
         return wrapped_func;
     }    
     function relation(f) {
-        return callable(f);
+        return callable(f, "relation");
     }
     function predicate(f) {
-        return callable(f);
+        return callable(f, "predicate");
+    }
+    function operation(f) {
+        return callable(f, "operation");
     }
     function bind(r, value, arg) {
         return function(x) { 
@@ -1999,10 +2046,10 @@ function scopeOrder(scope) {
         'window',
         'sequence', 'sequence_internal', 'alert', 'assign_it',
         'begin', 'log_predicate_call_internal', 'log_relation_call',
-        'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
+        'log_relation_call_internal', 'log_operation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'find_if', 'sink', 'source', 'successor', 'remove_it',
         'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending', 
-        'relation', 'iter_swap', 'predecessor', 'predicate'];
+        'relation', 'iter_swap', 'predecessor', 'predicate', 'operation'];
 
     // 'fill_elem'
 
@@ -2115,10 +2162,10 @@ function drawScope(scope) {
         'window',
         'sequence', 'sequence_internal', 'alert', 'assign_it',
         'begin', 'log_predicate_call_internal', 'log_relation_call',
-        'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
+        'log_relation_call_internal', 'log_operation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'find_if', 'sink', 'source', 'successor', 'remove_it',
         'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending',
-        'relation', 'iter_swap', 'predecessor', 'predicate'];
+        'relation', 'iter_swap', 'predecessor', 'predicate', 'operation'];
 
         // 'fill_elem'
 
