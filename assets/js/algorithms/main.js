@@ -1337,13 +1337,13 @@ function add_utils_lib() {
                 log_relation_call_internal(fname, x, y, res); 
                 return res;
             };        
-        else if (type == "operation") {
+        } else if (type == "operation") {
             var wrapped_func = function(x, y) {
                 var res = f(x, y); 
                 log_operation_call_internal(fname, x, y, res); 
                 return res;
             };        
-        else if (type == "predicate") {
+        } else if (type == "predicate") {
             var wrapped_func = function(x) {
                 var res = f(x);
                 log_predicate_call_internal(fname, x, res); 
