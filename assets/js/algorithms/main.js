@@ -1069,7 +1069,7 @@ function initFunctions(interpreter, scope) {
         if (y) {
             addLogBinaryOperation(name, x, y, res);
         } else {
-            addLogUnaryOperation(name, x, y, res);
+            addLogUnaryOperation(name, x, res);
         }
 
         if (log_stats_enabled) {
