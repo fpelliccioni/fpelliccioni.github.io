@@ -519,8 +519,12 @@ function addLogRelation(name, x, y, res) {
     addLog(name + '(' + x + ', ' + y + ') = ' + res);
 }
 
-function addLogOperation(name, x, y, res) {
+function addLogBinaryOperation(name, x, y, res) {
     addLog(name + '(' + x + ', ' + y + ') = ' + res);
+}
+
+function addLogUnaryOperation(name, x, res) {
+    addLog(name + '(' + x + ') = ' + res);
 }
 
 
@@ -1062,12 +1066,22 @@ function initFunctions(interpreter, scope) {
         }
         updateStatus();
 
-        addLogOperation(name, x, y, res);
+        if (y) {
+            addLogBinaryOperation(name, x, y, res);
+        } else {
+            addLogUnaryOperation(name, x, y, res);
+        }
 
         if (log_stats_enabled) {
             //TODO
             var hg_right_x_a = document.getElementById('hg-right-x-a');
-            var text = '<p id="Status">' + name + '(' + x + ', ' + y + ') = ' + res + '</p>';
+
+            if (y) {
+                var text = '<p id="Status">' + name + '(' + x + ', ' + y + ') = ' + res + '</p>';
+            } else {
+                var text = '<p id="Status">' + name + '(' + x + ') = ' + res + '</p>';
+            }
+
             hg_right_x_a.innerHTML += text;
         }
     };    
@@ -1337,10 +1351,16 @@ function add_utils_lib() {
                 log_relation_call_internal(fname, x, y, res); 
                 return res;
             };        
-        } else if (type == "operation") {
+        } else if (type == "binary_operation") {
             var wrapped_func = function(x, y) {
                 var res = f(x, y); 
                 log_operation_call_internal(fname, x, y, res); 
+                return res;
+            };        
+        } else if (type == "unary_operation") {
+            var wrapped_func = function(x) {
+                var res = f(x); 
+                log_operation_call_internal(fname, x, undefined, res); 
                 return res;
             };        
         } else if (type == "predicate") {
@@ -1377,8 +1397,11 @@ function add_utils_lib() {
     function predicate(f) {
         return callable(f, "predicate");
     }
-    function operation(f) {
-        return callable(f, "operation");
+    function binary_operation(f) {
+        return callable(f, "binary_operation");
+    }
+    function unary_operation(f) {
+        return callable(f, "unary_operation");
     }
     function bind(r, value, arg) {
         return function(x) { 
