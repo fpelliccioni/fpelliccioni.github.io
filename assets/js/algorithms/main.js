@@ -982,6 +982,10 @@ function initFunctions(interpreter, scope) {
 
     var sequence_internal_wrapper = function(data_par, name, preds, drawChart) {
         // console.log(data_par)
+
+        console.log(`sequence_internal_wrapper preds: ${preds}`);
+        console.log(`sequence_internal_wrapper preds[0]: ${preds[0]}`);
+        console.log(`sequence_internal_wrapper preds[1]: ${preds[1]}`);
         
         if (sequences[name] != undefined) {
             showError('sequence "' + name + '" already exists.');
