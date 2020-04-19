@@ -268,6 +268,32 @@ function clone_color(color) {
     return { r: color.r, g: color.g, b: color.b };
 }
 
+function get_colors_array(n) {
+    if (n == 2) {
+        return [
+            { r: 0xd8, g: 0x98, b: 0xa7 },          //red
+            { r: 0xff, g: 0xa5, b: 0x2e },          //orange
+            { r: 0xf6, g: 0xff, b: 0x5b },          //yellow
+            { r: 191, g: 255, b: 179 },             //green
+        ];
+    }
+
+    if (n == 3) {
+        return [
+            { r: 0xd8, g: 0x98, b: 0xa7 },          //red
+            { r: 0xff, g: 0xa5, b: 0x2e },          //orange
+            { r: 0xff, g: 0x41, b: 0xdf },          //pink
+            { r: 0xf6, g: 0xff, b: 0x5b },          //yellow
+            { r: 0xd1, g: 0x41, b: 0xff },          //purple
+            { r: 0x41, g: 0x4c, b: 0xff },          //blue
+            { r: 0x41, g: 0xc3, b: 0xff },          //cyan
+            { r: 191, g: 255, b: 179 },             //green
+        ];        
+    }
+
+    return undefined;
+}
+
 function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
 
     // console.log(arr)
@@ -289,6 +315,9 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
         text.fill = '#99ff99';
         leftMargin += 14.46 * name.length
     }
+
+    
+
     var green_def = { r: 191, g: 255, b: 179 };
     var red_def = { r: 0xd8, g: 0x98, b: 0xa7 };
     var green = clone_color(green_def);
@@ -303,15 +332,34 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
         
         if (callables) {
             if (Array.isArray(callables)) {
-                var start_color = clone_color(green_def);
-                red = clone_color(red_def);
-                for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
-                    var current_callable = callables[callable_idx];
-                    if (execute_callable(current_callable, value)) {
-                        start_color = darker(start_color)
+                var colors_array = get_colors_array(callables.length);
+                if ( ! colors_array) {
+                    color = rgb_to_str(green);
+                } else {
+                    var color_index = 0;
+                    for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
+                        var current_callable = callables[callable_idx];
+                        if (execute_callable(current_callable, value)) {
+                            color_index ^= 1 << callable_idx;
+                            console.log(`predicate ${callable_idx} true`)
+                        } else {
+                            console.log(`predicate ${callable_idx} false`)
+                        }
                     }
+                    console.log(`color_index: ${color_index}`)
+                    color = rgb_to_str(colors_array[color_index]);
+
+                    // var start_color = clone_color(green_def);
+                    // red = clone_color(red_def);
+                    // for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
+                    //     var current_callable = callables[callable_idx];
+                    //     if (execute_callable(current_callable, value)) {
+                    //         start_color = darker(start_color)
+                    //     }
+                    // }
+                    // color = rgb_to_str(start_color);
                 }
-                color = rgb_to_str(start_color);
+
             } else {
                 if (is_predicate(callables) && ! execute_callable(callables, value)) {
                     color = rgb_to_str(red);
