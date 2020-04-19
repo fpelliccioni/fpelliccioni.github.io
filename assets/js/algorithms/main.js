@@ -309,7 +309,7 @@ function Iterator(data, index, name) {
     this.name = name;
 }
 
-function Sequence(name, data, elements, colors, capacity, pred, drawChart) {
+function Sequence(name, data, elements, colors, capacity, preds, drawChart) {
     if (capacity == undefined) {
         capacity = data.length
     }
@@ -318,7 +318,7 @@ function Sequence(name, data, elements, colors, capacity, pred, drawChart) {
     this.elements = elements;
     // this.colors = colors;
     this.capacity = capacity;
-    this.pred = pred;
+    this.preds = preds;
     this.drawChart = drawChart;
 }
 
@@ -704,7 +704,7 @@ function initFunctions(interpreter, scope) {
     };
 
     var increase_capacity_wrapper = function(seq, n) {
-        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.pred, seq.drawChart);
+        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.preds, seq.drawChart);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -727,7 +727,7 @@ function initFunctions(interpreter, scope) {
         // console.log(data)
         // console.log(cap)
 
-        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.pred, seq.drawChart);
+        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.preds, seq.drawChart);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -980,7 +980,7 @@ function initFunctions(interpreter, scope) {
         return c.parameters;
     }
 
-    var sequence_internal_wrapper = function(data_par, name, pred, drawChart) {
+    var sequence_internal_wrapper = function(data_par, name, preds, drawChart) {
         // console.log(data_par)
         
         if (sequences[name] != undefined) {
@@ -1001,7 +1001,7 @@ function initFunctions(interpreter, scope) {
         }
 
         var elems = null;
-        var retobj = new Sequence(name, data, elems, colors, undefined, pred, drawChart);
+        var retobj = new Sequence(name, data, elems, colors, undefined, preds, drawChart);
         sequences[name] = retobj;
 
         updateStatus();
@@ -2293,7 +2293,7 @@ function drawScope(scope) {
         var key = seq_internal[i].key;
         var value = seq_internal[i].value;
         // console.log(value);
-        var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.pred, value.drawChart);
+        var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
         sequences[value.name].elements = elems;
         ++seqn;
     }

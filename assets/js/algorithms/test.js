@@ -268,7 +268,7 @@ function clone_color(color) {
     return { r: color.r, g: color.g, b: color.b };
 }
 
-function drawArray(two, chart, name, id, arr, capacity, callable, drawChart) {
+function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
 
     // console.log(arr)
 
@@ -301,33 +301,45 @@ function drawArray(two, chart, name, id, arr, capacity, callable, drawChart) {
         // let color = colors[index];
         let color = defaultElementColor;
         
-        if (callable) {
-            if (is_predicate(callable) && ! execute_callable(callable, value)) {
-                color = rgb_to_str(red);
-            } else {
-                color = rgb_to_str(green);
-            }
-            if (is_relation(callable)) {
-                if (index != 0) {
-                    let prev = arr[index - 1];
-    
-                    var res = execute_callable(callable, value, prev);
-                    // console.log(res)
-                    // console.log(res != undefined)
-                    // console.log(! res)
-
-                    if ( res != undefined && ! res) {
-                        color = rgb_to_str(green);
-                        green = darker(green)
-                        red = clone_color(red_def);
-                    } else {
-                        color = rgb_to_str(red);
-                        red = darker(red)
-                        green = clone_color(green_def);
+        if (callables) {
+            if (Array.isArray(callables)) {
+                var start_color = clone_color(green_def);
+                red = clone_color(red_def);
+                for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
+                    var current_callable = callables[callable_idx];
+                    if (execute_callable(current_callable, value)) {
+                        start_color = darker(start_color)
                     }
+                }
+                color = rgb_to_str(start_color);
+            } else {
+                if (is_predicate(callables) && ! execute_callable(callables, value)) {
+                    color = rgb_to_str(red);
                 } else {
                     color = rgb_to_str(green);
-                    green = darker(green)
+                }
+                if (is_relation(callables)) {
+                    if (index != 0) {
+                        let prev = arr[index - 1];
+        
+                        var res = execute_callable(callables, value, prev);
+                        // console.log(res)
+                        // console.log(res != undefined)
+                        // console.log(! res)
+    
+                        if ( res != undefined && ! res) {
+                            color = rgb_to_str(green);
+                            green = darker(green)
+                            red = clone_color(red_def);
+                        } else {
+                            color = rgb_to_str(red);
+                            red = darker(red)
+                            green = clone_color(green_def);
+                        }
+                    } else {
+                        color = rgb_to_str(green);
+                        green = darker(green)
+                    }
                 }
             }
         } else {
