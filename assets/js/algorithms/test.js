@@ -331,6 +331,7 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
         let color = defaultElementColor;
         
         if (callables) {
+            console.log(`Array.isArray(callables): ${Array.isArray(callables)}`)
             if (Array.isArray(callables)) {
                 var colors_array = get_colors_array(callables.length);
                 if ( ! colors_array) {
