@@ -332,6 +332,8 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
         
         if (callables) {
             console.log(`callables: ${callables}`)
+            console.log(`callables[0]: ${callables[0]}`)
+            console.log(`callables[1]: ${callables[1]}`)
             console.log(`Array.isArray(callables): ${Array.isArray(callables)}`)
             if (Array.isArray(callables)) {
                 var colors_array = get_colors_array(callables.length);
