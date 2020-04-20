@@ -1014,16 +1014,26 @@ function initFunctions(interpreter, scope) {
         //     // colors.push(defaultElementColor);
         // }
 
-        var data = fromInterpreterArray(data_par);
+        if (data_par) {
+            var data = fromInterpreterArray(data_par);
+        } else {
+            var data = [];
+        }
         stats_n += data.length; 
-        var preds = fromInterpreterArray(preds_par);
-        console.log(`preds: ${preds}`);
-        console.log(`preds.length: ${preds.length}`);
+
+        if (preds_par) {
+            var preds = fromInterpreterArray(preds_par);
+        } else {
+            var preds = preds_par;
+        }
+
+        // console.log(`preds: ${preds}`);
+        // console.log(`preds.length: ${preds.length}`);
         if ( ! preds || preds.length == 1) {
-            console.log(`inside IF`);
+            // console.log(`inside IF`);
             preds = preds_par;
         }
-        console.log(`preds: ${preds}`);
+        // console.log(`preds: ${preds}`);
 
         var elems = null;
         var retobj = new Sequence(name, data, elems, colors, undefined, preds, drawChart);
