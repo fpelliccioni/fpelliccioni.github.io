@@ -549,6 +549,17 @@ function showError(text) {
     console.log(arguments.length ? text : '');
 }
 
+function fromInterpreterArray(array_par) {
+    var length = array_par.properties['length'];
+    if ( ! length) return undefined;
+
+    var ret = [];
+    for (let i = 0; i < length; ++i) {
+        ret.push(array_par.properties[i]);
+    }
+    return ret;
+}
+
 
 function initFunctions(interpreter, scope) {
 
@@ -980,12 +991,14 @@ function initFunctions(interpreter, scope) {
         return c.parameters;
     }
 
-    var sequence_internal_wrapper = function(data_par, name, preds, drawChart) {
+    var sequence_internal_wrapper = function(data_par, name, preds_par, drawChart) {
         // console.log(data_par)
 
-        console.log(`sequence_internal_wrapper preds: ${preds}`);
-        console.log(`sequence_internal_wrapper preds[0]: ${preds[0]}`);
-        console.log(`sequence_internal_wrapper preds[1]: ${preds[1]}`);
+        console.log(`sequence_internal_wrapper preds_par: ${preds_par}`);
+        console.log(`sequence_internal_wrapper preds_par[0]: ${preds_par[0]}`);
+        console.log(`sequence_internal_wrapper preds_par[1]: ${preds_par[1]}`);
+
+        console.log(`preds_par.properties['length'];: ${preds_par[1]}`);
         
         if (sequences[name] != undefined) {
             showError('sequence "' + name + '" already exists.');
@@ -993,17 +1006,21 @@ function initFunctions(interpreter, scope) {
             return null;
         }
 
-        var data = [];
         var colors = [];
-        var length = data_par.properties['length'];
+        // var data = [];
+        // var length = data_par.properties['length'];
+        // stats_n += length; 
+        // for (let i = 0; i < length; ++i) {
+        //     data.push(data_par.properties[i]);
+        //     // colors.push(defaultElementColor);
+        // }
 
-        stats_n += length; 
-
-        for (let i = 0; i < length; ++i) {
-            data.push(data_par.properties[i]);
-            // colors.push(defaultElementColor);
+        var data = fromInterpreterArray(data_par);
+        stats_n += data.length; 
+        var preds = fromInterpreterArray(preds_par);
+        if ( ! preds) {
+            preds = preds_par;
         }
-
         var elems = null;
         var retobj = new Sequence(name, data, elems, colors, undefined, preds, drawChart);
         sequences[name] = retobj;
