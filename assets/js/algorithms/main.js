@@ -994,11 +994,10 @@ function initFunctions(interpreter, scope) {
     var sequence_internal_wrapper = function(data_par, name, preds_par, drawChart) {
         // console.log(data_par)
 
-        console.log(`sequence_internal_wrapper preds_par: ${preds_par}`);
-        console.log(`sequence_internal_wrapper preds_par[0]: ${preds_par[0]}`);
-        console.log(`sequence_internal_wrapper preds_par[1]: ${preds_par[1]}`);
-
-        console.log(`preds_par.properties['length'];: ${preds_par[1]}`);
+        // console.log(`sequence_internal_wrapper preds_par: ${preds_par}`);
+        // console.log(`sequence_internal_wrapper preds_par[0]: ${preds_par[0]}`);
+        // console.log(`sequence_internal_wrapper preds_par[1]: ${preds_par[1]}`);
+        console.log(`preds_par.properties['length']: ${preds_par.properties['length']}`);
         
         if (sequences[name] != undefined) {
             showError('sequence "' + name + '" already exists.');
@@ -1018,9 +1017,12 @@ function initFunctions(interpreter, scope) {
         var data = fromInterpreterArray(data_par);
         stats_n += data.length; 
         var preds = fromInterpreterArray(preds_par);
+        console.log(`preds: ${preds}`);
         if ( ! preds) {
             preds = preds_par;
         }
+        console.log(`preds: ${preds}`);
+
         var elems = null;
         var retobj = new Sequence(name, data, elems, colors, undefined, preds, drawChart);
         sequences[name] = retobj;
