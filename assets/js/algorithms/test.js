@@ -331,10 +331,10 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
         let color = defaultElementColor;
         
         if (callables) {
-            console.log(`callables: ${callables}`)
+            // console.log(`callables: ${callables}`)
             // console.log(`callables[0]: ${callables[0]}`)
             // console.log(`callables[1]: ${callables[1]}`)
-            console.log(`Array.isArray(callables): ${Array.isArray(callables)}`)
+            // console.log(`Array.isArray(callables): ${Array.isArray(callables)}`)
             if (Array.isArray(callables)) {
                 var colors_array = get_colors_array(callables.length);
                 if ( ! colors_array) {
@@ -345,12 +345,12 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
                         var current_callable = callables[callable_idx];
                         if (execute_callable(current_callable, value)) {
                             color_index ^= 1 << callable_idx;
-                            console.log(`predicate ${callable_idx} true`)
+                            // console.log(`predicate ${callable_idx} true`)
                         } else {
-                            console.log(`predicate ${callable_idx} false`)
+                            // console.log(`predicate ${callable_idx} false`)
                         }
                     }
-                    console.log(`color_index: ${color_index}`)
+                    // console.log(`color_index: ${color_index}`)
                     color = rgb_to_str(colors_array[color_index]);
 
                     // var start_color = clone_color(green_def);

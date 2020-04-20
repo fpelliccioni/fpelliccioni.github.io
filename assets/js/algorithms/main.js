@@ -997,7 +997,7 @@ function initFunctions(interpreter, scope) {
         // console.log(`sequence_internal_wrapper preds_par: ${preds_par}`);
         // console.log(`sequence_internal_wrapper preds_par[0]: ${preds_par[0]}`);
         // console.log(`sequence_internal_wrapper preds_par[1]: ${preds_par[1]}`);
-        console.log(`preds_par.properties['length']: ${preds_par.properties['length']}`);
+        // console.log(`preds_par.properties['length']: ${preds_par.properties['length']}`);
         
         if (sequences[name] != undefined) {
             showError('sequence "' + name + '" already exists.');
