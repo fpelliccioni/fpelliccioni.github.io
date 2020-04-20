@@ -1018,7 +1018,7 @@ function initFunctions(interpreter, scope) {
         stats_n += data.length; 
         var preds = fromInterpreterArray(preds_par);
         console.log(`preds: ${preds}`);
-        if ( ! preds) {
+        if ( ! preds || preds.length == 1) {
             preds = preds_par;
         }
         console.log(`preds: ${preds}`);
