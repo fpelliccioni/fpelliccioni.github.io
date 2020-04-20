@@ -198,7 +198,7 @@ function execute_callable() {
 
     full_code += ");";
 
-    // console.log(full_code)
+    console.log(full_code)
     var res = eval(full_code)
     // console.log(res)
     return res;
