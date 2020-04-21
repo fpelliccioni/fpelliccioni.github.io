@@ -83,9 +83,16 @@ function setSizes() {
     labelFontSize = escale_font(24);
     
     pointerTriangleSize = escale_other(5);
+    arrowTriangleSize = escale_other(4);
+
+
+    arrayElementSep = escale_x(40);
+    sllElementSep = escale_x(88);
+    dllElementSep = escale_x(120);
+
 }
 
-function drawElement(two, x, y, text, index, color = defaultElementColor) {
+function drawArrayElement(two, x, y, text, index, color = defaultElementColor) {
 
     var textIndex = two.makeText(index, x, y + escale_y(8));
     textIndex.family = "FiraCode"; //"Source Code Pro";
@@ -116,8 +123,7 @@ function drawElement(two, x, y, text, index, color = defaultElementColor) {
     };
 }
 
-
-function drawPastLast(two, x, y) {
+function drawArrayPastLast(two, x, y) {
     var rect = two.makeRectangle(x, y + escale_y(45), rectWidth, rectHeight);
     rect.fill = '#cacaca';
     rect.stroke = 'black'
@@ -132,6 +138,8 @@ function drawPastLast(two, x, y) {
     };
 
 }
+
+// ------------------------------------------------------------------------------
 
 function drawIterator(two, elem, text, color = '#99ff99') {
     var x = elem.rect.translation._x;
@@ -294,6 +302,82 @@ function get_colors_array(n) {
     return undefined;
 }
 
+
+function doColorWork(value, callables, green, red, defaultElementColor) {
+    // let color = colors[index];
+    let color = defaultElementColor;
+
+    if (callables) {
+        // console.log(`callables: ${callables}`)
+        // console.log(`callables[0]: ${callables[0]}`)
+        // console.log(`callables[1]: ${callables[1]}`)
+        // console.log(`Array.isArray(callables): ${Array.isArray(callables)}`)
+        if (Array.isArray(callables)) {
+            var colors_array = get_colors_array(callables.length);
+            if ( ! colors_array) {
+                color = rgb_to_str(green);
+            } else {
+                var color_index = 0;
+                for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
+                    var current_callable = callables[callable_idx];
+                    if (execute_callable(current_callable, value)) {
+                        color_index ^= 1 << callable_idx;
+                        // console.log(`predicate ${callable_idx} true`)
+                    } else {
+                        // console.log(`predicate ${callable_idx} false`)
+                    }
+                }
+                // console.log(`color_index: ${color_index}`)
+                color = rgb_to_str(colors_array[color_index]);
+
+                // var start_color = clone_color(green_def);
+                // red = clone_color(red_def);
+                // for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
+                //     var current_callable = callables[callable_idx];
+                //     if (execute_callable(current_callable, value)) {
+                //         start_color = darker(start_color)
+                //     }
+                // }
+                // color = rgb_to_str(start_color);
+            }
+
+        } else {
+            if (is_predicate(callables) && ! execute_callable(callables, value)) {
+                color = rgb_to_str(red);
+            } else {
+                color = rgb_to_str(green);
+            }
+            if (is_relation(callables)) {
+                if (index != 0) {
+                    let prev = arr[index - 1];
+
+                    var res = execute_callable(callables, value, prev);
+                    // console.log(res)
+                    // console.log(res != undefined)
+                    // console.log(! res)
+
+                    if ( res != undefined && ! res) {
+                        color = rgb_to_str(green);
+                        green = darker(green)
+                        red = clone_color(red_def);
+                    } else {
+                        color = rgb_to_str(red);
+                        red = darker(red)
+                        green = clone_color(green_def);
+                    }
+                } else {
+                    color = rgb_to_str(green);
+                    green = darker(green)
+                }
+            }
+        }
+    } else {
+        color = rgb_to_str(green);
+    }
+
+    return color;
+}
+
 function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
 
     // console.log(arr)
@@ -327,83 +411,14 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
 
     for (let index = 0; index < arr.length; ++index) {
         let value = arr[index];
-        // let color = colors[index];
-        let color = defaultElementColor;
-        
-        if (callables) {
-            // console.log(`callables: ${callables}`)
-            // console.log(`callables[0]: ${callables[0]}`)
-            // console.log(`callables[1]: ${callables[1]}`)
-            // console.log(`Array.isArray(callables): ${Array.isArray(callables)}`)
-            if (Array.isArray(callables)) {
-                var colors_array = get_colors_array(callables.length);
-                if ( ! colors_array) {
-                    color = rgb_to_str(green);
-                } else {
-                    var color_index = 0;
-                    for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
-                        var current_callable = callables[callable_idx];
-                        if (execute_callable(current_callable, value)) {
-                            color_index ^= 1 << callable_idx;
-                            // console.log(`predicate ${callable_idx} true`)
-                        } else {
-                            // console.log(`predicate ${callable_idx} false`)
-                        }
-                    }
-                    // console.log(`color_index: ${color_index}`)
-                    color = rgb_to_str(colors_array[color_index]);
-
-                    // var start_color = clone_color(green_def);
-                    // red = clone_color(red_def);
-                    // for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
-                    //     var current_callable = callables[callable_idx];
-                    //     if (execute_callable(current_callable, value)) {
-                    //         start_color = darker(start_color)
-                    //     }
-                    // }
-                    // color = rgb_to_str(start_color);
-                }
-
-            } else {
-                if (is_predicate(callables) && ! execute_callable(callables, value)) {
-                    color = rgb_to_str(red);
-                } else {
-                    color = rgb_to_str(green);
-                }
-                if (is_relation(callables)) {
-                    if (index != 0) {
-                        let prev = arr[index - 1];
-        
-                        var res = execute_callable(callables, value, prev);
-                        // console.log(res)
-                        // console.log(res != undefined)
-                        // console.log(! res)
-    
-                        if ( res != undefined && ! res) {
-                            color = rgb_to_str(green);
-                            green = darker(green)
-                            red = clone_color(red_def);
-                        } else {
-                            color = rgb_to_str(red);
-                            red = darker(red)
-                            green = clone_color(green_def);
-                        }
-                    } else {
-                        color = rgb_to_str(green);
-                        green = darker(green)
-                    }
-                }
-            }
-        } else {
-            color = rgb_to_str(green);
-        }
+        var color = doColorWork(value, callables, green, red, defaultElementColor);
 
         if (drawChart) {
             colors.push(str_to_rgba_str(color, 0.2));
             borders.push(str_to_rgba_str(color, 1));
         }
         
-        var e = drawElement(two, leftMargin + rectWidth / 2 + index * rectWidth, topMargin, value, index, color);
+        var e = drawArrayElement(two, leftMargin + rectWidth / 2 + index * arrayElementSep, topMargin, value, index, color);
         elements.push(e)
         // console.log(value);
     }
@@ -437,11 +452,11 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
     // console.log(cap_len)
 
     for (let index = 0; index < cap_len; ++index) {
-        var e = drawPastLast(two, leftMargin + rectWidth / 2 + (arr.length + index) * rectWidth, topMargin);
+        var e = drawArrayPastLast(two, leftMargin + rectWidth / 2 + (arr.length + index) * arrayElementSep, topMargin);
         elements.push(e)
     }
 
-    var e_last = drawPastLast(two, leftMargin + rectWidth / 2 + (arr.length + cap_len) * rectWidth, topMargin);
+    var e_last = drawArrayPastLast(two, leftMargin + rectWidth / 2 + (arr.length + cap_len) * arrayElementSep, topMargin);
     elements.push(e_last)
 
     two.update();
@@ -452,7 +467,7 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
 
 
 
-function drawNamedElementFinish(x, name, text) {
+function drawArrayNamedElementFinish(x, name, text) {
 
     var min_width = 2 * escale_x(19.2) + escale_x(5);
 
@@ -465,7 +480,7 @@ function drawNamedElementFinish(x, name, text) {
     return x + escale_x(14.46) * name.length + w / 2 + w
 }
 
-function drawNamedElementSimple(two, x, y, name, text, color = defaultElementColor) {
+function drawArrayNamedElementSimple(two, x, y, name, text, color = defaultElementColor) {
 
     // console.log(text)
     // console.log(text.toString())
@@ -530,8 +545,8 @@ function drawVariable(two, name, value, initTop) {
         var leftMargin = last.elements[0].x_finish;
         var topMargin = last.elements[0].y;
 
-        // console.log('drawNamedElementFinish')
-        var finish = drawNamedElementFinish(leftMargin, name, value);
+        // console.log('drawArrayNamedElementFinish')
+        var finish = drawArrayNamedElementFinish(leftMargin, name, value);
         if (finish > two.width) {
             var leftMargin = defaultLeftMargin;
             topMargin = topMargin + variableTotalHeight;
@@ -541,16 +556,500 @@ function drawVariable(two, name, value, initTop) {
         var leftMargin = defaultLeftMargin;
     }
     
-    // console.log('drawNamedElementSimple')
+    // console.log('drawArrayNamedElementSimple')
 
-    // var e = drawNamedElementSimple(two,  leftMargin + rectWidth / 2, topMargin + 30, name, value);
-    var e = drawNamedElementSimple(two, leftMargin, topMargin, name, value);
+    // var e = drawArrayNamedElementSimple(two,  leftMargin + rectWidth / 2, topMargin + 30, name, value);
+    var e = drawArrayNamedElementSimple(two, leftMargin, topMargin, name, value);
     elements.push(e)
 
     two.update();
 
     return elements;
 }
+
+
+// ----------------------------------------------------------------------------
+// Single-linked Lists
+// ----------------------------------------------------------------------------
+
+function drawSingleLinkedList(two, chart, name, id, arr, capacity, callables, drawChart) {
+
+    // console.log(arr)
+
+    if (capacity == undefined) {
+        capacity = arr.length
+    }
+
+    var elements = []
+    var leftMargin = defaultLeftMargin;
+    var topMargin = defaultTopMargin + id * sequenceTotalHeight;
+
+    if (name) {
+        name += ":"
+        var text = two.makeText(name, leftMargin, topMargin +  escale_y(45));
+        text.family = "FiraCode"; //"Source Code Pro";
+        text.size = labelFontSize
+        text.alignment = 'left'
+        text.fill = '#99ff99';
+        leftMargin += 14.46 * name.length
+    }
+
+    var green_def = { r: 191, g: 255, b: 179 };
+    var red_def = { r: 0xd8, g: 0x98, b: 0xa7 };
+    var green = clone_color(green_def);
+    var red = clone_color(red_def);
+    var colors = [];
+    var borders = [];
+
+    for (let index = 0; index < arr.length; ++index) {
+        let value = arr[index];
+
+        // // let color = colors[index];
+        // let color = defaultElementColor;
+        
+        // if (callables) {
+        //     // console.log(`callables: ${callables}`)
+        //     // console.log(`callables[0]: ${callables[0]}`)
+        //     // console.log(`callables[1]: ${callables[1]}`)
+        //     // console.log(`Array.isArray(callables): ${Array.isArray(callables)}`)
+        //     if (Array.isArray(callables)) {
+        //         var colors_array = get_colors_array(callables.length);
+        //         if ( ! colors_array) {
+        //             color = rgb_to_str(green);
+        //         } else {
+        //             var color_index = 0;
+        //             for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
+        //                 var current_callable = callables[callable_idx];
+        //                 if (execute_callable(current_callable, value)) {
+        //                     color_index ^= 1 << callable_idx;
+        //                     // console.log(`predicate ${callable_idx} true`)
+        //                 } else {
+        //                     // console.log(`predicate ${callable_idx} false`)
+        //                 }
+        //             }
+        //             // console.log(`color_index: ${color_index}`)
+        //             color = rgb_to_str(colors_array[color_index]);
+
+        //             // var start_color = clone_color(green_def);
+        //             // red = clone_color(red_def);
+        //             // for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
+        //             //     var current_callable = callables[callable_idx];
+        //             //     if (execute_callable(current_callable, value)) {
+        //             //         start_color = darker(start_color)
+        //             //     }
+        //             // }
+        //             // color = rgb_to_str(start_color);
+        //         }
+
+        //     } else {
+        //         if (is_predicate(callables) && ! execute_callable(callables, value)) {
+        //             color = rgb_to_str(red);
+        //         } else {
+        //             color = rgb_to_str(green);
+        //         }
+        //         if (is_relation(callables)) {
+        //             if (index != 0) {
+        //                 let prev = arr[index - 1];
+        
+        //                 var res = execute_callable(callables, value, prev);
+        //                 // console.log(res)
+        //                 // console.log(res != undefined)
+        //                 // console.log(! res)
+    
+        //                 if ( res != undefined && ! res) {
+        //                     color = rgb_to_str(green);
+        //                     green = darker(green)
+        //                     red = clone_color(red_def);
+        //                 } else {
+        //                     color = rgb_to_str(red);
+        //                     red = darker(red)
+        //                     green = clone_color(green_def);
+        //                 }
+        //             } else {
+        //                 color = rgb_to_str(green);
+        //                 green = darker(green)
+        //             }
+        //         }
+        //     }
+        // } else {
+        //     color = rgb_to_str(green);
+        // }
+
+        var color = doColorWork(value, callables, green, red, defaultElementColor);
+
+        if (drawChart) {
+            colors.push(str_to_rgba_str(color, 0.2));
+            borders.push(str_to_rgba_str(color, 1));
+        }
+        
+        var e = drawSingleLinkedListElement(two, leftMargin + rectWidth / 2 + index * sllElementSep, topMargin, value, index, color);
+        elements.push(e)
+        
+        // console.log(value);
+    }
+
+    // -------------------------------------------------
+    // console.log(colors);
+    // console.log(borders);
+
+    if (drawChart) {
+        if (chart == null) {
+            chart = createChart();
+        }
+
+        chart.data = {
+            labels: arr,
+            datasets: [{
+                // label: 'asdasd',
+                data: arr,
+                backgroundColor: colors,
+                borderColor: borders,
+                borderWidth: 3
+            }]
+        };
+        chart.update();
+    }
+    // -------------------------------------------------
+
+
+    var cap_len = capacity - arr.length;
+
+    // console.log(cap_len)
+
+    for (let index = 0; index < cap_len; ++index) {
+        var e = drawSingleLinkedListPastLast(two, leftMargin + rectWidth / 2 + (arr.length + index) * sllElementSep, topMargin);
+        elements.push(e)
+    }
+
+    var e_last = drawSingleLinkedListPastLast(two, leftMargin + rectWidth / 2 + (arr.length + cap_len) * sllElementSep, topMargin);
+    elements.push(e_last)
+
+    two.update();
+
+    return elements;
+}
+
+function drawSingleLinkedListElement(two, x, y, text, index, color = defaultElementColor) {
+
+    var textIndex = two.makeText(index, x, y + escale_y(8));
+    textIndex.family = "FiraCode"; //"Source Code Pro";
+    
+    textIndex.size = indexFontSize
+    textIndex.fill = 'white';
+
+    var rect = two.makeRectangle(x, y + escale_y(45), rectWidth, rectHeight);
+    rect.fill = color;
+    rect.stroke = 'black'
+    rect.linewidth = 1;
+    // console.log(rect.x)
+    // console.log(rect.width)
+    // console.log(rect.translation._x)
+
+    
+
+    var nextRect = two.makeRectangle(x + (rectWidth * 3 / 4), y + escale_y(45), (rectWidth / 2), rectHeight);
+    nextRect.fill = '#cacaca';
+    nextRect.stroke = 'black'
+    nextRect.linewidth = 1;
+
+    var arrowCircle = two.makeCircle(x + (rectWidth * 3 / 4), y + escale_y(45) + escale_y(1.5), 2);
+    arrowCircle.stroke = "white";
+    arrowCircle.fill = "white";
+
+    var arrowLine = two.makeLine(x + (rectWidth * 3 / 4), 
+                                 y + escale_y(45) + escale_y(1.5), 
+                                 x + rectWidth + (rectWidth / 2), 
+                                 y + escale_y(45) + escale_y(1.5));
+    arrowLine.stroke = "white";
+    arrowLine.fill = "white";
+
+    var arrowTri = two.makePolygon(x + rectWidth + escale_x(20), 
+                                   y + escale_y(45) + escale_y(1.5), 
+                                   arrowTriangleSize)
+    arrowTri.fill = "white";
+    arrowTri.noStroke();
+    arrowTri.rotation = (Math.PI / 2);
+
+    var text = two.makeText(text, x, y + escale_y(45) + escale_y(1.5));
+    text.family = "FiraCode"; //"Source Code Pro";
+    text.size = fontSize
+
+    var group = two.makeGroup(rect, text, nextRect, arrowCircle, arrowLine, arrowTri);//, textIndex);
+    // console.log(group.x)
+    // return group;
+
+    return {
+        group: group,
+        rect: rect
+    };
+}
+
+function drawSingleLinkedListPastLast(two, x, y, text, index, color = defaultElementColor) {
+
+    var rect = two.makeRectangle(x, y + escale_y(45), rectWidth, rectHeight);
+    rect.fill = '#cacaca';
+    rect.stroke = 'black'
+    rect.linewidth = 1;
+
+    var nextRect = two.makeRectangle(x + (rectWidth * 3 / 4), y + escale_y(45), (rectWidth / 2), rectHeight);
+    nextRect.fill = '#cacaca';
+    nextRect.stroke = 'black'
+    nextRect.linewidth = 1;
+
+    var arrowCircle = two.makeCircle(x + (rectWidth * 3 / 4), y + escale_y(45) + escale_y(1.5), 2);
+    arrowCircle.stroke = "black";
+    arrowCircle.fill = "black";
+
+    var group = two.makeGroup(rect, nextRect, arrowCircle);
+
+    return {
+        group: group,
+        rect: rect
+    };
+}
+
+
+// ----------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------
+// Double-linked Lists
+// ----------------------------------------------------------------------------
+
+
+
+function drawDoubleLinkedList(two, chart, name, id, arr, capacity, callables, drawChart) {
+
+    // console.log(arr)
+
+    if (capacity == undefined) {
+        capacity = arr.length
+    }
+
+    var elements = []
+    var leftMargin = defaultLeftMargin;
+    var topMargin = defaultTopMargin + id * sequenceTotalHeight;
+
+    if (name) {
+        name += ":"
+        var text = two.makeText(name, leftMargin, topMargin +  escale_y(45));
+        text.family = "FiraCode"; //"Source Code Pro";
+        text.size = labelFontSize
+        text.alignment = 'left'
+        text.fill = '#99ff99';
+        leftMargin += 14.46 * name.length
+    }
+
+    var green_def = { r: 191, g: 255, b: 179 };
+    var red_def = { r: 0xd8, g: 0x98, b: 0xa7 };
+    var green = clone_color(green_def);
+    var red = clone_color(red_def);
+    var colors = [];
+    var borders = [];
+
+    for (let index = 0; index < arr.length; ++index) {
+        let value = arr[index];
+        var color = doColorWork(value, callables, green, red, defaultElementColor);
+
+        if (drawChart) {
+            colors.push(str_to_rgba_str(color, 0.2));
+            borders.push(str_to_rgba_str(color, 1));
+        }
+        
+        var e = drawDoubleLinkedListElement(two, leftMargin + rectWidth / 2 + index * dllElementSep, topMargin, value, index, color);
+        elements.push(e)
+        
+        // console.log(value);
+    }
+
+    // -------------------------------------------------
+    // console.log(colors);
+    // console.log(borders);
+
+    if (drawChart) {
+        if (chart == null) {
+            chart = createChart();
+        }
+
+        chart.data = {
+            labels: arr,
+            datasets: [{
+                // label: 'asdasd',
+                data: arr,
+                backgroundColor: colors,
+                borderColor: borders,
+                borderWidth: 3
+            }]
+        };
+        chart.update();
+    }
+    // -------------------------------------------------
+
+
+    var cap_len = capacity - arr.length;
+
+    // console.log(cap_len)
+
+    for (let index = 0; index < cap_len; ++index) {
+        var e = drawDoubleLinkedListPastLast(two, leftMargin + rectWidth / 2 + (arr.length + index) * dllElementSep, topMargin);
+        elements.push(e)
+    }
+
+    var e_last = drawDoubleLinkedListPastLast(two, leftMargin + rectWidth / 2 + (arr.length + cap_len) * dllElementSep, topMargin);
+    elements.push(e_last)
+
+    two.update();
+
+    return elements;
+}
+
+function drawDoubleLinkedListElement(two, x, y, text, index, color = defaultElementColor) {
+
+    var textIndex = two.makeText(index, x + (rectWidth * 3/4), y + escale_y(8));
+    textIndex.family = "FiraCode"; //"Source Code Pro";
+    textIndex.size = indexFontSize
+    textIndex.fill = 'white';
+
+    var prevRect = two.makeRectangle(x, y + escale_y(45), (rectWidth / 2), rectHeight);
+    prevRect.fill = '#cacaca';
+    prevRect.stroke = 'black'
+    prevRect.linewidth = 1;
+
+    var rect = two.makeRectangle(x + (rectWidth * 3/4), y + escale_y(45), rectWidth, rectHeight);
+    rect.fill = color;
+    rect.stroke = 'black'
+    rect.linewidth = 1;
+    // console.log(rect.x)
+    // console.log(rect.width)
+    // console.log(rect.translation._x)
+
+    var nextRect = two.makeRectangle(x + rectWidth + (rectWidth * 1 / 2), y + escale_y(45), (rectWidth / 2), rectHeight);
+    nextRect.fill = '#cacaca';
+    nextRect.stroke = 'black'
+    nextRect.linewidth = 1;
+
+
+    // Right arrow --------------------------------
+    var rightArrowCircle = two.makeCircle(x + rectWidth + (rectWidth * 1 / 2), 
+                                          y + escale_y(35) + escale_y(1.5), 2);
+    rightArrowCircle.stroke = "white";
+    rightArrowCircle.fill = "white";
+
+    var rightArrowLine = two.makeLine(x + rectWidth + (rectWidth * 1 / 2), 
+                                 y + escale_y(35) + escale_y(1.5), 
+                                 x + rectWidth + rectWidth + (rectWidth / 2), 
+                                 y + escale_y(35) + escale_y(1.5));
+    rightArrowLine.stroke = "white";
+    rightArrowLine.fill = "white";
+
+    var rightArrowTri = two.makePolygon(x + rectWidth + rectWidth + escale_x(20), 
+                                   y + escale_y(35) + escale_y(1.5), 
+                                   arrowTriangleSize)
+    rightArrowTri.fill = "white";
+    rightArrowTri.noStroke();
+    rightArrowTri.rotation = (Math.PI / 2);
+
+    // Left arrow --------------------------------
+    var leftArrowCircle = two.makeCircle(x, 
+                                         y + escale_y(55) + escale_y(1.5), 2);
+
+    if (index == 0) {
+        leftArrowCircle.stroke = "black";
+        leftArrowCircle.fill = "black";
+    } else {
+        leftArrowCircle.stroke = "white";
+        leftArrowCircle.fill = "white";
+    }
+
+    if (index != 0) {
+        var leftArrowLine = two.makeLine(x,
+                                    y + escale_y(55) + escale_y(1.5), 
+                                    x - rectWidth, 
+                                    y + escale_y(55) + escale_y(1.5));
+        leftArrowLine.stroke = "white";
+        leftArrowLine.fill = "white";
+
+        var leftArrowTri = two.makePolygon(x - rectWidth - escale_x(2), 
+                                    y + escale_y(55) + escale_y(1.5), 
+                                    arrowTriangleSize)
+        leftArrowTri.fill = "white";
+        leftArrowTri.noStroke();
+        leftArrowTri.rotation = (Math.PI / -2);
+    }
+
+    var text = two.makeText(text, x + (rectWidth * 3/4), y + escale_y(45) + escale_y(1.5));
+    text.family = "FiraCode"; //"Source Code Pro";
+    text.size = fontSize
+
+    if (index == 0) {
+        var group = two.makeGroup(rect, text, prevRect, nextRect, rightArrowCircle, rightArrowLine, rightArrowTri, leftArrowCircle);
+    } else {
+        var group = two.makeGroup(rect, text, prevRect, nextRect, rightArrowCircle, rightArrowLine, rightArrowTri, leftArrowCircle, leftArrowLine, leftArrowTri);
+    }
+    // console.log(group.x)
+    // return group;
+
+    return {
+        group: group,
+        rect: rect
+    };
+}
+
+function drawDoubleLinkedListPastLast(two, x, y, text, index, color = defaultElementColor) {
+
+    var prevRect = two.makeRectangle(x, y + escale_y(45), (rectWidth / 2), rectHeight);
+    prevRect.fill = '#cacaca';
+    prevRect.stroke = 'black'
+    prevRect.linewidth = 1;
+
+    var rect = two.makeRectangle(x + (rectWidth * 3 / 4), y + escale_y(45), rectWidth, rectHeight);
+    rect.fill = '#cacaca';
+    rect.stroke = 'black'
+    rect.linewidth = 1;
+
+    var nextRect = two.makeRectangle(x + rectWidth + (rectWidth * 1 / 2), y + escale_y(45), (rectWidth / 2), rectHeight);
+    nextRect.fill = '#cacaca';
+    nextRect.stroke = 'black'
+    nextRect.linewidth = 1;
+
+    // Right arrow --------------------------------
+    var rightArrowCircle = two.makeCircle(x + rectWidth + (rectWidth * 1 / 2), 
+                                          y + escale_y(35) + escale_y(1.5), 2);
+    rightArrowCircle.stroke = "black";
+    rightArrowCircle.fill = "black";
+
+
+    // Left arrow --------------------------------
+    var leftArrowCircle = two.makeCircle(x, 
+                                         y + escale_y(55) + escale_y(1.5), 
+                                         2);
+    leftArrowCircle.stroke = "white";
+    leftArrowCircle.fill = "white";
+
+    var leftArrowLine = two.makeLine(x,
+                                    y + escale_y(55) + escale_y(1.5), 
+                                    x - rectWidth, 
+                                    y + escale_y(55) + escale_y(1.5));
+    leftArrowLine.stroke = "white";
+    leftArrowLine.fill = "white";
+
+    var leftArrowTri = two.makePolygon(x - rectWidth - escale_x(2), 
+                                       y + escale_y(55) + escale_y(1.5), 
+                                       arrowTriangleSize)
+    leftArrowTri.fill = "white";
+    leftArrowTri.noStroke();
+    leftArrowTri.rotation = (Math.PI / -2);
+
+
+    var group = two.makeGroup(rect, nextRect, prevRect, rightArrowCircle, leftArrowCircle, leftArrowLine, leftArrowTri);
+
+    return {
+        group: group,
+        rect: rect
+    };
+}
+
+
+// ----------------------------------------------------------------------------
 
 
 function drawCountedRange(f, n) {
@@ -574,7 +1073,6 @@ function drawCountedRange(f, n) {
         var x_last = elem_last.rect.translation._x + rectWidth / 2;
         var y_last = elem_last.rect.translation._y + elem_last.rect.height / 2 + escale_y(20);
     }
-
 
     var line = two.makeLine(x + escale_x(10), y, x_last, y);
     line.stroke = color;
@@ -600,7 +1098,6 @@ function drawCountedRange(f, n) {
     line2.stroke = color;
     line2.fill = color;
 
-
     var line3 = two.makeLine(x - escale_x(10), y, x - rectWidth / 2, y);
     line3.stroke = color;
     line3.fill = color;
@@ -609,18 +1106,7 @@ function drawCountedRange(f, n) {
     line4.stroke = color;
     line4.fill = color;
 
-
     two.update();
-
-
-
-
-
-
-
-
-
-
 
     // var tri = two.makePolygon(x, y, pointerTriangleSize)
     // tri.fill = color;
@@ -646,7 +1132,6 @@ function drawCountedRange(f, n) {
     // //     group: group,
     // //     tri: tri
     // // };    
-
 }
 
 

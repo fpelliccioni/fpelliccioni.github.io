@@ -303,13 +303,80 @@ function fillCatalogFull() {
     list.innerHTML = str;
 }
 
-function Iterator(data, index, name) {
+function Iterator(data, index, name, category) {
     this.data = data;
     this.index = index;
     this.name = name;
+    this.category = category;
 }
 
-function Sequence(name, data, elements, colors, capacity, preds, drawChart) {
+function getIteratorCatetoryFromSeqType(seqType) {
+    // console.log(`getIteratorCatetoryFromSeqType seqType ${seqType}`);
+    if (seqType === "array") {
+        return 3; //"RandomAccess";
+    } else if (seqType === "sll") {
+        return 1; //"Forward";
+    } else if (seqType === "dll") {
+        return 2; //"Bidirectional";
+    } else if (seqType === "stream") {
+        return 0; //"SinglePass";
+    }
+    return undefined;
+}
+
+function iteratorCategoryToString(category) {
+    console.log(category)
+    if (category === 3) {
+        return "RandomAccess";
+    } else if (category === 1) {
+        return "Forward";
+    } else if (category === 2) {
+        return "Bidirectional";
+    } else if (category === 0) {
+        return "SinglePass";
+    }
+    return undefined;
+}
+
+function isSinglePass(it) {
+    return it.category >= 0;
+}
+
+function isSinglePassStrict(it) {
+    return it.category == 0;
+}
+
+function isForward(it) {
+    return it.category >= 1;
+}
+
+function isBidirectional(it) {
+    return it.category >= 2;
+}
+
+function isRandomAccess(it) {
+    // console.log(it)
+    // console.log(it.category)
+    return it.category >= 3;
+}
+
+function clearStream(it, n) {
+    if ( ! isSinglePassStrict(it)) return;
+
+    // console.log(`clearStream`)
+    // console.log(it)
+    // console.log(n)
+
+    var i = it.index;
+    while (n != 0) {
+        it.data.data[i] = undefined;
+        ++i;
+        --n;
+    }
+}
+
+
+function Sequence(name, data, elements, colors, capacity, preds, type, drawChart) {
     if (capacity == undefined) {
         capacity = data.length
     }
@@ -319,6 +386,7 @@ function Sequence(name, data, elements, colors, capacity, preds, drawChart) {
     // this.colors = colors;
     this.capacity = capacity;
     this.preds = preds;
+    this.type = type;
     this.drawChart = drawChart;
 }
 
@@ -356,6 +424,7 @@ function resetState() {
     stats_n = 0;
     stats_it_moves = 0;
     stats_it_cmps = 0;
+    stats_it_other_ops = 0;
     stats_pred_appls = 0;
     stats_operation_calls = 0;
     stats_swaps = 0;
@@ -399,6 +468,7 @@ function updateStats() {
     hg_right_x_b.innerHTML += '<p id="Status"><b>n</b>:                      ' + stats_n + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator displacements</b>: ' + stats_it_moves + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator comparisons</b>:   ' + stats_it_cmps + '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator other ops.</b>:    ' + stats_it_other_ops + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Pred/Rel applications</b>:  ' + stats_pred_appls + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Op. calls</b>:              ' + stats_operation_calls + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Swaps</b>:                  ' + stats_swaps + '</p>';
@@ -611,13 +681,22 @@ function initFunctions(interpreter, scope) {
             return;
         }
 
-        var it = new Iterator(it_par.data, it_par.index + step, it_par.name);
+        var it = new Iterator(it_par.data, it_par.index + step, it_par.name, it_par.category);
         if (iterators_int[it.name]) {
             iterators_int[it.name] = it;
         }
 
+        // console.log(`isSinglePass(it_par): ${isSinglePass(it_par)}`);
+        if (isSinglePass(it_par)) {
+            clearStream(it_par, step);
+        }
+
         if (log_stats_enabled) {
-            ++stats_it_moves;
+            if (isRandomAccess(it_par)) {
+                ++stats_it_moves;
+            } else {
+                stats_it_moves += step;
+            }
         }
 
         updateStatus();
@@ -626,6 +705,15 @@ function initFunctions(interpreter, scope) {
     };
 
     var predecessor_wrapper = function (it_par, step_par = 1) {
+        console.log(it_par);
+        console.log(it_par.category);
+
+        if ( ! isBidirectional(it_par)) {
+            showError(`predecessor function is not defined for ${iteratorCategoryToString(it_par.category)} iterators`);
+            disable('disabled');
+            return;
+        }
+
         step = 0 + step_par;
         // console.log(step_par)
         // console.log(step)
@@ -635,13 +723,17 @@ function initFunctions(interpreter, scope) {
             return;
         }
 
-        var it = new Iterator(it_par.data, it_par.index - step, it_par.name);
+        var it = new Iterator(it_par.data, it_par.index - step, it_par.name, it_par.category);
         if (iterators_int[it.name]) {
             iterators_int[it.name] = it;
         }
         
         if (log_stats_enabled) {
-            ++stats_it_moves;
+            if (isRandomAccess(it_par)) {
+                ++stats_it_moves;
+            } else {
+                stats_it_moves += step;
+            }
         }
 
         updateStatus();
@@ -650,72 +742,38 @@ function initFunctions(interpreter, scope) {
         return it;
     };
     
-    var begin_wrapper = function(arr, name, color) {
-        // console.log(arr)
-        // console.log('begin_wrapper')
-
-        // if (iterators_int[name] != undefined) {
-        //     var gui = iterators_gui[name];
-        //     // console.log(gui)
-        //     color = gui.children[0].fill;
-        //     // console.log(color)
-        //     remove_it_wrapper(iterators_int[name]);
-        // }
-
-        // if ( ! color) {
-        //     // console.log(Object.keys(iterators_int).length)
-        //     color = iterators_colors[Object.keys(iterators_int).length];
-        // }
-
-
+    var begin_wrapper = function(seq, name, color) {
+        // console.log(seq)
+        // console.log(seq.type)
         var index = 0
-        // var it = new Iterator(arr, index, name);
-        var it = new Iterator(arr, index, null);
-        // iterators_int[name] = it;
+        // console.log(`begin_wrapper seq.type: ${seq.type}`);
+        // console.log(`begin_wrapper cat: ${getIteratorCatetoryFromSeqType(seq.type)}`);
 
+        var it = new Iterator(seq, index, null, getIteratorCatetoryFromSeqType(seq.type));
         updateStatus();
-
         return it;
     };
 
-    var end_wrapper = function(arr, name, color) {
-
-        // if (iterators_int[name] != undefined) {
-        //     var gui = iterators_gui[name];
-        //     // console.log(gui)
-        //     color = gui.children[0].fill;
-        //     // console.log(color)
-        //     remove_it_wrapper(iterators_int[name]);
-        // }
-
-        // if ( ! color) {
-        //     // console.log(Object.keys(iterators_int).length)
-        //     color = iterators_colors[Object.keys(iterators_int).length];
-        // }
-
-        var length = arr.data.length
+    var end_wrapper = function(seq, name, color) {
+        var length = seq.data.length
         var index = length
-        // var it = new Iterator(arr, index, name);
-        var it = new Iterator(arr, index, null);
-        // iterators_int[name] = it;
-
+        var it = new Iterator(seq, index, null, getIteratorCatetoryFromSeqType(seq.type));
         updateStatus();
-
         return it;
     };
 
-    var size_wrapper = function(arr) {
-        var length = arr.data.length
+    var size_wrapper = function(seq) {
+        var length = seq.data.length
         return length;
     };
 
-    var capacity_wrapper = function(arr) {
-        var c = arr.capacity
+    var capacity_wrapper = function(seq) {
+        var c = seq.capacity
         return c;
     };
 
     var increase_capacity_wrapper = function(seq, n) {
-        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.preds, seq.drawChart);
+        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.preds, seq.type, seq.drawChart);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -738,7 +796,7 @@ function initFunctions(interpreter, scope) {
         // console.log(data)
         // console.log(cap)
 
-        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.preds, seq.drawChart);
+        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.preds, seq.type, seq.drawChart);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -885,6 +943,30 @@ function initFunctions(interpreter, scope) {
 
     var distance_wrapper = function(a, b) {
         var res = b.index - a.index;
+
+        // console.log(a)
+        // console.log(b)
+
+        // console.log(`isRandomAccess(a): ${isRandomAccess(a)}`);
+        // console.log(`isRandomAccess(b): ${isRandomAccess(b)}`);
+
+        if (log_stats_enabled) {
+            if (isRandomAccess(a)) {
+                // console.log("RANDOM ACCESS");
+                ++stats_it_other_ops;
+            } else {
+                // console.log("NON RANDOM ACCESS");
+                stats_it_moves += Math.abs(res);
+                stats_it_cmps += Math.abs(res) + 1;
+            }
+        }
+
+        if (isSinglePass(a)) {
+            clearStream(a, Math.abs(res));
+        }
+
+        updateStatus();
+
         return res;
     };
 
@@ -991,7 +1073,7 @@ function initFunctions(interpreter, scope) {
         return c.parameters;
     }
 
-    var sequence_internal_wrapper = function(data_par, name, preds_par, drawChart) {
+    var sequence_internal_wrapper = function(data_par, name, preds_par, type, drawChart) {
         // console.log(data_par)
 
         // console.log(`sequence_internal_wrapper preds_par: ${preds_par}`);
@@ -1006,13 +1088,6 @@ function initFunctions(interpreter, scope) {
         }
 
         var colors = [];
-        // var data = [];
-        // var length = data_par.properties['length'];
-        // stats_n += length; 
-        // for (let i = 0; i < length; ++i) {
-        //     data.push(data_par.properties[i]);
-        //     // colors.push(defaultElementColor);
-        // }
 
         if (data_par) {
             var data = fromInterpreterArray(data_par);
@@ -1036,11 +1111,13 @@ function initFunctions(interpreter, scope) {
         // console.log(`preds: ${preds}`);
 
         var elems = null;
-        var retobj = new Sequence(name, data, elems, colors, undefined, preds, drawChart);
+        var retobj = new Sequence(name, data, elems, colors, undefined, preds, type, drawChart);
         sequences[name] = retobj;
 
         updateStatus();
         // two.update();
+
+        // console.log(`retobj: ${retobj}`);
         return retobj;
     };    
 
@@ -1331,8 +1408,25 @@ function callPredCode() {
 
 function addSequenceCode() {
     return `
-    function sequence(d, n, p, drawChart) {
-        return sequence_internal(d, n, p, drawChart);
+
+    function __standardSequenceType(type) {
+        if (type === "array") {
+            return "array";
+        } else if (type === "list" || type === "sll") {
+            return "sll";
+        } else if (type === "double" || type === "dll") {
+            return "dll";
+        } else if (type === "stream" || type === "buffer") {
+            return "stream";
+        }
+        return undefined;
+    }
+    
+    function sequence(d, n, p, type, drawChart) {
+        type = typeof type !== 'undefined' ? type : "array";
+        type = __standardSequenceType(type);
+        drawChart = typeof drawChart !== 'undefined' ? drawChart : false;
+        return sequence_internal(d, n, p, type, drawChart);
     }
 
 `
@@ -2328,7 +2422,21 @@ function drawScope(scope) {
         var key = seq_internal[i].key;
         var value = seq_internal[i].value;
         // console.log(value);
-        var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+
+        if (value.type === "array") {
+            var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+        } else if (value.type === "sll") {
+            var elems = drawSingleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+        } else if (value.type === "dll") {
+            var elems = drawDoubleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+        } else if (value.type === "stream") {
+            var elems = drawSingleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+        } else {
+            showError('invalid sequence type');
+            disable('disabled');
+            return;
+        }
+
         sequences[value.name].elements = elems;
         ++seqn;
     }
