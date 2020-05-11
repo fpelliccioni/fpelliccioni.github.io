@@ -2824,9 +2824,8 @@ function stepButton() {
             continue;
         }
 
-
         if (prevNode != null && prevNode.type == 'VariableDeclaration') {
-            if (prevNode.declarations[0].init.callee && prevNode.declarations[0].init.callee.name == "source") {
+            if (prevNode.declarations[0].init && prevNode.declarations[0].init.callee && prevNode.declarations[0].init.callee.name == "source") {
                 if (log_stats_enabled) {
                     ++stats_assigments;
                     updateStatus();
@@ -2834,11 +2833,8 @@ function stepButton() {
             }
         }
 
-
         prevLine = codeSelected;
         prevNode = node;
-
-        
 
         // console.log('-----------------------------------')
         drawScope(scope);
