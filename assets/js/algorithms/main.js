@@ -687,7 +687,7 @@ function initFunctions(interpreter, scope) {
         }
 
         // console.log(`isSinglePass(it_par): ${isSinglePass(it_par)}`);
-        if (isSinglePass(it_par)) {
+        if (isSinglePassStrict(it_par)) {
             clearStream(it_par, step);
         }
 
@@ -778,7 +778,6 @@ function initFunctions(interpreter, scope) {
         return retobj;
     };
 
-
     var push_back_wrapper = function(seq, x) {
 
         var cap = seq.capacity
@@ -801,14 +800,11 @@ function initFunctions(interpreter, scope) {
         return retobj;
     };
 
-
     var source_value = function(it) {
         var data = it.data.data;
         var s = data[it.index];
         return s;
     };
-
-    
 
     var register_rel_distance_wrapper = function (d) {
         if (log_stats_enabled) {
@@ -833,7 +829,6 @@ function initFunctions(interpreter, scope) {
         //     stats_move_distance += Math.abs(d);
         // }
     };
-
 
     var source_wrapper = function (it) {
         var data = it.data.data;
@@ -961,7 +956,7 @@ function initFunctions(interpreter, scope) {
             }
         }
 
-        if (isSinglePass(a)) {
+        if (isSinglePassStrict(a)) {
             clearStream(a, Math.abs(res));
         }
 
@@ -1299,7 +1294,11 @@ function initFunctions(interpreter, scope) {
     //     return Array.from(str);
     // }
 
+    var default_for_wrapper = function(arg, val) {
+        return typeof arg !== 'undefined' ? arg : val;    
+    }
 
+    // function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; } 
 
     
 
@@ -1362,7 +1361,7 @@ function initFunctions(interpreter, scope) {
 
     // interpreter.setProperty(scope, 'array_from_internal', interpreter.createNativeFunction(array_from_internal_wrapper));
 
-    
+    interpreter.setProperty(scope, 'default_for', interpreter.createNativeFunction(default_for_wrapper));
 }
 
 // function bind(r, value, arg=0) {
