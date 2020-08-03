@@ -1,5 +1,5 @@
 /*
-Copyright Fernando Pelliccioni 2019
+Copyright Fernando Pelliccioni 2019-2020
 
 Distributed under the Boost Software License, Version 1.0. (See accompanying
 file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) 
@@ -15,7 +15,7 @@ TODO list:
 var log_stats_enabled = true;
 var g_disable_function_printing = false;
 
-var categories = [
+var categories_full = [
     {id: 'rearrangements', name: 'Rearrangements', categories: [
         {id: 'rearrangements/position-based', name: 'Position-based', categories: [
               {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
@@ -33,6 +33,19 @@ var categories = [
         ]}
     ]}
   , {id: 'selection', name: 'Selection', categories: []}
+  , {id: 'search', name: 'Seach', categories: [
+        {id: 'search/binary', name: 'Binary', categories: []},
+        {id: 'search/linear', name: 'Linear', categories: []}
+  ]}
+  , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
+];
+
+var categories = [
+  , {id: 'selection', name: 'Selection', categories: []}
+  , {id: 'search', name: 'Seach', categories: [
+        {id: 'search/binary', name: 'Binary', categories: []},
+        {id: 'search/linear', name: 'Linear', categories: []}
+  ]}
   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
 ];
 
@@ -259,13 +272,111 @@ function fillCatalog() {
     list.innerHTML = str;
 }
 
-function Iterator(data, index, name) {
+function fillCatalogRecursiveFull(str, categories) {
+
+    if (categories == undefined) return;
+    if (categories == null) return;
+
+    for(var i in categories) {
+        var cat = categories[i];
+       
+        str += '<li class="linested"><span class="caret">' + cat.name + '</span><ul class="nested">';
+        if (catHasChilds(cat)) {
+            str = fillCatalogRecursiveFull(str, cat.categories);
+        } else {
+            snippets = getSnippets(cat);
+            for(var si in snippets) {
+                var s = snippets[si]
+                str += '<li><a href="/algorithms?repo=tao-js&snippet=' + s + '">[' + s + ']</a></li>';
+            }
+        }
+        
+        str +=  '</ul></li>';
+    }
+
+    return str;
+}
+
+function fillCatalogFull() {
+    var str = fillCatalogRecursiveFull('', categories_full);
+    var list = document.getElementById('list');
+    list.innerHTML = str;
+}
+
+function Iterator(data, index, name, category) {
     this.data = data;
     this.index = index;
     this.name = name;
+    this.category = category;
 }
 
-function Sequence(name, data, elements, colors, capacity, pred, drawChart) {
+function getIteratorCatetoryFromSeqType(seqType) {
+    // console.log(`getIteratorCatetoryFromSeqType seqType ${seqType}`);
+    if (seqType === "array") {
+        return 3; //"RandomAccess";
+    } else if (seqType === "sll") {
+        return 1; //"Forward";
+    } else if (seqType === "dll") {
+        return 2; //"Bidirectional";
+    } else if (seqType === "stream") {
+        return 0; //"SinglePass";
+    }
+    return undefined;
+}
+
+function iteratorCategoryToString(category) {
+    console.log(category)
+    if (category === 3) {
+        return "RandomAccess";
+    } else if (category === 1) {
+        return "Forward";
+    } else if (category === 2) {
+        return "Bidirectional";
+    } else if (category === 0) {
+        return "SinglePass";
+    }
+    return undefined;
+}
+
+function isSinglePass(it) {
+    return it.category >= 0;
+}
+
+function isSinglePassStrict(it) {
+    return it.category == 0;
+}
+
+function isForward(it) {
+    return it.category >= 1;
+}
+
+function isBidirectional(it) {
+    return it.category >= 2;
+}
+
+function isRandomAccess(it) {
+    // console.log(it)
+    // console.log(it.category)
+    return it.category >= 3;
+}
+
+function clearStream(it, n) {
+    if ( ! isSinglePassStrict(it)) return;
+
+    // console.log(`clearStream`)
+    // console.log(it)
+    // console.log(n)
+
+    var i = it.index;
+    while (n != 0) {
+        it.data.data[i] = undefined;
+        ++i;
+        --n;
+    }
+}
+
+
+function Sequence(name, data, elements, colors, capacity, preds, type, drawChart) {
     if (capacity == undefined) {
         capacity = data.length
     }
@@ -274,7 +385,8 @@ function Sequence(name, data, elements, colors, capacity, pred, drawChart) {
     this.elements = elements;
     // this.colors = colors;
     this.capacity = capacity;
-    this.pred = pred;
+    this.preds = preds;
+    this.type = type;
     this.drawChart = drawChart;
 }
 
@@ -305,13 +417,16 @@ function resetState() {
     iterators_int = {};
     iterators_gui = {};
     predicates = [];
+    operations = [];
     sequences = {};
     variables = {};
 
     stats_n = 0;
     stats_it_moves = 0;
     stats_it_cmps = 0;
+    stats_it_other_ops = 0;
     stats_pred_appls = 0;
+    stats_operation_calls = 0;
     stats_swaps = 0;
     stats_assigments = 0;
     stats_moves = 0;
@@ -353,7 +468,9 @@ function updateStats() {
     hg_right_x_b.innerHTML += '<p id="Status"><b>n</b>:                      ' + stats_n + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator displacements</b>: ' + stats_it_moves + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator comparisons</b>:   ' + stats_it_cmps + '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Iterator other ops.</b>:    ' + stats_it_other_ops + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Pred/Rel applications</b>:  ' + stats_pred_appls + '</p>';
+    hg_right_x_b.innerHTML += '<p id="Status"><b>Op. calls</b>:              ' + stats_operation_calls + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Swaps</b>:                  ' + stats_swaps + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Assignments</b>:            ' + stats_assigments + '</p>';
     hg_right_x_b.innerHTML += '<p id="Status"><b>Moves</b>:                  ' + stats_moves + '</p>';
@@ -472,6 +589,14 @@ function addLogRelation(name, x, y, res) {
     addLog(name + '(' + x + ', ' + y + ') = ' + res);
 }
 
+function addLogBinaryOperation(name, x, y, res) {
+    addLog(name + '(' + x + ', ' + y + ') = ' + res);
+}
+
+function addLogUnaryOperation(name, x, res) {
+    addLog(name + '(' + x + ') = ' + res);
+}
+
 
 
 function updateStatus() {
@@ -492,6 +617,17 @@ function showError(text) {
     // hljs.highlightBlock(output);
 
     console.log(arguments.length ? text : '');
+}
+
+function fromInterpreterArray(array_par) {
+    var length = array_par.properties['length'];
+    if ( ! length) return undefined;
+
+    var ret = [];
+    for (let i = 0; i < length; ++i) {
+        ret.push(array_par.properties[i]);
+    }
+    return ret;
 }
 
 
@@ -545,13 +681,22 @@ function initFunctions(interpreter, scope) {
             return;
         }
 
-        var it = new Iterator(it_par.data, it_par.index + step, it_par.name);
+        var it = new Iterator(it_par.data, it_par.index + step, it_par.name, it_par.category);
         if (iterators_int[it.name]) {
             iterators_int[it.name] = it;
         }
 
+        // console.log(`isSinglePass(it_par): ${isSinglePass(it_par)}`);
+        if (isSinglePassStrict(it_par)) {
+            clearStream(it_par, step);
+        }
+
         if (log_stats_enabled) {
-            ++stats_it_moves;
+            if (isRandomAccess(it_par)) {
+                ++stats_it_moves;
+            } else {
+                stats_it_moves += step;
+            }
         }
 
         updateStatus();
@@ -560,6 +705,15 @@ function initFunctions(interpreter, scope) {
     };
 
     var predecessor_wrapper = function (it_par, step_par = 1) {
+        console.log(it_par);
+        console.log(it_par.category);
+
+        if ( ! isBidirectional(it_par)) {
+            showError(`predecessor function is not defined for ${iteratorCategoryToString(it_par.category)} iterators`);
+            disable('disabled');
+            return;
+        }
+
         step = 0 + step_par;
         // console.log(step_par)
         // console.log(step)
@@ -569,13 +723,17 @@ function initFunctions(interpreter, scope) {
             return;
         }
 
-        var it = new Iterator(it_par.data, it_par.index - step, it_par.name);
+        var it = new Iterator(it_par.data, it_par.index - step, it_par.name, it_par.category);
         if (iterators_int[it.name]) {
             iterators_int[it.name] = it;
         }
         
         if (log_stats_enabled) {
-            ++stats_it_moves;
+            if (isRandomAccess(it_par)) {
+                ++stats_it_moves;
+            } else {
+                stats_it_moves += step;
+            }
         }
 
         updateStatus();
@@ -584,76 +742,41 @@ function initFunctions(interpreter, scope) {
         return it;
     };
     
-    var begin_wrapper = function(arr, name, color) {
-        // console.log(arr)
-        // console.log('begin_wrapper')
-
-        // if (iterators_int[name] != undefined) {
-        //     var gui = iterators_gui[name];
-        //     // console.log(gui)
-        //     color = gui.children[0].fill;
-        //     // console.log(color)
-        //     remove_it_wrapper(iterators_int[name]);
-        // }
-
-        // if ( ! color) {
-        //     // console.log(Object.keys(iterators_int).length)
-        //     color = iterators_colors[Object.keys(iterators_int).length];
-        // }
-
-
+    var begin_wrapper = function(seq, name, color) {
+        // console.log(seq)
+        // console.log(seq.type)
         var index = 0
-        // var it = new Iterator(arr, index, name);
-        var it = new Iterator(arr, index, null);
-        // iterators_int[name] = it;
+        // console.log(`begin_wrapper seq.type: ${seq.type}`);
+        // console.log(`begin_wrapper cat: ${getIteratorCatetoryFromSeqType(seq.type)}`);
 
+        var it = new Iterator(seq, index, null, getIteratorCatetoryFromSeqType(seq.type));
         updateStatus();
-
         return it;
     };
 
-    var end_wrapper = function(arr, name, color) {
-
-        // if (iterators_int[name] != undefined) {
-        //     var gui = iterators_gui[name];
-        //     // console.log(gui)
-        //     color = gui.children[0].fill;
-        //     // console.log(color)
-        //     remove_it_wrapper(iterators_int[name]);
-        // }
-
-        // if ( ! color) {
-        //     // console.log(Object.keys(iterators_int).length)
-        //     color = iterators_colors[Object.keys(iterators_int).length];
-        // }
-
-        var length = arr.data.length
+    var end_wrapper = function(seq, name, color) {
+        var length = seq.data.length
         var index = length
-        // var it = new Iterator(arr, index, name);
-        var it = new Iterator(arr, index, null);
-        // iterators_int[name] = it;
-
+        var it = new Iterator(seq, index, null, getIteratorCatetoryFromSeqType(seq.type));
         updateStatus();
-
         return it;
     };
 
-    var size_wrapper = function(arr) {
-        var length = arr.data.length
+    var size_wrapper = function(seq) {
+        var length = seq.data.length
         return length;
     };
 
-    var capacity_wrapper = function(arr) {
-        var c = arr.capacity
+    var capacity_wrapper = function(seq) {
+        var c = seq.capacity
         return c;
     };
 
     var increase_capacity_wrapper = function(seq, n) {
-        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.pred, seq.drawChart);
+        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.preds, seq.type, seq.drawChart);
         sequences[seq.name] = retobj;
         return retobj;
     };
-
 
     var push_back_wrapper = function(seq, x) {
 
@@ -672,19 +795,16 @@ function initFunctions(interpreter, scope) {
         // console.log(data)
         // console.log(cap)
 
-        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.pred, seq.drawChart);
+        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.preds, seq.type, seq.drawChart);
         sequences[seq.name] = retobj;
         return retobj;
     };
-
 
     var source_value = function(it) {
         var data = it.data.data;
         var s = data[it.index];
         return s;
     };
-
-    
 
     var register_rel_distance_wrapper = function (d) {
         if (log_stats_enabled) {
@@ -709,7 +829,6 @@ function initFunctions(interpreter, scope) {
         //     stats_move_distance += Math.abs(d);
         // }
     };
-
 
     var source_wrapper = function (it) {
         var data = it.data.data;
@@ -819,6 +938,30 @@ function initFunctions(interpreter, scope) {
 
     var distance_wrapper = function(a, b) {
         var res = b.index - a.index;
+
+        // console.log(a)
+        // console.log(b)
+
+        // console.log(`isRandomAccess(a): ${isRandomAccess(a)}`);
+        // console.log(`isRandomAccess(b): ${isRandomAccess(b)}`);
+
+        if (log_stats_enabled) {
+            if (isRandomAccess(a)) {
+                // console.log("RANDOM ACCESS");
+                ++stats_it_other_ops;
+            } else {
+                // console.log("NON RANDOM ACCESS");
+                stats_it_moves += Math.abs(res);
+                stats_it_cmps += Math.abs(res) + 1;
+            }
+        }
+
+        if (isSinglePassStrict(a)) {
+            clearStream(a, Math.abs(res));
+        }
+
+        updateStatus();
+
         return res;
     };
 
@@ -925,8 +1068,13 @@ function initFunctions(interpreter, scope) {
         return c.parameters;
     }
 
-    var sequence_internal_wrapper = function(data_par, name, pred, drawChart) {
+    var sequence_internal_wrapper = function(data_par, name, preds_par, type, drawChart) {
         // console.log(data_par)
+
+        // console.log(`sequence_internal_wrapper preds_par: ${preds_par}`);
+        // console.log(`sequence_internal_wrapper preds_par[0]: ${preds_par[0]}`);
+        // console.log(`sequence_internal_wrapper preds_par[1]: ${preds_par[1]}`);
+        // console.log(`preds_par.properties['length']: ${preds_par.properties['length']}`);
         
         if (sequences[name] != undefined) {
             showError('sequence "' + name + '" already exists.');
@@ -934,37 +1082,51 @@ function initFunctions(interpreter, scope) {
             return null;
         }
 
-        var data = [];
         var colors = [];
-        var length = data_par.properties['length'];
 
-        stats_n += length; 
+        if (data_par) {
+            var data = fromInterpreterArray(data_par);
+        } else {
+            var data = [];
+        }
+        stats_n += data.length; 
 
-        for (let i = 0; i < length; ++i) {
-            data.push(data_par.properties[i]);
-            // colors.push(defaultElementColor);
+        if (preds_par) {
+            var preds = fromInterpreterArray(preds_par);
+        } else {
+            var preds = preds_par;
         }
 
+        // console.log(`preds: ${preds}`);
+        // console.log(`preds.length: ${preds.length}`);
+        if ( ! preds || preds.length == 1) {
+            // console.log(`inside IF`);
+            preds = preds_par;
+        }
+        // console.log(`preds: ${preds}`);
+
         var elems = null;
-        var retobj = new Sequence(name, data, elems, colors, undefined, pred, drawChart);
+        var retobj = new Sequence(name, data, elems, colors, undefined, preds, type, drawChart);
         sequences[name] = retobj;
 
         updateStatus();
         // two.update();
+
+        // console.log(`retobj: ${retobj}`);
         return retobj;
     };    
 
 
-    var set_predicate_wrapper = function(p) {
+    // var set_predicate_wrapper = function(p) {
        
-        // console.log(p.node.id.name);
-        // interpreter.appendCode(p.node.id.name+'();');
+    //     // console.log(p.node.id.name);
+    //     // interpreter.appendCode(p.node.id.name+'();');
 
-        predicates.push(p);
+    //     predicates.push(p);
         
-        updateStatus();
-        two.update();
-    };    
+    //     updateStatus();
+    //     two.update();
+    // };    
 
     var log_predicate_call_internal_wrapper = function(name, x, res) {
         if (log_stats_enabled) {
@@ -1001,6 +1163,32 @@ function initFunctions(interpreter, scope) {
             //TODO
             var hg_right_x_a = document.getElementById('hg-right-x-a');
             var text = '<p id="Status">' + name + '(' + x + ', ' + y + ') = ' + res + '</p>';
+            hg_right_x_a.innerHTML += text;
+        }
+    };    
+
+    var log_operation_call_internal_wrapper = function(name, x, y, res) {
+        if (log_stats_enabled) {
+            ++stats_operation_calls;
+        }
+        updateStatus();
+
+        if (y) {
+            addLogBinaryOperation(name, x, y, res);
+        } else {
+            addLogUnaryOperation(name, x, res);
+        }
+
+        if (log_stats_enabled) {
+            //TODO
+            var hg_right_x_a = document.getElementById('hg-right-x-a');
+
+            if (y) {
+                var text = '<p id="Status">' + name + '(' + x + ', ' + y + ') = ' + res + '</p>';
+            } else {
+                var text = '<p id="Status">' + name + '(' + x + ') = ' + res + '</p>';
+            }
+
             hg_right_x_a.innerHTML += text;
         }
     };    
@@ -1106,7 +1294,11 @@ function initFunctions(interpreter, scope) {
     //     return Array.from(str);
     // }
 
+    var default_for_wrapper = function(arg, val) {
+        return typeof arg !== 'undefined' ? arg : val;    
+    }
 
+    // function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; } 
 
     
 
@@ -1148,6 +1340,7 @@ function initFunctions(interpreter, scope) {
     // interpreter.setProperty(scope, 'fill_elem',      interpreter.createNativeFunction(fill_elem_wrapper));
     interpreter.setProperty(scope, 'log_predicate_call_internal', interpreter.createNativeFunction(log_predicate_call_internal_wrapper));
     interpreter.setProperty(scope, 'log_relation_call_internal', interpreter.createNativeFunction(log_relation_call_internal_wrapper));
+    interpreter.setProperty(scope, 'log_operation_call_internal', interpreter.createNativeFunction(log_operation_call_internal_wrapper));
 
     interpreter.setProperty(scope, 'enable_log_stats', interpreter.createNativeFunction(enable_log_stats_wrapper));
     interpreter.setProperty(scope, 'disable_log_stats', interpreter.createNativeFunction(disable_log_stats_wrapper));
@@ -1168,7 +1361,7 @@ function initFunctions(interpreter, scope) {
 
     // interpreter.setProperty(scope, 'array_from_internal', interpreter.createNativeFunction(array_from_internal_wrapper));
 
-    
+    interpreter.setProperty(scope, 'default_for', interpreter.createNativeFunction(default_for_wrapper));
 }
 
 // function bind(r, value, arg=0) {
@@ -1214,8 +1407,25 @@ function callPredCode() {
 
 function addSequenceCode() {
     return `
-    function sequence(d, n, p, drawChart) {
-        return sequence_internal(d, n, p, drawChart);
+
+    function __standardSequenceType(type) {
+        if (type === "array") {
+            return "array";
+        } else if (type === "list" || type === "sll") {
+            return "sll";
+        } else if (type === "double" || type === "dll") {
+            return "dll";
+        } else if (type === "stream" || type === "buffer") {
+            return "stream";
+        }
+        return undefined;
+    }
+    
+    function sequence(d, n, p, type, drawChart) {
+        type = typeof type !== 'undefined' ? type : "array";
+        type = __standardSequenceType(type);
+        drawChart = typeof drawChart !== 'undefined' ? drawChart : false;
+        return sequence_internal(d, n, p, type, drawChart);
     }
 
 `
@@ -1258,24 +1468,50 @@ function add_utils_lib() {
     
     
     return `
-    function callable(f) {
+    function callable(f, type) {
         var c = callable_create(f);
         var fname = callable_get_name(c);
         var params = callable_get_parameters(c);
-        
-        if (params == 2) {
+
+        if (type == "relation") {
             var wrapped_func = function(x, y) {
                 var res = f(x, y); 
                 log_relation_call_internal(fname, x, y, res); 
                 return res;
             };        
-        } else if (params == 1) {
+        } else if (type == "binary_operation") {
+            var wrapped_func = function(x, y) {
+                var res = f(x, y); 
+                log_operation_call_internal(fname, x, y, res); 
+                return res;
+            };        
+        } else if (type == "unary_operation") {
+            var wrapped_func = function(x) {
+                var res = f(x); 
+                log_operation_call_internal(fname, x, undefined, res); 
+                return res;
+            };        
+        } else if (type == "predicate") {
             var wrapped_func = function(x) {
                 var res = f(x);
                 log_predicate_call_internal(fname, x, res); 
                 return res;
             };
         }
+        
+        // if (params == 2) {
+        //     var wrapped_func = function(x, y) {
+        //         var res = f(x, y); 
+        //         log_relation_call_internal(fname, x, y, res); 
+        //         return res;
+        //     };        
+        // } else if (params == 1) {
+        //     var wrapped_func = function(x) {
+        //         var res = f(x);
+        //         log_predicate_call_internal(fname, x, res); 
+        //         return res;
+        //     };
+        // }
         wrapped_func.inner_callable = c;
         wrapped_func.inner_function = f;
         wrapped_func.inner_name = fname;
@@ -1284,10 +1520,16 @@ function add_utils_lib() {
         return wrapped_func;
     }    
     function relation(f) {
-        return callable(f);
+        return callable(f, "relation");
     }
     function predicate(f) {
-        return callable(f);
+        return callable(f, "predicate");
+    }
+    function binary_operation(f) {
+        return callable(f, "binary_operation");
+    }
+    function unary_operation(f) {
+        return callable(f, "unary_operation");
     }
     function bind(r, value, arg) {
         return function(x) { 
@@ -1955,10 +2197,10 @@ function scopeOrder(scope) {
         'window',
         'sequence', 'sequence_internal', 'alert', 'assign_it',
         'begin', 'log_predicate_call_internal', 'log_relation_call',
-        'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
+        'log_relation_call_internal', 'log_operation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'find_if', 'sink', 'source', 'successor', 'remove_it',
         'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending', 
-        'relation', 'iter_swap', 'predecessor', 'predicate'];
+        'relation', 'iter_swap', 'predecessor', 'predicate', 'operation'];
 
     // 'fill_elem'
 
@@ -2071,10 +2313,10 @@ function drawScope(scope) {
         'window',
         'sequence', 'sequence_internal', 'alert', 'assign_it',
         'begin', 'log_predicate_call_internal', 'log_relation_call',
-        'log_relation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
+        'log_relation_call_internal', 'log_operation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'find_if', 'sink', 'source', 'successor', 'remove_it',
         'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending',
-        'relation', 'iter_swap', 'predecessor', 'predicate'];
+        'relation', 'iter_swap', 'predecessor', 'predicate', 'operation'];
 
         // 'fill_elem'
 
@@ -2179,7 +2421,21 @@ function drawScope(scope) {
         var key = seq_internal[i].key;
         var value = seq_internal[i].value;
         // console.log(value);
-        var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.pred, value.drawChart);
+
+        if (value.type === "array") {
+            var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+        } else if (value.type === "sll") {
+            var elems = drawSingleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+        } else if (value.type === "dll") {
+            var elems = drawDoubleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+        } else if (value.type === "stream") {
+            var elems = drawSingleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+        } else {
+            showError('invalid sequence type');
+            disable('disabled');
+            return;
+        }
+
         sequences[value.name].elements = elems;
         ++seqn;
     }
@@ -2568,9 +2824,8 @@ function stepButton() {
             continue;
         }
 
-
         if (prevNode != null && prevNode.type == 'VariableDeclaration') {
-            if (prevNode.declarations[0].init.callee && prevNode.declarations[0].init.callee.name == "source") {
+            if (prevNode.declarations[0].init && prevNode.declarations[0].init.callee && prevNode.declarations[0].init.callee.name == "source") {
                 if (log_stats_enabled) {
                     ++stats_assigments;
                     updateStatus();
@@ -2578,11 +2833,8 @@ function stepButton() {
             }
         }
 
-
         prevLine = codeSelected;
         prevNode = node;
-
-        
 
         // console.log('-----------------------------------')
         drawScope(scope);

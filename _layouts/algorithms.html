@@ -1,5 +1,5 @@
 <!-- 
-Copyright Fernando Pelliccioni 2019
+Copyright Fernando Pelliccioni 2019-2020
 
 Distributed under the Boost Software License, Version 1.0. (See accompanying
 file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) 
@@ -40,8 +40,9 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
                     <li><a href="/algorithms-about/">[About]</a></li>
                     <li><a href="/algorithms-support/">[Support]</a></li>
-                    <li><a href="/algorithms-stdlib/">[Std Lib]</a></li>
-                    <li><a href="/algorithms-catalog/">[Catalog]</a></li>
+                    <!-- <li><a href="/algorithms-stdlib/">[Std Lib]</a></li> -->
+                    <!-- <li><a href="/algorithms-catalog/">[Catalog]</a></li> -->
+                    <li><a href="/algorithms-course/">[Course]</a></li>
                     <li><a href="/">[Components Programming]</a></li>
 
                     <!-- <li><a href="http://componentsprogramming.com/algorithms-help/">[Help]</a></li> -->
@@ -72,7 +73,7 @@ var d = add_sequence(random_array(), "d");
                 <div class="hg-left-d">
                 <!-- <div id="CopyrightDiv"> -->
                     <p id="CopyrightP">
-                    <a id="Copyright" href="http://componentsprogramming.com/about-me/">Copyright &copy; Fernando Pelliccioni 2019.</a>
+                    <a id="Copyright" href="http://componentsprogramming.com/about-me/">Copyright &copy; Fernando Pelliccioni 2019-2020.</a>
                     </p>
                 <!-- </div>​ -->
                 </div>
@@ -177,7 +178,8 @@ var d = add_sequence(random_array(), "d");
         var repo = url.searchParams.get("repo");
         // console.log(repo)
         if ( ! repo) {
-            repo = "tao-js";
+            // repo = "tao-js";
+            repo = "algorithm_course";
         }
 
         var snippets = {};
@@ -201,7 +203,7 @@ var d = add_sequence(random_array(), "d");
                 var snippet = url.searchParams.get("snippet");
                 // console.log(snippet)
                 if ( ! snippet) {
-                    snippet = "partition_semistable";
+                    snippet = "find";
                 }
                 if (snippet) {
                     document.getElementById('codeArea').value = getSnippet(snippet);
