@@ -249,12 +249,12 @@ function exec_n_with_permutations(median_f, n, k, max_comps) {
     element[1] = element[0];
     element[2] = element[0];
     element[3] = element[0];
-    element[4] = element[0];
-    element[5] = element[0];
-    element[6] = element[0];
-    element[7] = element[0];
-    element[8] = element[0];
-    element[9] = element[0];
+    // element[4] = element[0];
+    // element[5] = element[0];
+    // element[6] = element[0];
+    // element[7] = element[0];
+    // element[8] = element[0];
+    // element[9] = element[0];
     // element[10] = element[0];
     
     var q = factorial(n);
