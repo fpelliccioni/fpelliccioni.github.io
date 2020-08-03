@@ -5,9 +5,7 @@ const median3 = require('./median_3_generated');
 const median5 = require('./median_5_generated');
 const median7 = require('./median_7_generated');
 const median9 = require('./median_9_in_progress');
-// const median11 = require('./median_11_in_progress');
-const median11 = require('./median_11_knuth_18cmps');
-
+const median11 = require('./median_11_in_progress');
 // const medians_gen = require('./medians_general');
 
 g_comparissons = 0
@@ -245,17 +243,8 @@ function exec_n_with_permutations(median_f, n, k, max_comps) {
     }
 
 
-    var element = common.iota(n);
-    element[1] = element[0];
-    element[2] = element[0];
-    element[3] = element[0];
-    element[4] = element[0];
-    element[5] = element[0];
-    element[6] = element[0];
-    element[7] = element[0];
-    element[8] = element[0];
-    element[9] = element[0];
-    // element[10] = element[0];
+    //var element = common.iota(n);
+    var element = [5, 0, 1, 2, 3, 4, 6, 7, 8, 9, 10];
     
     var q = factorial(n);
     var i = 0;
@@ -351,14 +340,17 @@ function test_all(n, max_comps) {
 }
 
 function main() {
+    
+
+    var element = [5, 0, 1, 2, 3, 4, 6, 7, 8, 9, 10];
+    median11.median_11_generated_stable(...element, lt_simple);
 
 
     // test_all(3);
     // test_all(5, 6);
     // test_all(7, 10);
     // test_all(9, 14);
-    // test_all(11, 19);
-    test_all(11, 18);
+    test_all(11, 19);
 
 
 

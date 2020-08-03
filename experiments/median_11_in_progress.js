@@ -1244,8 +1244,8 @@ function select_5_11_ab_cd(a,b,c,d,e,f,g,h,i,j,k,r) {
 // step 2
 // [3,4]
 function select_5_11_ab(a,b,c,d,e,f,g,h,i,j,k,r) {
-        // common.check_precondition(...arguments);
-        common.check_precondition(a,b,c,d,e,f,g,h,i,j,k,r);
+    // common.check_precondition(...arguments);
+    common.check_precondition(a,b,c,d,e,f,g,h,i,j,k,r);
 
 
     if ( ! r(d, c)) {
@@ -1258,9 +1258,8 @@ function select_5_11_ab(a,b,c,d,e,f,g,h,i,j,k,r) {
 // step 1
 // [1,2]
 function select_5_11(a,b,c,d,e,f,g,h,i,j,k,r) {
-        // common.check_precondition(...arguments);
-        common.check_precondition(a,b,c,d,e,f,g,h,i,j,k,r);
-
+    // common.check_precondition(...arguments);
+    common.check_precondition(a,b,c,d,e,f,g,h,i,j,k,r);
 
     if ( ! r(b, a)) {
         return select_5_11_ab(a,b,c,d,e,f,g,h,i,j,k,r);
