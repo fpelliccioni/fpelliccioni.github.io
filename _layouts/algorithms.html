@@ -1,8 +1,8 @@
-<!-- 
+<!--
 Copyright Fernando Pelliccioni 2019-2020
 
 Distributed under the Boost Software License, Version 1.0. (See accompanying
-file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) 
+file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 -->
 
 <!DOCTYPE html>
@@ -41,7 +41,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
                     <li><a href="/algorithms-about/">[About]</a></li>
                     <li><a href="/algorithms-support/">[Support]</a></li>
                     <!-- <li><a href="/algorithms-stdlib/">[Std Lib]</a></li> -->
-                    <!-- <li><a href="/algorithms-catalog/">[Catalog]</a></li> -->
+                    <li><a href="/algorithms-catalog/">[Catalog]</a></li>
                     <li><a href="/algorithms-course/">[Course]</a></li>
                     <li><a href="/">[Components Programming]</a></li>
 
@@ -59,7 +59,7 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //CODE HERE!
 var d = add_sequence(random_array(), "d");
 </textarea>
-    
+
 </div>
                 <div class="hg-left-c">
                     <div id="Buttons">
@@ -77,12 +77,12 @@ var d = add_sequence(random_array(), "d");
                     </p>
                 <!-- </div>​ -->
                 </div>
-    
+
             </div>
 
             <div class="hg-right">
                 <div id="hg-right-a" class="hg-right-a">
-                    <div id="sequence"></div>                    
+                    <div id="sequence"></div>
                 </div>
                 <div id="hg-right-pre-a" class="hg-right-pre-a">
                     <!-- <canvas id="myChart"></canvas> -->
@@ -103,10 +103,10 @@ var d = add_sequence(random_array(), "d");
                         </div>
                 </div>
             </div>
-    
+
         </div>
     </div>
-          
+
     <script>
         function loadParameters() {
             var url_string = window.location.href;
@@ -264,17 +264,17 @@ var d = add_sequence(random_array(), "d");
                     stepButton();
                 }
             }
-        };        
+        };
 
         loadParameters();
         // editButton();
-    </script>      
+    </script>
 </body>
 </html>
 
 
 
-<!-- 
+<!--
 function partition_semistable(f, l, p) {
     while (true) {
         if (equal(f, l)) return f;
@@ -282,7 +282,7 @@ function partition_semistable(f, l, p) {
         f = successor(f);
     }
 
-    //var j = f; 
+    //var j = f;
     var j = copy_it(f, 'j', '#9000d8');
     j = successor(j)
 
@@ -391,13 +391,13 @@ var it = partition_bidirectional_optimized(f, l, pred);
 
 
 
-<!-- 
+<!--
 
                     <textarea id="dataCodeArea">
                             data = [1, 3, 5];
                             pred = function(x) {return x % 2 == 0;};
                                     </textarea>
-                            
+
                                     <textarea id="codeArea">
                             function find_if_unguarded(f, p) {
                                 while ( ! p(source(f))) {
@@ -405,13 +405,13 @@ var it = partition_bidirectional_optimized(f, l, pred);
                                 }
                                 return f;
                             }
-                            
+
                             var f = begin(data, "f");
                             var l = begin(data, "l");
-                            
+
                             remove_it(l);
-                            
+
                             var it = find_if_unguarded(f, pred);
-                            
+
                             print(source(it))
                                     </textarea>                     -->
