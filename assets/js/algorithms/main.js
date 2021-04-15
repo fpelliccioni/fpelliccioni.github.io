@@ -2,7 +2,7 @@
 Copyright Fernando Pelliccioni 2019-2020
 
 Distributed under the Boost Software License, Version 1.0. (See accompanying
-file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) 
+file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
 TODO list:
     - standard library reference and links with examples
@@ -19,7 +19,7 @@ var categories_full = [
     {id: 'rearrangements', name: 'Rearrangements', categories: [
         {id: 'rearrangements/position-based', name: 'Position-based', categories: [
               {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
-            , {id: 'rearrangements/position-based/rotate', name: 'Rotate', categories: []}      
+            , {id: 'rearrangements/position-based/rotate', name: 'Rotate', categories: []}
         ]}
        ,{id: 'rearrangements/predicate-based', name: 'Predicate-based', categories: [
             {id: 'rearrangements/predicate-based/partition', name: 'Partition', categories: []},
@@ -40,7 +40,33 @@ var categories_full = [
   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
 ];
 
+// var categories = [
+//   , {id: 'selection', name: 'Selection', categories: []}
+//   , {id: 'search', name: 'Seach', categories: [
+//         {id: 'search/binary', name: 'Binary', categories: []},
+//         {id: 'search/linear', name: 'Linear', categories: []}
+//   ]}
+//   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
+// ];
+
+
 var categories = [
+    {id: 'rearrangements', name: 'Rearrangements', categories: [
+        {id: 'rearrangements/position-based', name: 'Position-based', categories: [
+              {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
+            , {id: 'rearrangements/position-based/rotate', name: 'Rotate', categories: []}
+        ]}
+       ,{id: 'rearrangements/predicate-based', name: 'Predicate-based', categories: [
+            {id: 'rearrangements/predicate-based/partition', name: 'Partition', categories: []},
+            {id: 'rearrangements/predicate-based/make-heap', name: 'Heaps', categories: []}
+        ]}
+       ,{id: 'rearrangements/ordering-based', name: 'Ordering-based', categories: [
+            {id: 'rearrangements/ordering-based/sorting', name: 'Sorting', categories: [
+                {id: 'rearrangements/ordering-based/sorting/insertion-sort', name: 'Insertion Sort', categories: []},
+                {id: 'rearrangements/ordering-based/sorting/selection-sort', name: 'Selection Sort', categories: []}
+            ]}
+        ]}
+    ]}
   , {id: 'selection', name: 'Selection', categories: []}
   , {id: 'search', name: 'Seach', categories: [
         {id: 'search/binary', name: 'Binary', categories: []},
@@ -94,7 +120,7 @@ function createChart() {
                 }]
             },
         }
-    });                
+    });
     return myChart;
 }
 
@@ -204,7 +230,7 @@ function catHasChilds(cat) {
 function getSnippets(cat) {
     var sns = []
     for(var key in snippets_cat){
-        
+
         var value = snippets_cat[key];
         console.log(key);
         console.log(value);
@@ -235,7 +261,7 @@ function fillCatalogRecursive(str, categories) {
 
     for(var i in categories) {
         var cat = categories[i];
-       
+
         str += '<li class="linested"><span class="caret">' + cat.name + '</span><ul class="nested">';
         if (catHasChilds(cat)) {
             str = fillCatalogRecursive(str, cat.categories);
@@ -247,7 +273,7 @@ function fillCatalogRecursive(str, categories) {
                 str += '<li><a href="/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
             }
         }
-        
+
         str +=  '</ul></li>';
     }
 
@@ -279,7 +305,7 @@ function fillCatalogRecursiveFull(str, categories) {
 
     for(var i in categories) {
         var cat = categories[i];
-       
+
         str += '<li class="linested"><span class="caret">' + cat.name + '</span><ul class="nested">';
         if (catHasChilds(cat)) {
             str = fillCatalogRecursiveFull(str, cat.categories);
@@ -290,7 +316,7 @@ function fillCatalogRecursiveFull(str, categories) {
                 str += '<li><a href="/algorithms?repo=tao-js&snippet=' + s + '">[' + s + ']</a></li>';
             }
         }
-        
+
         str +=  '</ul></li>';
     }
 
@@ -402,7 +428,7 @@ function RangeCounted(fname, nname) {
 
 
 function resetState() {
-    
+
     var hg_right_x_a = document.getElementById('hg-right-x-a');
     hg_right_x_a.innerHTML = '';
 
@@ -453,7 +479,7 @@ function updateState() {
         // console.log(data)
         // var length = data.properties['length'];
         // var text = '<p id="Status">source(<b>' + key + '</b>) = ' + data.properties[it.index] + '</p>';
- 
+
         var length = data.length;
         var text = '<p id="Status">source(<b>' + key + '</b>) = ' + data[it.index] + '</p>';
 
@@ -480,7 +506,7 @@ function updateStats() {
     for (var key in custom_stats) {
         // console.log(custom_stats[key]);
         hg_right_x_b.innerHTML += `<p id="Status"><b>${key}</b>: ${custom_stats[key]}</p>`;
-    }    
+    }
 }
 
 function subscript_digit(digit) {
@@ -512,7 +538,7 @@ function subscript(number) {
         // console.log(subscript_digit(c))
         res += subscript_digit(c);
     }
-      
+
     return res;
 }
 
@@ -654,7 +680,7 @@ function initFunctions(interpreter, scope) {
         console.log(arguments.length ? text : '');
     };
 
-    
+
 
     // var assign_it_wrapper = function(target, source) {
     //     var elements = target.data.elements;
@@ -727,7 +753,7 @@ function initFunctions(interpreter, scope) {
         if (iterators_int[it.name]) {
             iterators_int[it.name] = it;
         }
-        
+
         if (log_stats_enabled) {
             if (isRandomAccess(it_par)) {
                 ++stats_it_moves;
@@ -741,7 +767,7 @@ function initFunctions(interpreter, scope) {
         addLogPredecessor(it_par, step, it)
         return it;
     };
-    
+
     var begin_wrapper = function(seq, name, color) {
         // console.log(seq)
         // console.log(seq.type)
@@ -885,7 +911,7 @@ function initFunctions(interpreter, scope) {
         }
 
         addLogSink(it, x)
-        
+
         data[it.index] = x;
         elements[it.index].group.children[1].value = x;
 
@@ -965,7 +991,7 @@ function initFunctions(interpreter, scope) {
         return res;
     };
 
-    
+
     // var copy_it_wrapper = function(it, name, color) {
 
     //     if ( ! color) {
@@ -1075,7 +1101,7 @@ function initFunctions(interpreter, scope) {
         // console.log(`sequence_internal_wrapper preds_par[0]: ${preds_par[0]}`);
         // console.log(`sequence_internal_wrapper preds_par[1]: ${preds_par[1]}`);
         // console.log(`preds_par.properties['length']: ${preds_par.properties['length']}`);
-        
+
         if (sequences[name] != undefined) {
             showError('sequence "' + name + '" already exists.');
             disable('disabled');
@@ -1089,7 +1115,7 @@ function initFunctions(interpreter, scope) {
         } else {
             var data = [];
         }
-        stats_n += data.length; 
+        stats_n += data.length;
 
         if (preds_par) {
             var preds = fromInterpreterArray(preds_par);
@@ -1114,19 +1140,19 @@ function initFunctions(interpreter, scope) {
 
         // console.log(`retobj: ${retobj}`);
         return retobj;
-    };    
+    };
 
 
     // var set_predicate_wrapper = function(p) {
-       
+
     //     // console.log(p.node.id.name);
     //     // interpreter.appendCode(p.node.id.name+'();');
 
     //     predicates.push(p);
-        
+
     //     updateStatus();
     //     two.update();
-    // };    
+    // };
 
     var log_predicate_call_internal_wrapper = function(name, x, res) {
         if (log_stats_enabled) {
@@ -1142,7 +1168,7 @@ function initFunctions(interpreter, scope) {
             var text = '<p id="Status">' + name + '(' + x + ') = ' + res + '</p>';
             hg_right_x_a.innerHTML += text;
         }
-    };    
+    };
 
     var log_relation_call_internal_wrapper = function(name, x, y, res) {
         // console.log('log_relation_call_internal_wrapper')
@@ -1151,7 +1177,7 @@ function initFunctions(interpreter, scope) {
         // console.log(y)
         // console.log(res)
         // console.log(log_stats_enabled)
-        
+
         if (log_stats_enabled) {
             ++stats_pred_appls;
         }
@@ -1165,7 +1191,7 @@ function initFunctions(interpreter, scope) {
             var text = '<p id="Status">' + name + '(' + x + ', ' + y + ') = ' + res + '</p>';
             hg_right_x_a.innerHTML += text;
         }
-    };    
+    };
 
     var log_operation_call_internal_wrapper = function(name, x, y, res) {
         if (log_stats_enabled) {
@@ -1191,9 +1217,9 @@ function initFunctions(interpreter, scope) {
 
             hg_right_x_a.innerHTML += text;
         }
-    };    
+    };
 
-    
+
 
     // var fill_elem_wrapper = function(data, i, c) {
     //     // var elements = data.elements;
@@ -1202,28 +1228,28 @@ function initFunctions(interpreter, scope) {
 
     //     var colors = data.colors;
     //     colors[i] = c;
-    // };    
+    // };
 
     var enable_log_stats_wrapper = function() {
         log_stats_enabled = true;
-    };    
+    };
 
     var disable_log_stats_wrapper = function() {
         log_stats_enabled = false;
-    };    
-    
+    };
+
     var skip_debug_wrapper = function(name) {
         skipped.push(name);
         // console.log(skipped);
-    };    
+    };
 
     var range_bounded_wrapper = function(f, l) {
         return new RangeBounded(f, l);
-    };    
+    };
 
     var range_counted_wrapper = function(f, n) {
         return new RangeCounted(f, n);
-    };    
+    };
 
     // var log_f_wrapper = function() {
     //     // var myName = arguments.callee.toString();
@@ -1260,7 +1286,7 @@ function initFunctions(interpreter, scope) {
     //     // console.log(to_print);
     //     addLog("-- start: " + to_print);
     //     return to_print
-    // }; 
+    // };
 
     var start_f_wrapper = function() {
         if (arguments.length == 0) return [false, undefined];
@@ -1281,7 +1307,7 @@ function initFunctions(interpreter, scope) {
         to_print += ')';
         addLog("-- start: " + to_print);
         return [true, to_print];
-    }; 
+    };
 
     var end_f_wrapper = function(pars) {
         // alert(pars)
@@ -1295,14 +1321,14 @@ function initFunctions(interpreter, scope) {
     // }
 
     var default_for_wrapper = function(arg, val) {
-        return typeof arg !== 'undefined' ? arg : val;    
+        return typeof arg !== 'undefined' ? arg : val;
     }
 
-    // function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; } 
+    // function defaultFor(arg, val) { return typeof arg !== 'undefined' ? arg : val; }
 
-    
 
-    
+
+
 
     // interpreter.setProperty(scope, 'alert',          interpreter.createNativeFunction(alert_wrapper));
     interpreter.setProperty(scope, 'print',          interpreter.createNativeFunction(print_wrapper));
@@ -1316,7 +1342,7 @@ function initFunctions(interpreter, scope) {
     interpreter.setProperty(scope, 'capacity',       interpreter.createNativeFunction(capacity_wrapper));
     interpreter.setProperty(scope, 'increase_capacity', interpreter.createNativeFunction(increase_capacity_wrapper));
     interpreter.setProperty(scope, 'push_back', interpreter.createNativeFunction(push_back_wrapper));
-    
+
     interpreter.setProperty(scope, 'source',         interpreter.createNativeFunction(source_wrapper));
     interpreter.setProperty(scope, 'source_move',    interpreter.createNativeFunction(source_move_wrapper));
     interpreter.setProperty(scope, 'sink',           interpreter.createNativeFunction(sink_wrapper));
@@ -1330,9 +1356,9 @@ function initFunctions(interpreter, scope) {
     interpreter.setProperty(scope, 'register_custom_stat', interpreter.createNativeFunction(register_custom_stat_wrapper));
     interpreter.setProperty(scope, 'increment_custom_stat', interpreter.createNativeFunction(increment_custom_stat_wrapper));
 
-    
 
-    
+
+
 
     interpreter.setProperty(scope, 'iter_swap',      interpreter.createNativeFunction(iter_swap_wrapper));
 
@@ -1348,7 +1374,7 @@ function initFunctions(interpreter, scope) {
 
     interpreter.setProperty(scope, 'range_bounded', interpreter.createNativeFunction(range_bounded_wrapper));
     interpreter.setProperty(scope, 'range_counted', interpreter.createNativeFunction(range_counted_wrapper));
- 
+
 
     interpreter.setProperty(scope, 'start_f', interpreter.createNativeFunction(start_f_wrapper));
     interpreter.setProperty(scope, 'end_f', interpreter.createNativeFunction(end_f_wrapper));
@@ -1367,7 +1393,7 @@ function initFunctions(interpreter, scope) {
 // function bind(r, value, arg=0) {
 //     if (arg == 0)
 //         return function(x) { return r(value, x);};
-    
+
 //     return function(x) { return r(x, value);};
 // }
 
@@ -1381,8 +1407,8 @@ function initFunctions(interpreter, scope) {
 
 function callPredCode() {
     return '';
-    
-    // var res = '' + 
+
+    // var res = '' +
     //     // + 'function predicate(p, name) {return function(x) {return log_predicate_call(p, name, x);};}\n'
     //     // + 'function log_relation_call(r, name, x, y){var res = r(x, y); log_relation_call_internal(name, x, y, res); return res;}\n'
 
@@ -1394,11 +1420,11 @@ function callPredCode() {
 
     //     + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n';
     //     //  + 'function array_random(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
-    
+
     // res += `
     // function log_relation_call(r, name, x, y) {
-    //     var res = r(x, y); 
-    //     log_relation_call_internal(name, x, y, res); 
+    //     var res = r(x, y);
+    //     log_relation_call_internal(name, x, y, res);
     //     return res;
     // }`;
 
@@ -1420,7 +1446,7 @@ function addSequenceCode() {
         }
         return undefined;
     }
-    
+
     function sequence(d, n, p, type, drawChart) {
         type = typeof type !== 'undefined' ? type : "array";
         type = __standardSequenceType(type);
@@ -1436,7 +1462,7 @@ function addSequenceCode() {
     //     var obj = sequence_internal(d, n, p);
 
     //     // if ( ! obj) {enable_log_stats(); return obj;}
-    //     // if (p) {    
+    //     // if (p) {
     //     //     for (var i = 0; i < d.length; ++i) {
     //     //         var value = d[i];
     //     //         if ( ! p(value)) {
@@ -1452,7 +1478,7 @@ function addSequenceCode() {
 }
 
 function add_utils_lib() {
-    // var res = '' + 
+    // var res = '' +
     //     // 'function log_predicate_call(p, name, x){var res = p(x); log_predicate_call_internal(name, x, res); return res;};\n'
     //     // + 'function predicate(p, name) {return function(x) {return log_predicate_call(p, name, x);};}\n'
     //     // + 'function log_relation_call(r, name, x, y){var res = r(x, y); log_relation_call_internal(name, x, y, res); return res;}\n'
@@ -1465,8 +1491,8 @@ function add_utils_lib() {
 
     //     + 'function random_int(from, to) {if ( ! from) from = 0;if ( ! to) to = 99;return Math.floor(Math.random() * to) + from;}\n';
     //     //  + 'function array_random(n, from, to) {if ( ! n) n = 10;if ( ! from) from = 0;if ( ! to) to = 99;var res = []; while (n != 0) { var rand = Math.floor(Math.random() * to) + from; res.push(rand); --n;} return res; }\n';
-    
-    
+
+
     return `
     function callable(f, type) {
         var c = callable_create(f);
@@ -1475,40 +1501,40 @@ function add_utils_lib() {
 
         if (type == "relation") {
             var wrapped_func = function(x, y) {
-                var res = f(x, y); 
-                log_relation_call_internal(fname, x, y, res); 
+                var res = f(x, y);
+                log_relation_call_internal(fname, x, y, res);
                 return res;
-            };        
+            };
         } else if (type == "binary_operation") {
             var wrapped_func = function(x, y) {
-                var res = f(x, y); 
-                log_operation_call_internal(fname, x, y, res); 
+                var res = f(x, y);
+                log_operation_call_internal(fname, x, y, res);
                 return res;
-            };        
+            };
         } else if (type == "unary_operation") {
             var wrapped_func = function(x) {
-                var res = f(x); 
-                log_operation_call_internal(fname, x, undefined, res); 
+                var res = f(x);
+                log_operation_call_internal(fname, x, undefined, res);
                 return res;
-            };        
+            };
         } else if (type == "predicate") {
             var wrapped_func = function(x) {
                 var res = f(x);
-                log_predicate_call_internal(fname, x, res); 
+                log_predicate_call_internal(fname, x, res);
                 return res;
             };
         }
-        
+
         // if (params == 2) {
         //     var wrapped_func = function(x, y) {
-        //         var res = f(x, y); 
-        //         log_relation_call_internal(fname, x, y, res); 
+        //         var res = f(x, y);
+        //         log_relation_call_internal(fname, x, y, res);
         //         return res;
-        //     };        
+        //     };
         // } else if (params == 1) {
         //     var wrapped_func = function(x) {
         //         var res = f(x);
-        //         log_predicate_call_internal(fname, x, res); 
+        //         log_predicate_call_internal(fname, x, res);
         //         return res;
         //     };
         // }
@@ -1518,7 +1544,7 @@ function add_utils_lib() {
         wrapped_func.inner_code = callable_get_code(c);
         wrapped_func.inner_parameters = params;
         return wrapped_func;
-    }    
+    }
     function relation(f) {
         return callable(f, "relation");
     }
@@ -1532,7 +1558,7 @@ function add_utils_lib() {
         return callable(f, "unary_operation");
     }
     function bind(r, value, arg) {
-        return function(x) { 
+        return function(x) {
             return r(value, x);
         };
     }
@@ -1545,51 +1571,51 @@ function add_utils_lib() {
         if ( ! n) n = 10;
         if ( ! from) from = 0;
         if ( ! to) to = 99;
-        var res = []; 
+        var res = [];
         while (n != 0) {
-            var rand = Math.floor(Math.random() * to) + from; 
-            res.push(rand); 
+            var rand = Math.floor(Math.random() * to) + from;
+            res.push(rand);
             --n;
-        } return res; 
+        } return res;
     }
     function array_all_equal(n, x) {
         if ( ! n) n = 10;
         if ( ! x) x = 1;
-        var res = []; 
-        while (n != 0) { 
-            res.push(x); 
+        var res = [];
+        while (n != 0) {
+            res.push(x);
             --n;
-        } 
-        return res; 
+        }
+        return res;
     }
     function array_ascending(n, from) {
         if ( ! n) n = 10;
         if ( ! from) from = 0;
-        var res = []; 
+        var res = [];
         while (n != 0) {
-            res.push(from); 
+            res.push(from);
             ++from;
             --n;
-        } 
-        return res; 
+        }
+        return res;
     }
     function array_descending(n, from) {
         if ( ! n) n = 10;
         if ( ! from) from = n - 1;
-        var res = []; 
+        var res = [];
         while (n != 0) {
-            res.push(from); 
+            res.push(from);
             --from;
             --n;
-        } 
-        return res; 
+        }
+        return res;
     }
     function array_from(str) {
-        var res = []; 
+        var res = [];
         for (var i = 0; i < str.length; ++i) {
-            res.push(str[i]); 
+            res.push(str[i]);
         }
-        return res; 
+        return res;
     }
     function random_int(from, to) {
         if ( ! from) from = 0;
@@ -1684,7 +1710,7 @@ function add_std_lib_dict() {
     var res = {};
     for (var key in dict) {
         if (key.includes("_internal")) continue;
-        
+
         if ((key + "_internal") in dict) {
             res[key] = dict[key + "_internal"].replace(key + "_internal", key);
         } else {
@@ -1794,7 +1820,7 @@ function add_std_lib() {
 //         l_i = predecessor(l_i);
 //         l_o = predecessor(l_o);
 //         sink_move(l_o, source(l_i));
-//     } 
+//     }
 //     end_f(_f_);
 //     return l_o;
 // }`, `
@@ -1825,14 +1851,14 @@ function add_std_lib() {
 //     // `function iota(f, l, start, step) {
 //     //     if ( ! start) start = 0;
 //     //     if ( ! step) step = 1;
-    
+
 //     //     while ( ! equal(f, l)) {
 //     //         sink(f, start);
 //     //         start += step;
 //     //         f = successor(f);
 //     //     }
 //     //     return start;
-//     // }`    
+//     // }`
 // }
 
 function std_lib_attributes() {
@@ -2000,7 +2026,7 @@ function startButton() {
     var codeAll = getAllCode();
     console.log(codeAll);
     var codeView = getViewCode();
-    
+
     // document.getElementById('dataCodeArea').style.display = "none";
     document.getElementById('codeArea').style.display = "none";
     document.getElementById('codeHighlightPre').style.display = "block";
@@ -2027,7 +2053,7 @@ function startButton() {
     codeHighlight.style.fontSize = "12pt";
 
     try {
-        myInterpreter = new Interpreter(codeAll, initFunctions);    
+        myInterpreter = new Interpreter(codeAll, initFunctions);
         disable('');
         updateStatus();
     } catch (error) {
@@ -2039,7 +2065,7 @@ function startButton() {
 function showFunction() {
     var codeAll = getAllCode();
     var codeView = getViewCode();
-    
+
     // document.getElementById('dataCodeArea').style.display = "none";
     document.getElementById('codeArea').style.display = "none";
     document.getElementById('codeHighlightPre').style.display = "block";
@@ -2083,7 +2109,7 @@ function pad_end_nbsp(targetLength, str) {
 
 function array_to_str(key, arr, maxKeyLen) {
     if (arr.length == 0) return '';
-    
+
     var str = `<p id="Attribute"><b>${pad_end_nbsp(maxKeyLen, key + ":")}</b> <code>${arr[0]}</code></p>`;
 
     for (let i = 1; i < arr.length; ++i) {
@@ -2106,7 +2132,7 @@ function showFunctionAttributes(function_name) {
     var maxKeyLen = 0;
     for (var key in attrs) {
         if (key.length > maxKeyLen) maxKeyLen = key.length;
-    }    
+    }
 
     ++maxKeyLen;
     for (var key in attrs) {
@@ -2120,7 +2146,7 @@ function showFunctionAttributes(function_name) {
         } else {
             hg_right_a.innerHTML += `<p id="Attribute"><b>${pad_end_nbsp(maxKeyLen, key + ":")}</b> <code>${value}</code></p>`;
         }
-    }    
+    }
 
     hg_right_a.innerHTML += `<p id="Attribute">&nbsp;</p>`;
     hg_right_a.innerHTML += `<p id="Attribute">&nbsp;</p>`;
@@ -2193,13 +2219,13 @@ function scopeOrder(scope) {
         'Array', 'Boolean','Date', 'Error', 'EvalError', 'Function',
         'JSON', 'Math', 'Number', 'Object', 'RangeError', 'ReferenceError',
         'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
-        'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self', 
+        'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self',
         'window',
         'sequence', 'sequence_internal', 'alert', 'assign_it',
         'begin', 'log_predicate_call_internal', 'log_relation_call',
         'log_relation_call_internal', 'log_operation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
         'end',  'equal', 'find_if', 'sink', 'source', 'successor', 'remove_it',
-        'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending', 
+        'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending',
         'relation', 'iter_swap', 'predecessor', 'predicate', 'operation'];
 
     // 'fill_elem'
@@ -2237,7 +2263,7 @@ function scopeOrder(scope) {
 
         if ( ! reserved.includes(key)) {
             var value = scope.properties[key];
-        
+
             if (value != undefined) {
 
                 if (value instanceof Sequence) {
@@ -2309,7 +2335,7 @@ function drawScope(scope) {
         'Array', 'Boolean','Date', 'Error', 'EvalError', 'Function',
         'JSON', 'Math', 'Number', 'Object', 'RangeError', 'ReferenceError',
         'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
-        'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self', 
+        'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self',
         'window',
         'sequence', 'sequence_internal', 'alert', 'assign_it',
         'begin', 'log_predicate_call_internal', 'log_relation_call',
@@ -2350,7 +2376,7 @@ function drawScope(scope) {
         }
     }
 
-    
+
 
     // console.log(keys)
     for (var x in keys) {
@@ -2481,7 +2507,7 @@ function drawScope(scope) {
     //     // console.log(its_internal)
     //     alert2(3, its_internal)
     // }
-    
+
     for (var i in its_internal) {
         var key = its_internal[i].key;
         var value = its_internal[i].value;
@@ -2535,7 +2561,7 @@ function drawScope(scope) {
 
         if ( ! reserved.includes(key)) {
             var value = scope.properties[key];
-        
+
             // console.log(key);
             // console.log(scope.properties['start']);
 
@@ -2583,7 +2609,7 @@ function drawScope(scope) {
 
             var f = its_internal.find( x => x.key === r.fname );
             var l = its_internal.find( x => x.key === r.lname );
-            
+
             if (f != undefined && l != undefined) {
                 drawBoundedRange(f.value, l.value);
             }
@@ -2607,7 +2633,7 @@ function drawScope(scope) {
 }
 
 
-// Object.prototype.getName = function() { 
+// Object.prototype.getName = function() {
 //     var funcNameRegex = /function (.{1,})\(/;
 //     var results = (funcNameRegex).exec((this).constructor.toString());
 //     return (results && results.length > 1) ? results[1] : "";
@@ -2668,7 +2694,7 @@ function stepButton() {
                 var codeHighlight = document.getElementById('codeHighlight');
                 codeHighlight.innerHTML = codeView;
                 hljs.highlightBlock(codeHighlight);
-        
+
                 break;
             }
         }
