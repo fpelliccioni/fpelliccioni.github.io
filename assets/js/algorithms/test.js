@@ -1,8 +1,8 @@
 /*
-Copyright Fernando Pelliccioni 2019-2020
+Copyright Fernando Pelliccioni 2019-2021
 
 Distributed under the Boost Software License, Version 1.0. (See accompanying
-file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt) 
+file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 */
 
 
@@ -64,24 +64,24 @@ function setSizes() {
     defaultTopMargin = escale_y(0);
     sequenceTotalHeight = escale_y(130);
     variableTotalHeight = escale_y(70);
-    
-    
+
+
     // console.log(defaultLeftMargin)
     // console.log(defaultTopMargin)
     // console.log(sequenceTotalHeight)
     // console.log(variableTotalHeight)
-    
+
     // rectWidth = escale_x(80);
     // rectHeight = escale_y(120);
     // fontSize = escale_font(100);
-    
+
     rectWidth = escale_x(40);
     rectHeight = escale_y(60);
     fontSize = escale_font(32);
     indexFontSize = escale_font(15);
     pointerFontSize = escale_font(32);
     labelFontSize = escale_font(24);
-    
+
     pointerTriangleSize = escale_other(5);
     arrowTriangleSize = escale_other(4);
 
@@ -96,7 +96,7 @@ function drawArrayElement(two, x, y, text, index, color = defaultElementColor) {
 
     var textIndex = two.makeText(index, x, y + escale_y(8));
     textIndex.family = "FiraCode"; //"Source Code Pro";
-    
+
     textIndex.size = indexFontSize
     textIndex.fill = 'white';
 
@@ -156,7 +156,7 @@ function drawIterator(two, elem, text, color = '#99ff99') {
 
     var text = two.makeText(text, x, y + escale_y(24));
     text.family = "FiraCode"; //"Source Code Pro";
-    
+
     text.size = pointerFontSize //80
     text.alignment = 'center'
     text.baseline = 'middle'
@@ -246,7 +246,7 @@ function str_to_rgba_str(hex, alpha = 1) {
     hex = hex.replace(shorthandRegex, function(m, r, g, b) {
       return r + r + g + g + b + b;
     });
-  
+
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if ( ! result) return null;
 
@@ -296,7 +296,7 @@ function get_colors_array(n) {
             { r: 0x41, g: 0x4c, b: 0xff },          //blue
             { r: 0x41, g: 0xc3, b: 0xff },          //cyan
             { r: 191, g: 255, b: 179 },             //green
-        ];        
+        ];
     }
 
     return undefined;
@@ -400,7 +400,7 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
         leftMargin += 14.46 * name.length
     }
 
-    
+
 
     var green_def = { r: 191, g: 255, b: 179 };
     var red_def = { r: 0xd8, g: 0x98, b: 0xa7 };
@@ -417,7 +417,7 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
             colors.push(str_to_rgba_str(color, 0.2));
             borders.push(str_to_rgba_str(color, 1));
         }
-        
+
         var e = drawArrayElement(two, leftMargin + rectWidth / 2 + index * arrayElementSep, topMargin, value, index, color);
         elements.push(e)
         // console.log(value);
@@ -476,7 +476,7 @@ function drawArrayNamedElementFinish(x, name, text) {
     } else {
         var w = min_width
     }
-    
+
     return x + escale_x(14.46) * name.length + w / 2 + w
 }
 
@@ -494,7 +494,7 @@ function drawArrayNamedElementSimple(two, x, y, name, text, color = defaultEleme
         // var w = rectWidth
         var w = min_width
     }
-    
+
     if (name) {
         name += ":"
         var nameElement = two.makeText(name, x, y + escale_y(30));
@@ -530,7 +530,7 @@ function last_elem(dic) {
 }
 
 function drawVariable(two, name, value, initTop) {
-    
+
     // console.log(name)
     // console.log(value)
 
@@ -555,7 +555,7 @@ function drawVariable(two, name, value, initTop) {
         var topMargin = initTop
         var leftMargin = defaultLeftMargin;
     }
-    
+
     // console.log('drawArrayNamedElementSimple')
 
     // var e = drawArrayNamedElementSimple(two,  leftMargin + rectWidth / 2, topMargin + 30, name, value);
@@ -606,7 +606,7 @@ function drawSingleLinkedList(two, chart, name, id, arr, capacity, callables, dr
 
         // // let color = colors[index];
         // let color = defaultElementColor;
-        
+
         // if (callables) {
         //     // console.log(`callables: ${callables}`)
         //     // console.log(`callables[0]: ${callables[0]}`)
@@ -650,12 +650,12 @@ function drawSingleLinkedList(two, chart, name, id, arr, capacity, callables, dr
         //         if (is_relation(callables)) {
         //             if (index != 0) {
         //                 let prev = arr[index - 1];
-        
+
         //                 var res = execute_callable(callables, value, prev);
         //                 // console.log(res)
         //                 // console.log(res != undefined)
         //                 // console.log(! res)
-    
+
         //                 if ( res != undefined && ! res) {
         //                     color = rgb_to_str(green);
         //                     green = darker(green)
@@ -681,10 +681,10 @@ function drawSingleLinkedList(two, chart, name, id, arr, capacity, callables, dr
             colors.push(str_to_rgba_str(color, 0.2));
             borders.push(str_to_rgba_str(color, 1));
         }
-        
+
         var e = drawSingleLinkedListElement(two, leftMargin + rectWidth / 2 + index * sllElementSep, topMargin, value, index, color);
         elements.push(e)
-        
+
         // console.log(value);
     }
 
@@ -733,7 +733,7 @@ function drawSingleLinkedListElement(two, x, y, text, index, color = defaultElem
 
     var textIndex = two.makeText(index, x, y + escale_y(8));
     textIndex.family = "FiraCode"; //"Source Code Pro";
-    
+
     textIndex.size = indexFontSize
     textIndex.fill = 'white';
 
@@ -745,7 +745,7 @@ function drawSingleLinkedListElement(two, x, y, text, index, color = defaultElem
     // console.log(rect.width)
     // console.log(rect.translation._x)
 
-    
+
 
     var nextRect = two.makeRectangle(x + (rectWidth * 3 / 4), y + escale_y(45), (rectWidth / 2), rectHeight);
     nextRect.fill = '#cacaca';
@@ -756,15 +756,15 @@ function drawSingleLinkedListElement(two, x, y, text, index, color = defaultElem
     arrowCircle.stroke = "white";
     arrowCircle.fill = "white";
 
-    var arrowLine = two.makeLine(x + (rectWidth * 3 / 4), 
-                                 y + escale_y(45) + escale_y(1.5), 
-                                 x + rectWidth + (rectWidth / 2), 
+    var arrowLine = two.makeLine(x + (rectWidth * 3 / 4),
+                                 y + escale_y(45) + escale_y(1.5),
+                                 x + rectWidth + (rectWidth / 2),
                                  y + escale_y(45) + escale_y(1.5));
     arrowLine.stroke = "white";
     arrowLine.fill = "white";
 
-    var arrowTri = two.makePolygon(x + rectWidth + escale_x(20), 
-                                   y + escale_y(45) + escale_y(1.5), 
+    var arrowTri = two.makePolygon(x + rectWidth + escale_x(20),
+                                   y + escale_y(45) + escale_y(1.5),
                                    arrowTriangleSize)
     arrowTri.fill = "white";
     arrowTri.noStroke();
@@ -854,10 +854,10 @@ function drawDoubleLinkedList(two, chart, name, id, arr, capacity, callables, dr
             colors.push(str_to_rgba_str(color, 0.2));
             borders.push(str_to_rgba_str(color, 1));
         }
-        
+
         var e = drawDoubleLinkedListElement(two, leftMargin + rectWidth / 2 + index * dllElementSep, topMargin, value, index, color);
         elements.push(e)
-        
+
         // console.log(value);
     }
 
@@ -929,27 +929,27 @@ function drawDoubleLinkedListElement(two, x, y, text, index, color = defaultElem
 
 
     // Right arrow --------------------------------
-    var rightArrowCircle = two.makeCircle(x + rectWidth + (rectWidth * 1 / 2), 
+    var rightArrowCircle = two.makeCircle(x + rectWidth + (rectWidth * 1 / 2),
                                           y + escale_y(35) + escale_y(1.5), 2);
     rightArrowCircle.stroke = "white";
     rightArrowCircle.fill = "white";
 
-    var rightArrowLine = two.makeLine(x + rectWidth + (rectWidth * 1 / 2), 
-                                 y + escale_y(35) + escale_y(1.5), 
-                                 x + rectWidth + rectWidth + (rectWidth / 2), 
+    var rightArrowLine = two.makeLine(x + rectWidth + (rectWidth * 1 / 2),
+                                 y + escale_y(35) + escale_y(1.5),
+                                 x + rectWidth + rectWidth + (rectWidth / 2),
                                  y + escale_y(35) + escale_y(1.5));
     rightArrowLine.stroke = "white";
     rightArrowLine.fill = "white";
 
-    var rightArrowTri = two.makePolygon(x + rectWidth + rectWidth + escale_x(20), 
-                                   y + escale_y(35) + escale_y(1.5), 
+    var rightArrowTri = two.makePolygon(x + rectWidth + rectWidth + escale_x(20),
+                                   y + escale_y(35) + escale_y(1.5),
                                    arrowTriangleSize)
     rightArrowTri.fill = "white";
     rightArrowTri.noStroke();
     rightArrowTri.rotation = (Math.PI / 2);
 
     // Left arrow --------------------------------
-    var leftArrowCircle = two.makeCircle(x, 
+    var leftArrowCircle = two.makeCircle(x,
                                          y + escale_y(55) + escale_y(1.5), 2);
 
     if (index == 0) {
@@ -962,14 +962,14 @@ function drawDoubleLinkedListElement(two, x, y, text, index, color = defaultElem
 
     if (index != 0) {
         var leftArrowLine = two.makeLine(x,
-                                    y + escale_y(55) + escale_y(1.5), 
-                                    x - rectWidth, 
+                                    y + escale_y(55) + escale_y(1.5),
+                                    x - rectWidth,
                                     y + escale_y(55) + escale_y(1.5));
         leftArrowLine.stroke = "white";
         leftArrowLine.fill = "white";
 
-        var leftArrowTri = two.makePolygon(x - rectWidth - escale_x(2), 
-                                    y + escale_y(55) + escale_y(1.5), 
+        var leftArrowTri = two.makePolygon(x - rectWidth - escale_x(2),
+                                    y + escale_y(55) + escale_y(1.5),
                                     arrowTriangleSize)
         leftArrowTri.fill = "white";
         leftArrowTri.noStroke();
@@ -1012,28 +1012,28 @@ function drawDoubleLinkedListPastLast(two, x, y, text, index, color = defaultEle
     nextRect.linewidth = 1;
 
     // Right arrow --------------------------------
-    var rightArrowCircle = two.makeCircle(x + rectWidth + (rectWidth * 1 / 2), 
+    var rightArrowCircle = two.makeCircle(x + rectWidth + (rectWidth * 1 / 2),
                                           y + escale_y(35) + escale_y(1.5), 2);
     rightArrowCircle.stroke = "black";
     rightArrowCircle.fill = "black";
 
 
     // Left arrow --------------------------------
-    var leftArrowCircle = two.makeCircle(x, 
-                                         y + escale_y(55) + escale_y(1.5), 
+    var leftArrowCircle = two.makeCircle(x,
+                                         y + escale_y(55) + escale_y(1.5),
                                          2);
     leftArrowCircle.stroke = "white";
     leftArrowCircle.fill = "white";
 
     var leftArrowLine = two.makeLine(x,
-                                    y + escale_y(55) + escale_y(1.5), 
-                                    x - rectWidth, 
+                                    y + escale_y(55) + escale_y(1.5),
+                                    x - rectWidth,
                                     y + escale_y(55) + escale_y(1.5));
     leftArrowLine.stroke = "white";
     leftArrowLine.fill = "white";
 
-    var leftArrowTri = two.makePolygon(x - rectWidth - escale_x(2), 
-                                       y + escale_y(55) + escale_y(1.5), 
+    var leftArrowTri = two.makePolygon(x - rectWidth - escale_x(2),
+                                       y + escale_y(55) + escale_y(1.5),
                                        arrowTriangleSize)
     leftArrowTri.fill = "white";
     leftArrowTri.noStroke();
@@ -1053,7 +1053,7 @@ function drawDoubleLinkedListPastLast(two, x, y, text, index, color = defaultEle
 
 
 function drawCountedRange(f, n) {
-    
+
     // console.log(iterators_int[f.name]);
     // console.log(iterators_gui[f.name]);
 
@@ -1119,7 +1119,7 @@ function drawCountedRange(f, n) {
 
     // var text = two.makeText(text, x, y + 30);
     // text.family = "FiraCode"; //"Source Code Pro";
-    
+
     // text.size = pointerFontSize //80
     // text.alignment = 'center'
     // text.baseline = 'middle'
@@ -1131,14 +1131,14 @@ function drawCountedRange(f, n) {
     // // return {
     // //     group: group,
     // //     tri: tri
-    // // };    
+    // // };
 }
 
 
 function drawBoundedRange(f, l) {
     // console.log(f);
     // console.log(l);
-    
+
     // console.log(iterators_int[f.name]);
     // console.log(iterators_gui[f.name]);
 
