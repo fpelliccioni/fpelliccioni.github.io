@@ -744,8 +744,10 @@ function initFunctions(interpreter, scope) {
     };
 
     var predecessor_wrapper = function (it_par, step_par = 1) {
+        step = 0 + step_par;
+
         if (typeof(it_par) === 'number') {
-            var res = it_par - step_par;
+            var res = it_par - step;
             return res;
         }
 
@@ -759,7 +761,6 @@ function initFunctions(interpreter, scope) {
             return;
         }
 
-        step = 0 + step_par;
         // console.log(step_par)
         // console.log(step)
         if (it_par.index - step < 0) {
