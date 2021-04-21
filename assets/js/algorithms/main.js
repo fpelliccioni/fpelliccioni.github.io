@@ -696,6 +696,8 @@ function initFunctions(interpreter, scope) {
 
 
     var successor_wrapper = function(it_par, step_par = 1) {
+        console.log(it_par);
+
         step = 0 + step_par;
         var data = it_par.data.data;
         var max = data.length;
