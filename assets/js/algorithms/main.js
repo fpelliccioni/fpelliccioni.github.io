@@ -696,6 +696,10 @@ function initFunctions(interpreter, scope) {
 
 
     var successor_wrapper = function(it_par, step_par = 1) {
+        if (typeof(it_par) === 'number') {
+            return it + step_par;
+        }
+
         console.log(it_par);
         console.log(typeof(it_par));
 
@@ -734,7 +738,12 @@ function initFunctions(interpreter, scope) {
     };
 
     var predecessor_wrapper = function (it_par, step_par = 1) {
+        if (typeof(it_par) === 'number') {
+            return it - step_par;
+        }
+
         console.log(it_par);
+        console.log(typeof(it_par));
         console.log(it_par.category);
 
         if ( ! isBidirectional(it_par)) {
