@@ -702,9 +702,10 @@ function initFunctions(interpreter, scope) {
         step = 0 + step_par;
 
         if (typeof(it_par) === 'number') {
-            console.log("we are dealing with integers")
+            console.log("we are dealing with integers");
+            console.log("step: ", step);
             var res = it + step;
-            console.log(res);
+            console.log("res: ", res);
             return res;
         }
 
