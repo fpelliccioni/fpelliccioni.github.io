@@ -696,14 +696,18 @@ function initFunctions(interpreter, scope) {
 
 
     var successor_wrapper = function(it_par, step_par = 1) {
-        if (typeof(it_par) === 'number') {
-            return it + step_par;
-        }
-
         console.log(it_par);
         console.log(typeof(it_par));
 
         step = 0 + step_par;
+
+        if (typeof(it_par) === 'number') {
+            console.log("we are dealing with integers")
+            var res = it + step;
+            console.log(res);
+            return res;
+        }
+
         var data = it_par.data.data;
         var max = data.length;
 
