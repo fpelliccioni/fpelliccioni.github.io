@@ -697,15 +697,16 @@ function initFunctions(interpreter, scope) {
 
     var successor_wrapper = function(it_par, step_par = 1) {
         console.log(it_par);
+        console.log(step_par);
         console.log(typeof(it_par));
 
         step = 0 + step_par;
 
         if (typeof(it_par) === 'number') {
-            console.log("we are dealing with integers");
-            console.log("step: ", step);
-            var res = it + step;
-            console.log("res: ", res);
+            // console.log("we are dealing with integers");
+            // console.log("step: ", step);
+            var res = it_par + step;
+            // console.log("res: ", res);
             return res;
         }
 
@@ -744,7 +745,8 @@ function initFunctions(interpreter, scope) {
 
     var predecessor_wrapper = function (it_par, step_par = 1) {
         if (typeof(it_par) === 'number') {
-            return it - step_par;
+            var res = it_par - step_par;
+            return res;
         }
 
         console.log(it_par);
