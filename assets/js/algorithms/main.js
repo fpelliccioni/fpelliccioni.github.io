@@ -38,8 +38,8 @@ var categories_full = [
         {id: 'search/linear', name: 'Linear', categories: []}
     ]}
   , {id: 'copying', name: 'Copying and moving', categories: [
-        {id: 'copying/position', name: 'Position-Based Copying', categories: []},
-        {id: 'copying/predicate', name: 'Predicate-Based Copying', categories: []}
+        {id: 'copying/position', name: 'Position-based', categories: []},
+        {id: 'copying/predicate', name: 'Predicate-based', categories: []}
     ]}
   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
 ];
@@ -77,8 +77,8 @@ var categories = [
         {id: 'search/linear', name: 'Linear', categories: []}
     ]}
   , {id: 'copying', name: 'Copying and moving', categories: [
-        {id: 'copying/position', name: 'Position-Based Copying', categories: []},
-        {id: 'copying/predicate', name: 'Predicate-Based Copying', categories: []}
+        {id: 'copying/position', name: 'Position-based', categories: []},
+        {id: 'copying/predicate', name: 'Predicate-based', categories: []}
     ]}
   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
 ];
