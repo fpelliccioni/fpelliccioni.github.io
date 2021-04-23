@@ -33,16 +33,17 @@ var categories_full = [
         ]}
     ]}
   , {id: 'selection', name: 'Selection', categories: []}
-  , {id: 'search', name: 'Seach', categories: [
+  , {id: 'search', name: 'Search', categories: [
         {id: 'search/binary', name: 'Binary', categories: []},
         {id: 'search/linear', name: 'Linear', categories: []}
-  ]}
+    ]}
+  , {id: 'copying', name: 'Copying', categories: []}
   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
 ];
 
 // var categories = [
 //   , {id: 'selection', name: 'Selection', categories: []}
-//   , {id: 'search', name: 'Seach', categories: [
+//   , {id: 'search', name: 'Search', categories: [
 //         {id: 'search/binary', name: 'Binary', categories: []},
 //         {id: 'search/linear', name: 'Linear', categories: []}
 //   ]}
@@ -68,10 +69,11 @@ var categories = [
         ]}
     ]}
   , {id: 'selection', name: 'Selection', categories: []}
-  , {id: 'search', name: 'Seach', categories: [
+  , {id: 'search', name: 'Search', categories: [
         {id: 'search/binary', name: 'Binary', categories: []},
         {id: 'search/linear', name: 'Linear', categories: []}
-  ]}
+    ]}
+  , {id: 'copying', name: 'Copying', categories: []}
   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
 ];
 
@@ -707,6 +709,7 @@ function initFunctions(interpreter, scope) {
             // console.log("step: ", step);
             var res = it_par + step;
             // console.log("res: ", res);
+            updateStatus();
             return res;
         }
 
