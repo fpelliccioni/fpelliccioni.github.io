@@ -1146,6 +1146,7 @@ function initFunctions(interpreter, scope) {
         }
         stats_n += data.length;
 
+        console.log(`preds_par: ${preds_par}`);
         if (preds_par) {
             var preds = fromInterpreterArray(preds_par);
         } else {
