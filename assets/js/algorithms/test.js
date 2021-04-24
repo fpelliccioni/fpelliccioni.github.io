@@ -319,6 +319,7 @@ function doColorWork(value, callables, green, red, defaultElementColor) {
         if (Array.isArray(callables)) {
             console.log("doColorWork() callables is an array.");
             var colors_array = get_colors_array(callables.length);
+            console.log(`callables.length: ${callables.length}`)
             if ( ! colors_array) {
                 color = rgb_to_str(green);
             } else {
