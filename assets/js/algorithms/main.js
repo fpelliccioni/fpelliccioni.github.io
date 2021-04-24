@@ -1161,7 +1161,10 @@ function initFunctions(interpreter, scope) {
         }
 
         console.log(`preds: ${preds}`);
-        console.log(`preds.length: ${preds.length}`);
+        if (preds) {
+            console.log(`preds.length: ${preds.length}`);
+        }
+
         if ( ! preds || preds.length == 1) {
             console.log(`inside IF`);
             preds = preds_par;
