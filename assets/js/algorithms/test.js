@@ -193,6 +193,9 @@ function is_relation(callable) {
 function execute_callable() {
     if (arguments.length == 0) return undefined;
     var callable = arguments[0];
+    console.log("execute_callable() callable:", callable);
+    console.log("execute_callable() callable.properties:", callable.properties);
+    console.log("execute_callable() callable.properties.inner_parameters:", callable.properties.inner_parameters);
     if (arguments.length != callable.properties.inner_parameters + 1) return undefined;
 
     if (arguments[1] == '_') return undefined;
@@ -326,6 +329,9 @@ function doColorWork(value, callables, green, red, defaultElementColor) {
                 var color_index = 0;
                 for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
                     var current_callable = callables[callable_idx];
+                    console.log(`callable_idx: ${callable_idx}`)
+                    console.log(`current_callable: ${current_callable}`)
+                    console.log(`value: ${value}`)
                     if (execute_callable(current_callable, value)) {
                         color_index ^= 1 << callable_idx;
                         // console.log(`predicate ${callable_idx} true`)
