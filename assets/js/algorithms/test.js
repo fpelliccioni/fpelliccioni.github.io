@@ -193,6 +193,7 @@ function is_relation(callable) {
 function execute_callable() {
     if (arguments.length == 0) return undefined;
     var callable = arguments[0];
+    if ( ! callable) return undefined;
     console.log("execute_callable() callable:", callable);
     console.log("execute_callable() callable.properties:", callable.properties);
     console.log("execute_callable() callable.properties.inner_parameters:", callable.properties.inner_parameters);

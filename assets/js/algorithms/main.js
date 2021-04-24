@@ -657,8 +657,14 @@ function fromInterpreterArray(array_par) {
     var length = array_par.properties['length'];
     if ( ! length) return undefined;
 
+    console.log("fromInterpreterArray() length: ", length);
+    console.log("fromInterpreterArray() array_par.properties: ", array_par.properties);
+
     var ret = [];
     for (let i = 0; i < length; ++i) {
+        console.log("fromInterpreterArray() i: ", i);
+        console.log("fromInterpreterArray() array_par.properties[i]: ", array_par.properties[i]);
+
         ret.push(array_par.properties[i]);
     }
     return ret;
@@ -2476,7 +2482,9 @@ function drawScope(scope) {
     for (var i in seq_internal) {
         var key = seq_internal[i].key;
         var value = seq_internal[i].value;
-        // console.log(value);
+        console.log("i: ", i);
+        console.log("seq_internal[i].key: ", key);
+        console.log("seq_internal[i].value: ", value);
 
         if (value.type === "array") {
             var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
