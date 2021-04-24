@@ -311,6 +311,9 @@ function get_colors_array(n) {
 
 
 function doColorWork(value, callables, green, red, defaultElementColor, prev) {
+    var green_def = { r: 191, g: 255, b: 179 };
+    var red_def = { r: 0xd8, g: 0x98, b: 0xa7 };
+
     // let color = colors[index];
     let color = defaultElementColor;
 
