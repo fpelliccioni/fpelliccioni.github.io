@@ -665,13 +665,12 @@ function fromInterpreterArray(array_par) {
         console.log("fromInterpreterArray() i: ", i);
         console.log("fromInterpreterArray() array_par.properties[i]: ", array_par.properties[i]);
         var value = array_par.properties[i];
-        if ( ! value) return undefined;
+        if (value == undefined) return undefined;
 
         ret.push(value);
     }
     return ret;
 }
-
 
 function initFunctions(interpreter, scope) {
 
