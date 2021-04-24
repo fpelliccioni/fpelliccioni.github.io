@@ -184,6 +184,9 @@ function is_predicate(callable) {
 }
 
 function is_relation(callable) {
+    console.log("is_relation() callable:", callable);
+    console.log("is_relation() callable.properties:", callable.properties);
+    console.log("is_relation() callable.properties.inner_parameters:", callable.properties.inner_parameters);
     return callable.properties.inner_parameters == 2;
 }
 
@@ -308,6 +311,7 @@ function doColorWork(value, callables, green, red, defaultElementColor) {
     let color = defaultElementColor;
 
     if (callables) {
+        console.log("doColorWork() callables is defined.");
         // console.log(`callables: ${callables}`)
         // console.log(`callables[0]: ${callables[0]}`)
         // console.log(`callables[1]: ${callables[1]}`)
@@ -342,12 +346,16 @@ function doColorWork(value, callables, green, red, defaultElementColor) {
             }
 
         } else {
+            console.log("doColorWork() callables is not an array.");
             if (is_predicate(callables) && ! execute_callable(callables, value)) {
+                console.log("doColorWork() callables is a predicate.");
                 color = rgb_to_str(red);
             } else {
+                console.log("doColorWork() callables is not a predicate.");
                 color = rgb_to_str(green);
             }
             if (is_relation(callables)) {
+                console.log("doColorWork() callables is not a relation.");
                 if (index != 0) {
                     let prev = arr[index - 1];
 

@@ -1152,10 +1152,10 @@ function initFunctions(interpreter, scope) {
             var preds = preds_par;
         }
 
-        // console.log(`preds: ${preds}`);
-        // console.log(`preds.length: ${preds.length}`);
+        console.log(`preds: ${preds}`);
+        console.log(`preds.length: ${preds.length}`);
         if ( ! preds || preds.length == 1) {
-            // console.log(`inside IF`);
+            console.log(`inside IF`);
             preds = preds_par;
         }
         // console.log(`preds: ${preds}`);
