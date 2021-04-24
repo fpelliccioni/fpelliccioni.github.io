@@ -664,8 +664,10 @@ function fromInterpreterArray(array_par) {
     for (let i = 0; i < length; ++i) {
         console.log("fromInterpreterArray() i: ", i);
         console.log("fromInterpreterArray() array_par.properties[i]: ", array_par.properties[i]);
+        var value = array_par.properties[i];
+        if ( ! value) return undefined;
 
-        ret.push(array_par.properties[i]);
+        ret.push(value);
     }
     return ret;
 }
@@ -1165,6 +1167,12 @@ function initFunctions(interpreter, scope) {
             console.log(`inside IF`);
             preds = preds_par;
         }
+
+        if ( ! preds || preds.length == 2) {
+            console.log(`inside IF 2`);
+            preds = preds_par;
+        }
+
         // console.log(`preds: ${preds}`);
 
         var elems = null;
