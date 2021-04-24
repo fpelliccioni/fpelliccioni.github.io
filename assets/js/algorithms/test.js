@@ -310,7 +310,7 @@ function get_colors_array(n) {
 }
 
 
-function doColorWork(value, callables, green, red, defaultElementColor) {
+function doColorWork(value, callables, green, red, defaultElementColor, prev) {
     // let color = colors[index];
     let color = defaultElementColor;
 
@@ -364,9 +364,10 @@ function doColorWork(value, callables, green, red, defaultElementColor) {
                 color = rgb_to_str(green);
             }
             if (is_relation(callables)) {
-                console.log("doColorWork() callables is not a relation.");
-                if (index != 0) {
-                    let prev = arr[index - 1];
+                console.log("doColorWork() callables is a relation.");
+                // if (index != 0) {
+                if (prev) {
+                    // let prev = arr[index - 1];
 
                     var res = execute_callable(callables, value, prev);
                     // console.log(res)
@@ -428,7 +429,12 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
 
     for (let index = 0; index < arr.length; ++index) {
         let value = arr[index];
-        var color = doColorWork(value, callables, green, red, defaultElementColor);
+
+        let prev = undefined;
+        if (index != 0) {
+            prev = arr[index - 1];
+        }
+        var color = doColorWork(value, callables, green, red, defaultElementColor, prev);
 
         if (drawChart) {
             colors.push(str_to_rgba_str(color, 0.2));
@@ -692,7 +698,13 @@ function drawSingleLinkedList(two, chart, name, id, arr, capacity, callables, dr
         //     color = rgb_to_str(green);
         // }
 
-        var color = doColorWork(value, callables, green, red, defaultElementColor);
+
+        let prev = undefined;
+        if (index != 0) {
+            prev = arr[index - 1];
+        }
+
+        var color = doColorWork(value, callables, green, red, defaultElementColor, prev);
 
         if (drawChart) {
             colors.push(str_to_rgba_str(color, 0.2));
@@ -865,7 +877,12 @@ function drawDoubleLinkedList(two, chart, name, id, arr, capacity, callables, dr
 
     for (let index = 0; index < arr.length; ++index) {
         let value = arr[index];
-        var color = doColorWork(value, callables, green, red, defaultElementColor);
+
+        let prev = undefined;
+        if (index != 0) {
+            prev = arr[index - 1];
+        }
+        var color = doColorWork(value, callables, green, red, defaultElementColor, prev);
 
         if (drawChart) {
             colors.push(str_to_rgba_str(color, 0.2));
