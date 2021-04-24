@@ -41,6 +41,7 @@ var categories_full = [
         {id: 'copying/position', name: 'Position-based', categories: []},
         {id: 'copying/predicate', name: 'Predicate-based', categories: []}
     ]}
+  , {id: 'swapping', name: 'Swapping', categories: []}
   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
 ];
 
@@ -80,6 +81,7 @@ var categories = [
         {id: 'copying/position', name: 'Position-based', categories: []},
         {id: 'copying/predicate', name: 'Predicate-based', categories: []}
     ]}
+  , {id: 'swapping', name: 'Swapping', categories: []}
   , {id: 'uncatalogued', name: 'Uncatalogued', categories: []}
 ];
 
