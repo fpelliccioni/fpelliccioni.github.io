@@ -18,7 +18,8 @@ var g_disable_function_printing = false;
 var categories_full = [
     {id: 'rearrangements', name: 'Rearrangements', categories: [
         {id: 'rearrangements/position-based', name: 'Position-based', categories: [
-              {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
+              {id: 'rearrangements/position-based/cycle', name: 'Cycle', categories: []}
+            , {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
             , {id: 'rearrangements/position-based/rotate', name: 'Rotate', categories: []}
         ]}
        ,{id: 'rearrangements/predicate-based', name: 'Predicate-based', categories: [
@@ -58,7 +59,8 @@ var categories_full = [
 var categories = [
     {id: 'rearrangements', name: 'Rearrangements', categories: [
         {id: 'rearrangements/position-based', name: 'Position-based', categories: [
-              {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
+              {id: 'rearrangements/position-based/cycle', name: 'Cycle', categories: []}
+            , {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
             , {id: 'rearrangements/position-based/rotate', name: 'Rotate', categories: []}
         ]}
        ,{id: 'rearrangements/predicate-based', name: 'Predicate-based', categories: [
