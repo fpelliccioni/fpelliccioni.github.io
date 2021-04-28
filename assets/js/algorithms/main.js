@@ -896,6 +896,14 @@ function initFunctions(interpreter, scope) {
         // }
     };
 
+    var increment_assignment_stat_wrapper = function () {
+        stats_assigments += 1;
+    };
+
+    var increment_swap_stat_wrapper = function () {
+        stats_swaps += 1;
+    };
+
     var source_wrapper = function (it) {
         var data = it.data.data;
         var max = data.length;
@@ -1405,6 +1413,8 @@ function initFunctions(interpreter, scope) {
 
     interpreter.setProperty(scope, 'register_custom_stat', interpreter.createNativeFunction(register_custom_stat_wrapper));
     interpreter.setProperty(scope, 'increment_custom_stat', interpreter.createNativeFunction(increment_custom_stat_wrapper));
+    interpreter.setProperty(scope, 'increment_assignment_stat', interpreter.createNativeFunction(increment_assignment_stat_wrapper));
+    interpreter.setProperty(scope, 'increment_swap_stat', interpreter.createNativeFunction(increment_swap_stat_wrapper));
 
     interpreter.setProperty(scope, 'iter_swap',      interpreter.createNativeFunction(iter_swap_wrapper));
     interpreter.setProperty(scope, 'exchange_values',      interpreter.createNativeFunction(iter_swap_wrapper));
