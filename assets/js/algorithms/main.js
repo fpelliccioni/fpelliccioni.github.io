@@ -16,7 +16,8 @@ var log_stats_enabled = true;
 var g_disable_function_printing = false;
 
 var categories_full = [
-    {id: 'rearrangements', name: 'Rearrangements', categories: [
+    {id: 'numerics', name: 'Numerics', categories: []}
+  , {id: 'rearrangements', name: 'Rearrangements', categories: [
         {id: 'rearrangements/position-based', name: 'Position-based', categories: [
               {id: 'rearrangements/position-based/cycle', name: 'Cycle', categories: []}
             , {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
@@ -57,7 +58,8 @@ var categories_full = [
 
 
 var categories = [
-    {id: 'rearrangements', name: 'Rearrangements', categories: [
+    {id: 'numerics', name: 'Numerics', categories: []}
+  , {id: 'rearrangements', name: 'Rearrangements', categories: [
         {id: 'rearrangements/position-based', name: 'Position-based', categories: [
               {id: 'rearrangements/position-based/cycle', name: 'Cycle', categories: []}
             , {id: 'rearrangements/position-based/reverse', name: 'Reverse', categories: []}
