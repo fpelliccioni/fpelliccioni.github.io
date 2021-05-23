@@ -39,6 +39,7 @@ var categories_full = [
         {id: 'search/binary', name: 'Binary', categories: []},
         {id: 'search/linear', name: 'Linear', categories: []}
     ]}
+  , {id: 'writing', name: 'Writing', categories: []}
   , {id: 'copying', name: 'Copying and moving', categories: [
         {id: 'copying/position', name: 'Position-based', categories: []},
         {id: 'copying/predicate', name: 'Predicate-based', categories: []}
@@ -81,6 +82,7 @@ var categories = [
         {id: 'search/binary', name: 'Binary', categories: []},
         {id: 'search/linear', name: 'Linear', categories: []}
     ]}
+  , {id: 'writing', name: 'Writing', categories: []}
   , {id: 'copying', name: 'Copying and moving', categories: [
         {id: 'copying/position', name: 'Position-based', categories: []},
         {id: 'copying/predicate', name: 'Predicate-based', categories: []}
