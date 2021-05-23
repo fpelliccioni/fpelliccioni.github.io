@@ -17,6 +17,7 @@ var g_disable_function_printing = false;
 
 var categories_full = [
     {id: 'numerics', name: 'Numerics', categories: [
+        {id: 'numerics/gcd', name: 'Greatest Common Measure/Divisor', categories: []},
         {id: 'numerics/power', name: 'Power/Multiply', categories: []},
         {id: 'numerics/sift', name: 'Sift', categories: []}
     ]}
@@ -63,6 +64,7 @@ var categories_full = [
 
 var categories = [
     {id: 'numerics', name: 'Numerics', categories: [
+        {id: 'numerics/gcd', name: 'Greatest Common Measure/Divisor', categories: []},
         {id: 'numerics/power', name: 'Power/Multiply', categories: []},
         {id: 'numerics/sift', name: 'Sift', categories: []}
     ]}
