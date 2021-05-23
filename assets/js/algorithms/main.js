@@ -19,6 +19,7 @@ var categories_full = [
     {id: 'numerics', name: 'Numerics', categories: [
         {id: 'numerics/gcd', name: 'Greatest Common Measure/Divisor', categories: []},
         {id: 'numerics/power', name: 'Power/Multiply', categories: []},
+        {id: 'numerics/remainder', name: 'Quotient and Remainder', categories: []},
         {id: 'numerics/sift', name: 'Sift', categories: []}
     ]}
   , {id: 'rearrangements', name: 'Rearrangements', categories: [
@@ -66,6 +67,7 @@ var categories = [
     {id: 'numerics', name: 'Numerics', categories: [
         {id: 'numerics/gcd', name: 'Greatest Common Measure/Divisor', categories: []},
         {id: 'numerics/power', name: 'Power/Multiply', categories: []},
+        {id: 'numerics/remainder', name: 'Quotient and Remainder', categories: []},
         {id: 'numerics/sift', name: 'Sift', categories: []}
     ]}
   , {id: 'rearrangements', name: 'Rearrangements', categories: [
