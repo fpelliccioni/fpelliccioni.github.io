@@ -427,6 +427,10 @@ function clearStream(it, n) {
     }
 }
 
+function Track(name, base) {
+    this.name = name;
+    this.base = base;
+}
 
 function Sequence(name, data, elements, colors, capacity, preds, type, drawChart) {
     if (capacity == undefined) {
@@ -458,7 +462,6 @@ function resetState() {
     var hg_right_x_a = document.getElementById('hg-right-x-a');
     hg_right_x_a.innerHTML = '';
 
-
     lines = [];
 
     prevLine = "";
@@ -471,6 +474,8 @@ function resetState() {
     predicates = [];
     operations = [];
     sequences = {};
+    tracks = {};
+    track_data = [];
     variables = {};
 
     stats_n = 0;
@@ -688,6 +693,18 @@ function fromInterpreterArray(array_par) {
         ret.push(value);
     }
     return ret;
+}
+
+function converToBase(value, base) {
+    console.log("converToBase");
+    console.log(value);
+    console.log(base);
+    console.log(typeof(value));
+    console.log(typeof(base));
+
+    if (typeof(base) === 'undefined') return value;
+    if (typeof(value) === 'number') return (value >>> 0).toString(base);
+    return value;
 }
 
 function initFunctions(interpreter, scope) {
@@ -1156,6 +1173,67 @@ function initFunctions(interpreter, scope) {
         return c.parameters;
     }
 
+    var track_register_internal_wrapper = function(name, base) {
+        var retobj = new Track(name, base);
+        tracks[name] = retobj;
+    }
+
+    var track_internal_wrapper = function() {
+        var scope = myInterpreter.getScope();
+        var keys = Object.keys(scope.properties);
+        var reserved = getReserved();
+
+        var vars_internal = {};
+        for (var x in keys) {
+            var key = keys[x];
+
+            if ( ! reserved.includes(key)) {
+                var value = scope.properties[key];
+
+                if (value != undefined) {
+
+                    if (value instanceof Sequence) {
+                    } else if (value instanceof Iterator) {
+                    } else if (value instanceof RangeBounded) {
+                    } else if (value instanceof RangeCounted) {
+                    } else if (value instanceof Interpreter.Object) {
+                    } else {
+                        vars_internal[key] = {key: key, value: value};
+                    }
+                } else {
+                    vars_internal[key] = {key: key, value: undefined};
+                }
+            }
+        }
+
+        for (var track_key in tracks) {
+            var track_value = tracks[track_key];
+            var name = track_value.name;
+
+            var var_int = vars_internal[name];
+            if (typeof(var_int) === 'undefined') continue;
+
+            var base = track_value.base;
+            var value = var_int.value;
+
+            var data = {
+                name: name,
+                base: base,
+                value: undefined,
+            };
+
+            if (typeof(value) !== 'undefined') {
+                data.value = converToBase(value, base);
+            }
+            track_data.push(data);
+        }
+
+        console.log("track_data: ", track_data);
+
+        // updateStatus();
+        // two.update();
+    }
+
     var sequence_internal_wrapper = function(data_par, name, preds_par, type, drawChart) {
         // console.log(data_par)
 
@@ -1432,6 +1510,9 @@ function initFunctions(interpreter, scope) {
 
     interpreter.setProperty(scope, 'iter_swap',      interpreter.createNativeFunction(iter_swap_wrapper));
     interpreter.setProperty(scope, 'exchange_values',      interpreter.createNativeFunction(iter_swap_wrapper));
+
+    interpreter.setProperty(scope, 'track_register_internal',   interpreter.createNativeFunction(track_register_internal_wrapper));
+    interpreter.setProperty(scope, 'track_internal',   interpreter.createNativeFunction(track_internal_wrapper));
 
     interpreter.setProperty(scope, 'sequence_internal',   interpreter.createNativeFunction(sequence_internal_wrapper));
     // interpreter.setProperty(scope, 'fill_elem',      interpreter.createNativeFunction(fill_elem_wrapper));
@@ -2288,22 +2369,7 @@ function scopeComparer(a, b) {
 function scopeOrder(scope) {
 
     var res = [];
-
-    var reserved = ['arguments', 'this', 'undefined', 'NaN', 'Infinity',
-        'Array', 'Boolean','Date', 'Error', 'EvalError', 'Function',
-        'JSON', 'Math', 'Number', 'Object', 'RangeError', 'ReferenceError',
-        'RegExp', 'String', 'SyntaxError', 'TypeError', 'URIError',
-        'eval', 'isFinite', 'isNaN', 'parseFloat', 'parseInt', 'self',
-        'window',
-        'sequence', 'sequence_internal', 'alert', 'assign_it',
-        'begin', 'log_predicate_call_internal', 'log_relation_call',
-        'log_relation_call_internal', 'log_operation_call_internal', 'copy_it', 'disable_log_stats', 'enable_log_stats',
-        'end',  'equal', 'find_if', 'sink', 'source', 'successor', 'remove_it',
-        'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending',
-        'relation', 'iter_swap', 'predecessor', 'predicate', 'operation'];
-
-    // 'fill_elem'
-
+    var reserved = getReserved();
     variables = [];
 
     // var ranges = find_ranges(scope);
@@ -2399,12 +2465,8 @@ function scopePairComparer(a, b) {
 //     alert(s);
 // }
 
-function drawScope(scope) {
-    // console.log(scope.properties);
-    prevScopeOrder = scopeOrder(scope);
-    // console.log(prevScopeOrder);
 
-
+function getReserved() {
     var reserved = ['arguments', 'this', 'undefined', 'NaN', 'Infinity',
         'Array', 'Boolean','Date', 'Error', 'EvalError', 'Function',
         'JSON', 'Math', 'Number', 'Object', 'RangeError', 'ReferenceError',
@@ -2418,7 +2480,17 @@ function drawScope(scope) {
         'print', 'array_random', 'array_all_equal', 'array_ascending', 'array_descending',
         'relation', 'iter_swap', 'predecessor', 'predicate', 'operation'];
 
-        // 'fill_elem'
+    // 'fill_elem'
+    return reserved;
+}
+
+function drawScope(scope) {
+    // console.log(scope.properties);
+    prevScopeOrder = scopeOrder(scope);
+    // console.log(prevScopeOrder);
+
+
+    var reserved = getReserved();
 
     // console.clear();
     two.clear();
