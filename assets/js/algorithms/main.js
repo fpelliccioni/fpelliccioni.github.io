@@ -2759,6 +2759,8 @@ function stepButton() {
 
         try {
             var ok = myInterpreter.step();
+        } catch (e) {
+            showError(e);
         } finally {
             if (!ok) {
                 disable('disabled');
