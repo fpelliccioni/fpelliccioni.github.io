@@ -2034,6 +2034,9 @@ function getViewCode() {
 //     }
 // }
 
+function editionMode() {
+    return document.getElementById('stepButton').style.display === "none";
+}
 
 function editButton() {
     // document.getElementById('dataCodeArea').style.display = "inline";
