@@ -8,7 +8,7 @@ body {
   /* 337 x 5 */
   background: #0f0f23;
   /* background: #23241f;  */
-  
+
   color: #cccccc;
   font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 14pt;
@@ -601,7 +601,7 @@ form#settings input[type="checkbox"] ~ span {
 #myChart {
   /* position:sticky; */
 
-  margin:0; 
+  margin:0;
   padding:0;
   width: 100%;
   height:100%;
@@ -611,34 +611,34 @@ form#settings input[type="checkbox"] ~ span {
   /* background: blue; */
   /* border-top: 1px dotted #009900; */
 
-  height: 40%;
-  max-height: 40%;
+  height: 25%;
+  max-height: 25%;
   /* flex: auto; */
   display: flex;
   flex-direction: row;
 }
 
-#hg-right-b-a { 
+#hg-right-b-a {
   width:66.6%;
-  /* width:30%; */ 
+  /* width:30%; */
   /* flex: auto; */
   /* background: white; */
 
-  display: flex; 
+  display: flex;
   flex-direction: column;
 }
 
 
-/* #hg-right-b-b-parent { 
+/* #hg-right-b-b-parent {
   flex: auto;
 }
 
-#hg-right-b-b { 
+#hg-right-b-b {
   overflow-y: scroll;
 } */
 
 
-#hg-right-b-b { 
+#hg-right-b-b {
   flex: auto;
   /* flex-grow: 1; */
   /* background: red; */
@@ -648,18 +648,18 @@ form#settings input[type="checkbox"] ~ span {
 }
 
 
-#hg-right-b-b-data { 
+#hg-right-b-b-data {
 
   font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 10pt;
-  margin:0; 
+  margin:0;
   padding:0;
   color: #009900;
   /* text-align: center; */
-  
+
 
   width:100%;
-  height:100%; 
+  height:100%;
   box-sizing: border-box;         /* For IE and modern versions of Chrome */
   -moz-box-sizing: border-box;    /* For Firefox                          */
   -webkit-box-sizing: border-box; /* For Safari                           */
@@ -674,21 +674,21 @@ form#settings input[type="checkbox"] ~ span {
 
 }
 
-#hg-right-x { 
+#hg-right-x {
   /* background: orange; */
   height: 50%;
 
-  display: flex; 
+  display: flex;
   flex-direction: row;
 
 }
 
-#hg-right-x-a { 
+#hg-right-x-a {
   /* background: blue; */
   width: 60%;
 }
 
-#hg-right-x-b { 
+#hg-right-x-b {
   /* background: pink; */
   flex: auto;
 
@@ -698,7 +698,7 @@ form#settings input[type="checkbox"] ~ span {
 }
 
 
-#hg-right-y { 
+#hg-right-y {
   /* background: brown; */
   flex: auto;
   flex-grow: unset;
@@ -751,7 +751,7 @@ form#settings input[type="checkbox"] ~ span {
 button {
   border: 0;
   background: none;
-  /* box-shadow: none; nav */ 
+  /* box-shadow: none; nav */
   border-radius: 0px;
   /* color: #bfffb3; */
   /* background-color: co nav*/
@@ -767,7 +767,7 @@ button {
   font-size: 14pt;
 }
 
-button:hover { 
+button:hover {
   /* background-color: yellow; */
   color: #99ff99;
 }
@@ -807,7 +807,7 @@ button:hover {
 #Copyright {
     font-family: "FiraCode", "Source Code Pro", monospace;
     font-size: 8pt;
-    margin:0; 
+    margin:0;
     padding:0;
     color: #009900;
     text-align: center;
@@ -822,7 +822,7 @@ button:hover {
   /* float:left; */
 
   display: none;
-  margin:0; 
+  margin:0;
   padding:0;
   width: 100%;
   height:100%;
@@ -832,7 +832,7 @@ button:hover {
 
 #codeHighlight {
   /* float:left; */
-  margin:0; 
+  margin:0;
   padding:0;
   width: 100%;
   height:100%;
@@ -855,27 +855,27 @@ button:hover {
 
 
 /* #outputPre {
-    margin:0; 
+    margin:0;
     padding:0;
     width: 100%;
     height:100%;
   }
-  
+
   #output {
     width: 100%;
     height: 100%;
-    margin:0; 
+    margin:0;
     padding:0;
     font-family: "FiraCode", "Source Code Pro", monospace;
     font-size: 10pt;
     background: #0f0f23;
 } */
-  
+
 
 /* p {
     font-family: "FiraCode", "Source Code Pro", monospace;
     font-size: 12pt;
-    margin:0; 
+    margin:0;
     padding:0;
 } */
 
@@ -883,7 +883,7 @@ button:hover {
 #Status {
   font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 10pt;
-  margin:0; 
+  margin:0;
   padding:0;
   color: #009900;
   /* text-align: center; */
@@ -892,17 +892,17 @@ button:hover {
 #Attribute {
     font-family: "FiraCode", "Source Code Pro", monospace;
     font-size: 20pt;
-    margin:0; 
+    margin:0;
     padding:0;
     color: #009900;
     /* text-align: center; */
   }
-  
+
 
 #OutputMsg {
   font-family: "FiraCode", "Source Code Pro", monospace;
   font-size: 10pt;
-  margin:0; 
+  margin:0;
   padding:0;
 }
 
@@ -913,7 +913,7 @@ button:hover {
     /* font-style: italic; */
     /* font-style: oblique; */
     /* text-decoration: line-through; */
-    
+
     color: #009900;
 }
 
@@ -951,7 +951,7 @@ button:hover {
 
 
 
-/* 
+/*
 Martín Aimar [5:23 PM]
 guarda con el height: 100vh porque más de una vez en realidad eso tiene que ser min-height
 
