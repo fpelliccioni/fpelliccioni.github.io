@@ -491,8 +491,6 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
 }
 
 
-
-
 function drawArrayNamedElementFinish(x, name, text) {
 
     var min_width = 2 * escale_x(19.2) + escale_x(5);
@@ -549,6 +547,45 @@ function drawArrayNamedElementSimple(two, x, y, name, text, color = defaultEleme
         y: y,
     };
 }
+
+function drawArrayUnnamedElement(two, x, y, text, maxTextLen, color = defaultElementColor) {
+
+    var min_width = 2 * escale_x(19.2) + escale_x(5);
+
+    if (maxTextLen == undefined) {
+        if (text != undefined) {
+            maxTextLen = text.toString().length;
+        } else {
+            maxTextLen = 1;
+        }
+    }
+
+    if (maxTextLen > 2) {
+        var w = maxTextLen * escale_x(19.2) + escale_x(5);
+    } else {
+        // var w = rectWidth
+        var w = min_width
+    }
+
+    var rect = two.makeRectangle(x + escale_x(14.46), y + escale_y(30), w, rectHeight);
+    rect.fill = color;
+    rect.stroke = 'black'
+    rect.linewidth = 1;
+
+    var textElement = two.makeText(text, x + escale_x(14.46), y + escale_y(30) + escale_y(1.5));
+    textElement.family = "FiraCode"; //"Source Code Pro";
+    textElement.size = fontSize
+
+    // var group = two.makeGroup(nameElement, rect, textElement);
+
+    return {
+        // group: group,
+        rect: rect,
+        x_finish: x + escale_x(14.46)  + w,
+        y: y,
+    };
+}
+
 
 function last_elem(dic) {
     var key = Object.keys(dic)[Object.keys(dic).length - 1];
@@ -846,8 +883,6 @@ function drawSingleLinkedListPastLast(two, x, y, text, index, color = defaultEle
 // ----------------------------------------------------------------------------
 // Double-linked Lists
 // ----------------------------------------------------------------------------
-
-
 
 function drawDoubleLinkedList(two, chart, name, id, arr, capacity, callables, drawChart) {
 
@@ -1171,7 +1206,6 @@ function drawCountedRange(f, n) {
     // // };
 }
 
-
 function drawBoundedRange(f, l) {
     // console.log(f);
     // console.log(l);
@@ -1237,4 +1271,87 @@ function drawBoundedRange(f, l) {
     two.update();
 
 
+}
+
+function drawTrackedVariables(two, tracks, track_data) {
+    // name, id, arr, capacity, callables) {
+
+    if (track_data.length == 0) return;
+
+    for (var i = 0; i < track_data.length; ++i) {
+        var d = track_data[i];
+    }
+
+    var x = defaultLeftMargin;
+    var y = defaultTopMargin + 0 * rectHeight;
+
+    for (var track_value in tracks) {
+        var name = track_value.name;
+        x = drawArrayUnnamedElement(two, x, y, name, 2); //, color = defaultElementColor)
+    }
+
+
+    two.update();
+
+
+
+    // var elements = []
+    // var leftMargin = defaultLeftMargin;
+    // var topMargin = defaultTopMargin + id * sequenceTotalHeight;
+
+    // if (name) {
+    //     name += ":"
+    //     var text = two.makeText(name, leftMargin, topMargin +  escale_y(45));
+    //     text.family = "FiraCode"; //"Source Code Pro";
+    //     text.size = labelFontSize
+    //     text.alignment = 'left'
+    //     text.fill = '#99ff99';
+    //     leftMargin += 14.46 * name.length
+    // }
+
+
+
+    // var green_def = { r: 191, g: 255, b: 179 };
+    // var red_def = { r: 0xd8, g: 0x98, b: 0xa7 };
+    // var green = clone_color(green_def);
+    // var red = clone_color(red_def);
+    // var colors = [];
+    // var borders = [];
+
+    // for (let index = 0; index < arr.length; ++index) {
+    //     let value = arr[index];
+
+    //     let prev = undefined;
+    //     if (index != 0) {
+    //         prev = arr[index - 1];
+    //     }
+    //     var color = doColorWork(value, callables, green, red, defaultElementColor, prev);
+
+    //     if (drawChart) {
+    //         colors.push(str_to_rgba_str(color, 0.2));
+    //         borders.push(str_to_rgba_str(color, 1));
+    //     }
+
+    //     var e = drawArrayElement(two, leftMargin + rectWidth / 2 + index * arrayElementSep, topMargin, value, index, color);
+    //     elements.push(e)
+    //     // console.log(value);
+    // }
+
+
+
+    // var cap_len = capacity - arr.length;
+
+    // // console.log(cap_len)
+
+    // for (let index = 0; index < cap_len; ++index) {
+    //     var e = drawArrayPastLast(two, leftMargin + rectWidth / 2 + (arr.length + index) * arrayElementSep, topMargin);
+    //     elements.push(e)
+    // }
+
+    // var e_last = drawArrayPastLast(two, leftMargin + rectWidth / 2 + (arr.length + cap_len) * arrayElementSep, topMargin);
+    // elements.push(e_last)
+
+    // two.update();
+
+    // return elements;
 }

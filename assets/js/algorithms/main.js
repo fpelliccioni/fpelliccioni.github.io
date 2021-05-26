@@ -474,7 +474,7 @@ function resetState() {
     predicates = [];
     operations = [];
     sequences = {};
-    tracks = {};
+    tracks = [];
     track_data = [];
     variables = {};
 
@@ -1175,7 +1175,8 @@ function initFunctions(interpreter, scope) {
 
     var track_register_internal_wrapper = function(name, base) {
         var retobj = new Track(name, base);
-        tracks[name] = retobj;
+        // tracks[name] = retobj;
+        tracks.push(retobj);
     }
 
     var track_internal_wrapper = function() {
@@ -1206,8 +1207,9 @@ function initFunctions(interpreter, scope) {
             }
         }
 
-        for (var track_key in tracks) {
-            var track_value = tracks[track_key];
+        // for (var track_key in tracks) {
+        //     var track_value = tracks[track_key];
+        for (var track_value in tracks) {
             var name = track_value.name;
 
             var var_int = vars_internal[name];
@@ -1232,6 +1234,8 @@ function initFunctions(interpreter, scope) {
 
         // updateStatus();
         // two.update();
+        updateStatus();
+        two.update();
     }
 
     var sequence_internal_wrapper = function(data_par, name, preds_par, type, drawChart) {
@@ -2778,6 +2782,8 @@ function drawScope(scope) {
             }
         }
     }
+
+    drawTrackedVariables(two, tracks, track_data);
 }
 
 
