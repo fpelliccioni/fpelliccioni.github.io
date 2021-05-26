@@ -427,9 +427,10 @@ function clearStream(it, n) {
     }
 }
 
-function Track(name, base) {
+function Track(name, base, maxLen) {
     this.name = name;
     this.base = base;
+    this.maxLen = maxLen;
 }
 
 function Sequence(name, data, elements, colors, capacity, preds, type, drawChart) {
@@ -707,7 +708,7 @@ function valueAndBaseTreatment(value, base) {
         value = (value >>> 0).toString(base);
 
         if (base == 2) {
-            value = value.padStart(8, "0"); // "123abc"
+            value = value.padStart(8, "0");
         }
         return [value, base];
     }
@@ -1185,7 +1186,7 @@ function initFunctions(interpreter, scope) {
     }
 
     var track_register_internal_wrapper = function(name, base) {
-        var retobj = new Track(name, base);
+        var retobj = new Track(name, base, 0);
         // tracks[name] = retobj;
         tracks.push(retobj);
     }
@@ -1244,12 +1245,39 @@ function initFunctions(interpreter, scope) {
                  var res = valueAndBaseTreatment(value, base);
                  data.value = res[0];
                  data.base = res[1];
+
+                 if (data.value.length > track_value.maxLen) {
+                    console.log("new maxLen");
+                    console.log("prev maxLen: ", track_value.maxLen);
+                    track_value.maxLen = data.value.length;
+                    console.log("new maxLen: ", track_value.maxLen);
+                 }
+            } else {
+                data.value = '';
             }
             current_track.push(data);
         }
         track_data.push(current_track);
 
         console.log("current_track: ", current_track);
+        console.log("track_data: ", track_data);
+
+        for (var i = 0; i < track_data.length; ++i) {
+            var current_track = track_data[i];
+
+            for (var j = 0; j < current_track.length; ++j) {
+                var track_value = tracks[j];
+                var columnMaxLen = track_value.maxLen;
+                console.log("columnMaxLen(", j, ") = ", columnMaxLen);
+
+                var padChar = ' ';
+                if (current_track[j].base === 2) {
+                    padChar = '0';
+                }
+                current_track[j].value = current_track[j].value.padStart(columnMaxLen, padChar);
+            }
+        }
+        console.log("AFTER PADDING -----------------------");
         console.log("track_data: ", track_data);
 
         // updateStatus();
