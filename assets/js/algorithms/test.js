@@ -1288,8 +1288,14 @@ function drawTrackedVariables(two, tracks, track_data) {
     var x = defaultLeftMargin;
     var y = defaultTopMargin + 0 * rectHeight;
 
+    console.log("defaultLeftMargin: ", defaultLeftMargin);
+    console.log("defaultTopMargin: ", defaultTopMargin);
+    console.log("rectHeighrectHeight: ", x);
+
     console.log("x: ", x);
     console.log("y: ", y);
+
+
 
     for (let i = 0; i < tracks.length; ++i) {
         var track_value = tracks[i];
