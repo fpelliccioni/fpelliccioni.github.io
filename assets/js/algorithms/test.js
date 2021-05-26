@@ -1281,9 +1281,6 @@ function drawTrackedVariables(two, tracks, track_data) {
 
     if (track_data.length == 0) return;
 
-    // for (var i = 0; i < track_data.length; ++i) {
-    //     var d = track_data[i];
-    // }
 
     var x = defaultLeftMargin;
     // var y = defaultTopMargin + 0 * rectHeight;
@@ -1320,6 +1317,17 @@ function drawTrackedVariables(two, tracks, track_data) {
         x = drawArrayUnnamedElement(two, x, y, name, 2); //, color = defaultElementColor)
     }
 
+    for (var i = 0; i < track_data.length; ++i) {
+        var current_track = track_data[i];
+
+        y += rectHeight;
+        x = defaultLeftMargin;
+
+        for (var j = 0; j < current_track.length; ++j) {
+            var d = current_track[i];
+            x = drawArrayUnnamedElement(two, x, y, d.value, 2); //, color = defaultElementColor)
+        }
+    }
 
     two.update();
 

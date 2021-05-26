@@ -1209,9 +1209,7 @@ function initFunctions(interpreter, scope) {
 
         console.log("tracks: ", tracks);
 
-        // for (var track_key in tracks) {
-        //     var track_value = tracks[track_key];
-        // for (var track_value in tracks) {
+        var current_track = [];
         for (let i = 0; i < tracks.length; ++i) {
             var track_value = tracks[i];
             console.log("INSIDE THE LOOP");
@@ -1234,9 +1232,11 @@ function initFunctions(interpreter, scope) {
             if (typeof(value) !== 'undefined') {
                 data.value = converToBase(value, base);
             }
-            track_data.push(data);
+            current_track.push(data);
         }
+        track_data.push(current_track);
 
+        console.log("current_track: ", current_track);
         console.log("track_data: ", track_data);
 
         // updateStatus();
