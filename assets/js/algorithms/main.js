@@ -695,16 +695,27 @@ function fromInterpreterArray(array_par) {
     return ret;
 }
 
-function converToBase(value, base) {
-    console.log("converToBase");
+function valueAndBaseTreatment(value, base) {
+    console.log("valueAndBaseTreatment");
     console.log(value);
     console.log(base);
     console.log(typeof(value));
     console.log(typeof(base));
 
-    if (typeof(base) === 'undefined') return value;
-    if (typeof(value) === 'number') return (value >>> 0).toString(base);
-    return value;
+    if (typeof(value) === 'number') {
+        if (typeof(base) === 'undefined') base = 10;
+        value = (value >>> 0).toString(base);
+
+        if (base == 2) {
+            value = value.padStart(8, "0"); // "123abc"
+        }
+        return [value, base];
+    }
+
+    return [value, undefined];
+    // if (typeof(base) === 'undefined') return value;
+    // if (typeof(value) === 'number') return (value >>> 0).toString(base);
+    // return value;
 }
 
 function initFunctions(interpreter, scope) {
@@ -1230,7 +1241,9 @@ function initFunctions(interpreter, scope) {
             };
 
             if (typeof(value) !== 'undefined') {
-                data.value = converToBase(value, base);
+                 var res = valueAndBaseTreatment(value, base);
+                 data.value = res[0];
+                 data.base = res[1];
             }
             current_track.push(data);
         }

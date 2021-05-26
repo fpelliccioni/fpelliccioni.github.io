@@ -1324,7 +1324,7 @@ function drawTrackedVariables(two, tracks, track_data) {
         x = defaultLeftMargin;
 
         for (var j = 0; j < current_track.length; ++j) {
-            var d = current_track[i];
+            var d = current_track[j];
             x = drawArrayUnnamedElement(two, x, y, d.value, 2); //, color = defaultElementColor)
         }
     }
