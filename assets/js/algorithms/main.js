@@ -1213,7 +1213,7 @@ function initFunctions(interpreter, scope) {
         //     var track_value = tracks[track_key];
         // for (var track_value in tracks) {
         for (let i = 0; i < tracks.length; ++i) {
-            const track_value = tracks[i];
+            var track_value = tracks[i];
             console.log("INSIDE THE LOOP");
             console.log("track_value: ", track_value);
 

@@ -1276,17 +1276,29 @@ function drawBoundedRange(f, l) {
 function drawTrackedVariables(two, tracks, track_data) {
     // name, id, arr, capacity, callables) {
 
+    console.log("drawTrackedVariables")
+
     if (track_data.length == 0) return;
 
-    for (var i = 0; i < track_data.length; ++i) {
-        var d = track_data[i];
-    }
+    // for (var i = 0; i < track_data.length; ++i) {
+    //     var d = track_data[i];
+    // }
 
     var x = defaultLeftMargin;
     var y = defaultTopMargin + 0 * rectHeight;
 
-    for (var track_value in tracks) {
+    console.log("x: ", x);
+    console.log("y: ", y);
+
+    for (let i = 0; i < tracks.length; ++i) {
+        var track_value = tracks[i];
         var name = track_value.name;
+
+        console.log("x: ", x);
+        console.log("y: ", y);
+        console.log("track_value: ", track_value);
+        console.log("name: ", name);
+
         x = drawArrayUnnamedElement(two, x, y, name, 2); //, color = defaultElementColor)
     }
 
