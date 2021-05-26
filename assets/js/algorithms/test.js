@@ -1286,7 +1286,18 @@ function drawTrackedVariables(two, tracks, track_data) {
     // }
 
     var x = defaultLeftMargin;
-    var y = defaultTopMargin + 0 * rectHeight;
+    // var y = defaultTopMargin + 0 * rectHeight;
+    // var y = defaultTopMargin + seqn * sequenceTotalHeight;
+
+    if (Object.keys(variables).length > 0) {
+        console.log("Object.keys(variables).length > 0 -- IF")
+        var last = last_elem(variables);
+        var y = last.elements[0].y;
+        y = y + variableTotalHeight;
+    } else {
+        console.log("Object.keys(variables).length > 0 -- ELSE")
+        var y = defaultTopMargin + seqn * sequenceTotalHeight;
+    }
 
     console.log("defaultLeftMargin: ", defaultLeftMargin);
     console.log("defaultTopMargin: ", defaultTopMargin);
