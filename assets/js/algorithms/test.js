@@ -573,7 +573,7 @@ function drawArrayUnnamedElement(two, x, y, text, maxTextLen, color = defaultEle
 
 
     // var rect = two.makeRectangle(x + escale_x(14.46), y + rectHeight / 2), w, rectHeight);
-    var rect = two.makeRectangle(x + w / 2, y + rectHeight / 2), w, rectHeight);
+    var rect = two.makeRectangle(x + w / 2, y + rectHeight / 2, w, rectHeight);
     rect.fill = color;
     rect.stroke = 'black'
     rect.linewidth = 1;
