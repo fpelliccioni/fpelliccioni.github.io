@@ -577,13 +577,14 @@ function drawArrayUnnamedElement(two, x, y, text, maxTextLen, color = defaultEle
     textElement.size = fontSize
 
     // var group = two.makeGroup(nameElement, rect, textElement);
+    // return {
+    //     // group: group,
+    //     rect: rect,
+    //     x_finish: x + escale_x(14.46)  + w,
+    //     y: y,
+    // };
 
-    return {
-        // group: group,
-        rect: rect,
-        x_finish: x + escale_x(14.46)  + w,
-        y: y,
-    };
+    return x + escale_x(14.46)  + w;
 }
 
 
