@@ -1308,13 +1308,14 @@ function drawTrackedVariables(two, tracks, track_data) {
     for (let i = 0; i < tracks.length; ++i) {
         var track_value = tracks[i];
         var name = track_value.name;
+        var maxLen = track_value.maxLen;
 
         console.log("x: ", x);
         console.log("y: ", y);
         console.log("track_value: ", track_value);
         console.log("name: ", name);
 
-        x = drawArrayUnnamedElement(two, x, y, name, 2); //, color = defaultElementColor)
+        x = drawArrayUnnamedElement(two, x, y, name, maxLen); //, color = defaultElementColor)
     }
 
     for (var i = 0; i < track_data.length; ++i) {
@@ -1325,7 +1326,7 @@ function drawTrackedVariables(two, tracks, track_data) {
 
         for (var j = 0; j < current_track.length; ++j) {
             var d = current_track[j];
-            x = drawArrayUnnamedElement(two, x, y, d.value, 2); //, color = defaultElementColor)
+            x = drawArrayUnnamedElement(two, x, y, d.value, undefined); //, color = defaultElementColor)
         }
     }
 
