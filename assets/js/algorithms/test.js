@@ -559,6 +559,7 @@ function drawArrayUnnamedElement(two, x, y, text, maxTextLen, color = defaultEle
             maxTextLen = 1;
         }
     }
+    console.log("maxTextLen", maxTextLen);
 
     if (maxTextLen > 2) {
         var w = maxTextLen * escale_x(19.2) + escale_x(5);
@@ -567,12 +568,18 @@ function drawArrayUnnamedElement(two, x, y, text, maxTextLen, color = defaultEle
         var w = min_width
     }
 
-    var rect = two.makeRectangle(x + escale_x(14.46), y + escale_y(30), w, rectHeight);
+    console.log("w", w);
+    console.log("x + w / 2", x + w / 2);
+
+
+    // var rect = two.makeRectangle(x + escale_x(14.46), y + rectHeight / 2), w, rectHeight);
+    var rect = two.makeRectangle(x + w / 2, y + rectHeight / 2), w, rectHeight);
     rect.fill = color;
     rect.stroke = 'black'
     rect.linewidth = 1;
 
-    var textElement = two.makeText(text, x + escale_x(14.46), y + escale_y(30) + escale_y(1.5));
+    // var textElement = two.makeText(text, x + escale_x(14.46), y + rectHeight / 2 + escale_y(1.5));
+    var textElement = two.makeText(text, x + w / 2, y + rectHeight / 2 + escale_y(1.5));
     textElement.family = "FiraCode"; //"Source Code Pro";
     textElement.size = fontSize
 
