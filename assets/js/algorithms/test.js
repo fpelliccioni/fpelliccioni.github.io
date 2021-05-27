@@ -6,11 +6,11 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 */
 
 
-var twp_width_ref = 1389; //926;
-var two_height_ref = 409.5; //273;
+var two_width_ref = 1654;   //1389; //926;
+var two_height_ref = 569;    //409.5; //273;
 
 function escale_gen(a) {
-    var h = twp_width * a / twp_width_ref
+    var h = twp_width * a / two_width_ref
     var v = two_height * a / two_height_ref
 
     if (h < v) return h;
@@ -18,7 +18,7 @@ function escale_gen(a) {
 }
 function escale_x(a) {
     return escale_gen(a);
-    // return twp_width * a / twp_width_ref
+    // return twp_width * a / two_width_ref
 }
 
 function escale_y(a) {
@@ -28,18 +28,18 @@ function escale_y(a) {
 
 function escale_font(a) {
     return escale_gen(a);
-    // var o1 = twp_width * a / twp_width_ref
+    // var o1 = twp_width * a / two_width_ref
     // var o2 = two_height * a / two_height_ref
     // console.log("escale_font")
     // console.log(a)
     // console.log(o1)
     // console.log(o2)
-    // return twp_width * a / twp_width_ref
+    // return twp_width * a / two_width_ref
 }
 
 function escale_other(a) {
     return escale_gen(a);
-    // return twp_width * a / twp_width_ref
+    // return twp_width * a / two_width_ref
 }
 
 var defaultLeftMargin = 0;
