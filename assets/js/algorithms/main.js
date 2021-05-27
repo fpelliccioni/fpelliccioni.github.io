@@ -219,6 +219,7 @@ async function downloadStdCodeDebug(user, repo) {
         const response = await fetch(url);
         const code = await response.text();
         global_std_code_debug = code;
+        console.log("downloaded: ", url);
     } catch(e) {console.log(e);}
 }
 
@@ -1749,6 +1750,7 @@ function add_utils_lib() {
         wrapped_func.inner_name = fname;
         wrapped_func.inner_code = callable_get_code(c);
         wrapped_func.inner_parameters = params;
+        wrapped_func.type = type;
         return wrapped_func;
     }
     function relation(f) {
