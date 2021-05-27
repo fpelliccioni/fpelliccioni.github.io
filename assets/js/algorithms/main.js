@@ -710,6 +710,8 @@ function valueAndBaseTreatment(value, base) {
         if (base == 2) {
             value = value.padStart(8, "0");
         }
+
+        value += subscript(base);
         return [value, base];
     }
 
