@@ -1187,13 +1187,13 @@ function initFunctions(interpreter, scope) {
         return c.parameters;
     }
 
-    var track_register_internal_wrapper = function(name, base) {
+    var track_variable_wrapper = function(name, base) {
         var retobj = new Track(name, base, 0);
         // tracks[name] = retobj;
         tracks.push(retobj);
     }
 
-    var track_internal_wrapper = function() {
+    var snapshot_wrapper = function() {
         var scope = myInterpreter.getScope();
         var keys = Object.keys(scope.properties);
         var reserved = getReserved();
@@ -1565,8 +1565,8 @@ function initFunctions(interpreter, scope) {
     interpreter.setProperty(scope, 'iter_swap',      interpreter.createNativeFunction(iter_swap_wrapper));
     interpreter.setProperty(scope, 'exchange_values',      interpreter.createNativeFunction(iter_swap_wrapper));
 
-    interpreter.setProperty(scope, 'track_register_internal',   interpreter.createNativeFunction(track_register_internal_wrapper));
-    interpreter.setProperty(scope, 'track_internal',   interpreter.createNativeFunction(track_internal_wrapper));
+    interpreter.setProperty(scope, 'track_variable',   interpreter.createNativeFunction(track_variable_wrapper));
+    interpreter.setProperty(scope, 'snapshot',   interpreter.createNativeFunction(snapshot_wrapper));
 
     interpreter.setProperty(scope, 'sequence_internal',   interpreter.createNativeFunction(sequence_internal_wrapper));
     // interpreter.setProperty(scope, 'fill_elem',      interpreter.createNativeFunction(fill_elem_wrapper));
