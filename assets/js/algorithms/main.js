@@ -2130,6 +2130,9 @@ function std_lib_attributes() {
 
 
 function invisibleCode() {
+    var xxx = add_std_lib();
+    console.log("invisibleCode");
+    console.log(xxx);
     return callPredCode() + addSequenceCode() + add_std_lib() + add_utils_lib();
 }
 
