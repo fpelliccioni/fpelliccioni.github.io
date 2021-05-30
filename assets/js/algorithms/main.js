@@ -259,8 +259,8 @@ function getSnippets(cat) {
     for(var key in snippets_cat){
 
         var value = snippets_cat[key];
-        console.log(key);
-        console.log(value);
+        // console.log(key);
+        // console.log(value);
         if (cat.id == value) {
             sns.push(key)
         }
