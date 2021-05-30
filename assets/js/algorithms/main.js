@@ -761,9 +761,9 @@ function initFunctions(interpreter, scope) {
 
 
     var successor_wrapper = function(it_par, step_par = 1) {
-        console.log(it_par);
-        console.log(step_par);
-        console.log(typeof(it_par));
+        // console.log(it_par);
+        // console.log(step_par);
+        // console.log(typeof(it_par));
 
         step = 0 + step_par;
 
@@ -817,9 +817,9 @@ function initFunctions(interpreter, scope) {
             return res;
         }
 
-        console.log(it_par);
-        console.log(typeof(it_par));
-        console.log(it_par.category);
+        // console.log(it_par);
+        // console.log(typeof(it_par));
+        // console.log(it_par.category);
 
         if ( ! isBidirectional(it_par)) {
             showError(`predecessor function is not defined for ${iteratorCategoryToString(it_par.category)} iterators`);
