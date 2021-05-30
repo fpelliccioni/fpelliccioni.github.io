@@ -378,7 +378,7 @@ function getIteratorCatetoryFromSeqType(seqType) {
 }
 
 function iteratorCategoryToString(category) {
-    console.log(category)
+    // console.log(category)
     if (category === 3) {
         return "RandomAccess";
     } else if (category === 1) {
@@ -2651,9 +2651,9 @@ function drawScope(scope) {
     for (var i in seq_internal) {
         var key = seq_internal[i].key;
         var value = seq_internal[i].value;
-        console.log("i: ", i);
-        console.log("seq_internal[i].key: ", key);
-        console.log("seq_internal[i].value: ", value);
+        // console.log("i: ", i);
+        // console.log("seq_internal[i].key: ", key);
+        // console.log("seq_internal[i].value: ", value);
 
         if (value.type === "array") {
             var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
