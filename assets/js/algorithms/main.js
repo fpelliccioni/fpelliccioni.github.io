@@ -682,13 +682,13 @@ function fromInterpreterArray(array_par) {
     var length = array_par.properties['length'];
     if ( ! length) return undefined;
 
-    console.log("fromInterpreterArray() length: ", length);
-    console.log("fromInterpreterArray() array_par.properties: ", array_par.properties);
+    // console.log("fromInterpreterArray() length: ", length);
+    // console.log("fromInterpreterArray() array_par.properties: ", array_par.properties);
 
     var ret = [];
     for (let i = 0; i < length; ++i) {
-        console.log("fromInterpreterArray() i: ", i);
-        console.log("fromInterpreterArray() array_par.properties[i]: ", array_par.properties[i]);
+        // console.log("fromInterpreterArray() i: ", i);
+        // console.log("fromInterpreterArray() array_par.properties[i]: ", array_par.properties[i]);
         var value = array_par.properties[i];
         if (value == undefined) return undefined;
 
@@ -698,11 +698,11 @@ function fromInterpreterArray(array_par) {
 }
 
 function valueAndBaseTreatment(value, base) {
-    console.log("valueAndBaseTreatment");
-    console.log(value);
-    console.log(base);
-    console.log(typeof(value));
-    console.log(typeof(base));
+    // console.log("valueAndBaseTreatment");
+    // console.log(value);
+    // console.log(base);
+    // console.log(typeof(value));
+    // console.log(typeof(base));
 
     if (typeof(value) === 'number') {
         if (typeof(base) === 'undefined') base = 10;
@@ -742,7 +742,7 @@ function initFunctions(interpreter, scope) {
         // hljs.highlightBlock(output);
 
         // console.log(text);
-        console.log(arguments.length ? text : '');
+        // console.log(arguments.length ? text : '');
     };
 
 
