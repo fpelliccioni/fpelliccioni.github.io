@@ -184,9 +184,9 @@ function is_predicate(callable) {
 }
 
 function is_relation(callable) {
-    console.log("is_relation() callable:", callable);
-    console.log("is_relation() callable.properties:", callable.properties);
-    console.log("is_relation() callable.properties.inner_parameters:", callable.properties.inner_parameters);
+    // console.log("is_relation() callable:", callable);
+    // console.log("is_relation() callable.properties:", callable.properties);
+    // console.log("is_relation() callable.properties.inner_parameters:", callable.properties.inner_parameters);
     return callable.properties.inner_parameters == 2;
 }
 
@@ -194,9 +194,9 @@ function execute_callable() {
     if (arguments.length == 0) return undefined;
     var callable = arguments[0];
     if ( ! callable) return undefined;
-    console.log("execute_callable() callable:", callable);
-    console.log("execute_callable() callable.properties:", callable.properties);
-    console.log("execute_callable() callable.properties.inner_parameters:", callable.properties.inner_parameters);
+    // console.log("execute_callable() callable:", callable);
+    // console.log("execute_callable() callable.properties:", callable.properties);
+    // console.log("execute_callable() callable.properties.inner_parameters:", callable.properties.inner_parameters);
     if (arguments.length != callable.properties.inner_parameters + 1) return undefined;
 
     if (arguments[1] == '_') return undefined;
@@ -213,7 +213,7 @@ function execute_callable() {
 
     full_code += ");";
 
-    console.log(full_code)
+    // console.log(full_code)
     var res = eval(full_code)
     // console.log(res)
     return res;
@@ -318,24 +318,24 @@ function doColorWork(value, callables, green, red, defaultElementColor, prev) {
     let color = defaultElementColor;
 
     if (callables) {
-        console.log("doColorWork() callables is defined.");
+        // console.log("doColorWork() callables is defined.");
         // console.log(`callables: ${callables}`)
         // console.log(`callables[0]: ${callables[0]}`)
         // console.log(`callables[1]: ${callables[1]}`)
         // console.log(`Array.isArray(callables): ${Array.isArray(callables)}`)
         if (Array.isArray(callables)) {
-            console.log("doColorWork() callables is an array.");
+            // console.log("doColorWork() callables is an array.");
             var colors_array = get_colors_array(callables.length);
-            console.log(`callables.length: ${callables.length}`)
+            // console.log(`callables.length: ${callables.length}`)
             if ( ! colors_array) {
                 color = rgb_to_str(green);
             } else {
                 var color_index = 0;
                 for (let callable_idx = 0; callable_idx < callables.length; ++callable_idx) {
                     var current_callable = callables[callable_idx];
-                    console.log(`callable_idx: ${callable_idx}`)
-                    console.log(`current_callable: ${current_callable}`)
-                    console.log(`value: ${value}`)
+                    // console.log(`callable_idx: ${callable_idx}`)
+                    // console.log(`current_callable: ${current_callable}`)
+                    // console.log(`value: ${value}`)
                     if (execute_callable(current_callable, value)) {
                         color_index ^= 1 << callable_idx;
                         // console.log(`predicate ${callable_idx} true`)
@@ -358,16 +358,16 @@ function doColorWork(value, callables, green, red, defaultElementColor, prev) {
             }
 
         } else {
-            console.log("doColorWork() callables is not an array.");
+            // console.log("doColorWork() callables is not an array.");
             if (is_predicate(callables) && ! execute_callable(callables, value)) {
-                console.log("doColorWork() callables is a predicate.");
+                // console.log("doColorWork() callables is a predicate.");
                 color = rgb_to_str(red);
             } else {
-                console.log("doColorWork() callables is not a predicate.");
+                // console.log("doColorWork() callables is not a predicate.");
                 color = rgb_to_str(green);
             }
             if (is_relation(callables)) {
-                console.log("doColorWork() callables is a relation.");
+                // console.log("doColorWork() callables is a relation.");
                 // if (index != 0) {
                 if (prev) {
                     // let prev = arr[index - 1];
@@ -559,7 +559,7 @@ function drawArrayUnnamedElement(two, x, y, text, maxTextLen, color = defaultEle
             maxTextLen = 1;
         }
     }
-    console.log("maxTextLen", maxTextLen);
+    // console.log("maxTextLen", maxTextLen);
 
     if (maxTextLen > 2) {
         var w = maxTextLen * escale_x(19.2) + escale_x(5);
@@ -568,8 +568,8 @@ function drawArrayUnnamedElement(two, x, y, text, maxTextLen, color = defaultEle
         var w = min_width
     }
 
-    console.log("w", w);
-    console.log("x + w / 2", x + w / 2);
+    // console.log("w", w);
+    // console.log("x + w / 2", x + w / 2);
 
 
     // var rect = two.makeRectangle(x + escale_x(14.46), y + rectHeight / 2), w, rectHeight);
@@ -1284,7 +1284,7 @@ function drawBoundedRange(f, l) {
 function drawTrackedVariables(two, tracks, track_data) {
     // name, id, arr, capacity, callables) {
 
-    console.log("drawTrackedVariables")
+    // console.log("drawTrackedVariables")
 
     if (track_data.length == 0) return;
 
@@ -1294,21 +1294,21 @@ function drawTrackedVariables(two, tracks, track_data) {
     // var y = defaultTopMargin + seqn * sequenceTotalHeight;
 
     if (Object.keys(variables).length > 0) {
-        console.log("Object.keys(variables).length > 0 -- IF")
+        // console.log("Object.keys(variables).length > 0 -- IF")
         var last = last_elem(variables);
         var y = last.elements[0].y;
         y = y + variableTotalHeight;
     } else {
-        console.log("Object.keys(variables).length > 0 -- ELSE")
+        // console.log("Object.keys(variables).length > 0 -- ELSE")
         var y = defaultTopMargin + seqn * sequenceTotalHeight;
     }
 
-    console.log("defaultLeftMargin: ", defaultLeftMargin);
-    console.log("defaultTopMargin: ", defaultTopMargin);
-    console.log("rectHeighrectHeight: ", x);
+    // console.log("defaultLeftMargin: ", defaultLeftMargin);
+    // console.log("defaultTopMargin: ", defaultTopMargin);
+    // console.log("rectHeighrectHeight: ", x);
 
-    console.log("x: ", x);
-    console.log("y: ", y);
+    // console.log("x: ", x);
+    // console.log("y: ", y);
 
 
 
@@ -1317,10 +1317,10 @@ function drawTrackedVariables(two, tracks, track_data) {
         var name = track_value.name;
         var maxLen = track_value.maxLen;
 
-        console.log("x: ", x);
-        console.log("y: ", y);
-        console.log("track_value: ", track_value);
-        console.log("name: ", name);
+        // console.log("x: ", x);
+        // console.log("y: ", y);
+        // console.log("track_value: ", track_value);
+        // console.log("name: ", name);
 
         x = drawArrayUnnamedElement(two, x, y, name, maxLen); //, color = defaultElementColor)
     }
