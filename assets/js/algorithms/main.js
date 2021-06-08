@@ -21,7 +21,8 @@ var categories_full = [
         {id: 'numerics/power', name: 'Power/Multiply', categories: []},
         {id: 'numerics/primality_testing', name: 'Primality Testing', categories: []},
         {id: 'numerics/remainder', name: 'Quotient and Remainder', categories: []},
-        {id: 'numerics/sift', name: 'Sift', categories: []}
+        {id: 'numerics/sift', name: 'Sift', categories: []},
+        {id: 'numerics/misc', name: 'Misc', categories: []}
     ]}
   , {id: 'rearrangements', name: 'Rearrangements', categories: [
         {id: 'rearrangements/position-based', name: 'Position-based', categories: [
@@ -70,7 +71,8 @@ var categories = [
         {id: 'numerics/power', name: 'Power/Multiply', categories: []},
         {id: 'numerics/primality_testing', name: 'Primality Testing', categories: []},
         {id: 'numerics/remainder', name: 'Quotient and Remainder', categories: []},
-        {id: 'numerics/sift', name: 'Sift', categories: []}
+        {id: 'numerics/sift', name: 'Sift', categories: []},
+        {id: 'numerics/misc', name: 'Misc', categories: []}
     ]}
   , {id: 'rearrangements', name: 'Rearrangements', categories: [
         {id: 'rearrangements/position-based', name: 'Position-based', categories: [
