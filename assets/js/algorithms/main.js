@@ -1106,6 +1106,17 @@ function initFunctions(interpreter, scope) {
         return s;
     };
 
+    var move_obj_wrapper = function(x) {
+        addLogMove(x);
+
+        if (log_stats_enabled) {
+            ++stats_moves;
+        }
+
+        updateStatus();
+        return s;
+    };
+
     var sink_wrapper = function(it, x) {
         var data = it.data.data;
         var elements = it.data.elements;
@@ -1663,6 +1674,7 @@ function initFunctions(interpreter, scope) {
 
     interpreter.setProperty(scope, 'source',         interpreter.createNativeFunction(source_wrapper));
     interpreter.setProperty(scope, 'source_move',    interpreter.createNativeFunction(source_move_wrapper));
+    interpreter.setProperty(scope, 'move_obj',       interpreter.createNativeFunction(move_obj_wrapper));
     interpreter.setProperty(scope, 'sink',           interpreter.createNativeFunction(sink_wrapper));
     interpreter.setProperty(scope, 'sink_move',      interpreter.createNativeFunction(sink_move_wrapper));
     interpreter.setProperty(scope, 'equal',          interpreter.createNativeFunction(equal_wrapper));
