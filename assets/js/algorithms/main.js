@@ -154,6 +154,82 @@ function createChart() {
     return myChart;
 }
 
+function treeHeight(index) {
+    return Math.floor(Math.log2(index + 1))
+}
+
+function elementsInTreeHeight(h) {
+    return Math.pow(2, h);
+}
+
+function heightFirstIndex(h) {
+    return Math.pow(2, h) - 1;
+}
+
+function leftChild(i) {
+    return 2 * i + 1;
+}
+
+// function drawTreeElement(twoTree, two_width, two_height, arr, index) {
+//     let value = arr[index];
+    
+//     var center_x = two_width / 2;
+//     var y = two_height / 2;
+
+//     // var color = rgb_to_str({ r: 191, g: 255, b: 179 });
+//     var e = drawArrayElement(twoTree, x, y, value, index);
+// }
+
+
+function draw_line(a, b, color = defaultElementColor) {
+    // console.log(a)
+    // console.log(a.x)
+    // console.log(b)
+    var line = two.makeLine(a.translation.x, a.translation.y, b.translation.x, b.translation.y);
+    line.stroke = color;
+    line.fill = color;
+    background.add(line);
+    return line;
+}
+
+function drawTreeElement(twoTree, two_width, two_height, data, index, parent) {
+    if (index >= data.length) return;
+
+    var value = data[index];
+    // var text = `${value}`;
+
+    console.log("-----------------------------------");
+    console.log("index: ", index);
+    var h = treeHeight(index);
+    // console.log("treeHeight: ", h);
+    var indexInRow = index - heightFirstIndex(h);
+    console.log("indexInRow: ", indexInRow);
+    var denominador = elementsInTreeHeight(h) * 2;
+    // console.log("denominador: ", denominador);
+
+    var xFactor = (2 * indexInRow + 1) / denominador;
+    // console.log("xFactor: ", xFactor);
+
+
+    var x = two.width * xFactor;
+    // console.log("x: ", x);
+
+
+    var y = h * 70 + rectWidth;
+
+    // var node = draw_leaf(index, x, y, text);
+    var node = drawArrayElement(twoTree, x, y, value, index);
+    if (parent != null) {
+        draw_line(parent, node);
+    }
+    
+
+    console.log("data.length - index: ", data.length - index);
+
+    drawTreeElement(twoTree, two_width, two_height, data, leftChild(index), node);
+    drawTreeElement(twoTree, two_width, two_height, data, leftChild(index) + 1, node);
+}
+
 function drawTreeFromSequence(arr) {
     console.log("************** drawTreeFromSequence *********************");
     var hg_right_pre_a = document.getElementById('hg-right-pre-a');
@@ -171,10 +247,19 @@ function drawTreeFromSequence(arr) {
             autostart: true
     }).appendTo(sequence2);
     
-    let index = 0
-    let value = arr[index];
-    var color = { r: 191, g: 255, b: 179 };;
-    var e = drawArrayElement(twoTree, 100, 100, value, index, color);
+    const index = 0;
+    drawTreeElement(twoTree, two_width, two_height, arr, index);
+
+    // let index = 0
+    // let value = arr[index];
+    
+    // var x = two_width / 2;
+    // var y = two_height / 2;
+
+    // // var color = rgb_to_str({ r: 191, g: 255, b: 179 });
+    // var e = drawArrayElement(twoTree, x, y, value, index);
+
+
     twoTree.update();
 }
 
