@@ -1114,7 +1114,7 @@ function initFunctions(interpreter, scope) {
         }
 
         updateStatus();
-        return s;
+        return x;
     };
 
     var sink_wrapper = function(it, x) {
