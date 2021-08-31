@@ -155,6 +155,7 @@ function createChart() {
 }
 
 function drawTreeFromSequence() {
+    console.log("************** drawTreeFromSequence *********************");
     var hg_right_pre_a = document.getElementById('hg-right-pre-a');
     hg_right_pre_a.innerHTML = '<div id="sequence2"></div>';
 
@@ -1347,18 +1348,18 @@ function initFunctions(interpreter, scope) {
             var preds = preds_par;
         }
 
-        console.log(`preds: ${preds}`);
-        if (preds) {
-            console.log(`preds.length: ${preds.length}`);
-        }
+        // console.log(`preds: ${preds}`);
+        // if (preds) {
+        //     console.log(`preds.length: ${preds.length}`);
+        // }
 
         if ( ! preds || preds.length == 1) {
-            console.log(`inside IF`);
+            // console.log(`inside IF`);
             preds = preds_par;
         }
 
         if ( ! preds || preds.length == 2) {
-            console.log(`inside IF 2`);
+            // console.log(`inside IF 2`);
             preds = preds_par;
         }
 
@@ -1683,6 +1684,7 @@ function addSequenceCode() {
     }
 
     function sequence(d, n, p, type, drawChart, drawTree) {
+        console.log("drawTree: ", drawTree);
         type = typeof type !== 'undefined' ? type : "array";
         type = __standardSequenceType(type);
         drawChart = typeof drawChart !== 'undefined' ? drawChart : false;
