@@ -154,6 +154,29 @@ function createChart() {
     return myChart;
 }
 
+function drawTreeFromSequence() {
+    var hg_right_pre_a = document.getElementById('hg-right-pre-a');
+    hg_right_pre_a.innerHTML = '<div id="sequence2"></div>';
+
+    var two_width = document.getElementById('hg-right-pre-a').offsetWidth
+    var two_height = document.getElementById('hg-right-pre-a').offsetHeight
+    console.log(two_width)
+    console.log(two_height)
+
+    var twoTree = new Two({
+            fullscreen: false,
+            width: two_width,
+            height: two_height,
+            autostart: true
+    }).appendTo(sequence2);
+    
+    let index = 0
+    let value = arr[index];
+    var color = { r: 191, g: 255, b: 179 };;
+    var e = drawArrayElement(twoTree, 100, 100, value, index, color);
+    twoTree.update();
+}
+
 function process_snippets() {
     var code = global_std_code;
     var p = acorn.parse(code);
@@ -438,7 +461,7 @@ function Track(name, base, maxLen) {
     this.maxLen = maxLen;
 }
 
-function Sequence(name, data, elements, colors, capacity, preds, type, drawChart) {
+function Sequence(name, data, elements, colors, capacity, preds, type, drawChart, drawTree) {
     if (capacity == undefined) {
         capacity = data.length
     }
@@ -450,6 +473,7 @@ function Sequence(name, data, elements, colors, capacity, preds, type, drawChart
     this.preds = preds;
     this.type = type;
     this.drawChart = drawChart;
+    this.drawTree = drawTree;
 }
 
 function RangeBounded(fname, lname) {
@@ -889,7 +913,7 @@ function initFunctions(interpreter, scope) {
     };
 
     var increase_capacity_wrapper = function(seq, n) {
-        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.preds, seq.type, seq.drawChart);
+        var retobj = new Sequence(seq.name, seq.data, seq.elements, seq.colors, seq.capacity + n, seq.preds, seq.type, seq.drawChart, seq.drawTree);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -911,7 +935,7 @@ function initFunctions(interpreter, scope) {
         // console.log(data)
         // console.log(cap)
 
-        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.preds, seq.type, seq.drawChart);
+        var retobj = new Sequence(seq.name, data, seq.elements, seq.colors, cap, seq.preds, seq.type, seq.drawChart, seq.drawTree);
         sequences[seq.name] = retobj;
         return retobj;
     };
@@ -1293,7 +1317,7 @@ function initFunctions(interpreter, scope) {
         two.update();
     }
 
-    var sequence_internal_wrapper = function(data_par, name, preds_par, type, drawChart) {
+    var sequence_internal_wrapper = function(data_par, name, preds_par, type, drawChart, drawTree) {
         // console.log(data_par)
 
         // console.log(`sequence_internal_wrapper preds_par: ${preds_par}`);
@@ -1341,7 +1365,7 @@ function initFunctions(interpreter, scope) {
         // console.log(`preds: ${preds}`);
 
         var elems = null;
-        var retobj = new Sequence(name, data, elems, colors, undefined, preds, type, drawChart);
+        var retobj = new Sequence(name, data, elems, colors, undefined, preds, type, drawChart, drawTree);
         sequences[name] = retobj;
 
         updateStatus();
@@ -1658,11 +1682,12 @@ function addSequenceCode() {
         return undefined;
     }
 
-    function sequence(d, n, p, type, drawChart) {
+    function sequence(d, n, p, type, drawChart, drawTree) {
         type = typeof type !== 'undefined' ? type : "array";
         type = __standardSequenceType(type);
         drawChart = typeof drawChart !== 'undefined' ? drawChart : false;
-        return sequence_internal(d, n, p, type, drawChart);
+        drawTree = typeof drawTree !== 'undefined' ? drawTree : false;
+        return sequence_internal(d, n, p, type, drawChart, drawTree);
     }
 
 `
@@ -2660,13 +2685,13 @@ function drawScope(scope) {
         // console.log("seq_internal[i].value: ", value);
 
         if (value.type === "array") {
-            var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+            var elems = drawArray(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart, value.drawTree);
         } else if (value.type === "sll") {
-            var elems = drawSingleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+            var elems = drawSingleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart, value.drawTree);
         } else if (value.type === "dll") {
-            var elems = drawDoubleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+            var elems = drawDoubleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart, value.drawTree);
         } else if (value.type === "stream") {
-            var elems = drawSingleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart);
+            var elems = drawSingleLinkedList(two, myChart, key, seqn, value.data, value.capacity, value.preds, value.drawChart, value.drawTree);
         } else {
             showError('invalid sequence type');
             disable('disabled');

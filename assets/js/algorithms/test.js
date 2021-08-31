@@ -10,7 +10,7 @@ var two_width_ref = 1654;   //1389; //926;
 var two_height_ref = 569;    //409.5; //273;
 
 function escale_gen(a) {
-    var h = twp_width * a / two_width_ref
+    var h = two_width * a / two_width_ref
     var v = two_height * a / two_height_ref
 
     if (h < v) return h;
@@ -18,7 +18,7 @@ function escale_gen(a) {
 }
 function escale_x(a) {
     return escale_gen(a);
-    // return twp_width * a / two_width_ref
+    // return two_width * a / two_width_ref
 }
 
 function escale_y(a) {
@@ -28,18 +28,18 @@ function escale_y(a) {
 
 function escale_font(a) {
     return escale_gen(a);
-    // var o1 = twp_width * a / two_width_ref
+    // var o1 = two_width * a / two_width_ref
     // var o2 = two_height * a / two_height_ref
     // console.log("escale_font")
     // console.log(a)
     // console.log(o1)
     // console.log(o2)
-    // return twp_width * a / two_width_ref
+    // return two_width * a / two_width_ref
 }
 
 function escale_other(a) {
     return escale_gen(a);
-    // return twp_width * a / two_width_ref
+    // return two_width * a / two_width_ref
 }
 
 var defaultLeftMargin = 0;
@@ -399,7 +399,7 @@ function doColorWork(value, callables, green, red, defaultElementColor, prev) {
     return color;
 }
 
-function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
+function drawArray(two, chart, name, id, arr, capacity, callables, drawChart, drawTree) {
 
     // console.log(arr)
 
@@ -420,8 +420,6 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
         text.fill = '#99ff99';
         leftMargin += 14.46 * name.length
     }
-
-
 
     var green_def = { r: 191, g: 255, b: 179 };
     var red_def = { r: 0xd8, g: 0x98, b: 0xa7 };
@@ -471,6 +469,13 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart) {
         chart.update();
     }
     // -------------------------------------------------
+
+    // -------------------------------------------------
+    if (drawTree) {
+        drawTreeFromSequence();
+    }
+    // -------------------------------------------------
+
 
 
     var cap_len = capacity - arr.length;
@@ -643,7 +648,7 @@ function drawVariable(two, name, value, initTop) {
 // Single-linked Lists
 // ----------------------------------------------------------------------------
 
-function drawSingleLinkedList(two, chart, name, id, arr, capacity, callables, drawChart) {
+function drawSingleLinkedList(two, chart, name, id, arr, capacity, callables, drawChart, drawTree) {
 
     // console.log(arr)
 
@@ -892,7 +897,7 @@ function drawSingleLinkedListPastLast(two, x, y, text, index, color = defaultEle
 // Double-linked Lists
 // ----------------------------------------------------------------------------
 
-function drawDoubleLinkedList(two, chart, name, id, arr, capacity, callables, drawChart) {
+function drawDoubleLinkedList(two, chart, name, id, arr, capacity, callables, drawChart, drawTree) {
 
     // console.log(arr)
 
