@@ -2311,6 +2311,10 @@ function editButton() {
     // console.log(hg_right_x_a.innerHTML);
     hg_right_x_a.innerHTML = '';
 
+    var hg_right_pre_a = document.getElementById('hg-right-pre-a');
+    hg_right_pre_a.innerHTML = '';
+
+
     clearLog();
 
     two.clear();
@@ -2331,6 +2335,9 @@ function restartButton() {
 
     var hg_right_x_a = document.getElementById('hg-right-x-a');
     hg_right_x_a.innerHTML = '';
+
+    var hg_right_pre_a = document.getElementById('hg-right-pre-a');
+    hg_right_pre_a.innerHTML = '';
 
     clearLog();
 

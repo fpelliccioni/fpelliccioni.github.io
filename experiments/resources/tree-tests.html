@@ -1,0 +1,312 @@
+<!--
+Copyright Fernando Pelliccioni 2019-2021
+
+Distributed under the Boost Software License, Version 1.0. (See accompanying
+file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Algorithms</title>
+  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
+  <script src="two.min.js"></script>
+</head>
+
+<body>
+    <div id="main-container" class="main-container">
+        <div id="sequence"></div>
+    </div>
+
+    <script>
+
+        function reset_draws(n) {
+            two.clear();
+            background = two.makeGroup();
+            foreground = two.makeGroup();
+
+            var leafs = n;
+            var totalWidth = leafs * rectWidth + (leafs - 1) * 10
+            console.log(`totalWidth: ${totalWidth}`)
+            console.log(`two.width:  ${two.width}`)
+            two.width = totalWidth
+            console.log(`two.width:  ${two.width}`)
+            console.log(`two.width:  ${two.height}`)
+
+
+            // var background_rect = two.makeRectangle(0, 0, two.width, two.height);
+            // var background_rect = two.makeRectangle(25595, 40, rectWidth * 2, rectHeight * 2);
+            var background_rect = two.makeRectangle(totalWidth / 2, 0, totalWidth, two.height);
+            background_rect.fill = '#0f0f23' //  'black'
+            // background_rect.stroke = defaultElementColor
+            background_rect.linewidth = 0;
+            background.add(background_rect);
+            two.update();
+        }
+
+
+
+
+
+        function treeHeight(index) {
+            return Math.floor(Math.log2(index + 1))
+        }
+
+        function elementsInTreeHeight(h) {
+            return Math.pow(2, h);
+        }
+
+        function heightFirstIndex(h) {
+            return Math.pow(2, h) - 1;
+        }
+
+        function leftChild(i) {
+            return 2 * i + 1;
+        }
+
+        function drawTree(data) {
+            reset_draws(10);
+            drawTreeElement(data, 0, null);
+            two.update();
+        }
+
+        function drawTreeElement(data, index, parent) {
+            if (index >= data.length) return;
+
+            var value = data[index];
+            var text = `${value}`;
+
+            console.log("-----------------------------------");
+            console.log("index: ", index);
+            var h = treeHeight(index);
+            // console.log("treeHeight: ", h);
+            var indexInRow = index - heightFirstIndex(h);
+            console.log("indexInRow: ", indexInRow);
+            var denominador = elementsInTreeHeight(h) * 2;
+            // console.log("denominador: ", denominador);
+
+            var xFactor = (2 * indexInRow + 1) / denominador;
+            // console.log("xFactor: ", xFactor);
+
+
+            var x = two.width * xFactor;
+            // console.log("x: ", x);
+
+
+            var y = h * 70 + rectWidth;
+
+            var node = draw_leaf(index, x, y, text);
+            if (parent != null) {
+                draw_line(parent, node);
+            }
+            
+
+            console.log("data.length - index: ", data.length - index);
+
+            drawTreeElement(data, leftChild(index), node);
+            drawTreeElement(data, leftChild(index) + 1, node);
+        }
+
+        const rectWidth = 40;
+        const rectHeight = 60;
+        const fontSize = 32;
+        const defaultElementColor = '#bfffb3'
+
+
+        function half(n) {
+            return Math.floor(n / 2);
+        }
+
+        function draw_non_leaf(index, x, y, text, radius = rectWidth, color = defaultElementColor) {
+
+            // console.log("draw_non_leaf ------------------------------")
+            // console.log(x)
+            // console.log(y)
+
+            var circ = two.makeCircle(x, y /*+ 45*/, radius);
+            circ.fill = color;
+            circ.stroke = 'black'
+            circ.linewidth = 1;
+            foreground.add(circ);
+
+            var textI = two.makeText(index, x, y - 25);
+            textI.family = "FiraCode"; //"Source Code Pro";
+            textI.size = fontSize / 2.5;
+            foreground.add(textI);
+
+            var textE = two.makeText(text, x, y /*+ 45*/ + 1.5);
+            textE.family = "FiraCode"; //"Source Code Pro";
+            textE.size = fontSize
+            foreground.add(textE);
+
+            return circ;
+        }
+
+        function draw_leaf(index, x, y, text, w = rectWidth, h = rectHeight, color = defaultElementColor) {
+            var rect = two.makeRectangle(x, y /*+ 45*/, w, h);
+            rect.fill = color;
+            rect.stroke = 'black'
+            rect.linewidth = 1;
+            foreground.add(rect);
+
+            if (index != null) {
+                var textI = two.makeText(index, x, y - 22);
+                textI.family = "FiraCode"; //"Source Code Pro";
+                textI.size = fontSize / 2.5;
+                foreground.add(textI);
+            }
+
+            var textE = two.makeText(text, x, y /*+ 45*/ + 1.5);
+            textE.family = "FiraCode"; //"Source Code Pro";
+            textE.size = fontSize
+            foreground.add(textE);
+
+            // console.log(rect.translation.x)
+
+            return rect;
+        }
+
+        function draw_left_leaf(index, p, text, level, max_levels, color = defaultElementColor) {
+            var xxx = (max_levels - level) * 50
+            if (xxx == 0) {
+                xxx = 25;
+            }
+            // console.log(text)
+            // console.log(max_levels)
+            // console.log(level)
+            // console.log(xxx)
+
+            // var c = draw_leaf(p.translation.x - 25, p.translation.y + 80, text, undefined, undefined, color);
+            var c = draw_leaf(index, p.translation.x - xxx, p.translation.y + 90, text, undefined, undefined, color);
+            draw_line(p, c);
+            return c;
+        }
+
+        function draw_right_leaf(index, p, text, level, max_levels, color = defaultElementColor) {
+            var xxx = (max_levels - level) * 50
+            if (xxx == 0) {
+                xxx = 25;
+            }
+            // var c = draw_leaf(p.translation.x + 25, p.translation.y + 80, text, undefined, undefined, color);
+            var c = draw_leaf(index, p.translation.x + xxx, p.translation.y + 90, text, undefined, undefined, color);
+            draw_line(p, c);
+            return c;
+        }
+
+        function draw_left_non_leaf(index, p, text, level, max_levels, color = defaultElementColor) {
+            // var xxx = (max_levels - level) * 50
+            var xxx = Math.pow(2, max_levels - level) * 25
+
+            // console.log(text, max_levels, level, xxx)
+            var c = draw_non_leaf(index, p.translation.x - xxx, p.translation.y + 90, text);
+            draw_line(p, c);
+            return c;
+        }
+
+        function draw_right_non_leaf(index, p, text, level, max_levels, color = defaultElementColor) {
+            // var xxx = (max_levels - level) * 50
+            var xxx = Math.pow(2, max_levels - level) * 25
+            // console.log(text, max_levels, level, xxx)
+            var c = draw_non_leaf(index, p.translation.x + xxx, p.translation.y + 90, text);
+            draw_line(p, c);
+            return c;
+        }
+
+        function draw_line(a, b, color = defaultElementColor) {
+            // console.log(a)
+            // console.log(a.x)
+            // console.log(b)
+            var line = two.makeLine(a.translation.x, a.translation.y, b.translation.x, b.translation.y);
+            line.stroke = color;
+            line.fill = color;
+            background.add(line);
+            return line;
+        }
+
+        function draw_leaf_text(index, x, y, text, w = rectWidth, h = rectHeight, color = defaultElementColor) {
+
+
+            // console.log(text)
+            // text = word_wrap(text, 8);
+            text = word_wrap(text, 4);
+            // console.log(text)
+
+
+            var strs = text.split("\n");
+
+            var first = null;
+
+            for (let i = 0; i < strs.length; ++i) {
+                const element = strs[i];
+                var textE = two.makeText(element, x, y /*+ 45*/ + 1.5);
+                textE.family = "FiraCode"; //"Source Code Pro";
+                textE.size = fontSize
+                textE.fill = color;
+                // console.log(textE)
+                foreground.add(textE);
+
+                if (i == 0) first = textE;
+
+                y += 40;
+            }
+
+
+            // console.log(rect.translation.x)
+
+            return first;
+        }
+
+        function draw_left_text(index, p, text, level, max_levels, color = defaultElementColor) {
+            var xxx = (max_levels - level) * 50
+            if (xxx == 0) {
+                xxx = 25;
+            }
+
+            var c = draw_leaf_text(index, p.translation.x - xxx, p.translation.y + 90, text, undefined, undefined, color);
+            draw_line(p, c);
+            return c;
+        }
+
+        function draw_right_text(index, p, text, level, max_levels, color = defaultElementColor) {
+            var xxx = (max_levels - level) * 50
+            if (xxx == 0) {
+                xxx = 25;
+            }
+            var c = draw_leaf_text(index, p.translation.x + xxx, p.translation.y + 90, text, undefined, undefined, color);
+            draw_line(p, c);
+            return c;
+        }
+
+        var two_width = document.getElementById('main-container').offsetWidth
+        var two_height = document.getElementById('main-container').offsetHeight
+
+        var two = new Two({
+                fullscreen: false,
+                // width: document.getElementById('sequence').offsetWidth,
+                // height: 600,
+                // width: two_width,
+                // height: two_height,
+                width: 5000,
+                height: 2000,
+                autostart: true,
+                color: 'black' //'#bfffb3'
+        }).appendTo(sequence);
+        var background = two.makeGroup();
+        var foreground = two.makeGroup();
+
+        // var background_rect = two.makeRectangle(0, 0, two.width, two.height);
+        // background_rect.fill = 'black'
+        // background_rect.stroke = defaultElementColor
+        // background_rect.linewidth = 10;
+        // background.add(background_rect);
+
+        
+        var data = [10, 8, 6, 4, 5, 3, 1, 10, 8, 6, 4, 5, 3, 1, 2, 3];
+        console.log("data: ", data);
+        drawTree(data);
+
+    </script>
+</body>
+</html>
