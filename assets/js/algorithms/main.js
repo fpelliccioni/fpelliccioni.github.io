@@ -220,7 +220,7 @@ function drawTreeElement(twoTree, two_width, two_height, data, index, parent) {
     // var node = draw_leaf(index, x, y, text);
     var node = drawArrayElement(twoTree, x, y, value, index);
     if (parent != null) {
-        draw_line(parent, node);
+        draw_line(parent.rect, node.rect);
     }
     
 
