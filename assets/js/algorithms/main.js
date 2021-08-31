@@ -172,7 +172,7 @@ function leftChild(i) {
 
 // function drawTreeElement(twoTree, two_width, two_height, arr, index) {
 //     let value = arr[index];
-    
+
 //     var center_x = two_width / 2;
 //     var y = two_height / 2;
 
@@ -245,13 +245,13 @@ function drawTreeFromSequence(arr) {
             height: two_height,
             autostart: true
     }).appendTo(sequence2);
-    
+
     const index = 0;
     drawTreeElement(twoTree, two_width, two_height, arr, index);
 
     // let index = 0
     // let value = arr[index];
-    
+
     // var x = two_width / 2;
     // var y = two_height / 2;
 
@@ -1166,6 +1166,44 @@ function initFunctions(interpreter, scope) {
         two.update();
     };
 
+    var sink_move_from_it_wrapper = function(target_it, source_it) {
+        var target_data = target_it.data.data;
+        var target_elements = target_it.data.elements;
+
+        var source_data = source_it.data.data;
+        var source_max = source_data.length;
+
+
+        var target_max = target_data.length;
+        if (target_it.index >= target_max) {
+            showError('not valid target iterator.');
+            disable('disabled');
+            return;
+        }
+
+        if (source_it.index >= source_max) {
+            showError('not valid source iterator.');
+            disable('disabled');
+            return;
+        }
+
+        var x = source_data[source_it.index];
+
+        addLogMove(x)
+        addLogSink(target_it, x)
+
+        source_data[source_it.index] = '_';
+        target_data[target_it.index] = x;
+        target_elements[target_it.index].group.children[1].value = x;
+
+        if (log_stats_enabled) {
+            ++stats_moves;
+        }
+
+        updateStatus();
+        two.update();
+    };
+
     var equal_wrapper = function(a, b) {
         // addLog('equal(' + a.index + ', ' + b.index + ')');
         // addLog('equal(' + a.data.name + ', ' + b.index + ')');
@@ -1676,7 +1714,8 @@ function initFunctions(interpreter, scope) {
     interpreter.setProperty(scope, 'source_move',    interpreter.createNativeFunction(source_move_wrapper));
     interpreter.setProperty(scope, 'move_obj',       interpreter.createNativeFunction(move_obj_wrapper));
     interpreter.setProperty(scope, 'sink',           interpreter.createNativeFunction(sink_wrapper));
-    interpreter.setProperty(scope, 'sink_move',      interpreter.createNativeFunction(sink_move_wrapper));
+    interpreter.setProperty(scope, 'sink_move',         interpreter.createNativeFunction(sink_move_wrapper));
+    interpreter.setProperty(scope, 'sink_move_from_it', interpreter.createNativeFunction(sink_move_from_it_wrapper));
     interpreter.setProperty(scope, 'equal',          interpreter.createNativeFunction(equal_wrapper));
     interpreter.setProperty(scope, 'distance',       interpreter.createNativeFunction(distance_wrapper));
     // interpreter.setProperty(scope, 'move',           interpreter.createNativeFunction(move_wrapper));
