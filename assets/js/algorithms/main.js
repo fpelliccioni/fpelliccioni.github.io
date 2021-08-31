@@ -1826,6 +1826,22 @@ function addSequenceCode() {
         return sequence_internal(d, n, p, type, drawChart, drawTree);
     }
 
+    function sequenceChart(d, n, p, type) {
+        type = typeof type !== 'undefined' ? type : "array";
+        type = __standardSequenceType(type);
+        var drawChart = true;
+        var drawTree = false;
+        return sequence_internal(d, n, p, type, drawChart, drawTree);
+    }
+
+    function sequenceTree(d, n, p, type) {
+        type = typeof type !== 'undefined' ? type : "array";
+        type = __standardSequenceType(type);
+        var drawChart = false;
+        var drawTree = true;
+        return sequence_internal(d, n, p, type, drawChart, drawTree);
+    }
+
 `
 
     // return `
