@@ -32,7 +32,7 @@ var categories_full = [
         ]}
        ,{id: 'rearrangements/predicate-based', name: 'Predicate-based', categories: [
             {id: 'rearrangements/predicate-based/partition', name: 'Partition', categories: []},
-            {id: 'rearrangements/predicate-based/make-heap', name: 'Heaps', categories: []}
+            {id: 'rearrangements/predicate-based/heaps', name: 'Heaps', categories: []}
         ]}
        ,{id: 'rearrangements/ordering-based', name: 'Ordering-based', categories: [
             {id: 'rearrangements/ordering-based/sorting', name: 'Sorting', categories: [
@@ -82,7 +82,7 @@ var categories = [
         ]}
        ,{id: 'rearrangements/predicate-based', name: 'Predicate-based', categories: [
             {id: 'rearrangements/predicate-based/partition', name: 'Partition', categories: []},
-            {id: 'rearrangements/predicate-based/make-heap', name: 'Heaps', categories: []}
+            {id: 'rearrangements/predicate-based/heaps', name: 'Heaps', categories: []}
         ]}
        ,{id: 'rearrangements/ordering-based', name: 'Ordering-based', categories: [
             {id: 'rearrangements/ordering-based/sorting', name: 'Sorting', categories: [
