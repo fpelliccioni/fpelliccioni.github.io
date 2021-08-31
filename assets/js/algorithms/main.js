@@ -1684,7 +1684,8 @@ function addSequenceCode() {
     }
 
     function sequence(d, n, p, type, drawChart, drawTree) {
-        console.log("drawTree: ", drawTree);
+        print("drawTree:");
+        print(drawTree);
         type = typeof type !== 'undefined' ? type : "array";
         type = __standardSequenceType(type);
         drawChart = typeof drawChart !== 'undefined' ? drawChart : false;
