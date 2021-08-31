@@ -181,14 +181,14 @@ function leftChild(i) {
 // }
 
 
-function draw_line(a, b, color = defaultElementColor) {
+function draw_line(two, a, b, color = defaultElementColor) {
     // console.log(a)
     // console.log(a.x)
     // console.log(b)
     var line = two.makeLine(a.translation.x, a.translation.y, b.translation.x, b.translation.y);
     line.stroke = color;
     line.fill = color;
-    background.add(line);
+    // background.add(line);
     return line;
 }
 
@@ -220,9 +220,8 @@ function drawTreeElement(twoTree, two_width, two_height, data, index, parent) {
     // var node = draw_leaf(index, x, y, text);
     var node = drawArrayElement(twoTree, x, y, value, index);
     if (parent != null) {
-        draw_line(parent.rect, node.rect);
+        draw_line(twoTree, parent.rect, node.rect);
     }
-    
 
     console.log("data.length - index: ", data.length - index);
 
