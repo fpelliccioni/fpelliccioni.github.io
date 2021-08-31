@@ -154,7 +154,7 @@ function createChart() {
     return myChart;
 }
 
-function drawTreeFromSequence() {
+function drawTreeFromSequence(arr) {
     console.log("************** drawTreeFromSequence *********************");
     var hg_right_pre_a = document.getElementById('hg-right-pre-a');
     hg_right_pre_a.innerHTML = '<div id="sequence2"></div>';

@@ -472,7 +472,7 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart, dr
 
     // -------------------------------------------------
     if (drawTree) {
-        drawTreeFromSequence();
+        drawTreeFromSequence(arr);
     }
     // -------------------------------------------------
 
