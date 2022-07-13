@@ -9,7 +9,7 @@ layout: none
     <link>{{ site.url }}</link>
     <image>
       <url>
-        http://componentsprogramming.com/sutter.png
+        https://componentsprogramming.com/sutter.png
       </url>
       <title>{{ site.title }}</title>
       <link>{{ site.url }}</link>

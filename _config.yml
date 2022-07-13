@@ -6,7 +6,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 #url: "http://fpelliccioni.github.io" # the base hostname & protocol for your site
 #twitter_username: ferpelliccioni
 #github_username:  fpelliccioni
-canonical: http://componentsprogramming.com
+canonical: https://componentsprogramming.com
 
 # Owner/author information
 owner:
@@ -25,10 +25,10 @@ owner:
 # Settings for analytics helper
 # Set 'provider' to the analytics provider you want to use.
 # Set 'provider' to false to turn analytics off globally.
-#        
+#
 analytics :
   provider : google
-  google : 
+  google :
       tracking_id : 'UA-55291427-1'
 # getclicky :
 # site_id :

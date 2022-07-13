@@ -12,14 +12,14 @@ In this article I want to talk about 2 topics in which I think that most program
 
 I'm going to use a real experience, which happened some time ago:
 
-For 4 years now I have maintained a multi-currency node (Bitcoin, Bitcoin Cash and Litecoin) called [Knuth](https://github.com/k-nuth/kth) (a.k.a. Bitprim).   
+For 4 years now I have maintained a multi-currency node (Bitcoin, Bitcoin Cash and Litecoin) called [Knuth](https://github.com/k-nuth/kth) (a.k.a. Bitprim).
 In November 2017 [Bitcoin Cash](http://bitcoincashnode.org/) made its first protocol change after its birth in August of the same year. My job at that time was to update the code of our node to support the protocol changes. From that moment I want to write this article, but ... for one or several reasons I did not do it at that moment, I am doing it now.
 
 The most important change was in the _Difficulty Adjustment Algorithm_, from now _DAA_.
 
 [Here the description of the algorithm](https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/nov-13-hardfork-spec.md#difficulty-adjustment-algorithm-description).
 
-I do not want to go into detail about the concept of difficulty or the DAA. For this you can refer to: [Difficulty](https://en.bitcoin.it/wiki/Difficulty). 
+I do not want to go into detail about the concept of difficulty or the DAA. For this you can refer to: [Difficulty](https://en.bitcoin.it/wiki/Difficulty).
 
 What interests me are points 2 and 3 of the description of the DAA:
 
@@ -31,13 +31,13 @@ What interests me are points 2 and 3 of the description of the DAA:
 Both point to the footnote `[2]`:
 
 {% highlight cpp %}
-2. A block is chosen via the following mechanism: 
+2. A block is chosen via the following mechanism:
 
-Given a list: S = [B_n-2, B_n-1, B_n] 
-a. If timestamp(S[0]) greater than timestamp(S[2]) then swap S[0] and S[2]. 
-b. If timestamp(S[0]) greater than timestamp(S[1]) then swap S[0] and S[1]. 
-c. If timestamp(S[1]) greater than timestamp(S[2]) then swap S[1] and S[2]. 
-d. Return S[1]. 
+Given a list: S = [B_n-2, B_n-1, B_n]
+a. If timestamp(S[0]) greater than timestamp(S[2]) then swap S[0] and S[2].
+b. If timestamp(S[0]) greater than timestamp(S[1]) then swap S[0] and S[1].
+c. If timestamp(S[1]) greater than timestamp(S[2]) then swap S[1] and S[2].
+d. Return S[1].
 
 See GetSuitableBlock
 {% endhighlight %}
@@ -103,14 +103,14 @@ auto max(T const& a, U const& b) {
 template <TotallyOrdered T>
 auto median_3_ab(T const& a, T const& b, T const& c) {
     // precondition: a <= b
-    
+
     return ! (c < b) ? b :        // a, b, c are sorted
                        max(a, c); // b is not the median
 }
 
 template <TotallyOrdered T>
 auto median_3(T const& a, T const& b, T const& c) {
-    return b < a ? median_3_ab(b, a, c) 
+    return b < a ? median_3_ab(b, a, c)
                  : median_3_ab(a, b, c);
 }
 {% endhighlight %}
@@ -141,7 +141,7 @@ The time complexity of `median_3` is:
 Now, we could use our new algorithm in the original `GetSuitableBlock` function:
 
 {% highlight cpp %}
-static 
+static
 CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
     assert(pindex->nHeight >= 3);
     return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex);
@@ -150,8 +150,8 @@ CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
 
 Much shorter and understandable, right?.
 
-Before continuing, we have to fix something: we do not know if the _Natural Ordering_ specified in the `CBlockIndex` class is given by the block's timestamp (`nTime` attribute).  
-We need a version of `median_3` that accepts a form of comparison specified by the user: we need you to accept a _strict weak ordering relation_ ([for more information see here](http://componentsprogramming.com/writing-min-function-part3/)).
+Before continuing, we have to fix something: we do not know if the _Natural Ordering_ specified in the `CBlockIndex` class is given by the block's timestamp (`nTime` attribute).
+We need a version of `median_3` that accepts a form of comparison specified by the user: we need you to accept a _strict weak ordering relation_ ([for more information see here](https://componentsprogramming.com/writing-min-function-part3/)).
 
 {% highlight cpp %}
 template <Regular T, StrictWeakOrdering R>
@@ -162,14 +162,14 @@ auto max(T const& a, U const& b, R r) {
 template <Regular T, StrictWeakOrdering R>
 auto median_3_ab(T const& a, T const& b, T const& c, R r) {
     // precondition: a <= b
-    
+
     return ! r(c, b) ? b :           // a, b, c are sorted
                        max(a, c, r); // b is not the median
 }
 
 template <Regular T, StrictWeakOrdering R>
 auto median_3(T const& a, T const& b, T const& c, R r) {
-    return r(b, a) ? median_3_ab(b, a, c, r) 
+    return r(b, a) ? median_3_ab(b, a, c, r)
                    : median_3_ab(a, b, c, r);
 }
 {% endhighlight %}
@@ -177,7 +177,7 @@ auto median_3(T const& a, T const& b, T const& c, R r) {
 Now, we can correctly implement `GetSuitableBlockNewVersion`, comparing by `nTime`:
 
 {% highlight cpp %}
-static 
+static
 CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
     assert(pindex->nHeight >= 3);
     return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex, [](auto const& a, auto const& b){
@@ -215,7 +215,7 @@ GetSuitableBlockNewVersion: 1
 GetSuitableBlock:           2
 {% endhighlight %}
 
-What we are trying to prove with the previous code is the stability of both algorithms. Our `median_3` algorithm is _stable_ which means that the relative order of the equivalent elements is preserved ([for more information see here](http://componentsprogramming.com/writing-min-function-part5/)).
+What we are trying to prove with the previous code is the stability of both algorithms. Our `median_3` algorithm is _stable_ which means that the relative order of the equivalent elements is preserved ([for more information see here](https://componentsprogramming.com/writing-min-function-part5/)).
 
 To prove it with data, we will use the previous example, in which we have the following input data for our algorithms:
 
@@ -234,7 +234,7 @@ s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
 
 Note that the middle element is the one with `nHeight = 1`. This indicates that our algorithm behaved in a stable manner but not the original algorithm used in the Bitcoin Cash DAA.
 
-In my first implementation of DAA in the Bitprim node I used a code similar to `median_3` which was also stable, since I had not verified the code of the specification, I had mistakenly assumed that it was also stable.  
+In my first implementation of DAA in the Bitprim node I used a code similar to `median_3` which was also stable, since I had not verified the code of the specification, I had mistakenly assumed that it was also stable.
 Then this caused runtime errors of our node on a difficulty change. It did not always happen, but there was a particular case in which we could detect it. After several hours of debugging I could detect that the problem was that the algorithm used by me was not compatible with the "specified" in DAA.
 
 Therefore, I had to "correct" my algorithm to make it non-stable in the same way as that of the specification.

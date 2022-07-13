@@ -12,14 +12,14 @@ En este artículo quiero hablar sobre 2 temas en los que creo que la mayoría de
 
 Me voy a ayudar de una experiencia real, ocurrida ya hace un tiempo:
 
-Desde hace ya 4 años mantengo un nodo multimoneda (Bitcoin, Bitcoin Cash y Litecoin) llamado [Knuth](https://github.com/k-nuth/kth) (a.k.a. Bitprim).   
+Desde hace ya 4 años mantengo un nodo multimoneda (Bitcoin, Bitcoin Cash y Litecoin) llamado [Knuth](https://github.com/k-nuth/kth) (a.k.a. Bitprim).
 En noviembre de 2017 [Bitcoin Cash](http://bitcoincashnode.org/) hizo su primer cambio de protocolo luego de su nacimiento en agosto del mismo año. Mi trabajo en ese momento era actualizar el código de nuestro nodo para que soporte los cambios de protocolo. Desde aquel momento que quiero escribir este artículo, pero... por alguna o varias razones no lo hice en ese momento, lo estoy haciendo ahora.
 
 El cambio más importante de fue en el _Algoritmo de Ajuste de Dificultad_, en adelante _DAA_ (del inglés _Difficulty Adjustment Algorithm_).
 
 [Aquí la descripción del algoritmo](https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/nov-13-hardfork-spec.md#difficulty-adjustment-algorithm-description).
 
-No quiero entrar en detalles acerca del concepto de _dificultad_ ni del DAA. Para ello puede referirse a: [Difficulty](https://en.bitcoin.it/wiki/Difficulty). 
+No quiero entrar en detalles acerca del concepto de _dificultad_ ni del DAA. Para ello puede referirse a: [Difficulty](https://en.bitcoin.it/wiki/Difficulty).
 
 Lo que me interesa son los puntos 2 y 3 de la descripción del DAA:
 
@@ -31,13 +31,13 @@ Lo que me interesa son los puntos 2 y 3 de la descripción del DAA:
 Ambos apuntan a la nota al pie `[2]`:
 
 {% highlight cpp %}
-2. A block is chosen via the following mechanism: 
+2. A block is chosen via the following mechanism:
 
-Given a list: S = [B_n-2, B_n-1, B_n] 
-a. If timestamp(S[0]) greater than timestamp(S[2]) then swap S[0] and S[2]. 
-b. If timestamp(S[0]) greater than timestamp(S[1]) then swap S[0] and S[1]. 
-c. If timestamp(S[1]) greater than timestamp(S[2]) then swap S[1] and S[2]. 
-d. Return S[1]. 
+Given a list: S = [B_n-2, B_n-1, B_n]
+a. If timestamp(S[0]) greater than timestamp(S[2]) then swap S[0] and S[2].
+b. If timestamp(S[0]) greater than timestamp(S[1]) then swap S[0] and S[1].
+c. If timestamp(S[1]) greater than timestamp(S[2]) then swap S[1] and S[2].
+d. Return S[1].
 
 See GetSuitableBlock
 {% endhighlight %}
@@ -83,7 +83,7 @@ static const CBlockIndex *GetSuitableBlock(const CBlockIndex *pindex) {
 
 Lo que hace el algoritmo es básicamente crear una secuencia de 3 elementos (array), la ordena de menor a mayor y retorna el segundo elemento.
 
-La complejidad en tiempo de este algoritmo es: 
+La complejidad en tiempo de este algoritmo es:
 
 - Caso mejor:    0 swaps,   3 comparaciones
 - Caso peor:     2 swaps,   3 comparaciones
@@ -104,14 +104,14 @@ auto max(T const& a, U const& b) {
 template <TotallyOrdered T>
 auto median_3_ab(T const& a, T const& b, T const& c) {
     // precondition: a <= b
-    
+
     return ! (c < b) ? b :        // a, b, c are sorted
                        max(a, c); // b is not the median
 }
 
 template <TotallyOrdered T>
 auto median_3(T const& a, T const& b, T const& c) {
-    return b < a ? median_3_ab(b, a, c) 
+    return b < a ? median_3_ab(b, a, c)
                  : median_3_ab(a, b, c);
 }
 {% endhighlight %}
@@ -133,7 +133,7 @@ auto median_3(T const& a, T const& b, T const& c) {
 
 Dejo el análisis del código para el lector, para el vago: lo que hace el algoritmo es simplemente seleccionar el elemento del medio entre `a`, `b` y `c`, haciendo de cuenta que los 3 estuviesen ordenados ascendentemente. Esto lo hace sin mutar ni reordenar los datos de entrada.
 
-La complejidad en tiempo de `median_3` es: 
+La complejidad en tiempo de `median_3` es:
 
 - Caso mejor:    0 swaps, 2 comparaciones
 - Caso peor:     0 swaps, 3 comparaciones
@@ -143,7 +143,7 @@ La complejidad en tiempo de `median_3` es:
 Ahora, podríamos usar nuestro nuevo algoritmo en la función `GetSuitableBlock` original:
 
 {% highlight cpp %}
-static 
+static
 CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
     assert(pindex->nHeight >= 3);
     return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex);
@@ -153,7 +153,7 @@ CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
 Mucho más breve y entendible, ¿no?.
 
 Antes de seguir, tenemos que corregir un problema: no sabemos si el _Ordenamiento Natural_ especificado en la clase `CBlockIndex` está dado por el timestamp del bloque (atributo `nTime`).
-Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strict weak ordering relation_, [para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part3/)).
+Necesitamos una versión de `median_3` que acepte una forma de comparar especificado por el usuario: necesitamos que acepte una _relación de preorden total estricta_ (_strict weak ordering relation_, [para más información consulte aquí](https://componentsprogramming.com/writing-min-function-part3/)).
 
 
 {% highlight cpp %}
@@ -165,14 +165,14 @@ auto max(T const& a, U const& b, R r) {
 template <Regular T, StrictWeakOrdering R>
 auto median_3_ab(T const& a, T const& b, T const& c, R r) {
     // precondition: a <= b
-    
+
     return ! r(c, b) ? b :           // a, b, c are sorted
                        max(a, c, r); // b is not the median
 }
 
 template <Regular T, StrictWeakOrdering R>
 auto median_3(T const& a, T const& b, T const& c, R r) {
-    return r(b, a) ? median_3_ab(b, a, c, r) 
+    return r(b, a) ? median_3_ab(b, a, c, r)
                    : median_3_ab(a, b, c, r);
 }
 {% endhighlight %}
@@ -181,7 +181,7 @@ auto median_3(T const& a, T const& b, T const& c, R r) {
 Ahora sí, podemos implementar correctamente `GetSuitableBlockNewVersion`, comparando por `nTime`:
 
 {% highlight cpp %}
-static 
+static
 CBlockIndex const* GetSuitableBlockNewVersion(CBlockIndex const* pindex) {
     assert(pindex->nHeight >= 3);
     return &median_3(*pindex->pprev->pprev, *pindex->pprev, *pindex, [](auto const& a, auto const& b){
@@ -222,7 +222,7 @@ GetSuitableBlock:           2
 
 Lo que estamos intentando probar con el código anterior es la _estabilidad_ de ambos algoritmos.
 Nuestro algoritmo *median_3* es _estable_ lo que quiere decir que el orden de los elementos equivalentes se preserva
-([para más información consulte aquí](http://componentsprogramming.com/writing-min-function-part5/)).
+([para más información consulte aquí](https://componentsprogramming.com/writing-min-function-part5/)).
 
 Para demostrarlo con datos, vamos a utilizar el ejemplo anterior, en el cual tenemos los siguientes datos de entrada para nuestros algoritmos:
 
@@ -230,7 +230,7 @@ Para demostrarlo con datos, vamos a utilizar el ejemplo anterior, en el cual ten
 s = [{1, 1558731500}, {2, 1558731500}, {3, 1558730000}]
 {% endhighlight %}
 
-Donde el primer elemento de cada par es el identificador del bloque `nHeight` y el segundo elemento es el timestamp `nTime`.  
+Donde el primer elemento de cada par es el identificador del bloque `nHeight` y el segundo elemento es el timestamp `nTime`.
 Note que el `nTime` de los primeros 2 elementos es igual.
 
 Si ordenamos la secuencia anterior por `nTime` usando un algoritmo de ordenamiento estable, como por ejemplo [Merge sort](https://en.wikipedia.org/wiki/Merge_sort) nos quedaría algo así:
@@ -239,14 +239,14 @@ Si ordenamos la secuencia anterior por `nTime` usando un algoritmo de ordenamien
 s = [{3, 1558730000}, {1, 1558731500}, {2, 1558731500}]
 {% endhighlight %}
 
-Note que el elemento del medio es el que tiene `nHeight = 1`. Lo cual indica que nuestro algoritmo se comportó de manera estable pero no así el algoritmo original usado en el DAA de Bitcoin Cash. 
+Note que el elemento del medio es el que tiene `nHeight = 1`. Lo cual indica que nuestro algoritmo se comportó de manera estable pero no así el algoritmo original usado en el DAA de Bitcoin Cash.
 
-En mi primera implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código de la especificación, yo había asumido erróneamente que también era estable.  
+En mi primera implementación de DAA en el nodo Bitprim usé un código similar a `median_3` el cual también era estable, dado que no había verificado el código de la especificación, yo había asumido erróneamente que también era estable.
 Luego esto provocó errores en tiempo de ejecución de nuestro nodo ante un ajuste de dificultad. No se daba siempre, pero hubo un caso en particular en el que lo pudimos detectar. Luego de varias horas de debugging pude detectar que el problema era que el algoritmo usado por mí no era compatible con el "especificado" en DAA.
 
 Por lo tanto, tuve que "corregir" mi algoritmo para hacerlo no-estable de la misma forma que el de la especificación.
 
-En realidad, si mal no recuerdo, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock`, sino que decía que se calculaba la mediana de 3 elementos. Como la implementación de la mediana fue "incorrecta" tuvieron que adaptar la especificación para que se condiga con el código.  
+En realidad, si mal no recuerdo, en la primera versión de la especificación de DAA no se mencionaba al código de `GetSuitableBlock`, sino que decía que se calculaba la mediana de 3 elementos. Como la implementación de la mediana fue "incorrecta" tuvieron que adaptar la especificación para que se condiga con el código.
 Tenga en cuenta, que una vez que el código de un nodo Bitcoin o de cualquier criptomoneda está en funcionamiento, una modificación en su comportamiento introduce incompatibilidades con versiones anteriores y produce los denominados _forks_. Por lo que una vez que el código está corriendo, se trata de no cambiarlo. Por esta razón es por la que se tuvo que adaptar la especificación en vez de corregir el código.
 
 Antes de terminar, hagamos una comparación de ambos algoritmos, `GetSuitableBlock` vs. `median_3`:
@@ -255,9 +255,9 @@ Antes de terminar, hagamos una comparación de ambos algoritmos, `GetSuitableBlo
 - `median_3` realiza 2, 8/3 o 3 comparaciones, `GetSuitableBlock` realiza siempre 3 comparaciones. (Eficiencia)
 - `median_3` es estable, `GetSuitableBlock` no lo es. `median_3` es lo que cualquiera espera de un algoritmo que calcule la mediana de 3 elementos. (Correctitud)
 
-Y ahora sí, para finalizar, algunas conclusiones: 
+Y ahora sí, para finalizar, algunas conclusiones:
 
-El autor de la especificación de DAA podría haber optado por usar un algoritmo conocido y "estándar", pero no lo hizo.  
+El autor de la especificación de DAA podría haber optado por usar un algoritmo conocido y "estándar", pero no lo hizo.
 Es más, quizás lo peor de todo esto es que la especificación hace referencia al código. **El código no debe ser nunca especificación. El código debe ser creado a partir de una especificación.** Por lo que si una especificación hace referencia a código, no existe dicha especificación.
 
 ¡Saludos!

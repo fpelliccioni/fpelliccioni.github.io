@@ -4,7 +4,7 @@
 <!-- <link rel="shortcut icon" href="{{ site.url }}/favicon.ico">
 <link href="/favicon.png" rel="icon">
 -->
-<link rel="icon" type="image/png" href="http://componentsprogramming.com/icon.png" />
+<link rel="icon" type="image/png" href="https://componentsprogramming.com/icon.png" />
 
 
 <meta charset="utf-8">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="{{ site.url }}/icon_200x200.png">
 <!-- <meta property="og:type" content="article" /> -->
 <meta property="og:type" content="website" />
- 
+
 <link href="{{ site.url }}/feed.xml" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -70,7 +70,7 @@
             <li>
               <a href="/" title="{{ site.title }}">Home</a>
             </li>
-            
+
             {% for link in site.links %}
                 <li><a href="{% if link.external %}{{ link.url }}{% else %}{{ site.url }}{{ link.url }}{% endif %}" {% if link.external %}target="_blank"{% endif %}>{{ link.title }}</a></li>
             {% endfor %}

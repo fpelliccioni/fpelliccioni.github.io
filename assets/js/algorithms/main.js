@@ -408,7 +408,7 @@ function fillCatalogRecursive(str, categories) {
             snippets = getSnippets(cat);
             for(var si in snippets) {
                 var s = snippets[si]
-                // str += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
+                // str += '<li><a href="https://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
                 str += '<li><a href="/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
             }
         }
@@ -428,7 +428,7 @@ function fillCatalog() {
     // snippets = getUncataloguedSnippets();
     // for(var si in snippets) {
     //     var s = snippets[si]
-    //     // str += '<li><a href="http://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
+    //     // str += '<li><a href="https://componentsprogramming.com/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
     //     str += '<li><a href="/algorithms?snippet=' + s + '">[' + s + ']</a></li>';
     // }
     // str +=  '</ul></li>';

@@ -15,7 +15,7 @@ Originally, I wanted to address the two mistakes in the same article, but when I
 
 Therefore, this article will deal with an issue that only concerns to C++ programmers, so if C++ is not of your interest, feel free to jump directly to the fifth article.
 
-In general, I want that the algorithms written in my articles are not tied to a specific programming language, but in order to write the algorithms in a practical way, I have to do it in a real language, and C++ is my choice.  
+In general, I want that the algorithms written in my articles are not tied to a specific programming language, but in order to write the algorithms in a practical way, I have to do it in a real language, and C++ is my choice.
 Once the mistakes have been corrected, with the help of other people, I'll start writing the min function in other programming languages.
 
 So, to start, I'll update the usage code example to reflect things I would like to do using the min function:
@@ -42,7 +42,7 @@ void usage_with_mutable_objects() {
 
 (*employee* and *salary_comparator* were defined in [Part 3]({% post_url en/posts/2014-07-15-writing-min-function-part3 %}))
 
-In #1 we get a compile-time error, but, why?  
+In #1 we get a compile-time error, but, why?
 Remember our last version of the min function:
 
 {% highlight cpp %}
@@ -62,7 +62,7 @@ T const& min(T const& a, T const& b, Cmp cmp) {
 
 (**Note**: When I refer to the min function, actually I am not referring to a single function, but to a family of functions)
 
-It takes two constant-references to two objects (and a comparator); and returns a constant reference to one of the objects. That means that the returned reference cannot be modified, because it is returned as const.  
+It takes two constant-references to two objects (and a comparator); and returns a constant reference to one of the objects. That means that the returned reference cannot be modified, because it is returned as const.
 The *raise_salary* function tries to modify the object returned by the min function, causing the compilation-time error, because you can’t modify something declared as const.
 
 If I manually expand (or “inliniarize”) the code of the functions min and *raise_salary* I would get something like:
@@ -77,9 +77,9 @@ employee const& m = e1 < e2 ? e1 : e2;
 m.salary += 500.0f; //Compile-time error
 {% endhighlight %}
 
-In the last code, it is more clear that we are trying to modify something that is constant.  
-The variable m is a constant-reference pointing (or rather, referencing) to e1 or to e2.  
-Both e1 and e2 were not declared as constant, so they are mutable objects.  
+In the last code, it is more clear that we are trying to modify something that is constant.
+The variable m is a constant-reference pointing (or rather, referencing) to e1 or to e2.
+Both e1 and e2 were not declared as constant, so they are mutable objects.
 Then,  why the min function returns a constant reference and not just an ordinary (non-const) reference?
 Consider the following variation of a wrong min function:
 
@@ -93,7 +93,7 @@ T& wrong_min(T const& a, T const& b, Cmp cmp) {
 }
 {% endhighlight %}
 
-It is not valid C++ code (or using Standard C++ terminology, it is ill-formed code), it doesn’t compiles, because we are trying to return something that is constant as non-constant. And what's up with that?  
+It is not valid C++ code (or using Standard C++ terminology, it is ill-formed code), it doesn’t compiles, because we are trying to return something that is constant as non-constant. And what's up with that?
 Well, suppose that the *wrong_min* function compiles, in a fictitious programming language, then consider the following usage code:
 
 {% highlight cpp %}
@@ -123,7 +123,7 @@ Remember that the *wrong_min* function is not valid, but, if it were valid, we w
 
 You might wonder: “But… they are objects, so they reside in memory, and memory can be modified,... what is the problem with that? ”
 
-According to the [**C++ Standard** [1]](#Ref1), *“...any attempt to modify a const object during its lifetime (3.8) results in undefined behavior.”*  
+According to the [**C++ Standard** [1]](#Ref1), *“...any attempt to modify a const object during its lifetime (3.8) results in undefined behavior.”*
 In practice, a const object could be placed by the compiler (and the operating system) in a read-only segment of memory. Any attempt to write to read-only memory causes a segmentation fault, probably causing an abnormal termination of the process (program crash).
 
 That is the reason why C++ protects us from writing things like *wrong_min*.
@@ -145,8 +145,8 @@ If we wrote the min function as above, then we would have problems with the foll
 int m = min(5, 7); // Compile-time error
 {% endhighlight %}
 
-The code above doesn’t compile. Why?  
-In C++, the values 5 and 7 are called integer-literal, more specifically they are called decimal integer literal (base ten). Literals are something that can’t be modified, they are constants. So to accept the code above we have to return to our original min function, using const everywhere.  
+The code above doesn’t compile. Why?
+In C++, the values 5 and 7 are called integer-literal, more specifically they are called decimal integer literal (base ten). Literals are something that can’t be modified, they are constants. So to accept the code above we have to return to our original min function, using const everywhere.
 But, remember, we want our min function also allows us to work with mutable objects.
 
 So, we want a function that:
@@ -242,39 +242,39 @@ Then, I presented the code to Alex, because I wanted to know what he thought, an
 
 At first I did not understand the reason for his answer, but then, after spending hours focusing on details of the template-metaprogramming code, I understood that it is better to focus on real problems, which are the algorithms.
 
-Even so, if you want to take a look at the code, write me by private and I will gladly share it (See [About page](http://componentsprogramming.com/about/)).
+Even so, if you want to take a look at the code, write me by private and I will gladly share it (See [About page](https://componentsprogramming.com/about/)).
 
-I didn’t want to make an article explaining Const-Correctness so long, because there are countless [books and articles on the Internet [3]](#Ref3) that explain the topic better than me. But as I tried to explain some things, I thought it was necessary to extend the explanation, which ended in this article. 
+I didn’t want to make an article explaining Const-Correctness so long, because there are countless [books and articles on the Internet [3]](#Ref3) that explain the topic better than me. But as I tried to explain some things, I thought it was necessary to extend the explanation, which ended in this article.
 
 
 ---
 
 ## The Series
 
-&nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url en/posts/2014-05-20-writing-min-function-part1 %})  
-&nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url en/posts/2014-05-28-writing-min-function-part2 %})  
-&nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url en/posts/2014-07-15-writing-min-function-part3 %})  
-&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url en/posts/2014-09-24-writing-min-function-part4 %})  
-&nbsp;&nbsp;&nbsp;[Part 5: Stabilizing the algorithm]({% post_url en/posts/2014-10-05-writing-min-function-part5 %})  
+&nbsp;&nbsp;&nbsp;[Part 1: The rise of Concepts]({% post_url en/posts/2014-05-20-writing-min-function-part1 %})
+&nbsp;&nbsp;&nbsp;[Part 2: Understanding Concepts]({% post_url en/posts/2014-05-28-writing-min-function-part2 %})
+&nbsp;&nbsp;&nbsp;[Part 3: Weakening the ordering]({% post_url en/posts/2014-07-15-writing-min-function-part3 %})
+&nbsp;&nbsp;&nbsp;[Part 4: Const-Correctness]({% post_url en/posts/2014-09-24-writing-min-function-part4 %})
+&nbsp;&nbsp;&nbsp;[Part 5: Stabilizing the algorithm]({% post_url en/posts/2014-10-05-writing-min-function-part5 %})
 
 
 ---
 
 ## References
 
-<a name="Ref1">[1]</a> Latest publicly available C++ Draft Standard (n3797) (at September 2014) [dcl.type.cv] paragraph 4:  
+<a name="Ref1">[1]</a> Latest publicly available C++ Draft Standard (n3797) (at September 2014) [dcl.type.cv] paragraph 4:
 <http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3797.pdf>
 
 <a name="Ref2">[2]</a> Here Alex refers to [Donald Knuth](http://en.wikipedia.org/wiki/Donald_Knuth), but more specifically to his series of books, called ["The Art of Computer Programming"](http://en.wikipedia.org/wiki/The_Art_of_Computer_Programming) ([Amazon](http://www.amazon.com/Computer-Programming-Volumes-1-4A-Boxed/dp/0321751043))
 
 <a name="Ref3">[3]</a> For better references about Const-Correctness and ROM-ability, see:
 
-- Standard C++ FAQ about Const Correctness:  
+- Standard C++ FAQ about Const Correctness:
 <https://isocpp.org/wiki/faq/const-correctness>
-- The "Guru of the Week" (GotW) articles about Const-Correctness (the original and the new one), from [Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter):  
-<http://www.gotw.ca/gotw/006.htm>  
+- The "Guru of the Week" (GotW) articles about Const-Correctness (the original and the new one), from [Herb Sutter](http://en.wikipedia.org/wiki/Herb_Sutter):
+<http://www.gotw.ca/gotw/006.htm>
 <http://herbsutter.com/2013/05/24/gotw-6a-const-correctness-part-1-3/>
-- Technical Report on C++ Performance, Chapter 7.1, "ROMability":  
+- Technical Report on C++ Performance, Chapter 7.1, "ROMability":
 <http://www.open-std.org/jtc1/sc22/wg21/docs/TR18015.pdf>
 
 
