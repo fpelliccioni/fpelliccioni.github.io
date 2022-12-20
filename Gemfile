@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem "jekyll", ">= 4.2.2"
+gem "jekyll", ">= 3.9.2"
 gem 'yajl-ruby', '~> 1.4', '>= 1.4.3'
 gem 'jekyll-minibundle', '~> 3.0'
 gem 'coderay', '~> 1.1', '>= 1.1.3'
