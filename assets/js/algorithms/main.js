@@ -37,7 +37,8 @@ var categories_full = [
        ,{id: 'rearrangements/ordering-based', name: 'Ordering-based', categories: [
             {id: 'rearrangements/ordering-based/sorting', name: 'Sorting', categories: [
                 {id: 'rearrangements/ordering-based/sorting/insertion-sort', name: 'Insertion Sort', categories: []},
-                {id: 'rearrangements/ordering-based/sorting/selection-sort', name: 'Selection Sort', categories: []}
+                {id: 'rearrangements/ordering-based/sorting/selection-sort', name: 'Selection Sort', categories: []},
+                {id: 'rearrangements/ordering-based/sorting/sort-n', name: 'Sort-N', categories: []}
             ]}
         ]}
     ]}
@@ -87,7 +88,8 @@ var categories = [
        ,{id: 'rearrangements/ordering-based', name: 'Ordering-based', categories: [
             {id: 'rearrangements/ordering-based/sorting', name: 'Sorting', categories: [
                 {id: 'rearrangements/ordering-based/sorting/insertion-sort', name: 'Insertion Sort', categories: []},
-                {id: 'rearrangements/ordering-based/sorting/selection-sort', name: 'Selection Sort', categories: []}
+                {id: 'rearrangements/ordering-based/sorting/selection-sort', name: 'Selection Sort', categories: []},
+                {id: 'rearrangements/ordering-based/sorting/sort-n', name: 'Sort-N', categories: []}
             ]}
         ]}
     ]}
