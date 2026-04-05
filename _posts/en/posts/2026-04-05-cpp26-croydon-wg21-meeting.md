@@ -5,10 +5,13 @@ title:  "C++26 Wraps Up: Notes from the Croydon WG21 Meeting"
 date:   2026-04-05 12:00:00
 comments: true
 tags: [c++, cpp, c++26, wg21, iso, contracts, reflection, eiffel, design by contract, clang, gcc, components programming, componentsprogramming, generic programming]
+description: "The ISO C++ committee wrapped up C++26 on March 28 in Croydon, UK. Around 210 people participated representing 24 nations. No more features, no more additions. C++26 is done."
 ---
 
-![WG21 group photo at the Croydon meeting, March 2026]({{ site.url }}/images/wg21-2026-croydon.png)
-*Photo credit: Herb Sutter*
+<figure>
+<img src="{{ site.url }}/images/wg21-2026-croydon.png" alt="WG21 group photo at the Croydon meeting, March 2026">
+<figcaption>Photo credit: Herb Sutter</figcaption>
+</figure>
 
 The ISO C++ committee wrapped up C++26 on March 28 in Croydon, UK. Around 210 people participated (130 in person, 80 remote) representing 24 nations, resolving the last of 411 national body comments. From here the document goes to its final approval ballot. No more features, no more additions. C++26 is done.
 
