@@ -1462,3 +1462,17 @@ button {
 .featured-story.without-cover .featured-copy {
   max-width: 800px;
 }
+
+/* Geometric mark inspired by the supplied papyrus diagram. */
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  padding: 0;
+  color: var(--ink);
+}
+.brand-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

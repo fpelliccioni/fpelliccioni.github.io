@@ -1091,3 +1091,16 @@ main.catalog-page {
 .catalog-confirm button {
   margin: 0 8px 8px 0;
 }
+
+.lab-brand-mark {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  flex: 0 0 auto;
+}
+.lab-brand-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
