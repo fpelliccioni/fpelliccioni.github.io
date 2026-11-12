@@ -292,17 +292,17 @@ header.site-header {
 }
 
 
-header.site-header a.menu {
+header.site-header button.menu {
   display: none;
 }
 
-header.site-header hgroup h1, header.site-header nav ul {
+header.site-header .site-title, header.site-header nav ul {
   font-family: $sans;
 }
-header.site-header hgroup {
+header.site-header .site-brand {
   float: left;
   padding-left: 5vw;
-  h1 {
+  .site-title {
       font-weight: 700;
       font-size: 18px;
       line-height: 100%;
@@ -395,7 +395,7 @@ header.site-header nav {
     // Header Stuff
     header {
         margin: (2*$lh) 0 $lh 0;
-        hgroup {
+        &.post-header {
             color: $black;
             position: relative;
             text-align: center;
@@ -820,19 +820,19 @@ footer {
     padding-top: 0;
   }
   
-  header.site-header hgroup h1 {
+  header.site-header .site-title {
     margin-bottom: 0;
     font-size: $fsp;
   }
   
-  header.site-header hgroup {
+  header.site-header .site-brand {
     position: absolute;
     left: 7%;
     float: none;
     padding-left: 0;
   }
   
-  header.site-header a.menu {
+  header.site-header button.menu {
     position: absolute;
     right: 7%;
     display: block;
@@ -845,7 +845,7 @@ footer {
     }
   }
   
-  header.site-header a.menu img {
+  header.site-header button.menu img {
     width: 24px;
     height: auto;
   }

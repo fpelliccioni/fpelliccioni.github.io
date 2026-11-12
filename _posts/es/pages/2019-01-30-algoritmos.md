@@ -1,4 +1,5 @@
 ---
+translation_key: algorithms
 layout: algorithms
 title: Algoritmos
 date:   2019-01-30 12:00:00

@@ -1,4 +1,5 @@
 ---
+translation_key: elements-of-programming-authors-edition
 layout: post
 type: post
 title:  "Edición de Autores de Elements of Programming (free ebook)"

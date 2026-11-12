@@ -1,4 +1,5 @@
 ---
+translation_key: thanks-alex-once-again
 layout: post
 type: post
 title:  "¡Gracias nuevamente, Alex!"

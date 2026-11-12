@@ -1,4 +1,5 @@
 ---
+translation_key: limit-approved
 layout: post
 type: post
 title:  "Límite Exterior de la Plataforma Continental"

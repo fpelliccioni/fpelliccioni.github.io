@@ -1,4 +1,5 @@
 ---
+translation_key: palindromes
 layout: post
 type: post
 title:  "Palindromes and more"
@@ -391,7 +392,7 @@ For analysis on other platforms, please [refer to [7]](#Ref7).
 
 <a name="Ref6">[6]</a> [Java Primitive Data Types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 
-<a name="Ref7">[7]</a> [Analysis of memory consumption on other platforms]({% post_url es/posts/2015-08-26-palindromos-otras-plataformas %}). 
+<a name="Ref7">[7]</a> Analysis of memory consumption on other platforms (unpublished draft).
 
 <a name="Ref8">[8]</a> The formulas for calculating the [padding](https://en.wikipedia.org/wiki/Data_structure_alignment#Data_structure_padding) of the internal arrays of StringBuilder and String (in bytes):  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuilder internal array padding = \\( 8\left\lceil\dfrac{2n + 48}{8}\right\rceil - (2n + 48) \\)  

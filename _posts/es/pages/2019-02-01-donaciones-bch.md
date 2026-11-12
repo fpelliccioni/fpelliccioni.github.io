@@ -1,4 +1,5 @@
 ---
+translation_key: donate-bch
 layout: post
 title: Donaciones Bitcoin Cash
 date:   2019-02-01 12:00:00

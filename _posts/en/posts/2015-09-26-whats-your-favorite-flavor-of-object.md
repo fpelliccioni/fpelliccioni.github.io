@@ -1,4 +1,5 @@
 ---
+translation_key: whats-your-favorite-flavor-of-object
 layout: post
 type: post
 title:  "What's your favorite flavor of Object?"

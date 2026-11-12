@@ -1,6 +1,7 @@
 ---
 layout: post
 type: draft
+published: false
 title:  "Sobre números aleatorios"
 date:   2015-08-25 12:00:00
 comments: true

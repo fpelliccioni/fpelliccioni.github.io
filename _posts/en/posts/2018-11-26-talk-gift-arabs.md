@@ -1,4 +1,5 @@
 ---
+translation_key: talk-gift-arabs
 layout: post
 type: post
 title:  "My 'The Gift of the Arabs' talk (Spanish)"

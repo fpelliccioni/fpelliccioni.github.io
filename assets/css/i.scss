@@ -17,3 +17,23 @@
 
 // Remove the definition below for a pixel-based layout
 $total-width: 100%;
+
+.site-title { font-size: 1em; font-weight: bold; }
+.site-title a { color: inherit; }
+button.menu { padding: 0; background: transparent; border: 0; color: inherit; cursor: pointer; }
+.post-list h2 { font-size: $fs3; font-style: italic; }
+.archive-title { font-size: $fs3; }
+.prev-posts ol { padding: 0; list-style: none; }
+.article .overlay, .article .featured-image { height: clamp(180px, calc(100vh - 350px), 360px); min-height: 0; }
+.article .featured-image { z-index: 0; }
+.article .overlay { opacity: .6; }
+@media screen and (max-width: 680px) {
+  .site-header nav { display: block; padding-top: 40px; }
+  .site-header nav.menu-ready { display: none; }
+  .site-header nav.menu-ready.is-open { display: block; }
+}
+@media screen and (min-width: 681px) { .site-header button.menu { display: none; } }
+
+.archive-wrap .post-list h2 a { color: #416879; }
+.archive-wrap .post-list .date time { color: #666; }
+.article header.post-header .date { color: #666; }

@@ -1,6 +1,7 @@
 ---
 layout: post
 type: draft
+published: false
 title:  "Algoritmos y especificaciones"
 date:   2019-05-20 12:00:00
 comments: true

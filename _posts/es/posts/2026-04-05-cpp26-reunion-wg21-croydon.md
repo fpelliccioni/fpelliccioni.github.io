@@ -1,4 +1,5 @@
 ---
+translation_key: cpp26-croydon-wg21-meeting
 layout: post
 type: post
 title:  "C++26 está listo: notas desde la reunión de WG21 en Croydon"
