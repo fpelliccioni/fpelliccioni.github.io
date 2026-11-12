@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
+import { createHash } from 'node:crypto';
 import * as cheerio from 'cheerio';
 
 const engine = vm.createContext({ console });
@@ -166,10 +167,35 @@ test('lab uses a dialog picker and standalone catalog shares its implementation'
     assert.equal($('#exampleSelect').get(0).tagName, 'button');
     assert.equal($('#exampleSelect').attr('aria-haspopup'), 'dialog');
     assert.equal($('select').length, 0);
-    assert.equal($('script[src="/assets/js/algorithms/catalog.js"]').length, 1);
+    assert.equal(
+      $('script[src]').filter((_, el) =>
+        /^\/assets\/js\/algorithms\/catalog\.[a-f0-9]{12}\.js$/.test($(el).attr('src')),
+      ).length,
+      1,
+    );
   }
   const $ = cheerio.load(fs.readFileSync('dist/algorithms-catalog/index.html', 'utf8'));
   assert.equal($('[data-catalog-page]').length, 1);
-  assert.equal($('script[src="/assets/js/algorithms/catalog.js"]').length, 1);
+  assert.equal(
+    $('script[src]').filter((_, el) =>
+      /^\/assets\/js\/algorithms\/catalog\.[a-f0-9]{12}\.js$/.test($(el).attr('src')),
+    ).length,
+    1,
+  );
   assert.equal($('script:not([src])').length, 0);
+});
+
+test('lab pages reference matching content-addressed assets instead of cached legacy URLs', () => {
+  for (const route of ['algorithms', 'algoritmos', 'algorithms-catalog']) {
+    const $ = cheerio.load(fs.readFileSync(`dist/${route}/index.html`, 'utf8'));
+    for (const el of $('script[src],link[rel=stylesheet],link[rel=icon]').toArray()) {
+      const url = $(el).attr('src') || $(el).attr('href');
+      const match = url.match(/\.([a-f0-9]{12})\.(js|css|svg)$/);
+      assert.ok(match, `${route}: unversioned asset ${url}`);
+      const content = fs.readFileSync('dist' + url);
+      assert.equal(createHash('sha256').update(content).digest('hex').slice(0, 12), match[1]);
+      const original = url.replace(/\.[a-f0-9]{12}(?=\.(js|css|svg)$)/, '');
+      assert.deepEqual(content, fs.readFileSync('public' + original));
+    }
+  }
 });
