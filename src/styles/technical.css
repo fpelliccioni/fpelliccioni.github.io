@@ -1,6 +1,6 @@
 @import '@fontsource-variable/jetbrains-mono';
 
-/* The editorial theme remains the default. Opt in with ?design=technical. */
+/* Technical is the default; ?design=editorial opens the alternative preview. */
 .technical-cursor {
   display: none;
 }
