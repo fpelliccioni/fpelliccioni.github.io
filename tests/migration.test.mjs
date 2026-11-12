@@ -87,9 +87,11 @@ test('source code, article images and old fragment links survive Markdown conver
   }
   assert.deepEqual(issues, []);
 });
-test('the five reference pages remain unchanged during the lab UI refresh', () => {
+test('the four reference pages remain unchanged during the lab UI refresh', () => {
   for (const r of published.filter(
-    (r) => r.kind === 'analyzer' && !['/algorithms/', '/algoritmos/'].includes(r.url),
+    (r) =>
+      r.kind === 'analyzer' &&
+      !['/algorithms/', '/algoritmos/', '/algorithms-catalog/'].includes(r.url),
   ))
     assert.equal(
       createHash('sha256')

@@ -32,7 +32,26 @@ https://www.boost.org/LICENSE_1_0.txt
     <a class="skip-link" href="#codeArea">Saltar al editor</a>
     <header class="lab-header">
       <a class="lab-brand" href="/algoritmos/"
-        ><span class="lab-brand-mark" aria-hidden="true">α</span
+        ><span class="lab-brand-mark" aria-hidden="true"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 64"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M10 13V51M22 14L57 28"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M57 28L22 48"
+              stroke="var(--accent, currentColor)"
+              stroke-width="4"
+              stroke-linecap="round"
+            /></svg></span
         ><span>al-Khwārizmī<small>Laboratorio de algoritmos</small></span></a
       >
       <nav aria-label="Navegación">
@@ -65,10 +84,15 @@ https://www.boost.org/LICENSE_1_0.txt
       </section>
       <section class="lab-toolbar" aria-label="Controles del analizador">
         <div class="example-control">
-          <label for="exampleSelect">Ejemplo</label
-          ><select id="exampleSelect" disabled>
-            <option value="">Cargando ejemplos…</option>
-          </select>
+          <span>Algoritmo</span
+          ><button
+            id="exampleSelect"
+            disabled
+            aria-haspopup="dialog"
+            aria-controls="algorithmCatalog"
+          >
+            <span id="currentAlgorithm">Elegir algoritmo</span><span aria-hidden="true">⌕</span>
+          </button>
         </div>
         <div class="execution-controls" id="Buttons">
           <button id="startButton" class="primary" disabled>
@@ -194,6 +218,7 @@ https://www.boost.org/LICENSE_1_0.txt
       <a href="/acerca-de/">© 2026 Fernando Pelliccioni</a
       ><span>al-Khwārizmī · Algoritmos, paso a paso.</span>
     </footer>
+    <script src="/assets/js/algorithms/catalog.js"></script>
     <script src="/assets/js/algorithms/lab.js"></script>
   </body>
 </html>

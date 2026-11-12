@@ -695,3 +695,9 @@
     padding: 9px 10px;
   }
 }
+
+[data-design='technical'] .brand-mark {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+}

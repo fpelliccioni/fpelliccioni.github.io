@@ -83,8 +83,8 @@ Analytics is not enabled.
 The seven analyzer routes use standalone static HTML in
 `public/algorithms*/` and `public/algoritmos/`. Their scripts and styles remain
 in `public/assets/`. The English and Spanish lab entry pages use a responsive UI controller
-(`public/assets/js/algorithms/lab.js`) and scoped styles (`lab.css`). The five
-reference pages retain their existing UI. Root-domain
+(`public/assets/js/algorithms/lab.js`) and scoped styles (`lab.css`). The four
+remaining reference pages retain their existing UI. Root-domain
 asset references were made relative so the analyzer also works in local
 previews. No algorithm implementation was rewritten.
 
@@ -100,7 +100,7 @@ article code-block hashes, image references and fragment anchors. Tests verify:
 
 - Published URLs, canonical metadata, languages, translation links and drafts.
 - Every original article code block, image and fragment anchor.
-- The five unchanged analyzer reference pages and untouched interpreter, renderer,
+- The four unchanged analyzer reference pages and untouched interpreter,
   vendor and chart assets.
 - Complete bilingual sitemap and all six full-content Atom/RSS feeds.
 - Local navigation and article media targets.
@@ -173,3 +173,13 @@ library prelude.
 error locations. Historical hashes remain in the migration fixtures; the two
 redesigned entry pages and display-only changes in `main.js` and alignment fixes in `test.js` are intentionally
 excluded from unchanged-file checks.
+
+## Algorithm catalog
+
+The lab picker opens a searchable, categorized dialog in English or Spanish.
+The standalone `/algorithms-catalog/` page shares the same catalog UI and uses
+the same default `algorithm_course` library. Categories come from literal
+`__catalog` metadata parsed with Acorn without executing it. Usage examples
+populate the cards; custom libraries without categories use an Other group.
+Choosing an example preserves custom library parameters and asks before
+replacing edited code. The interpreter and operation counters are unchanged.

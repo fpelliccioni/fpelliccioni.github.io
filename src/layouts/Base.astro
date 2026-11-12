@@ -83,8 +83,26 @@ const feed = lang === 'es' ? '/feed-es.xml' : '/feed.xml';
     <header class="site-header shell">
       <a class="wordmark" href={t.home} aria-label={NAME}>
         <span class="brand-mark" aria-hidden="true">
-          c<span>p</span>
-          <i>·</i>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 64"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M10 13V51M22 14L57 28"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M57 28L22 48"
+              stroke="var(--accent, currentColor)"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+          </svg>
         </span>
         <span>
           Components

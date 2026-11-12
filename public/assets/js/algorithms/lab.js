@@ -279,7 +279,7 @@ var repo = params.get('repo') || 'algorithm_course';
   });
   editor.addEventListener('input', function () {
     sourceDirty = true;
-    select.value = '';
+    setCurrentAlgorithm('');
     updateEditor();
   });
   editor.addEventListener('keydown', function (event) {
@@ -287,7 +287,7 @@ var repo = params.get('repo') || 'algorithm_course';
       event.preventDefault();
       editor.setRangeText('    ', editor.selectionStart, editor.selectionEnd, 'end');
       sourceDirty = true;
-      select.value = '';
+      setCurrentAlgorithm('');
       updateEditor();
     }
   });
@@ -335,11 +335,6 @@ var repo = params.get('repo') || 'algorithm_course';
   byId('retryLoad').addEventListener('click', loadLibrary);
 
   function fillExamples() {
-    select.replaceChildren();
-    var custom = document.createElement('option');
-    custom.value = '';
-    custom.textContent = t.custom;
-    select.appendChild(custom);
     var parsed = acorn.parse(global_std_code_extra);
     exampleNames = parsed.body
       .filter(function (node) {
@@ -352,21 +347,33 @@ var repo = params.get('repo') || 'algorithm_course';
         return !!snippets[name];
       })
       .sort();
-    exampleNames.forEach(function (name) {
-      var option = document.createElement('option');
-      option.value = name;
-      option.textContent = name;
-      select.appendChild(option);
-    });
+    LabCatalog.setEntries(exampleNames, global_std_code_extra, chooseAlgorithm);
     select.disabled = false;
   }
-  select.addEventListener('change', function () {
-    var name = select.value;
-    if (!name) return;
-    if (sourceDirty && !window.confirm(t.changed)) {
-      select.value = '';
-      return;
+  function setCurrentAlgorithm(name) {
+    select.value = name;
+    byId('currentAlgorithm').textContent = name || t.custom;
+    LabCatalog.setCurrent(name);
+  }
+  select.addEventListener('click', function () {
+    LabCatalog.open();
+  });
+  document.querySelectorAll('a[href="/algorithms-catalog/"]').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      if (ready) {
+        event.preventDefault();
+        LabCatalog.open();
+      }
+    });
+  });
+  function chooseAlgorithm(name, confirmed) {
+    if (sourceDirty && !confirmed) {
+      LabCatalog.confirmReplacement(name, function () {
+        chooseAlgorithm(name, true);
+      });
+      return false;
     }
+    setCurrentAlgorithm(name);
     clearProblem();
     if (mode === 'reference') {
       var next = new URL(location.href);
@@ -377,6 +384,8 @@ var repo = params.get('repo') || 'algorithm_course';
       return;
     }
     editor.value = getSnippet(name);
+    editor.setSelectionRange(0, 0);
+    editor.scrollTop = 0;
     sourceDirty = false;
     editButton();
     setMode('ready');
@@ -389,7 +398,8 @@ var repo = params.get('repo') || 'algorithm_course';
     next.searchParams.delete('function');
     next.searchParams.set('snippet', name);
     history.replaceState(null, '', next);
-  });
+    editor.focus();
+  }
   function renderReference(name) {
     var container = byId('hg-right-a');
     container.replaceChildren();
@@ -496,7 +506,7 @@ var repo = params.get('repo') || 'algorithm_course';
             return;
           }
           editor.value = source;
-          select.value = name;
+          setCurrentAlgorithm(name);
           editButton();
           setMode('ready');
         }
