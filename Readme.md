@@ -178,7 +178,7 @@ excluded from unchanged-file checks.
 
 The lab picker opens a searchable, categorized dialog in English or Spanish.
 The standalone `/algorithms-catalog/` page shares the same catalog UI and uses
-the same default `algorithm_course` library. Categories come from literal
+the same default `tao-js` library. Categories come from literal
 `__catalog` metadata parsed with Acorn without executing it. Usage examples
 populate the cards; custom libraries without categories use an Other group.
 Choosing an example preserves custom library parameters and asks before
@@ -189,3 +189,10 @@ lab entry pages and standalone catalog via `scripts/version-lab-assets.mjs`.
 Content-based filenames prevent cached dropdown controllers or styles from
 being combined with newer HTML. Original asset URLs remain available for the
 legacy reference pages. Run `npm run build` to produce the deployable output.
+
+The lab and catalog share external library configuration in `library.js`. The
+default source is `fpelliccioni/tao-js` (`master/build/`); `?user=OWNER&repo=REPO`
+selects another compatible repository, including `?repo=algorithm_course`.
+Catalog entries require both an implementation and a usage example, avoiding
+phantom snippets from orphan usage functions. No algorithms are bundled into
+the website: their definitions and examples continue to load from GitHub.
