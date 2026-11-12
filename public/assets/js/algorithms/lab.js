@@ -36,8 +36,8 @@ var chartCtx = null,
   two_width = 960,
   two_height = 400;
 var params = new URLSearchParams(location.search);
-var user = params.get('user') || 'fpelliccioni';
-var repo = params.get('repo') || 'algorithm_course';
+var user = LabLibrary.user;
+var repo = LabLibrary.repo;
 
 (function () {
   var es = document.documentElement.lang === 'es';
@@ -335,18 +335,7 @@ var repo = params.get('repo') || 'algorithm_course';
   byId('retryLoad').addEventListener('click', loadLibrary);
 
   function fillExamples() {
-    var parsed = acorn.parse(global_std_code_extra);
-    exampleNames = parsed.body
-      .filter(function (node) {
-        return node.type === 'FunctionDeclaration' && /^__.+_usage$/.test(node.id.name);
-      })
-      .map(function (node) {
-        return node.id.name.slice(2, -6);
-      })
-      .filter(function (name) {
-        return !!snippets[name];
-      })
-      .sort();
+    exampleNames = LabLibrary.examples(global_std_code, global_std_code_extra);
     LabCatalog.setEntries(exampleNames, global_std_code_extra, chooseAlgorithm);
     select.disabled = false;
   }
@@ -439,30 +428,6 @@ var repo = params.get('repo') || 'algorithm_course';
     }
   }
 
-  async function fetchLibrary(filename) {
-    var controller = new AbortController();
-    var timer = setTimeout(function () {
-      controller.abort();
-    }, 15000);
-    try {
-      var response = await fetch(
-        'https://raw.githubusercontent.com/' +
-          encodeURIComponent(user) +
-          '/' +
-          encodeURIComponent(repo) +
-          '/master/build/' +
-          filename,
-        { signal: controller.signal },
-      );
-      if (!response.ok) throw new Error('Library request failed (' + response.status + ')');
-      var source = await response.text();
-      if (!source.trim()) throw new Error('Empty library');
-      acorn.parse(source);
-      return source;
-    } finally {
-      clearTimeout(timer);
-    }
-  }
   async function loadLibrary() {
     ready = false;
     clearProblem();
@@ -470,7 +435,7 @@ var repo = params.get('repo') || 'algorithm_course';
     setMode('loading');
     try {
       var library = await Promise.all(
-        ['algorithms.js', 'algorithms_debug.js', 'algorithms_extra.js'].map(fetchLibrary),
+        ['algorithms.js', 'algorithms_debug.js', 'algorithms_extra.js'].map(LabLibrary.load),
       );
       global_std_code = library[0];
       global_std_code_debug = library[1];

@@ -311,35 +311,10 @@
       count.textContent = labels.loading;
       results.replaceChildren();
       try {
-        var p = new URLSearchParams(location.search);
-        var controller = new AbortController();
-        var timer = setTimeout(function () {
-          controller.abort();
-        }, 15000);
-        try {
-          var response = await fetch(
-            'https://raw.githubusercontent.com/' +
-              encodeURIComponent(p.get('user') || 'fpelliccioni') +
-              '/' +
-              encodeURIComponent(p.get('repo') || 'algorithm_course') +
-              '/master/build/algorithms_extra.js',
-            { signal: controller.signal },
-          );
-          if (!response.ok) throw Error(response.status);
-          var source = await response.text();
-          var names = acorn
-            .parse(source)
-            .body.filter(function (n) {
-              return n.type === 'FunctionDeclaration' && /^__.+_usage$/.test(n.id.name);
-            })
-            .map(function (n) {
-              return n.id.name.slice(2, -6);
-            })
-            .sort();
-          setEntries(names, source);
-        } finally {
-          clearTimeout(timer);
-        }
+        var library = await Promise.all(
+          ['algorithms.js', 'algorithms_extra.js'].map(LabLibrary.load),
+        );
+        setEntries(LabLibrary.examples(library[0], library[1]), library[1]);
       } catch (error) {
         count.textContent = labels.error;
         var retry = element('button', '', labels.retry);

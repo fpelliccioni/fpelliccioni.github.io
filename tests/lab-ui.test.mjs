@@ -199,3 +199,44 @@ test('lab pages reference matching content-addressed assets instead of cached le
     }
   }
 });
+
+test('lab and catalog share tao-js defaults and preserve alternate external repositories', async () => {
+  for (const [search, owner, repo] of [
+    ['', 'fpelliccioni', 'tao-js'],
+    ['?repo=algorithm_course', 'fpelliccioni', 'algorithm_course'],
+    ['?user=other&repo=custom', 'other', 'custom'],
+  ]) {
+    const requested = [];
+    const context = vm.createContext({
+      window: {},
+      location: { search },
+      URLSearchParams,
+      AbortController,
+      setTimeout,
+      clearTimeout,
+      fetch: async (url) => {
+        requested.push(url);
+        return { ok: true, text: async () => 'function find() {}' };
+      },
+    });
+    vm.runInContext(fs.readFileSync('public/assets/js/algorithms/acorn.js', 'utf8'), context);
+    vm.runInContext(fs.readFileSync('public/assets/js/algorithms/library.js', 'utf8'), context);
+    const library = context.window.LabLibrary;
+    assert.equal(library.user, owner);
+    assert.equal(library.repo, repo);
+    await library.load('algorithms.js');
+    assert.equal(
+      requested[0],
+      `https://raw.githubusercontent.com/${owner}/${repo}/master/build/algorithms.js`,
+    );
+    assert.deepEqual(
+      Array.from(
+        library.examples(
+          'function find() {} function copy() {}',
+          'function __find_usage() {} function __copy_usage() {} function __missing_usage() {}',
+        ),
+      ),
+      ['copy', 'find'],
+    );
+  }
+});
