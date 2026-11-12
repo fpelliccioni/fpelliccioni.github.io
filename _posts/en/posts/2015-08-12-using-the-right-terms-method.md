@@ -1,4 +1,5 @@
 ---
+translation_key: using-the-right-terms-method
 layout: post
 type: post
 title:  "Using the proper terminology: Method?"

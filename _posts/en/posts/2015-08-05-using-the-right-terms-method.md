@@ -1,6 +1,7 @@
 ---
 layout: post
 type: draft
+published: false
 title:  "DRAFT - Using the right terms: Method?"
 date:   2013-08-05 12:00:00
 comments: true

@@ -23,16 +23,11 @@ owner:
   #dribbble:       coletownsend
   # Plug in your disqus shortname!
 
-# Settings for analytics helper
-# Set 'provider' to the analytics provider you want to use.
-# Set 'provider' to false to turn analytics off globally.
-#
-analytics :
-  provider : google
-  google :
-      tracking_id : 'UA-55291427-1'
-# getclicky :
-# site_id :
+# Optional Google Analytics 4. The retired Universal Analytics ID is not used.
+analytics:
+  provider: false
+  google:
+    measurement_id: ""
 
 
 tools:
@@ -45,7 +40,7 @@ defaults:
       path: ""
     values:
       lang: en
-      layout: default
+      layout: page
   -
     scope:
       path: _posts/es
@@ -56,13 +51,13 @@ defaults:
       path: _posts/es/pages
     values:
       type: pages
-      desc: "Site personnel traitant essentiellement de programmation en Python, Ruby, TeX, R..."
+      desc: "Artículos sobre programación, algoritmos y programación genérica."
   -
     scope:
       path: _posts/en/pages
     values:
       type: pages
-      desc: "Personnal website mostly about programming in Python, Ruby, TeX, R..."
+      desc: "Articles about programming, algorithms and generic programming."
 
 
 # # Links to include in top navigation
@@ -79,7 +74,7 @@ defaults:
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    America/Argentina/Buenos_Aires
-future:      true
+future:      false
 highlighter: rouge				#Ruby bases syntax highlighter
 # highlighter: pygments			#Python bases syntax highlighter
 markdown:    kramdown			#Default
@@ -95,14 +90,6 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  use_coderay: false
-
-  coderay:
-    coderay_line_numbers:
-    coderay_line_numbers_start: 1
-    coderay_tab_width: 4
-    coderay_bold_every: 10
-    coderay_css: class
 
 sass:
     style: :compressed
@@ -112,7 +99,7 @@ sass:
 permalink: /:title/
 
 include: [".htaccess"]
-exclude: ["vendor", "lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp"]
+exclude: ["scripts", "Readme.md", "OLDs-mds", "futuros_posts", "Icons.json", "bench.js", "temp.js", "temp_fer.js", "test.js", "test2.js", "vendor", "lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp"]
 
 
 

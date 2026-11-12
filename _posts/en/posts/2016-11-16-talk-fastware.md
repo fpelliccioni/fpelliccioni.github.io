@@ -1,4 +1,5 @@
 ---
+translation_key: talk-fastware
 layout: post
 type: post
 title:  "My '¿Fastware?' talk (Spanish)"

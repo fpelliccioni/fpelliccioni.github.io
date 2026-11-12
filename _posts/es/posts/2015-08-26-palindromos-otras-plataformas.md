@@ -1,6 +1,7 @@
 ---
 layout: post
 type: draft
+published: false
 title:  "Palíndromos xxxx"
 date:   2015-08-26 12:00:00
 comments: true

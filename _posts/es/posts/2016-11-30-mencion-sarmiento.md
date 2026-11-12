@@ -1,4 +1,5 @@
 ---
+translation_key: mention-sarmiento
 layout: post
 type: post
 title:  "Mención de Honor 'Senador Domingo Faustino Sarmiento'"

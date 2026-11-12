@@ -1,12 +1,18 @@
 en:
   recent_posts: "Recent Posts"
   contact_me: "Contact Me"
-  created: "Published on the"
+  created: "Published on"
   author: "by"
-  description: "Personal website, made with real pieces of code: articles about Jekyll, Raspberry Pi, R..."
+  description: "Articles by Fernando Pelliccioni about programming, algorithms and generic programming."
+  menu: "Menu"
+  share: "Share"
+  months: [January, February, March, April, May, June, July, August, September, October, November, December]
 es:
   recent_posts: "Artículos recientes"
   contact_me: "Contactame"
-  created: "Publié le"
-  author: "par"
-  description: "Site personnel, avec des vrais bouts de code dedans : articles sur Jekyll, Raspberry Pi, R..."
+  created: "Publicado el"
+  author: "por"
+  description: "Artículos de Fernando Pelliccioni sobre programación, algoritmos y programación genérica."
+  menu: "Menú"
+  share: "Compartir"
+  months: [enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]

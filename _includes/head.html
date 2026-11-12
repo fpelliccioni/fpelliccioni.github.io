@@ -1,207 +1,35 @@
+{% assign language = page.lang | default: 'en' %}
+{% assign description = page.description | default: page.content | strip_html | normalize_whitespace | strip %}
+{% if description == '' %}{% assign description = site.data.translations[language].description %}{% endif %}
 <meta charset="utf-8">
-<title>{% if page.title %}{{ page.title }} &#8211; {% endif %}{{ site.title }}</title>
-<meta name="description" content="{{ page.description }}">
-<meta name="keywords" content="{{ page.tags | join: ', ' }}">
-
-
-<meta property="og:locale" content="en_US">
-<meta property="og:title" content="{% if page.title %}{{ page.title }} &#8211; {% endif %}{{ site.title }}">
-<meta property="og:description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 120  }}{% else %}{{ page.content | strip_html | strip_newlines | truncate: 120 }}{% endif %}">
-<meta property="og:url" content="{{ site.url }}{{ page.url }}">
-<meta property="og:site_name" content="{{ site.title }}">
-<meta property="og:image" content="{{ site.url }}/icon_200x200.png">
-<!-- <meta property="og:type" content="article" /> -->
-<meta property="og:type" content="website" />
-
-<link href="{{ site.url }}/feed.xml" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
-
-<!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Type -->
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Crimson+Text:400,400italic,700,700italic" rel='stylesheet' type='text/css' />
-<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="{{ site.url }}/assets/css/entypo.css" media="all">
-
-<!-- In order to use Calendas Plus, you must first purchase it. Then, create a font-face package using FontSquirrel.
-<link rel='stylesheet' href='{{ site.url }}/assets/cal.css' media='all' />
--->
-
-
-
-<!-- For all browsers -->
-<link rel="stylesheet" href="{{ site.url }}/assets/css/i.css">
-
-<!-- Fresh Squeezed jQuery -->
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
-<meta http-equiv="cleartype" content="on">
-
-<!-- Load Modernizr -->
-<script src="{{ site.url }}/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
-
-
-
-<!--
-<style TYPE="text/css">
-code.has-jax {font: inherit; font-size: 500%; background: inherit; border: inherit;}
-</style>
--->
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
-    }
-});
-
-
-// MathJax.Hub.Config({
-//     "HTML-CSS": {
-//       scale: {
-//         prefer: {
-//           Firefox: 100,
-//           Chrome: 500,
-//           Opera: 100
-//         }
-//       }
-//     }
-// });
-
-
-MathJax.Hub.Config({
-   "HTML-CSS": {
-     scale: (MathJax.Hub.Browser.isChrome && MathJax.Hub.Browser.isPC ? 200 : 100)
-  }});
-
- // MathJax.Hub.Config({
- //  "HTML-CSS": {
- //    scale: (MathJax.Hub.Browser.isChrome && MathJax.Hub.Browser.isPC ? 100 : 100)
- // }});
-
-MathJax.Hub.Config({
-  displayAlign: "left",
-  displayIndent: "100px"
-});
-
-// MathJax {
-//   font-size: 1.3em;
-// }
-
-// displayIndent: "2em"
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        if (all[i].SourceElement().parentNode.className.indexOf(' has-jax') == -1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-
-    }
-});
-
-$("#inline_math").css("font-size","300%");
-$("#some_math").css("font-size","500%");
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.title %}{{ page.title | escape }} – {% endif %}{{ site.title | escape }}</title>
+<meta name="description" content="{{ description | truncate: 160 | escape }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta property="og:locale" content="{% if language == 'es' %}es_ES{% else %}en_US{% endif %}">
+<meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+<meta property="og:description" content="{{ description | truncate: 160 | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:image" content="{{ '/icon_200x200.png' | absolute_url }}">
+<meta property="og:type" content="{% if page.type == 'post' %}article{% else %}website{% endif %}">
+{% if page.translation_key %}
+{% assign translations = site.posts | where: 'translation_key', page.translation_key %}
+{% for translation in translations %}<link rel="alternate" hreflang="{{ translation.lang }}" href="{{ translation.url | absolute_url }}">
+{% endfor %}{% endif %}
+<link rel="alternate" type="application/atom+xml" href="{% if language == 'es' %}{{ '/feed-es.xml' | relative_url }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}" title="{{ site.title | escape }}">
+<link rel="icon" href="{{ '/favicon.png' | relative_url }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,700,700italic%7CSource+Sans+Pro:400,700">
+<link rel="stylesheet" href="{{ '/assets/css/entypo.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/i.css' | relative_url }}">
+{% if page.layout contains 'post' or page.math %}
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+};
 </script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+{% endif %}
 
-
-<!--
-<head>
-</head>
- -->
-<!-- Icons -->
-<!-- 16x16 -->
-<!--
-<link rel="shortcut icon" href="{{ site.url }}/favicon.ico">
-<link rel="icon" type="image/png" href="https://componentsprogramming.com/favicon.png" />
--->
-
-<link href="/favicon.png" rel="icon">
-
-</head>
-
-<!--<div id="bump">-->
-  <body class="">
-    <header class="site-header">
-      <div class="wrap">
-        <hgroup>
-          <h1><a href="/">{{ site.title }}</a></h1>
-        </hgroup>
-        <a href="#nav" class="menu"><span class='icons'>☰</span></a>
-
-
-        <nav role="navigation">
-<!--           <ul>
-            <li>
-              <a href="/" title="{{ site.title }}">Home</a>
-            </li>
-
-            {% for link in site.links %}
-                <li><a href="{% if link.external %}{{ link.url }}{% else %}{{ site.url }}{{ link.url }}{% endif %}" {% if link.external %}target="_blank"{% endif %}>{{ link.title }}</a></li>
-            {% endfor %}
-
-          </ul> -->
-
-<!--           <ul>
-            {% for menu in site.data.navigation[page.lang] %}
-              <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
-            {% endfor %}
-            <li class="lang">
-              {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
-              {% for post in posts %}
-                <a href="{{ post.url }}" class="{{ post.lang }}">{{ post.lang }}</a>
-              {% endfor %}
-            </li>
-          </ul> -->
-
-
-          <ul>
-            {% for menu in site.data.navigation[page.lang] %}
-              <li><a href="{{ menu[1].url }}">{{ menu[1].title }}</a></li>
-            {% endfor %}
-
-<!--             <li>
-              {% assign posts=site.posts | where:"date", page.date | sort: 'path' %}
-
-
-              {% for post in posts %}
-                {% if page.lang.substr(0, 2).toLowerCase() != post.lang.substr(0, 2).toLowerCase() %}
-                  {% if page.lang.substr(0, 2).toLowerCase() == "en" %}
-                  <a href="{{ post.url }}" class="{{ post.lang.substr(0, 2).toLowerCase() }}">Español</a>
-                  {% else %}
-                  <a href="{{ post.url }}" class="{{ post.lang.substr(0, 2).toLowerCase() }}">English</a>
-                  {% endif %}
-                {% endif %}
-              {% endfor %}
-            </li>
- -->
-
-
-            <!-- {% assign posts=site.posts | where:"date", page.date | sort: 'path' %} -->
-            {% assign posts=site.posts  | sort: 'path' %}
-
-            {% for post in posts %}
-              {% assign pageLang = page.lang | slice: 0, 2 %}
-              {% assign postLang = post.lang | slice: 0, 2 %}
-
-              {% if post.date == page.date %}
-                {% if pageLang != postLang %}
-                  {% if pageLang == "en" %}
-                  <li><a href="{{ post.url }}" class="{{ postLang }}">Español</a></li>
-                  {% else %}
-                  <li><a href="{{ post.url }}" class="{{ postLang }}">English</a></li>
-                  {% endif %}
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-
-          </ul>
-        </nav>
-      </div>
-    </header>
+{% include google_analytics.html %}

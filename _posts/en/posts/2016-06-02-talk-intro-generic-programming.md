@@ -1,4 +1,5 @@
 ---
+translation_key: talk-intro-generic-programming
 layout: post
 type: post
 title:  "My 'Intro to Generic Programming' talk (Spanish)"

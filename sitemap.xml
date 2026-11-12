@@ -1,16 +1,9 @@
 ---
-layout: nil
+layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>{{ site.url }}</loc>
-    </url>
-
-    {% assign posts=site.posts | where:"lang", page.lang | where:"type", "post" %}
-    {% for post in posts %}
-    <url>
-        <loc>{{ site.url }}{{ post.url }}</loc>
-    </url>
-    {% endfor %}
+{% for post in site.posts %}
+  <url><loc>{{ post.url | absolute_url }}</loc></url>
+{% endfor %}
 </urlset>

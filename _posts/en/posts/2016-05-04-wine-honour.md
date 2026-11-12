@@ -1,4 +1,5 @@
 ---
+translation_key: wine-honour
 layout: post
 type: post
 title:  "Vin d'honneur"

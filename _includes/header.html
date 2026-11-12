@@ -1,0 +1,16 @@
+<header class="site-header{% if include.dark %} darken{% endif %}">
+  <div class="wrap">
+    <div class="site-brand"><div class="site-title"><a href="{% if page.lang == 'es' %}{{ '/inicio/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}">{{ site.title }}</a></div></div>
+    <button type="button" class="menu" aria-controls="site-navigation" aria-expanded="false" aria-label="{{ site.data.translations[page.lang].menu }}"><span class="icons" aria-hidden="true">☰</span></button>
+    <nav id="site-navigation" aria-label="{{ site.data.translations[page.lang].menu }}">
+      <ul>
+        {% for menu in site.data.navigation[page.lang] %}<li><a href="{{ menu[1].url | relative_url }}">{{ menu[1].title }}</a></li>{% endfor %}
+        {% if page.translation_key %}
+        {% assign translations = site.posts | where: 'translation_key', page.translation_key %}
+        {% for translation in translations %}{% if translation.lang != page.lang %}
+        <li><a href="{{ translation.url | relative_url }}" lang="{{ translation.lang }}" hreflang="{{ translation.lang }}">{% if translation.lang == 'es' %}Español{% else %}English{% endif %}</a></li>
+        {% endif %}{% endfor %}{% endif %}
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,4 +1,5 @@
 ---
+translation_key: alex-retirement
 layout: post
 type: post
 title:  "Alex se jubiló"

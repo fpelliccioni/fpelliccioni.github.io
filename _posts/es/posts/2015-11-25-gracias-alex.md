@@ -1,4 +1,5 @@
 ---
+translation_key: thanks-alex
 layout: post
 type: post
 title:  "¡Gracias Alex!"

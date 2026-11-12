@@ -1,4 +1,5 @@
 ---
+translation_key: algorithms-specifications
 layout: post
 type: post
 title:  "Algoritmos y especificaciones"
