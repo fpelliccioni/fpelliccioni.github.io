@@ -116,3 +116,60 @@ test('scalar cells align with sequence cells and iterator centers across canvas 
     );
   }
 });
+
+test('catalog parses literal categories without executing code and combines search with filters', () => {
+  const node = () => ({
+    classList: { add() {} },
+    setAttribute() {},
+    appendChild() {},
+    addEventListener() {},
+  });
+  const catalog = vm.createContext({
+    document: {
+      documentElement: { lang: 'es' },
+      querySelector: () => null,
+      createElement: node,
+      body: node(),
+    },
+    window: {},
+  });
+  vm.runInContext(fs.readFileSync('public/assets/js/algorithms/acorn.js', 'utf8'), catalog);
+  vm.runInContext(fs.readFileSync('public/assets/js/algorithms/catalog.js', 'utf8'), catalog);
+  const api = catalog.window.LabCatalog;
+  const categories = api.parseCategories(`function __catalog() {
+    throw new Error('must not execute');
+    return {find: ['search/linear', 'url'], min: ['selection', 'url'], dynamic: [dangerous()]};
+  }`);
+  assert.equal(categories.find, 'search/linear');
+  assert.equal(categories.min, 'selection');
+  assert.equal(categories.dynamic, undefined);
+  assert.equal(Object.keys(api.parseCategories('function example() {}')).length, 0);
+  const items = [
+    { name: 'find_if', category: 'search/linear' },
+    { name: 'lower_bound', category: 'search/binary' },
+    { name: 'min', category: 'selection' },
+  ];
+  assert.deepEqual(
+    Array.from(api.filter(items, 'FIND IF', ''), (x) => x.name),
+    ['find_if'],
+  );
+  assert.deepEqual(
+    Array.from(api.filter(items, 'busqueda', 'search/binary'), (x) => x.name),
+    ['lower_bound'],
+  );
+  assert.equal(api.filter(items, 'find', 'selection').length, 0);
+});
+
+test('lab uses a dialog picker and standalone catalog shares its implementation', () => {
+  for (const route of ['algorithms', 'algoritmos']) {
+    const $ = cheerio.load(fs.readFileSync(`dist/${route}/index.html`, 'utf8'));
+    assert.equal($('#exampleSelect').get(0).tagName, 'button');
+    assert.equal($('#exampleSelect').attr('aria-haspopup'), 'dialog');
+    assert.equal($('select').length, 0);
+    assert.equal($('script[src="/assets/js/algorithms/catalog.js"]').length, 1);
+  }
+  const $ = cheerio.load(fs.readFileSync('dist/algorithms-catalog/index.html', 'utf8'));
+  assert.equal($('[data-catalog-page]').length, 1);
+  assert.equal($('script[src="/assets/js/algorithms/catalog.js"]').length, 1);
+  assert.equal($('script:not([src])').length, 0);
+});
