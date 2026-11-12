@@ -183,3 +183,9 @@ the same default `algorithm_course` library. Categories come from literal
 populate the cards; custom libraries without categories use an Other group.
 Choosing an example preserves custom library parameters and asks before
 replacing edited code. The interpreter and operation counters are unchanged.
+
+Lab production builds fingerprint local scripts, styles and favicons in the two
+lab entry pages and standalone catalog via `scripts/version-lab-assets.mjs`.
+Content-based filenames prevent cached dropdown controllers or styles from
+being combined with newer HTML. Original asset URLs remain available for the
+legacy reference pages. Run `npm run build` to produce the deployable output.
