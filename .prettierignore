@@ -1,0 +1,6 @@
+public/
+src/content/
+node_modules/
+dist/
+_site/
+vendor/

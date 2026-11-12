@@ -1,6 +1,0 @@
-{%- assign month_index = include.date | date: "%m" | minus: 1 -%}
-{%- if page.lang == 'es' -%}
-{{ include.date | date: "%d" }} de {{ site.data.translations.es.months[month_index] }} de {{ include.date | date: "%Y" }}
-{%- else -%}
-{{ site.data.translations.en.months[month_index] }} {{ include.date | date: "%d, %Y" }}
-{%- endif -%}

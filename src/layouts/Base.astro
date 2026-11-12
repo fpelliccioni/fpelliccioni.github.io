@@ -1,0 +1,170 @@
+---
+import '../styles/global.css';
+import { NAME, absolute, labels, type Lang } from '../lib/site';
+interface Props {
+  title: string;
+  description?: string;
+  lang?: Lang;
+  url?: string;
+  translations?: { lang: Lang; url: string }[];
+  article?: boolean;
+  published?: Date;
+  noindex?: boolean;
+}
+const {
+  title,
+  description,
+  lang = 'en',
+  url = Astro.url.pathname,
+  translations = [],
+  article = false,
+  published,
+  noindex = false,
+} = Astro.props;
+const t = labels[lang];
+const other = translations.find((p) => p.lang !== lang);
+const switchUrl = other?.url || (lang === 'en' ? '/inicio/' : '/');
+const feed = lang === 'es' ? '/feed-es.xml' : '/feed.xml';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === NAME ? NAME : `${title} — ${NAME}`}</title>
+    <meta name="description" content={description || t.description} />
+    <link rel="canonical" href={absolute(url)} />
+    {translations.map((p) => (
+      <link rel="alternate" hreflang={p.lang} href={absolute(p.url)} />
+    ))}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description || t.description} />
+    <meta property="og:url" content={absolute(url)} />
+    <meta property="og:site_name" content={NAME} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:image" content={absolute('/social-card.png')} />
+    <meta name="twitter:card" content="summary" />
+    {published && <meta property="article:published_time" content={published.toISOString()} />}
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/atom+xml" title={`${NAME} (${lang})`} href={feed} />
+    <meta name="theme-color" content="#f7f5ef" />
+    <script is:inline>
+      try {
+        const saved = localStorage.getItem('cp-theme');
+        if (saved === 'dark') document.documentElement.dataset.theme = 'dark';
+      } catch {}
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      {lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}
+    </a>
+    <header class="site-header shell">
+      <a class="wordmark" href={t.home} aria-label={NAME}>
+        <span class="brand-mark" aria-hidden="true">
+          c<span>p</span>
+          <i>·</i>
+        </span>
+        <span>
+          Components
+          <br />
+          Programming
+        </span>
+      </a>
+      <div class="header-actions">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">
+          {t.menu}
+          <span aria-hidden="true">＋</span>
+        </button>
+        <nav id="main-nav" aria-label={t.menu}>
+          <a href={`${t.home}#writing`}>{t.navArticles}</a>
+          <a href={t.about}>{t.navAbout}</a>
+          <a class="lab-nav" href={lang === 'es' ? '/algoritmos/' : '/algorithms/'}>
+            {t.navAlgorithms}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
+        <div class="utility-nav">
+          <a
+            class="language-switch"
+            href={switchUrl}
+            lang={lang === 'en' ? 'es' : 'en'}
+            hreflang={lang === 'en' ? 'es' : 'en'}
+          >
+            {lang === 'en' ? 'ES' : 'EN'}
+          </a>
+          <button class="theme-toggle" aria-label={t.theme} title={t.theme}>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="8" />
+              <path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer shell">
+      <div class="footer-top">
+        <a class="footer-title" href={t.home}>
+          Components
+          <br />
+          Programming<span>↗</span>
+        </a>
+        <p>
+          {t.footer}
+          <br />
+          <span>Fernando Pelliccioni</span>
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <span>© {new Date().getUTCFullYear()} Fernando Pelliccioni</span>
+        <div>
+          <a href={t.contact}>{t.navContact}</a>
+          <a href={t.donate}>{t.navDonate}</a>
+          <a href={feed}>RSS</a>
+          <a href="https://github.com/fpelliccioni/fpelliccioni.github.io">GitHub ↗</a>
+        </div>
+        <span class="built-with">Astro · {lang.toUpperCase()}</span>
+      </div>
+    </footer>
+    <script>
+      const menu = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#main-nav');
+      if (menu && nav) {
+        document.documentElement.classList.add('has-js');
+        menu.addEventListener('click', () => {
+          const open = menu.getAttribute('aria-expanded') !== 'true';
+          menu.setAttribute('aria-expanded', String(open));
+          nav.classList.toggle('is-open', open);
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            menu.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('is-open');
+          }
+        });
+      }
+      document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+        const dark = document.documentElement.dataset.theme !== 'dark';
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        try {
+          localStorage.setItem('cp-theme', dark ? 'dark' : 'light');
+        } catch {}
+      });
+    </script>
+  </body>
+</html>

@@ -1,93 +1,133 @@
 # Components Programming
 
-Personal bilingual blog by Fernando Pelliccioni, published at
-https://componentsprogramming.com through GitHub Pages. Built with Jekyll and a
-customized Balzac theme. The algorithm analyzer lives in this same repository,
-with independent layouts and assets.
+Fernando Pelliccioni's bilingual programming blog, built with Astro 7 and hosted
+on GitHub Pages at https://componentsprogramming.com.
 
-## Local development
+## Develop and validate
 
-Use Ruby 3.3 (see `.ruby-version`) and Bundler 4.0.23. On macOS with Homebrew:
+Node.js 24 is required (`.nvmrc`). Ruby, Bundler and Jekyll are no longer needed.
 
 ```sh
-brew install ruby@3.3
-export PATH="/opt/homebrew/opt/ruby@3.3/bin:$PATH"
-gem install bundler -v 4.0.23
-bundle config set --local path vendor/bundle
-bundle install
-bundle exec jekyll serve --host 127.0.0.1
+npm ci
+npm run dev
+npm run check
+npm run build
+npm test
+npm run preview
 ```
 
-Open http://127.0.0.1:4000. Blog assets use relative URLs so local previews do not
-load production styles or scripts. Canonical and Open Graph URLs use the public
-`url` from `_config.yml`. GitHub Pages 232 pins Jekyll 3.10; keep the dependency
-versions aligned with https://pages.github.com/versions/.
+`dev` and `preview` print their local URLs. Production files are generated in
+`dist/`. Only the contents of `public/` and Astro's generated pages are deployed;
+source Markdown, drafts, tests and historical scratch files are not copied.
 
-## Validation
+## Design and source
 
-```sh
-bundle exec jekyll build
-bundle exec ruby scripts/check_site.rb
+The editorial theme uses a warm paper background, terracotta accents, Manrope
+for navigation and Newsreader for long-form reading. Fonts are self-hosted.
+The default theme is light; the optional dark theme is saved locally. The blog
+uses plain browser JavaScript for mobile navigation, archive search and theme
+selection. There is no React runtime or third-party theme dependency.
+
+- `src/layouts/Base.astro`: document, navigation, metadata and footer.
+- `src/components/Home.astro`: front page and searchable archive.
+- `src/components/Article.astro`: reading layout, contents and related articles.
+- `src/styles/global.css`: responsive editorial design and code styles.
+- `src/lib/site.ts`: localized copy, dates, URLs and content helpers.
+- `src/content.config.ts`: validated Astro content collection schema.
+
+## Write and translate
+
+Articles and institutional pages live in `src/content/blog/en/` and
+`src/content/blog/es/`. Frontmatter currently uses JSON (valid YAML), followed
+by Markdown. Normal YAML frontmatter is also supported by Astro.
+
+```yaml
+---
+title: An article title
+url: /an-article-title/
+lang: en
+date: 2026-11-12T12:00:00+01:00
+type: post
+published: true
+translationKey: an-article-title
+description: A short summary.
+topic: C++ / Algorithms
+# Optional: cover: { src: /images/example.jpg, alt: A descriptive caption, caption: Photo credit }
+comments: true
+tags: [algorithms, cpp]
+---
+Article content, with standard Markdown code fences.
 ```
 
-The regression check verifies generated blog pages, draft exclusion, local
-resources, HTTPS dependencies, canonical URLs, reciprocal translation links,
-Spanish dates, sitemap coverage, the custom 404, and all Atom/RSS feeds.
-Optionally pass a previous build directory to compare the analyzer's generated
-HTML byte for byte:
+Use `type: page` for institutional pages and `type: home` for the two existing
+front-page records. `url` explicitly preserves each published permalink,
+independent of filename and date. Dates are displayed in the article's language
+with the historical Buenos Aires publication timezone. Future-dated content is
+not published. For drafts, set `published: false`.
 
-```sh
-bundle exec ruby scripts/check_site.rb /path/to/previous-build
-```
+Give actual translations the same `translationKey`. This generates reciprocal
+`hreflang` links and the language switch. On an untranslated article, the
+language switch goes to the other language's front page.
 
-## Content and translations
+Local images and downloads belong in `public/images/`, referenced as
+`/images/filename`. Use fenced code blocks instead of Liquid highlight tags.
+Existing named anchors and technical examples were retained during migration.
+MathJax 3.2.2 renders the existing TeX notation over HTTPS; inline code formulas
+are supported, and fenced code blocks are excluded. Disqus loads only when a
+reader presses the comments button, using the original canonical article URL.
+Analytics is not enabled.
 
-- English articles: `_posts/en/posts/`; Spanish articles: `_posts/es/posts/`.
-- Institutional pages: `_posts/en/pages/` and `_posts/es/pages/`. They are stored
-  as Jekyll posts for historical reasons; preserve their existing URLs.
-- An article uses `type: post`; an unpublished draft also **must** have
-  `published: false`. `type: draft` alone does not prevent publication.
-- Give translations the same stable `translation_key`, independent of their
-  filenames and publication dates. Use a unique key for each article/page pair.
-  Only actual translations should share a key. Navigation and `hreflang` links
-  are generated from this field.
-- Use `description` for a hand-written summary. Metadata falls back to plain
-  content and then the site's localized description.
-- `future: false` prevents early publication of future-dated content.
-- Global navigation: `_data/navigation.yml`; labels/months:
-  `_data/translations.yml`.
+## Analyzer and archived experiments
 
-## Templates and assets
+The seven analyzer pages are preserved as standalone static HTML in
+`public/algorithms*/` and `public/algoritmos/`. Their scripts and styles remain
+in `public/assets/`. They intentionally retain their existing UI. Root-domain
+asset references were made relative so the analyzer also works in local
+previews. No algorithm implementation was rewritten.
 
-`_layouts/default.html` owns the HTML document, header and footer. Blog layouts
-inherit it. `_includes/head.html` contains metadata and head resources only.
-The blog's `assets/js/scripts.js` is plain JavaScript; it does not require jQuery,
-Modernizr or Retina.js. The analyzer's separate scripts are unchanged.
+`public/experiments/`, `public/chartex/`, historical images, downloadable files
+and existing asset URLs are preserved. Historical unpublished source directories
+outside `src/` and `public/` are kept in Git but do not become website content.
 
-MathJax 3.2.2 loads over HTTPS for post layouts (or `math: true`) and supports
-existing TeX delimiters, including formulas in inline code, while excluding code
-blocks. Disqus loads only on pages with `comments: true`. Sharing uses a plain
-link and does not load the Twitter widget script.
+## Compatibility checks
 
-Analytics is disabled by default: the previous `UA-` identifier belongs to the
-retired Universal Analytics service. To enable GA4, set `analytics.provider` to
-`google` and configure your own `analytics.google.measurement_id` (`G-…`).
+`tests/fixtures/legacy-routes.json` records the 54 published routes and nine
+drafts from the Jekyll version at commit `4553bc5`. `legacy-content.json` records
+article code-block hashes, image references and fragment anchors. Tests verify:
 
-## Discovery and URLs
+- Published URLs, canonical metadata, languages, translation links and drafts.
+- Every original article code block, image and fragment anchor.
+- The seven analyzer HTML snapshots byte for byte, after localizing asset URLs.
+- Complete bilingual sitemap and all six full-content Atom/RSS feeds.
+- Local navigation and article media targets.
 
-- `/feed.xml`: English Atom; `/feed-es.xml`: Spanish Atom.
-- `/feed-rss.xml`: English RSS; `/feed-rss-es.xml`: Spanish RSS.
-- Legacy `/feed.links.xml` and `/feed_original_atom.xml` remain English Atom
-  endpoints using the same template.
-- `/sitemap.xml` includes all published documents in both languages, including
-  institutional/analyzer pages. Drafts are excluded.
-- `/404.html` is the bilingual GitHub Pages error page.
+A missing book-cover image at `/images/fm2gp_portada.jpg` was restored from the
+authors' book site, https://www.fm2gp.com/images/FM2GPCoverSmall.png. Its existing
+URL is retained. Old links to `/about/` and Meetup URLs without a scheme were
+corrected during migration.
 
-Changes pushed to the configured Pages branch are published by GitHub Pages.
-Work on a feature branch and review the generated output before merging.
+## GitHub Pages deployment
 
-## Theme attribution
+`.github/workflows/astro.yml` runs install, Astro/TypeScript diagnostics, static
+build and migration tests for pull requests. Only pushes to `master` or manual
+workflow runs upload and deploy `dist/` to the `github-pages` environment.
+The custom domain remains in `public/CNAME`; `astro.config.mjs` sets canonical
+URLs to https://componentsprogramming.com. Existing Atom and RSS endpoints and
+`/404.html` remain available.
 
-Based on Balzac by Cole Townsend, originally forked from Minimal Mistakes by
-Michael Rose. See `LICENSE` for the repository license. The original Balzac
-README prohibited resale of the theme design without the author's permission.
+**One-time cutover:** before merging this migration, change the repository's
+Settings → Pages → Build and deployment → Source to **GitHub Actions** (or use
+`gh api --method PUT repos/fpelliccioni/fpelliccioni.github.io/pages -f build_type=workflow`).
+This keeps the currently published site live and prevents the former Jekyll
+branch build from competing with Astro's deployment. Then merge the migration
+PR and verify the `Astro checks and GitHub Pages` deployment succeeds.
+
+The migration PR does not itself change the production Pages setting or publish
+the new design. For rollback, revert the migration commit and restore the
+previous Pages source (`master`, `/`).
+
+## Attribution
+
+Manrope and Newsreader are distributed with their bundled font licenses.
+The analyzer and older repository content retain their existing licenses and
+attribution. See `LICENSE` and the headers of the relevant source files.
