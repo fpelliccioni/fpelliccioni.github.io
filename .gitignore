@@ -19,3 +19,7 @@ _code_tests/a.out
 
 .bundle/
 vendor/
+
+node_modules/
+dist/
+.astro/

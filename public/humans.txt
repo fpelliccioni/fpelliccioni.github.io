@@ -1,0 +1,8 @@
+/* TEAM */
+Creator: Fernando Pelliccioni
+Contact: fpelliccioni@gmail.com
+GitHub: fpelliccioni
+
+/* SITE */
+Built with Astro. Editorial design for Components Programming.
+Typography: Manrope and Newsreader, self-hosted through Fontsource.

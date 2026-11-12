@@ -1,0 +1,506 @@
+[
+  {
+    "url": "/using-the-right-terms-method/",
+    "lang": "en",
+    "title": "DRAFT - Using the right terms: Method?",
+    "published": false,
+    "kind": "page",
+    "source": "src/content/blog/en/posts/2015-08-05-using-the-right-terms-method.md"
+  },
+  {
+    "url": "/writing-min-function-part1/",
+    "lang": "en",
+    "title": "Writing min function, part 1: The rise of Concepts",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2014-05-20-writing-min-function-part1.md"
+  },
+  {
+    "url": "/writing-min-function-part2/",
+    "lang": "en",
+    "title": "Writing min function, part 2: Understanding Concepts",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2014-05-28-writing-min-function-part2.md"
+  },
+  {
+    "url": "/writing-min-function-part3/",
+    "lang": "en",
+    "title": "Writing min function, part 3: Weakening the ordering",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2014-07-15-writing-min-function-part3.md"
+  },
+  {
+    "url": "/about-me/",
+    "lang": "en",
+    "title": "About me",
+    "published": true,
+    "kind": "page",
+    "source": "src/content/blog/en/pages/2014-08-22-about-me.md"
+  },
+  {
+    "url": "/acerca-de/",
+    "lang": "es",
+    "title": "Acerca de",
+    "published": true,
+    "kind": "page",
+    "source": "src/content/blog/es/pages/2014-08-22-acerca-de.md"
+  },
+  {
+    "url": "/",
+    "lang": "en",
+    "title": "Recent Posts",
+    "published": true,
+    "kind": "home",
+    "source": "src/content/blog/en/pages/2014-08-31-index.md"
+  },
+  {
+    "url": "/inicio/",
+    "lang": "es",
+    "title": "Artículos recientes",
+    "published": true,
+    "kind": "home",
+    "source": "src/content/blog/es/pages/2014-08-31-inicio.md"
+  },
+  {
+    "url": "/writing-min-function-part4/",
+    "lang": "en",
+    "title": "Writing min function, part 4: Const-Correctness",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2014-09-24-writing-min-function-part4.md"
+  },
+  {
+    "url": "/writing-min-function-part5/",
+    "lang": "en",
+    "title": "Writing min function, part 5: Stabilizing the algorithm",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2014-10-05-writing-min-function-part5.md"
+  },
+  {
+    "url": "/components-programming/",
+    "lang": "en",
+    "title": "Components Programming",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2014-10-28-components-programming.md"
+  },
+  {
+    "url": "/from-mathematics-to-generic-programming/",
+    "lang": "en",
+    "title": "Stepanov's new book: From Mathematics to Generic Programming",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2014-11-06-from-mathematics-to-generic-programming.md"
+  },
+  {
+    "url": "/using-the-right-terms-method/",
+    "lang": "en",
+    "title": "Using the proper terminology: Method?",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2015-08-12-using-the-right-terms-method.md"
+  },
+  {
+    "url": "/usando-la-terminologia-adecuada-metodo/",
+    "lang": "es",
+    "title": "Usando la terminología adecuada: ¿Método?",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2015-08-12-usando-la-terminologia-adecuada-metodo.md"
+  },
+  {
+    "url": "/sobre-numeros-aleatorios/",
+    "lang": "es",
+    "title": "Sobre números aleatorios",
+    "published": false,
+    "kind": "page",
+    "source": "src/content/blog/es/posts/2015-08-16-sobre-numeros-aleatorios.md"
+  },
+  {
+    "url": "/palindromos-otras-plataformas/",
+    "lang": "es",
+    "title": "Palíndromos xxxx",
+    "published": false,
+    "kind": "page",
+    "source": "src/content/blog/es/posts/2015-08-26-palindromos-otras-plataformas.md"
+  },
+  {
+    "url": "/whats-your-favorite-flavor-of-object/",
+    "lang": "en",
+    "title": "What's your favorite flavor of Object?",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2015-09-26-whats-your-favorite-flavor-of-object.md"
+  },
+  {
+    "url": "/cual-es-tu-sabor-de-objeto-preferido/",
+    "lang": "es",
+    "title": "¿Cuál es tu sabor de Objeto preferido?",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2015-09-26-cual-es-tu-sabor-de-objeto-preferido.md"
+  },
+  {
+    "url": "/objeto-o-valor/",
+    "lang": "es",
+    "title": "¿Objeto o Valor?",
+    "published": false,
+    "kind": "page",
+    "source": "src/content/blog/es/posts/2015-09-29-objeto-o-valor.md"
+  },
+  {
+    "url": "/thanks-alex/",
+    "lang": "en",
+    "title": "Thanks Alex!",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2015-11-25-thanks-alex.md"
+  },
+  {
+    "url": "/gracias-alex/",
+    "lang": "es",
+    "title": "¡Gracias Alex!",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2015-11-25-gracias-alex.md"
+  },
+  {
+    "url": "/desmitificando-parte1/",
+    "lang": "es",
+    "title": "«Python. Más rápido que C». Desmitificando, parte 1",
+    "published": false,
+    "kind": "page",
+    "source": "src/content/blog/es/posts/2016-01-13-desmitificando-parte1.md"
+  },
+  {
+    "url": "/alex-retirement/",
+    "lang": "en",
+    "title": "Alex Retirement",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2016-01-14-alex-retirement.md"
+  },
+  {
+    "url": "/jubilacion-alex/",
+    "lang": "es",
+    "title": "Alex se jubiló",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2016-01-14-jubilacion-alex.md"
+  },
+  {
+    "url": "/limit-approved/",
+    "lang": "en",
+    "title": "The Outer Limit of the Argentine Continental Shelf",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2016-03-11-limit-approved.md"
+  },
+  {
+    "url": "/limite-aprobado/",
+    "lang": "es",
+    "title": "Límite Exterior de la Plataforma Continental",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2016-03-11-limite-aprobado.md"
+  },
+  {
+    "url": "/intro-generic-programming/",
+    "lang": "es",
+    "title": "Introducción a Generic Programming",
+    "published": false,
+    "kind": "page",
+    "source": "src/content/blog/es/posts/2016-03-23-intro-generic-programming.md"
+  },
+  {
+    "url": "/wine-honour/",
+    "lang": "en",
+    "title": "Vin d'honneur",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2016-05-04-wine-honour.md"
+  },
+  {
+    "url": "/vino-honor/",
+    "lang": "es",
+    "title": "Invitación a Vino de Honor",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2016-05-04-vino-honor.md"
+  },
+  {
+    "url": "/talk-intro-generic-programming/",
+    "lang": "en",
+    "title": "My 'Intro to Generic Programming' talk (Spanish)",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2016-06-02-talk-intro-generic-programming.md"
+  },
+  {
+    "url": "/charla-intro-generic-programming/",
+    "lang": "es",
+    "title": "Mi charla: 'Introducción a Generic Programming'",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2016-06-02-charla-intro-generic-programming.md"
+  },
+  {
+    "url": "/palindromes/",
+    "lang": "en",
+    "title": "Palindromes and more",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2016-06-06-palindromes.md"
+  },
+  {
+    "url": "/palindromos/",
+    "lang": "es",
+    "title": "Palíndromos y algo más",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2016-06-06-palindromos.md"
+  },
+  {
+    "url": "/fastware/",
+    "lang": "es",
+    "title": "Fastware",
+    "published": false,
+    "kind": "page",
+    "source": "src/content/blog/es/posts/2016-07-03-fastware.md"
+  },
+  {
+    "url": "/talk-fastware/",
+    "lang": "en",
+    "title": "My '¿Fastware?' talk (Spanish)",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2016-11-16-talk-fastware.md"
+  },
+  {
+    "url": "/charla-fastware/",
+    "lang": "es",
+    "title": "Mi charla: '¿Fastware?'",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2016-11-16-charla-fastware.md"
+  },
+  {
+    "url": "/mention-sarmiento/",
+    "lang": "en",
+    "title": "Honorable Mention 'Senator Domingo Faustino Sarmiento'",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2016-11-30-mention-sarmiento.md"
+  },
+  {
+    "url": "/mencion-sarmiento/",
+    "lang": "es",
+    "title": "Mención de Honor 'Senador Domingo Faustino Sarmiento'",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2016-11-30-mencion-sarmiento.md"
+  },
+  {
+    "url": "/contact/",
+    "lang": "en",
+    "title": "Fernando Pelliccioni",
+    "published": true,
+    "kind": "page",
+    "source": "src/content/blog/en/pages/2016-12-01-contact.md"
+  },
+  {
+    "url": "/contacto/",
+    "lang": "es",
+    "title": "Fernando Pelliccioni",
+    "published": true,
+    "kind": "page",
+    "source": "src/content/blog/es/pages/2016-12-01-contacto.md"
+  },
+  {
+    "url": "/bsearch/",
+    "lang": "es",
+    "title": "bsearch, parte 1 (DRAFT)",
+    "published": false,
+    "kind": "page",
+    "source": "src/content/blog/es/posts/2017-03-03-bsearch.md"
+  },
+  {
+    "url": "/donate/",
+    "lang": "en",
+    "title": "Donate",
+    "published": true,
+    "kind": "page",
+    "source": "src/content/blog/en/pages/2017-12-21-donate.md"
+  },
+  {
+    "url": "/donaciones/",
+    "lang": "es",
+    "title": "Donaciones",
+    "published": true,
+    "kind": "page",
+    "source": "src/content/blog/es/pages/2017-12-21-donaciones.md"
+  },
+  {
+    "url": "/talk-gift-arabs/",
+    "lang": "en",
+    "title": "My 'The Gift of the Arabs' talk (Spanish)",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2018-11-26-talk-gift-arabs.md"
+  },
+  {
+    "url": "/charla-regalo-arabes/",
+    "lang": "es",
+    "title": "Mi charla: 'El regalo de los árabes'",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2018-11-26-charla-regalo-arabes.md"
+  },
+  {
+    "url": "/algorithms-support/",
+    "lang": "en",
+    "title": "Algorithms Support",
+    "published": true,
+    "kind": "analyzer",
+    "sha256": "d54df2766bc807d2f39d8aafec25d50c3f07087637728f2aa1c55bf52cbc44c7"
+  },
+  {
+    "url": "/algorithms-catalog/",
+    "lang": "en",
+    "title": "Algorithms Catalog",
+    "published": true,
+    "kind": "analyzer",
+    "sha256": "c50d051e986554ed0ed074967e4eba3aa67da5bb8f9200e1bed9c879ccb9f600"
+  },
+  {
+    "url": "/algorithms-course/",
+    "lang": "en",
+    "title": "Algorithms Course",
+    "published": true,
+    "kind": "analyzer",
+    "sha256": "d63fbdbc3b8641e61abdff30c44d69f1163cde665fcaf9b9017e52aba55cfcf1"
+  },
+  {
+    "url": "/algorithms-stdlib/",
+    "lang": "en",
+    "title": "Algorithms Standard Library",
+    "published": true,
+    "kind": "analyzer",
+    "sha256": "b9d664b3ad2c619892c7a6fee98bddcf536fa81c17a4c15f466c46ca64e86408"
+  },
+  {
+    "url": "/algorithms/",
+    "lang": "en",
+    "title": "Algorithms",
+    "published": true,
+    "kind": "analyzer",
+    "sha256": "ff1b07afd4268b07563fc71f36cde100f6e3be746308286d4fc6a294fa82f8ec"
+  },
+  {
+    "url": "/algoritmos/",
+    "lang": "es",
+    "title": "Algoritmos",
+    "published": true,
+    "kind": "analyzer",
+    "sha256": "ff1b07afd4268b07563fc71f36cde100f6e3be746308286d4fc6a294fa82f8ec"
+  },
+  {
+    "url": "/algorithms-about/",
+    "lang": "en",
+    "title": "Algorithms About",
+    "published": true,
+    "kind": "analyzer",
+    "sha256": "38d4e1c0dba392c18380ed0eb5b9ee2824f44b5db41259410c5a6bf63859fefc"
+  },
+  {
+    "url": "/donate-bch/",
+    "lang": "en",
+    "title": "Donate Bitcoin Cash",
+    "published": true,
+    "kind": "page",
+    "source": "src/content/blog/en/pages/2019-02-01-donate-bch.md"
+  },
+  {
+    "url": "/donaciones-bch/",
+    "lang": "es",
+    "title": "Donaciones Bitcoin Cash",
+    "published": true,
+    "kind": "page",
+    "source": "src/content/blog/es/pages/2019-02-01-donaciones-bch.md"
+  },
+  {
+    "url": "/algoritmos-especificacionesxxxxx/",
+    "lang": "es",
+    "title": "Algoritmos y especificaciones",
+    "published": false,
+    "kind": "page",
+    "source": "src/content/blog/es/posts/2020-05-20-algoritmos-especificacionesxxxxx.md"
+  },
+  {
+    "url": "/elements-of-programming-authors-edition/",
+    "lang": "en",
+    "title": "Elements of Programming Authors' Edition (free ebook)",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2019-06-28-elements-of-programming-authors-edition.md"
+  },
+  {
+    "url": "/elements-of-programming-edition-autores/",
+    "lang": "es",
+    "title": "Edición de Autores de Elements of Programming (free ebook)",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2019-06-28-elements-of-programming-edition-autores.md"
+  },
+  {
+    "url": "/algorithms-specifications/",
+    "lang": "en",
+    "title": "Algorithms and specifications",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2020-02-19-algorithms-specifications.md"
+  },
+  {
+    "url": "/algoritmos-especificaciones/",
+    "lang": "es",
+    "title": "Algoritmos y especificaciones",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2020-02-19-algoritmos-especificaciones.md"
+  },
+  {
+    "url": "/thanks-alex-once-again/",
+    "lang": "en",
+    "title": "Thanks Alex, once again!",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2020-02-20-thanks-alex-once-again.md"
+  },
+  {
+    "url": "/gracias-alex-nuevamente/",
+    "lang": "es",
+    "title": "¡Gracias nuevamente, Alex!",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2020-02-20-gracias-alex-nuevamente.md"
+  },
+  {
+    "url": "/cpp26-croydon-wg21-meeting/",
+    "lang": "en",
+    "title": "C++26 Wraps Up: Notes from the Croydon WG21 Meeting",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/en/posts/2026-04-05-cpp26-croydon-wg21-meeting.md"
+  },
+  {
+    "url": "/cpp26-reunion-wg21-croydon/",
+    "lang": "es",
+    "title": "C++26 está listo: notas desde la reunión de WG21 en Croydon",
+    "published": true,
+    "kind": "post",
+    "source": "src/content/blog/es/posts/2026-04-05-cpp26-reunion-wg21-croydon.md"
+  }
+]

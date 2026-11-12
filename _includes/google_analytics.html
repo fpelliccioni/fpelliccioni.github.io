@@ -1,9 +1,0 @@
-{% if site.analytics.provider == 'google' and site.analytics.google.measurement_id != '' %}
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics.google.measurement_id | uri_escape }}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', {{ site.analytics.google.measurement_id | jsonify }});
-</script>
-{% endif %}

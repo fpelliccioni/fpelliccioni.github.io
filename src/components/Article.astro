@@ -1,0 +1,117 @@
+---
+import { render } from 'astro:content';
+import { labels, formatDate, readingTime, type Entry } from '../lib/site';
+interface Props {
+  entry: Entry;
+  entries: Entry[];
+}
+const { entry, entries } = Astro.props;
+const { Content, headings } = await render(entry);
+const t = labels[entry.data.lang];
+const article = entry.data.type === 'post';
+const related = entries
+  .filter((p) => p.data.type === 'post' && p.data.lang === entry.data.lang && p.id !== entry.id)
+  .slice(0, 3);
+---
+
+<div class="article-shell shell">
+  <header class="article-header">
+    <a class="back-link" href={`${t.home}#writing`}>
+      ← {t.back}
+    </a>
+    <p class="eyebrow">
+      {article ? (entry.data.lang === 'es' ? 'CUADERNO' : 'NOTEBOOK') : 'FERNANDO PELLICCIONI'}
+    </p>
+    <h1>{entry.data.title}</h1>
+    {article && (
+      <div class="article-byline">
+        <span>Fernando Pelliccioni</span>
+        <span class="byline-dot">/</span>
+        <time datetime={entry.data.date.toISOString()}>
+          {formatDate(entry.data.date, entry.data.lang)}
+        </time>
+        <span class="byline-dot">/</span>
+        <span>
+          {readingTime(entry)} {t.minutes}
+        </span>
+      </div>
+    )}
+  </header>
+  <div class="reading-layout">
+    <article class="prose">
+      <Content />
+      <footer class="article-end">
+        <span class="end-mark" aria-hidden="true">
+          ∎
+        </span>
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(entry.data.title + ' https://componentsprogramming.com' + entry.data.url)}`}
+        >
+          {t.share} ↗
+        </a>
+      </footer>
+      {entry.data.comments && (
+        <section class="comments-section" aria-label={t.comments}>
+          <p>{t.commentsNote}</p>
+          <button
+            class="comments-button"
+            data-disqus-url={`https://componentsprogramming.com${entry.data.url}`}
+          >
+            {t.comments}
+          </button>
+          <div id="disqus_thread"></div>
+        </section>
+      )}
+    </article>
+    <aside class="reading-aside">
+      {headings.filter((h) => h.depth === 2).length > 1 && (
+        <nav aria-label={t.contents}>
+          <p class="eyebrow">{t.contents}</p>
+          {headings
+            .filter((h) => h.depth === 2)
+            .map((h) => (
+              <a href={`#${h.slug}`}>{h.text}</a>
+            ))}
+        </nav>
+      )}
+      <div class="author-note">
+        <span class="eyebrow">FERNANDO PELLICCIONI</span>
+        <p>{t.aboutLine}</p>
+        <a href={t.about}>{t.navAbout} ↗</a>
+      </div>
+    </aside>
+  </div>
+</div>
+{article && (
+  <section class="related shell">
+    <p class="eyebrow">{t.latest}</p>
+    <div>
+      {related.map((post) => (
+        <a href={post.data.url}>
+          <time>{post.data.date.getUTCFullYear()}</time>
+          <h2>{post.data.title}</h2>
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+<script>
+  document.querySelector<HTMLButtonElement>('.comments-button')?.addEventListener(
+    'click',
+    function () {
+      const canonical = this.dataset.disqusUrl;
+      (window as Window & { disqus_config?: () => void }).disqus_config = function (this: {
+        page: { url?: string };
+      }) {
+        this.page.url = canonical;
+      };
+      const script = document.createElement('script');
+      script.src = 'https://componentsprogramming.disqus.com/embed.js';
+      script.async = true;
+      document.body.appendChild(script);
+      this.hidden = true;
+    },
+    { once: true },
+  );
+</script>

@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Home from '../components/Home.astro';
+import Article from '../components/Article.astro';
+import { publicEntries, translationsFor, summary, labels, type Entry } from '../lib/site';
+export async function getStaticPaths() {
+  const entries = await publicEntries();
+  return entries.map((entry) => ({
+    params: { slug: entry.data.url.replace(/^\/|\/$/g, '') || undefined },
+    props: { entry, entries },
+  }));
+}
+interface Props {
+  entry: Entry;
+  entries: Entry[];
+}
+const { entry, entries } = Astro.props;
+const isHome = entry.data.type === 'home';
+---
+
+<Base
+  title={isHome ? 'Components Programming' : entry.data.title}
+  lang={entry.data.lang}
+  url={entry.data.url}
+  description={isHome ? labels[entry.data.lang].description : summary(entry)}
+  translations={translationsFor(entry, entries).map((p) => p.data)}
+  article={entry.data.type === 'post'}
+  published={entry.data.type === 'post' ? entry.data.date : undefined}
+>
+  {!isHome && (
+    <Fragment slot="head">
+      <script is:inline>
+        window.MathJax = {
+          tex: {
+            inlineMath: [
+              ['$', '$'],
+              ['\\(', '\\)'],
+            ],
+            displayMath: [
+              ['$$', '$$'],
+              ['\\[', '\\]'],
+            ],
+          },
+          options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] },
+        };
+      </script>
+      <script
+        is:inline
+        defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"
+      ></script>
+    </Fragment>
+  )}
+  {isHome ? (
+    <Home lang={entry.data.lang} entries={entries} />
+  ) : (
+    <Article entry={entry} entries={entries} />
+  )}
+</Base>

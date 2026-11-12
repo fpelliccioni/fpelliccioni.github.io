@@ -1,0 +1,1358 @@
+{
+  "/writing-min-function-part1/": {
+    "codeBlocks": [
+      "b97bda53b8662b0c4a441d63f24eacb1f53b1c3b9cc28dc3b8d07a248e5e91b9",
+      "7c4e9ec8533d0f4c25384dab9ea9a8af81f61c779bed583c09263ded7c968d76",
+      "6575fa33935c9fab6246200ac99b14a5b2d213c8cef8aa42c1d86326dc92924a"
+    ],
+    "images": [],
+    "anchors": [
+      "writing-min",
+      "first-attempt",
+      "mathematics-to-the-rescue",
+      "writing-min-using-concepts",
+      "acknowledgments",
+      "the-series",
+      "references",
+      "Ref1",
+      "Ref2",
+      "Ref3",
+      "Ref4",
+      "Ref5",
+      "Ref6",
+      "Ref7",
+      "appendix-a-definitions",
+      "AppendixA",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Writing min",
+        "id": "writing-min"
+      },
+      {
+        "text": "First Attempt",
+        "id": "first-attempt"
+      },
+      {
+        "text": "Mathematics to the rescue!",
+        "id": "mathematics-to-the-rescue"
+      },
+      {
+        "text": "Writing min using Concepts",
+        "id": "writing-min-using-concepts"
+      },
+      {
+        "text": "Acknowledgments",
+        "id": "acknowledgments"
+      },
+      {
+        "text": "The Series",
+        "id": "the-series"
+      },
+      {
+        "text": "References",
+        "id": "references"
+      },
+      {
+        "text": "Appendix A: Definitions",
+        "id": "appendix-a-definitions"
+      }
+    ]
+  },
+  "/writing-min-function-part2/": {
+    "codeBlocks": [
+      "cd668c714d7611f0f621c197aaf022a9925a4327f36c5bc25e74eda71eba9077"
+    ],
+    "images": [],
+    "anchors": [
+      "the-series",
+      "references",
+      "Ref1",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "The Series",
+        "id": "the-series"
+      },
+      {
+        "text": "References",
+        "id": "references"
+      }
+    ]
+  },
+  "/writing-min-function-part3/": {
+    "codeBlocks": [
+      "98070cce357965f2f2bae0063c4d98b7683914a615b2f6c5ba007123bd39a308",
+      "64fadf508bcbb164a8b2e79ed54bcd8b4afdf046a3f43059d6a94886f814d134",
+      "69fb1e6b5ea5ebc6896c465916841d9513c0d9951a346111f53aca63af0de67f",
+      "21dc8b8bf979047d1bb6663b8ac9bfeb5976fa169ab1db90fa1f028e39e36efa",
+      "6793ef589f1548fa167b993487e6fadc2e217bb1bbaf920f4d803efdf022043d",
+      "4dcb779dbe23615aafe3dca40d864b9adcc1353e335423c7b65aa56534787540",
+      "3b4adca1e22f0de452e2b119bf82d29eb808d8a0c4c07e56195c2f2af57492b2",
+      "2156d4773e93edc9aa65e363f009d75646c0c6171cfb514de5016bacfb31053c",
+      "5109ed0804b4b557c1dd17ce24c92d7a3d5b3e8e674fc0220442af3edbc2cafc",
+      "b786ae61f6eddfdb0ae7927c8f94425a524a3147066352fe3408ea20b9beac34",
+      "9ab7e4a06eb53f010f43055cc8259ccd873c26edbbc683946e83c35352702db2",
+      "757288e587ca369312145b9c896710c2350cba19fff312763caa82935a133aef",
+      "3d875b853edebf7cdf67f71eeb667643b04f476c168606c155648fda30a56b0a"
+    ],
+    "images": [],
+    "anchors": [
+      "the-series",
+      "references",
+      "Ref1",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "The Series",
+        "id": "the-series"
+      },
+      {
+        "text": "References",
+        "id": "references"
+      }
+    ]
+  },
+  "/about-me/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "c-and-standards",
+      "blockchain-and-bitcoin",
+      "recognition"
+    ],
+    "headings": [
+      {
+        "text": "C++ and Standards",
+        "id": "c-and-standards"
+      },
+      {
+        "text": "Blockchain and Bitcoin",
+        "id": "blockchain-and-bitcoin"
+      },
+      {
+        "text": "Recognition",
+        "id": "recognition"
+      }
+    ]
+  },
+  "/acerca-de/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "c-y-estándares",
+      "blockchain-y-bitcoin",
+      "reconocimiento"
+    ],
+    "headings": [
+      {
+        "text": "C++ y estándares",
+        "id": "c-y-estándares"
+      },
+      {
+        "text": "Blockchain y Bitcoin",
+        "id": "blockchain-y-bitcoin"
+      },
+      {
+        "text": "Reconocimiento",
+        "id": "reconocimiento"
+      }
+    ]
+  },
+  "/writing-min-function-part4/": {
+    "codeBlocks": [
+      "a3ac505b20e863a7aac11cbcbe677c7839f30d5ceae86b43133475018b980749",
+      "5efa84dd62aee7dbbd0cee73e65d7ab7d53c0583dbff5d948b04a9aa0312773a",
+      "c29482e7b6c8137ee07edc3bdfd937993a2105197a4f0eb0025db41d81b58565",
+      "de01c7b8406bb4bc0f288eb9cabd03052f7a19bbb262d4db586f865f2ae3fd78",
+      "12791efa849958f65d6e84d51787b4fc641d421b9273c84f7a641e26879d8c45",
+      "a1386764635b8b27ecc380e9d8599b0bece32d72ce0ae0c652802391e7442d75",
+      "c225cfd6fc7aa743366231ec563c68fb5aa9c979cd801137915a91444e69ecc8",
+      "0487ebff7d55550e6b32a6c625dd74973fb7b494a635113a80454c895c2ba647",
+      "1583228d31c3fa05deb384b6f9252bf66d0f44924029c5633b324b658470619f",
+      "882a77695d2d7115959339ffb925106d6a8f7a3040bdf05eabb5d9a8bdaa2b18",
+      "0ab70e267e8452f760c466b89a720c96461a847f1b8bd6c6d106e621416a6331",
+      "fa193516dd356abf2cb3bcdac4f236964b72711714a0e9d3e5ee256e27df822c",
+      "3db8271970ef68ffbefc0b0d87e123d8a2f59b915ef0f795f36182f807b0a87f",
+      "e1f94ed4019f2022e4717c39ae96eea9384b838c90ffd8897ac1447f20e50cbc"
+    ],
+    "images": [],
+    "anchors": [
+      "the-series",
+      "references",
+      "Ref1",
+      "Ref2",
+      "Ref3",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "The Series",
+        "id": "the-series"
+      },
+      {
+        "text": "References",
+        "id": "references"
+      }
+    ]
+  },
+  "/writing-min-function-part5/": {
+    "codeBlocks": [
+      "6f11a1b01a0930ff01ab11f5762f7bdff2daac4fb12a6da3de7da315d57ae553",
+      "be9668ba78d55154569e56858db15081717f2215eae6057dec5cd695f32d1976",
+      "44f8a040cf0de892d647e954855ddace98326ce596703910dc798e4af1c14971",
+      "8792464fbaadd93370dac470f501128c2b94d0b9933de8a9e87ffccca17f153c",
+      "22e400c18453e7ec718f9c334b6403bde5e73c1995791b45416030ea5e882d13",
+      "b41b64968379121de3898b28a7945964ebb78afef5faaab86b7c5fb37e9bd0d9",
+      "9fd63c637a7e1affee6d2fae747c08303e97b2820a7073ca891d67c992019c87",
+      "c41975bfaf429d2a275c78df05e1ad13a1de78774bf6177d8f2832476ab8cbf9",
+      "aebbf5b267d508868f451834bc9bcc4829628e3999de6349754e02ddaf8cd41b"
+    ],
+    "images": [],
+    "anchors": [
+      "the-series",
+      "references",
+      "Ref1",
+      "Ref2",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "The Series",
+        "id": "the-series"
+      },
+      {
+        "text": "References",
+        "id": "references"
+      }
+    ]
+  },
+  "/components-programming/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "references",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "References",
+        "id": "references"
+      }
+    ]
+  },
+  "/from-mathematics-to-generic-programming/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/fm2gp_portada.jpg"
+    ],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/using-the-right-terms-method/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "what-is-a-method",
+      "why-method",
+      "why-we-use-the-term-method-insted-of-procedure",
+      "java",
+      "c",
+      "simula",
+      "smalltalk",
+      "other-languages",
+      "eiffel",
+      "python",
+      "c-1",
+      "objective-c",
+      "languages-before-smalltalk",
+      "other-sources",
+      "pending-issues",
+      "conclusions",
+      "acknowledgements",
+      "notes--references",
+      "Ref1",
+      "Ref2",
+      "Ref3",
+      "Ref4",
+      "Ref5",
+      "Ref6",
+      "Ref7",
+      "Ref8",
+      "Ref9",
+      "Ref10",
+      "Ref11",
+      "Ref12",
+      "Ref13",
+      "Ref14",
+      "Ref15",
+      "Ref16",
+      "Ref17",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "What is a method?",
+        "id": "what-is-a-method"
+      },
+      {
+        "text": "Why “method”?",
+        "id": "why-method"
+      },
+      {
+        "text": "Why we use the term “method” insted of “procedure”?",
+        "id": "why-we-use-the-term-method-insted-of-procedure"
+      },
+      {
+        "text": "Java",
+        "id": "java"
+      },
+      {
+        "text": "C++",
+        "id": "c"
+      },
+      {
+        "text": "Simula",
+        "id": "simula"
+      },
+      {
+        "text": "Smalltalk",
+        "id": "smalltalk"
+      },
+      {
+        "text": "Other languages",
+        "id": "other-languages"
+      },
+      {
+        "text": "Eiffel",
+        "id": "eiffel"
+      },
+      {
+        "text": "Python",
+        "id": "python"
+      },
+      {
+        "text": "C#",
+        "id": "c-1"
+      },
+      {
+        "text": "Objective-C",
+        "id": "objective-c"
+      },
+      {
+        "text": "Languages ​​before Smalltalk",
+        "id": "languages-before-smalltalk"
+      },
+      {
+        "text": "Other sources",
+        "id": "other-sources"
+      },
+      {
+        "text": "Pending issues",
+        "id": "pending-issues"
+      },
+      {
+        "text": "Conclusions",
+        "id": "conclusions"
+      },
+      {
+        "text": "Acknowledgements",
+        "id": "acknowledgements"
+      },
+      {
+        "text": "Notes / References",
+        "id": "notes--references"
+      }
+    ]
+  },
+  "/usando-la-terminologia-adecuada-metodo/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "qué-es-un-método",
+      "por-qué-método",
+      "por-qué-usamos-el-término-método-y-no-procedimiento",
+      "java",
+      "c",
+      "simula",
+      "smalltalk",
+      "otros-lenguajes",
+      "eiffel",
+      "python",
+      "c-1",
+      "objective-c",
+      "lenguajes-anteriores-a-smalltalk",
+      "otras-fuentes",
+      "pendientes",
+      "conclusiones",
+      "agradecimientos",
+      "notas--referencias",
+      "Ref1",
+      "Ref2",
+      "Ref3",
+      "Ref4",
+      "Ref5",
+      "Ref6",
+      "Ref7",
+      "Ref8",
+      "Ref9",
+      "Ref10",
+      "Ref11",
+      "Ref12",
+      "Ref13",
+      "Ref14",
+      "Ref15",
+      "Ref16",
+      "Ref17",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "¿Qué es un método?",
+        "id": "qué-es-un-método"
+      },
+      {
+        "text": "¿Por qué “método”?",
+        "id": "por-qué-método"
+      },
+      {
+        "text": "¿Por qué usamos el término “método” y no “procedimiento”?",
+        "id": "por-qué-usamos-el-término-método-y-no-procedimiento"
+      },
+      {
+        "text": "Java",
+        "id": "java"
+      },
+      {
+        "text": "C++",
+        "id": "c"
+      },
+      {
+        "text": "Simula",
+        "id": "simula"
+      },
+      {
+        "text": "Smalltalk",
+        "id": "smalltalk"
+      },
+      {
+        "text": "Otros lenguajes",
+        "id": "otros-lenguajes"
+      },
+      {
+        "text": "Eiffel",
+        "id": "eiffel"
+      },
+      {
+        "text": "Python",
+        "id": "python"
+      },
+      {
+        "text": "C#",
+        "id": "c-1"
+      },
+      {
+        "text": "Objective-C",
+        "id": "objective-c"
+      },
+      {
+        "text": "Lenguajes anteriores a Smalltalk",
+        "id": "lenguajes-anteriores-a-smalltalk"
+      },
+      {
+        "text": "Otras fuentes",
+        "id": "otras-fuentes"
+      },
+      {
+        "text": "Pendientes",
+        "id": "pendientes"
+      },
+      {
+        "text": "Conclusiones",
+        "id": "conclusiones"
+      },
+      {
+        "text": "Agradecimientos",
+        "id": "agradecimientos"
+      },
+      {
+        "text": "Notas / Referencias",
+        "id": "notas--referencias"
+      }
+    ]
+  },
+  "/whats-your-favorite-flavor-of-object/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "introduction",
+      "what-object-means",
+      "simula",
+      "smalltalk",
+      "eiffel---object-oriented-software-construction",
+      "c",
+      "c-programming-language",
+      "elements-of-programming",
+      "conclusions",
+      "terminology-series",
+      "notes--references",
+      "Ref1",
+      "Ref2",
+      "Ref3",
+      "Ref4",
+      "Ref5",
+      "Ref6",
+      "Ref7",
+      "RefConcreteEntity",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Introduction",
+        "id": "introduction"
+      },
+      {
+        "text": "What “Object” means?",
+        "id": "what-object-means"
+      },
+      {
+        "text": "Simula",
+        "id": "simula"
+      },
+      {
+        "text": "Smalltalk",
+        "id": "smalltalk"
+      },
+      {
+        "text": "Eiffel - Object-Oriented Software Construction",
+        "id": "eiffel---object-oriented-software-construction"
+      },
+      {
+        "text": "C++",
+        "id": "c"
+      },
+      {
+        "text": "C programming language",
+        "id": "c-programming-language"
+      },
+      {
+        "text": "Elements of Programming",
+        "id": "elements-of-programming"
+      },
+      {
+        "text": "Conclusions",
+        "id": "conclusions"
+      },
+      {
+        "text": "“Terminology” series:",
+        "id": "terminology-series"
+      },
+      {
+        "text": "Notes / References",
+        "id": "notes--references"
+      }
+    ]
+  },
+  "/cual-es-tu-sabor-de-objeto-preferido/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "introducción",
+      "qué-significa-objeto",
+      "simula",
+      "smalltalk",
+      "eiffel---object-oriented-software-construction",
+      "c",
+      "c-lenguaje-de-programación",
+      "elements-of-programming",
+      "conclusiones",
+      "serie-terminología",
+      "notas--referencias",
+      "Ref1",
+      "Ref2",
+      "Ref3",
+      "Ref4",
+      "Ref5",
+      "Ref6",
+      "Ref7",
+      "RefConcreteEntity",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Introducción",
+        "id": "introducción"
+      },
+      {
+        "text": "¿Qué significa “Objeto”?",
+        "id": "qué-significa-objeto"
+      },
+      {
+        "text": "Simula",
+        "id": "simula"
+      },
+      {
+        "text": "Smalltalk",
+        "id": "smalltalk"
+      },
+      {
+        "text": "Eiffel - Object-Oriented Software Construction",
+        "id": "eiffel---object-oriented-software-construction"
+      },
+      {
+        "text": "C++",
+        "id": "c"
+      },
+      {
+        "text": "C (lenguaje de programación)",
+        "id": "c-lenguaje-de-programación"
+      },
+      {
+        "text": "Elements of Programming",
+        "id": "elements-of-programming"
+      },
+      {
+        "text": "Conclusiones",
+        "id": "conclusiones"
+      },
+      {
+        "text": "Serie “Terminología”:",
+        "id": "serie-terminología"
+      },
+      {
+        "text": "Notas / Referencias",
+        "id": "notas--referencias"
+      }
+    ]
+  },
+  "/thanks-alex/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/FM2GP.jpg",
+      "/images/EoP.jpg",
+      "/images/EoPAndFM2GP.jpg"
+    ],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/gracias-alex/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/FM2GP.jpg",
+      "/images/EoP.jpg",
+      "/images/EoPAndFM2GP.jpg"
+    ],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/alex-retirement/": {
+    "codeBlocks": [
+      "b50472caf948ce60b77a7db6a0be49550561ef1f07faf200b028ef76a8db65a6"
+    ],
+    "images": [
+      "/images/Stepanov_poster_FINAL.png"
+    ],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/jubilacion-alex/": {
+    "codeBlocks": [
+      "b50472caf948ce60b77a7db6a0be49550561ef1f07faf200b028ef76a8db65a6"
+    ],
+    "images": [
+      "/images/Stepanov_poster_FINAL.png"
+    ],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/limit-approved/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/copla/copla1.jpg"
+    ],
+    "anchors": [
+      "references",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "References",
+        "id": "references"
+      }
+    ]
+  },
+  "/limite-aprobado/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/copla/copla1.jpg"
+    ],
+    "anchors": [
+      "referencias",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Referencias",
+        "id": "referencias"
+      }
+    ]
+  },
+  "/wine-honour/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/copla/vinohonor1.jpg",
+      "/images/copla/vinohonor2.jpg"
+    ],
+    "anchors": [
+      "references",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "References",
+        "id": "references"
+      }
+    ]
+  },
+  "/vino-honor/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/copla/vinohonor1.jpg",
+      "/images/copla/vinohonor2.jpg"
+    ],
+    "anchors": [
+      "referencias",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Referencias",
+        "id": "referencias"
+      }
+    ]
+  },
+  "/talk-intro-generic-programming/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/charla-intro-generic-programming/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/palindromes/": {
+    "codeBlocks": [
+      "e7d3d7ae401c16167f03173f7d3439746d57ff1e85ed67f57134484213037d5b",
+      "e7d3d7ae401c16167f03173f7d3439746d57ff1e85ed67f57134484213037d5b",
+      "45edb30e8ebf6e5ddd37a2603f979b6aec7271810ad59c3479597dd832a556d8",
+      "b2ba0fbed0999a9ca9b0ea4e7fc1e9ad39b708e27c0fe041c87576e5b43c1061",
+      "02226b6202c8cac82bc45c7f692593d668b81a504cc0313676f1be0c27309739",
+      "472a89a639fafdef175cd457f7e98324e5bcb59cf0774f3193edd3bd404f3335"
+    ],
+    "images": [
+      "/images/OptimalAlgorithm.svg",
+      "/images/JavaStringBuilderMemoryRepresentation64CompressedOopsEnabled.svg",
+      "/images/JavaStringMemoryRepresentation64CompressedOopsEnabledJdk18.svg"
+    ],
+    "anchors": [
+      "asymptotic-computational-complexity",
+      "concrete-computational-complexity",
+      "back-to-palindromes",
+      "determining-the-complexity",
+      "improving-the-algorithm-naïve-version",
+      "RefAlgoritmoOptimo",
+      "optimal-algorithm",
+      "algorithm-i-detailed-analysis",
+      "construction-of-stringbuilder",
+      "reverse-stringbuilder",
+      "tostring-stringbuilder",
+      "equals-string",
+      "garbage-collection",
+      "data-cache-misses",
+      "memory-footprint",
+      "stringbuilder",
+      "string",
+      "total-memory-footprint",
+      "benchmarks",
+      "algorithm-n-versus-algorithm-o",
+      "ultimate-solution",
+      "pending-issues",
+      "conclusions",
+      "acknowledgements",
+      "notes",
+      "RefPlataforma",
+      "platform-used-for-the-analysis-in-this-article",
+      "references",
+      "Ref1",
+      "Ref2",
+      "Ref3",
+      "Ref4",
+      "Ref5",
+      "Ref6",
+      "Ref7",
+      "Ref8",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Asymptotic Computational Complexity",
+        "id": "asymptotic-computational-complexity"
+      },
+      {
+        "text": "Concrete Computational Complexity",
+        "id": "concrete-computational-complexity"
+      },
+      {
+        "text": "Back to Palindromes",
+        "id": "back-to-palindromes"
+      },
+      {
+        "text": "Determining the complexity",
+        "id": "determining-the-complexity"
+      },
+      {
+        "text": "Improving the algorithm (naïve version)",
+        "id": "improving-the-algorithm-naïve-version"
+      },
+      {
+        "text": "Optimal Algorithm",
+        "id": "optimal-algorithm"
+      },
+      {
+        "text": "Algorithm I, detailed analysis",
+        "id": "algorithm-i-detailed-analysis"
+      },
+      {
+        "text": "Construction of StringBuilder",
+        "id": "construction-of-stringbuilder"
+      },
+      {
+        "text": "reverse() (StringBuilder)",
+        "id": "reverse-stringbuilder"
+      },
+      {
+        "text": "toString() (StringBuilder)",
+        "id": "tostring-stringbuilder"
+      },
+      {
+        "text": "equals() (String)",
+        "id": "equals-string"
+      },
+      {
+        "text": "Garbage Collection",
+        "id": "garbage-collection"
+      },
+      {
+        "text": "Data Cache Misses",
+        "id": "data-cache-misses"
+      },
+      {
+        "text": "Memory footprint",
+        "id": "memory-footprint"
+      },
+      {
+        "text": "StringBuilder:",
+        "id": "stringbuilder"
+      },
+      {
+        "text": "String:",
+        "id": "string"
+      },
+      {
+        "text": "Total memory footprint:",
+        "id": "total-memory-footprint"
+      },
+      {
+        "text": "Benchmarks",
+        "id": "benchmarks"
+      },
+      {
+        "text": "Algorithm N versus Algorithm O",
+        "id": "algorithm-n-versus-algorithm-o"
+      },
+      {
+        "text": "Ultimate solution?",
+        "id": "ultimate-solution"
+      },
+      {
+        "text": "Pending issues",
+        "id": "pending-issues"
+      },
+      {
+        "text": "Conclusions",
+        "id": "conclusions"
+      },
+      {
+        "text": "Acknowledgements",
+        "id": "acknowledgements"
+      },
+      {
+        "text": "Notes",
+        "id": "notes"
+      },
+      {
+        "text": "Platform used for the analysis in this article:",
+        "id": "platform-used-for-the-analysis-in-this-article"
+      },
+      {
+        "text": "References",
+        "id": "references"
+      }
+    ]
+  },
+  "/palindromos/": {
+    "codeBlocks": [
+      "e7d3d7ae401c16167f03173f7d3439746d57ff1e85ed67f57134484213037d5b",
+      "e7d3d7ae401c16167f03173f7d3439746d57ff1e85ed67f57134484213037d5b",
+      "45edb30e8ebf6e5ddd37a2603f979b6aec7271810ad59c3479597dd832a556d8",
+      "b2ba0fbed0999a9ca9b0ea4e7fc1e9ad39b708e27c0fe041c87576e5b43c1061",
+      "02226b6202c8cac82bc45c7f692593d668b81a504cc0313676f1be0c27309739",
+      "472a89a639fafdef175cd457f7e98324e5bcb59cf0774f3193edd3bd404f3335"
+    ],
+    "images": [
+      "/images/OptimalAlgorithm.svg",
+      "/images/JavaStringBuilderMemoryRepresentation64CompressedOopsEnabled.svg",
+      "/images/JavaStringMemoryRepresentation64CompressedOopsEnabledJdk18.svg"
+    ],
+    "anchors": [
+      "complejidad-computacional-asintótica",
+      "complejidad-computacional-concreta",
+      "volviendo-a-los-palíndromos",
+      "determinando-la-complejidad",
+      "mejorando-el-algoritmo-versión-naïve",
+      "RefAlgoritmoOptimo",
+      "algoritmo-óptimo",
+      "análisis-detallado-del-algoritmo-i",
+      "construcción-de-stringbuilder",
+      "reverse-stringbuilder",
+      "tostring-stringbuilder",
+      "equals-string",
+      "garbage-collection",
+      "data-cache-misses",
+      "consumo-de-memoria-memory-footprint",
+      "stringbuilder",
+      "string",
+      "total-de-memoria-consumida",
+      "benchmarks",
+      "algoritmo-n-vs-algoritmo-o",
+      "solución-definitiva",
+      "pendientes",
+      "conclusiones",
+      "agradecimientos",
+      "notas",
+      "RefPlataforma",
+      "plataforma-utilizada-para-el-análisis-en-este-artículo",
+      "referencias",
+      "Ref1",
+      "Ref2",
+      "Ref3",
+      "Ref4",
+      "Ref5",
+      "Ref6",
+      "Ref7",
+      "Ref8",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Complejidad Computacional Asintótica",
+        "id": "complejidad-computacional-asintótica"
+      },
+      {
+        "text": "Complejidad Computacional Concreta",
+        "id": "complejidad-computacional-concreta"
+      },
+      {
+        "text": "Volviendo a los Palíndromos",
+        "id": "volviendo-a-los-palíndromos"
+      },
+      {
+        "text": "Determinando la complejidad",
+        "id": "determinando-la-complejidad"
+      },
+      {
+        "text": "Mejorando el algoritmo (versión naïve)",
+        "id": "mejorando-el-algoritmo-versión-naïve"
+      },
+      {
+        "text": "Algoritmo óptimo",
+        "id": "algoritmo-óptimo"
+      },
+      {
+        "text": "Análisis detallado del Algoritmo I",
+        "id": "análisis-detallado-del-algoritmo-i"
+      },
+      {
+        "text": "Construcción de StringBuilder",
+        "id": "construcción-de-stringbuilder"
+      },
+      {
+        "text": "reverse() (StringBuilder)",
+        "id": "reverse-stringbuilder"
+      },
+      {
+        "text": "toString() (StringBuilder)",
+        "id": "tostring-stringbuilder"
+      },
+      {
+        "text": "equals() (String)",
+        "id": "equals-string"
+      },
+      {
+        "text": "Garbage Collection",
+        "id": "garbage-collection"
+      },
+      {
+        "text": "Data Cache Misses",
+        "id": "data-cache-misses"
+      },
+      {
+        "text": "Consumo de memoria (memory footprint)",
+        "id": "consumo-de-memoria-memory-footprint"
+      },
+      {
+        "text": "StringBuilder:",
+        "id": "stringbuilder"
+      },
+      {
+        "text": "String:",
+        "id": "string"
+      },
+      {
+        "text": "Total de memoria consumida:",
+        "id": "total-de-memoria-consumida"
+      },
+      {
+        "text": "Benchmarks",
+        "id": "benchmarks"
+      },
+      {
+        "text": "Algoritmo N vs Algoritmo O",
+        "id": "algoritmo-n-vs-algoritmo-o"
+      },
+      {
+        "text": "¿Solución definitiva?",
+        "id": "solución-definitiva"
+      },
+      {
+        "text": "Pendientes",
+        "id": "pendientes"
+      },
+      {
+        "text": "Conclusiones",
+        "id": "conclusiones"
+      },
+      {
+        "text": "Agradecimientos",
+        "id": "agradecimientos"
+      },
+      {
+        "text": "Notas",
+        "id": "notas"
+      },
+      {
+        "text": "Plataforma utilizada para el análisis en este artículo:",
+        "id": "plataforma-utilizada-para-el-análisis-en-este-artículo"
+      },
+      {
+        "text": "Referencias",
+        "id": "referencias"
+      }
+    ]
+  },
+  "/talk-fastware/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/charla-fastware/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/mention-sarmiento/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/copla/sarmiento1.jpg",
+      "/images/copla/sarmiento2.png",
+      "/images/copla/sarmiento3.jpg"
+    ],
+    "anchors": [
+      "references",
+      "Ref1",
+      "links-to-news",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "References",
+        "id": "references"
+      },
+      {
+        "text": "Links to News",
+        "id": "links-to-news"
+      }
+    ]
+  },
+  "/mencion-sarmiento/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/copla/sarmiento1.jpg",
+      "/images/copla/sarmiento2.png",
+      "/images/copla/sarmiento3.jpg"
+    ],
+    "anchors": [
+      "referencias",
+      "Ref1",
+      "enlaces-a-noticias",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Referencias",
+        "id": "referencias"
+      },
+      {
+        "text": "Enlaces a Noticias",
+        "id": "enlaces-a-noticias"
+      }
+    ]
+  },
+  "/contact/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [],
+    "headings": []
+  },
+  "/contacto/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [],
+    "headings": []
+  },
+  "/donate/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [],
+    "headings": []
+  },
+  "/donaciones/": {
+    "codeBlocks": [
+      "98fc0bf629717bd3dfc63763b0c4686d06ce23b6ea3b701d9b9b9ee5d9bb2de3"
+    ],
+    "images": [
+      "/images/donate/qr-bch.png"
+    ],
+    "anchors": [
+      "formato-cashaddr-de-bch"
+    ],
+    "headings": [
+      {
+        "text": "Formato CashAddr de BCH:",
+        "id": "formato-cashaddr-de-bch"
+      }
+    ]
+  },
+  "/talk-gift-arabs/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/charla-regalo-arabes/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/donate-bch/": {
+    "codeBlocks": [
+      "98fc0bf629717bd3dfc63763b0c4686d06ce23b6ea3b701d9b9b9ee5d9bb2de3"
+    ],
+    "images": [
+      "/images/donate/qr-bch.png"
+    ],
+    "anchors": [],
+    "headings": []
+  },
+  "/donaciones-bch/": {
+    "codeBlocks": [
+      "98fc0bf629717bd3dfc63763b0c4686d06ce23b6ea3b701d9b9b9ee5d9bb2de3"
+    ],
+    "images": [
+      "/images/donate/qr-bch.png"
+    ],
+    "anchors": [],
+    "headings": []
+  },
+  "/elements-of-programming-authors-edition/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/elements-of-programming-edition-autores/": {
+    "codeBlocks": [],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/algorithms-specifications/": {
+    "codeBlocks": [
+      "f680d3250aad0c4694a7d754b5b0d795a36eb693ef8a3a37c7a4edda3d5b47a1",
+      "67f744e87bd7182c90e17949b980da13b26000a0768493a2ec503b8970936598",
+      "64fe41dc7b695141acf735ed180c61742e7ed88a7c5bb0af71e98f53f3175518",
+      "25691d73bc3e558914895205ea54d004f8dc02cadce19e5a934a3c45fabd168a",
+      "1ef60a3d22103780b070584e91ef32a70fa9df205dd7191eb26f15c38a9cee7d",
+      "3dacc0cb70b835aeff83ea87e624c259c15e115e8d080730e3c0ca835b554edc",
+      "fb1ef4e58036436eed4ae0d7bb03df59169f7f1f3248da0f39e7ff108eb2e808",
+      "64b93d8ce2c13a578ee9980acdf66e7471ee5cb5da567be20f50251e2c655f64",
+      "670d8813085e164479ec5f9a20fc77aec5dce489b3e4464160102c2106d16eef",
+      "37125f27d9c26bb9dab109b575a3266a1bfac774be8aed45ae753bae96acb3cd",
+      "b71183194396cf54665dfb8b3afc1dbb76804fab2e5e328300e8365ed44dfd51",
+      "a7973534694820f7257e3ed2bdad0c4fc92becb731d16dfffd6febbceaf1eb22"
+    ],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/algoritmos-especificaciones/": {
+    "codeBlocks": [
+      "f680d3250aad0c4694a7d754b5b0d795a36eb693ef8a3a37c7a4edda3d5b47a1",
+      "67f744e87bd7182c90e17949b980da13b26000a0768493a2ec503b8970936598",
+      "64fe41dc7b695141acf735ed180c61742e7ed88a7c5bb0af71e98f53f3175518",
+      "25691d73bc3e558914895205ea54d004f8dc02cadce19e5a934a3c45fabd168a",
+      "1ef60a3d22103780b070584e91ef32a70fa9df205dd7191eb26f15c38a9cee7d",
+      "3dacc0cb70b835aeff83ea87e624c259c15e115e8d080730e3c0ca835b554edc",
+      "fb1ef4e58036436eed4ae0d7bb03df59169f7f1f3248da0f39e7ff108eb2e808",
+      "64b93d8ce2c13a578ee9980acdf66e7471ee5cb5da567be20f50251e2c655f64",
+      "670d8813085e164479ec5f9a20fc77aec5dce489b3e4464160102c2106d16eef",
+      "37125f27d9c26bb9dab109b575a3266a1bfac774be8aed45ae753bae96acb3cd",
+      "b71183194396cf54665dfb8b3afc1dbb76804fab2e5e328300e8365ed44dfd51",
+      "a7973534694820f7257e3ed2bdad0c4fc92becb731d16dfffd6febbceaf1eb22"
+    ],
+    "images": [],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/thanks-alex-once-again/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/FormularioMathematico.jpeg"
+    ],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/gracias-alex-nuevamente/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/FormularioMathematico.jpeg"
+    ],
+    "anchors": [
+      "disqus_thread"
+    ],
+    "headings": []
+  },
+  "/cpp26-croydon-wg21-meeting/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/wg21-2026-croydon.png"
+    ],
+    "anchors": [
+      "contracts-approved-debated-divisive",
+      "reflection-the-big-one",
+      "the-evening-session-that-changed-my-direction",
+      "being-there",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Contracts: Approved, Debated, Divisive",
+        "id": "contracts-approved-debated-divisive"
+      },
+      {
+        "text": "Reflection: The Big One",
+        "id": "reflection-the-big-one"
+      },
+      {
+        "text": "The Evening Session That Changed My Direction",
+        "id": "the-evening-session-that-changed-my-direction"
+      },
+      {
+        "text": "Being There",
+        "id": "being-there"
+      }
+    ]
+  },
+  "/cpp26-reunion-wg21-croydon/": {
+    "codeBlocks": [],
+    "images": [
+      "/images/wg21-2026-croydon.png"
+    ],
+    "anchors": [
+      "contracts-aprobados-debatidos-divisivos",
+      "reflection-lo-grande-de-verdad",
+      "la-sesión-vespertina-que-cambió-mi-rumbo",
+      "estar-ahí",
+      "disqus_thread"
+    ],
+    "headings": [
+      {
+        "text": "Contracts: aprobados, debatidos, divisivos",
+        "id": "contracts-aprobados-debatidos-divisivos"
+      },
+      {
+        "text": "Reflection: lo grande de verdad",
+        "id": "reflection-lo-grande-de-verdad"
+      },
+      {
+        "text": "La sesión vespertina que cambió mi rumbo",
+        "id": "la-sesión-vespertina-que-cambió-mi-rumbo"
+      },
+      {
+        "text": "Estar ahí",
+        "id": "estar-ahí"
+      }
+    ]
+  }
+}

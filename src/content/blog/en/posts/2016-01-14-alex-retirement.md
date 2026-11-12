@@ -1,0 +1,71 @@
+---
+{
+  "title": "Alex Retirement",
+  "url": "/alex-retirement/",
+  "lang": "en",
+  "date": "2016-01-14T09:00:00-03:00",
+  "type": "post",
+  "published": true,
+  "comments": true,
+  "tags": [
+    "components",
+    "programming",
+    "components programming",
+    "componentsprogramming",
+    "stepanov",
+    "knuth",
+    "stroustrup",
+    "generic",
+    "genericprogramming",
+    "generic programming",
+    "genericity",
+    "concepts",
+    "math",
+    "mathematics",
+    "elements",
+    "eop",
+    "contracts",
+    "performance",
+    "c++",
+    "cpp",
+    "c",
+    "java",
+    "dotnet",
+    "c#",
+    "csharp",
+    "python",
+    "ruby",
+    "javascript",
+    "haskell",
+    "dlang",
+    "rust",
+    "golang",
+    "eiffel",
+    "templates",
+    "metaprogramming",
+    "book",
+    "fmgp"
+  ],
+  "translationKey": "alex-retirement"
+}
+---
+Alex has retired.
+
+This is a very nice Commemorative Stamp, by [Joyce Croft](https://twitter.com/joycecroft) and Alexander Zeyliger of [A9](http://a9.com/).
+
+![Alex Stepanov Commemorative Stamp](/images/Stepanov_poster_FINAL.png)
+
+I have to confess that I feel sad because I really wished that Alex continue contributing ideas for much longer time.\
+But he has retired and I'm happy for him.
+
+I wish you an excellent and well-deserved rest with your family and friends.
+
+
+```cpp
+
+auto who = successor(alex);
+
+```
+
+
+Thanks!
