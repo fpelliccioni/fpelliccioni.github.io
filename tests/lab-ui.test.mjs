@@ -82,3 +82,37 @@ test('both localized lab pages retain the engine DOM contract and accessible con
     }
   }
 });
+
+test('scalar cells align with sequence cells and iterator centers across canvas scales', () => {
+  const renderer = vm.createContext({ console });
+  vm.runInContext(fs.readFileSync('public/assets/js/algorithms/test.js', 'utf8'), renderer);
+  const two = {
+    makeText: (text, x, y) => ({ text, x, y }),
+    makeRectangle: (x, y, width, height) => ({ translation: { _x: x, _y: y }, width, height }),
+    makeGroup: (...children) => ({ children }),
+    update() {},
+  };
+  for (const [width, height] of [
+    [960, 400],
+    [1654, 569],
+    [2200, 900],
+  ]) {
+    renderer.two_width = width;
+    renderer.two_height = height;
+    renderer.setSizes();
+    const sequence = renderer.drawArray(two, null, 's', 0, ['H']);
+    const scalar = renderer.drawArrayNamedElementSimple(
+      two,
+      renderer.defaultLeftMargin,
+      150,
+      'x',
+      'x',
+    );
+    assert.equal(scalar.rect.translation._x, sequence[0].rect.translation._x);
+    assert.equal(scalar.rect.width, sequence[0].rect.width);
+    assert.equal(
+      renderer.drawArrayNamedElementFinish(renderer.defaultLeftMargin, 'x', 'x'),
+      scalar.x_finish,
+    );
+  }
+});

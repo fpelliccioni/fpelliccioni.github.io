@@ -418,7 +418,7 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart, dr
         text.size = labelFontSize
         text.alignment = 'left'
         text.fill = '#99ff99';
-        leftMargin += 14.46 * name.length
+        leftMargin += escale_x(14.46) * name.length
     }
 
     var green_def = { r: 191, g: 255, b: 179 };
@@ -498,7 +498,7 @@ function drawArray(two, chart, name, id, arr, capacity, callables, drawChart, dr
 
 function drawArrayNamedElementFinish(x, name, text) {
 
-    var min_width = 2 * escale_x(19.2) + escale_x(5);
+    var min_width = rectWidth;
 
     if (text && text.toString().length > 2) {
         var w = text.toString().length * escale_x(19.2) + escale_x(5);
@@ -506,7 +506,7 @@ function drawArrayNamedElementFinish(x, name, text) {
         var w = min_width
     }
 
-    return x + escale_x(14.46) * name.length + w / 2 + w
+    return x + escale_x(14.46) * (name.length + 1) + w / 2 + w
 }
 
 function drawArrayNamedElementSimple(two, x, y, name, text, color = defaultElementColor) {
@@ -515,7 +515,7 @@ function drawArrayNamedElementSimple(two, x, y, name, text, color = defaultEleme
     // console.log(text.toString())
     // console.log(text.toString().length)
 
-    var min_width = 2 * escale_x(19.2) + escale_x(5);
+    var min_width = rectWidth;
 
     if (text != undefined && text.toString().length > 2) {
         var w = text.toString().length * escale_x(19.2) + escale_x(5);
@@ -531,7 +531,7 @@ function drawArrayNamedElementSimple(two, x, y, name, text, color = defaultEleme
         nameElement.size = labelFontSize
         nameElement.alignment = 'left'
         nameElement.fill = '#99ff99';
-        // leftMargin += 14.46 * name.length
+        // leftMargin += escale_x(14.46) * name.length
     }
 
     var rect = two.makeRectangle(x + escale_x(14.46) * name.length + w / 2, y + escale_y(30), w, rectHeight);
@@ -667,7 +667,7 @@ function drawSingleLinkedList(two, chart, name, id, arr, capacity, callables, dr
         text.size = labelFontSize
         text.alignment = 'left'
         text.fill = '#99ff99';
-        leftMargin += 14.46 * name.length
+        leftMargin += escale_x(14.46) * name.length
     }
 
     var green_def = { r: 191, g: 255, b: 179 };
@@ -916,7 +916,7 @@ function drawDoubleLinkedList(two, chart, name, id, arr, capacity, callables, dr
         text.size = labelFontSize
         text.alignment = 'left'
         text.fill = '#99ff99';
-        leftMargin += 14.46 * name.length
+        leftMargin += escale_x(14.46) * name.length
     }
 
     var green_def = { r: 191, g: 255, b: 179 };
@@ -1357,7 +1357,7 @@ function drawTrackedVariables(two, tracks, track_data) {
     //     text.size = labelFontSize
     //     text.alignment = 'left'
     //     text.fill = '#99ff99';
-    //     leftMargin += 14.46 * name.length
+    //     leftMargin += escale_x(14.46) * name.length
     // }
 
 
