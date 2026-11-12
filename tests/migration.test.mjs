@@ -160,11 +160,11 @@ test('internal blog navigation and article media resolve to generated files', ()
   assert.deepEqual(failures, []);
 });
 
-test('the interpreter, renderer, vendor and chart assets remain unchanged', () => {
+test('the interpreter, vendor and chart assets remain unchanged', () => {
   const assets = JSON.parse(fs.readFileSync('tests/fixtures/analyzer-assets.json'));
-  // main.js has intentional source/output display fixes, covered by lab-ui.test.mjs.
+  // Display and renderer alignment changes are covered by lab-ui.test.mjs.
   for (const [file, expected] of Object.entries(assets).filter(
-    ([file]) => file !== 'assets/js/algorithms/main.js',
+    ([file]) => !['assets/js/algorithms/main.js', 'assets/js/algorithms/test.js'].includes(file),
   ))
     assert.equal(
       createHash('sha256')

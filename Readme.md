@@ -171,5 +171,5 @@ library prelude.
 
 `tests/lab-ui.test.mjs` verifies the engine's DOM contract, source rendering and
 error locations. Historical hashes remain in the migration fixtures; the two
-redesigned entry pages and display-only changes in `main.js` are intentionally
+redesigned entry pages and display-only changes in `main.js` and alignment fixes in `test.js` are intentionally
 excluded from unchanged-file checks.
