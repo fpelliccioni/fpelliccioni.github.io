@@ -19,7 +19,12 @@ const [latest] = posts;
     <h1>
       {t.hero[0]}
       <br />
-      <span>{t.hero[1]}</span>
+      <span>
+        {t.hero[1]}
+        <span class="technical-cursor" aria-hidden="true">
+          _
+        </span>
+      </span>
       <br />
       {t.hero[2]}
     </h1>
@@ -34,6 +39,20 @@ const [latest] = posts;
     <a class="text-link" href={t.about}>
       {lang === 'es' ? 'Sobre mí' : 'More about me'} <span aria-hidden="true">↗</span>
     </a>
+    <dl class="technical-stats technical-only">
+      <div>
+        <dt>{lang === 'es' ? 'Artículos' : 'Articles'}</dt>
+        <dd>{String(posts.length).padStart(2, '0')}</dd>
+      </div>
+      <div>
+        <dt>{lang === 'es' ? 'Desde' : 'Since'}</dt>
+        <dd>{Math.min(...posts.map((p) => p.data.date.getUTCFullYear()))}</dd>
+      </div>
+      <div>
+        <dt>{lang === 'es' ? 'Idiomas' : 'Languages'}</dt>
+        <dd>EN / ES</dd>
+      </div>
+    </dl>
     <span class="hero-note">C++ · GENERIC PROGRAMMING · MATHEMATICS</span>
   </div>
 </section>

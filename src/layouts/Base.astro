@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/technical.css';
 import { NAME, absolute, labels, type Lang } from '../lib/site';
 interface Props {
   title: string;
@@ -53,8 +54,18 @@ const feed = lang === 'es' ? '/feed-es.xml' : '/feed.xml';
     <meta name="theme-color" content="#f7f5ef" />
     <script is:inline>
       try {
-        const saved = localStorage.getItem('cp-theme');
-        if (saved === 'dark') document.documentElement.dataset.theme = 'dark';
+        const requested = new URLSearchParams(location.search).get('design');
+        if (requested === 'technical' || requested === 'editorial')
+          sessionStorage.setItem('cp-design-preview', requested);
+        const design = sessionStorage.getItem('cp-design-preview');
+        if (design === 'technical' || design === 'editorial') {
+          document.documentElement.dataset.designPreview = 'true';
+          document.documentElement.dataset.design = design;
+        }
+        const technical = design === 'technical';
+        const color = localStorage.getItem(technical ? 'cp-technical-theme' : 'cp-theme');
+        document.documentElement.dataset.theme =
+          color === 'light' || color === 'dark' ? color : technical ? 'dark' : 'light';
       } catch {}
     </script>
     <slot name="head" />
@@ -141,6 +152,28 @@ const feed = lang === 'es' ? '/feed-es.xml' : '/feed.xml';
         <span class="built-with">Astro · {lang.toUpperCase()}</span>
       </div>
     </footer>
+    <aside
+      class="design-preview"
+      aria-label={lang === 'es' ? 'Comparar diseños' : 'Compare designs'}
+    >
+      <span>{lang === 'es' ? 'Vista previa' : 'Design preview'}</span>
+      <div role="group" aria-label={lang === 'es' ? 'Diseño' : 'Design'}>
+        <button type="button" data-design-choice="editorial" aria-pressed="true">
+          Editorial
+        </button>
+        <button type="button" data-design-choice="technical" aria-pressed="false">
+          {lang === 'es' ? 'Técnico' : 'Technical'}
+        </button>
+      </div>
+      <button
+        type="button"
+        class="close-design-preview"
+        aria-label={lang === 'es' ? 'Cerrar vista previa' : 'Close design preview'}
+      >
+        ×
+      </button>
+    </aside>
+    <script src="../scripts/design-preview.ts"></script>
     <script>
       const menu = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const nav = document.querySelector<HTMLElement>('#main-nav');
@@ -158,13 +191,6 @@ const feed = lang === 'es' ? '/feed-es.xml' : '/feed.xml';
           }
         });
       }
-      document.querySelector('.theme-toggle')?.addEventListener('click', () => {
-        const dark = document.documentElement.dataset.theme !== 'dark';
-        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-        try {
-          localStorage.setItem('cp-theme', dark ? 'dark' : 'light');
-        } catch {}
-      });
     </script>
   </body>
 </html>

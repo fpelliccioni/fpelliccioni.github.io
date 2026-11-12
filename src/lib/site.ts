@@ -98,6 +98,7 @@ export const labels = {
 export const absolute = (path: string) => new URL(path, SITE).href;
 export const plain = (body: string) =>
   body
+    .replace(/\\\r?\n/g, ' ')
     .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/<[^>]*>/g, ' ')
     .replace(/```[\s\S]*?```/g, ' ')

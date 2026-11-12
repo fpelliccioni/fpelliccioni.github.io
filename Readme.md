@@ -131,3 +131,20 @@ previous Pages source (`master`, `/`).
 Manrope and Newsreader are distributed with their bundled font licenses.
 The analyzer and older repository content retain their existing licenses and
 attribution. See `LICENSE` and the headers of the relevant source files.
+
+## Comparing the editorial and technical designs
+
+The editorial design remains the default. Add `?design=technical` to any blog
+URL in a local preview to try the technical variant, or `?design=editorial` to
+compare. The preview bar switches between them without changing the page or
+content. The chosen design carries across blog navigation in that browser tab;
+close the preview bar to return to the regular editorial site.
+
+The technical design has its own light/dark preference, independent of the
+editorial palette. Both preferences are local to the reader's browser. Preview
+selection does not change the server, public default, canonical URLs, feeds,
+content or the standalone analyzer. The selector is hidden on normal visits.
+
+Technical design styles live in `src/styles/technical.css`; preview behavior is
+in `src/scripts/design-preview.ts`. JetBrains Mono is self-hosted and its license
+is distributed in `public/licenses/JetBrainsMono.txt`.
