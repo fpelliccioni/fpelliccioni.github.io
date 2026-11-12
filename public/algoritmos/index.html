@@ -1,419 +1,199 @@
 <!--
 Copyright Fernando Pelliccioni 2019-2021
-
-Distributed under the Boost Software License, Version 1.0. (See accompanying
-file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+Distributed under the Boost Software License, Version 1.0.
+https://www.boost.org/LICENSE_1_0.txt
 -->
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Algorithms</title>
-  <link href="/favicon.png" rel="icon">
-  <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="/assets/css/algorithms/style.css">
-  <link rel="stylesheet" href="/assets/css/algorithms/styles/monokai-sublime.css">
-  <script src="/assets/js/algorithms/highlight.pack.js"></script>
-  <script src="/assets/js/algorithms/two.min.js"></script>
-  <script src="/assets/js/algorithms/test.js"></script>
-  <script src="/assets/js/algorithms/main.js"></script>
-  <script src="/assets/js/algorithms/acorn.js"></script>
-  <script src="/assets/js/algorithms/interpreter.js"></script>
-  <script src="/assets/js/algorithms/Chart.bundle.min.js"></script>
-</head>
-
-<body>
-    <div class="main-container">
-        <div class="header-container">
-            <header>
-            <h1 class="title-global">
-                <!-- <a href="/algorithms">Algorithms &#120572;</a>-->
-                <a href="/algorithms">al-Khw&#257;rizm&#299; (&#120572;)</a>
-            </h1>
-            <nav>
-                <ul>
-                    <!-- <li><a href="/algorithms-about/">[About]</a></li>
-                    <li><a href="/algorithms-support/">[Support]</a></li>
-                    <li><a href="/algorithms-catalog/">[Catalog]</a></li>
-                    <li><a href="/">[Components Programming]</a></li> -->
-
-                    <li><a href="/algorithms-about/">[About]</a></li>
-                    <li><a href="/algorithms-support/">[Support]</a></li>
-                    <!-- <li><a href="/algorithms-stdlib/">[Std Lib]</a></li> -->
-                    <li><a href="/algorithms-catalog/">[Catalog]</a></li>
-                    <li><a href="/algorithms-course/">[Course]</a></li>
-                    <li><a href="/">[Components Programming]</a></li>
-
-                    <!-- <li><a href="/algorithms-help/">[Help]</a></li> -->
-                </ul>
-            </nav>
-            </header>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Laboratorio de algoritmos — al-Khwārizmī</title>
+    <meta
+      name="description"
+      content="Recorré los algoritmos paso a paso. Observá sus datos, iteradores y operaciones."
+    />
+    <link rel="canonical" href="https://componentsprogramming.com/algoritmos/" />
+    <link rel="alternate" hreflang="en" href="https://componentsprogramming.com/algorithms/" />
+    <link rel="alternate" hreflang="es" href="https://componentsprogramming.com/algoritmos/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0c1118" />
+    <link rel="stylesheet" href="/assets/css/algorithms/styles/monokai-sublime.css" />
+    <link rel="stylesheet" href="/assets/css/algorithms/lab.css" />
+    <script src="/assets/js/algorithms/highlight.pack.js"></script>
+    <script src="/assets/js/algorithms/two.min.js"></script>
+    <script src="/assets/js/algorithms/test.js"></script>
+    <script src="/assets/js/algorithms/main.js"></script>
+    <script src="/assets/js/algorithms/acorn.js"></script>
+    <script src="/assets/js/algorithms/interpreter.js"></script>
+    <script src="/assets/js/algorithms/Chart.bundle.min.js"></script>
+  </head>
+  <body class="algorithm-lab" data-mode="loading">
+    <a class="skip-link" href="#codeArea">Saltar al editor</a>
+    <header class="lab-header">
+      <a class="lab-brand" href="/algoritmos/"
+        ><span class="lab-brand-mark" aria-hidden="true">α</span
+        ><span>al-Khwārizmī<small>Laboratorio de algoritmos</small></span></a
+      >
+      <nav aria-label="Navegación">
+        <a href="/algorithms-catalog/">Catálogo</a><a href="/algorithms-course/">Curso</a
+        ><a href="/algorithms-about/">Acerca de</a><a href="/algorithms/" hreflang="en">EN</a
+        ><a class="blog-link" href="/inicio/">Volver al blog <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main class="lab-main">
+      <section class="lab-intro">
+        <div>
+          <p class="eyebrow">COMPONENTS PROGRAMMING / LAB</p>
+          <h1>Explorá. Ejecutá. Entendé.</h1>
+          <p>Recorré los algoritmos paso a paso. Observá sus datos, iteradores y operaciones.</p>
         </div>
-        <div class="hg">
-            <div id="hg-left" class="hg-left">
-                <div class="hg-left-b">
-                    <pre id="codeHighlightPre"><code id="codeHighlight" class="javascript"></code></pre>
-
-<textarea id="codeArea">
-//CODE HERE!
-var d = add_sequence(random_array(), "d");
-</textarea>
-
-</div>
-                <div class="hg-left-c">
-                    <div id="Buttons">
-                        <button id="startButton" onclick="startButton()">Start (Ctrl-F9)</button>
-                        <button id="stepButton" onclick="stepButton()" disabled="disabled">Step (&darr;)</button>
-                        <button id="restartButton" onclick="restartButton()">Restart</button>
-                        <button id="editButton" onclick="editButton()">Edit</button>
-                    </div>​
-                </div>
-
-                <div class="hg-left-d">
-                <!-- <div id="CopyrightDiv"> -->
-                    <p id="CopyrightP">
-                    <a id="Copyright" href="/about-me/">Copyright &copy; Fernando Pelliccioni 2019-2021.</a>
-                    </p>
-                <!-- </div>​ -->
-                </div>
-
-            </div>
-
-            <div class="hg-right">
-                <div id="hg-right-a" class="hg-right-a">
-                    <div id="sequence"></div>
-                </div>
-                <div id="hg-right-pre-a" class="hg-right-pre-a">
-                    <!-- <canvas id="myChart"></canvas> -->
-                </div>
-                <div class="hg-right-b">
-                    <div id="hg-right-b-a">
-                        <div id="hg-right-x">
-                            <div id="hg-right-x-a"></div>
-                            <div id="hg-right-x-b"></div>
-                        </div>
-                        <!-- <div id="hg-right-y">
-                            <pre id="outputPre"><code id="output" class="javascript"></code></pre>
-                        </div> -->
-                        <div id="hg-right-y"></div>
-                        </div>
-                        <div id="hg-right-b-b">
-                            <textarea id="hg-right-b-b-data" readonly></textarea>
-                        </div>
-                </div>
-            </div>
-
+        <details class="lab-help">
+          <summary>Cómo usarlo <span aria-hidden="true">?</span></summary>
+          <div>
+            <ol>
+              <li>Elegí un ejemplo en el selector o escribí tu propio código JavaScript.</li>
+              <li>Iniciá la sesión y usá Paso siguiente para avanzar por las instrucciones.</li>
+              <li>
+                Observá los datos, los iteradores y las operaciones. Editar vuelve al código sin
+                perderlo.
+              </li>
+            </ol>
+            <p>Atajos: <kbd>Ctrl / ⌘ + Enter</kbd> · <kbd>→</kbd> <kbd>↓</kbd></p>
+          </div>
+        </details>
+      </section>
+      <section class="lab-toolbar" aria-label="Controles del analizador">
+        <div class="example-control">
+          <label for="exampleSelect">Ejemplo</label
+          ><select id="exampleSelect" disabled>
+            <option value="">Cargando ejemplos…</option>
+          </select>
         </div>
-    </div>
-
-    <script>
-        function loadParameters() {
-            var url_string = window.location.href;
-            var url = new URL(url_string);
-            var c = url.searchParams.get("code");
-            // console.log(c);
-
-            if (c) {
-                document.getElementById('codeArea').value = c;
-                editButton();
-                return;
-            }
-
-            var functName = url.searchParams.get("function");
-            if (functName) {
-                // alert(getFunction(functName))
-                document.getElementById('codeArea').value = getFunction(functName);
-                // editButton();
-                showFunction();
-                showFunctionAttributes(functName);
-                return;
-            }
-
-
-            // var snippet = url.searchParams.get("snippet");
-            // // console.log(snippet)
-            // if ( ! snippet) {
-            //     snippet = "partition_semistable";
-            // }
-            // if (snippet) {
-            //     document.getElementById('codeArea').value = getSnippet(snippet);
-            // }
-            // editButton();
-        }
-
-        var lines = [];
-        var prevLine = "";
-        var myInterpreter;
-
-        // var iterators_colors = ['#99ff99', '#d80500', '#afafff', '#ffaff7', '#fdffaf'
-        //                         , '#affffb', '#ffe2af', '#d0afff', '#e1ffaf', '#ffafb9'];
-
-        var iterators_colors = ['#afafff', '#ffaff7', '#fdffaf'
-                                , '#affffb', '#ffe2af', '#d0afff', '#e1ffaf', '#ffafb9'];
-
-        var iterators_int = {};
-        var iterators_gui = {};
-        var predicates = [];
-        var sequences = {};
-        var variables = {};
-        var tracks = [];
-        var track_data = [];
-
-
-
-        // var skipped = ['skip_debug'];
-        var skipped = [];
-
-        var stats_it_moves = 0;
-        var stats_it_cmps = 0;
-        var stats_pred_appls = 0;
-        var stats_swaps = 0;
-        var stats_assigments = 0;
-
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var user = url.searchParams.get("user");
-        // console.log(user)
-        if ( ! user) {
-            user = "fpelliccioni";
-        }
-
-        var repo = url.searchParams.get("repo");
-        // console.log(repo)
-        if ( ! repo) {
-            // repo = "tao-js";
-            repo = "algorithm_course";
-        }
-
-        var snippets = {};
-        var snippets_cat = {};
-        var global_std_code = '';
-        var global_std_code_debug = '';
-        var global_std_code_extra = '';
-
-        (async () => {
-            try {
-                await downloadStdCode(user, repo);
-                await downloadStdCodeDebug(user, repo);
-                await downloadStdCodeExtra(user, repo);
-
-                // console.log(snippets)
-                process_snippets();
-                // console.log(snippets)
-                process_snippets_usage();
-                // process_catalog();
-
-                var snippet = url.searchParams.get("snippet");
-                // console.log(snippet)
-                if ( ! snippet) {
-                    snippet = "find";
-                }
-                if (snippet) {
-                    document.getElementById('codeArea').value = getSnippet(snippet);
-                }
-                editButton();
-
-
-            } catch (e) { console.log(e); }
-        })();
-
-
-        // -------------------------------------------------------
-        var chartCtx = null;
-        if (document.getElementById('myChart')) {
-            chartCtx = document.getElementById('myChart').getContext('2d');
-        }
-        var myChart = null;
-        // -------------------------------------------------------
-
-        // console.log(document.getElementById('hg-right-a').offsetWidth)
-        // console.log(document.getElementById('hg-right-a').offsetHeight)
-
-        var two_width = document.getElementById('hg-right-a').offsetWidth
-        var two_height = document.getElementById('hg-right-a').offsetHeight
-
-
-        // console.log(two_width)
-        // console.log(two_height)
-
-
-        var two = new Two({
-                fullscreen: false,
-                // width: document.getElementById('sequence').offsetWidth,
-                // height: 600,
-                width: two_width,
-                height: two_height,
-                autostart: true
-        }).appendTo(sequence);
-
-        setSizes();
-
-        document.onkeydown = function (e) {
-            e = e || window.event;
-                // console.log(e)
-            // console.log(e.keyCode)
-
-            if (e.ctrlKey && e.keyCode == 120) {
-                if (document.getElementById('stepButton').disabled) {
-                    startButton()
-                }
-            }
-
-            if ( (e.ctrlKey && e.keyCode == 121) || (e.keyCode == 39)|| (e.keyCode == 40)) {
-                // console.log("121 pressed.")
-                if ( ! editionMode() && ! document.getElementById('stepButton').disabled) {
-                    stepButton();
-                }
-            }
-        };
-
-        loadParameters();
-        // editButton();
-    </script>
-</body>
+        <div class="execution-controls" id="Buttons">
+          <button id="startButton" class="primary" disabled>
+            <span aria-hidden="true">▷</span> Iniciar</button
+          ><button id="stepButton" class="primary" disabled hidden>
+            Paso siguiente <span aria-hidden="true">→</span></button
+          ><button id="restartButton" disabled>Reiniciar</button
+          ><button id="editButton" disabled>Editar</button>
+        </div>
+        <div class="session-status">
+          <span class="status-dot" aria-hidden="true"></span
+          ><span id="sessionStatus" role="status" aria-live="polite"
+            >Preparando la biblioteca…</span
+          >
+        </div>
+      </section>
+      <div id="loadError" class="load-error" role="alert" hidden>
+        <span id="loadErrorMessage"></span><button id="retryLoad">Reintentar</button>
+      </div>
+      <div class="lab-workspace">
+        <section id="hg-left" class="editor-panel panel" aria-labelledby="editorHeading">
+          <div class="panel-heading">
+            <h2 id="editorHeading"><span class="panel-index">01</span> Código fuente</h2>
+            <div>
+              <span class="language-label">JAVASCRIPT</span
+              ><button
+                class="icon-button"
+                id="copyCode"
+                title="Copiar código"
+                aria-label="Copiar código"
+              >
+                ⧉
+              </button>
+            </div>
+          </div>
+          <div class="editor-content">
+            <div id="lineNumbers" class="line-numbers" aria-hidden="true">1</div>
+            <textarea
+              id="codeArea"
+              aria-label="Código fuente"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="off"
+              wrap="off"
+              placeholder="// Escribí tu código aquí"
+            ></textarea>
+            <pre
+              id="codeHighlightPre"
+              tabindex="0"
+              aria-label="Código en ejecución"
+              style="display: none"
+            ><code id="codeHighlight" class="javascript"></code></pre>
+          </div>
+          <div class="editor-footer">
+            <span id="editorPosition">Ln 1, Col 1</span><span id="editorMode">Edición</span>
+          </div>
+        </section>
+        <section class="visual-panel panel" aria-labelledby="visualHeading">
+          <div class="panel-heading">
+            <h2 id="visualHeading"><span class="panel-index">02</span> Visualización</h2>
+            <span class="panel-hint"
+              >Las visualizaciones anchas se pueden desplazar horizontalmente.</span
+            >
+          </div>
+          <div class="visual-stage">
+            <div id="hg-right-a"><div id="sequence"></div></div>
+            <div class="visual-empty" id="visualEmpty">
+              <div class="empty-sequence" aria-hidden="true">
+                <span>5</span><span>2</span><span>8</span><span>1</span><span>6</span>
+              </div>
+              <h3 id="visualEmptyTitle">Tu algoritmo, a la vista.</h3>
+              <p id="visualEmptyDescription">
+                Elegí un ejemplo o editá el código. Iniciá la sesión y avanzá paso a paso para ver
+                cómo cambia.
+              </p>
+            </div>
+          </div>
+          <div id="hg-right-pre-a" class="secondary-visual"></div>
+        </section>
+        <section class="state-panel panel">
+          <div class="panel-heading">
+            <h2><span class="panel-index">03</span> Variables e iteradores</h2>
+          </div>
+          <div class="panel-content" id="hg-right-x-a"></div>
+          <p class="panel-placeholder" id="stateEmpty">
+            Las variables aparecerán al avanzar por el código.
+          </p>
+        </section>
+        <section class="metrics-panel panel">
+          <div class="panel-heading">
+            <h2><span class="panel-index">04</span> Operaciones</h2>
+          </div>
+          <div class="panel-content metrics" id="hg-right-x-b"></div>
+          <p class="panel-placeholder" id="metricsEmpty">
+            Iniciá una sesión para ver los contadores.
+          </p>
+        </section>
+        <section class="console-panel panel">
+          <div class="panel-heading">
+            <h2><span class="panel-index">05</span> Salida</h2>
+            <button class="quiet-button" id="clearOutput">Limpiar salida</button>
+          </div>
+          <div
+            class="panel-content console-output"
+            id="hg-right-y"
+            role="log"
+            aria-label="Salida"
+          ></div>
+          <p class="panel-placeholder" id="outputEmpty">La salida aparecerá al ejecutar print().</p>
+        </section>
+        <section class="log-panel panel">
+          <div class="panel-heading">
+            <h2><span class="panel-index">06</span> Registro de operaciones</h2>
+          </div>
+          <textarea id="hg-right-b-b-data" readonly aria-label="Registro de operaciones"></textarea>
+          <p class="panel-placeholder" id="logEmpty">
+            Las operaciones se registrarán durante la ejecución.
+          </p>
+        </section>
+      </div>
+    </main>
+    <footer class="lab-footer">
+      <a href="/acerca-de/">© 2026 Fernando Pelliccioni</a
+      ><span>al-Khwārizmī · Algoritmos, paso a paso.</span>
+    </footer>
+    <script src="/assets/js/algorithms/lab.js"></script>
+  </body>
 </html>
-
-
-
-<!--
-function partition_semistable(f, l, p) {
-    while (true) {
-        if (equal(f, l)) return f;
-        if (p(source(f))) break;
-        f = successor(f);
-    }
-
-    //var j = f;
-    var j = copy_it(f, 'j', '#9000d8');
-    j = successor(j)
-
-    while ( ! equal(j, l)) {
-        if ( ! p(source(j))) {
-            iter_swap(f, j);
-            f = successor(f);
-        }
-        j = successor(j);
-    }
-
-    remove_it(j);   //GUI stuff
-
-    return f;
-}
-
-// var it = partition_semistable(f, l, function(x) {return x % 2 == 0;});
-
-// var it = find_if(f, l, function(x) {return x % 2 == 0;});
-//if ( ! equal(it, l)) {
-//    print(source(it));
-//}
-
-function find_backward_if(f, l, p) {
-    while ( ! equal(l, f) && ! p(source(predecessor(l, false)))) {
-        l = predecessor(l);
-    }
-    return l;
-}
-
-//var it = find_backward_if(f, l, function(x) {return x % 2 == 0;});
-//if ( ! equal(it, l)) {
-//    print(source(predecessor(it, false)));
-//}
-
-
-function find(f, l, x) {
-    while ( ! equal(f, l)) {
-        if (source(f) == x) {
-            return f;
-        }
-        f = successor(f)
-    }
-    return f;
-} -->
-
-
-        <!-- <p><textarea id="dataCodeArea">
-data = [1, 3, 5, 2, 4, 8, 7, 2, 1, 3, 5, 2, 7, 8, 4];
-pred = function(x) {return x % 2 == 0;};
-        </textarea></p> -->
-
-    <!-- <textarea id="code">
-function find_if(f, l, p) {
-    while ( ! equal(f, l) && ! p(source(f))) {
-        f = successor(f)
-    }
-    return f;
-}
-
-function find_backward_if_not(f, l, p) {
-    while ( ! equal(l, f) && p(source(predecessor(l, false)))) {
-        l = predecessor(l);
-    }
-    return l;
-}
-
-function partition_bidirectional_unguarded(f, l, p) {
-    while(true) {
-        while ( ! p(source(f))) {
-            f = successor(f)
-        }
-
-        l = predecessor(l);
-        while (p(source(l))) {
-            l = predecessor(l);
-        }
-
-        l = successor(l);
-        if ( equal(l, f)) return f;
-
-        l = predecessor(l);
-        iter_swap(f, l);
-        f = successor(f)
-    }
-}
-
-function partition_bidirectional_optimized(f, l, p) {
-    f = find_if(f, l, p);
-    l = find_backward_if_not(f, l, p);
-    if (equal(f, l)) return f;
-    l = predecessor(l);
-    iter_swap(f, l);
-    f = successor(f)
-    return partition_bidirectional_unguarded(f, l, p);
-
-}
-
-var f = begin(data, "f");
-var l = end(data, "l", "#d80500");
-var it = partition_bidirectional_optimized(f, l, pred);
-                    </textarea> -->
-
-
-
-
-
-
-<!--
-
-                    <textarea id="dataCodeArea">
-                            data = [1, 3, 5];
-                            pred = function(x) {return x % 2 == 0;};
-                                    </textarea>
-
-                                    <textarea id="codeArea">
-                            function find_if_unguarded(f, p) {
-                                while ( ! p(source(f))) {
-                                    f = successor(f)
-                                }
-                                return f;
-                            }
-
-                            var f = begin(data, "f");
-                            var l = begin(data, "l");
-
-                            remove_it(l);
-
-                            var it = find_if_unguarded(f, pred);
-
-                            print(source(it))
-                                    </textarea>                     -->

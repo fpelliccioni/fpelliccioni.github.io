@@ -87,8 +87,10 @@ test('source code, article images and old fragment links survive Markdown conver
   }
   assert.deepEqual(issues, []);
 });
-test('the seven analyzer pages are preserved byte for byte', () => {
-  for (const r of published.filter((r) => r.kind === 'analyzer'))
+test('the five reference pages remain unchanged during the lab UI refresh', () => {
+  for (const r of published.filter(
+    (r) => r.kind === 'analyzer' && !['/algorithms/', '/algoritmos/'].includes(r.url),
+  ))
     assert.equal(
       createHash('sha256')
         .update(fs.readFileSync(output(r.url)))
@@ -158,9 +160,12 @@ test('internal blog navigation and article media resolve to generated files', ()
   assert.deepEqual(failures, []);
 });
 
-test('all 108 analyzer and chart assets remain unchanged', () => {
+test('the interpreter, renderer, vendor and chart assets remain unchanged', () => {
   const assets = JSON.parse(fs.readFileSync('tests/fixtures/analyzer-assets.json'));
-  for (const [file, expected] of Object.entries(assets))
+  // main.js has intentional source/output display fixes, covered by lab-ui.test.mjs.
+  for (const [file, expected] of Object.entries(assets).filter(
+    ([file]) => file !== 'assets/js/algorithms/main.js',
+  ))
     assert.equal(
       createHash('sha256')
         .update(fs.readFileSync(path.join('dist', file)))

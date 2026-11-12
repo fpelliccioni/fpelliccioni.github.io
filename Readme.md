@@ -80,9 +80,11 @@ Analytics is not enabled.
 
 ## Analyzer and archived experiments
 
-The seven analyzer pages are preserved as standalone static HTML in
+The seven analyzer routes use standalone static HTML in
 `public/algorithms*/` and `public/algoritmos/`. Their scripts and styles remain
-in `public/assets/`. They intentionally retain their existing UI. Root-domain
+in `public/assets/`. The English and Spanish lab entry pages use a responsive UI controller
+(`public/assets/js/algorithms/lab.js`) and scoped styles (`lab.css`). The five
+reference pages retain their existing UI. Root-domain
 asset references were made relative so the analyzer also works in local
 previews. No algorithm implementation was rewritten.
 
@@ -98,7 +100,8 @@ article code-block hashes, image references and fragment anchors. Tests verify:
 
 - Published URLs, canonical metadata, languages, translation links and drafts.
 - Every original article code block, image and fragment anchor.
-- The seven analyzer HTML snapshots byte for byte, after localizing asset URLs.
+- The five unchanged analyzer reference pages and untouched interpreter, renderer,
+  vendor and chart assets.
 - Complete bilingual sitemap and all six full-content Atom/RSS feeds.
 - Local navigation and article media targets.
 
@@ -149,3 +152,24 @@ content or the standalone analyzer. The selector is hidden on normal visits.
 Technical design styles live in `src/styles/technical.css`; preview behavior is
 in `src/scripts/design-preview.ts`. JetBrains Mono is self-hosted and its license
 is distributed in `public/licenses/JetBrainsMono.txt`.
+
+## Algorithm lab: UI/UX phase
+
+The `/algorithms/` and `/algoritmos/` entry points now separate source code,
+visualization, variables, operation counters, output and operation logs. The UI
+provides localized labels, example selection, line numbers, keyboard hints,
+copy/clear actions, loading and error feedback, and narrow-screen layouts.
+
+The existing Start / Step / Restart / Edit workflow and interpreter are retained;
+this phase does not add autoplay or change operation counting. URL `code` takes
+priority over `function`, then `snippet`, with `find` as the default example.
+Typing during library loading preserves the user's edits. Custom `user` and
+`repo` library parameters are retained. Library files are fetched concurrently
+and validated before execution is enabled. Source markup and printed HTML-like
+strings are displayed as text, and parse-error locations exclude the hidden
+library prelude.
+
+`tests/lab-ui.test.mjs` verifies the engine's DOM contract, source rendering and
+error locations. Historical hashes remain in the migration fixtures; the two
+redesigned entry pages and display-only changes in `main.js` are intentionally
+excluded from unchanged-file checks.
