@@ -783,15 +783,42 @@ function resetStatus() {
     resetStats();
 }
 
+function escapeCodeHtml(text) {
+    return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function formatSourceParseError(error, prefix) {
+    var prefixLines = prefix.split('\n').length - 1;
+    return String(error.message || error).replace(/\((\d+):(\d+)\)$/, function (position, line, column) {
+        var sourceLine = Number(line) - prefixLines;
+        if (sourceLine < 1) return position;
+        var sourceColumn = Number(column);
+        if (sourceLine === 1) {
+            var prefixColumn = prefix.length - prefix.lastIndexOf('\n') - 1;
+            if (sourceColumn < prefixColumn) return position;
+            sourceColumn -= prefixColumn;
+        }
+        return '(' + sourceLine + ':' + sourceColumn + ')';
+    });
+}
+
+function appendOutputMessage(kind, text) {
+    var message = document.createElement('p');
+    message.className = 'output-message';
+    message.dataset.outputKind = kind;
+    var label = document.createElement('strong');
+    label.textContent = kind === 'error' ? 'ERROR: ' : 'INFO: ';
+    label.style.color = kind === 'error' ? '#ff9f9f' : '#7ad8ed';
+    message.appendChild(label);
+    message.appendChild(document.createTextNode(String(text)));
+    document.getElementById('hg-right-y').appendChild(message);
+}
+
 function showError(text) {
-    var msg = '<p id="OutputMsg"><span style="color:red">ERROR: </span>' + text + '</p>';
-
-    var output = document.getElementById('hg-right-y');
-    output.innerHTML += msg;
-    // hljs.highlightBlock(output);
-
+    appendOutputMessage('error', text);
     console.log(arguments.length ? text : '');
 }
+
 
 function fromInterpreterArray(array_par) {
     var length = array_par.properties['length'];
@@ -850,11 +877,7 @@ function initFunctions(interpreter, scope) {
             text = "[" + text.data.join(", ") + "]";
         }
 
-        var msg = '<p id="OutputMsg"><span style="color:cyan">INFO: </span>' + text + '</p>';
-
-        var output = document.getElementById('hg-right-y');
-        output.innerHTML += msg;
-        // hljs.highlightBlock(output);
+        appendOutputMessage('info', text);
 
         // console.log(text);
         // console.log(arguments.length ? text : '');
@@ -2452,7 +2475,7 @@ function startButton() {
     resetStatus();
 
     var codeHighlight = document.getElementById('codeHighlight');
-    codeHighlight.innerHTML = codeView;
+    codeHighlight.textContent = codeView;
     hljs.highlightBlock(codeHighlight);
     codeHighlight.style.fontSize = "12pt";
 
@@ -2462,7 +2485,7 @@ function startButton() {
         updateStatus();
     } catch (error) {
         editButton();
-        showError("parsing error");
+        showError(formatSourceParseError(error, invisibleCode()));
     }
 }
 
@@ -2492,7 +2515,7 @@ function showFunction() {
     resetStatus();
 
     var codeHighlight = document.getElementById('codeHighlight');
-    codeHighlight.innerHTML = codeView;
+    codeHighlight.textContent = codeView;
     hljs.highlightBlock(codeHighlight);
     codeHighlight.style.fontSize = "20pt";
 
@@ -3093,7 +3116,7 @@ function stepButton() {
                 // console.log('break 2')
 
                 var codeHighlight = document.getElementById('codeHighlight');
-                codeHighlight.innerHTML = codeView;
+                codeHighlight.textContent = codeView;
                 hljs.highlightBlock(codeHighlight);
 
                 break;
@@ -3118,8 +3141,8 @@ function stepButton() {
         var codeSelected = codeView.substring(start, end);
         // console.log(codeSelected);
 
-        var codeHtml = [codeView.slice(0, end), "</mark>", codeView.slice(end)].join('');
-            codeHtml = [codeHtml.slice(0, start), "<mark>", codeHtml.slice(start)].join('');
+        var codeHtml = escapeCodeHtml(codeView.slice(0, start)) + "<mark>" +
+            escapeCodeHtml(codeView.slice(start, end)) + "</mark>" + escapeCodeHtml(codeView.slice(end));
         // console.log(codeHtml);
         var codeHighlight = document.getElementById('codeHighlight');
         codeHighlight.innerHTML = codeHtml;
