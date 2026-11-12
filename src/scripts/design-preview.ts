@@ -8,7 +8,7 @@ function updateControls() {
   choices.forEach((button) => {
     button.setAttribute(
       'aria-pressed',
-      String(button.dataset.designChoice === (root.dataset.design || 'editorial')),
+      String(button.dataset.designChoice === (root.dataset.design || root.dataset.defaultDesign)),
     );
   });
   const dark = root.dataset.theme === 'dark';
@@ -50,7 +50,7 @@ document.querySelector('.close-design-preview')?.addEventListener('click', () =>
   try {
     sessionStorage.removeItem('cp-design-preview');
   } catch {}
-  delete root.dataset.design;
+  root.dataset.design = root.dataset.defaultDesign;
   delete root.dataset.designPreview;
   const url = new URL(location.href);
   url.searchParams.delete('design');

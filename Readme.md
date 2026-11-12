@@ -24,7 +24,8 @@ source Markdown, drafts, tests and historical scratch files are not copied.
 
 The editorial theme uses a warm paper background, terracotta accents, Manrope
 for navigation and Newsreader for long-form reading. Fonts are self-hosted.
-The default theme is light; the optional dark theme is saved locally. The blog
+The technical design is the default, with a dark palette and an optional light
+palette saved locally. The editorial variant remains available for comparison. The blog
 uses plain browser JavaScript for mobile navigation, archive search and theme
 selection. There is no React runtime or third-party theme dependency.
 
@@ -134,11 +135,11 @@ attribution. See `LICENSE` and the headers of the relevant source files.
 
 ## Comparing the editorial and technical designs
 
-The editorial design remains the default. Add `?design=technical` to any blog
+The technical design is the default (`src/lib/design.ts`). Add `?design=technical` to any blog
 URL in a local preview to try the technical variant, or `?design=editorial` to
 compare. The preview bar switches between them without changing the page or
 content. The chosen design carries across blog navigation in that browser tab;
-close the preview bar to return to the regular editorial site.
+close the preview bar to return to the default technical site.
 
 The technical design has its own light/dark preference, independent of the
 editorial palette. Both preferences are local to the reader's browser. Preview

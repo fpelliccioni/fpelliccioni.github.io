@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/technical.css';
+import { DEFAULT_DESIGN } from '../lib/design';
 import { NAME, absolute, labels, type Lang } from '../lib/site';
 interface Props {
   title: string;
@@ -29,7 +30,12 @@ const feed = lang === 'es' ? '/feed-es.xml' : '/feed.xml';
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html
+  lang={lang}
+  data-design={DEFAULT_DESIGN}
+  data-default-design={DEFAULT_DESIGN}
+  data-theme="dark"
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -51,7 +57,7 @@ const feed = lang === 'es' ? '/feed-es.xml' : '/feed.xml';
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/atom+xml" title={`${NAME} (${lang})`} href={feed} />
-    <meta name="theme-color" content="#f7f5ef" />
+    <meta name="theme-color" content="#0c1118" />
     <script is:inline>
       try {
         const requested = new URLSearchParams(location.search).get('design');
@@ -62,7 +68,7 @@ const feed = lang === 'es' ? '/feed-es.xml' : '/feed.xml';
           document.documentElement.dataset.designPreview = 'true';
           document.documentElement.dataset.design = design;
         }
-        const technical = design === 'technical';
+        const technical = document.documentElement.dataset.design === 'technical';
         const color = localStorage.getItem(technical ? 'cp-technical-theme' : 'cp-theme');
         document.documentElement.dataset.theme =
           color === 'light' || color === 'dark' ? color : technical ? 'dark' : 'light';
@@ -149,7 +155,6 @@ const feed = lang === 'es' ? '/feed-es.xml' : '/feed.xml';
           <a href={feed}>RSS</a>
           <a href="https://github.com/fpelliccioni/fpelliccioni.github.io">GitHub ↗</a>
         </div>
-        <span class="built-with">Astro · {lang.toUpperCase()}</span>
       </div>
     </footer>
     <aside
