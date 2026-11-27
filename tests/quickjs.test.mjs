@@ -63,3 +63,24 @@ test('closing a paused QuickJS session leaves later statements unexecuted', asyn
   assert.deepEqual(calls, []);
   assert.equal((await session.next()).done, true);
 });
+
+test('the visualizer can evaluate a guest predicate without counting a user operation', async () => {
+  const quick = Function(
+    fs.readFileSync('dist/assets/js/algorithms/quickjs.js', 'utf8') + '\nreturn LabQuickJS;',
+  )();
+  const colors = [];
+  const session = await quick.createSession(
+    'const compare = x => x > 2; const marker = 3;',
+    0,
+    () => {},
+    (scope) => {
+      if (scope.properties.compare) colors.push(scope.properties.compare.call(3));
+    },
+  );
+  try {
+    while (!(await session.next()).done) {}
+    assert.deepEqual(colors, [true]);
+  } finally {
+    await session.close();
+  }
+});

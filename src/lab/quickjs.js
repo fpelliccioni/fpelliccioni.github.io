@@ -142,7 +142,7 @@ export async function createSession(source, offset, initialize, draw) {
         if (!rendering) return undefined;
         const handles = args.map(write);
         try {
-          const target = vm.getProp(retained);
+          const target = vm.getProp(retained, 'inner_function');
           try {
             const fn = vm.typeof(target) === 'function' ? target : retained;
             return vm
