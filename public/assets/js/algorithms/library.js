@@ -52,5 +52,32 @@
       ),
     ).sort();
   }
-  window.LabLibrary = { user: user, repo: repo, load: load, examples: examples };
+  function typescriptSources(extra) {
+    var entries = Object.create(null);
+    for (var node of acorn.parse(extra, { ecmaVersion: 'latest' }).body) {
+      if (node.type !== 'FunctionDeclaration') continue;
+      var match = /^__(.+)_typescript$/.exec(node.id.name);
+      if (!match || node.body.body.length !== 1) continue;
+      var statement = node.body.body[0];
+      if (statement.type !== 'ReturnStatement' || statement.argument?.type !== 'ArrayExpression')
+        continue;
+      var values = statement.argument.elements;
+      if (
+        values.length === 2 &&
+        values.every(function (value) {
+          return value?.type === 'Literal' && typeof value.value === 'string';
+        })
+      ) {
+        entries[match[1]] = { definition: values[0].value, usage: values[1].value };
+      }
+    }
+    return entries;
+  }
+  window.LabLibrary = {
+    user: user,
+    repo: repo,
+    load: load,
+    examples: examples,
+    typescriptSources: typescriptSources,
+  };
 })();

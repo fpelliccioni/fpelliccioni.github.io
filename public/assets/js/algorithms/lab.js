@@ -190,6 +190,13 @@ var repo = LabLibrary.repo;
   window.addEventListener('resize', resizeCanvas);
 
   var commandPending = false;
+  var typedSources = Object.create(null);
+  var editorLanguage = 'javascript';
+
+  function setEditorLanguage(language) {
+    editorLanguage = language;
+    byId('editorLanguage').textContent = language.toUpperCase();
+  }
   async function closeSession() {
     if (!quickSession) return;
     var session = quickSession;
@@ -207,6 +214,8 @@ var repo = LabLibrary.repo;
           editUrl.searchParams.delete('function');
           editUrl.searchParams.delete('snippet');
           editUrl.searchParams.set('code', editor.value);
+          if (editorLanguage === 'typescript') editUrl.searchParams.set('lang', 'ts');
+          else editUrl.searchParams.delete('lang');
           location.href = editUrl.href;
           return;
         }
@@ -229,6 +238,7 @@ var repo = LabLibrary.repo;
             initFunctions(adapter);
           },
           drawScope,
+          editorLanguage,
         );
         startButton(function () {
           return myInterpreter;
@@ -429,6 +439,7 @@ var repo = LabLibrary.repo;
         location.href = next.href;
         return;
       }
+      setEditorLanguage(typedSources[name] ? 'typescript' : 'javascript');
       editor.value = getSnippet(name);
       editor.setSelectionRange(0, 0);
       editor.scrollTop = 0;
@@ -504,10 +515,21 @@ var repo = LabLibrary.repo;
       process_snippets();
       functionSources = Object.assign({}, snippets);
       process_snippets_usage();
+      typedSources = LabLibrary.typescriptSources(global_std_code_extra);
+      for (var name of Object.keys(typedSources)) {
+        if (!Object.hasOwn(functionSources, name)) {
+          delete typedSources[name];
+          continue;
+        }
+        var typed = typedSources[name];
+        functionSources[name] = typed.definition;
+        snippets[name] = typed.definition + '\n\n' + typed.usage;
+      }
       fillExamples();
       ready = true;
       if (!sourceDirty) {
         if (params.has('code')) {
+          setEditorLanguage(params.get('lang') === 'ts' ? 'typescript' : 'javascript');
           editor.value = params.get('code');
           editButton();
           setMode('ready');
@@ -518,6 +540,7 @@ var repo = LabLibrary.repo;
             showProblem(t.functionNotFound, false);
             return;
           }
+          setEditorLanguage(typedSources[name] ? 'typescript' : 'javascript');
           editor.value = source;
           showFunction();
           renderReference(name);
@@ -530,6 +553,7 @@ var repo = LabLibrary.repo;
             showProblem(t.notFound, false);
             return;
           }
+          setEditorLanguage(typedSources[name] ? 'typescript' : 'javascript');
           editor.value = source;
           setCurrentAlgorithm(name);
           editButton();
@@ -551,7 +575,10 @@ var repo = LabLibrary.repo;
       showProblem(t.loadFailed, true);
     }
   }
-  if (params.has('code')) editor.value = params.get('code');
+  if (params.has('code')) {
+    setEditorLanguage(params.get('lang') === 'ts' ? 'typescript' : 'javascript');
+    editor.value = params.get('code');
+  }
   updateEditor();
   setMode('loading');
   loadLibrary();

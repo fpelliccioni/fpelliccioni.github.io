@@ -87,3 +87,49 @@ test('the visualizer can evaluate a guest predicate without counting a user oper
     await session.close();
   }
 });
+
+test('TypeScript keeps checkpoints on the typed editor source', async () => {
+  const quick = Function(
+    fs.readFileSync('dist/assets/js/algorithms/quickjs.js', 'utf8') + '\nreturn LabQuickJS;',
+  )();
+  const source = [
+    'type Predicate<T> = (value: T) => boolean;',
+    'function testIt<T>(value: T, predicate: Predicate<T>): boolean {',
+    '  const result: boolean = predicate(value);',
+    '  return result;',
+    '}',
+    'const result: boolean = testIt<number>(2, x => x === 2);',
+    'print(result);',
+  ].join('\n');
+  const prefix = 'function identity(value) { return value; }\n';
+  const output = [];
+  const session = await quick.createSession(
+    prefix + source,
+    prefix.length,
+    (adapter) => adapter.setProperty(null, 'print', (value) => output.push(value)),
+    undefined,
+    'typescript',
+  );
+  const highlighted = [];
+  try {
+    let done = false;
+    for (let i = 0; i < 20; i++) {
+      const event = await session.next();
+      assert.ifError(event.error);
+      if (event.done) {
+        done = true;
+        break;
+      }
+      highlighted.push(
+        source.slice(event.point.start - prefix.length, event.point.end - prefix.length),
+      );
+    }
+    assert.ok(done);
+    assert.deepEqual(output, [true]);
+    assert.ok(highlighted.includes('const result: boolean = predicate(value);'));
+    assert.ok(highlighted.includes('const result: boolean = testIt<number>(2, x => x === 2);'));
+    assert.ok(highlighted.every((source) => !source.startsWith('type Predicate')));
+  } finally {
+    await session.close();
+  }
+});
