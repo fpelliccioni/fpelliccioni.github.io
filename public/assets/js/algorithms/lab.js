@@ -357,6 +357,91 @@ var repo = LabLibrary.repo;
   ['keyup', 'click', 'select'].forEach(function (name) {
     editor.addEventListener(name, updateEditor);
   });
+  var functionHelp = {
+    digitSum: ['Suma los dígitos decimales de un entero seguro. Ignora el signo.', 'Adds the decimal digits of a safe integer, ignoring its sign.'],
+    lower_bound_n: ['Devuelve la primera posición cuyo elemento no es menor que el valor buscado, según la relación dada.', 'Returns the first position whose element is not less than the search value under the given relation.'],
+    upper_bound_n: ['Devuelve la primera posición cuyo elemento es mayor que el valor buscado, según la relación dada.', 'Returns the first position whose element is greater than the search value under the given relation.'],
+    partition_point_n: ['Busca el límite entre los elementos que cumplen el predicado y los que no.', 'Finds the boundary between elements that satisfy the predicate and those that do not.'],
+    relation: ['Registra una relación binaria para contar y mostrar sus evaluaciones.', 'Registers a binary relation so the lab can count and display its calls.'],
+    predicate: ['Registra un predicado para contar y mostrar sus evaluaciones.', 'Registers a predicate so the lab can count and display its calls.'],
+    hasLowerDigitSum: ['Indica si el primer entero tiene una suma de dígitos menor que la del segundo.', 'Checks whether the first integer has a smaller digit sum than the second.'],
+    sequence: ['Crea una secuencia con nombre para el visualizador.', 'Creates a named sequence for the visualizer.'],
+    begin: ['Devuelve el iterador al comienzo de la secuencia.', 'Returns the iterator at the start of the sequence.'],
+    end: ['Devuelve el iterador que marca el final de la secuencia.', 'Returns the iterator marking the end of the sequence.'],
+    size: ['Devuelve la cantidad de elementos de la secuencia.', 'Returns the number of elements in the sequence.'],
+    source: ['Lee el elemento en la posición del iterador.', 'Reads the element at the iterator position.'],
+    print: ['Muestra un valor en la salida del laboratorio.', 'Displays a value in the lab output.'],
+  };
+  var tooltip = document.createElement('div');
+  tooltip.className = 'function-tooltip';
+  tooltip.setAttribute('role', 'dialog');
+  tooltip.setAttribute('aria-label', es ? 'Documentación de la función' : 'Function documentation');
+  var helpText = document.createElement('div');
+  var closeHelp = document.createElement('button');
+  closeHelp.className = 'function-tooltip-close';
+  closeHelp.type = 'button';
+  closeHelp.textContent = '×';
+  closeHelp.setAttribute('aria-label', es ? 'Cerrar documentación' : 'Close documentation');
+  tooltip.append(helpText, closeHelp);
+  tooltip.hidden = true;
+  document.body.appendChild(tooltip);
+  var measure = document.createElement('canvas').getContext('2d');
+
+  var helpOrigin;
+  function hideFunctionHelp() {
+    if (tooltip.hidden) return;
+    tooltip.hidden = true;
+    helpOrigin.focus({ preventScroll: true });
+  }
+  closeHelp.addEventListener('click', hideFunctionHelp);
+
+  function showFunctionHelp(event) {
+    var area = event.currentTarget;
+    var style = getComputedStyle(area);
+    var rect = area.getBoundingClientRect();
+    var x = event.clientX - rect.left - parseFloat(style.paddingLeft) + area.scrollLeft;
+    var y = event.clientY - rect.top - parseFloat(style.paddingTop) + area.scrollTop;
+    measure.font = style.fontSize + ' ' + style.fontFamily;
+    var column = Math.floor(x / measure.measureText('0').width);
+    var line = editor.value.split('\n')[Math.floor(y / parseFloat(style.lineHeight))];
+    if (!line || column < 0) return;
+
+    var visual = 0;
+    var size = parseInt(style.tabSize, 10) || 4;
+    var offset = 0;
+    while (offset < line.length && visual <= column) {
+      visual += line[offset] === '	' ? size - (visual % size) : 1;
+      offset++;
+    }
+    if (visual <= column) return;
+    var token = Array.from(line.matchAll(/[A-Za-z_$][\w$]*/g)).find(function (word) {
+      return word.index < offset && offset <= word.index + word[0].length;
+    });
+    if (!token) return;
+
+    var name = token[0];
+    var description = Object.hasOwn(functionHelp, name) ? functionHelp[name][es ? 0 : 1] : '';
+    var definition = Object.hasOwn(functionSources, name) ? functionSources[name].trim() : '';
+    if (!description && !definition) return;
+
+    var signature = definition.split('\n')[0].replace(/\s*\{\s*$/, '');
+    helpText.textContent = (signature || name) + (description ? '\n' + description : '');
+    helpOrigin = area;
+    tooltip.hidden = false;
+    closeHelp.focus({ preventScroll: true });
+    tooltip.style.left = Math.max(8, Math.min(event.clientX + 12, innerWidth - tooltip.offsetWidth - 8)) + 'px';
+    tooltip.style.top = (event.clientY + tooltip.offsetHeight + 20 < innerHeight
+      ? event.clientY + 16
+      : Math.max(8, event.clientY - tooltip.offsetHeight - 10)) + 'px';
+  }
+
+  [editor, byId('codeHighlightPre')].forEach(function (area) {
+    area.addEventListener('click', showFunctionHelp);
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') hideFunctionHelp();
+  });
+
   [editor, byId('codeHighlightPre')].forEach(function (area) {
     area.addEventListener('scroll', function () {
       byId('lineNumbers').scrollTop = area.scrollTop;

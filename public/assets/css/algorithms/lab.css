@@ -1104,3 +1104,29 @@ main.catalog-page {
   width: 100%;
   height: 100%;
 }
+
+.function-tooltip {
+  position: fixed;
+  z-index: 30;
+  max-width: min(430px, calc(100vw - 16px));
+  padding: 9px 36px 9px 12px;
+  border: 1px solid #40546b;
+  border-radius: 6px;
+  background: #182430;
+  color: var(--ink);
+  box-shadow: 0 6px 20px #0006;
+  font: 12px/1.5 var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+
+.function-tooltip-close {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  min-width: 26px;
+  min-height: 26px;
+  padding: 0;
+  font-size: 18px;
+}
