@@ -67,6 +67,51 @@ test('closing a paused QuickJS session leaves later statements unexecuted', asyn
   assert.equal((await session.next()).done, true);
 });
 
+test('control flow pauses on its condition and executed statements only', async () => {
+  const quick = Function(
+    fs.readFileSync('dist/assets/js/algorithms/quickjs.js', 'utf8') + '\nreturn LabQuickJS;',
+  )();
+  const source = [
+    'let i = 0;',
+    'while (i < 2) {',
+    '  if (i === 0) print("first");',
+    '  else print("second");',
+    '  ++i;',
+    '}',
+    'if (i < 0) print("unreachable");',
+    'for (let j = 0; j < 1; ++j) print(j);',
+    'do { ++i; } while (i < 3);',
+    'for (const value of [4]) print(value);',
+    'for (;;) { break; }',
+  ].join('\n');
+  const output = [];
+  const session = await quick.createSession(source, 0, (adapter) => {
+    adapter.setProperty(null, 'print', (value) => output.push(value));
+  });
+  const highlights = [];
+  try {
+    for (;;) {
+      const { done, error, point } = await session.next();
+      assert.ifError(error);
+      if (done) break;
+      highlights.push(source.slice(point.start, point.end).trim());
+    }
+    assert.deepEqual(highlights, [
+      'let i = 0;',
+      'i < 2', 'i === 0', 'print("first");', '++i;',
+      'i < 2', 'i === 0', 'print("second");', '++i;',
+      'i < 2', 'i < 0',
+      'j < 1', 'print(j);', 'j < 1',
+      '++i;', 'i < 3',
+      'for (const value of [4])', 'print(value);',
+      'for (;;)', 'break;',
+    ]);
+    assert.deepEqual(output, ['first', 'second', 0, 4]);
+  } finally {
+    await session.close();
+  }
+});
+
 test('the visualizer can evaluate a guest predicate without counting a user operation', async () => {
   const quick = Function(
     fs.readFileSync('dist/assets/js/algorithms/quickjs.js', 'utf8') + '\nreturn LabQuickJS;',
