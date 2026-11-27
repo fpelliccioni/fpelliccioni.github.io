@@ -372,7 +372,7 @@ var repo = LabLibrary.repo;
     relation: ['Registra una relación binaria para contar y mostrar sus evaluaciones.', 'Registers a binary relation so the lab can count and display its calls.'],
     predicate: ['Registra un predicado para contar y mostrar sus evaluaciones.', 'Registers a predicate so the lab can count and display its calls.'],
     hasLowerDigitSum: ['Indica si el primer entero tiene una suma de dígitos menor que la del segundo.', 'Checks whether the first integer has a smaller digit sum than the second.'],
-    sequence: ['Crea una secuencia con nombre para el visualizador.', 'Creates a named sequence for the visualizer.'],
+    sequence: ['Crea una secuencia para el visualizador. Si omitís el nombre, usa el de la variable.', 'Creates a sequence for the visualizer. If omitted, the name comes from the variable.'],
     begin: ['Devuelve el iterador al comienzo de la secuencia.', 'Returns the iterator at the start of the sequence.'],
     end: ['Devuelve el iterador que marca el final de la secuencia.', 'Returns the iterator marking the end of the sequence.'],
     size: ['Devuelve la cantidad de elementos de la secuencia.', 'Returns the number of elements in the sequence.'],

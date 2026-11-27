@@ -28,13 +28,20 @@ function instrument(source, offset, language) {
               start < offset ||
               !t.isIdentifier(id) ||
               !t.isCallExpression(init) ||
-              !t.isIdentifier(init.callee) ||
-              !['predicate', 'relation'].includes(init.callee.name) ||
-              !t.isArrowFunctionExpression(init.arguments[0])
+              !t.isIdentifier(init.callee)
             )
               return;
             const binding = path.scope.getBinding(init.callee.name);
             if (binding && binding.identifier.start >= offset) return;
+
+            if (init.callee.name === 'sequence' && init.arguments.length === 1 &&
+                !t.isSpreadElement(init.arguments[0])) {
+              init.arguments.push(t.stringLiteral(id.name));
+              return;
+            }
+
+            if (!['predicate', 'relation'].includes(init.callee.name) ||
+                !t.isArrowFunctionExpression(init.arguments[0])) return;
 
             // A computed property gives the arrow the same inferred name as
             // a direct initializer, without changing its lexical bindings.

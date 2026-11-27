@@ -208,3 +208,32 @@ test('contracts can read sequences without changing metrics, trace, output, or c
   const restored = await run('try { post(() => { throw Error("check failed"); }); } catch {}');
   assert.deepEqual(restored, { ...baseline, steps: baseline.steps + 2 });
 });
+
+test('sequence infers its name from the editor binding and keeps explicit names', async () => {
+  const quick = Function(
+    fs.readFileSync('dist/assets/js/algorithms/quickjs.js', 'utf8') + '\nreturn LabQuickJS;',
+  )();
+  const prefix = 'function sequence(data, name) { return capture(name); }\n';
+  const source = `
+    const d = sequence<number>([11, 22]);
+    const values = sequence([49], "custom");
+    {
+      const sequence = (data: number[], name?: string) => capture(name ?? "local");
+      const other = sequence([58]);
+    }
+  `;
+  const names = [];
+  const session = await quick.createSession(prefix + source, prefix.length, (adapter) => {
+    adapter.setProperty(null, 'capture', (name) => names.push(name));
+  }, undefined, 'typescript');
+  try {
+    for (;;) {
+      const event = await session.next();
+      assert.ifError(event.error);
+      if (event.done) break;
+    }
+    assert.deepEqual(names, ['d', 'custom', 'local']);
+  } finally {
+    await session.close();
+  }
+});
