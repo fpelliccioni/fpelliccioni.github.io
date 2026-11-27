@@ -53,6 +53,7 @@
         'sort-n': 'Tamaño fijo', cycle: 'Ciclos', reverse: 'Inversión', rotate: 'Rotación',
         shift: 'Desplazamiento', heaps: 'Montículos', partition: 'Partición',
         search: 'Búsqueda', linear: 'Lineal', binary: 'Binaria', selection: 'Selección',
+        traversal: 'Recorrido', reduction: 'Reducción',
         swapping: 'Intercambio', uncatalogued: 'Sin categoría', writing: 'Escritura', other: 'Otros',
       }
     : {
