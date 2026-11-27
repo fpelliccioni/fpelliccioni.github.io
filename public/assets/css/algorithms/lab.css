@@ -358,6 +358,7 @@ button.primary {
   min-height: 650px;
 }
 .editor-content {
+  --editor-gutter: 40px;
   display: flex;
   flex: 1;
   min-height: 0;
@@ -366,7 +367,7 @@ button.primary {
   background: #0f1720;
 }
 .line-numbers {
-  flex: 0 0 40px;
+  flex: 0 0 var(--editor-gutter);
   font: 11px/22px var(--mono);
   color: #62778b;
   text-align: right;
@@ -390,6 +391,47 @@ button.primary {
   tab-size: 4;
   white-space: pre;
   outline-offset: -3px;
+}
+#codeArea.has-syntax-preview {
+  position: relative;
+  color: transparent;
+  caret-color: var(--ink);
+}
+#codeArea.has-syntax-preview::selection {
+  background: #80bfff50;
+  color: transparent;
+}
+#codeArea.has-syntax-preview::placeholder {
+  color: var(--muted);
+}
+#editorSyntax {
+  position: absolute;
+  inset: 0 0 0 var(--editor-gutter);
+  margin: 0;
+  padding: 19px 15px;
+  overflow: hidden;
+  color: var(--ink);
+  font: 11px/22px var(--mono);
+  tab-size: 4;
+  white-space: pre;
+  pointer-events: none;
+}
+#editorSyntax code {
+  display: block;
+  font: inherit;
+  white-space: inherit;
+}
+@media (forced-colors: active) {
+  #editorSyntax {
+    display: none;
+  }
+  #codeArea.has-syntax-preview {
+    color: CanvasText;
+  }
+  #codeArea.has-syntax-preview::selection {
+    background: Highlight;
+    color: HighlightText;
+  }
 }
 #codeHighlightPre {
   flex: 1;
@@ -626,6 +668,7 @@ button.primary {
     grid-template-columns: minmax(420px, 1fr) minmax(380px, 1.1fr) minmax(250px, 0.65fr);
   }
   #codeArea,
+  #editorSyntax,
   #codeHighlight {
     font-size: 12px !important;
   }
@@ -809,11 +852,14 @@ button.primary {
     font-size: 7px;
   }
   #codeArea,
+  #editorSyntax,
   #codeHighlight {
     font-size: 11px !important;
   }
+  .editor-content {
+    --editor-gutter: 32px;
+  }
   .line-numbers {
-    flex-basis: 32px;
     font-size: 10px;
   }
   .metrics {
@@ -872,6 +918,7 @@ body[data-mode='reference'] #hg-right-a {
   line-height: 24px;
 }
 #codeArea,
+#editorSyntax,
 #codeHighlightPre,
 #codeHighlight {
   font-size: 13px !important;
@@ -883,6 +930,7 @@ body[data-mode='reference'] #hg-right-a {
 }
 @media (max-width: 700px) {
   #codeArea,
+  #editorSyntax,
   #codeHighlightPre,
   #codeHighlight {
     font-size: 12px !important;

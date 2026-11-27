@@ -43,6 +43,34 @@ var repo = LabLibrary.repo;
 (function () {
   var es = document.documentElement.lang === 'es';
   var editor = document.getElementById('codeArea');
+  var editorSyntax = document.createElement('pre');
+  editorSyntax.id = 'editorSyntax';
+  editorSyntax.setAttribute('aria-hidden', 'true');
+  editorSyntax.hidden = true;
+  var editorSyntaxCode = document.createElement('code');
+  editorSyntax.appendChild(editorSyntaxCode);
+  editor.before(editorSyntax);
+  var lastHighlightedCode;
+
+  function syncEditorSyntaxScroll() {
+    editorSyntaxCode.style.transform =
+      'translate(' + -editor.scrollLeft + 'px, ' + -editor.scrollTop + 'px)';
+  }
+
+  function updateEditorSyntax() {
+    if (!editor.getClientRects().length || typeof hljs === 'undefined') {
+      editorSyntax.hidden = true;
+      return;
+    }
+    if (editor.value !== lastHighlightedCode) {
+      editorSyntaxCode.innerHTML = hljs.highlight('javascript', editor.value, true).value + ' ';
+      lastHighlightedCode = editor.value;
+    }
+    editorSyntax.hidden = false;
+    editor.classList.add('has-syntax-preview');
+    syncEditorSyntaxScroll();
+  }
+
   var select = document.getElementById('exampleSelect');
   var status = document.getElementById('sessionStatus');
   var sourceDirty = false;
@@ -171,6 +199,7 @@ var repo = LabLibrary.repo;
     byId('logEmpty').hidden = !!byId('hg-right-b-b-data').value.trim();
   }
   function updateEditor() {
+    updateEditorSyntax();
     var count = editor.value.split('\n').length;
     byId('lineNumbers').textContent = Array.from({ length: count }, function (_, n) {
       return n + 1;
@@ -490,6 +519,7 @@ var repo = LabLibrary.repo;
   [editor, byId('codeHighlightPre')].forEach(function (area) {
     area.addEventListener('scroll', function () {
       byId('lineNumbers').scrollTop = area.scrollTop;
+      if (area === editor) syncEditorSyntaxScroll();
     });
   });
   document.addEventListener('keydown', function (event) {
