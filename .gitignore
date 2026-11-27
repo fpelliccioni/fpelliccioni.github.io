@@ -26,3 +26,4 @@ dist/
 
 # Generated QuickJS bundle for local development
 /public/assets/js/algorithms/quickjs.js
+/public/assets/js/algorithms/acorn-modern.js

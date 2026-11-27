@@ -19,7 +19,7 @@
       if (!response.ok) throw new Error('Library request failed (' + response.status + ')');
       var source = await response.text();
       if (!source.trim()) throw new Error('Empty library');
-      acorn.parse(source);
+      acorn.parse(source, { ecmaVersion: 'latest' });
       return source;
     } finally {
       clearTimeout(timer);
@@ -28,7 +28,7 @@
   function examples(source, extra) {
     var definitions = new Set(
       acorn
-        .parse(source)
+        .parse(source, { ecmaVersion: 'latest' })
         .body.filter(function (n) {
           return n.type === 'FunctionDeclaration';
         })
@@ -39,7 +39,7 @@
     return Array.from(
       new Set(
         acorn
-          .parse(extra)
+          .parse(extra, { ecmaVersion: 'latest' })
           .body.filter(function (n) {
             return n.type === 'FunctionDeclaration' && /^__.+_usage$/.test(n.id.name);
           })
