@@ -28,11 +28,12 @@ function instrument(source, offset, language) {
               start < offset ||
               !t.isIdentifier(id) ||
               !t.isCallExpression(init) ||
-              !t.isIdentifier(init.callee, { name: 'predicate' }) ||
+              !t.isIdentifier(init.callee) ||
+              !['predicate', 'relation'].includes(init.callee.name) ||
               !t.isArrowFunctionExpression(init.arguments[0])
             )
               return;
-            const binding = path.scope.getBinding('predicate');
+            const binding = path.scope.getBinding(init.callee.name);
             if (binding && binding.identifier.start >= offset) return;
 
             // A computed property gives the arrow the same inferred name as
