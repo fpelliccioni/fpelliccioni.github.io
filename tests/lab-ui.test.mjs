@@ -210,7 +210,7 @@ test('lab pages reference matching content-addressed assets instead of cached le
       assert.deepEqual(
         content,
         fs.readFileSync(
-          (/\/(quickjs|acorn-modern)\.js$/.test(original) ? 'dist' : 'public') + original,
+          (/\/(quickjs|acorn-modern|cpp-pilot)\.js$/.test(original) ? 'dist' : 'public') + original,
         ),
       );
     }

@@ -196,3 +196,16 @@ selects another compatible repository, including `?repo=algorithm_course`.
 Catalog entries require both an implementation and a usage example, avoiding
 phantom snippets from orphan usage functions. No algorithms are bundled into
 the website: their definitions and examples continue to load from GitHub.
+
+### C++ visualization pilot
+
+Open `/algorithms/?pilot=cpp` or `/algoritmos/?pilot=cpp` in a browser with
+WebAssembly JSPI. The read-only `find_if` example pauses inside the C++ code at
+each `lab::step()`. Its iterator operations use the same canvas and metrics as
+the TypeScript lab.
+
+To rebuild the checked-in WebAssembly module after editing
+`src/lab/cpp/find_if.cpp` or `src/lab/cpp/visualizer.hpp`, run
+`npm run build:cpp-pilot` with a Clang that targets WebAssembly and `wasm-ld`.
+Use `CXX` and `WASM_LD` if the tools are outside your PATH. The regular site
+build bundles the resulting module without requiring a C++ toolchain.
