@@ -10,13 +10,22 @@
   "tags": ["c++", "c++26", "wg21", "iso", "contracts", "gcc", "governance"],
   "translationKey": "cpp26-contracts-what-buzios-left-me-with",
   "description": "For the first time, the international ballot rejected the draft of a C++ edition. In Búzios the committee kept Contracts and approved a second attempt. What happened, and why I want Contracts in C++26.",
-  "topic": "C++ / WG21"
+  "topic": "C++ / WG21",
+  "cover": {
+    "src": "/images/cpp26-contracts-buzios.webp",
+    "alt": "Illustration of a draft document on a table overlooking the Búzios coast"
+  }
 }
 ---
 
 On October 23, something happened that had never happened to C++ before: the international ballot rejected the draft of a new edition of the standard. The edition was C++26, and a large share of the objections targeted a single feature, Contracts. A month later, in Búzios, the C++ committee decided to keep Contracts, made one concrete change to it, and approved sending the text to a second ballot.
 
 The rejection frustrated me a lot. I want to tell you what happened and, above all, why I think Contracts belongs in C++26.
+
+<figure>
+<img src="/images/cpp26-contracts-buzios.webp" alt="A marked-up draft on a table overlooking the Búzios coast" width="1200" height="700">
+<figcaption>Editorial illustration inspired by Búzios.</figcaption>
+</figure>
 
 ## What happened
 
