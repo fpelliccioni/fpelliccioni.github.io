@@ -266,7 +266,7 @@ function drawTreeFromSequence(arr) {
 
 function process_snippets() {
     var code = global_std_code;
-    var p = acorn.parse(code);
+    var p = acorn.parse(code, typeof LabLibrary === 'undefined' ? undefined : { ecmaVersion: 'latest' });
 
     for (var n in p.body) {
         const value = p.body[n];
@@ -298,7 +298,7 @@ function unindent_code(code, n) {
 function process_snippets_usage() {
     // console.log('begin of process_snippets_usage');
     var code = global_std_code_extra;
-    var p = acorn.parse(code);
+    var p = acorn.parse(code, typeof LabLibrary === 'undefined' ? undefined : { ecmaVersion: 'latest' });
 
     for (var n in p.body) {
         const value = p.body[n];

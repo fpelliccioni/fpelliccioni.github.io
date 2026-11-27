@@ -134,7 +134,7 @@ test('catalog parses literal categories without executing code and combines sear
     },
     window: {},
   });
-  vm.runInContext(fs.readFileSync('public/assets/js/algorithms/acorn.js', 'utf8'), catalog);
+  vm.runInContext(fs.readFileSync('dist/assets/js/algorithms/acorn-modern.js', 'utf8'), catalog);
   vm.runInContext(fs.readFileSync('public/assets/js/algorithms/catalog.js', 'utf8'), catalog);
   const api = catalog.window.LabCatalog;
   const categories = api.parseCategories(`function __catalog() {
@@ -197,7 +197,7 @@ test('lab pages reference matching content-addressed assets instead of cached le
       const original = url.replace(/\.[a-f0-9]{12}(?=\.(js|css|svg)$)/, '');
       assert.deepEqual(
         content,
-        fs.readFileSync((original.endsWith('/quickjs.js') ? 'dist' : 'public') + original),
+        fs.readFileSync((/\/(quickjs|acorn-modern)\.js$/.test(original) ? 'dist' : 'public') + original),
       );
     }
   }
@@ -222,7 +222,7 @@ test('lab and catalog share tao-js defaults and preserve alternate external repo
         return { ok: true, text: async () => 'function find() {}' };
       },
     });
-    vm.runInContext(fs.readFileSync('public/assets/js/algorithms/acorn.js', 'utf8'), context);
+    vm.runInContext(fs.readFileSync('dist/assets/js/algorithms/acorn-modern.js', 'utf8'), context);
     vm.runInContext(fs.readFileSync('public/assets/js/algorithms/library.js', 'utf8'), context);
     const library = context.window.LabLibrary;
     assert.equal(library.user, owner);
@@ -235,8 +235,8 @@ test('lab and catalog share tao-js defaults and preserve alternate external repo
     assert.deepEqual(
       Array.from(
         library.examples(
-          'function find() {} function copy() {}',
-          'function __find_usage() {} function __copy_usage() {} function __missing_usage() {}',
+          'function find() { const x = null ?? 1; return x; } function copy() {}',
+          'function __find_usage() { const x = find(); } function __copy_usage() {} function __missing_usage() {}',
         ),
       ),
       ['copy', 'find'],

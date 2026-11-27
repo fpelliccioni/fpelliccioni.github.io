@@ -142,7 +142,7 @@
   }
   // Read literal metadata from the AST; do not execute a remote __catalog function.
   function parseCategories(source) {
-    var body = acorn.parse(source).body;
+    var body = acorn.parse(source, { ecmaVersion: 'latest' }).body;
     var fn = body.find(function (node) {
       return node.type === 'FunctionDeclaration' && node.id.name === '__catalog';
     });
