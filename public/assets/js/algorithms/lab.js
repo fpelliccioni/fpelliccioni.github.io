@@ -264,10 +264,11 @@ var repo = LabLibrary.repo;
         prevNode = event.point || null;
         var code = editor.value;
         var highlighted = byId('codeHighlight');
+        var contractError = event.error?.name === 'LabContractError';
         if (event.done) {
           disable(true);
-          highlighted.textContent = code;
-          if (event.error) showError(event.error.message || String(event.error));
+          if (!contractError) highlighted.textContent = code;
+          if (event.error && !contractError) showError(event.error.message || String(event.error));
         } else {
           var offset = invisibleCode().length;
           var from = event.point.start - offset;
@@ -279,8 +280,10 @@ var repo = LabLibrary.repo;
             '</mark>' +
             escapeCodeHtml(code.slice(to));
         }
-        hljs.highlightBlock(highlighted);
-        if (byId('hg-right-y').querySelector('[data-output-kind="error"]')) {
+        if (!contractError) hljs.highlightBlock(highlighted);
+        if (contractError) {
+          showProblem(event.error.message, false);
+        } else if (byId('hg-right-y').querySelector('[data-output-kind="error"]')) {
           showProblem(
             byId('hg-right-y').querySelector('[data-output-kind="error"]').textContent,
             false,

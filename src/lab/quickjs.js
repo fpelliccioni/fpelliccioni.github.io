@@ -313,15 +313,22 @@ export async function createSession(source, offset, initialize, draw, language) 
         'const __labCheckpoint = ((pause) => (id, bindings) => {const keys = []; const values = []; for (const [key, read] of bindings) {try {const value = read(); keys.push(key); values.push(value);} catch {}} pause(id, keys, values);})(__labPause);\n';
       const contracts = `
         const [pre, post] = ((enter, leave) => {
+          class LabContractError extends Error {
+            constructor(message) {
+              super(message);
+              this.name = 'LabContractError';
+            }
+          }
           const check = (label) => (condition, message) => {
             enter();
-            let passed;
             try {
-              passed = condition();
+              if (condition() !== true) throw new LabContractError(message ? label + ': ' + message : label);
+            } catch (error) {
+              if (error instanceof LabContractError) throw error;
+              throw new LabContractError(label + ': ' + (error?.message ?? String(error)));
             } finally {
               leave();
             }
-            if (passed !== true) throw new Error(message ? label + ': ' + message : label);
           };
           return [check('Precondition failed'), check('Postcondition failed')];
         })(__labEnterContract, __labLeaveContract);

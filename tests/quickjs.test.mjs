@@ -176,6 +176,7 @@ test('contracts can read sequences without changing metrics, trace, output, or c
         if (event.done) {
           return {
             error: event.error?.message,
+            errorName: event.error?.name,
             output,
             steps,
             trace: panels.get('hg-right-b-b-data')?.value ?? '',
@@ -201,6 +202,7 @@ test('contracts can read sequences without changing metrics, trace, output, or c
   assert.deepEqual(checked, { ...baseline, steps: baseline.steps + 2 });
   assert.deepEqual(checked.output, [true]);
   const failed = await run('pre(() => false, "partition");');
+  assert.equal(failed.errorName, 'LabContractError');
   assert.match(failed.error, /Precondition failed: partition/);
   assert.deepEqual(failed.output, []);
   const restored = await run('try { post(() => { throw Error("check failed"); }); } catch {}');
