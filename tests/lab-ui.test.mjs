@@ -149,6 +149,8 @@ test('catalog parses literal categories without executing code and combines sear
     { name: 'find_if', category: 'search/linear' },
     { name: 'lower_bound', category: 'search/binary' },
     { name: 'min', category: 'selection' },
+    { name: 'lexicographical_compare', category: 'comparison' },
+    { name: 'lexicographical_equal', category: 'comparison' },
   ];
   assert.deepEqual(
     Array.from(api.filter(items, 'FIND IF', ''), (x) => x.name),
@@ -164,6 +166,11 @@ test('catalog parses literal categories without executing code and combines sear
   );
   assert.equal(api.filter(items, '', 'sea').length, 0);
   assert.equal(api.filter(items, 'find', 'selection').length, 0);
+  assert.deepEqual(
+    Array.from(api.filter(items, 'lexicographical_*', ''), (x) => x.name),
+    ['lexicographical_compare', 'lexicographical_equal'],
+  );
+  assert.equal(api.filter(items, 'lexicographical_*', 'search').length, 0);
 });
 
 test('lab uses a dialog picker and standalone catalog shares its implementation', () => {

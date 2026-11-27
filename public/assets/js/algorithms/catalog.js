@@ -147,7 +147,7 @@
       .replace(/[_/]+/g, ' ');
   }
   function filtered(items, term, group) {
-    var words = normalized(term).trim().split(/\s+/);
+    var words = normalized(term.replace(/\*+/g, ' ')).trim().split(/\s+/);
     return items.filter(function (item) {
       return (
         belongsTo(navigationPath(item.category), group) &&
