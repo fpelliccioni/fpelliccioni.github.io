@@ -92,6 +92,13 @@
     examples: examples,
     typescriptSources: typescriptSources,
     bookReferences: bookReferences,
+    documentation: function (extra) {
+      var entries = literalLists(extra, /^__(.+)_documentation$/);
+      for (var name of Object.keys(entries)) {
+        if (entries[name].length !== 3) delete entries[name];
+      }
+      return entries;
+    },
     typeDeclarations: function (extra) {
       return literalLists(extra, /^__(lab_types)_declarations$/).lab_types?.[0] || '';
     },

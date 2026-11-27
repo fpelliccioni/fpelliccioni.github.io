@@ -246,6 +246,15 @@ test('lab and catalog share tao-js defaults and preserve alternate external repo
     `);
     assert.deepEqual(Object.keys(references), ['find']);
     assert.deepEqual(Array.from(references.find), ['Elements of Programming, ch. 6, p. 94.']);
+    const documentation = library.documentation(`
+      function __copy_documentation() { return ["Copia el rango.", "Copies the range.", "function copy(f, l, o)"]; }
+      function __dynamic_documentation() { return [untrusted(), "text", "function x()"]; }
+      function __incomplete_documentation() { return ["text", "text"]; }
+    `);
+    assert.deepEqual(Object.keys(documentation), ['copy']);
+    assert.deepEqual(Array.from(documentation.copy), [
+      'Copia el rango.', 'Copies the range.', 'function copy(f, l, o)',
+    ]);
     assert.equal(library.user, owner);
     assert.equal(library.repo, repo);
     await library.load('algorithms.js');
