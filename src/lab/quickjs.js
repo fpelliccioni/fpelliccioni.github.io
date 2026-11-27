@@ -21,6 +21,28 @@ function instrument(source, offset) {
     plugins: [
       ({ types: t }) => ({
         visitor: {
+          VariableDeclarator(path) {
+            const { id, init, start } = path.node;
+            if (
+              start < offset ||
+              !t.isIdentifier(id) ||
+              !t.isCallExpression(init) ||
+              !t.isIdentifier(init.callee, { name: 'predicate' }) ||
+              !t.isArrowFunctionExpression(init.arguments[0])
+            )
+              return;
+            const binding = path.scope.getBinding('predicate');
+            if (binding && binding.identifier.start >= offset) return;
+
+            // A computed property gives the arrow the same inferred name as
+            // a direct initializer, without changing its lexical bindings.
+            const label = t.stringLiteral(id.name);
+            init.arguments[0] = t.memberExpression(
+              t.objectExpression([t.objectProperty(label, init.arguments[0], true)]),
+              t.stringLiteral(id.name),
+              true,
+            );
+          },
           Statement: {
             exit(path) {
               const node = path.node;

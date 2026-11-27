@@ -45,6 +45,7 @@ print(answer);`;
     assert.ok(events.every((event) => event.point.start >= prefix.length));
     assert.equal(context.stats_it_moves, 1);
     assert.equal(context.stats_pred_appls, 2);
+    assert.match(panels.get('hg-right-b-b-data').value, /match\(/);
   } finally {
     await session.close();
   }
