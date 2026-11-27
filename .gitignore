@@ -23,3 +23,6 @@ vendor/
 node_modules/
 dist/
 .astro/
+
+# Generated QuickJS bundle for local development
+/public/assets/js/algorithms/quickjs.js

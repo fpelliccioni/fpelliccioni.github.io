@@ -2,6 +2,7 @@
 var lines = [];
 var prevLine = '';
 var myInterpreter;
+var quickSession;
 var iterators_colors = [
   '#afafff',
   '#ffaff7',
@@ -167,7 +168,7 @@ var repo = LabLibrary.repo;
   }
   if (
     typeof Two === 'undefined' ||
-    typeof Interpreter !== 'function' ||
+    typeof LabQuickJS === 'undefined' ||
     typeof window.acorn === 'undefined' ||
     typeof hljs === 'undefined' ||
     typeof startButton !== 'function' ||
@@ -188,7 +189,16 @@ var repo = LabLibrary.repo;
   if (window.ResizeObserver) new ResizeObserver(resizeCanvas).observe(byId('hg-right-a'));
   window.addEventListener('resize', resizeCanvas);
 
-  function runCommand(command) {
+  var commandPending = false;
+  async function closeSession() {
+    if (!quickSession) return;
+    var session = quickSession;
+    quickSession = null;
+    await session.close();
+  }
+  async function runCommand(command) {
+    if (commandPending) return;
+    commandPending = true;
     clearProblem();
     try {
       if (command === 'edit') {
@@ -200,6 +210,7 @@ var repo = LabLibrary.repo;
           location.href = editUrl.href;
           return;
         }
+        await closeSession();
         editButton();
         resetStatus();
         setMode('ready');
@@ -207,8 +218,21 @@ var repo = LabLibrary.repo;
       } else if (command === 'start' || command === 'restart') {
         if (!ready || !editor.value.trim()) return;
         resizeCanvas();
-        if (command === 'restart') restartButton();
-        else startButton();
+        await closeSession();
+        editor.readOnly = true;
+        var prefix = invisibleCode();
+        quickSession = await LabQuickJS.createSession(
+          prefix + editor.value,
+          prefix.length,
+          function (adapter) {
+            myInterpreter = adapter;
+            initFunctions(adapter);
+          },
+          drawScope,
+        );
+        startButton(function () {
+          return myInterpreter;
+        });
         if (byId('hg-right-y').querySelector('[data-output-kind="error"]')) {
           showProblem(
             byId('hg-right-y').querySelector('[data-output-kind="error"]').textContent,
@@ -219,7 +243,33 @@ var repo = LabLibrary.repo;
           byId('stepButton').focus({ preventScroll: true });
         }
       } else if (command === 'step' && mode === 'executing') {
-        stepButton();
+        var event = await quickSession.next();
+        if (prevNode && prevNode.type === 'VariableDeclaration' && log_stats_enabled) {
+          var init = prevNode.declarations[0].init;
+          if (init && init.callee && init.callee.name === 'source') {
+            ++stats_assigments;
+            updateStatus();
+          }
+        }
+        prevNode = event.point || null;
+        var code = editor.value;
+        var highlighted = byId('codeHighlight');
+        if (event.done) {
+          disable(true);
+          highlighted.textContent = code;
+          if (event.error) showError(event.error.message || String(event.error));
+        } else {
+          var offset = invisibleCode().length;
+          var from = event.point.start - offset;
+          var to = event.point.end - offset;
+          highlighted.innerHTML =
+            escapeCodeHtml(code.slice(0, from)) +
+            '<mark>' +
+            escapeCodeHtml(code.slice(from, to)) +
+            '</mark>' +
+            escapeCodeHtml(code.slice(to));
+        }
+        hljs.highlightBlock(highlighted);
         if (byId('hg-right-y').querySelector('[data-output-kind="error"]')) {
           showProblem(
             byId('hg-right-y').querySelector('[data-output-kind="error"]').textContent,
@@ -236,6 +286,9 @@ var repo = LabLibrary.repo;
     } catch (error) {
       showError(error.message || String(error));
       showProblem(error.message || String(error), false);
+    } finally {
+      editor.readOnly = false;
+      commandPending = false;
     }
     syncEmptyStates();
     updateEditor();
@@ -355,39 +408,46 @@ var repo = LabLibrary.repo;
       }
     });
   });
-  function chooseAlgorithm(name, confirmed) {
+  async function chooseAlgorithm(name, confirmed) {
+    if (commandPending) return false;
     if (sourceDirty && !confirmed) {
       LabCatalog.confirmReplacement(name, function () {
-        chooseAlgorithm(name, true);
+        return chooseAlgorithm(name, true);
       });
       return false;
     }
-    setCurrentAlgorithm(name);
-    clearProblem();
-    if (mode === 'reference') {
+    commandPending = true;
+    try {
+      await closeSession();
+      setCurrentAlgorithm(name);
+      clearProblem();
+      if (mode === 'reference') {
+        var next = new URL(location.href);
+        next.searchParams.delete('code');
+        next.searchParams.delete('function');
+        next.searchParams.set('snippet', name);
+        location.href = next.href;
+        return;
+      }
+      editor.value = getSnippet(name);
+      editor.setSelectionRange(0, 0);
+      editor.scrollTop = 0;
+      sourceDirty = false;
+      editButton();
+      setMode('ready');
+      resizeCanvas();
+      resetStatus();
+      syncEmptyStates();
+      updateEditor();
       var next = new URL(location.href);
       next.searchParams.delete('code');
       next.searchParams.delete('function');
       next.searchParams.set('snippet', name);
-      location.href = next.href;
-      return;
+      history.replaceState(null, '', next);
+      editor.focus();
+    } finally {
+      commandPending = false;
     }
-    editor.value = getSnippet(name);
-    editor.setSelectionRange(0, 0);
-    editor.scrollTop = 0;
-    sourceDirty = false;
-    editButton();
-    setMode('ready');
-    resizeCanvas();
-    resetStatus();
-    syncEmptyStates();
-    updateEditor();
-    var next = new URL(location.href);
-    next.searchParams.delete('code');
-    next.searchParams.delete('function');
-    next.searchParams.set('snippet', name);
-    history.replaceState(null, '', next);
-    editor.focus();
   }
   function renderReference(name) {
     var container = byId('hg-right-a');

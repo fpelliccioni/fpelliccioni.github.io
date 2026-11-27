@@ -241,8 +241,8 @@
         action.href = url.href;
       } else {
         action.type = 'button';
-        action.addEventListener('click', function () {
-          if (onChoose(item.name) !== false) host.close();
+        action.addEventListener('click', async function () {
+          if ((await onChoose(item.name)) !== false) host.close();
         });
       }
       if (current === item.name) {
@@ -282,8 +282,8 @@
     });
     var replace = element('button', '', es ? 'Reemplazar código' : 'Replace code');
     replace.type = 'button';
-    replace.addEventListener('click', function () {
-      apply();
+    replace.addEventListener('click', async function () {
+      if ((await apply()) === false) return;
       clearConfirmation();
       host.close();
     });

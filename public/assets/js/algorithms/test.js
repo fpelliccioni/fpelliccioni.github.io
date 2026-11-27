@@ -201,6 +201,10 @@ function execute_callable() {
 
     if (arguments[1] == '_') return undefined;
 
+    if (typeof LabQuickJS !== 'undefined' && callable instanceof LabQuickJS.GuestObject) {
+        return callable.call(...Array.prototype.slice.call(arguments, 1));
+    }
+
     var full_code = callable.properties.inner_code;
     full_code += callable.properties.inner_name + "(";
     full_code += arguments[1];
