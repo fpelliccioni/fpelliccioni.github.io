@@ -80,6 +80,7 @@ var repo = LabLibrary.repo;
   var exampleNames = [];
   var functionSources = {};
   var bookReferences = Object.create(null);
+  var algorithmDocumentation = Object.create(null);
   var bibliography = document.createElement('section');
   bibliography.className = 'editor-references';
   bibliography.setAttribute('aria-labelledby', 'editorReferencesTitle');
@@ -496,6 +497,29 @@ var repo = LabLibrary.repo;
     editor.addEventListener(name, updateEditor);
   });
   var functionHelp = {
+    Iter: ['Iter<T> representa una posición en una secuencia de elementos T. El iterador de fin delimita el rango y no se puede leer.', 'Iter<T> represents a position in a sequence of T values. The end iterator delimits the range and cannot be read.'],
+    Seq: ['Seq<T> es una secuencia visualizable de elementos T.', 'Seq<T> is a visualizable sequence of T values.'],
+    ForwardIterator: ['Iterador que avanza y permite recorrer de nuevo el mismo rango.', 'An iterator that advances and supports repeated traversal of the same range.'],
+    BidirectionalIterator: ['Iterador que puede avanzar y retroceder.', 'An iterator that can move forward and backward.'],
+    MutableBidirectionalIterator: ['Iterador bidireccional que permite escribir en su posición.', 'A bidirectional iterator that allows writes at its position.'],
+    ValueOf: ['ValueOf<I> obtiene el tipo de elemento del iterador I.', 'ValueOf<I> extracts the element type of iterator I.'],
+    Predicate: ['Función que recibe un elemento y devuelve true o false.', 'A function that takes an element and returns true or false.'],
+    Relation: ['Función que compara dos elementos y devuelve true o false.', 'A function that compares two elements and returns true or false.'],
+    Operation: ['Operación binaria que combina dos valores del mismo tipo y devuelve otro de ese tipo.', 'A binary operation combining two values of the same type and returning a value of that type.'],
+    equal: ['Comprueba si dos iteradores del mismo rango están en la misma posición.', 'Checks whether two iterators in the same range are at the same position.'],
+    sink: ['Escribe un valor en la posición del iterador. La posición debe ser válida para escritura.', 'Writes a value at the iterator position. The position must be writable.'],
+    successor: ['Devuelve el iterador que está n posiciones más adelante. Por defecto avanza una posición.', 'Returns the iterator n positions ahead. Advances one position by default.'],
+    predecessor: ['Devuelve el iterador que está n posiciones más atrás. Por defecto retrocede una posición.', 'Returns the iterator n positions back. Moves back one position by default.'],
+    distance: ['Devuelve la diferencia de posición del segundo iterador respecto del primero en la misma secuencia.', 'Returns the position of the second iterator relative to the first in the same sequence.'],
+    exchange_values: ['Intercambia los valores en las dos posiciones indicadas.', 'Swaps the values at the two iterator positions.'],
+    array_ascending: ['Crea un arreglo de n enteros consecutivos en orden ascendente. Por defecto genera 10 valores a partir de 0.', 'Creates an array of n consecutive integers in increasing order. Defaults to 10 values starting at 0.'],
+    array_descending: ['Crea un arreglo de n enteros consecutivos en orden descendente. Por defecto genera 10 valores a partir de n − 1.', 'Creates an array of n consecutive integers in decreasing order. Defaults to 10 values starting at n − 1.'],
+    array_from: ['Convierte una cadena en un arreglo de unidades UTF-16.', 'Converts a string into an array of UTF-16 code units.'],
+    even: ['Comprueba si un entero es par y registra la evaluación del predicado.', 'Checks whether an integer is even and records the predicate evaluation.'],
+    odd: ['Comprueba si un entero es impar y registra la evaluación del predicado.', 'Checks whether an integer is odd and records the predicate evaluation.'],
+    is_bounded_range: ['Dentro de un contrato, comprueba que ambos iteradores delimiten un rango válido en la misma secuencia.', 'Inside a contract, checks that both iterators delimit a valid range in the same sequence.'],
+    range_value_counts: ['Cuenta cuántas veces aparece cada valor del rango. Sirve para guardar el estado inicial en un contrato.', 'Counts occurrences of each value in the range for use as a contract snapshot.'],
+    has_range_value_counts: ['Comprueba que el rango conserve todos los valores y sus repeticiones.', 'Checks that the range retains all values and their multiplicities.'],
     pre: ['Comprueba una precondición sin registrar operaciones.', 'Checks a precondition without recording operations.'],
     post: ['Comprueba una poscondición sin registrar operaciones.', 'Checks a postcondition without recording operations.'],
     is_partitioned_n: ['Comprueba que el predicado sea falso al principio y verdadero después del límite.', 'Checks that the predicate is false before the boundary and true afterward.'],
@@ -517,7 +541,7 @@ var repo = LabLibrary.repo;
   var tooltip = document.createElement('div');
   tooltip.className = 'function-tooltip';
   tooltip.setAttribute('role', 'dialog');
-  tooltip.setAttribute('aria-label', es ? 'Documentación de la función' : 'Function documentation');
+  tooltip.setAttribute('aria-label', es ? 'Documentación del código' : 'Code documentation');
   var helpText = document.createElement('div');
   var closeHelp = document.createElement('button');
   closeHelp.className = 'function-tooltip-close';
@@ -530,12 +554,15 @@ var repo = LabLibrary.repo;
   var measure = document.createElement('canvas').getContext('2d');
 
   var helpOrigin;
-  function hideFunctionHelp() {
+  function hideFunctionHelp(restoreFocus) {
     if (tooltip.hidden) return;
     tooltip.hidden = true;
-    helpOrigin.focus({ preventScroll: true });
+    if (restoreFocus) helpOrigin.focus({ preventScroll: true });
   }
-  closeHelp.addEventListener('click', hideFunctionHelp);
+  closeHelp.addEventListener('click', function () { hideFunctionHelp(true); });
+  document.addEventListener('click', function (event) {
+    if (!tooltip.contains(event.target)) hideFunctionHelp(false);
+  }, true);
 
   function showFunctionHelp(event) {
     var area = event.currentTarget;
@@ -562,12 +589,15 @@ var repo = LabLibrary.repo;
     if (!token) return;
 
     var name = token[0];
-    var description = Object.hasOwn(functionHelp, name) ? functionHelp[name][es ? 0 : 1] : '';
+    var docs = algorithmDocumentation[name];
+    var description = docs?.[es ? 0 : 1] ||
+      (Object.hasOwn(functionHelp, name) ? functionHelp[name][es ? 0 : 1] : '');
     var definition = Object.hasOwn(functionSources, name) ? functionSources[name].trim() : '';
     if (!description && !definition) return;
 
-    var signature = definition.split('\n')[0].replace(/\s*\{\s*$/, '');
-    helpText.textContent = (signature || name) + (description ? '\n' + description : '');
+    var signature = docs?.[2] || definition.split('\n')[0].replace(/\s*\{\s*$/, '');
+    var references = bookReferences[name] || [];
+    helpText.textContent = [signature || name, description, ...references].filter(Boolean).join('\n');
     helpOrigin = area;
     tooltip.hidden = false;
     closeHelp.focus({ preventScroll: true });
@@ -581,7 +611,7 @@ var repo = LabLibrary.repo;
     area.addEventListener('click', showFunctionHelp);
   });
   document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') hideFunctionHelp();
+    if (event.key === 'Escape') hideFunctionHelp(true);
   });
 
   [editor, byId('codeHighlightPre')].forEach(function (area) {
@@ -749,6 +779,7 @@ var repo = LabLibrary.repo;
       process_snippets_usage();
       typedSources = LabLibrary.typescriptSources(global_std_code_extra);
       bookReferences = LabLibrary.bookReferences(global_std_code_extra);
+      algorithmDocumentation = LabLibrary.documentation(global_std_code_extra);
       declarations = LabLibrary.typeDeclarations(global_std_code_extra);
       for (var name of Object.keys(typedSources)) {
         if (!Object.hasOwn(functionSources, name)) {
