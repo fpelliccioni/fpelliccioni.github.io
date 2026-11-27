@@ -47,7 +47,7 @@ print(answer);`;
     assert.match(code.slice(0, events[0].point.end - prefix.length), /^const data =/);
     assert.equal(context.stats_it_moves, 1);
     assert.equal(context.stats_pred_appls, 2);
-    assert.match(panels.get('hg-right-b-b-data').value, /match\(/);
+    assert.match(panels.get('hg-right-b-b-data')?.value ?? '', /match\(/);
   } finally {
     await session.close();
   }
@@ -132,4 +132,79 @@ test('TypeScript keeps checkpoints on the typed editor source', async () => {
   } finally {
     await session.close();
   }
+});
+
+test('contracts can read sequences without changing metrics, trace, output, or checkpoints', async () => {
+  const panels = new Map();
+  const document = {
+    getElementById(id) {
+      if (!panels.has(id)) panels.set(id, { innerHTML: '', value: '', appendChild() {} });
+      return panels.get(id);
+    },
+    createTextNode: String,
+    createElement: () => ({ dataset: {}, style: {}, appendChild() {} }),
+  };
+  const context = vm.createContext({ document, console: { log() {} } });
+  const read = (path) => fs.readFileSync(path, 'utf8');
+  vm.runInContext(read('public/assets/js/algorithms/main.js'), context);
+  vm.runInContext(read('public/assets/js/algorithms/lab.js').split('\nvar params =')[0], context);
+  context.two = { update() {} };
+  const quick = Function(read('dist/assets/js/algorithms/quickjs.js') + '\nreturn LabQuickJS;')();
+  context.LabQuickJS = quick;
+
+  async function run(check) {
+    panels.clear();
+    context.resetStatus();
+    const prefix = context.invisibleCode();
+    const source = `
+      const data = sequence([1, 2], "data");
+      const first = begin(data);
+      const match = predicate(x => x === 2);
+      ${check}
+      print(match(source(successor(first))));
+    `;
+    const output = [];
+    const session = await quick.createSession(prefix + source, prefix.length, (adapter) => {
+      context.myInterpreter = adapter;
+      context.initFunctions(adapter);
+      adapter.setProperty(null, 'print', value => output.push(value));
+    });
+    try {
+      let steps = 0;
+      for (;;) {
+        const event = await session.next();
+        if (event.done) {
+          return {
+            error: event.error?.message,
+            errorName: event.error?.name,
+            output,
+            steps,
+            trace: panels.get('hg-right-b-b-data')?.value ?? '',
+            moves: context.stats_it_moves,
+            comparisons: context.stats_it_cmps,
+            predicates: context.stats_pred_appls,
+          };
+        }
+        steps++;
+      }
+    } finally {
+      await session.close();
+    }
+  }
+  const baseline = await run('');
+  const checked = await run(`
+    pre(() => {
+      print("silent");
+      return match(source(successor(first))) && !equal(first, end(data));
+    });
+    post(() => match(source(successor(first))));
+  `);
+  assert.deepEqual(checked, { ...baseline, steps: baseline.steps + 2 });
+  assert.deepEqual(checked.output, [true]);
+  const failed = await run('pre(() => false, "partition");');
+  assert.equal(failed.errorName, 'LabContractError');
+  assert.match(failed.error, /Precondition failed: partition/);
+  assert.deepEqual(failed.output, []);
+  const restored = await run('try { post(() => { throw Error("check failed"); }); } catch {}');
+  assert.deepEqual(restored, { ...baseline, steps: baseline.steps + 2 });
 });

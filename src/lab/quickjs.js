@@ -229,7 +229,24 @@ export async function createSession(source, offset, initialize, draw, language) 
   function expose(name, handle) {
     handle.consume((h) => vm.setProp(vm.global, name, h));
   }
+  let contractDepth = 0;
+  const contractReaders = new Map();
+  const silentCalls = new Set([
+    'print', 'start_f', 'end_f', 'register_rel_distance',
+    'log_predicate_call_internal', 'log_relation_call_internal', 'log_operation_call_internal',
+  ]);
+  expose('__labEnterContract', vm.newFunction('__labEnterContract', () => {
+    contractDepth++;
+    return vm.undefined;
+  }));
+  expose('__labLeaveContract', vm.newFunction('__labLeaveContract', () => {
+    contractDepth--;
+    return vm.undefined;
+  }));
   const adapter = {
+    setContractReaders(readers) {
+      for (const [name, readOnly] of Object.entries(readers)) contractReaders.set(name, readOnly);
+    },
     getScope: () => scope,
     createNativeFunction: (fn) => fn,
     setProperty(_scope, name, fn) {
@@ -237,6 +254,12 @@ export async function createSession(source, offset, initialize, draw, language) 
         name,
         vm.newFunction(name, (...args) => {
           if (rendering || canceled) return vm.undefined;
+          if (contractDepth > 0) {
+            if (silentCalls.has(name)) return vm.undefined;
+            const readOnly = contractReaders.get(name);
+            if (!readOnly) throw new Error(name + ' is unavailable inside a contract.');
+            return write(readOnly(...args.map((h) => read(h))));
+          }
           return write(fn(...args.map((h) => read(h))));
         }),
       );
@@ -250,7 +273,7 @@ export async function createSession(source, offset, initialize, draw, language) 
   expose(
     '__labPause',
     vm.newAsyncifiedFunction('__labPause', (id, names, values) => {
-      if (rendering || canceled) return vm.undefined;
+      if (rendering || canceled || contractDepth > 0) return vm.undefined;
       const keys = vm.dump(names);
       const properties = Object.create(null);
       keys.forEach((name, index) => {
@@ -288,7 +311,29 @@ export async function createSession(source, offset, initialize, draw, language) 
     try {
       const prelude =
         'const __labCheckpoint = ((pause) => (id, bindings) => {const keys = []; const values = []; for (const [key, read] of bindings) {try {const value = read(); keys.push(key); values.push(value);} catch {}} pause(id, keys, values);})(__labPause);\n';
-      vm.unwrapResult(await vm.evalCodeAsync(prelude + code, 'algorithm.js')).dispose();
+      const contracts = `
+        const [pre, post] = ((enter, leave) => {
+          class LabContractError extends Error {
+            constructor(message) {
+              super(message);
+              this.name = 'LabContractError';
+            }
+          }
+          const check = (label) => (condition, message) => {
+            enter();
+            try {
+              if (condition() !== true) throw new LabContractError(message ? label + ': ' + message : label);
+            } catch (error) {
+              if (error instanceof LabContractError) throw error;
+              throw new LabContractError(label + ': ' + (error?.message ?? String(error)));
+            } finally {
+              leave();
+            }
+          };
+          return [check('Precondition failed'), check('Postcondition failed')];
+        })(__labEnterContract, __labLeaveContract);
+      `;
+      vm.unwrapResult(await vm.evalCodeAsync(prelude + contracts + code, 'algorithm.js')).dispose();
       if (runtime.hasPendingJob()) {
         throw new Error('Asynchronous jobs are not supported in step-by-step mode.');
       }

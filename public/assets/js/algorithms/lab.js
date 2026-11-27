@@ -264,10 +264,11 @@ var repo = LabLibrary.repo;
         prevNode = event.point || null;
         var code = editor.value;
         var highlighted = byId('codeHighlight');
+        var contractError = event.error?.name === 'LabContractError';
         if (event.done) {
           disable(true);
-          highlighted.textContent = code;
-          if (event.error) showError(event.error.message || String(event.error));
+          if (!contractError) highlighted.textContent = code;
+          if (event.error && !contractError) showError(event.error.message || String(event.error));
         } else {
           var offset = invisibleCode().length;
           var from = event.point.start - offset;
@@ -279,8 +280,10 @@ var repo = LabLibrary.repo;
             '</mark>' +
             escapeCodeHtml(code.slice(to));
         }
-        hljs.highlightBlock(highlighted);
-        if (byId('hg-right-y').querySelector('[data-output-kind="error"]')) {
+        if (!contractError) hljs.highlightBlock(highlighted);
+        if (contractError) {
+          showProblem(event.error.message, false);
+        } else if (byId('hg-right-y').querySelector('[data-output-kind="error"]')) {
           showProblem(
             byId('hg-right-y').querySelector('[data-output-kind="error"]').textContent,
             false,
@@ -358,6 +361,10 @@ var repo = LabLibrary.repo;
     editor.addEventListener(name, updateEditor);
   });
   var functionHelp = {
+    pre: ['Comprueba una precondición sin registrar operaciones.', 'Checks a precondition without recording operations.'],
+    post: ['Comprueba una poscondición sin registrar operaciones.', 'Checks a postcondition without recording operations.'],
+    is_partitioned_n: ['Comprueba que el predicado sea falso al principio y verdadero después del límite.', 'Checks that the predicate is false before the boundary and true afterward.'],
+    is_partition_point_n: ['Comprueba que el iterador marque el límite entre los dos grupos.', 'Checks that the iterator marks the boundary between the two groups.'],
     digitSum: ['Suma los dígitos decimales de un entero seguro. Ignora el signo.', 'Adds the decimal digits of a safe integer, ignoring its sign.'],
     lower_bound_n: ['Devuelve la primera posición cuyo elemento no es menor que el valor buscado, según la relación dada.', 'Returns the first position whose element is not less than the search value under the given relation.'],
     upper_bound_n: ['Devuelve la primera posición cuyo elemento es mayor que el valor buscado, según la relación dada.', 'Returns the first position whose element is greater than the search value under the given relation.'],
