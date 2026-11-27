@@ -16,6 +16,19 @@ function visibleBindings(path, offset) {
 
 function instrument(source, offset, language) {
   const points = [];
+  function checkpoint(t, path, point) {
+    const entries = visibleBindings(path, offset).map((name) =>
+      t.arrayExpression([
+        t.stringLiteral(name),
+        t.arrowFunctionExpression([], t.identifier(name)),
+      ]),
+    );
+    return t.callExpression(t.identifier('__labCheckpoint'), [
+      t.numericLiteral(points.push(point) - 1),
+      t.arrayExpression(entries),
+    ]);
+  }
+
   const { code } = transform(source, {
     sourceType: 'script',
     presets: language === 'typescript' ? [['typescript', { ignoreExtensions: true }]] : [],
@@ -60,24 +73,19 @@ function instrument(source, offset, language) {
                 node.start < offset ||
                 t.isTypeScript(node) ||
                 path.isBlockStatement() ||
-                path.isFunctionDeclaration() ||
-                path.parentPath.isLabeledStatement()
+                path.isFunctionDeclaration()
               )
                 return;
-              const names = visibleBindings(path, offset);
-              const entries = names.map((name) =>
-                t.arrayExpression([
-                  t.stringLiteral(name),
-                  t.arrowFunctionExpression([], t.identifier(name)),
-                ]),
-              );
-              const id = points.push(node) - 1;
-              const hook = t.expressionStatement(
-                t.callExpression(t.identifier('__labCheckpoint'), [
-                  t.numericLiteral(id),
-                  t.arrayExpression(entries),
-                ]),
-              );
+              if (path.isIfStatement() || path.isLoop()) {
+                const test = node.test;
+                if (test) {
+                  const point = { start: test.start, end: test.end, type: node.type };
+                  node.test = t.sequenceExpression([checkpoint(t, path, point), test]);
+                }
+                return;
+              }
+              if (path.parentPath.isLabeledStatement()) return;
+              const hook = t.expressionStatement(checkpoint(t, path, node));
               if (path.inList) path.insertBefore(hook);
               else if (
                 path.key === 'body' ||
@@ -90,22 +98,11 @@ function instrument(source, offset, language) {
             },
           },
           Loop(path) {
-            // Checkpoint each iteration, including empty loop bodies.
-            const { body, start } = path.node;
-            if (start < offset) return;
-            const point = { start, end: body.start, type: path.node.type };
-            const id = points.push(point) - 1;
-            const entries = visibleBindings(path, offset).map((name) =>
-              t.arrayExpression([
-                t.stringLiteral(name),
-                t.arrowFunctionExpression([], t.identifier(name)),
-              ]),
-            );
+            // Loops without an explicit condition still pause once per iteration.
+            const { body, start, test, type } = path.node;
+            if (start == null || start < offset || test) return;
             const hook = t.expressionStatement(
-              t.callExpression(t.identifier('__labCheckpoint'), [
-                t.numericLiteral(id),
-                t.arrayExpression(entries),
-              ]),
+              checkpoint(t, path, { start, end: body.start, type }),
             );
             if (t.isBlockStatement(body)) body.body.unshift(hook);
             else path.node.body = t.blockStatement([hook, body]);
