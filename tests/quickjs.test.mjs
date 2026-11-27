@@ -21,7 +21,7 @@ test('QuickJS pauses on modern JavaScript and uses the existing sequence and ite
   context.resetStatus();
   const quick = Function(read('dist/assets/js/algorithms/quickjs.js') + '\nreturn LabQuickJS;')();
   context.LabQuickJS = quick;
-  const prefix = context.invisibleCode();
+  const prefix = context.invisibleCode() + '\nfunction match() { return false; }\n';
   const code = `const data = sequence([3, 7, 9], "data");
 let first = begin(data);
 const last = end(data);
@@ -43,6 +43,8 @@ print(answer);`;
     }
     assert.ok(events.some((event) => event.scope.properties.answer === 7));
     assert.ok(events.every((event) => event.point.start >= prefix.length));
+    assert.equal(events[0].point.start, prefix.length);
+    assert.match(code.slice(0, events[0].point.end - prefix.length), /^const data =/);
     assert.equal(context.stats_it_moves, 1);
     assert.equal(context.stats_pred_appls, 2);
     assert.match(panels.get('hg-right-b-b-data').value, /match\(/);
