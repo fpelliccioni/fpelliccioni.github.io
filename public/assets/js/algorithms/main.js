@@ -629,7 +629,7 @@ function updateState() {
         // var text = '<p id="Status">source(<b>' + key + '</b>) = ' + data.properties[it.index] + '</p>';
 
         var length = data.length;
-        var text = '<p id="Status">source(<b>' + key + '</b>) = ' + data[it.index] + '</p>';
+        var text = '<p id="Status">source(<b>' + escapeCodeHtml(key) + '</b>) = ' + escapeCodeHtml(data[it.index]) + '</p>';
 
         hg_right_x_a.innerHTML += text;
     }
@@ -653,7 +653,7 @@ function updateStats() {
 
     for (var key in custom_stats) {
         // console.log(custom_stats[key]);
-        hg_right_x_b.innerHTML += `<p id="Status"><b>${key}</b>: ${custom_stats[key]}</p>`;
+        hg_right_x_b.innerHTML += `<p id="Status"><b>${escapeCodeHtml(key)}</b>: ${escapeCodeHtml(custom_stats[key])}</p>`;
     }
 }
 
@@ -864,6 +864,11 @@ function valueAndBaseTreatment(value, base) {
     // return value;
 }
 
+function isInterpreterObject(value) {
+    return (typeof Interpreter !== 'undefined' && value instanceof Interpreter.Object) ||
+        (typeof LabQuickJS !== 'undefined' && value instanceof LabQuickJS.GuestObject);
+}
+
 function initFunctions(interpreter, scope) {
 
     // var alert_wrapper = function(text) {
@@ -873,7 +878,9 @@ function initFunctions(interpreter, scope) {
 
     var print_wrapper = function(text) {
 
-        if (text instanceof Sequence) {
+        if (isInterpreterObject(text) && typeof text.properties.length === 'number') {
+            text = fromInterpreterArray(text).join(',');
+        } else if (text instanceof Sequence) {
             text = "[" + text.data.join(", ") + "]";
         }
 
@@ -1156,7 +1163,7 @@ function initFunctions(interpreter, scope) {
         addLogSink(it, x)
 
         data[it.index] = x;
-        elements[it.index].group.children[1].value = x;
+        if (elements && elements[it.index]) elements[it.index].group.children[1].value = x;
 
         if (log_stats_enabled) {
             ++stats_assigments;
@@ -1181,7 +1188,7 @@ function initFunctions(interpreter, scope) {
         addLogSink(it, x)
 
         data[it.index] = x;
-        elements[it.index].group.children[1].value = x;
+        if (elements && elements[it.index]) elements[it.index].group.children[1].value = x;
 
         if (log_stats_enabled) {
             ++stats_moves;
@@ -1219,7 +1226,7 @@ function initFunctions(interpreter, scope) {
 
         source_data[source_it.index] = '_';
         target_data[target_it.index] = x;
-        target_elements[target_it.index].group.children[1].value = x;
+        if (target_elements && target_elements[target_it.index]) target_elements[target_it.index].group.children[1].value = x;
 
         if (log_stats_enabled) {
             ++stats_moves;
@@ -1337,7 +1344,7 @@ function initFunctions(interpreter, scope) {
 
     var callable_create_wrapper = function (f) {
         var codeAll = getAllCode();
-        var codeSelected = codeAll.substring(f.node.start, f.node.end);
+        var codeSelected = f.source || codeAll.substring(f.node.start, f.node.end);
 
         // console.log(codeSelected)
         // console.log(f.node)
@@ -1399,7 +1406,7 @@ function initFunctions(interpreter, scope) {
                     } else if (value instanceof Iterator) {
                     } else if (value instanceof RangeBounded) {
                     } else if (value instanceof RangeCounted) {
-                    } else if (value instanceof Interpreter.Object) {
+                    } else if (isInterpreterObject(value)) {
                     } else {
                         vars_internal[key] = {key: key, value: value};
                     }
@@ -1557,7 +1564,7 @@ function initFunctions(interpreter, scope) {
         if (log_stats_enabled) {
             //TODO
             var hg_right_x_a = document.getElementById('hg-right-x-a');
-            var text = '<p id="Status">' + name + '(' + x + ') = ' + res + '</p>';
+            var text = '<p id="Status">' + escapeCodeHtml(name + '(' + x + ') = ' + res) + '</p>';
             hg_right_x_a.innerHTML += text;
         }
     };
@@ -1580,7 +1587,7 @@ function initFunctions(interpreter, scope) {
         if (log_stats_enabled) {
             //TODO
             var hg_right_x_a = document.getElementById('hg-right-x-a');
-            var text = '<p id="Status">' + name + '(' + x + ', ' + y + ') = ' + res + '</p>';
+            var text = '<p id="Status">' + escapeCodeHtml(name + '(' + x + ', ' + y + ') = ' + res) + '</p>';
             hg_right_x_a.innerHTML += text;
         }
     };
@@ -1602,9 +1609,9 @@ function initFunctions(interpreter, scope) {
             var hg_right_x_a = document.getElementById('hg-right-x-a');
 
             if (y) {
-                var text = '<p id="Status">' + name + '(' + x + ', ' + y + ') = ' + res + '</p>';
+                var text = '<p id="Status">' + escapeCodeHtml(name + '(' + x + ', ' + y + ') = ' + res) + '</p>';
             } else {
-                var text = '<p id="Status">' + name + '(' + x + ') = ' + res + '</p>';
+                var text = '<p id="Status">' + escapeCodeHtml(name + '(' + x + ') = ' + res) + '</p>';
             }
 
             hg_right_x_a.innerHTML += text;
@@ -2449,7 +2456,7 @@ function restartButton() {
 }
 
 
-function startButton() {
+function startButton(prepareSession) {
     var codeAll = getAllCode();
     console.log(codeAll);
     var codeView = getViewCode();
@@ -2480,7 +2487,7 @@ function startButton() {
     codeHighlight.style.fontSize = "12pt";
 
     try {
-        myInterpreter = new Interpreter(codeAll, initFunctions);
+        myInterpreter = prepareSession ? prepareSession(codeAll) : new Interpreter(codeAll, initFunctions);
         disable('');
         updateStatus();
     } catch (error) {
@@ -2682,7 +2689,7 @@ function scopeOrder(scope) {
                 } else if (value instanceof Iterator) {
                 } else if (value instanceof RangeBounded) {
                 } else if (value instanceof RangeCounted) {
-                } else if (value instanceof Interpreter.Object) {
+                } else if (isInterpreterObject(value)) {
                 } else {
                     res.push(key);
                 }
@@ -2913,7 +2920,6 @@ function drawScope(scope) {
     //             // iterators_int[name] = it;
 
     //             var color = iterators_colors[itn];
-    //             var it_gui = drawIterator(two, value.data.elements[value.index], key, color);
     //             iterators_gui[value.name] = it_gui;
     //             ++itn;
     //         }
@@ -2950,7 +2956,9 @@ function drawScope(scope) {
         }
 
         var color = iterators_colors[itn];
-        var it_gui = drawIterator(two, value.data.elements[value.index], key, color);
+        var element = value.data.elements && value.data.elements[value.index];
+        if (!element) continue;
+        var it_gui = drawIterator(two, element, key, color);
 
         if (value.data.drawChart) {
             var chart = myChart;
@@ -2991,7 +2999,7 @@ function drawScope(scope) {
                 } else if (value instanceof Iterator) {
                 } else if (value instanceof RangeBounded) {
                 } else if (value instanceof RangeCounted) {
-                } else if (value instanceof Interpreter.Object) {
+                } else if (isInterpreterObject(value)) {
                 } else {
                     // addVariable(key, value, seqn);
                     vars_internal.push({key: key, value: value});

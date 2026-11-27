@@ -195,7 +195,10 @@ test('lab pages reference matching content-addressed assets instead of cached le
       const content = fs.readFileSync('dist' + url);
       assert.equal(createHash('sha256').update(content).digest('hex').slice(0, 12), match[1]);
       const original = url.replace(/\.[a-f0-9]{12}(?=\.(js|css|svg)$)/, '');
-      assert.deepEqual(content, fs.readFileSync('public' + original));
+      assert.deepEqual(
+        content,
+        fs.readFileSync((original.endsWith('/quickjs.js') ? 'dist' : 'public') + original),
+      );
     }
   }
 });
