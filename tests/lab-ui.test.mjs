@@ -197,7 +197,9 @@ test('lab pages reference matching content-addressed assets instead of cached le
       const original = url.replace(/\.[a-f0-9]{12}(?=\.(js|css|svg)$)/, '');
       assert.deepEqual(
         content,
-        fs.readFileSync((/\/(quickjs|acorn-modern)\.js$/.test(original) ? 'dist' : 'public') + original),
+        fs.readFileSync(
+          (/\/(quickjs|acorn-modern)\.js$/.test(original) ? 'dist' : 'public') + original,
+        ),
       );
     }
   }
@@ -242,4 +244,16 @@ test('lab and catalog share tao-js defaults and preserve alternate external repo
       ['copy', 'find'],
     );
   }
+});
+
+test('algorithm snippets retain leading JSDoc type declarations', () => {
+  const context = vm.createContext({ LabLibrary: {}, snippets: {} });
+  vm.runInContext(fs.readFileSync('dist/assets/js/algorithms/acorn-modern.js', 'utf8'), context);
+  vm.runInContext(fs.readFileSync('public/assets/js/algorithms/main.js', 'utf8'), context);
+  context.global_std_code =
+    'function unrelated() {}\n/** @typedef {number} Item */\n\n/** @param {Item} value */\nfunction typed(value) { return value; }';
+  context.process_snippets();
+  assert.match(context.snippets.typed, /^\/\*\* @typedef \{number\} Item \*\//);
+  assert.match(context.snippets.typed, /@param \{Item\} value/);
+  assert.equal(context.snippets.unrelated, 'function unrelated() {}');
 });

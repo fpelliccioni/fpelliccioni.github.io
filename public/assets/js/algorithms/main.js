@@ -266,12 +266,21 @@ function drawTreeFromSequence(arr) {
 
 function process_snippets() {
     var code = global_std_code;
-    var p = acorn.parse(code, typeof LabLibrary === 'undefined' ? undefined : { ecmaVersion: 'latest' });
+    var comments = [];
+    var modern = typeof LabLibrary !== 'undefined';
+    var p = acorn.parse(code, modern ? { ecmaVersion: 'latest', onComment: comments } : undefined);
 
     for (var n in p.body) {
         const value = p.body[n];
         if (value.type == 'FunctionDeclaration') {
-            snippets[value.id.name] = code.substring(value.start, value.end);
+            let start = value.start;
+            for (const comment of comments.slice().reverse()) {
+                if (comment.end > start) continue;
+                if (comment.type !== 'Block' || !comment.value.startsWith('*') ||
+                    code.slice(comment.end, start).trim()) break;
+                start = comment.start;
+            }
+            snippets[value.id.name] = code.substring(start, value.end);
         }
     }
     // console.log('end of process_snippets');
