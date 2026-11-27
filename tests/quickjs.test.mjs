@@ -282,3 +282,25 @@ test('sequence infers its name from the editor binding and keeps explicit names'
     await session.close();
   }
 });
+
+test('a binary operation infers its name from the arrow function binding', async () => {
+  const quick = Function(
+    fs.readFileSync('dist/assets/js/algorithms/quickjs.js', 'utf8') + '\nreturn LabQuickJS;',
+  )();
+  const prefix = 'function binary_operation(fn) { capture(fn.name); return fn; }\n';
+  const source = 'const concatenate = binary_operation<string>((a, b) => a + b);';
+  const names = [];
+  const session = await quick.createSession(prefix + source, prefix.length, (adapter) => {
+    adapter.setProperty(null, 'capture', (name) => names.push(name));
+  }, undefined, 'typescript');
+  try {
+    for (;;) {
+      const event = await session.next();
+      assert.ifError(event.error);
+      if (event.done) break;
+    }
+    assert.deepEqual(names, ['concatenate']);
+  } finally {
+    await session.close();
+  }
+});
