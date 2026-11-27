@@ -92,5 +92,8 @@
     examples: examples,
     typescriptSources: typescriptSources,
     bookReferences: bookReferences,
+    typeDeclarations: function (extra) {
+      return literalLists(extra, /^__(lab_types)_declarations$/).lab_types?.[0] || '';
+    },
   };
 })();
