@@ -256,6 +256,40 @@ var repo = LabLibrary.repo;
   if (window.ResizeObserver) new ResizeObserver(resizeCanvas).observe(byId('hg-right-a'));
   window.addEventListener('resize', resizeCanvas);
 
+  var declarations = '';
+  var typecheckWorkerUrl = document.currentScript?.dataset.typecheckWorker;
+  var typecheckWorker;
+
+  function checkEditorTypes() {
+    if (!typecheckWorker) typecheckWorker = new Worker(typecheckWorkerUrl);
+    var worker = typecheckWorker;
+    return new Promise(function (resolve, reject) {
+      function clearHandlers() {
+        clearTimeout(timer);
+        worker.onmessage = null;
+        worker.onerror = null;
+      }
+
+      function fail(error) {
+        clearHandlers();
+        worker.terminate();
+        typecheckWorker = null;
+        reject(error);
+      }
+
+      var timer = setTimeout(function () { fail(new Error('Type check timed out.')); }, 15000);
+      worker.onerror = function (event) {
+        fail(new Error(event.message || 'Type checking failed.'));
+      };
+      worker.onmessage = function ({ data }) {
+        if (data.error) return fail(new Error(data.error));
+        clearHandlers();
+        resolve(data.diagnostics);
+      };
+      worker.postMessage({ source: editor.value, declarations: declarations });
+    });
+  }
+
   var commandPending = false;
   var typedSources = Object.create(null);
   var editorLanguage = 'javascript';
@@ -293,9 +327,28 @@ var repo = LabLibrary.repo;
         editor.focus();
       } else if (command === 'start' || command === 'restart') {
         if (!ready || !editor.value.trim()) return;
+        editor.readOnly = true;
+        if (editorLanguage === 'typescript' && declarations) {
+          status.textContent = es ? 'Comprobando tipos…' : 'Checking types…';
+          var diagnostics = await checkEditorTypes();
+          if (diagnostics.length) {
+            var diagnostic = diagnostics.find(function (item) { return item.line; }) || diagnostics[0];
+            var sourceLocation = diagnostic.line ? diagnostic.line + ':' + diagnostic.column + ' · ' : '';
+            if (!editor.getClientRects().length) editButton();
+            showProblem(
+              (es ? 'Error de tipos ' : 'Type error ') +
+                'TS' + diagnostic.code + ' · ' + sourceLocation + diagnostic.message,
+              false,
+            );
+            editor.focus();
+            if (diagnostic.start !== undefined) {
+              editor.setSelectionRange(diagnostic.start, diagnostic.start + (diagnostic.length || 1));
+            }
+            return;
+          }
+        }
         resizeCanvas();
         await closeSession();
-        editor.readOnly = true;
         var prefix = invisibleCode();
         quickSession = await LabQuickJS.createSession(
           prefix + editor.value,
@@ -678,6 +731,7 @@ var repo = LabLibrary.repo;
       process_snippets_usage();
       typedSources = LabLibrary.typescriptSources(global_std_code_extra);
       bookReferences = LabLibrary.bookReferences(global_std_code_extra);
+      declarations = LabLibrary.typeDeclarations(global_std_code_extra);
       for (var name of Object.keys(typedSources)) {
         if (!Object.hasOwn(functionSources, name)) {
           delete typedSources[name];

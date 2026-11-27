@@ -10,7 +10,7 @@ for (const route of ['algorithms', 'algoritmos', 'algorithms-catalog']) {
   const file = path.join(root, route, 'index.html');
   const html = fs
     .readFileSync(file, 'utf8')
-    .replace(/\b(src|href)="(\/[^"?#]+\.(?:js|css|svg))"/g, (attribute, name, url) => {
+    .replace(/\b(src|href|data-typecheck-worker)="(\/[^"?#]+\.(?:js|css|svg))"/g, (attribute, name, url) => {
       if (!versioned.has(url)) {
         const source = path.join(root, url);
         const bytes = fs.readFileSync(source);
