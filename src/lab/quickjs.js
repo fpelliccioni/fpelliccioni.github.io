@@ -14,10 +14,11 @@ function visibleBindings(path, offset) {
     .map(([name]) => name);
 }
 
-function instrument(source, offset) {
+function instrument(source, offset, language) {
   const points = [];
   const { code } = transform(source, {
     sourceType: 'script',
+    presets: language === 'typescript' ? [['typescript', { ignoreExtensions: true }]] : [],
     plugins: [
       ({ types: t }) => ({
         visitor: {
@@ -49,6 +50,7 @@ function instrument(source, offset) {
               if (
                 node.start == null ||
                 node.start < offset ||
+                t.isTypeScript(node) ||
                 path.isBlockStatement() ||
                 path.isFunctionDeclaration() ||
                 path.parentPath.isLabeledStatement()
@@ -107,7 +109,7 @@ function instrument(source, offset) {
   return { code, points };
 }
 
-export async function createSession(source, offset, initialize, draw) {
+export async function createSession(source, offset, initialize, draw, language) {
   // Keep library declarations outside the editor's lexical scope.
   const boundary = offset ? '\n{\n' : '';
   const editorOffset = offset + boundary.length;
@@ -116,7 +118,7 @@ export async function createSession(source, offset, initialize, draw) {
     : source;
   let program;
   try {
-    program = instrument(scopedSource, editorOffset);
+    program = instrument(scopedSource, editorOffset, language);
   } catch (error) {
     if (Number.isInteger(error.pos) && error.pos >= editorOffset) {
       const lines = scopedSource.slice(editorOffset, error.pos).split('\n');
