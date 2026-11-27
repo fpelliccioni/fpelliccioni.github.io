@@ -44,7 +44,7 @@
       };
   var categoryLabels = es
     ? {
-        copying: 'Copia', position: 'Por posición', predicate: 'Por predicado',
+        comparison: 'Comparación', copying: 'Copia', position: 'Por posición', predicate: 'Por predicado',
         numerics: 'Numéricos', gcd: 'Máximo común divisor', misc: 'Varios', power: 'Potencias',
         primality_testing: 'Primalidad', remainder: 'Restos', sift: 'Cribas',
         rearrangements: 'Reordenamiento', 'ordering-based': 'Por orden',
