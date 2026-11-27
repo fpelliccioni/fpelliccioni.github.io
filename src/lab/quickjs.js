@@ -108,12 +108,18 @@ function instrument(source, offset) {
 }
 
 export async function createSession(source, offset, initialize, draw) {
+  // Keep library declarations outside the editor's lexical scope.
+  const boundary = offset ? '\n{\n' : '';
+  const editorOffset = offset + boundary.length;
+  const scopedSource = offset
+    ? source.slice(0, offset) + boundary + source.slice(offset) + '\n}'
+    : source;
   let program;
   try {
-    program = instrument(source, offset);
+    program = instrument(scopedSource, editorOffset);
   } catch (error) {
-    if (Number.isInteger(error.pos) && error.pos >= offset) {
-      const lines = source.slice(offset, error.pos).split('\n');
+    if (Number.isInteger(error.pos) && error.pos >= editorOffset) {
+      const lines = scopedSource.slice(editorOffset, error.pos).split('\n');
       const message = error.reasonCode
         ? error.message.split('): ').at(-1).split('\n')[0]
         : error.message;
@@ -248,8 +254,13 @@ export async function createSession(source, offset, initialize, draw) {
         properties[name] = vm.getProp(values, index).consume((h) => read(h));
       });
       scope = { properties };
-      const point = points[vm.getNumber(id)];
-      if (!point) return vm.undefined;
+      const checkpoint = points[vm.getNumber(id)];
+      if (!checkpoint) return vm.undefined;
+      const point = {
+        ...checkpoint,
+        start: checkpoint.start - boundary.length,
+        end: checkpoint.end - boundary.length,
+      };
       rendering = true;
       try {
         draw?.(scope);
