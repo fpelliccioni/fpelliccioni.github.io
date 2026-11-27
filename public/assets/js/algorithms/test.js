@@ -61,9 +61,9 @@ var defaultElementColor = '#bfffb3'
 function setSizes() {
 
     defaultLeftMargin = escale_x(10);
-    defaultTopMargin = escale_y(0);
-    sequenceTotalHeight = escale_y(130);
-    variableTotalHeight = escale_y(70);
+    defaultTopMargin = escale_y(8);
+    sequenceTotalHeight = escale_y(142);
+    variableTotalHeight = escale_y(78);
 
 
     // console.log(defaultLeftMargin)
