@@ -44,16 +44,24 @@
       };
   var categoryLabels = es
     ? {
-        'search/linear': 'Búsqueda lineal',
-        'search/binary': 'Búsqueda binaria',
-        selection: 'Selección',
-        other: 'Otros',
+        copying: 'Copia', position: 'Por posición', predicate: 'Por predicado',
+        numerics: 'Numéricos', gcd: 'Máximo común divisor', misc: 'Varios', power: 'Potencias',
+        primality_testing: 'Primalidad', remainder: 'Restos', sift: 'Cribas',
+        rearrangements: 'Reordenamiento', 'ordering-based': 'Por orden',
+        'position-based': 'Por posición', 'predicate-based': 'Por predicado',
+        sorting: 'Ordenamiento', 'insertion-sort': 'Inserción', 'selection-sort': 'Selección',
+        'sort-n': 'Tamaño fijo', cycle: 'Ciclos', reverse: 'Inversión', rotate: 'Rotación',
+        shift: 'Desplazamiento', heaps: 'Montículos', partition: 'Partición',
+        search: 'Búsqueda', linear: 'Lineal', binary: 'Binaria', selection: 'Selección',
+        swapping: 'Intercambio', uncatalogued: 'Sin categoría', writing: 'Escritura', other: 'Otros',
       }
     : {
-        'search/linear': 'Linear search',
-        'search/binary': 'Binary search',
-        selection: 'Selection',
-        other: 'Other',
+        gcd: 'Greatest common divisor', misc: 'Miscellaneous', power: 'Powers',
+        primality_testing: 'Primality testing', sift: 'Sieves',
+        'ordering-based': 'By order', 'position-based': 'By position', 'predicate-based': 'By predicate',
+        position: 'By position', predicate: 'By predicate',
+        'insertion-sort': 'Insertion sort', 'selection-sort': 'Selection sort',
+        'sort-n': 'Fixed size', uncatalogued: 'Uncategorized',
       };
   var current = '';
   function element(tag, className, text) {
@@ -107,7 +115,9 @@
   var filters = element('div', 'catalog-filters');
   filters.setAttribute('role', 'group');
   filters.setAttribute('aria-label', labels.categories);
+  var subcategories = element('div', 'catalog-subcategories');
   host.appendChild(filters);
+  host.appendChild(subcategories);
   var count = element('p', 'catalog-count', labels.loading);
   count.setAttribute('role', 'status');
   host.appendChild(count);
@@ -118,7 +128,15 @@
     render();
   });
   function categoryName(key) {
-    return categoryLabels[key] || key.replace(/\//g, ' / ');
+    return Object.hasOwn(categoryLabels, key)
+      ? categoryLabels[key]
+      : key.charAt(0).toUpperCase() + key.slice(1).replace(/[_-]/g, ' ');
+  }
+  function navigationPath(path) {
+    return path.replace(/^rearrangements\/(ordering|position|predicate)-based\//, 'rearrangements/');
+  }
+  function belongsTo(path, group) {
+    return !group || path === group || path.startsWith(group + '/');
   }
   function normalized(text) {
     return text
@@ -131,10 +149,10 @@
     var words = normalized(term).trim().split(/\s+/);
     return items.filter(function (item) {
       return (
-        (!group || item.category === group) &&
+        belongsTo(navigationPath(item.category), group) &&
         words.every(function (word) {
           return normalized(
-            item.name + ' ' + item.category + ' ' + categoryName(item.category),
+            item.name + ' ' + item.category + ' ' + item.category.split('/').map(categoryName).join(' '),
           ).includes(word);
         })
       );
@@ -176,37 +194,57 @@
     search.value = '';
     render();
   }
+  function renderCategoryRow(row, parent) {
+    var prefix = parent ? parent + '/' : '';
+    var children = new Map();
+    entries.forEach(function (item) {
+      var path = navigationPath(item.category);
+      if (!path.startsWith(prefix) || path === parent) return;
+      var name = path.slice(prefix.length).split('/')[0];
+      children.set(name, (children.get(name) || 0) + 1);
+    });
+    if (!children.size) return false;
+
+    var options = [[parent, parent ? (es ? 'Todas' : 'All') : labels.all, filtered(entries, '', parent).length]];
+    [...children].sort(function (a, b) {
+      return categoryName(a[0]).localeCompare(categoryName(b[0]), es ? 'es' : 'en');
+    }).forEach(function ([name, total]) {
+      options.push([prefix + name, categoryName(name), total]);
+    });
+    options.forEach(function ([key, label, total]) {
+      var button = element('button', 'catalog-filter', label + ' · ' + total);
+      button.type = 'button';
+      var active = key === parent ? category === parent : belongsTo(category, key);
+      button.setAttribute('aria-pressed', String(active));
+      button.addEventListener('click', function () {
+        category = key;
+        render();
+        var renderedRow = parent
+          ? Array.from(subcategories.children).find(function (group) { return group.dataset.parent === parent; })
+          : filters;
+        renderedRow?.querySelector('[aria-pressed="true"]')?.focus();
+      });
+      row.appendChild(button);
+    });
+    return true;
+  }
+
   function render() {
     filters.replaceChildren();
-    ['']
-      .concat(
-        Array.from(
-          new Set(
-            entries.map(function (item) {
-              return item.category;
-            }),
-          ),
-        ).sort(),
-      )
-      .forEach(function (key) {
-        var total = key
-          ? entries.filter(function (item) {
-              return item.category === key;
-            }).length
-          : entries.length;
-        var button = element(
-          'button',
-          'catalog-filter',
-          (key ? categoryName(key) : labels.all) + ' · ' + total,
-        );
-        button.type = 'button';
-        button.setAttribute('aria-pressed', String(category === key));
-        button.addEventListener('click', function () {
-          category = key;
-          render();
-        });
-        filters.appendChild(button);
-      });
+    subcategories.replaceChildren();
+    renderCategoryRow(filters, '');
+    var parent = '';
+    if (category) category.split('/').forEach(function (part) {
+      parent = parent ? parent + '/' + part : part;
+      var row = element('div', 'catalog-filters catalog-subcategory-row');
+      row.dataset.parent = parent;
+      row.setAttribute('role', 'group');
+      row.setAttribute('aria-label', parent.split('/').map(categoryName).join(' / '));
+      if (!renderCategoryRow(row, parent)) return;
+      var label = element('span', 'catalog-subcategory-label', categoryName(part));
+      row.prepend(label);
+      subcategories.appendChild(row);
+    });
     var visible = filtered(entries, query, category);
     count.textContent = visible.length + ' / ' + entries.length + ' ' + labels.count;
     results.replaceChildren();
@@ -228,7 +266,7 @@
     }
     visible.forEach(function (item) {
       var card = element('article', 'catalog-card');
-      card.appendChild(element('span', 'catalog-category', categoryName(item.category)));
+      card.appendChild(element('span', 'catalog-category', navigationPath(item.category).split('/').map(categoryName).slice(-2).join(' · ')));
       card.appendChild(element('h3', '', item.name));
       var action = element(standalone ? 'a' : 'button', 'catalog-open', labels.open + ' →');
       if (standalone) {

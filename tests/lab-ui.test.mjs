@@ -158,6 +158,11 @@ test('catalog parses literal categories without executing code and combines sear
     Array.from(api.filter(items, 'busqueda', 'search/binary'), (x) => x.name),
     ['lower_bound'],
   );
+  assert.deepEqual(
+    Array.from(api.filter(items, '', 'search'), (x) => x.name),
+    ['find_if', 'lower_bound'],
+  );
+  assert.equal(api.filter(items, '', 'sea').length, 0);
   assert.equal(api.filter(items, 'find', 'selection').length, 0);
 });
 
