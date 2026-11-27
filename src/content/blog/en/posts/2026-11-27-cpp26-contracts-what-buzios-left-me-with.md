@@ -5,7 +5,7 @@
   "lang": "en",
   "date": "2026-11-27T12:00:00+01:00",
   "type": "post",
-  "published": false,
+  "published": true,
   "comments": true,
   "tags": ["c++", "c++26", "wg21", "iso", "contracts", "gcc", "governance"],
   "translationKey": "cpp26-contracts-what-buzios-left-me-with",
