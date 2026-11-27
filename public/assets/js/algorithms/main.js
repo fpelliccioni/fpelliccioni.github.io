@@ -1738,6 +1738,34 @@ function initFunctions(interpreter, scope) {
 
 
 
+    function contractOffset(it, step) {
+        if (typeof it === 'number') return it + step;
+        const index = it.index + step;
+        if (!Number.isSafeInteger(index) || index < 0 || index > it.data.data.length) {
+            throw new RangeError('Iterator outside the sequence during a contract check.');
+        }
+        return new Iterator(it.data, index, it.name, it.category);
+    }
+
+    interpreter.setContractReaders?.({
+        successor: (it, step = 1) => contractOffset(it, step),
+        next: (it, step = 1) => contractOffset(it, step),
+        predecessor: (it, step = 1) => contractOffset(it, -step),
+        pred: (it, step = 1) => contractOffset(it, -step),
+        begin: seq => new Iterator(seq, 0, null, getIteratorCatetoryFromSeqType(seq.type)),
+        end: seq => new Iterator(seq, seq.data.length, null, getIteratorCatetoryFromSeqType(seq.type)),
+        size: size_wrapper,
+        capacity: capacity_wrapper,
+        source: it => {
+            if (it.index < 0 || it.index >= it.data.data.length) {
+                throw new RangeError('Cannot read outside the sequence during a contract check.');
+            }
+            return it.data.data[it.index];
+        },
+        equal: (a, b) => typeof a === 'number' ? a === b : a.data === b.data && a.index === b.index,
+        distance: (a, b) => b.index - a.index,
+    });
+
     // interpreter.setProperty(scope, 'alert',          interpreter.createNativeFunction(alert_wrapper));
     interpreter.setProperty(scope, 'print',          interpreter.createNativeFunction(print_wrapper));
     interpreter.setProperty(scope, 'successor',      interpreter.createNativeFunction(successor_wrapper));
