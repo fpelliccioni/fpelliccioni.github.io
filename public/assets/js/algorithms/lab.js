@@ -50,6 +50,44 @@ var repo = LabLibrary.repo;
   var mode = 'loading';
   var exampleNames = [];
   var functionSources = {};
+  var bookReferences = Object.create(null);
+  var bibliography = document.createElement('section');
+  bibliography.className = 'editor-references';
+  bibliography.setAttribute('aria-labelledby', 'editorReferencesTitle');
+  bibliography.hidden = true;
+  var bibliographyTitle = document.createElement('h3');
+  bibliographyTitle.id = 'editorReferencesTitle';
+  bibliographyTitle.textContent = es ? 'Referencias bibliográficas' : 'Book references';
+  var bibliographyList = document.createElement('ul');
+  bibliography.append(bibliographyTitle, bibliographyList);
+  document.querySelector('.editor-footer').after(bibliography);
+
+  function renderBookReferences(name) {
+    var references = bookReferences[name] || [];
+    bibliographyList.replaceChildren();
+    bibliography.hidden = !references.length;
+    for (var reference of references) {
+      var item = document.createElement('li');
+      var url = '';
+      if (reference.startsWith('Elements of Programming,')) {
+        var page = /\bpp?\. (\d+)/.exec(reference);
+        url = 'https://elementsofprogramming.com/eop.pdf' + (page ? '#page=' + (Number(page[1]) + 14) : '');
+      } else if (reference.startsWith('From Mathematics to Generic Programming,')) {
+        var chapter = /\bch\. (\d+)/.exec(reference);
+        url = chapter
+          ? 'https://www.fm2gp.com/code/ch' + chapter[1].padStart(2, '0') + '.h'
+          : 'https://www.fm2gp.com/downloads.html';
+      }
+      if (url) {
+        var link = document.createElement('a');
+        link.href = url;
+        link.textContent = reference;
+        item.appendChild(link);
+      } else item.textContent = reference;
+      bibliographyList.appendChild(item);
+    }
+  }
+
   var t = es
     ? {
         loading: 'Cargando biblioteca',
@@ -498,6 +536,7 @@ var repo = LabLibrary.repo;
     select.value = name;
     byId('currentAlgorithm').textContent = name || t.custom;
     LabCatalog.setCurrent(name);
+    renderBookReferences(name);
   }
   select.addEventListener('click', function () {
     LabCatalog.open();
@@ -608,6 +647,7 @@ var repo = LabLibrary.repo;
       functionSources = Object.assign({}, snippets);
       process_snippets_usage();
       typedSources = LabLibrary.typescriptSources(global_std_code_extra);
+      bookReferences = LabLibrary.bookReferences(global_std_code_extra);
       for (var name of Object.keys(typedSources)) {
         if (!Object.hasOwn(functionSources, name)) {
           delete typedSources[name];
@@ -636,6 +676,7 @@ var repo = LabLibrary.repo;
           editor.value = source;
           showFunction();
           renderReference(name);
+          renderBookReferences(name);
           setMode('reference');
         } else {
           var name = params.get('snippet') || 'find';

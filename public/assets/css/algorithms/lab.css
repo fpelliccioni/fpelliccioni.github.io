@@ -1142,3 +1142,25 @@ main.catalog-page {
   font-size: 12px;
   margin-inline-end: 2px;
 }
+
+.editor-references {
+  flex: none;
+  padding: 10px 16px 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+.editor-references h3 {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: inherit;
+  font-weight: 600;
+}
+.editor-references ul {
+  margin: 0;
+  padding-inline-start: 16px;
+}
+.editor-references a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

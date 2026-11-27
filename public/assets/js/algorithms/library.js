@@ -52,26 +52,38 @@
       ),
     ).sort();
   }
-  function typescriptSources(extra) {
+  function literalLists(extra, pattern) {
     var entries = Object.create(null);
     for (var node of acorn.parse(extra, { ecmaVersion: 'latest' }).body) {
       if (node.type !== 'FunctionDeclaration') continue;
-      var match = /^__(.+)_typescript$/.exec(node.id.name);
+      var match = pattern.exec(node.id.name);
       if (!match || node.body.body.length !== 1) continue;
       var statement = node.body.body[0];
       if (statement.type !== 'ReturnStatement' || statement.argument?.type !== 'ArrayExpression')
         continue;
       var values = statement.argument.elements;
       if (
-        values.length === 2 &&
+        values.length > 0 &&
         values.every(function (value) {
           return value?.type === 'Literal' && typeof value.value === 'string';
         })
       ) {
-        entries[match[1]] = { definition: values[0].value, usage: values[1].value };
+        entries[match[1]] = values.map(function (value) { return value.value; });
       }
     }
     return entries;
+  }
+  function typescriptSources(extra) {
+    var entries = literalLists(extra, /^__(.+)_typescript$/);
+    for (var name of Object.keys(entries)) {
+      var values = entries[name];
+      if (values.length === 2) entries[name] = { definition: values[0], usage: values[1] };
+      else delete entries[name];
+    }
+    return entries;
+  }
+  function bookReferences(extra) {
+    return literalLists(extra, /^__(.+)_references$/);
   }
   window.LabLibrary = {
     user: user,
@@ -79,5 +91,6 @@
     load: load,
     examples: examples,
     typescriptSources: typescriptSources,
+    bookReferences: bookReferences,
   };
 })();
