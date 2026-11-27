@@ -42,6 +42,7 @@ var repo = LabLibrary.repo;
 
 (function () {
   var es = document.documentElement.lang === 'es';
+  var cppPilot = params.get('pilot') === 'cpp';
   var editor = document.getElementById('codeArea');
   var editorSyntax = document.createElement('pre');
   editorSyntax.id = 'editorSyntax';
@@ -63,7 +64,7 @@ var repo = LabLibrary.repo;
       return;
     }
     if (editor.value !== lastHighlightedCode) {
-      editorSyntaxCode.innerHTML = hljs.highlight('javascript', editor.value, true).value + ' ';
+      editorSyntaxCode.innerHTML = hljs.highlight(cppPilot && hljs.getLanguage('cpp') ? 'cpp' : 'javascript', editor.value, true).value + ' ';
       lastHighlightedCode = editor.value;
     }
     editorSyntax.hidden = false;
@@ -171,8 +172,10 @@ var repo = LabLibrary.repo;
     byId('restartButton').disabled = !executing;
     byId('editButton').style.display = 'inline-flex';
     byId('editButton').disabled =
-      !executing && next !== 'reference' && !(next === 'error' && editor.style.display === 'none');
-    byId('editorMode').textContent = executing || next === 'reference' ? t.viewing : t.editing;
+      cppPilot || (!executing && next !== 'reference' && !(next === 'error' && editor.style.display === 'none'));
+    byId('editorMode').textContent = cppPilot
+      ? (es ? 'Piloto de solo lectura' : 'Read-only pilot')
+      : executing || next === 'reference' ? t.viewing : t.editing;
     syncEmptyStates();
   }
   function syncEmptyStates() {
@@ -296,7 +299,8 @@ var repo = LabLibrary.repo;
 
   function setEditorLanguage(language) {
     editorLanguage = language;
-    byId('editorLanguage').textContent = language.toUpperCase();
+    byId('editorLanguage').textContent = language === 'cpp' ? 'C++' : language.toUpperCase();
+    byId('codeHighlight').classList.toggle('language-cpp', language === 'cpp' && !!hljs.getLanguage('cpp'));
   }
   async function closeSession() {
     if (!quickSession) return;
@@ -310,6 +314,7 @@ var repo = LabLibrary.repo;
     clearProblem();
     try {
       if (command === 'edit') {
+        if (cppPilot) return;
         if (mode === 'reference') {
           var editUrl = new URL(location.href);
           editUrl.searchParams.delete('function');
@@ -349,17 +354,27 @@ var repo = LabLibrary.repo;
         }
         resizeCanvas();
         await closeSession();
-        var prefix = invisibleCode();
-        quickSession = await LabQuickJS.createSession(
-          prefix + editor.value,
-          prefix.length,
-          function (adapter) {
-            myInterpreter = adapter;
-            initFunctions(adapter);
-          },
-          drawScope,
-          editorLanguage,
-        );
+        var initialize = function (adapter) {
+          myInterpreter = adapter;
+          initFunctions(adapter);
+        };
+        if (cppPilot) {
+          if (!LabCppPilot.supported()) {
+            showProblem(
+              es
+                ? 'Este piloto requiere soporte de WebAssembly JSPI. Probá con Chrome o Firefox.'
+                : 'This pilot requires WebAssembly JSPI. Try Chrome or Firefox.',
+              false,
+            );
+            return;
+          }
+          quickSession = await LabCppPilot.createSession(initialize, drawScope, es ? 'Índice: ' : 'Index: ');
+        } else {
+          var prefix = invisibleCode();
+          quickSession = await LabQuickJS.createSession(
+            prefix + editor.value, prefix.length, initialize, drawScope, editorLanguage,
+          );
+        }
         startButton(function () {
           return myInterpreter;
         });
@@ -390,7 +405,7 @@ var repo = LabLibrary.repo;
           if (!contractError) highlighted.textContent = code;
           if (event.error && !contractError) showError(event.error.message || String(event.error));
         } else {
-          var offset = invisibleCode().length;
+          var offset = cppPilot ? 0 : invisibleCode().length;
           var from = event.point.start - offset;
           var to = event.point.end - offset;
           highlighted.innerHTML =
@@ -420,7 +435,7 @@ var repo = LabLibrary.repo;
       showError(error.message || String(error));
       showProblem(error.message || String(error), false);
     } finally {
-      editor.readOnly = false;
+      editor.readOnly = cppPilot;
       commandPending = false;
     }
     syncEmptyStates();
@@ -469,7 +484,7 @@ var repo = LabLibrary.repo;
     updateEditor();
   });
   editor.addEventListener('keydown', function (event) {
-    if (event.key === 'Tab' && !event.shiftKey) {
+    if (!cppPilot && event.key === 'Tab' && !event.shiftKey) {
       event.preventDefault();
       editor.setRangeText('    ', editor.selectionStart, editor.selectionEnd, 'end');
       sourceDirty = true;
@@ -653,6 +668,8 @@ var repo = LabLibrary.repo;
         location.href = next.href;
         return;
       }
+      cppPilot = false;
+      editor.readOnly = false;
       setEditorLanguage(typedSources[name] ? 'typescript' : 'javascript');
       editor.value = getSnippet(name);
       editor.setSelectionRange(0, 0);
@@ -668,6 +685,7 @@ var repo = LabLibrary.repo;
       next.searchParams.delete('code');
       next.searchParams.delete('function');
       next.searchParams.set('snippet', name);
+      next.searchParams.delete('pilot');
       history.replaceState(null, '', next);
       editor.focus();
     } finally {
@@ -744,7 +762,14 @@ var repo = LabLibrary.repo;
       fillExamples();
       ready = true;
       if (!sourceDirty) {
-        if (params.has('code')) {
+        if (cppPilot) {
+          setEditorLanguage('cpp');
+          editor.value = LabCppPilot.source;
+          editor.readOnly = true;
+          editButton();
+          byId('currentAlgorithm').textContent = 'find_if (C++)';
+          setMode('ready');
+        } else if (params.has('code')) {
           setEditorLanguage(params.get('lang') === 'ts' ? 'typescript' : 'javascript');
           editor.value = params.get('code');
           editButton();
@@ -792,7 +817,7 @@ var repo = LabLibrary.repo;
       showProblem(t.loadFailed, true);
     }
   }
-  if (params.has('code')) {
+  if (!cppPilot && params.has('code')) {
     setEditorLanguage(params.get('lang') === 'ts' ? 'typescript' : 'javascript');
     editor.value = params.get('code');
   }

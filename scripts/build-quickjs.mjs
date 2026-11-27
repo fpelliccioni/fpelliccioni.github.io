@@ -18,6 +18,18 @@ await build({
   minify: true,
 });
 
+await build({
+  entryPoints: ['src/lab/cpp-pilot.js'],
+  outfile: output + '/cpp-pilot.js',
+  bundle: true,
+  format: 'iife',
+  globalName: 'LabCppPilot',
+  platform: 'browser',
+  target: 'es2020',
+  loader: { '.cpp': 'text', '.wasm': 'binary' },
+  minify: true,
+});
+
 await copyFile(require.resolve('acorn'), output + '/acorn-modern.js');
 
 const tsDirectory = dirname(require.resolve('typescript'));
