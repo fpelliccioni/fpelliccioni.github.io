@@ -232,6 +232,13 @@ test('lab and catalog share tao-js defaults and preserve alternate external repo
     vm.runInContext(fs.readFileSync('dist/assets/js/algorithms/acorn-modern.js', 'utf8'), context);
     vm.runInContext(fs.readFileSync('public/assets/js/algorithms/library.js', 'utf8'), context);
     const library = context.window.LabLibrary;
+    const references = library.bookReferences(`
+      function __find_references() { return ["Elements of Programming, ch. 6, p. 94."]; }
+      function __copy_references() { return [untrusted()]; }
+      function __bad_references() { throw 1; }
+    `);
+    assert.deepEqual(Object.keys(references), ['find']);
+    assert.deepEqual(Array.from(references.find), ['Elements of Programming, ch. 6, p. 94.']);
     assert.equal(library.user, owner);
     assert.equal(library.repo, repo);
     await library.load('algorithms.js');
