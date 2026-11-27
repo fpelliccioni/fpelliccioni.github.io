@@ -53,7 +53,7 @@ function instrument(source, offset, language) {
               return;
             }
 
-            if (!['predicate', 'relation'].includes(init.callee.name) ||
+            if (!['predicate', 'relation', 'binary_operation'].includes(init.callee.name) ||
                 !t.isArrowFunctionExpression(init.arguments[0])) return;
 
             // A computed property gives the arrow the same inferred name as
