@@ -478,41 +478,11 @@ button.primary {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   text-align: center;
-  padding: 25px;
+  padding: 20px;
   pointer-events: none;
-  background: #0e1720f0;
-}
-.visual-empty h3 {
-  font-size: 17px;
-  font-weight: 550;
-  margin: 22px 0 9px;
-}
-.visual-empty p {
-  max-width: 310px;
+  color: var(--muted);
   font-size: 12px;
-  color: var(--muted);
-  line-height: 1.8;
-}
-.empty-sequence {
-  display: flex;
-  gap: 6px;
-}
-.empty-sequence > span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border);
-  width: 36px;
-  height: 42px;
-  font: 15px var(--mono);
-  color: var(--muted);
-  background: var(--surface);
-}
-.empty-sequence > span:nth-child(2) {
-  color: var(--accent);
-  border-color: var(--accent);
 }
 #hg-right-a {
   min-height: 100%;
@@ -836,12 +806,6 @@ button.primary {
   }
   .load-error button {
     font-size: 10px;
-  }
-  .visual-empty {
-    padding: 20px;
-  }
-  .visual-empty h3 {
-    font-size: 15px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -20,15 +20,20 @@ test('the visualization scrolls horizontally only when the drawing needs it', { 
         const url = new URL('/algoritmos/', base);
         url.searchParams.set('code', `const d = sequence(array_ascending(${size}));\nprint(d);`);
         await page.goto(url.href);
+        const placeholder = page.locator('#visualEmpty');
+        assert.equal(await placeholder.innerText(), 'Iniciá la ejecución para ver los datos.');
+        assert.equal(await placeholder.locator('span').count(), 0);
         const empty = await dimensions();
         assert.equal(empty.content, empty.available);
 
         await page.locator('#startButton').click();
         const step = page.locator('#stepButton');
         await step.waitFor();
+        assert.match(await placeholder.innerText(), /Avanzá hasta/);
         await step.click();
         await step.click();
         await stage.locator('svg text').first().waitFor();
+        await placeholder.waitFor({ state: 'hidden' });
 
         const sourceHeading = await page.locator('.editor-panel > .panel-heading').boundingBox();
         const visualHeading = await page.locator('.visual-panel > .panel-heading').boundingBox();
