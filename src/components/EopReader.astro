@@ -55,15 +55,8 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
           </div>
         </section>
 
-        <section class="reader-panel analyzer" aria-labelledby="book-examples-title">
-          <div class="example-panel">
-            <h2 id="book-examples-title">{es ? 'Algoritmos de la página' : 'Algorithms on this page'}</h2>
-            <div id="book-examples"></div>
-          </div>
-          <div class="analyzer-toolbar">
-            <h3 id="book-lab-title">{es ? 'Laboratorio' : 'Algorithm lab'}</h3>
-            <a id="book-open-lab" target="_blank" rel="noopener" hidden>{es ? 'Abrir en el lab ↗' : 'Open in the lab ↗'}</a>
-          </div>
+        <section class="reader-panel analyzer" aria-label={es ? 'Laboratorio' : 'Algorithm lab'}>
+          <div id="book-examples" role="group" aria-label={es ? 'Algoritmos de la página' : 'Algorithms on this page'}></div>
           <p id="book-notice" role="status" hidden></p>
           <iframe id="book-lab" title={es ? 'Laboratorio de algoritmos' : 'Algorithm lab'} hidden></iframe>
         </section>
@@ -82,15 +75,15 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   #eop-reader [hidden] { display: none !important; }
   #eop-reader a { color: #c4e69f; }
   #eop-reader a:hover { text-decoration: underline; }
-  .reader-header, .book-toolbar, .analyzer-toolbar { display: flex; align-items: center; gap: 9px 12px; flex-wrap: wrap; }
+  .reader-header, .book-toolbar { display: flex; align-items: center; gap: 9px 12px; flex-wrap: wrap; }
   .reader-header { justify-content: space-between; padding: 0 1px 14px; }
   .reader-header h1 { font-size: clamp(21px, 2.3vw, 30px); letter-spacing: -.035em; margin: 0; }
   .reader-header p { color: #a4b7c9; margin: 3px 0 0; }
   .reader-header nav { display: flex; gap: 16px; }
   .reader-layout { display: grid; grid-template-columns: minmax(330px, 44fr) minmax(0, 56fr); gap: 14px; }
   .reader-panel { display: flex; min-width: 0; flex-direction: column; height: max(580px, calc(100dvh - 118px)); border: 1px solid #2a3c4b; border-radius: 8px; overflow: hidden; background: #111b26; }
-  .book-toolbar, .analyzer-toolbar { padding: 10px 12px; border-bottom: 1px solid #2a3c4b; }
-  .book-toolbar a, .analyzer-toolbar a { margin-inline-start: auto; }
+  .book-toolbar { padding: 10px 12px; border-bottom: 1px solid #2a3c4b; }
+  .book-toolbar a { margin-inline-start: auto; }
   #eop-reader button, #eop-reader select { font: inherit; border: 1px solid #40576a; border-radius: 5px; color: inherit; background: #172531; padding: 4px 9px; }
   #eop-reader select { width: auto; min-width: 60px; }
   #eop-reader button:not(:disabled) { cursor: pointer; }
@@ -103,10 +96,7 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   .book-pdf-page iframe { height: 100%; pointer-events: none; }
   .book-pdf-page iframe:not([src]) { visibility: hidden; }
   #book-lab { flex: 1; min-height: 0; background: #0c1118; }
-  .example-panel { padding: 10px 12px; border-bottom: 1px solid #2a3c4b; }
-  .example-panel h2, .analyzer-toolbar h3 { margin: 0; font-size: 13px; }
-  .analyzer-toolbar h3 { overflow-wrap: anywhere; font-family: var(--mono, monospace); }
-  #book-examples { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 7px; }
+  #book-examples { display: flex; flex-wrap: wrap; gap: 6px; padding: 7px 10px; border-bottom: 1px solid #2a3c4b; }
   #book-examples button { max-width: 100%; overflow-wrap: anywhere; text-align: start; font: 12px/1.55 var(--mono, monospace); }
   #book-examples button[aria-pressed="true"] { border-color: #b1ed80; color: #c4e69f; }
   #book-examples small { display: inline-block; margin-inline-start: 7px; color: #a4b7c9; }

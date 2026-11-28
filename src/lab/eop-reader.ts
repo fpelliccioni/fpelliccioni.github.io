@@ -11,8 +11,6 @@ const pdfPages = Array.from(pdfStage.querySelectorAll<HTMLDivElement>('.book-pdf
 const pdfLink = byId<HTMLAnchorElement>('book-official');
 const exampleList = byId<HTMLDivElement>('book-examples');
 const lab = byId<HTMLIFrameElement>('book-lab');
-const labLink = byId<HTMLAnchorElement>('book-open-lab');
-const labTitle = byId<HTMLElement>('book-lab-title');
 const notice = byId<HTMLParagraphElement>('book-notice');
 
 const rawPage = Number(new URL(location.href).searchParams.get('page'));
@@ -26,15 +24,12 @@ function setSelection(entry?: BookExample) {
     activeExample = entry.example;
     const url = new URL(reader.dataset.labPath!, location.origin);
     url.searchParams.set('snippet', entry.example);
-    labLink.href = url.href;
     url.searchParams.set('embed', 'book');
     lab.src = url.href;
   }
 
   const showLab = Boolean(activeExample && (!entry || entry.example));
   lab.hidden = !showLab;
-  labLink.hidden = !showLab;
-  labTitle.textContent = showLab ? activeExample : entry ? localizeLabel(entry.label) : (es ? 'Laboratorio' : 'Algorithm lab');
   notice.hidden = showLab;
   notice.textContent = entry
     ? (es ? 'Este algoritmo todavía no está disponible en el lab.' : 'This algorithm is not available in the lab yet.')
