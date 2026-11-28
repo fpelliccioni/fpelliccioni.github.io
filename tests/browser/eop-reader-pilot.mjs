@@ -166,9 +166,11 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.doesNotMatch(await lab.locator('#hg-right-y').innerText(), /2147483646/);
 
     await picker.selectOption('19');
+    await page.getByRole('button', { name: /distance \(transformación\)/ }).click();
     assert.match(await page.locator('#book-notice').innerText(), /todavía no está disponible/);
     assert.equal(await page.locator('#book-lab').isVisible(), false);
 
+    await splitView.click();
     await picker.selectOption('24');
     assert.equal(await page.locator('input[type=file]').count(), 0);
     assert.equal(await pdf.isVisible(), true);
@@ -209,6 +211,52 @@ test('the blog home and lab link to the reader in their own language', async () 
       const link = page.locator(`a[href="${reader}"]`).filter({ hasText: label });
       await link.waitFor({ state: 'visible' });
     }
+  } finally {
+    await browser.close();
+  }
+});
+
+test('the reader navigates all twelve chapters and the complete PDF', async () => {
+  const browser = await chromium.launch({ channel: 'chrome' });
+  try {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+    await page.goto(new URL('/interactive-eop/?page=95', base).href, { waitUntil: 'domcontentloaded' });
+    const section = page.getByRole('combobox', { name: 'Chapter or section' });
+    const picker = page.locator('#book-page');
+    const pdf = page.locator('.book-pdf-page[aria-current=page] iframe');
+    const lab = page.frameLocator('#book-lab');
+    await page.getByRole('button', { name: 'all', pressed: true, exact: true }).waitFor();
+    await lab.locator('#startButton:enabled').waitFor();
+    assert.equal(await section.inputValue(), '87');
+    assert.equal(await picker.inputValue(), '95');
+    assert.equal(await section.getByRole('option').count(), 18);
+    assert.equal(await picker.getByRole('option').count(), 279);
+
+    for (const start of [1, 15, 29, 47, 63, 87, 113, 131, 147, 167, 189, 207]) {
+      await section.selectOption(String(start));
+      assert.equal(await picker.inputValue(), String(start));
+      assert.match(await pdf.getAttribute('src'), new RegExp(`#page=${start + 14}&`));
+    }
+    assert.equal(await page.locator('#book-lab').isVisible(), false);
+    await picker.selectOption('208');
+    await page.getByRole('button', { name: /12\.1.*Pending/ }).waitFor();
+    assert.equal(await page.locator('#book-notice').innerText(), 'This algorithm is not available in the lab yet.');
+
+    await section.selectOption('189');
+    await page.getByRole('button', { name: 'partitioned_at_point', pressed: true }).waitFor();
+    await lab.locator('#startButton:enabled').waitFor();
+
+    await section.selectOption('-13');
+    assert.equal(await picker.locator('option:checked').textContent(), 'i');
+    assert.match(await pdf.getAttribute('src'), /#page=1&/);
+    assert.equal(await page.getByRole('button', { name: 'Previous page' }).isDisabled(), true);
+    await picker.selectOption('265');
+    assert.equal(await section.inputValue(), '247');
+    assert.match(await pdf.getAttribute('src'), /#page=279&/);
+    assert.equal(await page.getByRole('button', { name: 'Next page' }).isDisabled(), true);
+    assert.ok(await page.locator('#book-pdf-stage iframe').count() <= 3);
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    assert.equal(await picker.inputValue(), '265');
   } finally {
     await browser.close();
   }

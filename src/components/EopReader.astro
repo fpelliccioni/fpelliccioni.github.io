@@ -1,5 +1,5 @@
 ---
-import { firstExamplePage, firstPage, lastPage, officialPdf, pdfPage } from '../lab/eop-pilot';
+import { firstExamplePage, firstPage, lastPage, officialPdf, pageLabel, sections } from '../lab/eop-book';
 
 interface Props { lang: 'es' | 'en' }
 const { lang } = Astro.props;
@@ -14,7 +14,7 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{es ? 'Elements of Programming interactivo' : 'Interactive Elements of Programming'}</title>
-    <meta name="description" content={es ? 'Leé Elements of Programming y ejecutá los algoritmos del capítulo 2 paso a paso.' : 'Read Elements of Programming and step through the chapter 2 algorithms.'} />
+    <meta name="description" content={es ? 'Leé Elements of Programming y ejecutá los algoritmos disponibles paso a paso.' : 'Read Elements of Programming and step through the available algorithms.'} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/assets/css/algorithms/lab.css" />
   </head>
@@ -23,7 +23,6 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
       <header class="reader-header">
         <div>
           <h1>Elements of Programming</h1>
-          <p>{es ? 'Capítulo 2 · Transformaciones y sus órbitas' : 'Chapter 2 · Transformations and Their Orbits'}</p>
         </div>
         <div class="reader-views" role="group" aria-label={es ? 'Vista del lector' : 'Reader view'}>
           <button type="button" data-reader-view="pdf" aria-pressed="false">PDF</button>
@@ -39,24 +38,19 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
       <div class="reader-layout" data-view="split">
         <section class="reader-panel book" aria-label={es ? 'Libro' : 'Book'}>
           <div class="book-toolbar">
+            <select id="book-section" aria-label={es ? 'Capítulo o sección' : 'Chapter or section'}>
+              {sections.map(([page, en, spanish]) => <option value={page} selected={page === 15}>{es ? spanish : en}</option>)}
+            </select>
             <button type="button" id="book-previous" aria-label={es ? 'Página anterior' : 'Previous page'}>←</button>
             <label for="book-page">{es ? 'Página' : 'Page'}</label>
             <select id="book-page">
-              {pages.map(page => <option value={page} selected={page === firstExamplePage}>{page}</option>)}
+              {pages.map(page => <option value={page} selected={page === firstExamplePage}>{pageLabel(page)}</option>)}
             </select>
             <button type="button" id="book-next" aria-label={es ? 'Página siguiente' : 'Next page'}>→</button>
             <a id="book-official" href={officialPdf} target="_blank" rel="noopener">{es ? 'Abrir PDF oficial ↗' : 'Open official PDF ↗'}</a>
           </div>
           <div id="book-pdf-stage" role="region" aria-label={es ? 'Páginas de Elements of Programming' : 'Elements of Programming pages'} tabindex="0">
-            {pages.map(page => (
-              <div class="book-pdf-page" data-page={page}>
-                <iframe
-                  title={es ? `Página ${page}` : `Page ${page}`}
-                  tabindex="-1"
-                  data-src={`${officialPdf}#page=${pdfPage(page)}&toolbar=0&navpanes=0&view=Fit`}
-                ></iframe>
-              </div>
-            ))}
+            {pages.map(page => <div class="book-pdf-page" data-page={page}></div>)}
           </div>
         </section>
 
@@ -86,7 +80,6 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   .reader-header, .book-toolbar { display: flex; align-items: center; gap: 9px 12px; flex-wrap: wrap; }
   .reader-header { justify-content: space-between; padding: 0 1px 14px; }
   .reader-header h1 { font-size: clamp(21px, 2.3vw, 30px); letter-spacing: -.035em; margin: 0; }
-  .reader-header p { color: #a4b7c9; margin: 3px 0 0; }
   .reader-header nav { display: flex; gap: 16px; }
   .reader-views { display: flex; gap: 4px; }
   #eop-reader .reader-views [aria-pressed="true"] { border-color: #b1ed80; color: #c4e69f; }
@@ -120,6 +113,7 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   .book-toolbar a { margin-inline-start: auto; }
   #eop-reader button, #eop-reader select { font: inherit; border: 1px solid #40576a; border-radius: 5px; color: inherit; background: #172531; padding: 4px 9px; }
   #eop-reader select { width: auto; min-width: 60px; }
+  #eop-reader #book-section { flex: 1 0 100%; max-width: 100%; text-overflow: ellipsis; }
   #eop-reader button:not(:disabled) { cursor: pointer; }
   #eop-reader button:disabled { opacity: .4; }
   #eop-reader :focus-visible { outline: 2px solid #b1ed80; outline-offset: 2px; }
@@ -128,9 +122,8 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   .book-pdf-page + .book-pdf-page { margin-top: 8px; }
   .book-pdf-page iframe, #book-lab { border: 0; display: block; width: 100%; }
   .book-pdf-page iframe { height: 100%; pointer-events: none; }
-  .book-pdf-page iframe:not([src]) { visibility: hidden; }
   #book-lab { flex: 1; min-height: 0; background: #0c1118; }
-  #book-examples { display: flex; flex-wrap: wrap; gap: 6px; padding: 7px 10px; border-bottom: 1px solid #2a3c4b; }
+  #book-examples { max-height: 30%; overflow: auto; display: flex; flex-wrap: wrap; gap: 6px; padding: 7px 10px; border-bottom: 1px solid #2a3c4b; }
   #book-examples button { max-width: 100%; overflow-wrap: anywhere; text-align: start; font: 12px/1.55 var(--mono, monospace); }
   #book-examples button[aria-pressed="true"] { border-color: #b1ed80; color: #c4e69f; }
   #book-examples small { display: inline-block; margin-inline-start: 7px; color: #a4b7c9; }
