@@ -586,12 +586,23 @@ var repo = LabLibrary.repo;
   tooltip.setAttribute('role', 'dialog');
   tooltip.setAttribute('aria-label', es ? 'Documentación del código' : 'Code documentation');
   var helpText = document.createElement('div');
+  var helpExample = document.createElement('a');
+  helpExample.className = 'function-tooltip-example';
+  helpExample.textContent = es ? 'Ver ejemplo →' : 'View example →';
+  helpExample.addEventListener('click', function (event) {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    var name = new URL(helpExample.href).searchParams.get('snippet');
+    hideFunctionHelp(false);
+    if (sourceDirty && !commandPending) LabCatalog.open();
+    chooseAlgorithm(name);
+  });
   var closeHelp = document.createElement('button');
   closeHelp.className = 'function-tooltip-close';
   closeHelp.type = 'button';
   closeHelp.textContent = '×';
   closeHelp.setAttribute('aria-label', es ? 'Cerrar documentación' : 'Close documentation');
-  tooltip.append(helpText, closeHelp);
+  tooltip.append(helpText, closeHelp, helpExample);
   tooltip.hidden = true;
   document.body.appendChild(tooltip);
   var measure = document.createElement('canvas').getContext('2d');
@@ -641,6 +652,9 @@ var repo = LabLibrary.repo;
     var signature = docs?.[2] || definition.split('\n')[0].replace(/\s*\{\s*$/, '');
     var references = bookReferences[name] || [];
     helpText.textContent = [signature || name, description, ...references].filter(Boolean).join('\n');
+    helpExample.hidden = !exampleNames.includes(name);
+    if (helpExample.hidden) helpExample.removeAttribute('href');
+    else helpExample.href = exampleUrl(name).href;
     helpOrigin = area;
     tooltip.hidden = false;
     closeHelp.focus({ preventScroll: true });
@@ -720,6 +734,15 @@ var repo = LabLibrary.repo;
       }
     });
   });
+  function exampleUrl(name) {
+    var url = new URL(location.href);
+    url.searchParams.delete('function');
+    url.searchParams.delete('code');
+    url.searchParams.delete('pilot');
+    url.searchParams.set('snippet', name);
+    return url;
+  }
+
   async function chooseAlgorithm(name, confirmed) {
     if (commandPending) return false;
     if (sourceDirty && !confirmed) {
@@ -734,11 +757,7 @@ var repo = LabLibrary.repo;
       setCurrentAlgorithm(name);
       clearProblem();
       if (mode === 'reference') {
-        var next = new URL(location.href);
-        next.searchParams.delete('code');
-        next.searchParams.delete('function');
-        next.searchParams.set('snippet', name);
-        location.href = next.href;
+        location.href = exampleUrl(name).href;
         return;
       }
       cppPilot = false;
@@ -754,12 +773,7 @@ var repo = LabLibrary.repo;
       resetStatus();
       syncEmptyStates();
       updateEditor();
-      var next = new URL(location.href);
-      next.searchParams.delete('code');
-      next.searchParams.delete('function');
-      next.searchParams.set('snippet', name);
-      next.searchParams.delete('pilot');
-      history.replaceState(null, '', next);
+      history.replaceState(null, '', exampleUrl(name));
       editor.focus();
     } finally {
       commandPending = false;
@@ -793,12 +807,8 @@ var repo = LabLibrary.repo;
       container.appendChild(list);
     }
     if (exampleNames.includes(name)) {
-      var exampleUrl = new URL(location.href);
-      exampleUrl.searchParams.delete('function');
-      exampleUrl.searchParams.delete('code');
-      exampleUrl.searchParams.set('snippet', name);
       var link = document.createElement('a');
-      link.href = exampleUrl.href;
+      link.href = exampleUrl(name).href;
       link.textContent = es ? 'Abrir ejemplo de uso →' : 'Open usage example →';
       container.appendChild(link);
     }

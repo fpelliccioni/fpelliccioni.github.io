@@ -1089,6 +1089,17 @@ main.catalog-page {
   overflow-wrap: anywhere;
 }
 
+.function-tooltip-example {
+  display: inline-block;
+  margin-top: 7px;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.function-tooltip-example[hidden] {
+  display: none;
+}
 
 .function-tooltip-close {
   position: absolute;
