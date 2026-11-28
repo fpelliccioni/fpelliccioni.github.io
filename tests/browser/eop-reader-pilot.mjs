@@ -39,6 +39,7 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.equal(await picker.inputValue(), '21');
     const lab = page.frameLocator('#book-lab');
     await lab.locator('#startButton:enabled').waitFor();
+    assert.equal(await lab.locator('.editor-references').count(), 0);
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'collision_point');
     const examples = page.getByRole('group', { name: 'Algoritmos de la página' });
     assert.equal(await examples.getByRole('button').count(), 1);
@@ -313,7 +314,6 @@ test('lab references link to the corresponding edition and printed page', async 
     for (const [path, expected] of [
       ['/algorithms/?snippet=for_each', '/interactive-eop/?page=94'],
       ['/algoritmos/?snippet=lower_bound_n', '/eop-interactivo/?page=105'],
-      ['/algorithms/?snippet=for_each&embed=book', officialPdf + '#page=108'],
       ['/algorithms/?snippet=polynomial_value', 'https://www.fm2gp.com/code/ch08.h'],
     ]) {
       await page.goto(new URL(path, base).href, { waitUntil: 'domcontentloaded' });
