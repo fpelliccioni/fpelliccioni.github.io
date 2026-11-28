@@ -81,9 +81,9 @@ p {
   justify-content: space-between;
   align-items: center;
   gap: 25px;
-  padding: 21px 32px;
+  padding: 12px 32px;
   border-bottom: 1px solid var(--border);
-  min-height: 90px;
+  min-height: 68px;
 }
 .lab-brand {
   display: flex;
@@ -714,9 +714,9 @@ button.primary {
 }
 @media (max-width: 700px) {
   .lab-header {
-    padding: 17px 18px;
+    padding: 11px 18px;
     flex-wrap: wrap;
-    gap: 17px;
+    gap: 10px;
   }
   .lab-brand {
     font-size: 16px;
