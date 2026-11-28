@@ -537,9 +537,6 @@ button.primary {
   min-height: 100%;
   position: relative;
 }
-#sequence {
-  min-width: 960px;
-}
 #sequence svg {
   display: block;
 }

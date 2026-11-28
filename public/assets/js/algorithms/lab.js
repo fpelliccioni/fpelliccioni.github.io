@@ -225,18 +225,34 @@ var repo = LabLibrary.repo;
   function clearProblem() {
     byId('loadError').hidden = true;
   }
-  function resizeCanvas() {
-    if (mode === 'executing' || mode === 'finished' || mode === 'reference') return;
-    two_width = Math.max(960, byId('hg-right-a').clientWidth);
-    two_height = Math.max(300, byId('hg-right-a').clientHeight);
-    if (two) {
-      two.width = two_width;
-      two.height = two_height;
-      two.renderer.setSize(two_width, two_height);
-      setSizes();
-      two.update();
-    }
+  var visualStage = byId('hg-right-a').parentElement;
+  var visualHint = visualStage.previousElementSibling.querySelector('.panel-hint');
+  function fitCanvas() {
+    if (!two) return;
+    var svg = two.renderer.domElement;
+    var bounds = svg.getBBox();
+    var width = Math.max(visualStage.clientWidth, Math.ceil(bounds.x + bounds.width + 2));
+    var height = Math.max(visualStage.clientHeight, Math.ceil(bounds.y + bounds.height + 2));
+    visualHint.hidden = width <= visualStage.clientWidth;
+    if (svg.getAttribute('width') !== String(width)) svg.setAttribute('width', width);
+    if (svg.getAttribute('height') !== String(height)) svg.setAttribute('height', height);
   }
+  function resizeCanvas() {
+    if (!two) return;
+    two.width = visualStage.clientWidth;
+    if (mode !== 'executing' && mode !== 'finished' && mode !== 'reference') {
+      two_width = Math.max(960, visualStage.clientWidth);
+      two_height = Math.max(300, visualStage.clientHeight);
+      setSizes();
+    }
+    fitCanvas();
+  }
+  function drawLabScope(scope) {
+    drawScope(scope);
+    two.update();
+    fitCanvas();
+  }
+
   if (
     typeof Two === 'undefined' ||
     typeof LabQuickJS === 'undefined' ||
@@ -257,7 +273,8 @@ var repo = LabLibrary.repo;
     byId('sequence'),
   );
   setSizes();
-  if (window.ResizeObserver) new ResizeObserver(resizeCanvas).observe(byId('hg-right-a'));
+  resizeCanvas();
+  if (window.ResizeObserver) new ResizeObserver(resizeCanvas).observe(visualStage);
   window.addEventListener('resize', resizeCanvas);
 
   var declarations = '';
@@ -369,16 +386,18 @@ var repo = LabLibrary.repo;
             );
             return;
           }
-          quickSession = await LabCppPilot.createSession(initialize, drawScope, es ? 'Índice: ' : 'Index: ');
+          quickSession = await LabCppPilot.createSession(initialize, drawLabScope, es ? 'Índice: ' : 'Index: ');
         } else {
           var prefix = invisibleCode();
           quickSession = await LabQuickJS.createSession(
-            prefix + editor.value, prefix.length, initialize, drawScope, editorLanguage,
+            prefix + editor.value, prefix.length, initialize, drawLabScope, editorLanguage,
           );
         }
         startButton(function () {
           return myInterpreter;
         });
+        two.update();
+        fitCanvas();
         if (byId('hg-right-y').querySelector('[data-output-kind="error"]')) {
           showProblem(
             byId('hg-right-y').querySelector('[data-output-kind="error"]').textContent,
