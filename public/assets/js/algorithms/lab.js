@@ -226,14 +226,12 @@ var repo = LabLibrary.repo;
     byId('loadError').hidden = true;
   }
   var visualStage = byId('hg-right-a').parentElement;
-  var visualHint = visualStage.previousElementSibling.querySelector('.panel-hint');
   function fitCanvas() {
     if (!two) return;
     var svg = two.renderer.domElement;
     var bounds = svg.getBBox();
     var width = Math.max(visualStage.clientWidth, Math.ceil(bounds.x + bounds.width + 2));
     var height = Math.max(visualStage.clientHeight, Math.ceil(bounds.y + bounds.height + 2));
-    visualHint.hidden = width <= visualStage.clientWidth;
     if (svg.getAttribute('width') !== String(width)) svg.setAttribute('width', width);
     if (svg.getAttribute('height') !== String(height)) svg.setAttribute('height', height);
   }
@@ -317,7 +315,6 @@ var repo = LabLibrary.repo;
 
   function setEditorLanguage(language) {
     editorLanguage = language;
-    byId('editorLanguage').textContent = language === 'cpp' ? 'C++' : language.toUpperCase();
     byId('codeHighlight').classList.toggle('language-cpp', language === 'cpp' && !!hljs.getLanguage('cpp'));
   }
   async function closeSession() {
