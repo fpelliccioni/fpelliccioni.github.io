@@ -6,7 +6,7 @@ const es = document.documentElement.lang === 'es';
 const pagePicker = byId<HTMLSelectElement>('book-page');
 const previous = byId<HTMLButtonElement>('book-previous');
 const next = byId<HTMLButtonElement>('book-next');
-const officialFrame = byId<HTMLIFrameElement>('book-pdf');
+let officialFrame = byId<HTMLIFrameElement>('book-pdf');
 const localPage = byId<HTMLDivElement>('book-local-page');
 const pdfStage = byId<HTMLDivElement>('book-pdf-stage');
 const pdfLink = byId<HTMLAnchorElement>('book-official');
@@ -93,8 +93,13 @@ async function showPdf() {
     localPage.hidden = true;
     localPage.inert = false;
     localPage.removeAttribute('aria-busy');
-    officialFrame.hidden = false;
-    officialFrame.src = `${url}&toolbar=0&navpanes=0&view=FitH`;
+    // Native PDF viewers may ignore fragment changes within an existing frame.
+    const nextFrame = officialFrame.cloneNode(false) as HTMLIFrameElement;
+    nextFrame.hidden = false;
+    nextFrame.src = `${url}&toolbar=0&navpanes=0&view=FitH`;
+    officialFrame.replaceWith(nextFrame);
+    officialFrame = nextFrame;
+    pdfStage.scrollTop = 0;
     return;
   }
   localPage.inert = true;
