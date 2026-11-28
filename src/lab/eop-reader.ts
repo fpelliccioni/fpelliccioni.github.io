@@ -24,14 +24,17 @@ function setSelection(entry?: BookExample, keepCurrent = false) {
     url.searchParams.set('snippet', entry.example);
     url.searchParams.set('embed', 'book');
     lab.src = url.href;
+  } else if (!entry && !keepCurrent && activeExample) {
+    activeExample = '';
+    lab.removeAttribute('src');
   }
 
   const showLab = Boolean(entry?.example || (keepCurrent && activeExample));
   lab.hidden = !showLab;
-  notice.hidden = showLab;
-  notice.textContent = entry
-    ? (es ? 'Este algoritmo todavía no está disponible en el lab.' : 'This algorithm is not available in the lab yet.')
-    : (es ? 'Esta página no tiene un ejemplo asociado.' : 'This page has no associated example.');
+  notice.hidden = showLab || !entry;
+  notice.textContent = notice.hidden
+    ? ''
+    : (es ? 'Este algoritmo todavía no está disponible en el lab.' : 'This algorithm is not available in the lab yet.');
   for (const button of exampleList.querySelectorAll('button')) {
     button.setAttribute('aria-pressed', String(button.dataset.label === entry?.label));
   }
@@ -41,6 +44,22 @@ function localizeLabel(label: string) {
   if (!es) return label;
   return ({ '2.1 · 32-bit addition': '2.1 · Suma de 32 bits', 'distance (transformation)': 'distance (transformación)', '2.6 · Actions': '2.6 · Acciones' } as Record<string, string>)[label] ?? label;
 }
+
+function isDebugging() {
+  const labState = lab.contentDocument?.body?.dataset;
+  return labState?.mode === 'executing' || labState?.startingSession === 'true';
+}
+
+const labModeObserver = new MutationObserver(() => {
+  if (activeExample && !chapterPages[page]?.length && !isDebugging()) setSelection();
+});
+lab.addEventListener('load', () => {
+  labModeObserver.disconnect();
+  const body = lab.contentDocument?.body;
+  if (activeExample && body) {
+    labModeObserver.observe(body, { attributeFilter: ['data-mode', 'data-starting-session'] });
+  }
+});
 
 function renderExamples() {
   const entries = chapterPages[page] ?? [];
@@ -64,9 +83,7 @@ function renderExamples() {
     exampleList.append(text);
   }
 
-  const labState = lab.contentDocument?.body?.dataset;
-  const debugging = labState?.mode === 'executing' || labState?.startingSession === 'true';
-  if (debugging) {
+  if (isDebugging()) {
     setSelection(entries.find(entry => entry.example === activeExample), true);
   } else {
     setSelection(entries.find(entry => entry.example) ?? entries[0]);

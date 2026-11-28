@@ -59,6 +59,13 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await lab.locator('#stepButton').waitFor({ state: 'visible' });
     assert.ok((await toolbar.boundingBox()).height <= 45, 'the toolbar stays compact while stepping');
 
+    await picker.selectOption('15');
+    assert.equal(await examples.innerText(), 'Sin algoritmos asociados a esta página.');
+    assert.equal(await page.locator('#book-lab').isVisible(), true);
+    assert.equal(await lab.locator('#stepButton:enabled').isVisible(), true);
+    assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'terminating');
+    await picker.selectOption('22');
+
     const stage = page.locator('#book-pdf-stage');
     const stageBounds = await stage.boundingBox();
     assert.ok(stageBounds);
@@ -71,6 +78,11 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.equal(new URL(page.url()).searchParams.get('page'), '23');
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'terminating');
     assert.equal(await lab.locator('#stepButton').isVisible(), true);
+
+    await picker.selectOption('15');
+    await lab.locator('#editButton:enabled').click();
+    await page.locator('#book-lab').waitFor({ state: 'hidden' });
+    assert.equal(await page.locator('#book-lab').getAttribute('src'), null);
 
     await picker.selectOption('17');
     await page.getByRole('button', { name: 'Página anterior' }).click();
@@ -104,6 +116,17 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.ok(additionOutput.includes('-2147483647 + (-1): true'), additionOutput);
     assert.ok(additionOutput.includes('-2147483648 + (-1): false'), additionOutput);
     assert.ok(additionOutput.includes('2147483648 + (-1): false'), additionOutput);
+
+    await picker.selectOption('15');
+    assert.equal(await examples.innerText(), 'Sin algoritmos asociados a esta página.');
+    assert.equal(await page.locator('#book-lab').isVisible(), false);
+    assert.equal(await page.locator('#book-lab').getAttribute('src'), null);
+    assert.equal(await page.locator('#book-notice').isVisible(), false);
+
+    await picker.selectOption('17');
+    await lab.locator('#currentAlgorithm').filter({ hasText: /^addition_defined_int32$/ }).waitFor({ state: 'attached' });
+    await lab.locator('#startButton:enabled').waitFor();
+    assert.doesNotMatch(await lab.locator('#hg-right-y').innerText(), /2147483646/);
 
     await picker.selectOption('19');
     assert.match(await page.locator('#book-notice').innerText(), /todavía no está disponible/);
