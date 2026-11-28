@@ -1,4 +1,4 @@
-import { chapterPages, firstExamplePage, firstPage, lastPage, officialPdf, pdfPage, type BookExample } from './eop-pilot';
+import { firstExamplePage, firstPage, lastPage, officialPdf, pageExamples, pageLabel, pdfPage, sections, type BookExample } from './eop-book';
 
 const byId = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const reader = byId<HTMLElement>('eop-reader');
@@ -8,6 +8,7 @@ const bookPanel = layout.querySelector<HTMLElement>('.book')!;
 const labPanel = layout.querySelector<HTMLElement>('.analyzer')!;
 const es = document.documentElement.lang === 'es';
 const pagePicker = byId<HTMLSelectElement>('book-page');
+const sectionPicker = byId<HTMLSelectElement>('book-section');
 const previous = byId<HTMLButtonElement>('book-previous');
 const next = byId<HTMLButtonElement>('book-next');
 const pdfStage = byId<HTMLDivElement>('book-pdf-stage');
@@ -17,9 +18,11 @@ const exampleList = byId<HTMLDivElement>('book-examples');
 const lab = byId<HTMLIFrameElement>('book-lab');
 const notice = byId<HTMLParagraphElement>('book-notice');
 
-const rawPage = Number(new URL(location.href).searchParams.get('page'));
+const rawPage = Number(new URL(location.href).searchParams.get('page') ?? firstExamplePage);
 let page = Number.isInteger(rawPage) && rawPage >= firstPage && rawPage <= lastPage ? rawPage : firstExamplePage;
 let activeExample = '';
+let visiblePage = firstPage - 1;
+const pdfFrames = new Map<number, HTMLIFrameElement>();
 
 type ReaderView = 'split' | 'pdf' | 'lab';
 
@@ -69,18 +72,13 @@ function setSelection(entry?: BookExample, keepCurrent = false) {
   }
 }
 
-function localizeLabel(label: string) {
-  if (!es) return label;
-  return ({ '2.1 · 32-bit addition': '2.1 · Suma de 32 bits', 'distance (transformation)': 'distance (transformación)', '2.6 · Actions': '2.6 · Acciones' } as Record<string, string>)[label] ?? label;
-}
-
 function isDebugging() {
   const labState = lab.contentDocument?.body?.dataset;
   return labState?.mode === 'executing' || labState?.startingSession === 'true';
 }
 
 const labModeObserver = new MutationObserver(() => {
-  if (activeExample && !chapterPages[page]?.length && !isDebugging()) setSelection();
+  if (activeExample && !pageExamples(page).length && !isDebugging()) setSelection();
 });
 lab.addEventListener('load', () => {
   labModeObserver.disconnect();
@@ -92,13 +90,13 @@ lab.addEventListener('load', () => {
 });
 
 function renderExamples() {
-  const entries = chapterPages[page] ?? [];
+  const entries = pageExamples(page);
   exampleList.replaceChildren();
   for (const entry of entries) {
     const button = document.createElement('button');
     button.type = 'button';
     button.dataset.label = entry.label;
-    button.append(localizeLabel(entry.label));
+    button.append(es ? entry.es ?? entry.label : entry.label);
     if (!entry.example) {
       const badge = document.createElement('small');
       badge.textContent = es ? 'Pendiente' : 'Pending';
@@ -122,24 +120,32 @@ function renderExamples() {
 
 function showPdf() {
   pdfLink.href = `${officialPdf}#page=${pdfPage(page)}`;
-  for (const sheet of pdfPages) {
-    const number = Number(sheet.dataset.page);
-    if (number === page) sheet.setAttribute('aria-current', 'page');
-    else sheet.removeAttribute('aria-current');
+  pdfPages[visiblePage - firstPage]?.removeAttribute('aria-current');
+  pdfPages[page - firstPage].setAttribute('aria-current', 'page');
+  visiblePage = page;
 
-    // Give each page its own native frame. The outer panel owns scrolling.
-    const frame = sheet.querySelector('iframe')!;
-    if (Math.abs(number - page) <= 1) {
-      if (!frame.hasAttribute('src')) frame.src = frame.dataset.src!;
-    } else if (frame.hasAttribute('src')) {
-      frame.removeAttribute('src');
-    }
+  for (const [number, frame] of pdfFrames) {
+    if (Math.abs(number - page) <= 1) continue;
+    frame.remove();
+    pdfFrames.delete(number);
+  }
+
+  // Mount just the current and adjacent native PDF frames. The outer panel scrolls.
+  for (let number = Math.max(firstPage, page - 1); number <= Math.min(lastPage, page + 1); ++number) {
+    if (pdfFrames.has(number)) continue;
+    const frame = document.createElement('iframe');
+    frame.title = `${es ? 'Página' : 'Page'} ${pageLabel(number)}`;
+    frame.tabIndex = -1;
+    frame.src = `${officialPdf}#page=${pdfPage(number)}&toolbar=0&navpanes=0&view=Fit`;
+    pdfPages[number - firstPage].append(frame);
+    pdfFrames.set(number, frame);
   }
 }
 
 function setPage(value: number) {
   page = value;
   pagePicker.value = String(page);
+  sectionPicker.value = String(sections.findLast(([start]) => start <= page)![0]);
   previous.disabled = page === firstPage;
   next.disabled = page === lastPage;
   const url = new URL(location.href);
@@ -162,8 +168,14 @@ pdfStage.addEventListener('scroll', () => {
   scrollFrame = requestAnimationFrame(() => {
     scrollFrame = 0;
     const focus = pdfStage.getBoundingClientRect().top + pdfStage.clientHeight * 0.3;
-    const visible = pdfPages.find(sheet => sheet.getBoundingClientRect().bottom >= focus);
-    const value = visible ? Number(visible.dataset.page) : lastPage;
+    let low = 0;
+    let high = pdfPages.length - 1;
+    while (low < high) {
+      const middle = Math.floor((low + high) / 2);
+      if (pdfPages[middle].getBoundingClientRect().bottom < focus) low = middle + 1;
+      else high = middle;
+    }
+    const value = firstPage + low;
     if (value !== page) setPage(value);
   });
 }, { passive: true });
@@ -171,4 +183,5 @@ pdfStage.addEventListener('scroll', () => {
 previous.addEventListener('click', () => jumpToPage(page - 1));
 next.addEventListener('click', () => jumpToPage(page + 1));
 pagePicker.addEventListener('change', () => jumpToPage(Number(pagePicker.value)));
+sectionPicker.addEventListener('change', () => jumpToPage(Number(sectionPicker.value)));
 jumpToPage(page);
