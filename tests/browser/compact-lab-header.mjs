@@ -17,7 +17,7 @@ test('the lab opens directly on the controls and keeps help accessible', async (
         const toolbar = page.locator('.lab-toolbar');
         const controls = await toolbar.boundingBox();
         assert.ok(controls.y - (header.y + header.height) <= 20);
-        assert.equal(await page.locator('.lab-intro').count(), 0);
+        assert.equal(await page.locator('.lab-intro, .panel-hint, #editorLanguage').count(), 0);
 
         const help = toolbar.locator('.lab-help');
         await help.locator('summary').click();

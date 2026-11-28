@@ -33,15 +33,14 @@ test('the visualization scrolls horizontally only when the drawing needs it', { 
         const sourceHeading = await page.locator('.editor-panel > .panel-heading').boundingBox();
         const visualHeading = await page.locator('.visual-panel > .panel-heading').boundingBox();
         assert.equal(visualHeading.height, sourceHeading.height);
+        assert.equal(await page.locator('.panel-hint, #editorLanguage').count(), 0);
         if (width > 1050) assert.equal(visualHeading.y, sourceHeading.y);
 
         const { available, content } = await dimensions();
         if (size === 10) {
           assert.equal(content, available);
-          assert.equal(await page.locator('.panel-hint').isVisible(), false);
         } else {
           assert.ok(content > available);
-          if (width > 1050) assert.equal(await page.locator('.panel-hint').isVisible(), true);
           const scroll = await stage.evaluate((el) => {
             el.scrollLeft = el.scrollWidth;
             const svg = el.querySelector('#sequence svg');
