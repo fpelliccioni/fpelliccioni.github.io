@@ -324,6 +324,12 @@ button.primary {
   align-items: center;
   gap: 12px;
 }
+.editor-panel > .panel-heading,
+.visual-panel > .panel-heading {
+  flex: 0 0 47px;
+  min-height: 0;
+  padding-block: 6px;
+}
 .language-label {
   font: 8px var(--mono);
   letter-spacing: 0.7px;
