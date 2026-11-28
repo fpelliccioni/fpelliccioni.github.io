@@ -89,8 +89,10 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
       for (let i = 0; i < 30 && await step.isEnabled(); ++i) await step.click();
       assert.match(await lab.locator('#hg-right-y').innerText(), output);
     }
-    await picker.selectOption('17');
-    await page.getByRole('button', { name: '2.1 · Suma de 32 bits', exact: true }).click();
+    await page.mouse.move(stageBounds.x + stageBounds.width / 2, stageBounds.y + stageBounds.height / 2);
+    await page.mouse.wheel(0, currentHeight + 8);
+    await page.waitForFunction(() => document.querySelector('#book-page')?.value === '17');
+    await page.getByRole('button', { name: '2.1 · Suma de 32 bits', pressed: true }).waitFor();
     await lab.locator('#currentAlgorithm').filter({ hasText: /^addition_defined_int32$/ }).waitFor({ state: 'attached' });
     await lab.locator('#startButton:enabled').click();
     const additionStep = lab.locator('#stepButton');

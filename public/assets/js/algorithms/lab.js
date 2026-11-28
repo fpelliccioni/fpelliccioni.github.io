@@ -446,6 +446,7 @@ var repo = LabLibrary.repo;
       showError(error.message || String(error));
       showProblem(error.message || String(error), false);
     } finally {
+      delete document.body.dataset.startingSession;
       editor.readOnly = cppPilot;
       commandPending = false;
     }
