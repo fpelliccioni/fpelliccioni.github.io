@@ -6,8 +6,8 @@ const es = document.documentElement.lang === 'es';
 const pagePicker = byId<HTMLSelectElement>('book-page');
 const previous = byId<HTMLButtonElement>('book-previous');
 const next = byId<HTMLButtonElement>('book-next');
-let officialFrame = byId<HTMLIFrameElement>('book-pdf');
 const pdfStage = byId<HTMLDivElement>('book-pdf-stage');
+const pdfPages = Array.from(pdfStage.querySelectorAll<HTMLDivElement>('.book-pdf-page'));
 const pdfLink = byId<HTMLAnchorElement>('book-official');
 const exampleList = byId<HTMLDivElement>('book-examples');
 const lab = byId<HTMLIFrameElement>('book-lab');
@@ -79,14 +79,20 @@ function renderExamples() {
 }
 
 function showPdf() {
-  const url = `${officialPdf}#page=${pdfPage(page)}`;
-  pdfLink.href = url;
-  // Native PDF viewers may ignore fragment changes within an existing frame.
-  const nextFrame = officialFrame.cloneNode(false) as HTMLIFrameElement;
-  nextFrame.src = `${url}&toolbar=0&navpanes=0&view=FitH`;
-  officialFrame.replaceWith(nextFrame);
-  officialFrame = nextFrame;
-  pdfStage.scrollTop = 0;
+  pdfLink.href = `${officialPdf}#page=${pdfPage(page)}`;
+  for (const sheet of pdfPages) {
+    const number = Number(sheet.dataset.page);
+    if (number === page) sheet.setAttribute('aria-current', 'page');
+    else sheet.removeAttribute('aria-current');
+
+    // Give each page its own native frame. The outer panel owns scrolling.
+    const frame = sheet.querySelector('iframe')!;
+    if (Math.abs(number - page) <= 1) {
+      if (!frame.hasAttribute('src')) frame.src = frame.dataset.src!;
+    } else if (frame.hasAttribute('src')) {
+      frame.removeAttribute('src');
+    }
+  }
 }
 
 function setPage(value: number) {
@@ -101,8 +107,26 @@ function setPage(value: number) {
   showPdf();
 }
 
-previous.addEventListener('click', () => setPage(page - 1));
-next.addEventListener('click', () => setPage(page + 1));
-pagePicker.addEventListener('change', () => setPage(Number(pagePicker.value)));
+function jumpToPage(value: number) {
+  const sheet = pdfPages[value - firstPage];
+  if (!sheet) return;
+  setPage(value);
+  pdfStage.scrollTop += sheet.getBoundingClientRect().top - pdfStage.getBoundingClientRect().top;
+}
 
-setPage(page);
+let scrollFrame = 0;
+pdfStage.addEventListener('scroll', () => {
+  if (scrollFrame) return;
+  scrollFrame = requestAnimationFrame(() => {
+    scrollFrame = 0;
+    const focus = pdfStage.getBoundingClientRect().top + pdfStage.clientHeight * 0.3;
+    const visible = pdfPages.find(sheet => sheet.getBoundingClientRect().bottom >= focus);
+    const value = visible ? Number(visible.dataset.page) : lastPage;
+    if (value !== page) setPage(value);
+  });
+}, { passive: true });
+
+previous.addEventListener('click', () => jumpToPage(page - 1));
+next.addEventListener('click', () => jumpToPage(page + 1));
+pagePicker.addEventListener('change', () => jumpToPage(Number(pagePicker.value)));
+jumpToPage(page);
