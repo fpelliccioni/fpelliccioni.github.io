@@ -43,6 +43,7 @@ var repo = LabLibrary.repo;
 (function () {
   var es = document.documentElement.lang === 'es';
   var cppPilot = params.get('pilot') === 'cpp';
+  if (params.get('embed') === 'book') document.body.classList.add('book-embedded-lab');
   var editor = document.getElementById('codeArea');
   var editorSyntax = document.createElement('pre');
   editorSyntax.id = 'editorSyntax';
