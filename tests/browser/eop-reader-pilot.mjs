@@ -305,3 +305,26 @@ test('the navigator finds algorithms by name and selects them on their page', as
     await browser.close();
   }
 });
+
+test('lab references link to the corresponding edition and printed page', async () => {
+  const browser = await chromium.launch({ channel: 'chrome' });
+  try {
+    const page = await browser.newPage();
+    for (const [path, expected] of [
+      ['/algorithms/?snippet=for_each', '/interactive-eop/?page=94'],
+      ['/algoritmos/?snippet=lower_bound_n', '/eop-interactivo/?page=105'],
+      ['/algorithms/?snippet=for_each&embed=book', officialPdf + '#page=108'],
+      ['/algorithms/?snippet=polynomial_value', 'https://www.fm2gp.com/code/ch08.h'],
+    ]) {
+      await page.goto(new URL(path, base).href, { waitUntil: 'domcontentloaded' });
+      const link = page.locator('.editor-references a').first();
+      assert.equal(await link.getAttribute('href', { timeout: 10000 }), expected);
+    }
+    await page.goto(new URL('/algorithms/?snippet=for_each', base).href, { waitUntil: 'domcontentloaded' });
+    await page.locator('.editor-references a').click();
+    assert.equal(new URL(page.url()).searchParams.get('page'), '94');
+    await page.getByRole('button', { name: 'for_each', exact: true }).waitFor();
+  } finally {
+    await browser.close();
+  }
+});

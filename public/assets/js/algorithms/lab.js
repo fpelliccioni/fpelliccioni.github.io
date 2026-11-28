@@ -43,7 +43,8 @@ var repo = LabLibrary.repo;
 (function () {
   var es = document.documentElement.lang === 'es';
   var cppPilot = params.get('pilot') === 'cpp';
-  if (params.get('embed') === 'book') document.body.classList.add('book-embedded-lab');
+  var embeddedInBook = params.get('embed') === 'book';
+  if (embeddedInBook) document.body.classList.add('book-embedded-lab');
   var editor = document.getElementById('codeArea');
   var editorSyntax = document.createElement('pre');
   editorSyntax.id = 'editorSyntax';
@@ -102,7 +103,12 @@ var repo = LabLibrary.repo;
       var url = '';
       if (reference.startsWith('Elements of Programming,')) {
         var page = /\bpp?\. (\d+)/.exec(reference);
-        url = 'https://elementsofprogramming.com/eop.pdf' + (page ? '#page=' + (Number(page[1]) + 14) : '');
+        if (embeddedInBook) {
+          url = 'https://elementsofprogramming.com/eop.pdf' + (page ? '#page=' + (Number(page[1]) + 14) : '');
+        } else {
+          url = es ? '/eop-interactivo/' : '/interactive-eop/';
+          if (page) url += '?page=' + page[1];
+        }
       } else if (reference.startsWith('From Mathematics to Generic Programming,')) {
         var chapter = /\bch\. (\d+)/.exec(reference);
         url = chapter
