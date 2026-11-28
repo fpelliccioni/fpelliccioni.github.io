@@ -1901,6 +1901,10 @@ function addSequenceCode() {
 
     globalThis.seq = sequence;
 
+    globalThis.rng = function rng(data) {
+        return [begin(data), end(data)];
+    };
+
     function sequenceChart(d, n, p, type) {
         type = typeof type !== 'undefined' ? type : "array";
         type = __standardSequenceType(type);

@@ -6,7 +6,7 @@ import { chromium } from 'playwright-core';
 
 const base = process.env.LAB_BROWSER_URL ?? 'https://componentsprogramming.com';
 
-test('seq and sequence support inferred names and coloring', async () => {
+test('seq, sequence and rng preserve names, coloring and range boundaries', async () => {
   const browser = await chromium.launch({ channel: 'chrome' });
   try {
     const page = await browser.newPage();
@@ -23,7 +23,17 @@ test('seq and sequence support inferred names and coloring', async () => {
     }
     const url = new URL('/algoritmos/', base);
     url.searchParams.set('lang', 'ts');
-    url.searchParams.set('code', 'const d = seq([1, 2, 3], even);\nconst label = "original";\nconst other = sequence([4], label);\nconst plain = seq([6]);\nprint(d);');
+    url.searchParams.set('code', [
+      'const d = seq([1, 2, 3], even);',
+      'const label = "original";',
+      'const other = sequence([4], label);',
+      'const plain = seq([6]);',
+      'const [f, l] = rng(d);',
+      'const first = source(f);',
+      'const span = distance(f, l);',
+      'print(d);',
+      'print("range: " + first + ", " + span);',
+    ].join('\n'));
     await page.goto(url.href);
     await page.locator('#startButton').click();
     const step = page.locator('#stepButton');
@@ -37,7 +47,9 @@ test('seq and sequence support inferred names and coloring', async () => {
     assert.equal(colors[0], colors[2]);
     assert.notEqual(colors[0], colors[1]);
     assert.equal(await page.evaluate(() => globalThis.stats_pred_appls), 0);
-    assert.match(await page.locator('#hg-right-y').innerText(), /\[1, 2, 3\]/);
+    const output = await page.locator('#hg-right-y').innerText();
+    assert.match(output, /\[1, 2, 3\]/);
+    assert.match(output, /range: 1, 3/);
   } finally {
     await browser.close();
   }
