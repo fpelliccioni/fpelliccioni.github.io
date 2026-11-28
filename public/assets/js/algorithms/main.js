@@ -1887,7 +1887,11 @@ function addSequenceCode() {
         return undefined;
     }
 
-    function sequence(d, n, p, type, drawChart, drawTree) {
+    function sequence(d, n, p, type, drawChart, drawTree, inferredName) {
+        if (typeof n === 'function') {
+            p = n;
+            n = inferredName;
+        }
         type = typeof type !== 'undefined' ? type : "array";
         type = __standardSequenceType(type);
         drawChart = typeof drawChart !== 'undefined' ? drawChart : false;

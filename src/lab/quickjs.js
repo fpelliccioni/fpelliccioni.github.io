@@ -52,6 +52,14 @@ function instrument(source, offset, language) {
               init.arguments.push(t.stringLiteral(id.name));
               return;
             }
+            if (init.callee.name === 'sequence' && init.arguments.length === 2 &&
+                !init.arguments.some((arg) => t.isSpreadElement(arg)) &&
+                !t.isStringLiteral(init.arguments[1])) {
+              // Infer the display name if the second argument is a color function.
+              const omitted = () => t.unaryExpression('void', t.numericLiteral(0));
+              init.arguments.push(omitted(), omitted(), omitted(), omitted(), t.stringLiteral(id.name));
+              return;
+            }
 
             if (!['predicate', 'relation', 'binary_operation'].includes(init.callee.name) ||
                 !t.isArrowFunctionExpression(init.arguments[0])) return;
