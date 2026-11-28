@@ -20,8 +20,11 @@ test('the chapter 2 reader links print pages to runnable examples and local PDF 
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'collision_point');
     if (process.env.EOP_NATIVE_SCREENSHOT) await page.screenshot({ path: process.env.EOP_NATIVE_SCREENSHOT });
 
+    const initialFrame = await pdf.elementHandle();
     await page.getByRole('button', { name: 'Página siguiente' }).click();
     assert.equal(await picker.inputValue(), '22');
+    assert.match(await pdf.getAttribute('src'), /#page=36&/);
+    assert.equal(await initialFrame.evaluate(frame => frame.isConnected), false);
     await page.getByRole('button', { name: 'terminating', exact: true }).click();
     await lab.locator('#currentAlgorithm').filter({ hasText: /^terminating$/ }).waitFor({ state: 'attached' });
     await lab.locator('#startButton:enabled').waitFor();
@@ -32,6 +35,12 @@ test('the chapter 2 reader links print pages to runnable examples and local PDF 
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'terminating');
     assert.equal(await lab.locator('#stepButton').isVisible(), true);
 
+    await picker.selectOption('17');
+    const page17Frame = await pdf.elementHandle();
+    await page.getByRole('button', { name: 'Página anterior' }).click();
+    assert.equal(await picker.inputValue(), '16');
+    assert.match(await pdf.getAttribute('src'), /#page=30&/);
+    assert.equal(await page17Frame.evaluate(frame => frame.isConnected), false);
     await picker.selectOption('17');
     assert.equal(await page.getByRole('button', { name: /Suma de 32 bits/ }).count(), 1);
     assert.match(await page.locator('#book-notice').innerText(), /todavía no está disponible/);
