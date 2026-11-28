@@ -64,6 +64,11 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.match(await pdf.getAttribute('src'), /#page=36&/);
     assert.equal(await examples.getByRole('button').count(), 2);
     await examples.getByRole('button', { name: 'terminating', exact: true }).click();
+    const readerLayout = page.locator('.reader-layout');
+    assert.equal(await readerLayout.getAttribute('data-view'), 'split');
+    await examples.click({ position: { x: 2, y: 2 } });
+    assert.equal(await readerLayout.getAttribute('data-view'), 'lab');
+    await splitView.click();
     assert.equal(await examples.getByRole('button', { name: 'terminating', pressed: true }).count(), 1);
     assert.equal(await examples.getByRole('button', { name: 'collision_point', pressed: false }).count(), 1);
     await lab.locator('#currentAlgorithm').filter({ hasText: /^terminating$/ }).waitFor({ state: 'attached' });
