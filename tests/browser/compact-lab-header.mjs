@@ -13,6 +13,7 @@ test('the lab opens directly on the controls and keeps help accessible', async (
       for (const route of ['/algoritmos/', '/algorithms/']) {
         await page.goto(new URL(route, base).href, { waitUntil: 'domcontentloaded' });
         const header = await page.locator('.lab-header').boundingBox();
+        assert.ok(header.height <= (width > 700 ? 70 : 95), `Header height at ${width}px: ${header.height}px`);
         const toolbar = page.locator('.lab-toolbar');
         const controls = await toolbar.boundingBox();
         assert.ok(controls.y - (header.y + header.height) <= 20);
