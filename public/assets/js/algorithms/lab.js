@@ -518,6 +518,8 @@ var repo = LabLibrary.repo;
     range_matches_snapshot: ['Comprueba que el rango tenga los mismos valores y el mismo orden que la copia guardada.', 'Checks that a range has the same values in the same order as the snapshot.'],
     partition_buffered_block: ['Particiona un bloque de forma estable usando un búfer y devuelve el punto de partición.', 'Stably partitions a block using a buffer and returns its partition point.'],
     combine_partition_blocks: ['Combina dos bloques adyacentes ya particionados mediante una rotación que conserva el orden de cada grupo.', 'Combines two adjacent partitioned blocks by rotating while preserving each group’s order.'],
+    MutableRandomAccessIterator: ['Iterador escribible que permite acceder a posiciones por desplazamiento en tiempo constante.', 'A writable iterator that supports constant-time access by offset.'],
+    range_snapshot: ['Copia los valores de un rango para que un contrato pueda verificar el resultado de una modificación.', 'Copies the values of a range so that a contract can verify the result of a mutation.'],
     MutableBidirectionalIterator: ['Iterador bidireccional que permite escribir en su posición.', 'A bidirectional iterator that allows writes at its position.'],
     ValueOf: ['ValueOf<I> obtiene el tipo de elemento del iterador I.', 'ValueOf<I> extracts the element type of iterator I.'],
     Predicate: ['Función que recibe un elemento y devuelve true o false.', 'A function that takes an element and returns true or false.'],
