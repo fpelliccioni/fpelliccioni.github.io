@@ -9,6 +9,11 @@ const labPanel = layout.querySelector<HTMLElement>('.analyzer')!;
 const es = document.documentElement.lang === 'es';
 const pagePicker = byId<HTMLSelectElement>('book-page');
 const sectionPicker = byId<HTMLSelectElement>('book-section');
+const pageStatus = byId<HTMLSpanElement>('book-page-status');
+const navigatorDialog = byId<HTMLDialogElement>('book-navigator');
+const algorithmSearch = byId<HTMLInputElement>('book-algorithm');
+const results = byId<HTMLUListElement>('book-nav-results');
+const noResults = byId<HTMLParagraphElement>('book-nav-empty');
 const previous = byId<HTMLButtonElement>('book-previous');
 const next = byId<HTMLButtonElement>('book-next');
 const pdfStage = byId<HTMLDivElement>('book-pdf-stage');
@@ -56,7 +61,7 @@ function setSelection(entry?: BookExample, keepCurrent = false) {
     url.searchParams.set('snippet', entry.example);
     url.searchParams.set('embed', 'book');
     lab.src = url.href;
-  } else if (!entry && !keepCurrent && activeExample) {
+  } else if (!entry?.example && !keepCurrent && activeExample) {
     activeExample = '';
     lab.removeAttribute('src');
   }
@@ -89,7 +94,7 @@ lab.addEventListener('load', () => {
   }
 });
 
-function renderExamples() {
+function renderExamples(selection?: BookExample) {
   const entries = pageExamples(page);
   exampleList.replaceChildren();
   for (const entry of entries) {
@@ -111,7 +116,9 @@ function renderExamples() {
     exampleList.append(text);
   }
 
-  if (isDebugging()) {
+  if (selection) {
+    setSelection(selection);
+  } else if (isDebugging()) {
     setSelection(entries.find(entry => entry.example === activeExample), true);
   } else {
     setSelection(entries.find(entry => entry.example) ?? entries[0]);
@@ -142,23 +149,24 @@ function showPdf() {
   }
 }
 
-function setPage(value: number) {
+function setPage(value: number, selection?: BookExample) {
   page = value;
   pagePicker.value = String(page);
+  pageStatus.textContent = `${es ? 'Página' : 'Page'} ${pageLabel(page)}`;
   sectionPicker.value = String(sections.findLast(([start]) => start <= page)![0]);
   previous.disabled = page === firstPage;
   next.disabled = page === lastPage;
   const url = new URL(location.href);
   url.searchParams.set('page', String(page));
   history.replaceState(null, '', url);
-  renderExamples();
+  renderExamples(selection);
   showPdf();
 }
 
-function jumpToPage(value: number) {
+function jumpToPage(value: number, selection?: BookExample) {
   const sheet = pdfPages[value - firstPage];
   if (!sheet) return;
-  setPage(value);
+  setPage(value, selection);
   pdfStage.scrollTop += sheet.getBoundingClientRect().top - pdfStage.getBoundingClientRect().top;
 }
 
@@ -182,6 +190,77 @@ pdfStage.addEventListener('scroll', () => {
 
 previous.addEventListener('click', () => jumpToPage(page - 1));
 next.addEventListener('click', () => jumpToPage(page + 1));
-pagePicker.addEventListener('change', () => jumpToPage(Number(pagePicker.value)));
-sectionPicker.addEventListener('change', () => jumpToPage(Number(sectionPicker.value)));
+function navigateTo(value: number, selection?: BookExample) {
+  navigatorDialog.close();
+  if ((!selection && layout.dataset.view === 'lab') || (selection && layout.dataset.view === 'pdf')) {
+    setView('split');
+  }
+  jumpToPage(value, selection);
+}
+
+for (const picker of [pagePicker, sectionPicker]) {
+  picker.form?.addEventListener('submit', event => {
+    event.preventDefault();
+    navigateTo(Number(picker.value));
+  });
+}
+
+const normalizeName = (name: string) => name.normalize('NFD')
+  .replace(/\p{Diacritic}/gu, '')
+  .toLowerCase()
+  .replace(/[\s_-]+/g, ' ')
+  .trim();
+
+const algorithmIndex = new Map<string, { page: number; entry: BookExample; name: string }>();
+for (let number = 1; number <= lastPage; ++number) {
+  for (const entry of pageExamples(number)) {
+    const key = entry.example ?? entry.label;
+    if (!algorithmIndex.has(key)) {
+      algorithmIndex.set(key, { page: number, entry, name: normalizeName(entry.example ?? entry.label) });
+    }
+  }
+}
+
+function searchAlgorithms() {
+  results.replaceChildren();
+  const query = normalizeName(algorithmSearch.value);
+  noResults.hidden = true;
+  if (!query) return;
+  const rank = (name: string) => name === query ? 0 : name.startsWith(query) ? 1 : 2;
+  const matches = [...algorithmIndex.values()].filter(({ entry, name }) =>
+    name.includes(query) || normalizeName(es ? entry.es ?? entry.label : entry.label).includes(query),
+  ).sort((left, right) => rank(left.name) - rank(right.name) || left.name.localeCompare(right.name));
+  noResults.hidden = matches.length > 0;
+  for (const match of matches) {
+    const item = document.createElement('li');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.append(es ? match.entry.es ?? match.entry.label : match.entry.label);
+    const detail = document.createElement('small');
+    const pending = match.entry.example ? '' : (es ? ' · Pendiente' : ' · Pending');
+    detail.textContent = `${es ? 'pág.' : 'p.'} ${pageLabel(match.page)}${pending}`;
+    button.append(detail);
+    button.addEventListener('click', () => navigateTo(match.page, match.entry));
+    item.append(button);
+    results.append(item);
+  }
+  results.scrollTop = 0;
+}
+
+byId('book-navigate').addEventListener('click', () => {
+  pagePicker.value = String(page);
+  sectionPicker.value = String(sections.findLast(([start]) => start <= page)![0]);
+  navigatorDialog.showModal();
+});
+navigatorDialog.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || event.isComposing) return;
+  event.preventDefault();
+  navigatorDialog.close();
+});
+algorithmSearch.addEventListener('input', searchAlgorithms);
+algorithmSearch.addEventListener('keydown', event => {
+  if (event.key !== 'Enter' || event.isComposing) return;
+  event.preventDefault();
+  results.querySelector('button')?.click();
+});
 jumpToPage(page);
