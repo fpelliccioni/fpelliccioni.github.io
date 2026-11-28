@@ -7,6 +7,13 @@ import { chromium } from 'playwright-core';
 const base = process.env.LAB_BROWSER_URL ?? 'https://componentsprogramming.com';
 const officialPdf = 'https://elementsofprogramming.com/eop.pdf';
 
+async function navigate(page, picker, value) {
+  await page.locator('#book-navigate').click();
+  await picker.selectOption(value);
+  await picker.locator('..').getByRole('button').click();
+  await page.locator('#book-navigator').waitFor({ state: 'hidden' });
+}
+
 test('the chapter 2 reader links printed pages to runnable examples', async () => {
   const browser = await chromium.launch({ channel: 'chrome' });
   try {
@@ -66,12 +73,12 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.ok((await toolbar.boundingBox()).height <= 45, 'the toolbar stays compact while stepping');
 
     await splitView.click();
-    await picker.selectOption('15');
+    await navigate(page, picker, '15');
     assert.equal(await examples.innerText(), 'Sin algoritmos asociados a esta página.');
     assert.equal(await page.locator('#book-lab').isVisible(), true);
     assert.equal(await lab.locator('#stepButton:enabled').isVisible(), true);
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'terminating');
-    await picker.selectOption('22');
+    await navigate(page, picker, '22');
 
     const stage = page.locator('#book-pdf-stage');
     const layout = page.locator('.reader-layout');
@@ -113,13 +120,13 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'terminating');
     assert.equal(await lab.locator('#stepButton').isVisible(), true);
 
-    await picker.selectOption('15');
+    await navigate(page, picker, '15');
     await lab.locator('#editButton:enabled').click();
     await page.locator('#book-lab').waitFor({ state: 'hidden' });
     assert.equal(await page.locator('#book-lab').getAttribute('src'), null);
 
     await splitView.click();
-    await picker.selectOption('17');
+    await navigate(page, picker, '17');
     await page.getByRole('button', { name: 'Página anterior' }).click();
     assert.equal(await picker.inputValue(), '16');
     assert.match(await pdf.getAttribute('src'), /#page=30&/);
@@ -154,24 +161,24 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.ok(additionOutput.includes('2147483648 + (-1): false'), additionOutput);
 
     await splitView.click();
-    await picker.selectOption('15');
+    await navigate(page, picker, '15');
     assert.equal(await examples.innerText(), 'Sin algoritmos asociados a esta página.');
     assert.equal(await page.locator('#book-lab').isVisible(), false);
     assert.equal(await page.locator('#book-lab').getAttribute('src'), null);
     assert.equal(await page.locator('#book-notice').isVisible(), false);
 
-    await picker.selectOption('17');
+    await navigate(page, picker, '17');
     await lab.locator('#currentAlgorithm').filter({ hasText: /^addition_defined_int32$/ }).waitFor({ state: 'attached' });
     await lab.locator('#startButton:enabled').waitFor();
     assert.doesNotMatch(await lab.locator('#hg-right-y').innerText(), /2147483646/);
 
-    await picker.selectOption('19');
+    await navigate(page, picker, '19');
     await page.getByRole('button', { name: /distance \(transformación\)/ }).click();
     assert.match(await page.locator('#book-notice').innerText(), /todavía no está disponible/);
     assert.equal(await page.locator('#book-lab').isVisible(), false);
 
     await splitView.click();
-    await picker.selectOption('24');
+    await navigate(page, picker, '24');
     assert.equal(await page.locator('input[type=file]').count(), 0);
     assert.equal(await pdf.isVisible(), true);
     await page.getByRole('button', { name: 'circular', exact: true }).click();
@@ -221,7 +228,7 @@ test('the reader navigates all twelve chapters and the complete PDF', async () =
   try {
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
     await page.goto(new URL('/interactive-eop/?page=95', base).href, { waitUntil: 'domcontentloaded' });
-    const section = page.getByRole('combobox', { name: 'Chapter or section' });
+    const section = page.locator('#book-section');
     const picker = page.locator('#book-page');
     const pdf = page.locator('.book-pdf-page[aria-current=page] iframe');
     const lab = page.frameLocator('#book-lab');
@@ -229,34 +236,71 @@ test('the reader navigates all twelve chapters and the complete PDF', async () =
     await lab.locator('#startButton:enabled').waitFor();
     assert.equal(await section.inputValue(), '87');
     assert.equal(await picker.inputValue(), '95');
-    assert.equal(await section.getByRole('option').count(), 18);
-    assert.equal(await picker.getByRole('option').count(), 279);
+    assert.equal(await section.locator('option').count(), 18);
+    assert.equal(await picker.locator('option').count(), 279);
 
     for (const start of [1, 15, 29, 47, 63, 87, 113, 131, 147, 167, 189, 207]) {
-      await section.selectOption(String(start));
+      await navigate(page, section, String(start));
       assert.equal(await picker.inputValue(), String(start));
       assert.match(await pdf.getAttribute('src'), new RegExp(`#page=${start + 14}&`));
     }
     assert.equal(await page.locator('#book-lab').isVisible(), false);
-    await picker.selectOption('208');
+    await navigate(page, picker, '208');
     await page.getByRole('button', { name: /12\.1.*Pending/ }).waitFor();
     assert.equal(await page.locator('#book-notice').innerText(), 'This algorithm is not available in the lab yet.');
 
-    await section.selectOption('189');
+    await navigate(page, section, '189');
     await page.getByRole('button', { name: 'partitioned_at_point', pressed: true }).waitFor();
     await lab.locator('#startButton:enabled').waitFor();
 
-    await section.selectOption('-13');
+    await navigate(page, section, '-13');
     assert.equal(await picker.locator('option:checked').textContent(), 'i');
     assert.match(await pdf.getAttribute('src'), /#page=1&/);
     assert.equal(await page.getByRole('button', { name: 'Previous page' }).isDisabled(), true);
-    await picker.selectOption('265');
+    await navigate(page, picker, '265');
     assert.equal(await section.inputValue(), '247');
     assert.match(await pdf.getAttribute('src'), /#page=279&/);
     assert.equal(await page.getByRole('button', { name: 'Next page' }).isDisabled(), true);
     assert.ok(await page.locator('#book-pdf-stage iframe').count() <= 3);
     await page.reload({ waitUntil: 'domcontentloaded' });
     assert.equal(await picker.inputValue(), '265');
+  } finally {
+    await browser.close();
+  }
+});
+
+test('the navigator finds algorithms by name and selects them on their page', async () => {
+  const browser = await chromium.launch({ channel: 'chrome' });
+  try {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.goto(new URL('/eop-interactivo/', base).href, { waitUntil: 'domcontentloaded' });
+    page.setDefaultTimeout(5000);
+    const open = page.getByRole('button', { name: 'Navegar', exact: true });
+    const dialog = page.getByRole('dialog', { name: 'Navegar por el libro' });
+    await open.click();
+    const search = dialog.getByRole('searchbox', { name: 'Nombre del algoritmo' });
+    assert.equal(await search.evaluate(input => input === document.activeElement), true);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    await search.fill('missing-algorithm-123');
+    await dialog.getByText('No se encontraron algoritmos.').waitFor();
+    await search.fill('upper bound n');
+    await search.press('Enter');
+    await dialog.waitFor({ state: 'hidden' });
+    await page.getByRole('button', { name: 'upper_bound_n', pressed: true, exact: true }).waitFor();
+    const lab = page.frameLocator('#book-lab');
+    await lab.locator('#startButton:enabled').waitFor();
+    assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'upper_bound_n');
+    assert.equal(await page.locator('#book-page-status').innerText(), 'Página 106');
+
+    await open.click();
+    await search.fill('bifurcate_compare_nonempty');
+    await dialog.getByRole('button', { name: /bifurcate_compare_nonempty.*Pendiente/ }).click();
+    await page.locator('#book-notice').waitFor();
+    assert.equal(await page.locator('#book-page-status').innerText(), 'Página 128');
+    await open.click();
+    await page.keyboard.press('Escape');
+    await dialog.waitFor({ state: 'hidden' });
+    assert.equal(await open.evaluate(button => button === document.activeElement), true);
   } finally {
     await browser.close();
   }

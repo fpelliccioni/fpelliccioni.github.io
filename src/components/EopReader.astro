@@ -30,6 +30,7 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
           <button type="button" data-reader-view="lab" aria-pressed="false">Lab</button>
         </div>
         <nav aria-label={es ? 'Navegación' : 'Navigation'}>
+          <button type="button" id="book-navigate" aria-haspopup="dialog">{es ? 'Navegar' : 'Navigate'}</button>
           <a href={labPath}>{es ? 'Laboratorio' : 'Algorithm lab'}</a>
           <a href={alternatePath} hreflang={es ? 'en' : 'es'} lang={es ? 'en' : 'es'}>{es ? 'English' : 'Español'}</a>
         </nav>
@@ -38,14 +39,8 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
       <div class="reader-layout" data-view="split">
         <section class="reader-panel book" aria-label={es ? 'Libro' : 'Book'}>
           <div class="book-toolbar">
-            <select id="book-section" aria-label={es ? 'Capítulo o sección' : 'Chapter or section'}>
-              {sections.map(([page, en, spanish]) => <option value={page} selected={page === 15}>{es ? spanish : en}</option>)}
-            </select>
             <button type="button" id="book-previous" aria-label={es ? 'Página anterior' : 'Previous page'}>←</button>
-            <label for="book-page">{es ? 'Página' : 'Page'}</label>
-            <select id="book-page">
-              {pages.map(page => <option value={page} selected={page === firstExamplePage}>{pageLabel(page)}</option>)}
-            </select>
+            <span id="book-page-status">{es ? 'Página' : 'Page'} {pageLabel(firstExamplePage)}</span>
             <button type="button" id="book-next" aria-label={es ? 'Página siguiente' : 'Next page'}>→</button>
             <a id="book-official" href={officialPdf} target="_blank" rel="noopener">{es ? 'Abrir PDF oficial ↗' : 'Open official PDF ↗'}</a>
           </div>
@@ -63,6 +58,40 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
         <button class="reader-view-peek" type="button" data-focus-panel="pdf" aria-label={es ? 'Dar foco al PDF' : 'Focus the PDF'}><span>PDF</span></button>
         <button class="reader-view-peek" type="button" data-focus-panel="lab" aria-label={es ? 'Dar foco al lab' : 'Focus the lab'}><span>Lab</span></button>
       </div>
+      <dialog id="book-navigator" aria-labelledby="book-nav-title">
+        <div class="book-nav-header">
+          <h2 id="book-nav-title">{es ? 'Navegar por el libro' : 'Navigate the book'}</h2>
+          <form method="dialog">
+            <button aria-label={es ? 'Cerrar navegador' : 'Close navigator'}>×</button>
+          </form>
+        </div>
+        <div class="book-nav-pickers">
+          <form>
+            <label for="book-page">{es ? 'Página' : 'Page'}</label>
+            <div>
+              <select id="book-page">
+                {pages.map(page => <option value={page} selected={page === firstExamplePage}>{pageLabel(page)}</option>)}
+              </select>
+              <button aria-label={es ? 'Ir a página' : 'Go to page'}>{es ? 'Ir' : 'Go'}</button>
+            </div>
+          </form>
+          <form>
+            <label for="book-section">{es ? 'Capítulo o sección' : 'Chapter or section'}</label>
+            <div>
+              <select id="book-section">
+                {sections.map(([page, en, spanish]) => <option value={page} selected={page === 15}>{es ? spanish : en}</option>)}
+              </select>
+              <button aria-label={es ? 'Ir a capítulo o sección' : 'Go to chapter or section'}>{es ? 'Ir' : 'Go'}</button>
+            </div>
+          </form>
+        </div>
+        <label class="book-nav-search">
+          {es ? 'Nombre del algoritmo' : 'Algorithm name'}
+          <input id="book-algorithm" type="search" placeholder="lower_bound" autocomplete="off" autofocus />
+        </label>
+        <p id="book-nav-empty" role="status" hidden>{es ? 'No se encontraron algoritmos.' : 'No algorithms found.'}</p>
+        <ul id="book-nav-results"></ul>
+      </dialog>
       <noscript><p>{es ? 'Activá JavaScript para usar el lector y los ejemplos.' : 'Enable JavaScript to use the reader and examples.'}</p></noscript>
     </main>
     <script>
@@ -80,7 +109,7 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   .reader-header, .book-toolbar { display: flex; align-items: center; gap: 9px 12px; flex-wrap: wrap; }
   .reader-header { justify-content: space-between; padding: 0 1px 14px; }
   .reader-header h1 { font-size: clamp(21px, 2.3vw, 30px); letter-spacing: -.035em; margin: 0; }
-  .reader-header nav { display: flex; gap: 16px; }
+  .reader-header nav { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; }
   .reader-views { display: flex; gap: 4px; }
   #eop-reader .reader-views [aria-pressed="true"] { border-color: #b1ed80; color: #c4e69f; }
   .reader-layout { --peek: clamp(46px, 7vw, 100px); position: relative; display: grid; grid-template-columns: minmax(330px, 44fr) minmax(0, 56fr); gap: 14px; }
@@ -113,7 +142,21 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   .book-toolbar a { margin-inline-start: auto; }
   #eop-reader button, #eop-reader select { font: inherit; border: 1px solid #40576a; border-radius: 5px; color: inherit; background: #172531; padding: 4px 9px; }
   #eop-reader select { width: auto; min-width: 60px; }
-  #eop-reader #book-section { flex: 1 0 100%; max-width: 100%; text-overflow: ellipsis; }
+  #book-navigator { box-sizing: border-box; width: min(560px, calc(100% - 24px)); max-height: 85dvh; overflow: auto; padding: 18px; border: 1px solid #40576a; border-radius: 8px; background: #111b26; color: inherit; }
+  #book-navigator::backdrop { background: #05090dbb; }
+  .book-nav-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .book-nav-header h2 { margin: 0; font-size: 18px; }
+  .book-nav-pickers { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; }
+  .book-nav-pickers form, .book-nav-search { display: grid; min-width: 0; gap: 5px; }
+  .book-nav-pickers form div { display: flex; gap: 4px; }
+  .book-nav-pickers select { min-width: 0; }
+  #eop-reader #book-section { flex: 1; min-width: 0; width: 100%; text-overflow: ellipsis; }
+  .book-nav-search { margin-top: 14px; }
+  #book-algorithm { box-sizing: border-box; width: 100%; font: inherit; border: 1px solid #40576a; border-radius: 5px; color: inherit; background: #172531; padding: 7px 9px; }
+  #book-nav-results { display: grid; gap: 4px; list-style: none; padding: 0; margin: 8px 0 0; max-height: 45dvh; overflow: auto; }
+  #book-nav-results button { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; text-align: start; overflow-wrap: anywhere; }
+  #book-nav-results small { flex: none; color: #a4b7c9; }
+  #book-nav-empty { color: #a4b7c9; margin: 8px 0 0; }
   #eop-reader button:not(:disabled) { cursor: pointer; }
   #eop-reader button:disabled { opacity: .4; }
   #eop-reader :focus-visible { outline: 2px solid #b1ed80; outline-offset: 2px; }
