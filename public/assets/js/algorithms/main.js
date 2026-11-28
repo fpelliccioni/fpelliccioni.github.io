@@ -831,7 +831,7 @@ function showError(text) {
 
 function fromInterpreterArray(array_par) {
     var length = array_par.properties['length'];
-    if ( ! length) return undefined;
+    if (typeof length !== 'number') return undefined;
 
     // console.log("fromInterpreterArray() length: ", length);
     // console.log("fromInterpreterArray() array_par.properties: ", array_par.properties);
