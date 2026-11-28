@@ -23,8 +23,8 @@ test('the chapter 2 reader links print pages to runnable examples and local PDF 
     await page.getByRole('button', { name: 'Página siguiente' }).click();
     assert.equal(await picker.inputValue(), '22');
     await page.getByRole('button', { name: 'terminating', exact: true }).click();
+    await lab.locator('#currentAlgorithm').filter({ hasText: /^terminating$/ }).waitFor({ state: 'attached' });
     await lab.locator('#startButton:enabled').waitFor();
-    assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'terminating');
     await lab.locator('#startButton').click();
     await lab.locator('#stepButton').waitFor({ state: 'visible' });
 
@@ -46,8 +46,8 @@ test('the chapter 2 reader links print pages to runnable examples and local PDF 
     assert.equal(await pdf.isVisible(), false);
     const hotspot = page.locator('#book-local-page').getByRole('button', { name: 'circular', exact: true });
     await hotspot.click();
+    await lab.locator('#currentAlgorithm').filter({ hasText: /^circular$/ }).waitFor({ state: 'attached' });
     await lab.locator('#startButton:enabled').waitFor();
-    assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'circular');
 
     if (process.env.EOP_SCREENSHOT) await page.screenshot({ path: process.env.EOP_SCREENSHOT });
 
