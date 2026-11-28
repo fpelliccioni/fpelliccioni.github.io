@@ -17,7 +17,7 @@ export const chapterPages: Partial<Record<number, BookExample[]>> = {
     { label: 'euclidean_norm(x, y)', example: 'euclidean_norm' },
     { label: 'euclidean_norm(x, y, z)', example: 'euclidean_norm_3' },
   ],
-  17: [{ label: '2.1 · 32-bit addition' }],
+  17: [{ label: '2.1 · 32-bit addition', example: 'addition_defined_int32' }],
   18: examples('power_unary'),
   19: [{ label: 'distance (transformation)' }],
   21: examples('collision_point'),
