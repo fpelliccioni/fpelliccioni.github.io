@@ -538,6 +538,7 @@ var repo = LabLibrary.repo;
     rotate_forward_range: ['Rota dos subrangos adyacentes y devuelve la nueva posición del primer elemento.', 'Rotates two adjacent subranges and returns the new position of the first element.'],
     is_sorted_range: ['Comprueba que ningún elemento sea menor que el que lo precede.', 'Checks that no element is less than its predecessor.'],
     stable_sort_snapshot: ['Dentro de un contrato, calcula el orden estable esperado sin modificar el rango.', 'Inside a contract, computes the expected stable order without modifying the range.'],
+    fibonacci_matches: ['Verifica un número de Fibonacci con aritmética entera exacta dentro de un contrato.', 'Checks a Fibonacci number using exact integer arithmetic inside a contract.'],
     is_bounded_range: ['Dentro de un contrato, comprueba que ambos iteradores delimiten un rango válido en la misma secuencia.', 'Inside a contract, checks that both iterators delimit a valid range in the same sequence.'],
     range_value_counts: ['Cuenta cuántas veces aparece cada valor del rango. Sirve para guardar el estado inicial en un contrato.', 'Counts occurrences of each value in the range for use as a contract snapshot.'],
     has_range_value_counts: ['Comprueba que el rango conserve todos los valores y sus repeticiones.', 'Checks that the range retains all values and their multiplicities.'],
