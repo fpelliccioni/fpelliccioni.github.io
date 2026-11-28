@@ -8,12 +8,12 @@ const bookPanel = layout.querySelector<HTMLElement>('.book')!;
 const labPanel = layout.querySelector<HTMLElement>('.analyzer')!;
 const es = document.documentElement.lang === 'es';
 const pagePicker = byId<HTMLSelectElement>('book-page');
-const sectionPicker = byId<HTMLSelectElement>('book-section');
-const pageStatus = byId<HTMLSpanElement>('book-page-status');
-const navigatorDialog = byId<HTMLDialogElement>('book-navigator');
+const chapterDialog = byId<HTMLDialogElement>('book-chapters');
+const algorithmDialog = byId<HTMLDialogElement>('book-algorithms');
+const chapterButtons = chapterDialog.querySelectorAll<HTMLButtonElement>('[data-chapter-page]');
 const algorithmSearch = byId<HTMLInputElement>('book-algorithm');
 const results = byId<HTMLUListElement>('book-nav-results');
-const noResults = byId<HTMLParagraphElement>('book-nav-empty');
+const resultCount = byId<HTMLParagraphElement>('book-nav-count');
 const previous = byId<HTMLButtonElement>('book-previous');
 const next = byId<HTMLButtonElement>('book-next');
 const pdfStage = byId<HTMLDivElement>('book-pdf-stage');
@@ -152,8 +152,6 @@ function showPdf() {
 function setPage(value: number, selection?: BookExample) {
   page = value;
   pagePicker.value = String(page);
-  pageStatus.textContent = `${es ? 'Página' : 'Page'} ${pageLabel(page)}`;
-  sectionPicker.value = String(sections.findLast(([start]) => start <= page)![0]);
   previous.disabled = page === firstPage;
   next.disabled = page === lastPage;
   const url = new URL(location.href);
@@ -190,18 +188,22 @@ pdfStage.addEventListener('scroll', () => {
 
 previous.addEventListener('click', () => jumpToPage(page - 1));
 next.addEventListener('click', () => jumpToPage(page + 1));
-function navigateTo(value: number, selection?: BookExample) {
-  navigatorDialog.close();
-  if ((!selection && layout.dataset.view === 'lab') || (selection && layout.dataset.view === 'pdf')) {
-    setView('split');
-  }
-  jumpToPage(value, selection);
-}
+pagePicker.addEventListener('change', () => jumpToPage(Number(pagePicker.value)));
 
-for (const picker of [pagePicker, sectionPicker]) {
-  picker.form?.addEventListener('submit', event => {
-    event.preventDefault();
-    navigateTo(Number(picker.value));
+byId('book-open-chapters').addEventListener('click', () => {
+  const active = String(sections.findLast(([start]) => start <= page)![0]);
+  chapterDialog.showModal();
+  for (const button of chapterButtons) {
+    if (button.dataset.chapterPage === active) {
+      button.setAttribute('aria-current', 'true');
+      button.focus();
+    } else button.removeAttribute('aria-current');
+  }
+});
+for (const button of chapterButtons) {
+  button.addEventListener('click', () => {
+    chapterDialog.close();
+    jumpToPage(Number(button.dataset.chapterPage));
   });
 }
 
@@ -224,38 +226,56 @@ for (let number = 1; number <= lastPage; ++number) {
 function searchAlgorithms() {
   results.replaceChildren();
   const query = normalizeName(algorithmSearch.value);
-  noResults.hidden = true;
-  if (!query) return;
   const rank = (name: string) => name === query ? 0 : name.startsWith(query) ? 1 : 2;
   const matches = [...algorithmIndex.values()].filter(({ entry, name }) =>
     name.includes(query) || normalizeName(es ? entry.es ?? entry.label : entry.label).includes(query),
   ).sort((left, right) => rank(left.name) - rank(right.name) || left.name.localeCompare(right.name));
-  noResults.hidden = matches.length > 0;
+  resultCount.textContent = matches.length
+    ? `${matches.length} / ${algorithmIndex.size} ${es ? 'algoritmos' : 'algorithms'}`
+    : (es ? 'No se encontraron algoritmos.' : 'No algorithms found.');
   for (const match of matches) {
     const item = document.createElement('li');
     const button = document.createElement('button');
     button.type = 'button';
-    button.append(es ? match.entry.es ?? match.entry.label : match.entry.label);
-    const detail = document.createElement('small');
+    button.className = 'catalog-card';
+    const detail = document.createElement('span');
+    detail.className = 'catalog-category';
     const pending = match.entry.example ? '' : (es ? ' · Pendiente' : ' · Pending');
     detail.textContent = `${es ? 'pág.' : 'p.'} ${pageLabel(match.page)}${pending}`;
-    button.append(detail);
-    button.addEventListener('click', () => navigateTo(match.page, match.entry));
+    const name = document.createElement('span');
+    name.className = 'catalog-name';
+    name.textContent = es ? match.entry.es ?? match.entry.label : match.entry.label;
+    const action = document.createElement('span');
+    action.className = 'catalog-open';
+    action.textContent = es ? 'Ir a la página →' : 'Go to page →';
+    button.append(detail, name, action);
+    button.addEventListener('click', () => {
+      algorithmDialog.close();
+      if (layout.dataset.view === 'pdf') setView('split');
+      jumpToPage(match.page, match.entry);
+    });
     item.append(button);
     results.append(item);
   }
-  results.scrollTop = 0;
+  algorithmDialog.scrollTop = 0;
 }
 
-byId('book-navigate').addEventListener('click', () => {
-  pagePicker.value = String(page);
-  sectionPicker.value = String(sections.findLast(([start]) => start <= page)![0]);
-  navigatorDialog.showModal();
+byId('book-open-algorithms').addEventListener('click', () => {
+  searchAlgorithms();
+  algorithmDialog.showModal();
 });
-navigatorDialog.addEventListener('keydown', event => {
+for (const dialog of [chapterDialog, algorithmDialog]) {
+  dialog.addEventListener('click', event => {
+    if (event.target !== dialog) return;
+    const bounds = dialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right ||
+        event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+  });
+}
+algorithmDialog.addEventListener('keydown', event => {
   if (event.key !== 'Escape' || event.isComposing) return;
   event.preventDefault();
-  navigatorDialog.close();
+  algorithmDialog.close();
 });
 algorithmSearch.addEventListener('input', searchAlgorithms);
 algorithmSearch.addEventListener('keydown', event => {
