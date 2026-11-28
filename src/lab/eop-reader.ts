@@ -16,10 +16,8 @@ const notice = byId<HTMLParagraphElement>('book-notice');
 const rawPage = Number(new URL(location.href).searchParams.get('page'));
 let page = Number.isInteger(rawPage) && rawPage >= firstPage && rawPage <= lastPage ? rawPage : firstExamplePage;
 let activeExample = '';
-let selected: BookExample | undefined;
 
-function setSelection(entry?: BookExample) {
-  selected = entry;
+function setSelection(entry?: BookExample, keepCurrent = false) {
   if (entry?.example && activeExample !== entry.example) {
     activeExample = entry.example;
     const url = new URL(reader.dataset.labPath!, location.origin);
@@ -28,7 +26,7 @@ function setSelection(entry?: BookExample) {
     lab.src = url.href;
   }
 
-  const showLab = Boolean(activeExample && (!entry || entry.example));
+  const showLab = Boolean(entry?.example || (keepCurrent && activeExample));
   lab.hidden = !showLab;
   notice.hidden = showLab;
   notice.textContent = entry
@@ -66,11 +64,13 @@ function renderExamples() {
     exampleList.append(text);
   }
 
-  const same = entries.find(entry => entry.label === selected?.label);
-  if (same) setSelection(same);
-  else if (!entries.length) setSelection();
-  else if (!activeExample || entries.every(entry => !entry.example)) setSelection(entries.find(entry => entry.example) ?? entries[0]);
-  else setSelection(entries.find(entry => entry.example === activeExample));
+  const labState = lab.contentDocument?.body?.dataset;
+  const debugging = labState?.mode === 'executing' || labState?.startingSession === 'true';
+  if (debugging) {
+    setSelection(entries.find(entry => entry.example === activeExample), true);
+  } else {
+    setSelection(entries.find(entry => entry.example) ?? entries[0]);
+  }
 }
 
 function showPdf() {
