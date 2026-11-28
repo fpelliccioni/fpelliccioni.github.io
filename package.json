@@ -23,7 +23,6 @@
     "@fontsource-variable/newsreader": "^5.3.0",
     "astro": "7.4.11",
     "esbuild": "^0.28.2",
-    "pdfjs-dist": "^6.5.438",
     "quickjs-emscripten": "^0.32.0"
   },
   "devDependencies": {

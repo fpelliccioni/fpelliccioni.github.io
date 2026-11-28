@@ -7,11 +7,8 @@ const pagePicker = byId<HTMLSelectElement>('book-page');
 const previous = byId<HTMLButtonElement>('book-previous');
 const next = byId<HTMLButtonElement>('book-next');
 let officialFrame = byId<HTMLIFrameElement>('book-pdf');
-const localPage = byId<HTMLDivElement>('book-local-page');
 const pdfStage = byId<HTMLDivElement>('book-pdf-stage');
 const pdfLink = byId<HTMLAnchorElement>('book-official');
-const fileInput = byId<HTMLInputElement>('book-file');
-const localStatus = byId<HTMLParagraphElement>('book-file-status');
 const exampleList = byId<HTMLDivElement>('book-examples');
 const lab = byId<HTMLIFrameElement>('book-lab');
 const labLink = byId<HTMLAnchorElement>('book-open-lab');
@@ -22,10 +19,6 @@ const rawPage = Number(new URL(location.href).searchParams.get('page'));
 let page = Number.isInteger(rawPage) && rawPage >= firstPage && rawPage <= lastPage ? rawPage : firstExamplePage;
 let activeExample = '';
 let selected: BookExample | undefined;
-let documentVersion = 0;
-let pageVersion = 0;
-let localPdf: Awaited<ReturnType<typeof import('./eop-pdf').openLocalPdf>> | undefined;
-let pdfModule: typeof import('./eop-pdf') | undefined;
 
 function setSelection(entry?: BookExample) {
   selected = entry;
@@ -85,46 +78,15 @@ function renderExamples() {
   else setSelection(entries.find(entry => entry.example === activeExample));
 }
 
-async function showPdf() {
-  const version = ++pageVersion;
+function showPdf() {
   const url = `${officialPdf}#page=${pdfPage(page)}`;
   pdfLink.href = url;
-  if (!localPdf || !pdfModule) {
-    localPage.hidden = true;
-    localPage.inert = false;
-    localPage.removeAttribute('aria-busy');
-    // Native PDF viewers may ignore fragment changes within an existing frame.
-    const nextFrame = officialFrame.cloneNode(false) as HTMLIFrameElement;
-    nextFrame.hidden = false;
-    nextFrame.src = `${url}&toolbar=0&navpanes=0&view=FitH`;
-    officialFrame.replaceWith(nextFrame);
-    officialFrame = nextFrame;
-    pdfStage.scrollTop = 0;
-    return;
-  }
-  localPage.inert = true;
-  localPage.setAttribute('aria-busy', 'true');
-  try {
-    const rendered = await pdfModule.renderBookPage(localPdf.pdf, page, chapterPages[page] ?? [], setSelection);
-    if (pageVersion !== version) return;
-    localPage.replaceChildren(rendered);
-    localPage.hidden = false;
-    officialFrame.hidden = true;
-    officialFrame.removeAttribute('src');
-    pdfStage.scrollTop = 0;
-  } catch {
-    if (version !== pageVersion) return;
-    const failed = localPdf;
-    localPdf = undefined;
-    await failed?.close();
-    localStatus.textContent = es ? 'La página local no se pudo abrir. Mostramos el PDF oficial.' : 'The local page could not be opened. Showing the official PDF.';
-    await showPdf();
-  } finally {
-    if (version === pageVersion) {
-      localPage.inert = false;
-      localPage.removeAttribute('aria-busy');
-    }
-  }
+  // Native PDF viewers may ignore fragment changes within an existing frame.
+  const nextFrame = officialFrame.cloneNode(false) as HTMLIFrameElement;
+  nextFrame.src = `${url}&toolbar=0&navpanes=0&view=FitH`;
+  officialFrame.replaceWith(nextFrame);
+  officialFrame = nextFrame;
+  pdfStage.scrollTop = 0;
 }
 
 function setPage(value: number) {
@@ -136,39 +98,11 @@ function setPage(value: number) {
   url.searchParams.set('page', String(page));
   history.replaceState(null, '', url);
   renderExamples();
-  void showPdf();
+  showPdf();
 }
 
 previous.addEventListener('click', () => setPage(page - 1));
 next.addEventListener('click', () => setPage(page + 1));
 pagePicker.addEventListener('change', () => setPage(Number(pagePicker.value)));
-fileInput.addEventListener('change', async () => {
-  const file = fileInput.files?.[0];
-  if (!file) return;
-  const version = ++documentVersion;
-  localStatus.textContent = es ? 'Abriendo el PDF…' : 'Opening the PDF…';
-  try {
-    pdfModule ??= await import('./eop-pdf');
-    const opened = await pdfModule.openLocalPdf(file);
-    if (version !== documentVersion) {
-      await opened.close();
-      return;
-    }
-    const old = localPdf;
-    localPdf = opened;
-    const rendering = showPdf();
-    await old?.close();
-    await rendering;
-    if (version === documentVersion && localPdf === opened) {
-      localStatus.textContent = es ? 'Modo interactivo activo. Los nombres resaltados se pueden pulsar.' : 'Interactive mode is on. Select a highlighted name.';
-    }
-  } catch {
-    if (version === documentVersion) {
-      localStatus.textContent = es ? 'Elegí el PDF de la edición oficial enlazado arriba.' : 'Choose the official edition PDF linked above.';
-    }
-  } finally {
-    if (version === documentVersion) fileInput.value = '';
-  }
-});
 
 setPage(page);
