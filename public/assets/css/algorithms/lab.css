@@ -125,37 +125,23 @@ p {
   padding-left: 25px;
 }
 .lab-main {
-  padding: 30px 32px 24px;
+  padding: 16px 32px 24px;
   max-width: 1800px;
   margin: auto;
 }
-.lab-intro {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 30px;
-  margin-bottom: 27px;
-}
-.eyebrow {
-  font: 9px var(--mono);
-  letter-spacing: 1.5px;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-.lab-intro h1 {
-  font-size: 25px;
-  font-weight: 600;
-  letter-spacing: -0.6px;
-  margin-bottom: 6px;
-}
-.lab-intro > div > p:last-child {
-  font-size: 12px;
-  color: var(--muted);
+.lab-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 .lab-help {
   position: relative;
-  align-self: flex-start;
-  font-size: 11px;
+  margin-inline-start: 8px;
+  font: 11px var(--sans);
+  color: var(--ink);
   z-index: 20;
 }
 .lab-help summary {
@@ -678,7 +664,7 @@ button.primary {
     gap: 16px;
   }
   .lab-main {
-    padding: 25px 22px;
+    padding: 14px 22px 25px;
   }
   .lab-toolbar {
     gap: 15px;
@@ -752,25 +738,10 @@ button.primary {
     border-left: 0;
   }
   .lab-main {
-    padding: 24px 16px 16px;
+    padding: 12px 16px 16px;
   }
-  .lab-intro {
-    align-items: start;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  .lab-intro h1 {
-    font-size: 20px;
-    line-height: 1.3;
-  }
-  .lab-intro > div > p:last-child {
-    font-size: 11px;
-    line-height: 1.8;
-    margin-top: 9px;
-  }
-  .eyebrow {
-    font-size: 7px;
-    letter-spacing: 1px;
+  .lab-help {
+    margin-inline-start: auto;
   }
   .lab-help summary {
     font-size: 0;
