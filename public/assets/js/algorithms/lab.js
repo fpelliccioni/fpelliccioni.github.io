@@ -181,22 +181,15 @@ var repo = LabLibrary.repo;
   }
   function syncEmptyStates() {
     var hasScene = two && two.scene.children.length > 0;
-    byId('visualEmpty').hidden = !!hasScene || mode === 'reference';
-    var active = mode === 'executing' || mode === 'finished';
-    byId('visualEmptyTitle').textContent = active
-      ? es
-        ? 'Avanzá para explorar los datos.'
-        : 'Step through to explore the data.'
-      : es
-        ? 'Tu algoritmo, a la vista.'
-        : 'Your algorithm, in view.';
-    byId('visualEmptyDescription').textContent = active
-      ? es
-        ? 'Los datos aparecerán cuando el código cree una secuencia o una variable.'
-        : 'Data appears when the code creates a sequence or a variable.'
-      : es
-        ? 'Elegí un ejemplo o editá el código. Iniciá la sesión y avanzá paso a paso para ver cómo cambia.'
-        : 'Choose an example or edit the code. Start a session, then step through to see what changes.';
+    var empty = byId('visualEmpty');
+    empty.hidden = !!hasScene || mode === 'reference';
+    if (!empty.hidden) {
+      empty.textContent = mode === 'executing'
+        ? (es ? 'Avanzá hasta que el código cree datos para mostrar.' : 'Step through until the code creates data to display.')
+        : mode === 'finished'
+          ? (es ? 'Esta ejecución no generó datos para mostrar.' : 'This run produced no data to display.')
+          : (es ? 'Iniciá la ejecución para ver los datos.' : 'Start the execution to see the data.');
+    }
     byId('stateEmpty').hidden = !!byId('hg-right-x-a').textContent.trim();
     byId('metricsEmpty').hidden = !!byId('hg-right-x-b').textContent.trim();
     byId('outputEmpty').hidden = !!byId('hg-right-y').textContent.trim();
