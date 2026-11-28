@@ -1144,3 +1144,20 @@ main.catalog-page {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+.book-embedded-lab .lab-header,
+.book-embedded-lab .lab-footer,
+.book-embedded-lab .lab-title,
+.book-embedded-lab .example-control {
+  display: none;
+}
+
+.book-embedded-lab .lab-main {
+  padding: 10px;
+}
+
+@media (min-width: 701px) and (max-width: 1050px) {
+  .book-embedded-lab .lab-workspace {
+    grid-template-columns: minmax(0, 1.25fr) minmax(230px, 0.85fr);
+  }
+}
