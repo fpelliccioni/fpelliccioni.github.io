@@ -23,8 +23,8 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
       });
     }
     await page.goto(new URL('/eop-interactivo/', base).href, { waitUntil: 'domcontentloaded' });
-    const pdf = page.locator('#book-pdf');
-    await page.waitForFunction(url => document.querySelector('#book-pdf')?.getAttribute('src')?.startsWith(url + '#page=35'), officialPdf);
+    const pdf = page.locator('.book-pdf-page[aria-current=page] iframe');
+    await page.waitForFunction(url => document.querySelector('.book-pdf-page[aria-current=page] iframe')?.getAttribute('src')?.startsWith(url + '#page=35'), officialPdf);
     const picker = page.locator('#book-page');
     assert.equal(await picker.inputValue(), '21');
     const lab = page.frameLocator('#book-lab');
@@ -41,11 +41,9 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await help.locator('summary').click();
     if (process.env.EOP_NATIVE_SCREENSHOT) await page.screenshot({ path: process.env.EOP_NATIVE_SCREENSHOT });
 
-    const initialFrame = await pdf.elementHandle();
     await page.getByRole('button', { name: 'Página siguiente' }).click();
     assert.equal(await picker.inputValue(), '22');
     assert.match(await pdf.getAttribute('src'), /#page=36&/);
-    assert.equal(await initialFrame.evaluate(frame => frame.isConnected), false);
     await page.getByRole('button', { name: 'terminating', exact: true }).click();
     await lab.locator('#currentAlgorithm').filter({ hasText: /^terminating$/ }).waitFor({ state: 'attached' });
     await lab.locator('#startButton:enabled').waitFor();
@@ -53,16 +51,23 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await lab.locator('#stepButton').waitFor({ state: 'visible' });
     assert.ok((await toolbar.boundingBox()).height <= 45, 'the toolbar stays compact while stepping');
 
-    await picker.selectOption('23');
+    const stage = page.locator('#book-pdf-stage');
+    const stageBounds = await stage.boundingBox();
+    assert.ok(stageBounds);
+    const currentHeight = (await page.locator('.book-pdf-page[aria-current=page]').boundingBox()).height;
+    await page.mouse.move(stageBounds.x + stageBounds.width / 2, stageBounds.y + stageBounds.height / 2);
+    await page.mouse.wheel(0, currentHeight + 8);
+    await page.waitForFunction(() => document.querySelector('#book-page')?.value === '23');
+    assert.match(await pdf.getAttribute('src'), /#page=37&/);
+    await page.getByRole('button', { name: 'collision_point_nonterminating_orbit', exact: true }).waitFor();
+    assert.equal(new URL(page.url()).searchParams.get('page'), '23');
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'terminating');
     assert.equal(await lab.locator('#stepButton').isVisible(), true);
 
     await picker.selectOption('17');
-    const page17Frame = await pdf.elementHandle();
     await page.getByRole('button', { name: 'Página anterior' }).click();
     assert.equal(await picker.inputValue(), '16');
     assert.match(await pdf.getAttribute('src'), /#page=30&/);
-    assert.equal(await page17Frame.evaluate(frame => frame.isConnected), false);
     for (const [label, name, output] of [
       ['abs(x)', 'abs', /Absolute value: 7/],
       ['euclidean_norm(x, y)', 'euclidean_norm', /Euclidean norm: 5/],

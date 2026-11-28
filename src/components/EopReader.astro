@@ -1,5 +1,5 @@
 ---
-import { firstExamplePage, firstPage, lastPage, officialPdf } from '../lab/eop-pilot';
+import { firstExamplePage, firstPage, lastPage, officialPdf, pdfPage } from '../lab/eop-pilot';
 
 interface Props { lang: 'es' | 'en' }
 const { lang } = Astro.props;
@@ -42,8 +42,16 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
             <button type="button" id="book-next" aria-label={es ? 'Página siguiente' : 'Next page'}>→</button>
             <a id="book-official" href={officialPdf} target="_blank" rel="noopener">{es ? 'Abrir PDF oficial ↗' : 'Open official PDF ↗'}</a>
           </div>
-          <div id="book-pdf-stage">
-            <iframe id="book-pdf" title={es ? 'PDF oficial de Elements of Programming' : 'Official Elements of Programming PDF'}></iframe>
+          <div id="book-pdf-stage" role="region" aria-label={es ? 'Páginas de Elements of Programming' : 'Elements of Programming pages'} tabindex="0">
+            {pages.map(page => (
+              <div class="book-pdf-page" data-page={page}>
+                <iframe
+                  title={es ? `Página ${page}` : `Page ${page}`}
+                  tabindex="-1"
+                  data-src={`${officialPdf}#page=${pdfPage(page)}&toolbar=0&navpanes=0&view=Fit`}
+                ></iframe>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -88,9 +96,12 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   #eop-reader button:not(:disabled) { cursor: pointer; }
   #eop-reader button:disabled { opacity: .4; }
   #eop-reader :focus-visible { outline: 2px solid #b1ed80; outline-offset: 2px; }
-  #book-pdf-stage { flex: 1; overflow: auto; min-height: 0; background: #1a2530; }
-  #book-pdf, #book-lab { border: 0; display: block; width: 100%; }
-  #book-pdf { height: 100%; }
+  #book-pdf-stage { flex: 1; overflow: auto; min-height: 0; background: #262626; }
+  .book-pdf-page { aspect-ratio: 2 / 3; }
+  .book-pdf-page + .book-pdf-page { margin-top: 8px; }
+  .book-pdf-page iframe, #book-lab { border: 0; display: block; width: 100%; }
+  .book-pdf-page iframe { height: 100%; pointer-events: none; }
+  .book-pdf-page iframe:not([src]) { visibility: hidden; }
   #book-lab { flex: 1; min-height: 0; background: #0c1118; }
   .example-panel { padding: 10px 12px; border-bottom: 1px solid #2a3c4b; }
   .example-panel h2, .analyzer-toolbar h3 { margin: 0; font-size: 13px; }
