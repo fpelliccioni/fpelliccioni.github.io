@@ -522,6 +522,7 @@ var repo = LabLibrary.repo;
     ValueOf: ['ValueOf<I> obtiene el tipo de elemento del iterador I.', 'ValueOf<I> extracts the element type of iterator I.'],
     Predicate: ['Función que recibe un elemento y devuelve true o false.', 'A function that takes an element and returns true or false.'],
     Relation: ['Función que compara dos elementos y devuelve true o false.', 'A function that compares two elements and returns true or false.'],
+    Semiring: ['Semianillo que aporta cero, uno, suma, producto e igualdad para el tipo de los coeficientes.', 'A semiring supplies zero, one, addition, multiplication and equality for the coefficient type.'],
     Operation: ['Operación binaria que combina dos valores del mismo tipo y devuelve otro de ese tipo.', 'A binary operation combining two values of the same type and returning a value of that type.'],
     equal: ['Comprueba si dos iteradores del mismo rango están en la misma posición.', 'Checks whether two iterators in the same range are at the same position.'],
     sink: ['Escribe un valor en la posición del iterador. La posición debe ser válida para escritura.', 'Writes a value at the iterator position. The position must be writable.'],
