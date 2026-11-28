@@ -191,3 +191,22 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await browser.close();
   }
 });
+
+test('the blog home and lab link to the reader in their own language', async () => {
+  const browser = await chromium.launch({ channel: 'chrome' });
+  try {
+    const page = await browser.newPage();
+    for (const [path, reader, label] of [
+      ['/', '/interactive-eop/', 'Interactive Elements of Programming'],
+      ['/inicio/', '/eop-interactivo/', 'Elements of Programming interactivo'],
+      ['/algorithms/', '/interactive-eop/', 'Interactive EoP'],
+      ['/algoritmos/', '/eop-interactivo/', 'EoP interactivo'],
+    ]) {
+      await page.goto(new URL(path, base).href, { waitUntil: 'domcontentloaded' });
+      const link = page.locator(`a[href="${reader}"]`).filter({ hasText: label });
+      await link.waitFor({ state: 'visible' });
+    }
+  } finally {
+    await browser.close();
+  }
+});
