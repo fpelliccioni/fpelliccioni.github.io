@@ -30,6 +30,11 @@ test('the visualization scrolls horizontally only when the drawing needs it', { 
         await step.click();
         await stage.locator('svg text').first().waitFor();
 
+        const sourceHeading = await page.locator('.editor-panel > .panel-heading').boundingBox();
+        const visualHeading = await page.locator('.visual-panel > .panel-heading').boundingBox();
+        assert.equal(visualHeading.height, sourceHeading.height);
+        if (width > 1050) assert.equal(visualHeading.y, sourceHeading.y);
+
         const { available, content } = await dimensions();
         if (size === 10) {
           assert.equal(content, available);
