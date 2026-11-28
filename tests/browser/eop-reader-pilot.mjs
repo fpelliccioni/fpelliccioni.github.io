@@ -1,12 +1,11 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
 
 const base = process.env.LAB_BROWSER_URL ?? 'https://componentsprogramming.com';
 const officialPdf = 'https://elementsofprogramming.com/eop.pdf';
 
-test('the chapter 2 reader links print pages to runnable examples and local PDF hotspots', async () => {
+test('the chapter 2 reader links printed pages to runnable examples', async () => {
   const browser = await chromium.launch({ channel: 'chrome' });
   try {
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
@@ -47,18 +46,11 @@ test('the chapter 2 reader links print pages to runnable examples and local PDF 
     assert.equal(await page.locator('#book-lab').isVisible(), false);
 
     await picker.selectOption('24');
-    const buffer = process.env.EOP_TEST_PDF
-      ? await readFile(process.env.EOP_TEST_PDF)
-      : await (await page.request.get(officialPdf)).body();
-    await page.locator('#book-file').setInputFiles({ name: 'eop.pdf', mimeType: 'application/pdf', buffer });
-    await page.locator('#book-local-page canvas').waitFor();
-    assert.equal(await pdf.isVisible(), false);
-    const hotspot = page.locator('#book-local-page').getByRole('button', { name: 'circular', exact: true });
-    await hotspot.click();
+    assert.equal(await page.locator('input[type=file]').count(), 0);
+    assert.equal(await pdf.isVisible(), true);
+    await page.getByRole('button', { name: 'circular', exact: true }).click();
     await lab.locator('#currentAlgorithm').filter({ hasText: /^circular$/ }).waitFor({ state: 'attached' });
     await lab.locator('#startButton:enabled').waitFor();
-
-    if (process.env.EOP_SCREENSHOT) await page.screenshot({ path: process.env.EOP_SCREENSHOT });
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(new URL('/interactive-eop/?page=26', base).href, { waitUntil: 'domcontentloaded' });

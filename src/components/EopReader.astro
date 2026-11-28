@@ -42,16 +42,8 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
             <button type="button" id="book-next" aria-label={es ? 'Página siguiente' : 'Next page'}>→</button>
             <a id="book-official" href={officialPdf} target="_blank" rel="noopener">{es ? 'Abrir PDF oficial ↗' : 'Open official PDF ↗'}</a>
           </div>
-          <div class="file-controls">
-            <label class="file-button">
-              {es ? 'Abrir PDF local' : 'Open local PDF'}
-              <input id="book-file" type="file" accept="application/pdf,.pdf" />
-            </label>
-            <p id="book-file-status" role="status">{es ? 'Cargá el PDF oficial desde tu equipo para hacer clic en los algoritmos de la página.' : 'Open the official PDF from your device to select algorithms on the page.'}</p>
-          </div>
           <div id="book-pdf-stage">
             <iframe id="book-pdf" title={es ? 'PDF oficial de Elements of Programming' : 'Official Elements of Programming PDF'}></iframe>
-            <div id="book-local-page" hidden></div>
           </div>
         </section>
 
@@ -82,25 +74,20 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   #eop-reader [hidden] { display: none !important; }
   #eop-reader a { color: #c4e69f; }
   #eop-reader a:hover { text-decoration: underline; }
-  .reader-header, .book-toolbar, .analyzer-toolbar, .file-controls { display: flex; align-items: center; gap: 9px 12px; flex-wrap: wrap; }
+  .reader-header, .book-toolbar, .analyzer-toolbar { display: flex; align-items: center; gap: 9px 12px; flex-wrap: wrap; }
   .reader-header { justify-content: space-between; padding: 0 1px 14px; }
   .reader-header h1 { font-size: clamp(21px, 2.3vw, 30px); letter-spacing: -.035em; margin: 0; }
   .reader-header p { color: #a4b7c9; margin: 3px 0 0; }
   .reader-header nav { display: flex; gap: 16px; }
   .reader-layout { display: grid; grid-template-columns: minmax(330px, 44fr) minmax(0, 56fr); gap: 14px; }
   .reader-panel { display: flex; min-width: 0; flex-direction: column; height: max(580px, calc(100dvh - 118px)); border: 1px solid #2a3c4b; border-radius: 8px; overflow: hidden; background: #111b26; }
-  .book-toolbar, .analyzer-toolbar, .file-controls { padding: 10px 12px; border-bottom: 1px solid #2a3c4b; }
+  .book-toolbar, .analyzer-toolbar { padding: 10px 12px; border-bottom: 1px solid #2a3c4b; }
   .book-toolbar a, .analyzer-toolbar a { margin-inline-start: auto; }
-  #eop-reader button, #eop-reader select, .file-button { font: inherit; border: 1px solid #40576a; border-radius: 5px; color: inherit; background: #172531; padding: 4px 9px; }
+  #eop-reader button, #eop-reader select { font: inherit; border: 1px solid #40576a; border-radius: 5px; color: inherit; background: #172531; padding: 4px 9px; }
   #eop-reader select { width: auto; min-width: 60px; }
-  #eop-reader button:not(:disabled), .file-button { cursor: pointer; }
+  #eop-reader button:not(:disabled) { cursor: pointer; }
   #eop-reader button:disabled { opacity: .4; }
   #eop-reader :focus-visible { outline: 2px solid #b1ed80; outline-offset: 2px; }
-  .file-controls { font-size: 12px; }
-  .file-button { position: relative; display: inline-block; }
-  .file-button input { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; }
-  .file-button:focus-within { outline: 2px solid #b1ed80; outline-offset: 2px; }
-  #book-file-status { margin: 0; flex: 1 1 200px; color: #a4b7c9; }
   #book-pdf-stage { flex: 1; overflow: auto; min-height: 0; background: #1a2530; }
   #book-pdf, #book-lab { border: 0; display: block; width: 100%; }
   #book-pdf { height: 100%; }
@@ -114,11 +101,6 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   #book-examples small { display: inline-block; margin-inline-start: 7px; color: #a4b7c9; }
   #book-examples p, #book-notice { color: #a4b7c9; margin: 0; }
   #book-notice { padding: 22px 12px; }
-  #book-local-page { padding: clamp(5px, 1vw, 12px); }
-  .book-rendered-page { position: relative; margin-inline: auto; max-width: 850px; background: white; }
-  .book-rendered-page canvas { display: block; width: 100%; height: auto; }
-  #eop-reader .book-hotspot { position: absolute; padding: 0; border: 0; border-radius: 2px; background: #77b52d32; border-bottom: 1px solid #457719; }
-  #eop-reader .book-hotspot:hover { background: #77b52d65; }
   @media (max-width: 830px) {
     .reader-layout { grid-template-columns: minmax(0, 1fr); }
     .reader-panel { height: max(480px, 75dvh); }
