@@ -1899,6 +1899,8 @@ function addSequenceCode() {
         return sequence_internal(d, n, p, type, drawChart, drawTree);
     }
 
+    globalThis.seq = sequence;
+
     function sequenceChart(d, n, p, type) {
         type = typeof type !== 'undefined' ? type : "array";
         type = __standardSequenceType(type);

@@ -6,7 +6,7 @@ import { chromium } from 'playwright-core';
 
 const base = process.env.LAB_BROWSER_URL ?? 'https://componentsprogramming.com';
 
-test('a colored sequence uses its variable as its display name', async () => {
+test('seq and sequence support inferred names and coloring', async () => {
   const browser = await chromium.launch({ channel: 'chrome' });
   try {
     const page = await browser.newPage();
@@ -23,14 +23,14 @@ test('a colored sequence uses its variable as its display name', async () => {
     }
     const url = new URL('/algoritmos/', base);
     url.searchParams.set('lang', 'ts');
-    url.searchParams.set('code', 'const d = sequence([1, 2, 3], even);\nconst label = "original";\nconst other = sequence([4], label);\nprint(d);');
+    url.searchParams.set('code', 'const d = seq([1, 2, 3], even);\nconst label = "original";\nconst other = sequence([4], label);\nconst plain = seq([6]);\nprint(d);');
     await page.goto(url.href);
     await page.locator('#startButton').click();
     const step = page.locator('#stepButton');
     await step.waitFor();
     for (let i = 0; i < 30 && await step.isEnabled(); ++i) await step.click();
 
-    assert.deepEqual(await page.evaluate(() => Object.keys(globalThis.sequences)), ['d', 'original']);
+    assert.deepEqual(await page.evaluate(() => Object.keys(globalThis.sequences)), ['d', 'original', 'plain']);
     const colors = await page.evaluate(() =>
       globalThis.sequences.d.elements.slice(0, 3).map((element) => element.group.children[0].fill),
     );

@@ -47,12 +47,13 @@ function instrument(source, offset, language) {
             const binding = path.scope.getBinding(init.callee.name);
             if (binding && binding.identifier.start >= offset) return;
 
-            if (init.callee.name === 'sequence' && init.arguments.length === 1 &&
+            const createsSequence = ['seq', 'sequence'].includes(init.callee.name);
+            if (createsSequence && init.arguments.length === 1 &&
                 !t.isSpreadElement(init.arguments[0])) {
               init.arguments.push(t.stringLiteral(id.name));
               return;
             }
-            if (init.callee.name === 'sequence' && init.arguments.length === 2 &&
+            if (createsSequence && init.arguments.length === 2 &&
                 !init.arguments.some((arg) => t.isSpreadElement(arg)) &&
                 !t.isStringLiteral(init.arguments[1])) {
               // Infer the display name if the second argument is a color function.
