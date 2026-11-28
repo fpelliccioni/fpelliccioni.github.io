@@ -555,6 +555,7 @@ var repo = LabLibrary.repo;
     source: ['Lee el elemento en la posición del iterador.', 'Reads the element at the iterator position.'],
     print: ['Muestra un valor en la salida del laboratorio.', 'Displays a value in the lab output.'],
   };
+  functionHelp.seq = functionHelp.sequence;
   var tooltip = document.createElement('div');
   tooltip.className = 'function-tooltip';
   tooltip.setAttribute('role', 'dialog');
