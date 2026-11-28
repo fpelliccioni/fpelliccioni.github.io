@@ -30,6 +30,11 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     const lab = page.frameLocator('#book-lab');
     await lab.locator('#startButton:enabled').waitFor();
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'collision_point');
+    const examples = page.getByRole('group', { name: 'Algoritmos de la página' });
+    assert.equal(await examples.getByRole('button').count(), 1);
+    assert.equal(await examples.getByRole('button', { name: 'collision_point', pressed: true }).count(), 1);
+    assert.equal(await page.locator('.analyzer').getByRole('heading').count(), 0);
+    assert.equal(await page.locator('.analyzer').getByRole('link').count(), 0);
     const toolbar = lab.locator('.lab-toolbar');
     const start = await lab.locator('#startButton').boundingBox();
     const help = lab.locator('.lab-help');
@@ -44,7 +49,10 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await page.getByRole('button', { name: 'Página siguiente' }).click();
     assert.equal(await picker.inputValue(), '22');
     assert.match(await pdf.getAttribute('src'), /#page=36&/);
-    await page.getByRole('button', { name: 'terminating', exact: true }).click();
+    assert.equal(await examples.getByRole('button').count(), 2);
+    await examples.getByRole('button', { name: 'terminating', exact: true }).click();
+    assert.equal(await examples.getByRole('button', { name: 'terminating', pressed: true }).count(), 1);
+    assert.equal(await examples.getByRole('button', { name: 'collision_point', pressed: false }).count(), 1);
     await lab.locator('#currentAlgorithm').filter({ hasText: /^terminating$/ }).waitFor({ state: 'attached' });
     await lab.locator('#startButton:enabled').waitFor();
     await lab.locator('#startButton').click();
@@ -108,7 +116,7 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(new URL('/interactive-eop/?page=26', base).href, { waitUntil: 'domcontentloaded' });
-    assert.equal(await page.getByRole('heading', { name: 'Algorithms on this page' }).count(), 1);
+    assert.equal(await page.getByRole('group', { name: 'Algorithms on this page' }).count(), 1);
     await page.getByRole('button', { name: '2.3 · convergent_point_guarded' }).waitFor();
     assert.equal(await picker.inputValue(), '26');
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
