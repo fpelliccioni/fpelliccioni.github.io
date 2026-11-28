@@ -77,7 +77,20 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
       assert.match(await lab.locator('#hg-right-y').innerText(), output);
     }
     await picker.selectOption('17');
-    assert.equal(await page.getByRole('button', { name: /Suma de 32 bits/ }).count(), 1);
+    await page.getByRole('button', { name: '2.1 · Suma de 32 bits', exact: true }).click();
+    await lab.locator('#currentAlgorithm').filter({ hasText: /^addition_defined_int32$/ }).waitFor({ state: 'attached' });
+    await lab.locator('#startButton:enabled').click();
+    const additionStep = lab.locator('#stepButton');
+    await additionStep.waitFor({ state: 'visible' });
+    for (let i = 0; i < 100 && await additionStep.isEnabled(); ++i) await additionStep.click();
+    const additionOutput = await lab.locator('#hg-right-y').innerText();
+    assert.ok(additionOutput.includes('2147483646 + (1): true'), additionOutput);
+    assert.ok(additionOutput.includes('2147483647 + (1): false'), additionOutput);
+    assert.ok(additionOutput.includes('-2147483647 + (-1): true'), additionOutput);
+    assert.ok(additionOutput.includes('-2147483648 + (-1): false'), additionOutput);
+    assert.ok(additionOutput.includes('2147483648 + (-1): false'), additionOutput);
+
+    await picker.selectOption('19');
     assert.match(await page.locator('#book-notice').innerText(), /todavía no está disponible/);
     assert.equal(await page.locator('#book-lab').isVisible(), false);
 
