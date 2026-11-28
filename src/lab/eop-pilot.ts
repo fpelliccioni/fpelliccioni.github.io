@@ -12,6 +12,11 @@ const examples = (...names: string[]): BookExample[] =>
   names.map(name => ({ label: name, example: name }));
 
 export const chapterPages: Partial<Record<number, BookExample[]>> = {
+  16: [
+    { label: 'abs(x)', example: 'abs' },
+    { label: 'euclidean_norm(x, y)', example: 'euclidean_norm' },
+    { label: 'euclidean_norm(x, y, z)', example: 'euclidean_norm_3' },
+  ],
   17: [{ label: '2.1 · 32-bit addition' }],
   18: examples('power_unary'),
   19: [{ label: 'distance (transformation)' }],
