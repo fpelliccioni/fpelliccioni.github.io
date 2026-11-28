@@ -26,8 +26,8 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
           <p>{es ? 'Capítulo 2 · Transformaciones y sus órbitas' : 'Chapter 2 · Transformations and Their Orbits'}</p>
         </div>
         <div class="reader-views" role="group" aria-label={es ? 'Vista del lector' : 'Reader view'}>
-          <button type="button" data-reader-view="split" aria-pressed="true">{es ? 'Partida' : 'Split'}</button>
           <button type="button" data-reader-view="pdf" aria-pressed="false">PDF</button>
+          <button type="button" data-reader-view="split" aria-pressed="true">{es ? 'Partida' : 'Split'}</button>
           <button type="button" data-reader-view="lab" aria-pressed="false">Lab</button>
         </div>
         <nav aria-label={es ? 'Navegación' : 'Navigation'}>
