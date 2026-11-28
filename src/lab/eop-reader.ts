@@ -107,7 +107,10 @@ function renderExamples(selection?: BookExample) {
       badge.textContent = es ? 'Pendiente' : 'Pending';
       button.append(badge);
     }
-    button.addEventListener('click', () => setSelection(entry));
+    button.addEventListener('click', event => {
+      event.stopPropagation();
+      setSelection(entry);
+    });
     exampleList.append(button);
   }
   if (!entries.length) {
