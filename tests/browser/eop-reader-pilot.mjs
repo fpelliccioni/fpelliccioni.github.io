@@ -23,6 +23,9 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
       });
     }
     await page.goto(new URL('/eop-interactivo/', base).href, { waitUntil: 'domcontentloaded' });
+    const views = page.getByRole('group', { name: 'Vista del lector' });
+    assert.deepEqual(await views.getByRole('button').allTextContents(), ['PDF', 'Partida', 'Lab']);
+    assert.equal(await views.getByRole('button', { pressed: true }).innerText(), 'Partida');
     const pdf = page.locator('.book-pdf-page[aria-current=page] iframe');
     await page.waitForFunction(url => document.querySelector('.book-pdf-page[aria-current=page] iframe')?.getAttribute('src')?.startsWith(url + '#page=35'), officialPdf);
     const picker = page.locator('#book-page');
