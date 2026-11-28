@@ -196,10 +196,16 @@ const [latest] = posts;
     <span class="eyebrow">03 / AL-KHWĀRIZMĪ</span>
     <h2>{t.labTitle}</h2>
     <p>{t.labDescription}</p>
-    <a href={lang === 'es' ? '/algoritmos/' : '/algorithms/'}>
-      {t.labLink}
-      <span aria-hidden="true">↗</span>
-    </a>
+    <div class="lab-callout-links">
+      <a href={lang === 'es' ? '/algoritmos/' : '/algorithms/'}>
+        {t.labLink}
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a href={lang === 'es' ? '/eop-interactivo/' : '/interactive-eop/'}>
+        {t.eopLink}
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
   </div>
   <div class="lab-diagram" aria-hidden="true">
     <div class="diagram-rule"></div>

@@ -45,6 +45,7 @@ export const labels = {
     labDescription:
       'Step through algorithms and explore how they behave in the interactive analyzer.',
     labLink: 'Open algorithm lab',
+    eopLink: 'Interactive Elements of Programming',
     source: 'Source on GitHub',
     menu: 'Menu',
     theme: 'Toggle color theme',
@@ -90,6 +91,7 @@ export const labels = {
     labDescription:
       'Recorré los algoritmos paso a paso y explorá su comportamiento con el analizador interactivo.',
     labLink: 'Abrir el laboratorio',
+    eopLink: 'Elements of Programming interactivo',
     source: 'Código en GitHub',
     menu: 'Menú',
     theme: 'Cambiar tema de color',
