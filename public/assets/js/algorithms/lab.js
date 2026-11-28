@@ -539,6 +539,8 @@ var repo = LabLibrary.repo;
     is_sorted_range: ['Comprueba que ningún elemento sea menor que el que lo precede.', 'Checks that no element is less than its predecessor.'],
     stable_sort_snapshot: ['Dentro de un contrato, calcula el orden estable esperado sin modificar el rango.', 'Inside a contract, computes the expected stable order without modifying the range.'],
     Transformation: ['Función que lleva un estado a otro del mismo tipo.', 'A function that maps a state to another state of the same type.'],
+    OrbitStructure: ['Tupla con la distancia a la conexión, la longitud del ciclo menos uno y el punto de conexión. Para una órbita terminal, el segundo campo es cero.', 'Tuple with the distance to the connection, the cycle length minus one and the connection point. For a terminating orbit the second field is zero.'],
+    orbit_distance: ['Cuenta los pasos hasta un estado alcanzable desde el estado inicial.', 'Counts the steps from the starting state to a reachable state.'],
     orbit_reference: ['Verifica el punto de colisión y la entrada del ciclo recorriendo la órbita dentro de un contrato.', 'Checks the collision point and cycle entry by tracing the orbit inside a contract.'],
     convergence_reference: ['Comprueba si dos recorridos convergen al avanzar al mismo ritmo.', 'Checks whether two traversals meet when advanced at the same speed.'],
     fibonacci_matches: ['Verifica un número de Fibonacci con aritmética entera exacta dentro de un contrato.', 'Checks a Fibonacci number using exact integer arithmetic inside a contract.'],
