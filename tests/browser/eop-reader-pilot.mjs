@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import test from 'node:test';
 import { chromium } from 'playwright-core';
 
@@ -9,6 +11,17 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
   const browser = await chromium.launch({ channel: 'chrome' });
   try {
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+    const fixtures = process.env.TAO_LOCAL_BUILD;
+    if (fixtures) {
+      await page.route('https://raw.githubusercontent.com/fpelliccioni/tao-js/master/build/*', async route => {
+        const name = new URL(route.request().url()).pathname.split('/').at(-1);
+        await route.fulfill({
+          contentType: 'application/javascript',
+          headers: { 'access-control-allow-origin': '*' },
+          body: await readFile(join(fixtures, name)),
+        });
+      });
+    }
     await page.goto(new URL('/eop-interactivo/', base).href, { waitUntil: 'domcontentloaded' });
     const pdf = page.locator('#book-pdf');
     await page.waitForFunction(url => document.querySelector('#book-pdf')?.getAttribute('src')?.startsWith(url + '#page=35'), officialPdf);
@@ -50,6 +63,19 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.equal(await picker.inputValue(), '16');
     assert.match(await pdf.getAttribute('src'), /#page=30&/);
     assert.equal(await page17Frame.evaluate(frame => frame.isConnected), false);
+    for (const [label, name, output] of [
+      ['abs(x)', 'abs', /Absolute value: 7/],
+      ['euclidean_norm(x, y)', 'euclidean_norm', /Euclidean norm: 5/],
+      ['euclidean_norm(x, y, z)', 'euclidean_norm_3', /Euclidean norm: 7/],
+    ]) {
+      await page.getByRole('button', { name: label, exact: true }).click();
+      await lab.locator('#currentAlgorithm').filter({ hasText: new RegExp('^' + name + '$') }).waitFor({ state: 'attached' });
+      await lab.locator('#startButton:enabled').click();
+      const step = lab.locator('#stepButton');
+      await step.waitFor({ state: 'visible' });
+      for (let i = 0; i < 30 && await step.isEnabled(); ++i) await step.click();
+      assert.match(await lab.locator('#hg-right-y').innerText(), output);
+    }
     await picker.selectOption('17');
     assert.equal(await page.getByRole('button', { name: /Suma de 32 bits/ }).count(), 1);
     assert.match(await page.locator('#book-notice').innerText(), /todavía no está disponible/);
