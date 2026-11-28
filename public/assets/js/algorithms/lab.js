@@ -92,9 +92,10 @@ var repo = LabLibrary.repo;
   bibliographyTitle.textContent = es ? 'Referencias bibliográficas' : 'Book references';
   var bibliographyList = document.createElement('ul');
   bibliography.append(bibliographyTitle, bibliographyList);
-  document.querySelector('.editor-footer').after(bibliography);
+  if (!embeddedInBook) document.querySelector('.editor-footer').after(bibliography);
 
   function renderBookReferences(name) {
+    if (embeddedInBook) return;
     var references = bookReferences[name] || [];
     bibliographyList.replaceChildren();
     bibliography.hidden = !references.length;
@@ -103,12 +104,8 @@ var repo = LabLibrary.repo;
       var url = '';
       if (reference.startsWith('Elements of Programming,')) {
         var page = /\bpp?\. (\d+)/.exec(reference);
-        if (embeddedInBook) {
-          url = 'https://elementsofprogramming.com/eop.pdf' + (page ? '#page=' + (Number(page[1]) + 14) : '');
-        } else {
-          url = es ? '/eop-interactivo/' : '/interactive-eop/';
-          if (page) url += '?page=' + page[1];
-        }
+        url = es ? '/eop-interactivo/' : '/interactive-eop/';
+        if (page) url += '?page=' + page[1];
       } else if (reference.startsWith('From Mathematics to Generic Programming,')) {
         var chapter = /\bch\. (\d+)/.exec(reference);
         url = chapter
