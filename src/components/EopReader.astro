@@ -30,7 +30,9 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
           <button type="button" data-reader-view="lab" aria-pressed="false">Lab</button>
         </div>
         <nav aria-label={es ? 'Navegación' : 'Navigation'}>
-          <button type="button" id="book-navigate" aria-haspopup="dialog">{es ? 'Navegar' : 'Navigate'}</button>
+          <button type="button" id="book-open-algorithms" aria-haspopup="dialog" aria-controls="book-algorithms">
+            {es ? 'Buscar algoritmo' : 'Find algorithm'} <span aria-hidden="true">⌕</span>
+          </button>
           <a href={labPath}>{es ? 'Laboratorio' : 'Algorithm lab'}</a>
           <a href={alternatePath} hreflang={es ? 'en' : 'es'} lang={es ? 'en' : 'es'}>{es ? 'English' : 'Español'}</a>
         </nav>
@@ -40,8 +42,12 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
         <section class="reader-panel book" aria-label={es ? 'Libro' : 'Book'}>
           <div class="book-toolbar">
             <button type="button" id="book-previous" aria-label={es ? 'Página anterior' : 'Previous page'}>←</button>
-            <span id="book-page-status">{es ? 'Página' : 'Page'} {pageLabel(firstExamplePage)}</span>
+            <label for="book-page">{es ? 'Página' : 'Page'}</label>
+            <select id="book-page">
+              {pages.map(page => <option value={page} selected={page === firstExamplePage}>{pageLabel(page)}</option>)}
+            </select>
             <button type="button" id="book-next" aria-label={es ? 'Página siguiente' : 'Next page'}>→</button>
+            <button type="button" id="book-open-chapters" aria-haspopup="dialog" aria-controls="book-chapters">{es ? 'Capítulos' : 'Chapters'}</button>
             <a id="book-official" href={officialPdf} target="_blank" rel="noopener">{es ? 'Abrir PDF oficial ↗' : 'Open official PDF ↗'}</a>
           </div>
           <div id="book-pdf-stage" role="region" aria-label={es ? 'Páginas de Elements of Programming' : 'Elements of Programming pages'} tabindex="0">
@@ -58,39 +64,32 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
         <button class="reader-view-peek" type="button" data-focus-panel="pdf" aria-label={es ? 'Dar foco al PDF' : 'Focus the PDF'}><span>PDF</span></button>
         <button class="reader-view-peek" type="button" data-focus-panel="lab" aria-label={es ? 'Dar foco al lab' : 'Focus the lab'}><span>Lab</span></button>
       </div>
-      <dialog id="book-navigator" aria-labelledby="book-nav-title">
-        <div class="book-nav-header">
-          <h2 id="book-nav-title">{es ? 'Navegar por el libro' : 'Navigate the book'}</h2>
+      <dialog id="book-chapters" class="algorithm-catalog" aria-labelledby="book-chapters-title">
+        <div class="catalog-heading">
+          <h2 id="book-chapters-title">{es ? 'Capítulos y secciones' : 'Chapters and sections'}</h2>
           <form method="dialog">
-            <button aria-label={es ? 'Cerrar navegador' : 'Close navigator'}>×</button>
+            <button class="catalog-close" aria-label={es ? 'Cerrar capítulos' : 'Close chapters'}>×</button>
           </form>
         </div>
-        <div class="book-nav-pickers">
-          <form>
-            <label for="book-page">{es ? 'Página' : 'Page'}</label>
-            <div>
-              <select id="book-page">
-                {pages.map(page => <option value={page} selected={page === firstExamplePage}>{pageLabel(page)}</option>)}
-              </select>
-              <button aria-label={es ? 'Ir a página' : 'Go to page'}>{es ? 'Ir' : 'Go'}</button>
-            </div>
-          </form>
-          <form>
-            <label for="book-section">{es ? 'Capítulo o sección' : 'Chapter or section'}</label>
-            <div>
-              <select id="book-section">
-                {sections.map(([page, en, spanish]) => <option value={page} selected={page === 15}>{es ? spanish : en}</option>)}
-              </select>
-              <button aria-label={es ? 'Ir a capítulo o sección' : 'Go to chapter or section'}>{es ? 'Ir' : 'Go'}</button>
-            </div>
+        <ul class="book-chapter-list">
+          {sections.map(([page, en, spanish]) => (
+            <li><button type="button" data-chapter-page={page}>
+              <span>{es ? spanish : en}</span><small>{es ? 'pág.' : 'p.'} {pageLabel(page)}</small>
+            </button></li>
+          ))}
+        </ul>
+      </dialog>
+      <dialog id="book-algorithms" class="algorithm-catalog" aria-labelledby="book-algorithms-title">
+        <div class="catalog-heading">
+          <h2 id="book-algorithms-title">{es ? 'Catálogo de algoritmos' : 'Algorithm catalog'}</h2>
+          <form method="dialog">
+            <button class="catalog-close" aria-label={es ? 'Cerrar catálogo' : 'Close catalog'}>×</button>
           </form>
         </div>
-        <label class="book-nav-search">
-          {es ? 'Nombre del algoritmo' : 'Algorithm name'}
-          <input id="book-algorithm" type="search" placeholder="lower_bound" autocomplete="off" autofocus />
-        </label>
-        <p id="book-nav-empty" role="status" hidden>{es ? 'No se encontraron algoritmos.' : 'No algorithms found.'}</p>
-        <ul id="book-nav-results"></ul>
+        <label class="catalog-search-label" for="book-algorithm">{es ? 'Buscar por nombre' : 'Search by name'}</label>
+        <input class="catalog-search" id="book-algorithm" type="search" placeholder="lower_bound" autocomplete="off" autofocus />
+        <p class="catalog-count" id="book-nav-count" role="status"></p>
+        <ul class="catalog-results" id="book-nav-results"></ul>
       </dialog>
       <noscript><p>{es ? 'Activá JavaScript para usar el lector y los ejemplos.' : 'Enable JavaScript to use the reader and examples.'}</p></noscript>
     </main>
@@ -142,21 +141,17 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   .book-toolbar a { margin-inline-start: auto; }
   #eop-reader button, #eop-reader select { font: inherit; border: 1px solid #40576a; border-radius: 5px; color: inherit; background: #172531; padding: 4px 9px; }
   #eop-reader select { width: auto; min-width: 60px; }
-  #book-navigator { box-sizing: border-box; width: min(560px, calc(100% - 24px)); max-height: 85dvh; overflow: auto; padding: 18px; border: 1px solid #40576a; border-radius: 8px; background: #111b26; color: inherit; }
-  #book-navigator::backdrop { background: #05090dbb; }
-  .book-nav-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-  .book-nav-header h2 { margin: 0; font-size: 18px; }
-  .book-nav-pickers { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; }
-  .book-nav-pickers form, .book-nav-search { display: grid; min-width: 0; gap: 5px; }
-  .book-nav-pickers form div { display: flex; gap: 4px; }
-  .book-nav-pickers select { min-width: 0; }
-  #eop-reader #book-section { flex: 1; min-width: 0; width: 100%; text-overflow: ellipsis; }
-  .book-nav-search { margin-top: 14px; }
-  #book-algorithm { box-sizing: border-box; width: 100%; font: inherit; border: 1px solid #40576a; border-radius: 5px; color: inherit; background: #172531; padding: 7px 9px; }
-  #book-nav-results { display: grid; gap: 4px; list-style: none; padding: 0; margin: 8px 0 0; max-height: 45dvh; overflow: auto; }
-  #book-nav-results button { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; text-align: start; overflow-wrap: anywhere; }
-  #book-nav-results small { flex: none; color: #a4b7c9; }
-  #book-nav-empty { color: #a4b7c9; margin: 8px 0 0; }
+  #eop-reader dialog { box-sizing: border-box; }
+  #eop-reader .catalog-heading { align-items: center; margin-bottom: 12px; }
+  #eop-reader .catalog-close { font-size: 22px; line-height: 1; }
+  #eop-reader .catalog-results, .book-chapter-list { list-style: none; margin: 0; padding: 0; }
+  #eop-reader #book-nav-results .catalog-card { width: 100%; height: 100%; padding: 12px; border-color: var(--border); background: var(--bg); text-align: start; overflow-wrap: anywhere; }
+  #book-nav-results .catalog-name { margin: 6px 0 10px; font: 13px/1.5 var(--mono); }
+  #book-chapters { width: min(550px, calc(100% - 32px)); }
+  .book-chapter-list { display: grid; gap: 5px; }
+  .book-chapter-list button { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; text-align: start; }
+  #eop-reader .book-chapter-list button[aria-current], #eop-reader #book-nav-results .catalog-card:hover { border-color: var(--accent); }
+  .book-chapter-list small { flex: none; color: var(--muted); }
   #eop-reader button:not(:disabled) { cursor: pointer; }
   #eop-reader button:disabled { opacity: .4; }
   #eop-reader :focus-visible { outline: 2px solid #b1ed80; outline-offset: 2px; }
