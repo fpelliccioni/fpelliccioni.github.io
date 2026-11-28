@@ -2,6 +2,10 @@ import { chapterPages, firstExamplePage, firstPage, lastPage, officialPdf, pdfPa
 
 const byId = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const reader = byId<HTMLElement>('eop-reader');
+const layout = reader.querySelector<HTMLElement>('.reader-layout')!;
+const viewButtons = reader.querySelectorAll<HTMLButtonElement>('[data-reader-view]');
+const bookPanel = layout.querySelector<HTMLElement>('.book')!;
+const labPanel = layout.querySelector<HTMLElement>('.analyzer')!;
 const es = document.documentElement.lang === 'es';
 const pagePicker = byId<HTMLSelectElement>('book-page');
 const previous = byId<HTMLButtonElement>('book-previous');
@@ -16,6 +20,31 @@ const notice = byId<HTMLParagraphElement>('book-notice');
 const rawPage = Number(new URL(location.href).searchParams.get('page'));
 let page = Number.isInteger(rawPage) && rawPage >= firstPage && rawPage <= lastPage ? rawPage : firstExamplePage;
 let activeExample = '';
+
+type ReaderView = 'split' | 'pdf' | 'lab';
+
+function setView(view: ReaderView) {
+  if (layout.dataset.view === view) return;
+  const sheet = pdfPages[page - firstPage];
+  const before = sheet.getBoundingClientRect();
+  const offset = (pdfStage.getBoundingClientRect().top - before.top) / before.height;
+  layout.dataset.view = view;
+  bookPanel.inert = view === 'lab';
+  labPanel.inert = view === 'pdf';
+  const after = sheet.getBoundingClientRect();
+  pdfStage.scrollTop += after.top - pdfStage.getBoundingClientRect().top + after.height * offset;
+  for (const button of viewButtons) {
+    button.setAttribute('aria-pressed', String(button.dataset.readerView === view));
+  }
+}
+
+for (const button of viewButtons) {
+  button.addEventListener('click', () => setView(button.dataset.readerView as ReaderView));
+}
+layout.querySelector('[data-focus-panel="pdf"]')?.addEventListener('click', () => setView('pdf'));
+layout.querySelector('[data-focus-panel="lab"]')?.addEventListener('click', () => setView('lab'));
+pdfStage.addEventListener('click', () => setView('pdf'));
+labPanel.addEventListener('click', () => setView('lab'));
 
 function setSelection(entry?: BookExample, keepCurrent = false) {
   if (entry?.example && activeExample !== entry.example) {
@@ -58,6 +87,7 @@ lab.addEventListener('load', () => {
   const body = lab.contentDocument?.body;
   if (activeExample && body) {
     labModeObserver.observe(body, { attributeFilter: ['data-mode', 'data-starting-session'] });
+    body.addEventListener('click', () => setView('lab'));
   }
 });
 

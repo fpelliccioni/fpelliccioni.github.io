@@ -25,13 +25,18 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
           <h1>Elements of Programming</h1>
           <p>{es ? 'Capítulo 2 · Transformaciones y sus órbitas' : 'Chapter 2 · Transformations and Their Orbits'}</p>
         </div>
+        <div class="reader-views" role="group" aria-label={es ? 'Vista del lector' : 'Reader view'}>
+          <button type="button" data-reader-view="split" aria-pressed="true">{es ? 'Partida' : 'Split'}</button>
+          <button type="button" data-reader-view="pdf" aria-pressed="false">PDF</button>
+          <button type="button" data-reader-view="lab" aria-pressed="false">Lab</button>
+        </div>
         <nav aria-label={es ? 'Navegación' : 'Navigation'}>
           <a href={labPath}>{es ? 'Laboratorio' : 'Algorithm lab'}</a>
           <a href={alternatePath} hreflang={es ? 'en' : 'es'} lang={es ? 'en' : 'es'}>{es ? 'English' : 'Español'}</a>
         </nav>
       </header>
 
-      <div class="reader-layout">
+      <div class="reader-layout" data-view="split">
         <section class="reader-panel book" aria-label={es ? 'Libro' : 'Book'}>
           <div class="book-toolbar">
             <button type="button" id="book-previous" aria-label={es ? 'Página anterior' : 'Previous page'}>←</button>
@@ -60,6 +65,9 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
           <p id="book-notice" role="status" hidden></p>
           <iframe id="book-lab" title={es ? 'Laboratorio de algoritmos' : 'Algorithm lab'} hidden></iframe>
         </section>
+
+        <button class="reader-view-peek" type="button" data-focus-panel="pdf" aria-label={es ? 'Dar foco al PDF' : 'Focus the PDF'}><span>PDF</span></button>
+        <button class="reader-view-peek" type="button" data-focus-panel="lab" aria-label={es ? 'Dar foco al lab' : 'Focus the lab'}><span>Lab</span></button>
       </div>
       <noscript><p>{es ? 'Activá JavaScript para usar el lector y los ejemplos.' : 'Enable JavaScript to use the reader and examples.'}</p></noscript>
     </main>
@@ -80,7 +88,33 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
   .reader-header h1 { font-size: clamp(21px, 2.3vw, 30px); letter-spacing: -.035em; margin: 0; }
   .reader-header p { color: #a4b7c9; margin: 3px 0 0; }
   .reader-header nav { display: flex; gap: 16px; }
-  .reader-layout { display: grid; grid-template-columns: minmax(330px, 44fr) minmax(0, 56fr); gap: 14px; }
+  .reader-views { display: flex; gap: 4px; }
+  #eop-reader .reader-views [aria-pressed="true"] { border-color: #b1ed80; color: #c4e69f; }
+  .reader-layout { --peek: clamp(46px, 7vw, 100px); position: relative; display: grid; grid-template-columns: minmax(330px, 44fr) minmax(0, 56fr); gap: 14px; }
+  .reader-layout[data-view="pdf"] > .reader-panel,
+  .reader-layout[data-view="lab"] > .reader-panel { grid-area: 1 / 1 / 2 / -1; }
+  .reader-layout[data-view="pdf"] > .book,
+  .reader-layout[data-view="lab"] > .analyzer { width: calc(100% - var(--peek)); z-index: 1; box-shadow: 0 8px 24px #0007; }
+  .reader-layout[data-view="lab"] > .book { width: 44%; opacity: .55; }
+  .reader-layout[data-view="pdf"] > .analyzer { width: 56%; opacity: .55; }
+  .reader-layout[data-view="lab"] > .analyzer,
+  .reader-layout[data-view="pdf"] > .analyzer { justify-self: end; }
+
+  #eop-reader .reader-view-peek {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    inset-block: 0;
+    width: var(--peek);
+    align-items: center;
+    justify-content: center;
+    padding: 8px 2px;
+    background: transparent;
+    border: 0;
+  }
+  #eop-reader .reader-view-peek span { padding: 3px 6px; border: 1px solid #40576a; border-radius: 4px; background: #111b26; }
+  #eop-reader [data-view="lab"] [data-focus-panel="pdf"] { display: flex; inset-inline-start: 0; }
+  #eop-reader [data-view="pdf"] [data-focus-panel="lab"] { display: flex; inset-inline-end: 0; }
   .reader-panel { display: flex; min-width: 0; flex-direction: column; height: max(580px, calc(100dvh - 118px)); border: 1px solid #2a3c4b; border-radius: 8px; overflow: hidden; background: #111b26; }
   .book-toolbar { padding: 10px 12px; border-bottom: 1px solid #2a3c4b; }
   .book-toolbar a { margin-inline-start: auto; }
@@ -106,5 +140,9 @@ const pages = Array.from({ length: lastPage - firstPage + 1 }, (_, i) => i + fir
     .reader-layout { grid-template-columns: minmax(0, 1fr); }
     .reader-panel { height: max(480px, 75dvh); }
     .analyzer { height: max(620px, 90dvh); }
+    .reader-layout[data-view="pdf"] > .reader-panel,
+    .reader-layout[data-view="lab"] > .reader-panel { height: max(520px, calc(100dvh - 118px)); }
+    .reader-layout[data-view="lab"] > .book,
+    .reader-layout[data-view="pdf"] > .analyzer { width: calc(100% - var(--peek)); }
   }
 </style>

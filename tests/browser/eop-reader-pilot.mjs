@@ -44,6 +44,9 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await help.locator('summary').click();
     assert.equal(await help.locator('div').isVisible(), true);
     await help.locator('summary').click();
+    assert.equal(await page.locator('.reader-layout').getAttribute('data-view'), 'lab');
+    const splitView = page.getByRole('button', { name: 'Partida', exact: true });
+    await splitView.click();
     if (process.env.EOP_NATIVE_SCREENSHOT) await page.screenshot({ path: process.env.EOP_NATIVE_SCREENSHOT });
 
     await page.getByRole('button', { name: 'Página siguiente' }).click();
@@ -59,6 +62,7 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await lab.locator('#stepButton').waitFor({ state: 'visible' });
     assert.ok((await toolbar.boundingBox()).height <= 45, 'the toolbar stays compact while stepping');
 
+    await splitView.click();
     await picker.selectOption('15');
     assert.equal(await examples.innerText(), 'Sin algoritmos asociados a esta página.');
     assert.equal(await page.locator('#book-lab').isVisible(), true);
@@ -67,6 +71,33 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await picker.selectOption('22');
 
     const stage = page.locator('#book-pdf-stage');
+    const layout = page.locator('.reader-layout');
+    await splitView.click();
+    const splitBook = await page.locator('.book').boundingBox();
+    const splitLab = await page.locator('.analyzer').boundingBox();
+    assert.ok(splitBook && splitLab);
+
+    await stage.click({ position: { x: 100, y: 100 } });
+    assert.equal(await layout.getAttribute('data-view'), 'pdf');
+    const focusedBook = await page.locator('.book').boundingBox();
+    assert.ok(focusedBook && focusedBook.width > splitBook.width);
+    assert.equal(await picker.inputValue(), '22');
+    const labPeek = page.getByRole('button', { name: 'Dar foco al lab' });
+    assert.equal(await labPeek.isVisible(), true);
+    await labPeek.click();
+    assert.equal(await layout.getAttribute('data-view'), 'lab');
+    const focusedLab = await page.locator('.analyzer').boundingBox();
+    const pdfPeek = page.getByRole('button', { name: 'Dar foco al PDF' });
+    assert.ok(focusedLab && focusedLab.width > splitLab.width && await pdfPeek.isVisible());
+    assert.equal(await lab.locator('#stepButton:enabled').isVisible(), true);
+    assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'terminating');
+    if (process.env.EOP_FOCUS_SCREENSHOT) await page.screenshot({ path: process.env.EOP_FOCUS_SCREENSHOT });
+    await pdfPeek.click();
+    assert.equal(await layout.getAttribute('data-view'), 'pdf');
+    await splitView.click();
+    assert.equal(await layout.getAttribute('data-view'), 'split');
+    assert.equal(await picker.inputValue(), '22');
+
     const stageBounds = await stage.boundingBox();
     assert.ok(stageBounds);
     const currentHeight = (await page.locator('.book-pdf-page[aria-current=page]').boundingBox()).height;
@@ -84,6 +115,7 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await page.locator('#book-lab').waitFor({ state: 'hidden' });
     assert.equal(await page.locator('#book-lab').getAttribute('src'), null);
 
+    await splitView.click();
     await picker.selectOption('17');
     await page.getByRole('button', { name: 'Página anterior' }).click();
     assert.equal(await picker.inputValue(), '16');
@@ -101,6 +133,7 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
       for (let i = 0; i < 30 && await step.isEnabled(); ++i) await step.click();
       assert.match(await lab.locator('#hg-right-y').innerText(), output);
     }
+    await splitView.click();
     await page.mouse.move(stageBounds.x + stageBounds.width / 2, stageBounds.y + stageBounds.height / 2);
     await page.mouse.wheel(0, currentHeight + 8);
     await page.waitForFunction(() => document.querySelector('#book-page')?.value === '17');
@@ -117,6 +150,7 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     assert.ok(additionOutput.includes('-2147483648 + (-1): false'), additionOutput);
     assert.ok(additionOutput.includes('2147483648 + (-1): false'), additionOutput);
 
+    await splitView.click();
     await picker.selectOption('15');
     assert.equal(await examples.innerText(), 'Sin algoritmos asociados a esta página.');
     assert.equal(await page.locator('#book-lab').isVisible(), false);
@@ -148,6 +182,11 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     const bookRect = await page.locator('.book').boundingBox();
     const labRect = await page.locator('.analyzer').boundingBox();
     assert.ok(bookRect && labRect && labRect.y >= bookRect.y + bookRect.height);
+    await page.getByRole('button', { name: 'PDF', exact: true }).click();
+    assert.equal(await layout.getAttribute('data-view'), 'pdf');
+    assert.equal(await page.getByRole('button', { name: 'Focus the lab' }).isVisible(), true);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await picker.inputValue(), '26');
   } finally {
     await browser.close();
   }
