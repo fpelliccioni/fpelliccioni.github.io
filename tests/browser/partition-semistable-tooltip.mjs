@@ -1,8 +1,9 @@
-// Run with npm run test:browser. Pass a site URL to test another deployment.
+// Run with npm run test:browser. Set LAB_BROWSER_URL to test another deployment.
+
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright-core';
 
-const base = process.argv[2] ?? 'https://componentsprogramming.com';
+const base = process.argv[2] ?? process.env.LAB_BROWSER_URL ?? 'https://componentsprogramming.com';
 const name = 'partition_semistable';
 const browser = await chromium.launch({ channel: 'chrome' });
 
