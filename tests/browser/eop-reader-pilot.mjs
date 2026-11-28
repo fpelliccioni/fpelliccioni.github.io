@@ -17,6 +17,15 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     const lab = page.frameLocator('#book-lab');
     await lab.locator('#startButton:enabled').waitFor();
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'collision_point');
+    const toolbar = lab.locator('.lab-toolbar');
+    const start = await lab.locator('#startButton').boundingBox();
+    const help = lab.locator('.lab-help');
+    const helpButton = await help.locator('summary').boundingBox();
+    assert.ok((await toolbar.boundingBox()).height <= 45, 'the embedded execution toolbar fits on one compact row');
+    assert.ok(Math.abs(start.y - helpButton.y) <= 6, 'help shares the execution row');
+    await help.locator('summary').click();
+    assert.equal(await help.locator('div').isVisible(), true);
+    await help.locator('summary').click();
     if (process.env.EOP_NATIVE_SCREENSHOT) await page.screenshot({ path: process.env.EOP_NATIVE_SCREENSHOT });
 
     const initialFrame = await pdf.elementHandle();
@@ -29,6 +38,7 @@ test('the chapter 2 reader links printed pages to runnable examples', async () =
     await lab.locator('#startButton:enabled').waitFor();
     await lab.locator('#startButton').click();
     await lab.locator('#stepButton').waitFor({ state: 'visible' });
+    assert.ok((await toolbar.boundingBox()).height <= 45, 'the toolbar stays compact while stepping');
 
     await picker.selectOption('23');
     assert.equal(await lab.locator('#currentAlgorithm').innerText(), 'terminating');

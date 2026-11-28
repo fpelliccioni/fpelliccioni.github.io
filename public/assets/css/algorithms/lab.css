@@ -1156,6 +1156,47 @@ main.catalog-page {
   padding: 10px;
 }
 
+.book-embedded-lab .lab-toolbar {
+  gap: 5px 10px;
+  padding: 5px 8px;
+  margin-bottom: 8px;
+}
+
+.book-embedded-lab .execution-controls {
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.book-embedded-lab .execution-controls button {
+  min-height: 28px;
+  min-width: 0;
+  padding: 4px 8px;
+}
+
+.book-embedded-lab .session-status {
+  flex-basis: auto;
+  gap: 6px;
+  margin-inline-start: auto;
+}
+
+.book-embedded-lab .lab-help {
+  margin-inline-start: 0;
+}
+
+.book-embedded-lab .lab-help summary {
+  padding: 5px;
+  font-size: 0;
+}
+
+.book-embedded-lab .lab-help summary > span {
+  font-size: 11px;
+}
+
+.book-embedded-lab .lab-help > div {
+  top: calc(100% + 5px);
+  width: min(350px, calc(100vw - 30px));
+}
+
 @media (min-width: 701px) and (max-width: 1050px) {
   .book-embedded-lab .lab-workspace {
     grid-template-columns: minmax(0, 1.25fr) minmax(230px, 0.85fr);
